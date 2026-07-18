@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0f172a">
+<title>우리 가족 위치</title>
+<link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="가족위치">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    background: #0f172a; color: #e2e8f0;
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  header {
+    padding: 14px 16px 10px; display: flex; align-items: center; justify-content: space-between;
+    background: #0f172a; z-index: 500; flex-shrink: 0;
+  }
+  header h1 { font-size: 17px; font-weight: 700; }
+  #status {
+    font-size: 12px; color: #94a3b8; display: flex; align-items: center; gap: 6px;
+  }
+  #status .dot { width: 8px; height: 8px; border-radius: 50%; background: #475569; }
+  #status.on .dot { background: #34d399; box-shadow: 0 0 6px #34d399; }
+  #map { flex: 1; min-height: 0; background: #1e293b; }
+  .leaflet-container { font: inherit; }
+
+  #panel {
+    flex-shrink: 0; background: #0f172a; padding: 10px 12px calc(12px + env(safe-area-inset-bottom));
+    border-top: 1px solid #1e293b;
+  }
+  #members { display: flex; gap: 8px; margin-bottom: 10px; }
+  .member {
+    flex: 1; background: #1e293b; border-radius: 12px; padding: 10px 8px;
+    text-align: center; cursor: pointer; border: 1px solid transparent;
+  }
+  .member.me { border-color: #334155; }
+  .member .avatar {
+    width: 34px; height: 34px; border-radius: 50%; margin: 0 auto 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; font-weight: 700; color: #0f172a;
+  }
+  .member .name { font-size: 13px; font-weight: 600; }
+  .member .seen { font-size: 11px; color: #64748b; margin-top: 2px; }
+  .member .seen.live { color: #34d399; }
+
+  #shareBtn {
+    width: 100%; padding: 15px; border: none; border-radius: 14px;
+    font-size: 16px; font-weight: 700; cursor: pointer;
+    background: #3b82f6; color: #fff;
+  }
+  #shareBtn.sharing { background: #ef4444; }
+  #shareBtn:disabled { background: #334155; color: #64748b; }
+
+  /* 최초 실행: 나는 누구? */
+  .overlay {
+    position: fixed; inset: 0; background: #0f172a; z-index: 2000;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 24px; text-align: center;
+  }
+  .overlay h2 { font-size: 20px; margin-bottom: 6px; }
+  .overlay p { font-size: 14px; color: #94a3b8; margin-bottom: 24px; line-height: 1.6; }
+  .overlay input {
+    width: 100%; max-width: 360px; padding: 14px; margin-bottom: 16px;
+    border: 1px solid #334155; border-radius: 12px; background: #1e293b;
+    color: #e2e8f0; font-size: 15px; text-align: center;
+  }
+  .overlay .pick {
+    display: flex; gap: 12px; width: 100%; max-width: 360px;
+  }
+  .overlay .pick button {
+    flex: 1; padding: 20px 0 16px; border: none; border-radius: 16px;
+    background: #1e293b; color: #e2e8f0; font-size: 15px; font-weight: 700; cursor: pointer;
+  }
+  .overlay .pick .emoji { font-size: 30px; display: block; margin-bottom: 8px; }
+  .overlay.hidden, #setupOverlay.hidden { display: none; }
+  #setupOverlay code {
+    display: block; background: #1e293b; border-radius: 8px; padding: 10px;
+    font-size: 12px; color: #fbbf24; margin-top: 12px; word-break: break-all;
+  }
+  .marker-dot {
+    width: 100%; height: 100%; border-radius: 50%;
+    border: 3px solid #fff; box-shadow: 0 1px 6px rgba(0,0,0,.5);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 800; color: #0f172a;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>우리 가족 위치</h1>
+  <div id="status"><span class="dot"></span><span id="statusText">공유 꺼짐</span></div>
+</header>
+
+<div id="map"></div>
+
+<div id="panel">
+  <div id="members"></div>
+  <button id="shareBtn">내 위치 공유 시작</button>
+</div>
+
+<div class="overlay hidden" id="whoOverlay">
+  <h2>처음 설정</h2>
+  <p>우리 가족만 아는 <b>가족 코드</b>를 입력하고,<br>이 휴대폰의 주인을 선택해 주세요.<br>한 번만 하면 저장됩니다.</p>
+  <input id="famInput" type="text" placeholder="가족 코드 (모두 똑같이 입력)" autocomplete="off">
+  <div class="pick" id="whoPick"></div>
+</div>
+
+<div class="overlay hidden" id="setupOverlay">
+  <h2>⚙️ 초기 설정이 필요해요</h2>
+  <p>Firebase 설정이 아직 입력되지 않았습니다.<br>README.md의 안내에 따라 index.html 안의<br><b>firebaseConfig</b>와 <b>FAMILY_KEY</b>를 채워 주세요.</p>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+// ─────────────────────────────────────────────────────────────
+// [1] Firebase 콘솔에서 복사한 설정을 여기에 붙여넣으세요 (README 참고)
+const firebaseConfig = {
+  apiKey: "REPLACE_ME",
+  authDomain: "REPLACE_ME.firebaseapp.com",
+  databaseURL: "https://REPLACE_ME-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "REPLACE_ME",
+  storageBucket: "REPLACE_ME.appspot.com",
+  messagingSenderId: "REPLACE_ME",
+  appId: "REPLACE_ME"
+};
+// 가족 코드는 코드에 넣지 않습니다 — 첫 실행 때 입력받아 이 휴대폰에만 저장
+const FAMILY_KEY = localStorage.getItem("family_key") || "";
+// ─────────────────────────────────────────────────────────────
+
+const MEMBERS = {
+  dad:      { name: "아빠", emoji: "👨", color: "#60a5fa" },
+  mom:      { name: "엄마", emoji: "👩", color: "#f472b6" },
+  daughter: { name: "딸",   emoji: "👧", color: "#facc15" },
+};
+
+const $ = (id) => document.getElementById(id);
+
+if (firebaseConfig.apiKey === "REPLACE_ME") {
+  $("setupOverlay").classList.remove("hidden");
+  $("shareBtn").disabled = true;
+  throw new Error("Firebase 설정 필요");
+}
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const locRef = (id) => ref(db, `families/${FAMILY_KEY}/locations/${id}`);
+
+// ── 첫 실행 설정: 가족 코드 + 내가 누구인지 (localStorage에 1회 저장) ──
+let me = localStorage.getItem("family_me");
+if (!me || !MEMBERS[me] || !FAMILY_KEY) {
+  const pick = $("whoPick");
+  $("famInput").value = FAMILY_KEY;
+  for (const [id, m] of Object.entries(MEMBERS)) {
+    const b = document.createElement("button");
+    b.innerHTML = `<span class="emoji">${m.emoji}</span>${m.name}`;
+    b.onclick = () => {
+      const key = $("famInput").value.trim();
+      if (key.length < 6) { alert("가족 코드를 6자 이상으로 입력해 주세요.\n(가족 모두 똑같은 코드를 써야 해요)"); return; }
+      localStorage.setItem("family_key", key);
+      localStorage.setItem("family_me", id);
+      location.reload();
+    };
+    pick.appendChild(b);
+  }
+  $("whoOverlay").classList.remove("hidden");
+  $("shareBtn").disabled = true;
+  throw new Error("첫 실행 설정 필요");
+}
+
+// ── 지도 ──
+const map = L.map("map", { zoomControl: false }).setView([37.5665, 126.978], 12);
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  maxZoom: 19, attribution: "&copy; OpenStreetMap"
+}).addTo(map);
+
+const markers = {};
+const latest = {};
+
+function markerFor(id) {
+  if (markers[id]) return markers[id];
+  const m = MEMBERS[id];
+  const icon = L.divIcon({
+    className: "",
+    html: `<div class="marker-dot" style="background:${m.color}">${m.name[0]}</div>`,
+    iconSize: [34, 34], iconAnchor: [17, 17],
+  });
+  markers[id] = L.marker([0, 0], { icon }).addTo(map).bindPopup(m.name);
+  return markers[id];
+}
+
+function timeAgo(ts) {
+  const s = Math.floor((Date.now() - ts) / 1000);
+  if (s < 90) return { text: "방금 전", live: true };
+  if (s < 3600) return { text: `${Math.floor(s / 60)}분 전`, live: s < 300 };
+  if (s < 86400) return { text: `${Math.floor(s / 3600)}시간 전`, live: false };
+  return { text: new Date(ts).toLocaleDateString("ko-KR", { month: "short", day: "numeric" }), live: false };
+}
+
+// ── 멤버 카드 ──
+const membersEl = $("members");
+for (const [id, m] of Object.entries(MEMBERS)) {
+  const el = document.createElement("div");
+  el.className = "member" + (id === me ? " me" : "");
+  el.id = `card-${id}`;
+  el.innerHTML = `
+    <div class="avatar" style="background:${m.color}">${m.name[0]}</div>
+    <div class="name">${m.name}${id === me ? " (나)" : ""}</div>
+    <div class="seen" id="seen-${id}">위치 없음</div>`;
+  el.onclick = () => {
+    const p = latest[id];
+    if (p) { map.setView([p.lat, p.lng], 16); markers[id]?.openPopup(); }
+  };
+  membersEl.appendChild(el);
+}
+
+function renderCards() {
+  for (const id of Object.keys(MEMBERS)) {
+    const el = $(`seen-${id}`);
+    const p = latest[id];
+    if (!p) { el.textContent = "위치 없음"; el.className = "seen"; continue; }
+    const t = timeAgo(p.ts);
+    el.textContent = t.text;
+    el.className = "seen" + (t.live ? " live" : "");
+  }
+}
+setInterval(renderCards, 30000);
+
+// ── 실시간 수신 ──
+let didFit = false;
+onValue(ref(db, `families/${FAMILY_KEY}/locations`), (snap) => {
+  const data = snap.val() || {};
+  for (const [id, p] of Object.entries(data)) {
+    if (!MEMBERS[id] || !p?.lat) continue;
+    latest[id] = p;
+    markerFor(id).setLatLng([p.lat, p.lng]);
+  }
+  renderCards();
+  const pts = Object.values(latest).map((p) => [p.lat, p.lng]);
+  if (!didFit && pts.length) {
+    map.fitBounds(L.latLngBounds(pts).pad(0.3), { maxZoom: 15 });
+    didFit = true;
+  }
+});
+
+// ── 내 위치 공유 ──
+let watchId = null;
+let lastSent = 0;
+let wakeLock = null;
+const btn = $("shareBtn");
+
+async function startShare() {
+  if (!navigator.geolocation) { alert("이 기기는 위치 기능을 지원하지 않아요."); return; }
+  watchId = navigator.geolocation.watchPosition(
+    (pos) => {
+      const now = Date.now();
+      if (now - lastSent < 8000) return; // 8초에 한 번만 전송
+      lastSent = now;
+      set(locRef(me), {
+        lat: pos.coords.latitude,
+        lng: pos.coords.longitude,
+        acc: Math.round(pos.coords.accuracy),
+        ts: now,
+      });
+    },
+    (err) => {
+      stopShare();
+      alert("위치 권한을 허용해야 공유할 수 있어요.\n(" + err.message + ")");
+    },
+    { enableHighAccuracy: true, maximumAge: 5000, timeout: 20000 }
+  );
+  try { wakeLock = await navigator.wakeLock?.request("screen"); } catch {}
+  btn.textContent = "공유 중지";
+  btn.classList.add("sharing");
+  $("status").classList.add("on");
+  $("statusText").textContent = "내 위치 공유 중";
+}
+
+function stopShare() {
+  if (watchId !== null) navigator.geolocation.clearWatch(watchId);
+  watchId = null;
+  wakeLock?.release(); wakeLock = null;
+  btn.textContent = "내 위치 공유 시작";
+  btn.classList.remove("sharing");
+  $("status").classList.remove("on");
+  $("statusText").textContent = "공유 꺼짐";
+}
+
+btn.onclick = () => (watchId === null ? startShare() : stopShare());
+
+// 화면이 다시 켜지면 wake lock 재요청
+document.addEventListener("visibilitychange", async () => {
+  if (document.visibilityState === "visible" && watchId !== null) {
+    try { wakeLock = await navigator.wakeLock?.request("screen"); } catch {}
+  }
+});
+</script>
+</body>
+</html>
