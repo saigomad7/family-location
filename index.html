@@ -264,6 +264,24 @@
   .addrow button:active { background: var(--accent); color: #fff; }
   .divider { color: var(--text-dim); font-size: 12px; margin: 4px 0 14px; font-weight: 600; }
 
+  .placeLabel {
+    background: transparent; border: none; box-shadow: none;
+    color: #7c3aed; font-weight: 800; font-size: 11px;
+    text-shadow: 0 1px 3px #fff, 0 -1px 3px #fff, 1px 0 3px #fff, -1px 0 3px #fff;
+  }
+  .toast {
+    position: fixed; top: calc(14px + env(safe-area-inset-top)); left: 50%;
+    transform: translate(-50%, -90px); z-index: 3000;
+    background: #26334d; color: #fff; padding: 12px 18px; border-radius: 999px;
+    font-size: 13.5px; font-weight: 700; box-shadow: 0 8px 20px rgba(0,0,0,.25);
+    transition: transform 0.35s ease; max-width: 88vw; text-align: center;
+  }
+  .toast.show { transform: translate(-50%, 0); }
+  .trailBtnSm {
+    margin-top: 2px; padding: 7px 12px; border: none; border-radius: 999px;
+    background: var(--accent-soft); color: var(--accent);
+    font-weight: 700; font-size: 12.5px; cursor: pointer;
+  }
   .marker-dot {
     width: 100%; height: 100%; border-radius: 50%;
     border: 3px solid #fff; box-shadow: 0 2px 8px rgba(30, 60, 120, .35);
@@ -308,6 +326,8 @@
     <button id="shareBtn">내 위치 공유 시작</button>
   </div>
 </div>
+
+<div id="toast" class="toast"></div>
 
 <!-- ── 최초 설정 ── -->
 <div class="overlay hidden" id="whoOverlay">
@@ -384,6 +404,17 @@ const membersRef = () => ref(db, `families/${FAMILY_KEY}/members`);
 const memberRef = (id) => ref(db, `families/${FAMILY_KEY}/members/${id}`);
 const locRef = (id) => ref(db, `families/${FAMILY_KEY}/locations/${id}`);
 const adminPinRef = () => ref(db, `families/${FAMILY_KEY}/adminPin`);
+const trackRef = (id) => ref(db, `families/${FAMILY_KEY}/tracks/${id}`);
+const placeRef = (pid) => ref(db, `families/${FAMILY_KEY}/places/${pid}`);
+const placesRef = () => ref(db, `families/${FAMILY_KEY}/places`);
+
+// 두 좌표 사이 거리(m)
+function distM(lat1, lng1, lat2, lng2) {
+  const R = 6371000, d = Math.PI / 180;
+  const a = Math.sin(((lat2 - lat1) * d) / 2) ** 2 +
+    Math.cos(lat1 * d) * Math.cos(lat2 * d) * Math.sin(((lng2 - lng1) * d) / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(a));
+}
 
 async function sha256(s) {
   const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s));
@@ -520,6 +551,10 @@ function startApp() {
       const pts = Object.values(latest).map((p) => [p.lat, p.lng]);
       if (pts.length) map.fitBounds(L.latLngBounds(pts).pad(0.3), { maxZoom: 15 });
     }, 60);
+    if (!localStorage.getItem("place_hint")) {
+      localStorage.setItem("place_hint", "1");
+      setTimeout(() => showToast("💡 지도를 길게 누르면 '학원' 같은 도착 알림 장소를 등록할 수 있어요"), 700);
+    }
   };
   $("backBtn").onclick = () => {
     $("mapView").classList.add("hidden");
@@ -540,8 +575,126 @@ function startApp() {
       html: `<div class="marker-dot" style="background:${m.color}">${m.name[0]}</div>`,
       iconSize: [34, 34], iconAnchor: [17, 17],
     });
-    markers[id] = L.marker([0, 0], { icon }).addTo(map).bindPopup(m.name);
+    markers[id] = L.marker([0, 0], { icon }).addTo(map).bindPopup(() => {
+      const div = document.createElement("div");
+      div.style.textAlign = "center";
+      const nm = document.createElement("div");
+      nm.textContent = members[id]?.name || "";
+      nm.style.cssText = "font-weight:700;margin-bottom:6px";
+      const b = document.createElement("button");
+      b.className = "trailBtnSm";
+      b.textContent = trails[id] ? "경로 숨기기" : "오늘 경로 보기";
+      b.onclick = async () => {
+        const on = await toggleTrail(id);
+        b.textContent = on ? "경로 숨기기" : "오늘 경로 보기";
+      };
+      div.append(nm, b);
+      return div;
+    });
     return markers[id];
+  }
+
+  // ── 이동 경로 (최근 24시간) ──
+  const trails = {};
+  async function toggleTrail(id) {
+    if (trails[id]) { map.removeLayer(trails[id]); delete trails[id]; return false; }
+    const snap = await get(trackRef(id));
+    const cutoff = Date.now() - 24 * 3600 * 1000;
+    const pts = Object.values(snap.val() || {})
+      .filter((p) => p.ts >= cutoff)
+      .sort((a, b) => a.ts - b.ts)
+      .map((p) => [p.lat, p.lng]);
+    if (pts.length < 2) { showToast("최근 24시간 이동 경로가 아직 없어요"); return false; }
+    trails[id] = L.polyline(pts, {
+      color: members[id]?.color || "#3d7bfa",
+      weight: 4, opacity: 0.75, dashArray: "1 9", lineCap: "round",
+    }).addTo(map);
+    map.fitBounds(trails[id].getBounds().pad(0.2));
+    return true;
+  }
+
+  // 내 경로 중 48시간 지난 것은 정리
+  (async () => {
+    try {
+      const snap = await get(trackRef(me));
+      const data = snap.val();
+      if (!data) return;
+      const cutoff = Date.now() - 48 * 3600 * 1000;
+      const pruned = {};
+      for (const [k, v] of Object.entries(data)) if (v.ts >= cutoff) pruned[k] = v;
+      if (Object.keys(pruned).length !== Object.keys(data).length) await set(trackRef(me), pruned);
+    } catch {}
+  })();
+
+  // ── 토스트 알림 ──
+  let toastTimer;
+  function showToast(msg) {
+    const t = $("toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove("show"), 5000);
+  }
+
+  // ── 장소(도착 알림) — 지도를 길게 누르면 등록 ──
+  let places = {};
+  const placeLayers = {};
+  const inPlace = {}; // "멤버_장소" → 안/밖 상태
+
+  onValue(placesRef(), (snap) => {
+    places = snap.val() || {};
+    for (const k of Object.keys(placeLayers)) { map.removeLayer(placeLayers[k]); delete placeLayers[k]; }
+    for (const [pid, pl] of Object.entries(places)) {
+      const c = L.circle([pl.lat, pl.lng], {
+        radius: pl.r || 150, color: "#8b5cf6", weight: 2, fillColor: "#8b5cf6", fillOpacity: 0.08,
+      }).addTo(map);
+      c.bindTooltip(pl.name, { permanent: true, direction: "center", className: "placeLabel" });
+      c.bindPopup(() => {
+        const div = document.createElement("div");
+        div.style.textAlign = "center";
+        const nm = document.createElement("div");
+        nm.textContent = "📍 " + pl.name;
+        nm.style.cssText = "font-weight:700;margin-bottom:6px";
+        const del = document.createElement("button");
+        del.className = "trailBtnSm";
+        del.textContent = "장소 삭제";
+        del.onclick = () => { if (confirm(`"${pl.name}" 장소를 삭제할까요?`)) set(placeRef(pid), null); };
+        div.append(nm, del);
+        return div;
+      });
+      placeLayers[pid] = c;
+    }
+  });
+
+  map.on("contextmenu", (e) => {
+    const name = prompt("이 위치에 등록할 장소 이름 (예: 학원, 집)");
+    if (!name || !name.trim()) return;
+    const pid = "p" + Date.now().toString(36);
+    set(placeRef(pid), { name: name.trim(), lat: e.latlng.lat, lng: e.latlng.lng, r: 150 });
+    showToast(`"${name.trim()}" 등록 완료 — 가족이 도착하면 알려드려요`);
+    if ("Notification" in window && Notification.permission === "default") Notification.requestPermission();
+  });
+
+  function notifyArrive(who, placeName) {
+    const msg = `${who}이(가) "${placeName}"에 도착했어요!`;
+    showToast("📍 " + msg);
+    try { navigator.vibrate?.([200, 100, 200]); } catch {}
+    if ("Notification" in window && Notification.permission === "granted") {
+      new Notification("우리 가족 위치", { body: msg });
+    }
+  }
+
+  // 가족 위치가 갱신될 때 장소 진입 여부 확인 (앱이 열려 있는 동안만 동작)
+  function checkArrivals() {
+    for (const [id, p] of Object.entries(latest)) {
+      for (const [pid, pl] of Object.entries(places)) {
+        const key = id + "_" + pid;
+        const inside = distM(p.lat, p.lng, pl.lat, pl.lng) <= (pl.r || 150);
+        if (inPlace[key] === undefined) { inPlace[key] = inside; continue; } // 첫 관측은 알림 없이 상태만 기록
+        if (inside && !inPlace[key] && id !== me) notifyArrive(members[id]?.name || "가족", pl.name);
+        inPlace[key] = inside;
+      }
+    }
   }
 
   function timeAgo(ts) {
@@ -708,11 +861,14 @@ function startApp() {
     updateMarkers();
     renderSeen();
     renderHome();
+    checkArrivals();
   });
 
   // ── 내 위치 공유 ──
   let watchId = null;
   let lastSent = 0;
+  let lastTrackTs = 0;
+  let lastTrackPt = null;
   let wakeLock = null;
 
   function setShareUI(on) {
@@ -732,12 +888,14 @@ function startApp() {
         const now = Date.now();
         if (now - lastSent < 8000) return; // 8초에 한 번만 전송
         lastSent = now;
-        set(locRef(me), {
-          lat: pos.coords.latitude,
-          lng: pos.coords.longitude,
-          acc: Math.round(pos.coords.accuracy),
-          ts: now,
-        });
+        const lat = pos.coords.latitude, lng = pos.coords.longitude;
+        set(locRef(me), { lat, lng, acc: Math.round(pos.coords.accuracy), ts: now });
+        // 이동 경로 기록: 30m 이상 이동했거나 2분이 지났을 때만 저장
+        if (!lastTrackPt || now - lastTrackTs > 120000 || distM(lastTrackPt[0], lastTrackPt[1], lat, lng) > 30) {
+          lastTrackTs = now;
+          lastTrackPt = [lat, lng];
+          set(ref(db, `families/${FAMILY_KEY}/tracks/${me}/${now}`), { lat, lng, ts: now });
+        }
       },
       (err) => {
         stopShare();
