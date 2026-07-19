@@ -1,7 +1,6 @@
 {
   "name": "우리 가족 위치",
   "short_name": "가족위치",
-  "start_url": ".",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#f2f6fc",
