@@ -73,9 +73,16 @@
   .member {
     flex: 0 0 auto; width: 92px; background: var(--surface);
     border-radius: 16px; padding: 12px 6px 10px;
-    text-align: center; cursor: pointer;
+    text-align: center; cursor: pointer; position: relative;
     border: 1.5px solid var(--border); box-shadow: var(--shadow);
     transition: transform 0.12s;
+  }
+  .member .delx {
+    position: absolute; top: -7px; right: -7px; width: 24px; height: 24px;
+    border-radius: 50%; border: 2px solid #fff; cursor: pointer;
+    background: var(--danger); color: #fff; font-size: 12px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,.25);
   }
   .member:active { transform: scale(0.96); }
   .member.me { border-color: var(--accent); }
@@ -431,6 +438,24 @@ function startApp() {
         const p = latest[id];
         if (p) { map.setView([p.lat, p.lng], 16); markers[id]?.openPopup(); }
       };
+      // 관리자 폰에는 삭제(✕) 배지 표시
+      if (localStorage.getItem("family_admin") === "1") {
+        const del = document.createElement("button");
+        del.className = "delx";
+        del.textContent = "✕";
+        del.onclick = async (ev) => {
+          ev.stopPropagation();
+          if (!confirm(`"${m.name}"을(를) 가족에서 삭제할까요?\n위치 기록도 함께 지워져요.`)) return;
+          await set(memberRef(id), null);
+          await set(locRef(id), null);
+          if (id === me) {
+            // 나 자신을 삭제한 경우 → 처음 설정 화면으로
+            localStorage.removeItem("family_me");
+            location.reload();
+          }
+        };
+        el.appendChild(del);
+      }
       wrap.appendChild(el);
     }
     // 관리자용 가족 추가 카드
@@ -459,6 +484,7 @@ function startApp() {
       if (!pin) return;
       if ((await sha256(pin.trim())) !== stored) { alert("관리자 코드가 틀렸어요."); return; }
       localStorage.setItem("family_admin", "1");
+      renderMembers(); // 관리자 인증됨 → 삭제(✕) 배지 표시
     }
     const name = prompt("추가할 가족 이름 (예: 아들)");
     if (!name || !name.trim()) return;
@@ -517,6 +543,13 @@ function startApp() {
   // 위치 실시간 수신
   onValue(ref(db, `families/${FAMILY_KEY}/locations`), (snap) => {
     const data = snap.val() || {};
+    // 삭제된 멤버의 위치는 지도에서도 제거
+    for (const id of Object.keys(latest)) {
+      if (!data[id]) {
+        delete latest[id];
+        if (markers[id]) { map.removeLayer(markers[id]); delete markers[id]; }
+      }
+    }
     for (const [id, p] of Object.entries(data)) {
       if (!p?.lat) continue;
       latest[id] = p;
