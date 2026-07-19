@@ -724,8 +724,9 @@ function startApp() {
     $("statusText").textContent = on ? "내 위치 공유 중" : "공유 꺼짐";
   }
 
-  async function startShare() {
-    if (!navigator.geolocation) { alert("이 기기는 위치 기능을 지원하지 않아요."); return; }
+  async function startShare(auto = false) {
+    if (!navigator.geolocation) { if (!auto) alert("이 기기는 위치 기능을 지원하지 않아요."); return; }
+    localStorage.setItem("share_on", "1"); // 앱을 다시 열면 자동으로 공유 재개
     watchId = navigator.geolocation.watchPosition(
       (pos) => {
         const now = Date.now();
@@ -740,7 +741,7 @@ function startApp() {
       },
       (err) => {
         stopShare();
-        alert("위치 권한을 허용해야 공유할 수 있어요.\n(" + err.message + ")");
+        if (!auto) alert("위치 권한을 허용해야 공유할 수 있어요.\n(" + err.message + ")");
       },
       { enableHighAccuracy: true, maximumAge: 5000, timeout: 20000 }
     );
@@ -749,6 +750,7 @@ function startApp() {
   }
 
   function stopShare() {
+    localStorage.removeItem("share_on");
     if (watchId !== null) navigator.geolocation.clearWatch(watchId);
     watchId = null;
     wakeLock?.release(); wakeLock = null;
@@ -758,6 +760,9 @@ function startApp() {
   const toggleShare = () => (watchId === null ? startShare() : stopShare());
   $("shareBtn").onclick = toggleShare;
   $("homeShareBtn").onclick = toggleShare;
+
+  // 지난번에 공유를 켠 채로 앱이 닫혔다면, 다시 열 때 자동으로 재개
+  if (localStorage.getItem("share_on") === "1") startShare(true);
 
   // 초대 링크 보내기 — 링크에 가족 코드가 담겨 상대는 이름만 선택하면 됨
   $("inviteBtn").onclick = async () => {
