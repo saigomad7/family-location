@@ -89,6 +89,12 @@
   .hname { font-size: 14.5px; font-weight: 700; }
   .hseen { font-size: 12px; color: var(--text-dim); font-weight: 600; margin-top: 1px; }
   .hseen.live { color: var(--live); }
+  .hbtn {
+    flex-shrink: 0; padding: 7px 12px; border: none; border-radius: 999px;
+    background: var(--accent-soft); color: var(--accent);
+    font-weight: 700; font-size: 12px; cursor: pointer;
+  }
+  .hbtn:active { background: var(--accent); color: #fff; }
   .hdot { width: 10px; height: 10px; border-radius: 50%; background: #d4deee; flex-shrink: 0; }
   .hdot.live { background: var(--live); box-shadow: 0 0 8px rgba(16,185,129,.55); }
 
@@ -724,10 +730,48 @@ function startApp() {
         <div class="hinfo">
           <div class="hname">${m.name}${id === me ? " (나)" : ""}</div>
           <div class="hseen${t && t.live ? " live" : ""}">${t ? t.text : "위치 없음"}</div>
-        </div>
-        <div class="hdot${t && t.live ? " live" : ""}"></div>`;
+        </div>`;
+      // 줄을 탭하면 그 사람 위치로 지도 열기
+      row.onclick = () => openMapAt(id);
+      // "경로" 버튼 — 지도로 넘어가며 최근 24시간 경로 표시
+      const tb = document.createElement("button");
+      tb.className = "hbtn";
+      tb.textContent = "경로";
+      tb.onclick = (ev) => { ev.stopPropagation(); showTrailFromHome(id); };
+      row.appendChild(tb);
+      const dot = document.createElement("div");
+      dot.className = "hdot" + (t && t.live ? " live" : "");
+      row.appendChild(dot);
       wrap.appendChild(row);
     }
+  }
+
+  function openMapView() {
+    $("homeView").classList.add("hidden");
+    $("mapView").classList.remove("hidden");
+  }
+
+  function openMapAt(id) {
+    openMapView();
+    setTimeout(() => {
+      map.invalidateSize();
+      const p = latest[id];
+      if (p) { map.setView([p.lat, p.lng], 16); markers[id]?.openPopup(); }
+    }, 60);
+  }
+
+  async function showTrailFromHome(id) {
+    openMapView();
+    setTimeout(async () => {
+      map.invalidateSize();
+      if (trails[id]) { map.fitBounds(trails[id].getBounds().pad(0.2)); return; }
+      const on = await toggleTrail(id);
+      if (!on) {
+        // 경로가 아직 없으면 현재 위치라도 보여주기
+        const p = latest[id];
+        if (p) map.setView([p.lat, p.lng], 15);
+      }
+    }, 60);
   }
 
   function renderMembers() {
