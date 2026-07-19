@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<meta name="theme-color" content="#f2f6fc">
+<meta name="theme-color" content="#5b93ff">
 <title>우리 가족 위치</title>
 <link rel="manifest" href="manifest.json">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="가족위치">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
@@ -28,38 +28,125 @@
   html, body { height: 100%; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
-    background: var(--bg); color: var(--text);
-    display: flex; flex-direction: column; overflow: hidden;
+    background: var(--bg); color: var(--text); overflow: hidden;
   }
-  header {
-    padding: calc(12px + env(safe-area-inset-top)) 18px 12px;
+  .view { position: fixed; inset: 0; display: flex; flex-direction: column; background: var(--bg); }
+  .view.hidden { display: none; }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  /* ── 홈 화면 ── */
+  .hero {
+    flex-shrink: 0; position: relative; text-align: center; color: #fff;
+    padding: calc(34px + env(safe-area-inset-top)) 22px 32px;
+    background: linear-gradient(160deg, #5b93ff, var(--accent-deep));
+    border-radius: 0 0 30px 30px;
+    box-shadow: 0 10px 26px rgba(47, 99, 214, 0.28);
+  }
+  .heroLogo {
+    width: 76px; height: 76px; border-radius: 24px; margin: 0 auto 14px;
+    background: rgba(255, 255, 255, 0.18);
+    display: flex; align-items: center; justify-content: center; font-size: 38px;
+    animation: bob 3.2s ease-in-out infinite;
+  }
+  .hero h1 { font-size: 24px; font-weight: 800; letter-spacing: -0.4px; }
+  .hero .date { margin-top: 6px; font-size: 13px; font-weight: 600; opacity: 0.85; }
+  #inviteBtn {
+    position: absolute; top: calc(16px + env(safe-area-inset-top)); right: 18px;
+    width: 38px; height: 38px; border-radius: 50%; border: none; cursor: pointer;
+    background: rgba(255, 255, 255, 0.22); color: #fff; font-size: 16px;
+  }
+  .homeBody {
+    flex: 1; min-height: 0; display: flex; flex-direction: column;
+    padding: 18px 16px calc(18px + env(safe-area-inset-bottom));
+    overflow-y: auto;
+  }
+  .homeCard {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 20px; box-shadow: var(--shadow); padding: 16px;
+    animation: rise 0.45s ease both;
+  }
+  .cardTitle {
+    font-size: 14px; font-weight: 800; margin-bottom: 10px;
     display: flex; align-items: center; justify-content: space-between;
+  }
+  .cardTitle span { color: var(--text-dim); font-weight: 700; font-size: 12px; }
+  .hrow { display: flex; align-items: center; gap: 12px; padding: 9px 2px; }
+  .hrow + .hrow { border-top: 1px solid var(--border); }
+  .havatar {
+    width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 800; color: #fff;
+    box-shadow: inset 0 -2px 4px rgba(0,0,0,.12);
+  }
+  .hinfo { flex: 1; min-width: 0; text-align: left; }
+  .hname { font-size: 14.5px; font-weight: 700; }
+  .hseen { font-size: 12px; color: var(--text-dim); font-weight: 600; margin-top: 1px; }
+  .hseen.live { color: var(--live); }
+  .hdot { width: 10px; height: 10px; border-radius: 50%; background: #d4deee; flex-shrink: 0; }
+  .hdot.live { background: var(--live); box-shadow: 0 0 8px rgba(16,185,129,.55); }
+
+  .cta {
+    width: 100%; margin-top: 16px; padding: 17px; border: none; border-radius: 16px;
+    font-size: 16px; font-weight: 800; cursor: pointer; color: #fff;
+    background: linear-gradient(135deg, #4a86ff, var(--accent-deep));
+    box-shadow: 0 6px 16px rgba(61, 123, 250, 0.35);
+    transition: transform 0.12s;
+    animation: rise 0.5s 0.06s ease both;
+  }
+  .cta:active { transform: scale(0.98); }
+  .homeShare {
+    width: 100%; margin-top: 10px; padding: 15px; border-radius: 16px; cursor: pointer;
+    border: 1.5px solid var(--accent-soft); background: var(--surface); color: var(--accent);
+    font-size: 15px; font-weight: 800; box-shadow: var(--shadow);
+    animation: rise 0.5s 0.12s ease both;
+  }
+  .homeShare.sharing {
+    color: #fff; border-color: transparent;
+    background: linear-gradient(135deg, #f36c6c, #d9453f);
+    box-shadow: 0 6px 16px rgba(239, 83, 80, 0.3);
+  }
+
+  /* ── 지도 화면 ── */
+  header {
+    padding: calc(12px + env(safe-area-inset-top)) 14px 12px;
+    display: flex; align-items: center; gap: 10px;
     background: var(--bg); z-index: 500; flex-shrink: 0;
   }
-  header h1 { font-size: 18px; font-weight: 800; letter-spacing: -0.3px; }
-  header h1 .pin { color: var(--accent); }
+  #backBtn {
+    width: 36px; height: 36px; border-radius: 50%; cursor: pointer; flex-shrink: 0;
+    border: 1px solid var(--border); background: var(--surface);
+    box-shadow: var(--shadow); font-size: 17px; color: var(--text);
+  }
+  header h1 { font-size: 17px; font-weight: 800; letter-spacing: -0.3px; flex: 1; }
   #status {
     font-size: 12px; font-weight: 600; color: var(--text-dim);
     display: flex; align-items: center; gap: 6px;
     background: var(--surface); border: 1px solid var(--border);
     padding: 6px 12px; border-radius: 999px; box-shadow: var(--shadow);
   }
-  .hright { display: flex; align-items: center; gap: 8px; }
-  #inviteBtn {
-    width: 34px; height: 34px; border-radius: 50%; cursor: pointer;
-    border: 1px solid var(--border); background: var(--surface);
-    box-shadow: var(--shadow); font-size: 15px;
-  }
   #status .dot { width: 8px; height: 8px; border-radius: 50%; background: #c3cede; }
   #status.on { color: var(--live); }
   #status.on .dot { background: var(--live); box-shadow: 0 0 6px rgba(16,185,129,.6); }
 
-  #mapWrap { flex: 1; min-height: 0; padding: 0 12px; }
+  #mapWrap { flex: 1; min-height: 0; padding: 0 12px; position: relative; }
   #map {
     height: 100%; border-radius: 20px; background: #dbe6f5;
     box-shadow: var(--shadow); border: 1px solid var(--border);
   }
   .leaflet-container { font: inherit; border-radius: 20px; }
+  #layerBtn {
+    position: absolute; top: 12px; right: 24px; z-index: 800;
+    width: 42px; height: 42px; border-radius: 14px; cursor: pointer;
+    border: 1px solid var(--border); background: var(--surface);
+    box-shadow: var(--shadow); font-size: 19px;
+  }
 
   #panel {
     flex-shrink: 0; padding: 12px 12px calc(14px + env(safe-area-inset-bottom));
@@ -67,7 +154,7 @@
   #members {
     display: flex; gap: 10px; margin-bottom: 12px;
     overflow-x: auto; -webkit-overflow-scrolling: touch;
-    padding: 2px;
+    padding: 8px 2px 2px;
   }
   #members::-webkit-scrollbar { display: none; }
   .member {
@@ -113,7 +200,7 @@
   }
   #shareBtn:disabled { background: #c9d4e8; box-shadow: none; color: #fff; }
 
-  /* 최초 설정 화면 */
+  /* ── 최초 설정 화면 ── */
   .overlay {
     position: fixed; inset: 0; background: var(--bg); z-index: 2000;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -177,10 +264,6 @@
   .addrow button:active { background: var(--accent); color: #fff; }
   .divider { color: var(--text-dim); font-size: 12px; margin: 4px 0 14px; font-weight: 600; }
 
-  #setupOverlay code {
-    display: block; background: var(--accent-soft); border-radius: 10px; padding: 10px;
-    font-size: 12px; color: var(--accent-deep); margin-top: 12px; word-break: break-all;
-  }
   .marker-dot {
     width: 100%; height: 100%; border-radius: 50%;
     border: 3px solid #fff; box-shadow: 0 2px 8px rgba(30, 60, 120, .35);
@@ -191,23 +274,43 @@
 </head>
 <body>
 
-<header>
-  <h1><span class="pin">📍</span> 우리 가족 위치</h1>
-  <div class="hright">
+<!-- ── 홈 화면 ── -->
+<div class="view" id="homeView">
+  <div class="hero">
     <button id="inviteBtn" aria-label="가족 초대 링크 보내기">🔗</button>
-    <div id="status"><span class="dot"></span><span id="statusText">공유 꺼짐</span></div>
+    <div class="heroLogo">📍</div>
+    <h1>우리 가족 위치</h1>
+    <div class="date" id="homeDate"></div>
   </div>
-</header>
-
-<div id="mapWrap"><div id="map"></div></div>
-
-<div id="panel">
-  <div id="members"></div>
-  <button id="shareBtn">내 위치 공유 시작</button>
+  <div class="homeBody">
+    <div class="homeCard">
+      <div class="cardTitle">우리 가족 <span id="memberCount"></span></div>
+      <div id="homeMembers"></div>
+    </div>
+    <button class="cta" id="openMapBtn">🗺️ 실시간 지도 열기</button>
+    <button class="homeShare" id="homeShareBtn">내 위치 공유 시작</button>
+  </div>
 </div>
 
+<!-- ── 지도 화면 ── -->
+<div class="view hidden" id="mapView">
+  <header>
+    <button id="backBtn" aria-label="홈으로">←</button>
+    <h1>실시간 지도</h1>
+    <div id="status"><span class="dot"></span><span id="statusText">공유 꺼짐</span></div>
+  </header>
+  <div id="mapWrap">
+    <div id="map"></div>
+    <button id="layerBtn" aria-label="지도 종류 바꾸기">🛰️</button>
+  </div>
+  <div id="panel">
+    <div id="members"></div>
+    <button id="shareBtn">내 위치 공유 시작</button>
+  </div>
+</div>
+
+<!-- ── 최초 설정 ── -->
 <div class="overlay hidden" id="whoOverlay">
-  <!-- 1단계: 가족 코드 -->
   <div class="step" id="step1">
     <div class="card">
       <div class="logo">📍</div>
@@ -217,7 +320,6 @@
       <button class="big" id="nextBtn">다음</button>
     </div>
   </div>
-  <!-- 2단계: 나는 누구? (기존 멤버 선택 또는 + 추가) -->
   <div class="step hidden" id="step2">
     <div class="card">
       <div class="logo">👋</div>
@@ -267,7 +369,6 @@ const $ = (id) => document.getElementById(id);
 
 if (firebaseConfig.apiKey === "REPLACE_ME") {
   $("setupOverlay").classList.remove("hidden");
-  $("shareBtn").disabled = true;
   throw new Error("Firebase 설정 필요");
 }
 
@@ -294,7 +395,6 @@ async function sha256(s) {
 // ─────────────────────────────────────────────
 function showSetup() {
   $("whoOverlay").classList.remove("hidden");
-  $("shareBtn").disabled = true;
   $("famInput").value = FAMILY_KEY || urlKey;
 
   $("nextBtn").onclick = () => goStep2($("famInput").value.trim());
@@ -390,15 +490,45 @@ function startApp() {
     history.replaceState(null, "", `${location.pathname}?f=${encodeURIComponent(FAMILY_KEY)}`);
   }
 
+  $("homeDate").textContent = new Date().toLocaleDateString("ko-KR", {
+    month: "long", day: "numeric", weekday: "long"
+  });
+
+  // ── 지도 + 일반/위성 전환 ──
   const map = L.map("map", { zoomControl: false }).setView([37.5665, 126.978], 12);
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  const streets = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19, attribution: "&copy; OpenStreetMap"
-  }).addTo(map);
+  });
+  const satellite = L.tileLayer(
+    "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+    { maxZoom: 19, attribution: "Tiles &copy; Esri" }
+  );
+  streets.addTo(map);
+  let satOn = false;
+  $("layerBtn").onclick = () => {
+    satOn = !satOn;
+    if (satOn) { map.removeLayer(streets); satellite.addTo(map); $("layerBtn").textContent = "🗺️"; }
+    else { map.removeLayer(satellite); streets.addTo(map); $("layerBtn").textContent = "🛰️"; }
+  };
+
+  // ── 홈 ↔ 지도 화면 전환 ──
+  $("openMapBtn").onclick = () => {
+    $("homeView").classList.add("hidden");
+    $("mapView").classList.remove("hidden");
+    setTimeout(() => {
+      map.invalidateSize();
+      const pts = Object.values(latest).map((p) => [p.lat, p.lng]);
+      if (pts.length) map.fitBounds(L.latLngBounds(pts).pad(0.3), { maxZoom: 15 });
+    }, 60);
+  };
+  $("backBtn").onclick = () => {
+    $("mapView").classList.add("hidden");
+    $("homeView").classList.remove("hidden");
+  };
 
   let members = {};
   const markers = {};
   const latest = {};
-  let didFit = false;
   let migrated = false;
 
   function markerFor(id) {
@@ -422,11 +552,35 @@ function startApp() {
     return { text: new Date(ts).toLocaleDateString("ko-KR", { month: "short", day: "numeric" }), live: false };
   }
 
+  const sortedIds = () => Object.keys(members).sort((a, b) => (a === me ? -1 : b === me ? 1 : 0));
+
+  // 홈 화면 가족 현황 카드
+  function renderHome() {
+    const wrap = $("homeMembers");
+    wrap.innerHTML = "";
+    const n = Object.keys(members).length;
+    $("memberCount").textContent = n ? `${n}명` : "";
+    for (const id of sortedIds()) {
+      const m = members[id];
+      const p = latest[id];
+      const t = p ? timeAgo(p.ts) : null;
+      const row = document.createElement("div");
+      row.className = "hrow";
+      row.innerHTML = `
+        <div class="havatar" style="background:${m.color}">${m.name[0]}</div>
+        <div class="hinfo">
+          <div class="hname">${m.name}${id === me ? " (나)" : ""}</div>
+          <div class="hseen${t && t.live ? " live" : ""}">${t ? t.text : "위치 없음"}</div>
+        </div>
+        <div class="hdot${t && t.live ? " live" : ""}"></div>`;
+      wrap.appendChild(row);
+    }
+  }
+
   function renderMembers() {
     const wrap = $("members");
     wrap.innerHTML = "";
-    const ids = Object.keys(members).sort((a, b) => (a === me ? -1 : b === me ? 1 : 0));
-    for (const id of ids) {
+    for (const id of sortedIds()) {
       const m = members[id];
       const el = document.createElement("div");
       el.className = "member" + (id === me ? " me" : "");
@@ -479,6 +633,7 @@ function startApp() {
       if (!pin || pin.trim().length < 4) return;
       await set(adminPinRef(), await sha256(pin.trim()));
       localStorage.setItem("family_admin", "1");
+      renderMembers();
     } else if (localStorage.getItem("family_admin") !== "1") {
       const pin = prompt("관리자 코드를 입력하세요");
       if (!pin) return;
@@ -507,21 +662,16 @@ function startApp() {
       el.className = "seen" + (t.live ? " live" : "");
     }
   }
-  setInterval(renderSeen, 30000);
+  setInterval(() => { renderSeen(); renderHome(); }, 30000);
 
   function updateMarkers() {
     for (const [id, p] of Object.entries(latest)) {
       const mk = markerFor(id);
       if (mk) mk.setLatLng([p.lat, p.lng]);
     }
-    const pts = Object.values(latest).map((p) => [p.lat, p.lng]);
-    if (!didFit && pts.length) {
-      map.fitBounds(L.latLngBounds(pts).pad(0.3), { maxZoom: 15 });
-      didFit = true;
-    }
   }
 
-  // 멤버 목록 실시간 수신 — 누가 새로 추가되면 모든 폰에 바로 반영
+  // 멤버 목록 실시간 수신 — 추가/삭제가 모든 폰에 바로 반영
   onValue(membersRef(), (snap) => {
     members = snap.val() || {};
     // 예전 버전(dad/mom/daughter 고정)으로 설정된 폰이면 멤버 명단에 자동 등록
@@ -531,12 +681,13 @@ function startApp() {
       set(memberRef(me), { name: LEGACY[me], color });
       return;
     }
-    // 각 멤버의 마커 다시 만들기 (이름/색 변경 대비)
+    // 마커 다시 만들기 (이름/색 변경·삭제 대비)
     for (const id of Object.keys(markers)) {
       map.removeLayer(markers[id]);
       delete markers[id];
     }
     renderMembers();
+    renderHome();
     updateMarkers();
   });
 
@@ -556,13 +707,22 @@ function startApp() {
     }
     updateMarkers();
     renderSeen();
+    renderHome();
   });
 
   // ── 내 위치 공유 ──
   let watchId = null;
   let lastSent = 0;
   let wakeLock = null;
-  const btn = $("shareBtn");
+
+  function setShareUI(on) {
+    for (const b of [$("shareBtn"), $("homeShareBtn")]) {
+      b.textContent = on ? "공유 중지" : "내 위치 공유 시작";
+      b.classList.toggle("sharing", on);
+    }
+    $("status").classList.toggle("on", on);
+    $("statusText").textContent = on ? "내 위치 공유 중" : "공유 꺼짐";
+  }
 
   async function startShare() {
     if (!navigator.geolocation) { alert("이 기기는 위치 기능을 지원하지 않아요."); return; }
@@ -585,23 +745,19 @@ function startApp() {
       { enableHighAccuracy: true, maximumAge: 5000, timeout: 20000 }
     );
     try { wakeLock = await navigator.wakeLock?.request("screen"); } catch {}
-    btn.textContent = "공유 중지";
-    btn.classList.add("sharing");
-    $("status").classList.add("on");
-    $("statusText").textContent = "내 위치 공유 중";
+    setShareUI(true);
   }
 
   function stopShare() {
     if (watchId !== null) navigator.geolocation.clearWatch(watchId);
     watchId = null;
     wakeLock?.release(); wakeLock = null;
-    btn.textContent = "내 위치 공유 시작";
-    btn.classList.remove("sharing");
-    $("status").classList.remove("on");
-    $("statusText").textContent = "공유 꺼짐";
+    setShareUI(false);
   }
 
-  btn.onclick = () => (watchId === null ? startShare() : stopShare());
+  const toggleShare = () => (watchId === null ? startShare() : stopShare());
+  $("shareBtn").onclick = toggleShare;
+  $("homeShareBtn").onclick = toggleShare;
 
   // 초대 링크 보내기 — 링크에 가족 코드가 담겨 상대는 이름만 선택하면 됨
   $("inviteBtn").onclick = async () => {
