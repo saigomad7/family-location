@@ -1,0 +1,13 @@
+# 로컬과 App Service가 같은 버전을 쓰도록 반드시 핀 고정 상태로 유지할 것.
+anthropic==1.2.0
+boto3==1.35.76
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+pydantic==2.10.4
+pydantic-settings==2.7.0
+pymilvus==2.5.0
+python-dotenv==1.0.1
+httpx==0.28.1
+pandas==2.2.3
+sentence-transformers==3.3.1   # 로컬 임베딩용. 사내 임베딩 API를 쓰면 제거 가능
+pytest==8.3.4

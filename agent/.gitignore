@@ -1,0 +1,10 @@
+.env
+.env.local
+.env.cloudlike
+data/
+__pycache__/
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+volumes/
