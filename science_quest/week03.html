@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ko" class="c1">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d1117">
+<title>3주차 · 원자와 분자</title>
+<meta name="description" content="원자는 알갱이 한 개, 분자는 원자가 붙은 한 덩어리. 화학식을 읽는 눈을 만든다.">
+<style>
+:root{
+  --bg:#0d1117; --bg2:#0b0f15; --panel:#161b22; --panel2:#1c2230; --line:#2a3340;
+  --ink:#e6edf3; --sub:#9aa7b4; --mut:#6b7886;
+  --acc:#4f9cff; --acc2:#7c5cff; --good:#3fb950; --warn:#d29922; --pink:#f778ba;
+  --chip:#21304a; --radius:16px;
+  --camp:#7c5cff; --camp-dim:#b7a4ff; --camp-bg:rgba(124,92,255,.14); --camp-line:#3d3470;
+}
+:root.c1{--camp:#7c5cff;--camp-dim:#b7a4ff;--camp-bg:rgba(124,92,255,.14);--camp-line:#3d3470}
+:root.c2{--camp:#d29922;--camp-dim:#f0c674;--camp-bg:rgba(210,153,34,.14);--camp-line:#5c4718}
+:root.c3{--camp:#3fb950;--camp-dim:#63d67c;--camp-bg:rgba(63,185,80,.14);--camp-line:#2c5c34}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);line-height:1.72;font-size:16.5px;
+  font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR","Segoe UI",system-ui,sans-serif;
+  word-break:keep-all;overflow-wrap:anywhere;
+  padding-bottom:calc(40px + env(safe-area-inset-bottom))}
+.wrap{max-width:720px;margin:0 auto;padding:0 18px}
+a{color:var(--acc);text-decoration:none}
+p{margin:0 0 13px}
+b,strong{font-weight:700;color:#fff}
+.sub{color:var(--sub)}
+.mut{color:var(--mut)}
+
+/* 헤더 */
+header.top{padding:26px 0 18px;background:linear-gradient(180deg,var(--bg2),var(--bg) 90%)}
+.kicker{display:inline-block;font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;font-weight:700;
+  color:var(--camp-dim);background:var(--camp-bg);border:1px solid var(--camp-line);
+  padding:6px 12px;border-radius:999px;margin-bottom:14px}
+h1{font-size:27px;line-height:1.3;margin:0 0 10px;font-weight:800;letter-spacing:-.01em}
+h1 .g{background:linear-gradient(90deg,var(--acc),var(--camp));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:15.5px;color:var(--sub);margin:0 0 16px}
+.meta{display:flex;flex-wrap:wrap;gap:7px}
+.meta .m{font-size:12.5px;color:var(--sub);background:var(--panel);border:1px solid var(--line);padding:5px 11px;border-radius:999px}
+
+/* 상단 이동 바 */
+nav.toc{position:sticky;top:0;z-index:30;background:rgba(13,17,23,.92);backdrop-filter:blur(8px);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:18px}
+nav.toc .row{display:flex;gap:6px;overflow-x:auto;padding:10px 18px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+nav.toc .row::-webkit-scrollbar{display:none}
+nav.toc a{flex:0 0 auto;font-size:13px;color:var(--sub);padding:7px 12px;border-radius:999px;
+  border:1px solid var(--line);background:var(--panel)}
+nav.toc a.now{color:#fff;background:var(--camp-bg);border-color:var(--camp-line)}
+
+/* 섹션 */
+section{padding:30px 0;border-bottom:1px solid var(--line)}
+.eyebrow{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--camp-dim);font-weight:700;margin-bottom:7px}
+h2{font-size:20px;margin:0 0 14px;font-weight:800;line-height:1.4}
+h2 .cell{display:inline-block;background:var(--camp);color:#0d1117;font-size:12.5px;font-weight:800;
+  border-radius:8px;padding:2px 9px;margin-right:8px;vertical-align:2px;font-family:ui-monospace,Menlo,monospace}
+h3{font-size:16.5px;margin:22px 0 9px;font-weight:700}
+h3:first-child{margin-top:0}
+
+/* 카드 · 콜아웃 */
+.grid{display:grid;gap:11px;margin:12px 0}
+.g2{grid-template-columns:1fr}
+@media(min-width:620px){.g2{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:15px 16px}
+.card h4{margin:0 0 7px;font-size:15px;font-weight:700}
+.card p{font-size:14.5px;margin:0}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px;margin-bottom:8px;
+  background:var(--camp-bg);color:var(--camp-dim);border:1px solid var(--camp-line)}
+.callout{border-left:4px solid var(--acc);background:var(--panel);border-radius:10px;padding:13px 15px;margin:14px 0;font-size:15px}
+.callout.good{border-left-color:var(--good)}
+.callout.warn{border-left-color:var(--warn)}
+.callout.p{border-left-color:var(--camp)}
+.callout b{display:inline}
+.callout .lbl{display:block;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);font-weight:700;margin-bottom:4px}
+
+/* 표 */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:12px;margin:12px 0}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:340px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--mut);font-weight:700;background:var(--panel)}
+tbody tr:last-child td{border-bottom:0}
+td b{color:#fff}
+code{background:#0b1020;border:1px solid var(--line);border-radius:6px;padding:1px 6px;font-size:14px;color:#c9d6e5;
+  font-family:ui-monospace,Menlo,monospace}
+
+/* 다이어그램 */
+.diagram{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:var(--radius);
+  background:var(--panel);padding:12px;margin:12px 0}
+.diagram svg{display:block}
+.figcap{font-size:12.5px;color:var(--mut);margin:-4px 0 12px;text-align:center}
+
+/* 할 일 체크 */
+.todo{list-style:none;margin:14px 0 0;padding:0;border:1px solid var(--line);border-radius:12px;background:var(--panel);overflow:hidden}
+.todo li+li{border-top:1px solid var(--line)}
+.todo label{display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start;
+  padding:14px 15px;cursor:pointer;font-size:15px;min-height:52px}
+.todo input{appearance:none;-webkit-appearance:none;width:21px;height:21px;margin:1px 0 0;
+  border:1.5px solid var(--mut);border-radius:6px;background:var(--panel2);display:grid;place-content:center;cursor:pointer}
+.todo input::after{content:"✓";font-size:13px;font-weight:800;color:#0d1117;transform:scale(0);transition:transform .12s}
+.todo input:checked{background:var(--good);border-color:var(--good)}
+.todo input:checked::after{transform:scale(1)}
+.todo input:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.todo input:checked ~ .tt{color:var(--mut);text-decoration:line-through}
+.todo .day{font-weight:700;color:var(--camp-dim)}
+
+/* 문제 */
+.q{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px 16px;margin:11px 0}
+.q .qn{font-family:ui-monospace,Menlo,monospace;font-size:12px;font-weight:700;color:var(--camp-dim);letter-spacing:.08em}
+.q p{margin:6px 0 0;font-size:15.5px}
+details{margin-top:11px;border-top:1px solid var(--line);padding-top:10px}
+details summary{cursor:pointer;font-size:14px;font-weight:700;color:var(--acc);list-style:none;padding:4px 0}
+details summary::-webkit-details-marker{display:none}
+details summary::before{content:"▸ ";color:var(--acc)}
+details[open] summary::before{content:"▾ "}
+details .ans{font-size:14.5px;color:var(--sub);margin-top:8px}
+details .ans b{color:var(--good)}
+
+/* 대본 틀 */
+.script{background:#0b1020;border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0;font-size:15px}
+.script .s{color:var(--camp-dim);font-weight:700}
+.script div+div{margin-top:10px}
+
+/* 배지 · 이동 */
+.badge{display:inline-block;font-size:15px;font-weight:700;color:var(--camp-dim);background:var(--camp-bg);
+  border:1px solid var(--camp-line);border-radius:999px;padding:8px 16px;margin-top:6px}
+.nav-b{display:flex;gap:10px;margin:22px 0 0}
+.nav-b a{flex:1;text-align:center;background:var(--panel);border:1px solid var(--line);border-radius:12px;
+  padding:14px 10px;font-size:14.5px;font-weight:700;color:var(--ink)}
+.nav-b a.main{background:var(--camp-bg);border-color:var(--camp-line);color:var(--camp-dim)}
+.nav-b a.off{color:var(--mut)}
+footer{padding:24px 0 40px;color:var(--mut);font-size:12.5px;text-align:center}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <span class="kicker">WEEK 03 · CAMP 1 물질 · 하루 20분 × 4일</span>
+  <h1>원자와 분자 — <span class="g">화학식을 읽는 눈</span></h1>
+  <p class="lead">2주차에서 원소가 “종류”라는 걸 알았다. 이번 주는 <b>알갱이 한 개(원자)</b>와
+  <b>그것들이 붙은 덩어리(분자)</b>를 구별한다. 여기가 되면 H₂O, CO₂ 같은 화학식이 글자처럼 읽힌다.</p>
+  <div class="meta">
+    <span class="m">1주차 연결 · 입자</span>
+    <span class="m">원자 · 분자 · 분자식</span>
+    <span class="m">모형 만들기</span>
+    <span class="m" id="wdone">0 / 4 완료</span>
+  </div>
+</div></header>
+
+<nav class="toc"><div class="row">
+  <a href="#map">이번 주 지도</a>
+  <a href="#mon">월 · 열기</a>
+  <a href="#tue">화 · 채우기</a>
+  <a href="#thu">목 · 손으로</a>
+  <a href="#fri">금 · 보스전</a>
+</div></nav>
+
+<div class="wrap">
+
+<section id="map">
+  <div class="eyebrow">This week</div>
+  <h2><span class="cell">MAP</span>원자 한 개 → 분자 한 덩어리</h2>
+  <div class="diagram">
+    <svg viewBox="0 0 640 210" width="640" height="210" font-family="inherit" role="img" aria-label="원자의 구조와 물 분자 모형">
+      <rect x="16" y="20" width="270" height="170" rx="14" fill="#1c2230" stroke="#2a3340"/>
+      <text x="151" y="46" fill="#e6edf3" font-size="14" font-weight="700" text-anchor="middle">원자 — 알갱이 한 개</text>
+      <circle cx="151" cy="115" r="60" fill="none" stroke="#2a3340" stroke-dasharray="4 4"/>
+      <circle cx="151" cy="115" r="16" fill="#f778ba"/>
+      <text x="151" y="120" fill="#0d1117" font-size="11" font-weight="800" text-anchor="middle">+</text>
+      <circle cx="211" cy="115" r="7" fill="#4f9cff"/>
+      <circle cx="119" cy="63" r="7" fill="#4f9cff"/>
+      <text x="151" y="152" fill="#f778ba" font-size="11" text-anchor="middle">원자핵 (+)</text>
+      <text x="240" y="100" fill="#4f9cff" font-size="11" text-anchor="middle">전자 (−)</text>
+      <text x="151" y="180" fill="#6b7886" font-size="11">+와 −의 개수가 같아 전기를 띠지 않는다</text>
+
+      <rect x="306" y="20" width="318" height="170" rx="14" fill="#1c2230" stroke="#2a3340"/>
+      <text x="465" y="46" fill="#e6edf3" font-size="14" font-weight="700" text-anchor="middle">분자 — 원자가 붙은 덩어리</text>
+      <line x1="465" y1="105" x2="420" y2="140" stroke="#9aa7b4" stroke-width="6"/>
+      <line x1="465" y1="105" x2="510" y2="140" stroke="#9aa7b4" stroke-width="6"/>
+      <circle cx="465" cy="105" r="24" fill="#3fb950"/>
+      <text x="465" y="111" fill="#0d1117" font-size="14" font-weight="800" text-anchor="middle">O</text>
+      <circle cx="418" cy="143" r="15" fill="#7c5cff"/>
+      <text x="418" y="148" fill="#fff" font-size="11" font-weight="800" text-anchor="middle">H</text>
+      <circle cx="512" cy="143" r="15" fill="#7c5cff"/>
+      <text x="512" y="148" fill="#fff" font-size="11" font-weight="800" text-anchor="middle">H</text>
+      <text x="465" y="180" fill="#6b7886" font-size="11.5" text-anchor="middle">물 분자 H₂O · 원자 3개가 붙어 있다</text>
+    </svg>
+  </div>
+  <p class="figcap">원자 = 블록 한 조각 · 분자 = 조각을 붙여 만든 하나의 물건</p>
+</section>
+
+<section id="mon">
+  <div class="eyebrow">Monday · 열기</div>
+  <h2><span class="cell">[1]</span>원자 — 가운데는 +, 주위는 −</h2>
+
+  <p><b>원자는 물질을 이루는 알갱이 한 개</b>다. 1주차에서 “입자”라고 뭉뚱그려 부른 것의 정확한 이름이다.</p>
+  <p>원자 안은 두 부분으로 되어 있다. 가운데 <b>원자핵</b>은 <b>+</b> 전기를 띠고, 그 주위를 <b>전자</b>가 돌며 <b>−</b> 전기를 띤다.
+  보통 상태에서는 +와 −의 개수가 같아서 <b>원자 전체는 전기를 띠지 않는다</b>. 이 문장이 4주차 이온의 출발점이다.</p>
+
+  <div class="callout p"><span class="lbl">크기 감각</span>
+  원자를 <b>야구장</b> 크기로 키우면, 원자핵은 <b>가운데 놓인 완두콩 한 알</b> 정도다.
+  나머지는 거의 다 빈 공간이고 그 안을 전자가 돈다. 1주차의 “빈 공간”이 원자 안에도 있다.</div>
+
+  <h3>원소와 원자, 다시 한 번</h3>
+  <div class="tw"><table>
+    <thead><tr><th>말</th><th>뜻</th><th>이렇게 쓴다</th></tr></thead>
+    <tbody>
+      <tr><td><b>원소</b></td><td>종류·이름</td><td>“물은 수소와 산소, <b>두 원소</b>로 되어 있다”</td></tr>
+      <tr><td><b>원자</b></td><td>알갱이 한 개 (개수를 셀 수 있다)</td><td>“물 분자 하나에는 <b>원자 3개</b>가 있다”</td></tr>
+    </tbody>
+  </table></div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w3m1"><span class="tt"><span class="day">월</span> — 원자 그림(원자핵 + 전자)을 직접 그리고, 질문 3개를 적는다.</span></label></li>
+  </ul>
+</section>
+
+<section id="tue">
+  <div class="eyebrow">Tuesday · 채우기</div>
+  <h2><span class="cell">[2]</span>분자와 분자식 읽는 법</h2>
+
+  <p><b>분자는 원자 몇 개가 붙어서 그 물질의 성질을 갖게 된 입자</b>다.
+  산소 원자 하나(O)는 우리가 마시는 산소가 아니다. <b>두 개가 붙은 O₂</b>가 되어야 우리가 아는 산소가 된다.
+  물도 마찬가지다. 수소 원자 2개와 산소 원자 1개가 붙어야 비로소 ‘물’이다.</p>
+
+  <h3>숫자 두 개의 자리</h3>
+  <p>분자식에는 숫자가 두 군데 나온다. 자리가 다르면 뜻이 완전히 다르다.</p>
+  <div class="tw"><table>
+    <thead><tr><th>쓰기</th><th>읽기</th><th>뜻</th></tr></thead>
+    <tbody>
+      <tr><td><code>H₂O</code></td><td>아래 작은 2</td><td>한 분자 <b>안에</b> 수소 원자가 2개</td></tr>
+      <tr><td><code>2H₂O</code></td><td>앞의 큰 2</td><td>물 <b>분자가 2개</b> (원자로는 총 6개)</td></tr>
+      <tr><td><code>H₂O₂</code></td><td>둘 다 2</td><td>다른 물질이다 — 과산화수소(소독약)</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout warn"><span class="lbl">여기서 틀린다</span>
+  <b>H₂O₂는 물이 아니다.</b> 원자 하나만 더 붙어도 완전히 다른 물질이 된다.
+  분자식은 “원자 몇 개가 어떻게 붙었는지”를 적은 것이라서, 숫자 하나가 물질의 이름을 바꾼다.</div>
+
+  <h3>자주 나오는 분자 6개</h3>
+  <div class="tw"><table>
+    <thead><tr><th>분자식</th><th>이름</th><th>원자 구성</th><th>총 원자 수</th></tr></thead>
+    <tbody>
+      <tr><td><code>H₂O</code></td><td>물</td><td>H 2개 + O 1개</td><td>3</td></tr>
+      <tr><td><code>CO₂</code></td><td>이산화탄소</td><td>C 1개 + O 2개</td><td>3</td></tr>
+      <tr><td><code>O₂</code></td><td>산소</td><td>O 2개</td><td>2</td></tr>
+      <tr><td><code>N₂</code></td><td>질소</td><td>N 2개</td><td>2</td></tr>
+      <tr><td><code>NH₃</code></td><td>암모니아</td><td>N 1개 + H 3개</td><td>4</td></tr>
+      <tr><td><code>CH₄</code></td><td>메테인(도시가스)</td><td>C 1개 + H 4개</td><td>5</td></tr>
+    </tbody>
+  </table></div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w3m2"><span class="tt"><span class="day">화</span> — 위 6개를 노트에 옮겨 적고, 각각 <b>원자 개수</b>를 직접 세어 적는다.</span></label></li>
+  </ul>
+</section>
+
+<section id="thu">
+  <div class="eyebrow">Thursday · 손으로</div>
+  <h2><span class="cell">[3]</span>분자를 손으로 만든다</h2>
+
+  <div class="tw"><table>
+    <thead><tr><th>준비물</th><th>대체 가능</th></tr></thead>
+    <tbody>
+      <tr><td>지점토 또는 찰흙 (2~3색)</td><td>초코볼·젤리·포도알</td></tr>
+      <tr><td>이쑤시개</td><td>짧게 자른 빨대</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>순서</h3>
+  <div class="grid g2">
+    <div class="card"><span class="tag">01</span><h4>색 정하기</h4><p class="sub">O는 빨강, H는 흰색, C는 검정처럼 <b>원소마다 색을 정한다</b>. 실제 화학에서도 이렇게 약속해서 쓴다.</p></div>
+    <div class="card"><span class="tag">02</span><h4>크기 다르게</h4><p class="sub">원소마다 원자 크기가 다르다. O를 크게, H를 작게 만든다.</p></div>
+    <div class="card"><span class="tag">03</span><h4>4개 만들기</h4><p class="sub">H₂O · CO₂ · O₂ · NH₃ 네 개를 만들어 나란히 놓는다.</p></div>
+    <div class="card"><span class="tag">04</span><h4>집 안 화학식 찾기</h4><p class="sub">생수 성분표, 베이킹소다 봉지(NaHCO₃), 소독약 병(H₂O₂)에서 화학식을 찾아 사진 찍는다.</p></div>
+  </div>
+
+  <div class="callout good"><span class="lbl">확인 질문</span>
+  만든 모형을 늘어놓고 아빠가 묻는다. “이건 원자 몇 개짜리야?” “여기서 O를 하나 더 붙이면 무슨 물질이 될까?”
+  손에 든 채로 답하면 그 개념은 끝난 것이다.</div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w3m3"><span class="tt"><span class="day">목</span> — 분자 모형 4개를 만들고 사진을 남긴다. 집에서 찾은 화학식 2개를 적는다.</span></label></li>
+  </ul>
+</section>
+
+<section id="fri">
+  <div class="eyebrow">Friday · 보스전</div>
+  <h2><span class="cell">[4]</span>문제 5개 + 3분 설명</h2>
+
+  <div class="q"><span class="qn">Q1</span>
+    <p>물 분자 <code>H₂O</code> 하나에는 원자가 모두 몇 개 들어 있을까?</p>
+    <details><summary>해설 보기</summary><div class="ans"><b>3개.</b> 수소 원자 2개 + 산소 원자 1개다. 아래 작은 숫자는 그 원자의 개수를 뜻한다.</div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q2</span>
+    <p><code>2H₂O</code>와 <code>H₂O₂</code>는 무엇이 다를까?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>2H₂O는 물 분자가 2개</b>(같은 물질이 두 덩어리), <b>H₂O₂는 과산화수소라는 다른 물질</b>이다.
+      앞의 큰 숫자는 분자의 개수, 아래 작은 숫자는 분자 안 원자의 개수다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q3</span>
+    <p>산소 원자 하나(O)와 산소 분자(O₂)는 같은 것일까?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>다르다.</b> 우리가 숨 쉬며 마시는 산소는 원자 2개가 붙은 <b>O₂</b>다.
+      원자 하나만으로는 그 물질의 성질이 나타나지 않는다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q4</span>
+    <p>원자는 왜 전기를 띠지 않을까?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>원자핵의 + 전기와 전자의 − 전기가 같은 크기로 상쇄되기 때문이다.</b>
+      이 균형이 깨지면(전자를 잃거나 얻으면) 전기를 띠게 되는데, 그게 다음 주에 배울 <b>이온</b>이다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q5</span>
+    <p><code>CO₂</code> 분자 3개에는 산소 원자가 모두 몇 개 있을까?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>6개.</b> 한 분자에 산소 원자가 2개이고 분자가 3개이므로 2 × 3 = 6이다. (탄소 원자는 3개)
+    </div></details>
+  </div>
+
+  <h3>아빠에게 3분 설명하기</h3>
+  <div class="script">
+    <div><span class="s">① 이번 주에 배운 건</span> — 원자는 알갱이 한 개고, 그게 붙어서 성질을 갖게 된 게 분자라는 것.</div>
+    <div><span class="s">② 예를 들면</span> — H₂O는 수소 2개랑 산소 1개가 붙은 거야. 이걸 만들어 봤어. (모형 보여주기)</div>
+    <div><span class="s">③ 헷갈리기 쉬운 건</span> — 2H₂O는 물 분자 2개고, H₂O₂는 아예 다른 물질이야. 숫자 위치가 다르거든.</div>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w3m4"><span class="tt"><span class="day">금</span> — 문제 5개 + 3분 설명. 모형을 들고 설명하면 더 쉽다.</span></label></li>
+  </ul>
+
+  <p style="margin-top:18px"><span class="badge">⚛️ 분자 조립공 획득</span></p>
+</section>
+
+<section style="border-bottom:0">
+  <div class="eyebrow">Next</div>
+  <h2><span class="cell">[5]</span>다음 주 예고</h2>
+  <p>4주차는 <b>이온</b>이다. 오늘 “원자는 +와 −가 같아서 전기를 띠지 않는다”고 했는데,
+  그 균형이 깨지면 어떻게 될까. 소금물이 전기를 통하는 이유가 거기 있다. 캠프 1의 마지막이자 가장 중요한 주다.</p>
+  <div class="nav-b">
+    <a href="week02.html">← 2주차</a>
+    <a href="index.html">전체 지도</a>
+    <a class="main" href="week04.html">4주차 →</a>
+  </div>
+</section>
+
+<footer>과학 등반 · 3주차 · 하루 20분 × 4일</footer>
+</div>
+<script>
+(function(){
+  var KEY="science_quest_progress";
+  function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){return{}}}
+  function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+  var boxes=[].slice.call(document.querySelectorAll(".todo input[type=checkbox]"));
+  var st=load();
+  boxes.forEach(function(b){
+    if(st[b.dataset.q])b.checked=true;
+    b.addEventListener("change",function(){
+      var s=load();
+      if(b.checked)s[b.dataset.q]=1;else delete s[b.dataset.q];
+      save(s);paint();
+    });
+  });
+  function paint(){
+    var el=document.getElementById("wdone");if(!el)return;
+    var n=boxes.filter(function(b){return b.checked}).length;
+    el.textContent=n+" / "+boxes.length+" 완료";
+  }
+  paint();
+  // 현재 섹션 표시
+  var links=[].slice.call(document.querySelectorAll("nav.toc a[href^='#']"));
+  var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1))});
+  function onScroll(){
+    var y=window.scrollY+120,idx=0;
+    secs.forEach(function(s,i){if(s&&s.offsetTop<=y)idx=i});
+    links.forEach(function(a,i){a.classList.toggle("now",i===idx)});
+  }
+  window.addEventListener("scroll",onScroll,{passive:true});onScroll();
+})();
+</script>
+</body>
+</html>

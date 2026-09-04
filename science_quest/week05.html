@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ko" class="c2">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d1117">
+<title>5주차 · 정전기와 전하</title>
+<meta name="description" content="문고리에서 따끔한 이유. 마찰로 전자가 옮겨 가며 생기는 전하를 배운다.">
+<style>
+:root{
+  --bg:#0d1117; --bg2:#0b0f15; --panel:#161b22; --panel2:#1c2230; --line:#2a3340;
+  --ink:#e6edf3; --sub:#9aa7b4; --mut:#6b7886;
+  --acc:#4f9cff; --acc2:#7c5cff; --good:#3fb950; --warn:#d29922; --pink:#f778ba;
+  --chip:#21304a; --radius:16px;
+  --camp:#7c5cff; --camp-dim:#b7a4ff; --camp-bg:rgba(124,92,255,.14); --camp-line:#3d3470;
+}
+:root.c1{--camp:#7c5cff;--camp-dim:#b7a4ff;--camp-bg:rgba(124,92,255,.14);--camp-line:#3d3470}
+:root.c2{--camp:#d29922;--camp-dim:#f0c674;--camp-bg:rgba(210,153,34,.14);--camp-line:#5c4718}
+:root.c3{--camp:#3fb950;--camp-dim:#63d67c;--camp-bg:rgba(63,185,80,.14);--camp-line:#2c5c34}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);line-height:1.72;font-size:16.5px;
+  font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR","Segoe UI",system-ui,sans-serif;
+  word-break:keep-all;overflow-wrap:anywhere;
+  padding-bottom:calc(40px + env(safe-area-inset-bottom))}
+.wrap{max-width:720px;margin:0 auto;padding:0 18px}
+a{color:var(--acc);text-decoration:none}
+p{margin:0 0 13px}
+b,strong{font-weight:700;color:#fff}
+.sub{color:var(--sub)}
+.mut{color:var(--mut)}
+
+/* 헤더 */
+header.top{padding:26px 0 18px;background:linear-gradient(180deg,var(--bg2),var(--bg) 90%)}
+.kicker{display:inline-block;font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;font-weight:700;
+  color:var(--camp-dim);background:var(--camp-bg);border:1px solid var(--camp-line);
+  padding:6px 12px;border-radius:999px;margin-bottom:14px}
+h1{font-size:27px;line-height:1.3;margin:0 0 10px;font-weight:800;letter-spacing:-.01em}
+h1 .g{background:linear-gradient(90deg,var(--acc),var(--camp));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:15.5px;color:var(--sub);margin:0 0 16px}
+.meta{display:flex;flex-wrap:wrap;gap:7px}
+.meta .m{font-size:12.5px;color:var(--sub);background:var(--panel);border:1px solid var(--line);padding:5px 11px;border-radius:999px}
+
+/* 상단 이동 바 */
+nav.toc{position:sticky;top:0;z-index:30;background:rgba(13,17,23,.92);backdrop-filter:blur(8px);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:18px}
+nav.toc .row{display:flex;gap:6px;overflow-x:auto;padding:10px 18px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+nav.toc .row::-webkit-scrollbar{display:none}
+nav.toc a{flex:0 0 auto;font-size:13px;color:var(--sub);padding:7px 12px;border-radius:999px;
+  border:1px solid var(--line);background:var(--panel)}
+nav.toc a.now{color:#fff;background:var(--camp-bg);border-color:var(--camp-line)}
+
+/* 섹션 */
+section{padding:30px 0;border-bottom:1px solid var(--line)}
+.eyebrow{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--camp-dim);font-weight:700;margin-bottom:7px}
+h2{font-size:20px;margin:0 0 14px;font-weight:800;line-height:1.4}
+h2 .cell{display:inline-block;background:var(--camp);color:#0d1117;font-size:12.5px;font-weight:800;
+  border-radius:8px;padding:2px 9px;margin-right:8px;vertical-align:2px;font-family:ui-monospace,Menlo,monospace}
+h3{font-size:16.5px;margin:22px 0 9px;font-weight:700}
+h3:first-child{margin-top:0}
+
+/* 카드 · 콜아웃 */
+.grid{display:grid;gap:11px;margin:12px 0}
+.g2{grid-template-columns:1fr}
+@media(min-width:620px){.g2{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:15px 16px}
+.card h4{margin:0 0 7px;font-size:15px;font-weight:700}
+.card p{font-size:14.5px;margin:0}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px;margin-bottom:8px;
+  background:var(--camp-bg);color:var(--camp-dim);border:1px solid var(--camp-line)}
+.callout{border-left:4px solid var(--acc);background:var(--panel);border-radius:10px;padding:13px 15px;margin:14px 0;font-size:15px}
+.callout.good{border-left-color:var(--good)}
+.callout.warn{border-left-color:var(--warn)}
+.callout.p{border-left-color:var(--camp)}
+.callout b{display:inline}
+.callout .lbl{display:block;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);font-weight:700;margin-bottom:4px}
+
+/* 표 */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:12px;margin:12px 0}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:340px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--mut);font-weight:700;background:var(--panel)}
+tbody tr:last-child td{border-bottom:0}
+td b{color:#fff}
+code{background:#0b1020;border:1px solid var(--line);border-radius:6px;padding:1px 6px;font-size:14px;color:#c9d6e5;
+  font-family:ui-monospace,Menlo,monospace}
+
+/* 다이어그램 */
+.diagram{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:var(--radius);
+  background:var(--panel);padding:12px;margin:12px 0}
+.diagram svg{display:block}
+.figcap{font-size:12.5px;color:var(--mut);margin:-4px 0 12px;text-align:center}
+
+/* 할 일 체크 */
+.todo{list-style:none;margin:14px 0 0;padding:0;border:1px solid var(--line);border-radius:12px;background:var(--panel);overflow:hidden}
+.todo li+li{border-top:1px solid var(--line)}
+.todo label{display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start;
+  padding:14px 15px;cursor:pointer;font-size:15px;min-height:52px}
+.todo input{appearance:none;-webkit-appearance:none;width:21px;height:21px;margin:1px 0 0;
+  border:1.5px solid var(--mut);border-radius:6px;background:var(--panel2);display:grid;place-content:center;cursor:pointer}
+.todo input::after{content:"✓";font-size:13px;font-weight:800;color:#0d1117;transform:scale(0);transition:transform .12s}
+.todo input:checked{background:var(--good);border-color:var(--good)}
+.todo input:checked::after{transform:scale(1)}
+.todo input:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.todo input:checked ~ .tt{color:var(--mut);text-decoration:line-through}
+.todo .day{font-weight:700;color:var(--camp-dim)}
+
+/* 문제 */
+.q{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px 16px;margin:11px 0}
+.q .qn{font-family:ui-monospace,Menlo,monospace;font-size:12px;font-weight:700;color:var(--camp-dim);letter-spacing:.08em}
+.q p{margin:6px 0 0;font-size:15.5px}
+details{margin-top:11px;border-top:1px solid var(--line);padding-top:10px}
+details summary{cursor:pointer;font-size:14px;font-weight:700;color:var(--acc);list-style:none;padding:4px 0}
+details summary::-webkit-details-marker{display:none}
+details summary::before{content:"▸ ";color:var(--acc)}
+details[open] summary::before{content:"▾ "}
+details .ans{font-size:14.5px;color:var(--sub);margin-top:8px}
+details .ans b{color:var(--good)}
+
+/* 대본 틀 */
+.script{background:#0b1020;border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0;font-size:15px}
+.script .s{color:var(--camp-dim);font-weight:700}
+.script div+div{margin-top:10px}
+
+/* 배지 · 이동 */
+.badge{display:inline-block;font-size:15px;font-weight:700;color:var(--camp-dim);background:var(--camp-bg);
+  border:1px solid var(--camp-line);border-radius:999px;padding:8px 16px;margin-top:6px}
+.nav-b{display:flex;gap:10px;margin:22px 0 0}
+.nav-b a{flex:1;text-align:center;background:var(--panel);border:1px solid var(--line);border-radius:12px;
+  padding:14px 10px;font-size:14.5px;font-weight:700;color:var(--ink)}
+.nav-b a.main{background:var(--camp-bg);border-color:var(--camp-line);color:var(--camp-dim)}
+.nav-b a.off{color:var(--mut)}
+footer{padding:24px 0 40px;color:var(--mut);font-size:12.5px;text-align:center}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <span class="kicker">WEEK 05 · CAMP 2 전기와 성질 · 하루 20분 × 4일</span>
+  <h1>정전기와 전하 — <span class="g">전자의 이사</span></h1>
+  <p class="lead">캠프 1의 주인공이었던 <b>전자</b>가 그대로 캠프 2의 주인공이 된다.
+  전자가 <b>옮겨 가면</b> 정전기, 전자가 <b>계속 흐르면</b> 전류다. 이번 주는 앞쪽, 옮겨 가는 이야기다.</p>
+  <div class="meta">
+    <span class="m">4주차 연결 · 전자와 전기</span>
+    <span class="m">마찰전기 · 전하</span>
+    <span class="m">풍선 실험 3종</span>
+    <span class="m" id="wdone">0 / 4 완료</span>
+  </div>
+</div></header>
+
+<nav class="toc"><div class="row">
+  <a href="#map">이번 주 지도</a>
+  <a href="#mon">월 · 열기</a>
+  <a href="#tue">화 · 채우기</a>
+  <a href="#thu">목 · 손으로</a>
+  <a href="#fri">금 · 보스전</a>
+</div></nav>
+
+<div class="wrap">
+
+<section id="map">
+  <div class="eyebrow">This week</div>
+  <h2><span class="cell">MAP</span>문지르면 전자가 넘어간다</h2>
+  <div class="diagram">
+    <svg viewBox="0 0 640 200" width="640" height="200" font-family="inherit" role="img" aria-label="마찰로 전자가 이동해 두 물체가 서로 다른 전하를 띠는 과정">
+      <defs><marker id="a5" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#d29922"/></marker></defs>
+      <text x="120" y="34" fill="#9aa7b4" font-size="12" text-anchor="middle">문지르기 전 — 둘 다 중성</text>
+      <ellipse cx="70" cy="90" rx="40" ry="34" fill="#1c2230" stroke="#2a3340"/>
+      <text x="70" y="95" fill="#e6edf3" font-size="12" text-anchor="middle">머리카락</text>
+      <ellipse cx="172" cy="90" rx="40" ry="34" fill="#1c2230" stroke="#2a3340"/>
+      <text x="172" y="95" fill="#e6edf3" font-size="12" text-anchor="middle">풍선</text>
+      <text x="120" y="148" fill="#6b7886" font-size="11" text-anchor="middle">+ 와 − 개수가 같다</text>
+
+      <line x1="232" y1="90" x2="292" y2="90" stroke="#d29922" stroke-width="2.4" marker-end="url(#a5)"/>
+      <text x="262" y="78" fill="#d29922" font-size="11" text-anchor="middle">문지름</text>
+
+      <text x="450" y="34" fill="#9aa7b4" font-size="12" text-anchor="middle">문지른 후 — 전자가 풍선으로 이동</text>
+      <ellipse cx="380" cy="90" rx="40" ry="34" fill="#3a1d19" stroke="#b93a2c"/>
+      <text x="380" y="88" fill="#f5a79c" font-size="12" text-anchor="middle">머리카락</text>
+      <text x="380" y="106" fill="#f5a79c" font-size="14" font-weight="800" text-anchor="middle">+</text>
+      <ellipse cx="520" cy="90" rx="40" ry="34" fill="#12233a" stroke="#2f4f7a"/>
+      <text x="520" y="88" fill="#8cc0ff" font-size="12" text-anchor="middle">풍선</text>
+      <text x="520" y="106" fill="#8cc0ff" font-size="14" font-weight="800" text-anchor="middle">−</text>
+      <path d="M410 70 Q450 46 490 70" stroke="#d29922" stroke-width="2" fill="none" marker-end="url(#a5)"/>
+      <text x="450" y="42" fill="#d29922" font-size="11" text-anchor="middle">전자 이동</text>
+      <text x="450" y="148" fill="#6b7886" font-size="11" text-anchor="middle">잃은 쪽 +, 얻은 쪽 −</text>
+      <text x="320" y="182" fill="#6b7886" font-size="11.5" text-anchor="middle">전자만 움직인다 · 원자핵은 제자리 · 전체 전기량은 그대로</text>
+    </svg>
+  </div>
+</section>
+
+<section id="mon">
+  <div class="eyebrow">Monday · 열기</div>
+  <h2><span class="cell">[1]</span>마찰전기 — 왜 겨울에만 따끔할까</h2>
+
+  <p>서로 다른 두 물체를 문지르면 <b>한쪽에서 다른 쪽으로 전자가 옮겨 간다</b>.
+  전자를 잃은 쪽은 <b>+ 전하</b>를, 얻은 쪽은 <b>− 전하</b>를 띤다. 이렇게 생긴 전기를 <b>마찰전기</b>라고 한다.</p>
+  <p>4주차의 이온과 원리가 똑같다. 다른 점은 하나다. 이온은 <b>물속에서 입자 단위</b>로 일어난 일이고,
+  마찰전기는 <b>물체 전체</b>가 전자를 얻거나 잃은 것이다.</p>
+
+  <div class="callout p"><span class="lbl">규칙 한 줄</span>
+  같은 전하끼리는 <b>밀어내고</b>, 다른 전하끼리는 <b>끌어당긴다</b>. 이 한 줄로 이번 주 실험이 전부 설명된다.</div>
+
+  <h3>겨울에 정전기가 심한 이유</h3>
+  <p>공기가 습하면 옮겨 간 전자가 <b>공기 중 물기를 타고 빠져나간다</b>. 그래서 여름에는 전기가 쌓이지 않는다.
+  겨울은 건조해서 빠져나갈 길이 없으니 몸에 계속 쌓이고, 금속 문고리에 닿는 순간 한꺼번에 이동하면서 따끔한 것이다.</p>
+
+  <div class="grid g2">
+    <div class="card"><span class="tag">생활</span><h4>스웨터 벗을 때 파직</h4><p class="sub">옷과 몸이 문질러지며 전자가 옮겨 간 뒤, 떨어질 때 되돌아가면서 소리와 빛이 난다.</p></div>
+    <div class="card"><span class="tag">자연</span><h4>번개</h4><p class="sub">구름 속 얼음 알갱이들이 부딪치며 전하가 갈라지고, 쌓인 전하가 한꺼번에 이동하는 것이 번개다. 정전기의 초대형 판이다.</p></div>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w5m1"><span class="tt"><span class="day">월</span> — 위를 읽고 질문 3개를 적는다. 오늘 하루 정전기를 느낀 순간을 하나 기록한다.</span></label></li>
+  </ul>
+</section>
+
+<section id="tue">
+  <div class="eyebrow">Tuesday · 채우기</div>
+  <h2><span class="cell">[2]</span>풍선은 왜 아무것도 안 한 벽에 붙을까</h2>
+
+  <p>벽은 문지르지도 않았으니 전기를 띠지 않았다. 그런데 왜 − 전하를 띤 풍선이 붙을까?</p>
+  <p>답은 <b>벽 속 전자가 밀려나기 때문</b>이다. − 를 띤 풍선을 가까이 대면, 벽 표면의 전자들이
+  같은 −끼리 밀려서 <b>안쪽으로 물러난다</b>. 그러면 벽 표면은 상대적으로 +가 되고, 풍선(−)과 서로 끌어당긴다.
+  물체 전체는 여전히 중성인데 <b>표면만 전하가 갈라진 것</b>이다.</p>
+
+  <div class="callout good"><span class="lbl">이 원리로 설명되는 것</span>
+  ① 문지른 풍선이 벽·천장에 붙는다 ② 가는 물줄기가 풍선 쪽으로 휜다 ③ 문지른 자로 종잇조각을 들어올린다.
+  셋 다 <b>상대는 중성인데도 끌려온다</b>는 공통점이 있다.</div>
+
+  <h3>노트 한 장 양식</h3>
+  <div class="tw"><table>
+    <thead><tr><th>칸</th><th>여기에 쓸 것</th></tr></thead>
+    <tbody>
+      <tr><td><b>① 그림</b></td><td>머리카락 → 풍선으로 전자가 이동하는 화살표 그림</td></tr>
+      <tr><td><b>② 규칙</b></td><td>같은 전하는 밀고, 다른 전하는 당긴다</td></tr>
+      <tr><td><b>③ 이유</b></td><td>중성인 벽에 붙는 이유 (표면 전자가 밀려나 +가 된다)</td></tr>
+      <tr><td><b>④ 내 예시</b></td><td>오늘 겪은 정전기 1개</td></tr>
+    </tbody>
+  </table></div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w5m2"><span class="tt"><span class="day">화</span> — 노트 한 장을 채운다. 특히 ③번을 자기 말로 쓴다.</span></label></li>
+  </ul>
+</section>
+
+<section id="thu">
+  <div class="eyebrow">Thursday · 손으로</div>
+  <h2><span class="cell">[3]</span>풍선 실험 3종</h2>
+
+  <p class="sub">준비물: 고무풍선 1~2개, 수도꼭지, 종잇조각, 머리카락. 습한 날에는 잘 안 되니 <b>건조한 날 실내</b>에서 한다.</p>
+
+  <div class="grid g2">
+    <div class="card"><span class="tag">실험 1</span><h4>머리카락 세우기</h4>
+      <p class="sub">풍선을 머리카락에 20번 문지른 뒤 천천히 든다. 머리카락이 따라 올라온다.
+      <b>왜?</b> 머리카락은 +, 풍선은 −라서 서로 당긴다. 머리카락끼리는 같은 +라서 서로 밀려 흩어진다.</p></div>
+    <div class="card"><span class="tag">실험 2</span><h4>벽에 붙이기</h4>
+      <p class="sub">문지른 풍선을 벽에 대고 손을 뗀다. 몇 초~몇 분 붙어 있다.
+      <b>왜?</b> 벽 표면 전자가 밀려나 +가 되면서 끌어당긴다. 시간이 지나면 전하가 빠져나가 떨어진다.</p></div>
+    <div class="card"><span class="tag">실험 3</span><h4>물줄기 휘게 하기</h4>
+      <p class="sub">수도꼭지를 <b>실처럼 가늘게</b> 틀고 문지른 풍선을 3 cm 옆에 가까이 댄다. 물줄기가 풍선 쪽으로 휜다.
+      <b>왜?</b> 물 분자가 전기적으로 한쪽에 치우쳐 있어(극성) 풍선 쪽으로 방향을 맞추고 끌려온다.</p></div>
+    <div class="card"><span class="tag">기록</span><h4>조건 바꿔 보기</h4>
+      <p class="sub">문지르는 횟수를 5번 · 20번 · 40번으로 바꿔 가며 <b>붙어 있는 시간</b>을 재서 표로 적는다.
+      숫자가 생기면 실험이 관찰에서 <b>탐구</b>가 된다.</p></div>
+  </div>
+
+  <div class="tw"><table>
+    <thead><tr><th>문지른 횟수</th><th>벽에 붙어 있던 시간</th></tr></thead>
+    <tbody>
+      <tr><td>5번</td><td>______ 초</td></tr>
+      <tr><td>20번</td><td>______ 초</td></tr>
+      <tr><td>40번</td><td>______ 초</td></tr>
+    </tbody>
+  </table></div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w5m3"><span class="tt"><span class="day">목</span> — 실험 3종을 하고 표를 채운다. 물줄기가 휘는 장면은 영상으로 찍는다.</span></label></li>
+  </ul>
+</section>
+
+<section id="fri">
+  <div class="eyebrow">Friday · 보스전</div>
+  <h2><span class="cell">[4]</span>문제 5개 + 3분 설명</h2>
+
+  <div class="q"><span class="qn">Q1</span>
+    <p>풍선을 머리카락에 문질렀더니 풍선이 − 전하를 띠었다. 머리카락은 어떻게 되었을까?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>+ 전하를 띤다.</b> 머리카락에서 풍선으로 전자가 옮겨 갔기 때문이다.
+      전자를 잃은 쪽이 +, 얻은 쪽이 −다. 없던 전기가 생긴 것이 아니라 <b>자리만 옮긴 것</b>이다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q2</span>
+    <p>문지른 풍선을 아무 처리도 하지 않은 벽에 붙이면 붙는다. 벽은 전기를 띠지 않았는데 왜 그럴까?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>풍선의 − 전하가 벽 표면 전자를 안쪽으로 밀어내서, 벽 표면이 상대적으로 +가 되기 때문이다.</b>
+      벽 전체는 여전히 중성이지만 표면에서 전하가 갈라져 서로 끌어당긴다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q3</span>
+    <p>여름보다 겨울에 정전기가 심한 이유는?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>공기가 건조해서 몸에 쌓인 전하가 빠져나가지 못하기 때문이다.</b>
+      습한 날에는 공기 중 물기를 통해 전하가 조금씩 흘러나가 쌓이지 않는다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q4</span>
+    <p>같은 방법으로 문지른 풍선 두 개를 실에 매달아 가까이 하면 어떻게 될까?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>서로 밀어낸다.</b> 둘 다 − 전하를 띠고 있어서다. 같은 전하는 밀고 다른 전하는 당긴다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q5</span>
+    <p>정전기(마찰전기)와 4주차의 이온은 어떤 점이 같고 무엇이 다를까?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>같은 점:</b> 둘 다 전자가 옮겨 가서 전기를 띠게 된 것.<br>
+      <b>다른 점:</b> 이온은 <b>원자 하나</b> 단위로 물속에서 일어나고, 마찰전기는 <b>물체 전체</b>가 전자를 얻거나 잃은 것이다.
+    </div></details>
+  </div>
+
+  <h3>아빠에게 3분 설명하기</h3>
+  <div class="script">
+    <div><span class="s">① 이번 주에 배운 건</span> — 문지르면 전자가 한쪽으로 옮겨 가서 한쪽은 +, 한쪽은 −가 된다는 것.</div>
+    <div><span class="s">② 예를 들면</span> — 풍선을 문질러서 벽에 붙였어. 벽은 중성인데도 표면 전자가 밀려나서 붙어.</div>
+    <div><span class="s">③ 헷갈리기 쉬운 건</span> — 전기가 새로 생기는 게 아니야. 원래 있던 전자가 자리를 옮긴 것뿐이야.</div>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w5m4"><span class="tt"><span class="day">금</span> — 문제 5개 + 3분 설명. 풍선을 들고 설명하면 더 쉽다.</span></label></li>
+  </ul>
+
+  <p style="margin-top:18px"><span class="badge">⚡ 전하 감지기 획득</span></p>
+</section>
+
+<section style="border-bottom:0">
+  <div class="eyebrow">Next</div>
+  <h2><span class="cell">[5]</span>다음 주 예고</h2>
+  <p>6주차는 <b>전류·전압·저항</b>이다. 이번 주에는 전자가 <b>한 번 옮겨 갔다</b>. 다음 주에는 전자가 <b>계속 흐른다</b>.
+  V = I × R 이라는 공식이 나오지만, 공식보다 <b>물탱크 그림</b>을 먼저 그린다.</p>
+  <div class="nav-b">
+    <a href="week04.html">← 4주차</a>
+    <a href="index.html">전체 지도</a>
+    <a class="main" href="week06.html">6주차 →</a>
+  </div>
+</section>
+
+<footer>과학 등반 · 5주차 · 하루 20분 × 4일</footer>
+</div>
+<script>
+(function(){
+  var KEY="science_quest_progress";
+  function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){return{}}}
+  function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+  var boxes=[].slice.call(document.querySelectorAll(".todo input[type=checkbox]"));
+  var st=load();
+  boxes.forEach(function(b){
+    if(st[b.dataset.q])b.checked=true;
+    b.addEventListener("change",function(){
+      var s=load();
+      if(b.checked)s[b.dataset.q]=1;else delete s[b.dataset.q];
+      save(s);paint();
+    });
+  });
+  function paint(){
+    var el=document.getElementById("wdone");if(!el)return;
+    var n=boxes.filter(function(b){return b.checked}).length;
+    el.textContent=n+" / "+boxes.length+" 완료";
+  }
+  paint();
+  // 현재 섹션 표시
+  var links=[].slice.call(document.querySelectorAll("nav.toc a[href^='#']"));
+  var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1))});
+  function onScroll(){
+    var y=window.scrollY+120,idx=0;
+    secs.forEach(function(s,i){if(s&&s.offsetTop<=y)idx=i});
+    links.forEach(function(a,i){a.classList.toggle("now",i===idx)});
+  }
+  window.addEventListener("scroll",onScroll,{passive:true});onScroll();
+})();
+</script>
+</body>
+</html>
