@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ko" class="c2">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d1117">
+<title>7주차 · 전류의 자기 작용</title>
+<meta name="description" content="전류가 흐르면 자기장이 생긴다. 전자석과 모터로 전기가 움직임이 되는 원리.">
+<style>
+:root{
+  --bg:#0d1117; --bg2:#0b0f15; --panel:#161b22; --panel2:#1c2230; --line:#2a3340;
+  --ink:#e6edf3; --sub:#9aa7b4; --mut:#6b7886;
+  --acc:#4f9cff; --acc2:#7c5cff; --good:#3fb950; --warn:#d29922; --pink:#f778ba;
+  --chip:#21304a; --radius:16px;
+  --camp:#7c5cff; --camp-dim:#b7a4ff; --camp-bg:rgba(124,92,255,.14); --camp-line:#3d3470;
+}
+:root.c1{--camp:#7c5cff;--camp-dim:#b7a4ff;--camp-bg:rgba(124,92,255,.14);--camp-line:#3d3470}
+:root.c2{--camp:#d29922;--camp-dim:#f0c674;--camp-bg:rgba(210,153,34,.14);--camp-line:#5c4718}
+:root.c3{--camp:#3fb950;--camp-dim:#63d67c;--camp-bg:rgba(63,185,80,.14);--camp-line:#2c5c34}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);line-height:1.72;font-size:16.5px;
+  font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR","Segoe UI",system-ui,sans-serif;
+  word-break:keep-all;overflow-wrap:anywhere;
+  padding-bottom:calc(40px + env(safe-area-inset-bottom))}
+.wrap{max-width:720px;margin:0 auto;padding:0 18px}
+a{color:var(--acc);text-decoration:none}
+p{margin:0 0 13px}
+b,strong{font-weight:700;color:#fff}
+.sub{color:var(--sub)}
+.mut{color:var(--mut)}
+
+/* 헤더 */
+header.top{padding:26px 0 18px;background:linear-gradient(180deg,var(--bg2),var(--bg) 90%)}
+.kicker{display:inline-block;font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;font-weight:700;
+  color:var(--camp-dim);background:var(--camp-bg);border:1px solid var(--camp-line);
+  padding:6px 12px;border-radius:999px;margin-bottom:14px}
+h1{font-size:27px;line-height:1.3;margin:0 0 10px;font-weight:800;letter-spacing:-.01em}
+h1 .g{background:linear-gradient(90deg,var(--acc),var(--camp));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:15.5px;color:var(--sub);margin:0 0 16px}
+.meta{display:flex;flex-wrap:wrap;gap:7px}
+.meta .m{font-size:12.5px;color:var(--sub);background:var(--panel);border:1px solid var(--line);padding:5px 11px;border-radius:999px}
+
+/* 상단 이동 바 */
+nav.toc{position:sticky;top:0;z-index:30;background:rgba(13,17,23,.92);backdrop-filter:blur(8px);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:18px}
+nav.toc .row{display:flex;gap:6px;overflow-x:auto;padding:10px 18px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+nav.toc .row::-webkit-scrollbar{display:none}
+nav.toc a{flex:0 0 auto;font-size:13px;color:var(--sub);padding:7px 12px;border-radius:999px;
+  border:1px solid var(--line);background:var(--panel)}
+nav.toc a.now{color:#fff;background:var(--camp-bg);border-color:var(--camp-line)}
+
+/* 섹션 */
+section{padding:30px 0;border-bottom:1px solid var(--line)}
+.eyebrow{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--camp-dim);font-weight:700;margin-bottom:7px}
+h2{font-size:20px;margin:0 0 14px;font-weight:800;line-height:1.4}
+h2 .cell{display:inline-block;background:var(--camp);color:#0d1117;font-size:12.5px;font-weight:800;
+  border-radius:8px;padding:2px 9px;margin-right:8px;vertical-align:2px;font-family:ui-monospace,Menlo,monospace}
+h3{font-size:16.5px;margin:22px 0 9px;font-weight:700}
+h3:first-child{margin-top:0}
+
+/* 카드 · 콜아웃 */
+.grid{display:grid;gap:11px;margin:12px 0}
+.g2{grid-template-columns:1fr}
+@media(min-width:620px){.g2{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:15px 16px}
+.card h4{margin:0 0 7px;font-size:15px;font-weight:700}
+.card p{font-size:14.5px;margin:0}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px;margin-bottom:8px;
+  background:var(--camp-bg);color:var(--camp-dim);border:1px solid var(--camp-line)}
+.callout{border-left:4px solid var(--acc);background:var(--panel);border-radius:10px;padding:13px 15px;margin:14px 0;font-size:15px}
+.callout.good{border-left-color:var(--good)}
+.callout.warn{border-left-color:var(--warn)}
+.callout.p{border-left-color:var(--camp)}
+.callout b{display:inline}
+.callout .lbl{display:block;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);font-weight:700;margin-bottom:4px}
+
+/* 표 */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:12px;margin:12px 0}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:340px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--mut);font-weight:700;background:var(--panel)}
+tbody tr:last-child td{border-bottom:0}
+td b{color:#fff}
+code{background:#0b1020;border:1px solid var(--line);border-radius:6px;padding:1px 6px;font-size:14px;color:#c9d6e5;
+  font-family:ui-monospace,Menlo,monospace}
+
+/* 다이어그램 */
+.diagram{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:var(--radius);
+  background:var(--panel);padding:12px;margin:12px 0}
+.diagram svg{display:block}
+.figcap{font-size:12.5px;color:var(--mut);margin:-4px 0 12px;text-align:center}
+
+/* 할 일 체크 */
+.todo{list-style:none;margin:14px 0 0;padding:0;border:1px solid var(--line);border-radius:12px;background:var(--panel);overflow:hidden}
+.todo li+li{border-top:1px solid var(--line)}
+.todo label{display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start;
+  padding:14px 15px;cursor:pointer;font-size:15px;min-height:52px}
+.todo input{appearance:none;-webkit-appearance:none;width:21px;height:21px;margin:1px 0 0;
+  border:1.5px solid var(--mut);border-radius:6px;background:var(--panel2);display:grid;place-content:center;cursor:pointer}
+.todo input::after{content:"✓";font-size:13px;font-weight:800;color:#0d1117;transform:scale(0);transition:transform .12s}
+.todo input:checked{background:var(--good);border-color:var(--good)}
+.todo input:checked::after{transform:scale(1)}
+.todo input:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.todo input:checked ~ .tt{color:var(--mut);text-decoration:line-through}
+.todo .day{font-weight:700;color:var(--camp-dim)}
+
+/* 문제 */
+.q{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px 16px;margin:11px 0}
+.q .qn{font-family:ui-monospace,Menlo,monospace;font-size:12px;font-weight:700;color:var(--camp-dim);letter-spacing:.08em}
+.q p{margin:6px 0 0;font-size:15.5px}
+details{margin-top:11px;border-top:1px solid var(--line);padding-top:10px}
+details summary{cursor:pointer;font-size:14px;font-weight:700;color:var(--acc);list-style:none;padding:4px 0}
+details summary::-webkit-details-marker{display:none}
+details summary::before{content:"▸ ";color:var(--acc)}
+details[open] summary::before{content:"▾ "}
+details .ans{font-size:14.5px;color:var(--sub);margin-top:8px}
+details .ans b{color:var(--good)}
+
+/* 대본 틀 */
+.script{background:#0b1020;border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0;font-size:15px}
+.script .s{color:var(--camp-dim);font-weight:700}
+.script div+div{margin-top:10px}
+
+/* 배지 · 이동 */
+.badge{display:inline-block;font-size:15px;font-weight:700;color:var(--camp-dim);background:var(--camp-bg);
+  border:1px solid var(--camp-line);border-radius:999px;padding:8px 16px;margin-top:6px}
+.nav-b{display:flex;gap:10px;margin:22px 0 0}
+.nav-b a{flex:1;text-align:center;background:var(--panel);border:1px solid var(--line);border-radius:12px;
+  padding:14px 10px;font-size:14.5px;font-weight:700;color:var(--ink)}
+.nav-b a.main{background:var(--camp-bg);border-color:var(--camp-line);color:var(--camp-dim)}
+.nav-b a.off{color:var(--mut)}
+footer{padding:24px 0 40px;color:var(--mut);font-size:12.5px;text-align:center}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <span class="kicker">WEEK 07 · CAMP 2 전기와 성질 · 하루 20분 × 4일</span>
+  <h1>전류의 자기 작용 — <span class="g">전기가 힘이 되는 순간</span></h1>
+  <p class="lead">전선에 전류를 흘렸더니 옆에 있던 나침반 바늘이 움직였다. 1820년에 우연히 발견된 이 현상 하나로
+  <b>모터·스피커·전동차</b>가 만들어졌다. 이번 주는 그 원리를 직접 만들어 본다.</p>
+  <div class="meta">
+    <span class="m">6주차 연결 · 전류</span>
+    <span class="m">자기장 · 전자석</span>
+    <span class="m">전자석 만들기</span>
+    <span class="m" id="wdone">0 / 4 완료</span>
+  </div>
+</div></header>
+
+<nav class="toc"><div class="row">
+  <a href="#map">이번 주 지도</a>
+  <a href="#mon">월 · 열기</a>
+  <a href="#tue">화 · 채우기</a>
+  <a href="#thu">목 · 손으로</a>
+  <a href="#fri">금 · 보스전</a>
+</div></nav>
+
+<div class="wrap">
+
+<section id="map">
+  <div class="eyebrow">This week</div>
+  <h2><span class="cell">MAP</span>전류 → 자기장 → 힘</h2>
+  <div class="diagram">
+    <svg viewBox="0 0 640 210" width="640" height="210" font-family="inherit" role="img" aria-label="전류가 흐르는 전선 주위 자기장과 코일 전자석">
+      <defs><marker id="a7" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#f0c674"/></marker></defs>
+      <text x="150" y="30" fill="#9aa7b4" font-size="12" text-anchor="middle">직선 전선 — 동심원 자기장</text>
+      <line x1="150" y1="52" x2="150" y2="180" stroke="#f0c674" stroke-width="5"/>
+      <circle cx="150" cy="116" r="26" fill="none" stroke="#4f9cff" stroke-width="1.6"/>
+      <circle cx="150" cy="116" r="44" fill="none" stroke="#4f9cff" stroke-width="1.6"/>
+      <circle cx="150" cy="116" r="62" fill="none" stroke="#4f9cff" stroke-width="1.4" stroke-dasharray="4 4"/>
+      <line x1="150" y1="60" x2="150" y2="52" stroke="#f0c674" stroke-width="5" marker-end="url(#a7)"/>
+      <text x="232" y="118" fill="#4f9cff" font-size="11">자기장</text>
+      <text x="150" y="200" fill="#6b7886" font-size="11" text-anchor="middle">전류가 셀수록 · 가까울수록 세다</text>
+
+      <text x="450" y="30" fill="#9aa7b4" font-size="12" text-anchor="middle">코일로 감으면 — 전자석</text>
+      <rect x="360" y="86" width="180" height="30" rx="6" fill="#3a2f18" stroke="#5c4718"/>
+      <text x="450" y="106" fill="#f0c674" font-size="11.5" text-anchor="middle">철심 (못)</text>
+      <g stroke="#d29922" stroke-width="3.4" fill="none">
+        <path d="M372 86 Q382 70 392 86"/><path d="M396 86 Q406 70 416 86"/><path d="M420 86 Q430 70 440 86"/>
+        <path d="M444 86 Q454 70 464 86"/><path d="M468 86 Q478 70 488 86"/><path d="M492 86 Q502 70 512 86"/>
+      </g>
+      <text x="352" y="140" fill="#8cc0ff" font-size="13" font-weight="700" text-anchor="middle">N</text>
+      <text x="548" y="140" fill="#f5a79c" font-size="13" font-weight="700" text-anchor="middle">S</text>
+      <text x="450" y="164" fill="#6b7886" font-size="11" text-anchor="middle">감은 횟수 ↑ · 전류 ↑ → 더 센 자석</text>
+      <text x="450" y="186" fill="#6b7886" font-size="11" text-anchor="middle">전류를 끊으면 자석이 사라진다</text>
+    </svg>
+  </div>
+</section>
+
+<section id="mon">
+  <div class="eyebrow">Monday · 열기</div>
+  <h2><span class="cell">[1]</span>전류가 흐르면 자석이 된다</h2>
+
+  <p>1820년, 외르스테드라는 과학자가 수업 중에 전선에 전류를 흘렸더니 <b>옆에 있던 나침반 바늘이 돌아갔다</b>.
+  전기와 자기가 <b>서로 다른 것이 아니라는 사실</b>이 처음 밝혀진 순간이었다.</p>
+  <p>정리하면 이렇다. <b>전류가 흐르는 곳 주위에는 반드시 자기장이 생긴다.</b>
+  직선 전선이면 전선을 감싸는 <b>동심원 모양</b>으로 생기고, 전선을 코일로 감으면 자기장이 겹쳐져 <b>막대자석과 같은 모양</b>이 된다.</p>
+
+  <div class="callout p"><span class="lbl">한 줄 정리</span>
+  전류가 흐르면 자기장이 생기고, 자기장 속에 있는 전선은 힘을 받는다. 이 두 문장이 모터의 전부다.</div>
+
+  <h3>전자석이 영구자석보다 좋은 점</h3>
+  <div class="grid g2">
+    <div class="card"><span class="tag">켜고 끄기</span><h4>필요할 때만 자석</h4><p class="sub">전류를 끊으면 자석이 사라진다. 고철을 들어 올리는 크레인이 이 방식으로 붙였다 놓았다 한다.</p></div>
+    <div class="card"><span class="tag">세기 조절</span><h4>더 세게, 더 약하게</h4><p class="sub">감은 횟수와 전류를 바꾸면 세기를 조절할 수 있다. 영구자석은 세기가 고정이다.</p></div>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w7m1"><span class="tt"><span class="day">월</span> — 위를 읽고 질문 3개를 적는다. 집에서 모터가 들어 있는 물건 3개를 찾아 적는다.</span></label></li>
+  </ul>
+</section>
+
+<section id="tue">
+  <div class="eyebrow">Tuesday · 채우기</div>
+  <h2><span class="cell">[2]</span>모터는 어떻게 도는가</h2>
+
+  <p>자기장 속에 놓인 전선에 전류가 흐르면 <b>전선이 힘을 받아 밀린다</b>.
+  전선을 네모난 고리로 만들어 자석 사이에 넣으면, 한쪽 변은 위로 밀리고 반대쪽 변은 아래로 밀린다.
+  <b>서로 반대 방향으로 밀리니 고리가 돈다.</b> 이것이 모터다.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>단계</th><th>일어나는 일</th></tr></thead>
+    <tbody>
+      <tr><td><b>①</b></td><td>전지에서 전류가 흘러 코일로 들어간다</td></tr>
+      <tr><td><b>②</b></td><td>코일이 자석의 자기장 속에서 힘을 받는다</td></tr>
+      <tr><td><b>③</b></td><td>한쪽은 위로, 반대쪽은 아래로 밀려 <b>회전</b>이 시작된다</td></tr>
+      <tr><td><b>④</b></td><td>반 바퀴마다 전류 방향이 바뀌어 계속 같은 방향으로 돈다</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout good"><span class="lbl">거꾸로도 된다</span>
+  전기를 넣으면 돌아가는 것이 <b>모터</b>이고, 반대로 돌려 주면 전기가 나오는 것이 <b>발전기</b>다.
+  구조는 거의 같다. 자전거 라이트, 풍력·수력 발전소가 모두 이 원리다.</div>
+
+  <h3>노트 한 장 양식</h3>
+  <div class="tw"><table>
+    <thead><tr><th>칸</th><th>여기에 쓸 것</th></tr></thead>
+    <tbody>
+      <tr><td><b>① 그림</b></td><td>직선 전선 주위 동심원 자기장</td></tr>
+      <tr><td><b>② 그림</b></td><td>코일을 감은 전자석과 N·S극</td></tr>
+      <tr><td><b>③ 한 줄</b></td><td>전류가 흐르면 자기장이 생긴다</td></tr>
+      <tr><td><b>④ 예시</b></td><td>집에서 찾은 모터 3개</td></tr>
+    </tbody>
+  </table></div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w7m2"><span class="tt"><span class="day">화</span> — 노트 한 장을 채운다. 그림 두 개가 핵심이다.</span></label></li>
+  </ul>
+</section>
+
+<section id="thu">
+  <div class="eyebrow">Thursday · 손으로</div>
+  <h2><span class="cell">[3]</span>전자석 만들고 세기 재기</h2>
+
+  <div class="callout warn"><span class="lbl">안전</span>
+  전류가 흐르는 동안 <b>못과 전선이 뜨거워진다</b>. 오래 연결해 두지 말고, 측정이 끝나면 바로 전선을 뗀다.
+  전지의 +−를 곧장 잇지 않는다. 아빠와 함께 한다.</div>
+
+  <div class="tw"><table>
+    <thead><tr><th>준비물</th><th>구하는 곳</th></tr></thead>
+    <tbody>
+      <tr><td>굵은 못 1개 (철)</td><td>철물점·집</td></tr>
+      <tr><td>에나멜선 또는 얇은 전선 1~2 m</td><td>다이소·문구점</td></tr>
+      <tr><td>AA 건전지 + 홀더</td><td>—</td></tr>
+      <tr><td>클립 20개 이상, 나침반</td><td>나침반은 휴대폰 나침반 앱으로 대체 가능</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>순서</h3>
+  <div class="grid g2">
+    <div class="card"><span class="tag">01</span><h4>20번 감기</h4><p class="sub">못에 전선을 한 방향으로 20번 감는다. 양 끝을 5 cm 남긴다. (에나멜선이면 끝의 피복을 사포로 벗긴다)</p></div>
+    <div class="card"><span class="tag">02</span><h4>연결하고 세기</h4><p class="sub">전지에 연결하고 클립을 몇 개나 들어 올리는지 센다. 세고 나면 바로 전선을 뗀다.</p></div>
+    <div class="card"><span class="tag">03</span><h4>40번으로</h4><p class="sub">감은 횟수를 40번으로 늘려 다시 센다. <b>몇 배</b>가 되는지 본다.</p></div>
+    <div class="card"><span class="tag">04</span><h4>나침반</h4><p class="sub">전류를 흘렸을 때와 껐을 때 나침반 바늘을 비교한다. 전선 아래위에서도 해 본다.</p></div>
+  </div>
+
+  <div class="tw"><table>
+    <thead><tr><th>조건</th><th>붙은 클립 수</th></tr></thead>
+    <tbody>
+      <tr><td>코일 20번, 전지 1개</td><td>______ 개</td></tr>
+      <tr><td>코일 40번, 전지 1개</td><td>______ 개</td></tr>
+      <tr><td>코일 40번, 전지 2개</td><td>______ 개</td></tr>
+      <tr><td>전류를 끊었을 때</td><td>______ 개</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout good"><span class="lbl">여기서 알게 되는 것</span>
+  전자석의 세기는 <b>감은 횟수</b>와 <b>전류의 세기</b>로 정해진다. 전류를 끊으면 클립이 우수수 떨어진다.
+  <b>자석이 사라진다</b>는 것을 손으로 확인하는 순간이다.</div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w7m3"><span class="tt"><span class="day">목</span> — 전자석을 만들고 표를 채운다. 클립이 떨어지는 장면을 영상으로 찍는다.</span></label></li>
+  </ul>
+</section>
+
+<section id="fri">
+  <div class="eyebrow">Friday · 보스전</div>
+  <h2><span class="cell">[4]</span>문제 5개 + 3분 설명</h2>
+
+  <div class="q"><span class="qn">Q1</span>
+    <p>전선 옆에 둔 나침반 바늘이 전류를 흘리자 움직였다. 무엇이 생겼기 때문일까?</p>
+    <details><summary>해설 보기</summary><div class="ans"><b>전선 주위에 자기장이 생겼기 때문이다.</b> 전류가 흐르는 곳에는 항상 자기장이 생긴다.</div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q2</span>
+    <p>전자석을 더 세게 만드는 방법 두 가지는?</p>
+    <details><summary>해설 보기</summary><div class="ans"><b>① 코일을 더 많이 감는다 ② 더 센 전류를 흘린다(전지를 늘린다).</b> 철심을 넣는 것도 세기를 크게 한다.</div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q3</span>
+    <p>고철 처리장 크레인이 영구자석 대신 전자석을 쓰는 이유는?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>전류를 끊으면 자석이 사라져서 붙잡은 물체를 원하는 곳에 놓을 수 있기 때문이다.</b>
+      영구자석은 한 번 붙으면 떼기 어렵다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q4</span>
+    <p>모터는 무엇을 무엇으로 바꾸는 장치일까?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>전기 에너지를 운동 에너지로 바꾼다.</b> 반대로 운동을 전기로 바꾸면 발전기다. 구조는 거의 같다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q5</span>
+    <p>전자석의 N극과 S극을 서로 바꾸려면 어떻게 해야 할까?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>전지의 +−를 반대로 연결해 전류의 방향을 바꾼다.</b> 전류 방향이 바뀌면 자기장 방향도 반대가 된다.
+    </div></details>
+  </div>
+
+  <h3>아빠에게 3분 설명하기</h3>
+  <div class="script">
+    <div><span class="s">① 이번 주에 배운 건</span> — 전류가 흐르면 그 주위에 자기장이 생기고, 그걸로 자석을 만들 수 있다는 것.</div>
+    <div><span class="s">② 예를 들면</span> — 못에 전선을 40번 감았더니 클립이 ○개 붙었어. 전선을 떼니까 다 떨어졌어.</div>
+    <div><span class="s">③ 헷갈리기 쉬운 건</span> — 못이 자석이 된 게 아니라, 전류가 흐르는 동안만 자석이야.</div>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w7m4"><span class="tt"><span class="day">금</span> — 문제 5개 + 3분 설명. 전자석을 켜고 끄면서 보여주면 가장 좋다.</span></label></li>
+  </ul>
+
+  <p style="margin-top:18px"><span class="badge">🧲 전자석 기술자 획득</span></p>
+</section>
+
+<section style="border-bottom:0">
+  <div class="eyebrow">Next</div>
+  <h2><span class="cell">[5]</span>다음 주 예고</h2>
+  <p>8주차는 <b>물질의 특성</b>이다. 캠프 2의 마지막이고, 1주차의 입자 개념이 다시 돌아온다.
+  기름이 물 위에 뜨는 이유를 <b>밀도</b>라는 한 단어로 설명하게 된다.</p>
+  <div class="nav-b">
+    <a href="week06.html">← 6주차</a>
+    <a href="index.html">전체 지도</a>
+    <a class="main" href="week08.html">8주차 →</a>
+  </div>
+</section>
+
+<footer>과학 등반 · 7주차 · 하루 20분 × 4일</footer>
+</div>
+<script>
+(function(){
+  var KEY="science_quest_progress";
+  function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){return{}}}
+  function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+  var boxes=[].slice.call(document.querySelectorAll(".todo input[type=checkbox]"));
+  var st=load();
+  boxes.forEach(function(b){
+    if(st[b.dataset.q])b.checked=true;
+    b.addEventListener("change",function(){
+      var s=load();
+      if(b.checked)s[b.dataset.q]=1;else delete s[b.dataset.q];
+      save(s);paint();
+    });
+  });
+  function paint(){
+    var el=document.getElementById("wdone");if(!el)return;
+    var n=boxes.filter(function(b){return b.checked}).length;
+    el.textContent=n+" / "+boxes.length+" 완료";
+  }
+  paint();
+  // 현재 섹션 표시
+  var links=[].slice.call(document.querySelectorAll("nav.toc a[href^='#']"));
+  var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1))});
+  function onScroll(){
+    var y=window.scrollY+120,idx=0;
+    secs.forEach(function(s,i){if(s&&s.offsetTop<=y)idx=i});
+    links.forEach(function(a,i){a.classList.toggle("now",i===idx)});
+  }
+  window.addEventListener("scroll",onScroll,{passive:true});onScroll();
+})();
+</script>
+</body>
+</html>

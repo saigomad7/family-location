@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ko" class="c2">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d1117">
+<title>8주차 · 물질의 특성</title>
+<meta name="description" content="밀도·용해도·끓는점은 물질마다 정해진 번호표다. 캠프 2 보스전.">
+<style>
+:root{
+  --bg:#0d1117; --bg2:#0b0f15; --panel:#161b22; --panel2:#1c2230; --line:#2a3340;
+  --ink:#e6edf3; --sub:#9aa7b4; --mut:#6b7886;
+  --acc:#4f9cff; --acc2:#7c5cff; --good:#3fb950; --warn:#d29922; --pink:#f778ba;
+  --chip:#21304a; --radius:16px;
+  --camp:#7c5cff; --camp-dim:#b7a4ff; --camp-bg:rgba(124,92,255,.14); --camp-line:#3d3470;
+}
+:root.c1{--camp:#7c5cff;--camp-dim:#b7a4ff;--camp-bg:rgba(124,92,255,.14);--camp-line:#3d3470}
+:root.c2{--camp:#d29922;--camp-dim:#f0c674;--camp-bg:rgba(210,153,34,.14);--camp-line:#5c4718}
+:root.c3{--camp:#3fb950;--camp-dim:#63d67c;--camp-bg:rgba(63,185,80,.14);--camp-line:#2c5c34}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);line-height:1.72;font-size:16.5px;
+  font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR","Segoe UI",system-ui,sans-serif;
+  word-break:keep-all;overflow-wrap:anywhere;
+  padding-bottom:calc(40px + env(safe-area-inset-bottom))}
+.wrap{max-width:720px;margin:0 auto;padding:0 18px}
+a{color:var(--acc);text-decoration:none}
+p{margin:0 0 13px}
+b,strong{font-weight:700;color:#fff}
+.sub{color:var(--sub)}
+.mut{color:var(--mut)}
+
+/* 헤더 */
+header.top{padding:26px 0 18px;background:linear-gradient(180deg,var(--bg2),var(--bg) 90%)}
+.kicker{display:inline-block;font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;font-weight:700;
+  color:var(--camp-dim);background:var(--camp-bg);border:1px solid var(--camp-line);
+  padding:6px 12px;border-radius:999px;margin-bottom:14px}
+h1{font-size:27px;line-height:1.3;margin:0 0 10px;font-weight:800;letter-spacing:-.01em}
+h1 .g{background:linear-gradient(90deg,var(--acc),var(--camp));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:15.5px;color:var(--sub);margin:0 0 16px}
+.meta{display:flex;flex-wrap:wrap;gap:7px}
+.meta .m{font-size:12.5px;color:var(--sub);background:var(--panel);border:1px solid var(--line);padding:5px 11px;border-radius:999px}
+
+/* 상단 이동 바 */
+nav.toc{position:sticky;top:0;z-index:30;background:rgba(13,17,23,.92);backdrop-filter:blur(8px);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:18px}
+nav.toc .row{display:flex;gap:6px;overflow-x:auto;padding:10px 18px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+nav.toc .row::-webkit-scrollbar{display:none}
+nav.toc a{flex:0 0 auto;font-size:13px;color:var(--sub);padding:7px 12px;border-radius:999px;
+  border:1px solid var(--line);background:var(--panel)}
+nav.toc a.now{color:#fff;background:var(--camp-bg);border-color:var(--camp-line)}
+
+/* 섹션 */
+section{padding:30px 0;border-bottom:1px solid var(--line)}
+.eyebrow{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--camp-dim);font-weight:700;margin-bottom:7px}
+h2{font-size:20px;margin:0 0 14px;font-weight:800;line-height:1.4}
+h2 .cell{display:inline-block;background:var(--camp);color:#0d1117;font-size:12.5px;font-weight:800;
+  border-radius:8px;padding:2px 9px;margin-right:8px;vertical-align:2px;font-family:ui-monospace,Menlo,monospace}
+h3{font-size:16.5px;margin:22px 0 9px;font-weight:700}
+h3:first-child{margin-top:0}
+
+/* 카드 · 콜아웃 */
+.grid{display:grid;gap:11px;margin:12px 0}
+.g2{grid-template-columns:1fr}
+@media(min-width:620px){.g2{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:15px 16px}
+.card h4{margin:0 0 7px;font-size:15px;font-weight:700}
+.card p{font-size:14.5px;margin:0}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px;margin-bottom:8px;
+  background:var(--camp-bg);color:var(--camp-dim);border:1px solid var(--camp-line)}
+.callout{border-left:4px solid var(--acc);background:var(--panel);border-radius:10px;padding:13px 15px;margin:14px 0;font-size:15px}
+.callout.good{border-left-color:var(--good)}
+.callout.warn{border-left-color:var(--warn)}
+.callout.p{border-left-color:var(--camp)}
+.callout b{display:inline}
+.callout .lbl{display:block;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);font-weight:700;margin-bottom:4px}
+
+/* 표 */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:12px;margin:12px 0}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:340px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--mut);font-weight:700;background:var(--panel)}
+tbody tr:last-child td{border-bottom:0}
+td b{color:#fff}
+code{background:#0b1020;border:1px solid var(--line);border-radius:6px;padding:1px 6px;font-size:14px;color:#c9d6e5;
+  font-family:ui-monospace,Menlo,monospace}
+
+/* 다이어그램 */
+.diagram{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:var(--radius);
+  background:var(--panel);padding:12px;margin:12px 0}
+.diagram svg{display:block}
+.figcap{font-size:12.5px;color:var(--mut);margin:-4px 0 12px;text-align:center}
+
+/* 할 일 체크 */
+.todo{list-style:none;margin:14px 0 0;padding:0;border:1px solid var(--line);border-radius:12px;background:var(--panel);overflow:hidden}
+.todo li+li{border-top:1px solid var(--line)}
+.todo label{display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start;
+  padding:14px 15px;cursor:pointer;font-size:15px;min-height:52px}
+.todo input{appearance:none;-webkit-appearance:none;width:21px;height:21px;margin:1px 0 0;
+  border:1.5px solid var(--mut);border-radius:6px;background:var(--panel2);display:grid;place-content:center;cursor:pointer}
+.todo input::after{content:"✓";font-size:13px;font-weight:800;color:#0d1117;transform:scale(0);transition:transform .12s}
+.todo input:checked{background:var(--good);border-color:var(--good)}
+.todo input:checked::after{transform:scale(1)}
+.todo input:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.todo input:checked ~ .tt{color:var(--mut);text-decoration:line-through}
+.todo .day{font-weight:700;color:var(--camp-dim)}
+
+/* 문제 */
+.q{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px 16px;margin:11px 0}
+.q .qn{font-family:ui-monospace,Menlo,monospace;font-size:12px;font-weight:700;color:var(--camp-dim);letter-spacing:.08em}
+.q p{margin:6px 0 0;font-size:15.5px}
+details{margin-top:11px;border-top:1px solid var(--line);padding-top:10px}
+details summary{cursor:pointer;font-size:14px;font-weight:700;color:var(--acc);list-style:none;padding:4px 0}
+details summary::-webkit-details-marker{display:none}
+details summary::before{content:"▸ ";color:var(--acc)}
+details[open] summary::before{content:"▾ "}
+details .ans{font-size:14.5px;color:var(--sub);margin-top:8px}
+details .ans b{color:var(--good)}
+
+/* 대본 틀 */
+.script{background:#0b1020;border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0;font-size:15px}
+.script .s{color:var(--camp-dim);font-weight:700}
+.script div+div{margin-top:10px}
+
+/* 배지 · 이동 */
+.badge{display:inline-block;font-size:15px;font-weight:700;color:var(--camp-dim);background:var(--camp-bg);
+  border:1px solid var(--camp-line);border-radius:999px;padding:8px 16px;margin-top:6px}
+.nav-b{display:flex;gap:10px;margin:22px 0 0}
+.nav-b a{flex:1;text-align:center;background:var(--panel);border:1px solid var(--line);border-radius:12px;
+  padding:14px 10px;font-size:14.5px;font-weight:700;color:var(--ink)}
+.nav-b a.main{background:var(--camp-bg);border-color:var(--camp-line);color:var(--camp-dim)}
+.nav-b a.off{color:var(--mut)}
+footer{padding:24px 0 40px;color:var(--mut);font-size:12.5px;text-align:center}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <span class="kicker">WEEK 08 · CAMP 2 전기와 성질 · 캠프 2 보스전</span>
+  <h1>물질의 특성 — <span class="g">물질마다의 번호표</span></h1>
+  <p class="lead">물질을 구별하는 방법은 색이나 냄새가 아니다. <b>양이 달라져도 변하지 않는 값</b>,
+  즉 밀도·녹는점·끓는점·용해도로 구별한다. 1주차의 입자 개념이 여기서 다시 쓰인다.</p>
+  <div class="meta">
+    <span class="m">1주차 연결 · 입자와 상태</span>
+    <span class="m">밀도 · 용해도 · 끓는점</span>
+    <span class="m">밀도탑 만들기</span>
+    <span class="m" id="wdone">0 / 4 완료</span>
+  </div>
+</div></header>
+
+<nav class="toc"><div class="row">
+  <a href="#map">이번 주 지도</a>
+  <a href="#mon">월 · 열기</a>
+  <a href="#tue">화 · 채우기</a>
+  <a href="#thu">목 · 손으로</a>
+  <a href="#fri">금 · 보스전</a>
+</div></nav>
+
+<div class="wrap">
+
+<section id="map">
+  <div class="eyebrow">This week</div>
+  <h2><span class="cell">MAP</span>양이 변해도 그대로인 값</h2>
+  <div class="diagram">
+    <svg viewBox="0 0 640 210" width="640" height="210" font-family="inherit" role="img" aria-label="크기가 달라도 밀도는 같다는 것을 보여주는 그림">
+      <text x="160" y="28" fill="#9aa7b4" font-size="12" text-anchor="middle">같은 물질, 다른 크기</text>
+      <rect x="60" y="44" width="46" height="46" rx="6" fill="#33240f" stroke="#5c4718"/>
+      <text x="83" y="106" fill="#f0c674" font-size="11" text-anchor="middle">질량 10 g</text>
+      <text x="83" y="122" fill="#f0c674" font-size="11" text-anchor="middle">부피 5 cm³</text>
+      <rect x="170" y="30" width="76" height="76" rx="6" fill="#33240f" stroke="#5c4718"/>
+      <text x="208" y="122" fill="#f0c674" font-size="11" text-anchor="middle">질량 40 g · 부피 20 cm³</text>
+      <text x="160" y="152" fill="#e6edf3" font-size="13" font-weight="700" text-anchor="middle">밀도 = 10÷5 = 2 · 40÷20 = 2</text>
+      <text x="160" y="174" fill="#3fb950" font-size="12.5" font-weight="700" text-anchor="middle">크기가 달라도 밀도는 같다</text>
+
+      <line x1="320" y1="30" x2="320" y2="180" stroke="#2a3340" stroke-width="1.5"/>
+
+      <text x="480" y="28" fill="#9aa7b4" font-size="12" text-anchor="middle">밀도가 다르면 층이 생긴다</text>
+      <rect x="410" y="44" width="140" height="30" rx="4" fill="#3a2f18" stroke="#5c4718"/>
+      <text x="480" y="64" fill="#f0c674" font-size="11.5" text-anchor="middle">식용유 0.92</text>
+      <rect x="410" y="76" width="140" height="30" rx="4" fill="#12233a" stroke="#2f4f7a"/>
+      <text x="480" y="96" fill="#8cc0ff" font-size="11.5" text-anchor="middle">물 1.00</text>
+      <rect x="410" y="108" width="140" height="34" rx="4" fill="#241a2e" stroke="#7c5cff"/>
+      <text x="480" y="130" fill="#c9b6ff" font-size="11.5" text-anchor="middle">꿀 1.4</text>
+      <text x="480" y="166" fill="#6b7886" font-size="11" text-anchor="middle">가벼운 것이 위 · 무거운 것이 아래</text>
+      <text x="320" y="200" fill="#6b7886" font-size="11.5" text-anchor="middle">단위: g/cm³ · 물의 밀도 1 g/cm³ 를 기준으로 외운다</text>
+    </svg>
+  </div>
+</section>
+
+<section id="mon">
+  <div class="eyebrow">Monday · 열기</div>
+  <h2><span class="cell">[1]</span>밀도 — 같은 부피에 얼마나 빽빽한가</h2>
+
+  <p><b>밀도 = 질량 ÷ 부피</b>다. 단위는 <code>g/cm³</code>. 뜻은 “같은 크기에 얼마나 많이 들어 있나”이다.
+  1주차의 그림으로 보면, <b>같은 상자에 알갱이가 얼마나 빽빽하게 들어 있는가</b>이다.</p>
+
+  <div class="callout warn"><span class="lbl">가장 많이 하는 착각</span>
+  “큰 게 더 무거우니까 밀도도 크다” — <b>아니다.</b> 쇠구슬을 반으로 잘라도 밀도는 그대로다.
+  질량과 부피가 <b>같은 비율로</b> 줄기 때문이다. 그래서 밀도는 <b>물질을 구별하는 번호표</b>가 된다.</div>
+
+  <div class="tw"><table>
+    <thead><tr><th>물질</th><th>밀도 (g/cm³)</th><th>물에 넣으면</th></tr></thead>
+    <tbody>
+      <tr><td>스타이로폼</td><td>약 0.03</td><td>뜬다</td></tr>
+      <tr><td>식용유</td><td>0.92</td><td>뜬다</td></tr>
+      <tr><td>얼음</td><td>0.92</td><td>뜬다</td></tr>
+      <tr><td><b>물</b></td><td><b>1.00</b></td><td>기준</td></tr>
+      <tr><td>꿀</td><td>약 1.4</td><td>가라앉는다</td></tr>
+      <tr><td>철</td><td>7.9</td><td>가라앉는다</td></tr>
+      <tr><td>금</td><td>19.3</td><td>가라앉는다</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout p"><span class="lbl">얼음이 뜨는 이유</span>
+  물은 얼면 입자 배열이 <b>육각형 구조로 벌어져</b> 부피가 커진다. 질량은 그대로인데 부피가 커지니 밀도가 작아져 뜬다.
+  대부분의 물질은 얼면 밀도가 커지는데 물은 반대다. 겨울에 호수가 <b>위부터 어는</b> 덕분에 물고기가 산다.</div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w8m1"><span class="tt"><span class="day">월</span> — 밀도 표를 읽고 질문 3개를 적는다. 물보다 밀도가 작은 물건을 집에서 3개 찾는다.</span></label></li>
+  </ul>
+</section>
+
+<section id="tue">
+  <div class="eyebrow">Tuesday · 채우기</div>
+  <h2><span class="cell">[2]</span>끓는점 · 녹는점 · 용해도</h2>
+
+  <p>밀도 말고도 물질마다 정해진 값이 있다. 모두 <b>양이 달라져도 변하지 않는다</b>는 공통점이 있다.</p>
+  <div class="tw"><table>
+    <thead><tr><th>특성</th><th>뜻</th><th>예</th></tr></thead>
+    <tbody>
+      <tr><td><b>녹는점</b></td><td>고체가 액체로 되는 온도</td><td>물 0 ℃ · 철 1538 ℃</td></tr>
+      <tr><td><b>끓는점</b></td><td>액체가 기체로 되는 온도</td><td>물 100 ℃ · 알코올 78 ℃</td></tr>
+      <tr><td><b>용해도</b></td><td>일정한 물에 최대로 녹는 양</td><td>온도가 높을수록 대개 커진다</td></tr>
+      <tr><td><b>밀도</b></td><td>질량 ÷ 부피</td><td>물 1 g/cm³</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout warn"><span class="lbl">여기서 틀린다</span>
+  물을 <b>많이</b> 끓이면 끓는점이 높아질까? <b>아니다.</b> 양이 많으면 <b>끓는 데 걸리는 시간</b>이 길어질 뿐,
+  끓는 <b>온도</b>는 100 ℃ 그대로다. 시간과 온도를 구별하는 것이 이 단원의 핵심이다.</div>
+
+  <h3>순물질과 혼합물</h3>
+  <p>소금물처럼 <b>섞인 것(혼합물)</b>은 끓는점이 일정하지 않고 100 ℃보다 높아진다.
+  반대로 <b>끓는점이 딱 정해져 있으면 순물질</b>이라는 뜻이다. 이 성질로 물질을 분리할 수도 있다.</p>
+  <div class="grid g2">
+    <div class="card"><span class="tag">분리 1</span><h4>바닷물 → 마실 물</h4><p class="sub">끓여서 나온 수증기를 식혀 모으면 소금은 남고 <b>물만</b> 얻는다. 끓는점 차이를 이용한 <b>증류</b>다.</p></div>
+    <div class="card"><span class="tag">분리 2</span><h4>기름 유출 사고</h4><p class="sub">기름은 밀도가 작아 바다 <b>위에 뜬다</b>. 그래서 흡착포를 물 위에 띄워 걷어낸다. 밀도 차이를 이용한 분리다.</p></div>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w8m2"><span class="tt"><span class="day">화</span> — 네 가지 특성 표를 노트에 옮기고, “양이 변해도 그대로”라는 문장을 크게 적는다.</span></label></li>
+  </ul>
+</section>
+
+<section id="thu">
+  <div class="eyebrow">Thursday · 손으로</div>
+  <h2><span class="cell">[3]</span>밀도탑 쌓기</h2>
+
+  <div class="tw"><table>
+    <thead><tr><th>준비물</th><th>비고</th></tr></thead>
+    <tbody>
+      <tr><td>투명한 긴 컵 1개</td><td>좁고 길수록 층이 잘 보인다</td></tr>
+      <tr><td>꿀 · 주방세제 · 물 · 식용유</td><td>이 순서가 아래에서 위 순서다</td></tr>
+      <tr><td>물에 색소 한 방울</td><td>색이 있어야 층이 보인다 (식용색소·물감)</td></tr>
+      <tr><td>포도알 · 방울토마토 · 클립 · 스타이로폼 조각</td><td>띄워 볼 물건들</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>순서</h3>
+  <div class="grid g2">
+    <div class="card"><span class="tag">01</span><h4>예상 먼저</h4><p class="sub">네 가지 액체를 <b>어떤 순서로 쌓일지</b> 먼저 적는다. 물건들이 어느 층에 멈출지도 예상한다.</p></div>
+    <div class="card"><span class="tag">02</span><h4>무거운 것부터</h4><p class="sub">꿀 → 주방세제 → 색소물 → 식용유 순서로 <b>컵 벽을 타고 천천히</b> 붓는다. 숟가락 뒷면에 대고 부으면 잘 섞이지 않는다.</p></div>
+    <div class="card"><span class="tag">03</span><h4>물건 넣기</h4><p class="sub">포도알·클립·스타이로폼을 하나씩 떨어뜨린다. 각자 자기 밀도에 맞는 층에서 멈춘다.</p></div>
+    <div class="card"><span class="tag">04</span><h4>달걀 실험</h4><p class="sub">물에 달걀을 넣으면 가라앉는다. 소금을 계속 녹이면 어느 순간 <b>떠오른다</b>. 소금물의 밀도가 달걀보다 커졌기 때문이다.</p></div>
+  </div>
+
+  <div class="tw"><table>
+    <thead><tr><th>물건</th><th>예상 위치</th><th>실제 위치</th></tr></thead>
+    <tbody>
+      <tr><td>포도알</td><td>______</td><td>______</td></tr>
+      <tr><td>클립</td><td>______</td><td>______</td></tr>
+      <tr><td>스타이로폼</td><td>______</td><td>______</td></tr>
+      <tr><td>달걀 (소금 넣기 전 / 후)</td><td>______</td><td>______</td></tr>
+    </tbody>
+  </table></div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w8m3"><span class="tt"><span class="day">목</span> — 밀도탑을 만들고 표를 채운다. 사진을 남긴다. 층이 섞였다면 다시 천천히 부어 본다.</span></label></li>
+  </ul>
+</section>
+
+<section id="fri">
+  <div class="eyebrow">Friday · 캠프 2 보스전</div>
+  <h2><span class="cell">[4]</span>문제 5개 + 캠프 전체 설명</h2>
+
+  <div class="q"><span class="qn">Q1</span>
+    <p>질량 40 g, 부피 20 cm³인 물체의 밀도는? 이 물체를 물에 넣으면 어떻게 될까?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>밀도 2 g/cm³ · 가라앉는다.</b> 40 ÷ 20 = 2 이고, 물(1 g/cm³)보다 크므로 가라앉는다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q2</span>
+    <p>쇠구슬을 반으로 잘랐다. 밀도는 어떻게 될까?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>그대로다.</b> 질량과 부피가 똑같은 비율로 줄기 때문이다. 밀도는 양이 아니라 <b>물질의 종류</b>가 정한다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q3</span>
+    <p>물을 두 배로 많이 넣고 끓이면 끓는점은 어떻게 될까?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>변하지 않는다(100 ℃).</b> 끓는 데 걸리는 <b>시간</b>만 길어진다. 시간과 온도를 구별해야 한다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q4</span>
+    <p>바닷물에서 마실 물을 얻는 방법과 그 원리는?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>끓여서 나온 수증기를 식혀 모은다(증류).</b> 물은 100 ℃에서 끓어 나가지만 소금은 훨씬 높은 온도라야 하므로 남는다.
+      끓는점 차이를 이용한 분리다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q5</span>
+    <p><b>캠프 2 통합 문제</b> — 전하 · 전류 · 자기장 · 밀도를 각각 한 문장으로 설명해 보자.</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      ① <b>전하</b>: 전자가 옮겨 가서 물체가 띠게 된 전기 (5주차)<br>
+      ② <b>전류</b>: 전하가 계속 흐르는 것. V = I × R (6주차)<br>
+      ③ <b>자기장</b>: 전류 주위에 생기는 자석의 힘이 미치는 공간 (7주차)<br>
+      ④ <b>밀도</b>: 질량 ÷ 부피. 양이 변해도 그대로인 물질의 번호표 (8주차)
+    </div></details>
+  </div>
+
+  <h3>아빠에게 3분 설명하기</h3>
+  <div class="script">
+    <div><span class="s">① 이번 주에 배운 건</span> — 밀도·끓는점 같은 값은 양이 달라져도 변하지 않아서 물질을 구별하는 데 쓴다는 것.</div>
+    <div><span class="s">② 예를 들면</span> — 꿀·물·기름을 부었더니 층이 생겼어. 밀도가 큰 게 아래로 가서.</div>
+    <div><span class="s">③ 헷갈리기 쉬운 건</span> — 물을 많이 끓여도 끓는점은 100 ℃ 그대로야. 시간만 오래 걸려.</div>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w8m4"><span class="tt"><span class="day">금</span> — 문제 5개 + 캠프 2 네 가지를 한 문장씩 설명한다. 여기까지가 전반전이다.</span></label></li>
+  </ul>
+
+  <p style="margin-top:18px"><span class="badge">⚖️ 밀도 감정사 획득 · 캠프 2 완주</span></p>
+</section>
+
+<section style="border-bottom:0">
+  <div class="eyebrow">Next</div>
+  <h2><span class="cell">[5]</span>다음 주 예고</h2>
+  <p>9주차부터 <b>캠프 3 · 생명과 지구</b>다. 지금까지 배운 분자(CO₂, H₂O)와 에너지가
+  <b>식물과 내 몸 안에서</b> 어떻게 움직이는지로 이어진다. 외울 게 많아 보이는 단원이지만 한 줄로 꿸 수 있다.</p>
+  <div class="nav-b">
+    <a href="week07.html">← 7주차</a>
+    <a href="index.html">전체 지도</a>
+    <a class="main" href="week09.html">9주차 →</a>
+  </div>
+</section>
+
+<footer>과학 등반 · 8주차 · 캠프 2 마지막 주</footer>
+</div>
+<script>
+(function(){
+  var KEY="science_quest_progress";
+  function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){return{}}}
+  function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+  var boxes=[].slice.call(document.querySelectorAll(".todo input[type=checkbox]"));
+  var st=load();
+  boxes.forEach(function(b){
+    if(st[b.dataset.q])b.checked=true;
+    b.addEventListener("change",function(){
+      var s=load();
+      if(b.checked)s[b.dataset.q]=1;else delete s[b.dataset.q];
+      save(s);paint();
+    });
+  });
+  function paint(){
+    var el=document.getElementById("wdone");if(!el)return;
+    var n=boxes.filter(function(b){return b.checked}).length;
+    el.textContent=n+" / "+boxes.length+" 완료";
+  }
+  paint();
+  // 현재 섹션 표시
+  var links=[].slice.call(document.querySelectorAll("nav.toc a[href^='#']"));
+  var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1))});
+  function onScroll(){
+    var y=window.scrollY+120,idx=0;
+    secs.forEach(function(s,i){if(s&&s.offsetTop<=y)idx=i});
+    links.forEach(function(a,i){a.classList.toggle("now",i===idx)});
+  }
+  window.addEventListener("scroll",onScroll,{passive:true});onScroll();
+})();
+</script>
+</body>
+</html>
