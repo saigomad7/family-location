@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>과학 등반 지도</title>
+<meta name="description" content="중2 딸과 아빠가 3개월 동안 중1·중2 과학을 주차별 퀘스트로 따라잡는 추진 계획.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;700&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<style>
+  :root {
+    --paper: #f3f5f4;
+    --surface: #ffffff;
+    --surface-2: #fafbfa;
+    --ink: #16211d;
+    --ink-2: #4a5a54;
+    --ink-3: #7c8a84;
+    --line: #dfe5e2;
+    --line-2: #eef1f0;
+    --accent: #16706a;
+    --accent-soft: #ddedea;
+    --s1: #6f3fca;      /* 칼륨 불꽃 — 보라 */
+    --s1-soft: #ece4fb;
+    --s2: #a3610f;      /* 나트륨 불꽃 — 노랑·주황 */
+    --s2-soft: #fbeedb;
+    --s3: #2b7549;      /* 엽록소 — 초록 */
+    --s3-soft: #ddefe4;
+    --flame: #b93a2c;   /* 리튬 불꽃 — 빨강 */
+    --flame-soft: #fbe6e3;
+    --shadow: 0 1px 2px rgba(22, 33, 29, .05), 0 8px 24px -12px rgba(22, 33, 29, .18);
+    --display: "Hahmlet", "Nanum Myeongjo", Georgia, serif;
+    --body: "IBM Plex Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #101614;
+      --surface: #172420;
+      --surface-2: #1c2c27;
+      --ink: #e9efec;
+      --ink-2: #aabab4;
+      --ink-3: #7f8f89;
+      --line: #2a3a35;
+      --line-2: #223029;
+      --accent: #5cc4b6;
+      --accent-soft: #16332f;
+      --s1: #b79bf0; --s1-soft: #251d3d;
+      --s2: #e0a458; --s2-soft: #33240f;
+      --s3: #6cc58e; --s3-soft: #14301f;
+      --flame: #ec8175; --flame-soft: #3a1d19;
+      --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px -12px rgba(0, 0, 0, .6);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #101614;
+    --surface: #172420;
+    --surface-2: #1c2c27;
+    --ink: #e9efec;
+    --ink-2: #aabab4;
+    --ink-3: #7f8f89;
+    --line: #2a3a35;
+    --line-2: #223029;
+    --accent: #5cc4b6;
+    --accent-soft: #16332f;
+    --s1: #b79bf0; --s1-soft: #251d3d;
+    --s2: #e0a458; --s2-soft: #33240f;
+    --s3: #6cc58e; --s3-soft: #14301f;
+    --flame: #ec8175; --flame-soft: #3a1d19;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px -12px rgba(0, 0, 0, .6);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: var(--body); font-size: 16px; line-height: 1.72;
+    -webkit-text-size-adjust: 100%;
+    word-break: keep-all;          /* 한글은 어절 단위로 줄바꿈 */
+    overflow-wrap: anywhere;       /* 원소기호 나열처럼 긴 문자열은 넘치지 않게 */
+  }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 22px 90px; }
+  h1, h2, h3, h4 { font-family: var(--display); font-weight: 700; text-wrap: balance; margin: 0; line-height: 1.32; }
+  p { margin: 0; }
+  a { color: var(--accent); }
+  .eyebrow {
+    font-family: var(--mono); font-size: 12px; font-weight: 600;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3);
+  }
+
+  /* ── 표지 ── */
+  .cover { padding: 54px 0 30px; border-bottom: 1px solid var(--line); }
+  .cover h1 { font-size: clamp(34px, 6vw, 52px); letter-spacing: -.02em; margin: 14px 0 0; }
+  .cover .lede {
+    margin-top: 16px; max-width: 63ch; font-size: 17px; color: var(--ink-2);
+  }
+  .cover .lede b { color: var(--ink); font-weight: 600; }
+  .facts {
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1px; margin-top: 30px; background: var(--line); border: 1px solid var(--line);
+    border-radius: 4px; overflow: hidden;
+  }
+  .facts div { background: var(--surface); padding: 14px 16px; }
+  .facts dt { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; color: var(--ink-3); text-transform: uppercase; }
+  .facts dd { margin: 4px 0 0; font-size: 19px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .facts dd small { font-size: 13px; font-weight: 500; color: var(--ink-2); }
+
+  /* ── 진행률 ── */
+  .progress {
+    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+    margin-top: 22px; padding: 16px 18px; border: 1px solid var(--line);
+    border-radius: 4px; background: var(--surface);
+  }
+  .progress .track { flex: 1 1 240px; height: 8px; border-radius: 999px; background: var(--line-2); overflow: hidden; }
+  .progress .track i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .35s ease; }
+  .progress .num { font-family: var(--mono); font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .progress .hint { font-size: 13px; color: var(--ink-3); }
+  .reset { border: 0; background: none; color: var(--ink-3); font: inherit; font-size: 13px; cursor: pointer; text-decoration: underline; padding: 0; }
+
+  /* ── 섹션 ── */
+  section { padding-top: 52px; }
+  .sechead { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 6px; }
+  .sechead h2 { font-size: 26px; letter-spacing: -.01em; }
+  .secnote { color: var(--ink-2); font-size: 15px; max-width: 66ch; margin-top: 8px; }
+
+  /* ── 설계 근거 ── */
+  .why { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px; margin-top: 26px; }
+  .why h3 { font-size: 17px; margin-bottom: 6px; }
+  .why .tag { font-family: var(--mono); font-size: 11px; color: var(--flame); letter-spacing: .1em; }
+  .why p { font-size: 14.5px; color: var(--ink-2); }
+
+  /* ── 한 주 리듬 ── */
+  .rhythm { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; margin-top: 26px; }
+  .beat { background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 15px 15px 17px; }
+  .beat .day { font-family: var(--mono); font-size: 12px; font-weight: 600; color: var(--accent); letter-spacing: .08em; }
+  .beat h4 { font-size: 16px; margin: 6px 0 5px; }
+  .beat p { font-size: 13.5px; color: var(--ink-2); line-height: 1.6; }
+  .beat .mins { font-family: var(--mono); font-size: 11.5px; color: var(--ink-3); display: block; margin-top: 8px; }
+  .beat.rest { background: var(--surface-2); border-style: dashed; }
+
+  /* ── 캠프 ── */
+  .camp { margin-top: 42px; }
+  .camp-head {
+    display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;
+    padding-bottom: 12px; border-bottom: 2px solid var(--camp);
+  }
+  .camp-head .no {
+    font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: .12em;
+    color: var(--camp); background: var(--camp-soft); padding: 4px 9px; border-radius: 3px;
+  }
+  .camp-head h3 { font-size: 22px; }
+  .camp-head .weeks { font-family: var(--mono); font-size: 13px; color: var(--ink-3); margin-left: auto; }
+  .camp-why { font-size: 14.5px; color: var(--ink-2); margin-top: 12px; max-width: 70ch; }
+  .weeks-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 20px; }
+
+  /* ── 주차 카드 ── */
+  .week {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 4px;
+    padding: 20px 20px 18px; display: flex; flex-direction: column; gap: 14px;
+    box-shadow: var(--shadow);
+  }
+  .week > header { display: flex; flex-direction: column; gap: 7px; }
+  .wtop { display: flex; align-items: center; gap: 10px; }
+  .wnum {
+    font-family: var(--mono); font-size: 11.5px; font-weight: 600; letter-spacing: .12em;
+    color: var(--camp);
+  }
+  .wtopic { font-family: var(--mono); font-size: 11px; color: var(--ink-3); margin-left: auto; letter-spacing: .04em; }
+  .week h4 { font-size: 20px; letter-spacing: -.01em; }
+  .say {
+    font-size: 14.5px; color: var(--ink-2); font-style: italic;
+    border-left: 2px solid var(--camp); padding-left: 11px;
+  }
+  .meta { display: flex; flex-direction: column; gap: 9px; margin: 0; }
+  .meta > div { display: grid; grid-template-columns: 84px 1fr; gap: 10px; align-items: baseline; }
+  .meta dt {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--ink-3); padding-top: 2px;
+  }
+  .meta dd { margin: 0; font-size: 14px; color: var(--ink-2); line-height: 1.62; }
+  .meta dd b { color: var(--ink); font-weight: 600; }
+  .missions { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+  .missions li { border-top: 1px solid var(--line-2); }
+  .missions li:first-child { border-top: 0; }
+  .missions label {
+    display: grid; grid-template-columns: 20px 26px 1fr; gap: 10px; align-items: start;
+    padding: 8px 2px; cursor: pointer; font-size: 14px; line-height: 1.55;
+  }
+  .missions input {
+    appearance: none; -webkit-appearance: none; width: 17px; height: 17px; margin: 2px 0 0;
+    border: 1.5px solid var(--ink-3); border-radius: 3px; background: var(--surface); cursor: pointer;
+    display: grid; place-content: center;
+  }
+  .missions input::after {
+    content: "✓"; font-size: 12px; font-weight: 700; color: var(--surface); transform: scale(0);
+    transition: transform .12s ease;
+  }
+  .missions input:checked { background: var(--accent); border-color: var(--accent); }
+  .missions input:checked::after { transform: scale(1); }
+  .missions input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .missions .d { font-family: var(--mono); font-size: 12px; font-weight: 600; color: var(--ink-3); padding-top: 1px; }
+  .missions input:checked ~ .t { color: var(--ink-3); text-decoration: line-through; text-decoration-color: var(--line); }
+  .foot { display: flex; flex-direction: column; gap: 8px; padding-top: 12px; border-top: 1px solid var(--line-2); }
+  .foot p { font-size: 13.5px; color: var(--ink-2); line-height: 1.6; }
+  .foot b { font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); display: block; }
+  .boss b { color: var(--flame); }
+  .badge {
+    align-self: flex-start; font-size: 13px; font-weight: 600; color: var(--camp);
+    background: var(--camp-soft); border-radius: 999px; padding: 4px 12px;
+  }
+
+  /* ── 표·목록 ── */
+  .two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px; margin-top: 24px; }
+  .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 20px; }
+  .panel h3 { font-size: 17px; margin-bottom: 12px; }
+  .panel.warn { background: var(--flame-soft); border-color: transparent; }
+  .panel.warn h3 { color: var(--flame); }
+  .list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .list li { font-size: 14.5px; color: var(--ink-2); padding-left: 20px; position: relative; line-height: 1.62; }
+  .list li::before {
+    content: ""; position: absolute; left: 2px; top: 10px; width: 7px; height: 7px;
+    border-radius: 50%; background: var(--accent);
+  }
+  .list.no li::before { background: var(--flame); border-radius: 1px; }
+  .list li b { color: var(--ink); font-weight: 600; }
+  .tablewrap { overflow-x: auto; margin-top: 20px; border: 1px solid var(--line); border-radius: 4px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; min-width: 520px; font-size: 14.5px; }
+  th, td { text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--line-2); vertical-align: top; }
+  thead th {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--ink-3); font-weight: 600; background: var(--surface-2);
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  td.step { font-family: var(--mono); font-weight: 600; color: var(--accent); white-space: nowrap; }
+  td b { font-weight: 600; }
+  .kit { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .kit span {
+    font-size: 13.5px; background: var(--surface); border: 1px solid var(--line);
+    border-radius: 999px; padding: 5px 13px; color: var(--ink-2);
+  }
+  .closing {
+    margin-top: 54px; padding: 26px 24px; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: 4px; background: var(--surface);
+  }
+  .closing h3 { font-size: 19px; margin-bottom: 10px; }
+  .closing p { font-size: 15px; color: var(--ink-2); max-width: 66ch; }
+  .closing p + p { margin-top: 10px; }
+  footer { margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-3); }
+
+  @media (max-width: 860px) {
+    .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .why, .rhythm, .weeks-grid, .two { grid-template-columns: 1fr; }
+    .rhythm { gap: 10px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="cover">
+  <p class="eyebrow">3개월 · 12주 · 아빠와 함께</p>
+  <h1>과학 등반 지도</h1>
+  <p class="lede">
+    과학은 머리가 좋아야 하는 과목이 아니라 <b>앞에서 쌓은 개념 위에 다음 개념을 얹는 과목</b>이다.
+    지금 어렵게 느껴지는 건 능력의 문제가 아니라, 중1에서 지나간 개념 몇 칸이 비어 있어서다.
+    그래서 이 계획은 진도를 앞서 나가지 않는다. <b>매주 비어 있는 한 칸을 메우고, 그 위에 지금 배우는 한 칸을 올린다.</b>
+    하루 20분, 주 4일, 한 주에 개념 하나. 12주 뒤에는 중1 과학의 뼈대와 중2 과학의 핵심이 이어져 있게 된다.
+  </p>
+  <dl class="facts">
+    <div><dt>기간</dt><dd>12주 <small>· 3개월</small></dd></div>
+    <div><dt>하루 학습량</dt><dd>20분 <small>· 주 4일</small></dd></div>
+    <div><dt>주당 개념</dt><dd>1개 <small>· 중1 연결 1개</small></dd></div>
+    <div><dt>모을 배지</dt><dd>12개 <small>· 주 1개</small></dd></div>
+  </dl>
+  <div class="progress">
+    <span class="num" id="pnum">0 / 48</span>
+    <span class="track"><i id="pbar"></i></span>
+    <span class="hint">퀘스트를 끝내면 체크하세요. 이 기기에 저장됩니다.</span>
+    <button class="reset" id="reset" type="button">전체 초기화</button>
+  </div>
+</header>
+
+<section id="why">
+  <div class="sechead"><h2>왜 이렇게 설계했나</h2></div>
+  <p class="secnote">딸이 힘들어하는 지점은 세 가지다. 계획의 모든 규칙은 이 세 가지에서 나왔다.</p>
+  <div class="why">
+    <div>
+      <p class="tag">문제 01</p>
+      <h3>개념이 누적된다</h3>
+      <p>중2 ‘이온’은 중1 ‘입자’를 알아야 보이고, ‘전류’는 ‘입자의 이동’을 알아야 보인다.
+        그래서 매주 <b>중1 연결고리 하나</b>를 먼저 복구한 다음 그 주의 중2 개념으로 올라간다. 복습이 아니라 사다리다.</p>
+    </div>
+    <div>
+      <p class="tag">문제 02</p>
+      <h3>양이 부담스럽다</h3>
+      <p>부담은 난이도보다 분량에서 온다. 하루 20분, 주 4일, 한 주에 개념 하나로 고정한다.
+        <b>20분이 지나면 이해가 덜 됐어도 끝낸다.</b> 다음 날 다시 20분이 있다.</p>
+    </div>
+    <div>
+      <p class="tag">문제 03</p>
+      <h3>이해했는지 알 수 없다</h3>
+      <p>문제를 맞혀도 이해했는지는 모른다. 그래서 채점 대신 <b>금요일에 아빠에게 3분 설명하기</b>로 확인한다.
+        설명이 막히는 지점이 정확히 비어 있는 칸이고, 그게 다음 주 연결고리가 된다.</p>
+    </div>
+  </div>
+</section>
+
+<section id="rhythm">
+  <div class="sechead"><h2>한 주의 리듬</h2></div>
+  <p class="secnote">매주 같은 순서로 돈다. 요일이 정해져 있으면 “오늘 뭐 하지”를 고민하지 않아도 되고, 딸도 끝이 보인다.</p>
+  <div class="rhythm">
+    <div class="beat">
+      <span class="day">MON</span>
+      <h4>열기</h4>
+      <p>이번 주 개념을 짧은 영상·교과서 두 쪽으로 훑고, <b>궁금한 질문 3개</b>를 딸이 직접 적는다. 답은 아직 안 찾는다.</p>
+      <span class="mins">20분</span>
+    </div>
+    <div class="beat">
+      <span class="day">TUE</span>
+      <h4>채우기</h4>
+      <p>A5 노트 <b>한 장</b>으로 정리. 글보다 그림. 월요일 질문 3개 중 답이 생긴 것에 표시한다.</p>
+      <span class="mins">20분</span>
+    </div>
+    <div class="beat">
+      <span class="day">THU</span>
+      <h4>손으로</h4>
+      <p>집에 있는 물건으로 하는 관찰·실험 한 가지. 결과가 예상과 달라도 성공이다. 사진 한 장 남긴다.</p>
+      <span class="mins">20~30분</span>
+    </div>
+    <div class="beat">
+      <span class="day">FRI</span>
+      <h4>보스전</h4>
+      <p>문제 5개 + <b>아빠에게 3분 설명</b>. 설명이 되면 그 주 배지 획득. 안 되면 막힌 지점만 다시 본다.</p>
+      <span class="mins">20분</span>
+    </div>
+    <div class="beat rest">
+      <span class="day">SAT · SUN</span>
+      <h4>쉼</h4>
+      <p>밀린 게 있으면 <b>딱 하나만</b> 한다. 없으면 안 한다. 쉬는 것도 계획에 들어 있다.</p>
+      <span class="mins">0~20분</span>
+    </div>
+  </div>
+</section>
+
+<section id="map">
+  <div class="sechead"><h2>12주 등반 지도</h2></div>
+  <p class="secnote">
+    캠프 세 개로 나눴다. 캠프 하나가 4주, 과학의 한 영역이다.
+    각 주차는 <b>중1 연결고리 → 이번 주 개념 → 손으로 확인 → 설명하기</b> 순서로 같은 모양이다.
+    학교 진도와 순서가 다르면, 그 주 ‘개념’ 자리에 학교에서 배우는 단원을 끼워 넣으면 된다. 순서보다 리듬이 중요하다.
+  </p>
+
+  <div class="camp" style="--camp: var(--s1); --camp-soft: var(--s1-soft);">
+    <div class="camp-head">
+      <span class="no">CAMP 1</span>
+      <h3>물질 · 세상은 무엇으로 되어 있나</h3>
+      <span class="weeks">WEEK 01 – 04</span>
+    </div>
+    <p class="camp-why">중2 과학에서 가장 먼저, 그리고 가장 자주 막히는 곳이 ‘물질의 구성’이다.
+      눈에 안 보이는 입자를 상상해야 하기 때문이다. 그래서 첫 캠프는 <b>보이지 않는 것을 그림으로 그리는 연습</b>부터 시작한다.</p>
+    <div class="weeks-grid">
+
+      <article class="week">
+        <header>
+          <div class="wtop"><span class="wnum">WEEK 01</span><span class="wtopic">중1 상태 변화 → 물질의 구성</span></div>
+          <h4>입자의 눈</h4>
+          <p class="say">“물도 공기도 눈에 안 보이는 알갱이라는 게 이제 그림으로 그려져.”</p>
+        </header>
+        <dl class="meta">
+          <div><dt>연결고리</dt><dd><b>중1 · 물질의 상태 변화</b> — 고체·액체·기체의 입자 배열과 움직임</dd></div>
+          <div><dt>핵심 질문</dt><dd>① 끓어서 사라진 물은 어디로 갔을까 ② 물 50 mL + 알코올 50 mL가 100 mL가 안 되는 이유 ③ 냄새는 왜 문을 닫아도 퍼질까</dd></div>
+        </dl>
+        <ul class="missions">
+          <li><label><input type="checkbox" data-q="w1m1"><span class="d">월</span><span class="t">교과서 상태 변화 단원 그림 두 쪽 훑고, 궁금한 질문 3개 적기</span></label></li>
+          <li><label><input type="checkbox" data-q="w1m2"><span class="d">화</span><span class="t">고체·액체·기체 입자 배열을 동그라미로 직접 그리기 (노트 한 장)</span></label></li>
+          <li><label><input type="checkbox" data-q="w1m3"><span class="d">목</span><span class="t">물 + 소독용 알코올 부피 재기, 향수 확산 시간 재기</span></label></li>
+          <li><label><input type="checkbox" data-q="w1m4"><span class="d">금</span><span class="t">문제 5개 + 아빠에게 3분 설명</span></label></li>
+        </ul>
+        <div class="foot">
+          <p><b>손으로 확인</b>계량컵 두 개에 물과 알코올을 같은 양 담아 섞고 눈금을 다시 읽는다. 줄어든 만큼이 ‘입자 사이 빈틈’이다.</p>
+          <p class="boss"><b>보스전</b>“빨래가 마르면 물은 어디로 갔는지” 입자 그림을 그리며 3분 설명하기</p>
+          <span class="badge">🔍 입자의 눈</span>
+        </div>
+      </article>
+
+      <article class="week">
+        <header>
+          <div class="wtop"><span class="wnum">WEEK 02</span><span class="wtopic">물질의 구성 ①</span></div>
+          <h4>원소와 불꽃</h4>
+          <p class="say">“불꽃 색만 보고도 무슨 원소인지 맞힐 수 있어.”</p>
+        </header>
+        <dl class="meta">
+          <div><dt>연결고리</dt><dd><b>중1 · 기체의 성질</b> — 산소·이산화탄소처럼 물질마다 성질이 다르다</dd></div>
+          <div><dt>핵심 질문</dt><dd>① 물은 더 쪼갤 수 있을까 ② 불꽃놀이의 색은 어떻게 만들까 ③ 가보지도 않은 별의 성분을 어떻게 알까</dd></div>
+        </dl>
+        <ul class="missions">
+          <li><label><input type="checkbox" data-q="w2m1"><span class="d">월</span><span class="t">원소 = 더 쪼개지지 않는 성분. 물 전기분해 영상 보고 질문 3개</span></label></li>
+          <li><label><input type="checkbox" data-q="w2m2"><span class="d">화</span><span class="t">자주 나오는 원소기호 20개 카드 만들기 (H·He·Li·C·N·O·Na·Mg·Al·Si·P·S·Cl·K·Ca·Fe·Cu·Zn·Ag·Au)</span></label></li>
+          <li><label><input type="checkbox" data-q="w2m3"><span class="d">목</span><span class="t">불꽃반응 관찰 — 젖은 나무젓가락에 소금(Na)·염화칼슘 제습제(Ca)를 묻혀 가스레인지 불에 (반드시 아빠와 함께, 3초씩)</span></label></li>
+          <li><label><input type="checkbox" data-q="w2m4"><span class="d">금</span><span class="t">문제 5개 + 아빠에게 3분 설명</span></label></li>
+        </ul>
+        <div class="foot">
+          <p><b>손으로 확인</b>나트륨은 노란색, 칼슘은 주황빛 붉은색. 색이 곧 원소의 이름표라는 걸 눈으로 본다.</p>
+          <p class="boss"><b>보스전</b>“소금을 태웠을 뿐인데 왜 노란색이 나오는지” 원소 개념으로 설명하기</p>
+          <span class="badge">🔥 불꽃 판독기</span>
+        </div>
+      </article>
+
+      <article class="week">
+        <header>
+          <div class="wtop"><span class="wnum">WEEK 03</span><span class="wtopic">물질의 구성 ②</span></div>
+          <h4>원자와 분자</h4>
+          <p class="say">“H₂O의 작은 2가 무슨 뜻인지 이제 안다.”</p>
+        </header>
+        <dl class="meta">
+          <div><dt>연결고리</dt><dd><b>1주차 · 입자의 눈</b> — 물질은 알갱이로 되어 있다</dd></div>
+          <div><dt>핵심 질문</dt><dd>① 원자와 분자는 어떻게 다를까 ② H₂O의 2는 무엇을 뜻할까 ③ 산소 원자 하나와 산소 분자(O₂)는 왜 다를까</dd></div>
+        </dl>
+        <ul class="missions">
+          <li><label><input type="checkbox" data-q="w3m1"><span class="d">월</span><span class="t">원자 모형(원자핵 + 전자)과 분자 개념 훑고 질문 3개</span></label></li>
+          <li><label><input type="checkbox" data-q="w3m2"><span class="d">화</span><span class="t">지점토·구슬·이쑤시개로 H₂O, CO₂, O₂, NH₃ 모형 만들기</span></label></li>
+          <li><label><input type="checkbox" data-q="w3m3"><span class="d">목</span><span class="t">집 안 화학식 찾기 — 생수 성분표, 베이킹소다(NaHCO₃), 소독용 알코올 라벨을 사진 찍고 읽어 보기</span></label></li>
+          <li><label><input type="checkbox" data-q="w3m4"><span class="d">금</span><span class="t">문제 5개 + 아빠에게 3분 설명</span></label></li>
+        </ul>
+        <div class="foot">
+          <p><b>손으로 확인</b>만든 모형을 늘어놓고 “원자 몇 개짜리 분자인지” 아빠가 물으면 딸이 답한다. 손으로 만든 건 잊히지 않는다.</p>
+          <p class="boss"><b>보스전</b>“H₂O와 2H₂O는 무엇이 다른지” 모형을 들고 설명하기</p>
+          <span class="badge">⚛️ 분자 조립공</span>
+        </div>
+      </article>
+
+      <article class="week">
+        <header>
+          <div class="wtop"><span class="wnum">WEEK 04</span><span class="wtopic">물질의 구성 ③ · 캠프 1 보스전</span></div>
+          <h4>이온과 앙금</h4>
+          <p class="say">“물이 뿌예지는 걸 보고 안에 뭐가 들었는지 말할 수 있어.”</p>
+        </header>
+        <dl class="meta">
+          <div><dt>연결고리</dt><dd><b>3주차 · 원자 구조</b> — 원자핵 주위의 전자</dd></div>
+          <div><dt>핵심 질문</dt><dd>① 원자가 전자를 잃으면 무슨 일이 생길까 ② 소금물은 전기가 통하는데 설탕물은 왜 안 통할까 ③ 두 액체를 섞었더니 뿌옇게 되는 이유는</dd></div>
+        </dl>
+        <ul class="missions">
+          <li><label><input type="checkbox" data-q="w4m1"><span class="d">월</span><span class="t">이온 = 전자를 잃거나 얻어 전기를 띤 입자. 양이온·음이온 이름 규칙</span></label></li>
+          <li><label><input type="checkbox" data-q="w4m2"><span class="d">화</span><span class="t">이온식 카드 10개 만들고 짝 맞추기 (Na⁺ · Cl⁻ · Ca²⁺ · CO₃²⁻ · Ag⁺ …)</span></label></li>
+          <li><label><input type="checkbox" data-q="w4m3"><span class="d">목</span><span class="t">석회수에 빨대로 숨 불어넣어 흰 앙금(탄산칼슘) 만들기</span></label></li>
+          <li><label><input type="checkbox" data-q="w4m4"><span class="d">금</span><span class="t">캠프 1 보스전 — 1~4주 통합 문제 10개 + 3분 설명</span></label></li>
+        </ul>
+        <div class="foot">
+          <p><b>손으로 확인</b>내 숨 속 이산화탄소가 석회수의 칼슘 이온을 만나 흰 알갱이가 된다. 눈에 안 보이던 이온이 처음으로 눈에 보이는 순간이다.</p>
+          <p class="boss"><b>보스전</b>“물속에 무엇이 들어 있는지 어떻게 알아내는지” 앙금 반응으로 설명하기</p>
+          <span class="badge">💧 앙금 탐정</span>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <div class="camp" style="--camp: var(--s2); --camp-soft: var(--s2-soft);">
+    <div class="camp-head">
+      <span class="no">CAMP 2</span>
+      <h3>전기와 성질 · 보이지 않는 것이 일을 한다</h3>
+      <span class="weeks">WEEK 05 – 08</span>
+    </div>
+    <p class="camp-why">전기 단원은 공식(V = I × R)부터 나와서 겁을 먹기 쉽다.
+      이 캠프는 공식을 <b>물이 흐르는 그림</b>으로 먼저 이해하고 숫자는 맨 마지막에 넣는다. 1캠프에서 배운 전자가 그대로 주인공이다.</p>
+    <div class="weeks-grid">
+
+      <article class="week">
+        <header>
+          <div class="wtop"><span class="wnum">WEEK 05</span><span class="wtopic">전기와 자기 ①</span></div>
+          <h4>정전기와 전하</h4>
+          <p class="say">“겨울에 문고리에서 따끔한 이유를 전자로 설명할 수 있어.”</p>
+        </header>
+        <dl class="meta">
+          <div><dt>연결고리</dt><dd><b>4주차 · 이온</b> — 전자를 잃으면 +, 얻으면 −</dd></div>
+          <div><dt>핵심 질문</dt><dd>① 문고리에서 왜 따끔할까 ② 풍선은 왜 머리카락을 끌어당길까 ③ 번개도 같은 원리일까</dd></div>
+        </dl>
+        <ul class="missions">
+          <li><label><input type="checkbox" data-q="w5m1"><span class="d">월</span><span class="t">마찰전기와 전하의 종류, 같은 전하는 밀고 다른 전하는 당긴다</span></label></li>
+          <li><label><input type="checkbox" data-q="w5m2"><span class="d">화</span><span class="t">전자가 옮겨 가는 과정을 화살표로 그리기 (노트 한 장)</span></label></li>
+          <li><label><input type="checkbox" data-q="w5m3"><span class="d">목</span><span class="t">풍선 실험 3종 — 머리카락 세우기, 벽에 붙이기, 가는 물줄기 휘게 하기</span></label></li>
+          <li><label><input type="checkbox" data-q="w5m4"><span class="d">금</span><span class="t">문제 5개 + 아빠에게 3분 설명</span></label></li>
+        </ul>
+        <div class="foot">
+          <p><b>손으로 확인</b>수도꼭지를 아주 가늘게 틀고 문지른 풍선을 가까이 대면 물줄기가 휜다. 물은 전기를 띠지 않았는데 왜 휘는지가 이번 주의 진짜 질문이다.</p>
+          <p class="boss"><b>보스전</b>“풍선이 벽에 붙는 이유”를 전자의 이동으로 설명하기</p>
+          <span class="badge">⚡ 전하 감지기</span>
+        </div>
+      </article>
+
+      <article class="week">
+        <header>
+          <div class="wtop"><span class="wnum">WEEK 06</span><span class="wtopic">전기와 자기 ②</span></div>
+          <h4>전류 · 전압 · 저항</h4>
+          <p class="say">“V = I × R가 물탱크 그림으로 보여.”</p>
+        </header>
+        <dl class="meta">
+          <div><dt>연결고리</dt><dd><b>5주차 · 전하</b> — 전류는 전하(전자)가 흐르는 것</dd></div>
+          <div><dt>핵심 질문</dt><dd>① 전류는 무엇이 흐르는 걸까 ② 전압이 커지면 왜 전류가 커질까 ③ 저항이 크면 왜 전구가 어두울까</dd></div>
+        </dl>
+        <ul class="missions">
+          <li><label><input type="checkbox" data-q="w6m1"><span class="d">월</span><span class="t">물의 흐름 비유 — 물탱크 높이 = 전압, 흐르는 물의 양 = 전류, 좁은 관 = 저항</span></label></li>
+          <li><label><input type="checkbox" data-q="w6m2"><span class="d">화</span><span class="t">V = I × R 세 줄 정리 + 아주 쉬운 계산 3개 (3 V, 6 Ω → 0.5 A)</span></label></li>
+          <li><label><input type="checkbox" data-q="w6m3"><span class="d">목</span><span class="t">건전지·꼬마전구·집게전선으로 직렬과 병렬 만들어 밝기 비교</span></label></li>
+          <li><label><input type="checkbox" data-q="w6m4"><span class="d">금</span><span class="t">문제 5개 + 아빠에게 3분 설명</span></label></li>
+        </ul>
+        <div class="foot">
+          <p><b>손으로 확인</b>전구 두 개를 직렬로 달면 어두워지고 병렬로 달면 밝다. 계산보다 이 장면이 먼저다.</p>
+          <p class="boss"><b>보스전</b>“왜 집 안 전등은 병렬로 연결되어 있는지” 설명하기</p>
+          <span class="badge">🔌 회로 설계자</span>
+        </div>
+      </article>
+
+      <article class="week">
+        <header>
+          <div class="wtop"><span class="wnum">WEEK 07</span><span class="wtopic">전기와 자기 ③</span></div>
+          <h4>전류의 자기 작용</h4>
+          <p class="say">“전기가 어떻게 움직임이 되는지 알아.”</p>
+        </header>
+        <dl class="meta">
+          <div><dt>연결고리</dt><dd><b>6주차 · 전류</b> — 흐르는 전류 주위에 자기장이 생긴다</dd></div>
+          <div><dt>핵심 질문</dt><dd>① 전선 옆 나침반은 왜 움직일까 ② 전자석을 더 세게 만들려면 ③ 선풍기 모터 안에서는 무슨 일이 일어날까</dd></div>
+        </dl>
+        <ul class="missions">
+          <li><label><input type="checkbox" data-q="w7m1"><span class="d">월</span><span class="t">자기장과 자기력선, 전자석의 원리 훑고 질문 3개</span></label></li>
+          <li><label><input type="checkbox" data-q="w7m2"><span class="d">화</span><span class="t">코일을 감은 그림에 자기력선 그려 넣기 (노트 한 장)</span></label></li>
+          <li><label><input type="checkbox" data-q="w7m3"><span class="d">목</span><span class="t">못 + 에나멜선 + 건전지로 전자석 만들기 — 코일 20회·40회일 때 클립 개수를 표로 기록</span></label></li>
+          <li><label><input type="checkbox" data-q="w7m4"><span class="d">금</span><span class="t">문제 5개 + 아빠에게 3분 설명</span></label></li>
+        </ul>
+        <div class="foot">
+          <p><b>손으로 확인</b>코일 수를 두 배로 늘리면 클립이 몇 개 더 붙는지 직접 센다. “세기는 무엇으로 정해지는가”가 손끝에서 답이 나온다.</p>
+          <p class="boss"><b>보스전</b>“전기가 어떻게 회전하는 힘이 되는지” 모터를 예로 설명하기</p>
+          <span class="badge">🧲 전자석 기술자</span>
+        </div>
+      </article>
+
+      <article class="week">
+        <header>
+          <div class="wtop"><span class="wnum">WEEK 08</span><span class="wtopic">물질의 특성 · 캠프 2 보스전</span></div>
+          <h4>밀도 · 용해도 · 끓는점</h4>
+          <p class="say">“물질마다 고유한 번호표가 있다는 걸 알겠어.”</p>
+        </header>
+        <dl class="meta">
+          <div><dt>연결고리</dt><dd><b>중1 · 물질의 상태 변화</b> — 끓는점과 녹는점은 물질마다 정해져 있다</dd></div>
+          <div><dt>핵심 질문</dt><dd>① 덩어리가 커지면 밀도도 커질까 ② 소금물은 왜 100 ℃보다 높은 온도에서 끓을까 ③ 바닷물에서 어떻게 마실 물을 얻을까</dd></div>
+        </dl>
+        <ul class="missions">
+          <li><label><input type="checkbox" data-q="w8m1"><span class="d">월</span><span class="t">밀도 = 질량 ÷ 부피 (g/cm³). 물질마다 값이 정해져 있다</span></label></li>
+          <li><label><input type="checkbox" data-q="w8m2"><span class="d">화</span><span class="t">물·식용유·알코올·철의 밀도와 끓는점을 한 장 표로 정리</span></label></li>
+          <li><label><input type="checkbox" data-q="w8m3"><span class="d">목</span><span class="t">밀도탑 만들기 — 꿀·주방세제·물·식용유를 층으로 쌓고 포도알·방울토마토 띄우기</span></label></li>
+          <li><label><input type="checkbox" data-q="w8m4"><span class="d">금</span><span class="t">캠프 2 보스전 — 5~8주 통합 문제 10개 + 3분 설명</span></label></li>
+        </ul>
+        <div class="foot">
+          <p><b>손으로 확인</b>층이 섞이지 않고 쌓이는 걸 보면 밀도는 외울 값이 아니라 눈에 보이는 성질이 된다.</p>
+          <p class="boss"><b>보스전</b>“기름이 물 위에 뜨는 이유”와 “같은 물질이면 크기가 달라도 밀도가 같은 이유” 설명하기</p>
+          <span class="badge">⚖️ 밀도 감정사</span>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <div class="camp" style="--camp: var(--s3); --camp-soft: var(--s3-soft);">
+    <div class="camp-head">
+      <span class="no">CAMP 3</span>
+      <h3>생명과 지구 · 나와 세계가 이어진다</h3>
+      <span class="weeks">WEEK 09 – 12</span>
+    </div>
+    <p class="camp-why">앞의 두 캠프에서 익힌 입자와 에너지 개념이 여기서 몸과 지구로 확장된다.
+      외울 것이 많아 보이는 단원이지만 <b>‘에너지가 어디서 와서 어디로 가는가’ 하나로 꿰면</b> 암기량이 크게 줄어든다.</p>
+    <div class="weeks-grid">
+
+      <article class="week">
+        <header>
+          <div class="wtop"><span class="wnum">WEEK 09</span><span class="wtopic">식물과 에너지</span></div>
+          <h4>광합성과 호흡</h4>
+          <p class="say">“식물이 밥을 스스로 만든다는 말의 뜻을 알겠어.”</p>
+        </header>
+        <dl class="meta">
+          <div><dt>연결고리</dt><dd><b>2·3주차 · 원소와 분자</b> — CO₂와 O₂가 실제로 오가는 이야기</dd></div>
+          <div><dt>핵심 질문</dt><dd>① 식물은 양분을 어디서 얻을까 ② 광합성과 호흡은 반대일까 ③ 밤에 식물은 무엇을 할까</dd></div>
+        </dl>
+        <ul class="missions">
+          <li><label><input type="checkbox" data-q="w9m1"><span class="d">월</span><span class="t">광합성 식(이산화탄소 + 물 → 포도당 + 산소)과 엽록체·기공 훑기</span></label></li>
+          <li><label><input type="checkbox" data-q="w9m2"><span class="d">화</span><span class="t">광합성과 호흡을 한 장 표로 비교 (재료 · 결과 · 일어나는 때)</span></label></li>
+          <li><label><input type="checkbox" data-q="w9m3"><span class="d">목</span><span class="t">잎 뒷면을 스마트폰으로 확대 촬영해 기공 찾기, 잎에 비닐봉지를 씌워 물방울 관찰</span></label></li>
+          <li><label><input type="checkbox" data-q="w9m4"><span class="d">금</span><span class="t">문제 5개 + 아빠에게 3분 설명</span></label></li>
+        </ul>
+        <div class="foot">
+          <p><b>손으로 확인</b>비닐봉지 안쪽에 맺힌 물방울이 증산의 증거다. 식물이 ‘살아서 일하고 있다’는 걸 눈으로 확인한다.</p>
+          <p class="boss"><b>보스전</b>“식물이 만드는 것과 쓰는 것”을 광합성·호흡으로 나눠 설명하기</p>
+          <span class="badge">🌿 광합성 관찰자</span>
+        </div>
+      </article>
+
+      <article class="week">
+        <header>
+          <div class="wtop"><span class="wnum">WEEK 10</span><span class="wtopic">동물과 에너지</span></div>
+          <h4>에너지 배달 경로</h4>
+          <p class="say">“소화·순환·호흡·배설이 따로가 아니라 한 줄이었어.”</p>
+        </header>
+        <dl class="meta">
+          <div><dt>연결고리</dt><dd><b>9주차 · 포도당</b> — 식물이 만든 양분이 내 몸으로 들어온다</dd></div>
+          <div><dt>핵심 질문</dt><dd>① 먹은 밥은 어떻게 에너지가 될까 ② 뛰면 왜 숨이 차고 심장이 빨라질까 ③ 네 기관계는 왜 한 세트일까</dd></div>
+        </dl>
+        <ul class="missions">
+          <li><label><input type="checkbox" data-q="w10m1"><span class="d">월</span><span class="t">소화(양분) → 순환(운반) → 호흡(에너지) → 배설(찌꺼기) 한 줄로 훑기</span></label></li>
+          <li><label><input type="checkbox" data-q="w10m2"><span class="d">화</span><span class="t">밥 한 숟갈이 근육까지 가는 경로를 한 장 그림으로 완성</span></label></li>
+          <li><label><input type="checkbox" data-q="w10m3"><span class="d">목</span><span class="t">안정 심박수 → 제자리 뛰기 30초 → 다시 심박수. 회복까지 걸린 시간을 표로 기록</span></label></li>
+          <li><label><input type="checkbox" data-q="w10m4"><span class="d">금</span><span class="t">문제 5개 + 아빠에게 3분 설명</span></label></li>
+        </ul>
+        <div class="foot">
+          <p><b>손으로 확인</b>내 심박수가 실험 데이터가 된다. 숫자가 내 몸에서 나오면 단원이 남의 이야기가 아니게 된다.</p>
+          <p class="boss"><b>보스전</b>“밥 한 숟갈이 팔 근육에 도착하기까지”를 순서대로 3분 설명하기</p>
+          <span class="badge">🫀 에너지 배달부</span>
+        </div>
+      </article>
+
+      <article class="week">
+        <header>
+          <div class="wtop"><span class="wnum">WEEK 11</span><span class="wtopic">태양계</span></div>
+          <h4>지구와 달의 운동</h4>
+          <p class="say">“달 모양이 바뀌는 이유를 손으로 보여줄 수 있어.”</p>
+        </header>
+        <dl class="meta">
+          <div><dt>연결고리</dt><dd><b>중1 · 빛과 파동</b> — 달은 스스로 빛나지 않고 햇빛을 반사한다</dd></div>
+          <div><dt>핵심 질문</dt><dd>① 달 모양은 왜 바뀔까 ② 계절은 왜 생길까 ③ 태양을 농구공으로 줄이면 지구는 얼마나 작을까</dd></div>
+        </dl>
+        <ul class="missions">
+          <li><label><input type="checkbox" data-q="w11m1"><span class="d">월</span><span class="t">지구의 자전·공전과 달의 위상 훑고 질문 3개</span></label></li>
+          <li><label><input type="checkbox" data-q="w11m2"><span class="d">화</span><span class="t">태양–지구–달 배치와 위상 변화를 한 장 그림으로</span></label></li>
+          <li><label><input type="checkbox" data-q="w11m3"><span class="d">목</span><span class="t">어두운 방에서 스탠드(태양)·머리(지구)·공(달)으로 위상 재현 + 7일 달 관찰 사진 일지 시작</span></label></li>
+          <li><label><input type="checkbox" data-q="w11m4"><span class="d">금</span><span class="t">문제 5개 + 아빠에게 3분 설명</span></label></li>
+        </ul>
+        <div class="foot">
+          <p><b>손으로 확인</b>공을 들고 한 바퀴 돌면 초승달·보름달이 손 안에서 만들어진다. 이 단원은 외우는 게 아니라 돌려 보는 것이다.</p>
+          <p class="boss"><b>보스전</b>“보름달과 그믐달일 때 태양·지구·달의 위치”를 공을 들고 설명하기</p>
+          <span class="badge">🌗 달 기록관</span>
+        </div>
+      </article>
+
+      <article class="week">
+        <header>
+          <div class="wtop"><span class="wnum">WEEK 12</span><span class="wtopic">열과 우리 생활 · 최종 보스전</span></div>
+          <h4>열의 이동, 그리고 정상</h4>
+          <p class="say">“이제 내가 설명하는 쪽이야.”</p>
+        </header>
+        <dl class="meta">
+          <div><dt>연결고리</dt><dd><b>1·8주차 · 입자와 물질의 특성</b> — 열은 입자의 움직임이 옮겨 가는 것</dd></div>
+          <div><dt>핵심 질문</dt><dd>① 쇠 손잡이는 왜 나무보다 차갑게 느껴질까 ② 에어컨은 왜 위, 난로는 왜 아래에 둘까 ③ 바닷가 바람은 왜 낮과 밤에 방향이 바뀔까</dd></div>
+        </dl>
+        <ul class="missions">
+          <li><label><input type="checkbox" data-q="w12m1"><span class="d">월</span><span class="t">전도·대류·복사 세 가지 열 이동과 비열 훑기</span></label></li>
+          <li><label><input type="checkbox" data-q="w12m2"><span class="d">화</span><span class="t">집 안에서 세 가지 열 이동의 예를 하나씩 찾아 사진 3장</span></label></li>
+          <li><label><input type="checkbox" data-q="w12m3"><span class="d">목</span><span class="t">같은 뜨거운 물에 금속 숟가락과 나무젓가락을 넣고 손잡이 온도 비교</span></label></li>
+          <li><label><input type="checkbox" data-q="w12m4"><span class="d">금</span><span class="t">최종 보스전 — 12주 중 가장 자신 있는 개념 하나로 가족 앞에서 15분 미니 강의 + 성장 리포트 쓰기</span></label></li>
+        </ul>
+        <div class="foot">
+          <p><b>손으로 확인</b>같은 온도인데 다르게 느껴지는 이유가 ‘열이 빠져나가는 속도’라는 걸 손으로 확인한다.</p>
+          <p class="boss"><b>보스전</b>1주차에 녹음한 3분 설명과 12주차 설명을 나란히 듣기. 성장은 점수가 아니라 이 차이로 확인한다.</p>
+          <span class="badge">🏆 과학 등반 완주</span>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="dad">
+  <div class="sechead"><h2>아빠 역할 설명서</h2></div>
+  <p class="secnote">이 프로그램에서 아빠는 선생님이 아니라 <b>관객이자 등반 파트너</b>다. 가르치는 사람이 되는 순간 딸에게는 학원이 하나 더 생긴다.</p>
+  <div class="two">
+    <div class="panel">
+      <h3>이것만 한다</h3>
+      <ul class="list">
+        <li><b>20분 타이머를 대신 지킨다.</b> 잘 되고 있어도 20분에 끊는다. “더 하자”는 다음 주의 힘을 미리 쓰는 것이다.</li>
+        <li><b>모르는 척 물어본다.</b> “아빠는 이거 왜 그런지 모르겠는데 설명해 줄래?” 설명하는 사람이 가장 많이 배운다.</li>
+        <li><b>실패한 실험을 축하한다.</b> 예상과 다른 결과가 나온 날은 기록해 둘 가치가 있는 날이다.</li>
+        <li><b>금요일 3분 설명을 녹음한다.</b> 12주 뒤 1주차 녹음과 나란히 들려주는 것이 이 프로그램의 진짜 마지막 장면이다.</li>
+        <li><b>배지를 준다.</b> 배지는 결과가 아니라 그 주를 끝냈다는 표시다. 이해가 덜 됐어도 4일을 했으면 준다.</li>
+      </ul>
+    </div>
+    <div class="panel warn">
+      <h3>절대 하지 않는다</h3>
+      <ul class="list no">
+        <li><b>“이것도 몰라?”</b> — 이 한 문장이 3개월을 되돌린다.</li>
+        <li><b>정답을 먼저 말하기</b> — 딸이 15초 생각할 시간을 기다린다. 침묵은 공부 중이라는 뜻이다.</li>
+        <li><b>분량 늘리기</b> — 잘 따라오면 늘리고 싶어진다. 늘리지 않는다. 늘리는 순간 부담 과목으로 되돌아간다.</li>
+        <li><b>다른 아이와 비교하기</b> — 비교 대상은 지난주의 딸 하나뿐이다.</li>
+        <li><b>점수로 평가하기</b> — 이 프로그램에는 점수가 없다. 설명이 되면 통과다.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-top: 26px;">
+    <h3>막혔을 때 — 3분 규칙</h3>
+    <p class="secnote" style="margin-top:0">한 문제에서 3분 넘게 막히면 그 자리에서 더 밀지 않는다. <b>한 칸 아래로 내려가서</b> 비어 있는 개념을 채우고 올라온다. 내려가는 건 후퇴가 아니라 이 프로그램의 정식 경로다.</p>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>여기서 막히면</th><th>한 칸 아래로</th><th>이렇게 확인한다</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>이온 · 앙금</b></td><td>원자의 구조 (3주차)</td><td>“원자핵과 전자를 그려 볼래?”</td></tr>
+          <tr><td><b>화학식 읽기</b></td><td>원소기호 (2주차)</td><td>“이 기호 이름이 뭐였지?”</td></tr>
+          <tr><td><b>전류 · 옴의 법칙</b></td><td>전하와 전자의 이동 (5주차)</td><td>“전선 안에서 뭐가 움직이는 거야?”</td></tr>
+          <tr><td><b>광합성 식</b></td><td>분자식 CO₂ · H₂O (3주차)</td><td>“이 분자는 원자 몇 개짜리야?”</td></tr>
+          <tr><td><b>열의 이동 · 비열</b></td><td>입자의 운동 (1주차)</td><td>“뜨거우면 입자가 어떻게 움직여?”</td></tr>
+          <tr><td><b>달의 위상</b></td><td>빛의 반사 (중1 빛과 파동)</td><td>“달은 스스로 빛나? 아니면?”</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="check">
+  <div class="sechead"><h2>이해했는지 확인하는 법</h2></div>
+  <p class="secnote">채점 대신 4단계로 본다. 매주 금요일, 이번 주 개념이 몇 단계까지 왔는지만 표시한다. <b>3단계면 그 주는 통과</b>다. 4단계는 보너스다.</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>단계</th><th>상태</th><th>이렇게 들린다</th></tr></thead>
+      <tbody>
+        <tr><td class="step">01</td><td><b>들어봤다</b></td><td>“이온… 뭔가 배운 것 같은데.”</td></tr>
+        <tr><td class="step">02</td><td><b>따라 말한다</b></td><td>“이온은 전자를 잃거나 얻은 입자예요.” (교과서 문장 그대로)</td></tr>
+        <tr><td class="step">03</td><td><b>예를 든다</b></td><td>“소금물이 전기가 통하는 건 물속에 이온이 돌아다녀서예요.” — 통과</td></tr>
+        <tr><td class="step">04</td><td><b>가르친다</b></td><td>“아빠, 여기서 헷갈리기 쉬운 게 뭐냐면요…” — 완전히 자기 것이 된 상태</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="ops">
+  <div class="sechead"><h2>준비물과 변수 대응</h2></div>
+  <p class="secnote">3개월 안에는 시험도 있고 안 되는 주도 온다. 흔들릴 때 계획을 버리지 않도록 미리 정해 둔다.</p>
+  <div class="kit">
+    <span>A5 노트 1권</span><span>색연필 · 형광펜</span><span>건전지(1.5 V) · 꼬마전구 · 집게전선</span><span>못 · 에나멜선</span>
+    <span>풍선</span><span>지점토 · 이쑤시개</span><span>계량컵 · 주방 저울</span><span>소독용 알코올</span>
+    <span>베이킹소다 · 소금 · 염화칼슘 제습제</span><span>석회수(또는 소석회)</span><span>꿀 · 식용유 · 주방세제</span><span>줄자 · 초시계(폰)</span>
+  </div>
+  <div class="two" style="margin-top: 26px;">
+    <div class="panel">
+      <h3>이런 일이 생기면</h3>
+      <ul class="list">
+        <li><b>학교 진도와 순서가 다르다</b> → 그 주의 ‘개념’ 자리에 학교 단원을 끼워 넣는다. 연결고리·요일 리듬·보스전은 그대로 둔다.</li>
+        <li><b>시험 기간이 겹친다</b> → 그 주는 <b>시험 범위 복습 주간</b>으로 바꾸고 전체를 1주 뒤로 민다. 12주 계획에 2주의 여유를 넣어 두었다.</li>
+        <li><b>한 주를 통째로 못 했다</b> → 밀린 주를 따라잡지 않는다. 그 주는 없던 것으로 하고 다음 주부터 다시 시작한다.</li>
+        <li><b>흥미가 떨어진다</b> → 캠프 사이에 <b>쉬는 주</b>를 하나 넣는다. 과학관·유튜브 실험 영상만 보는 주여도 된다.</li>
+        <li><b>너무 쉬워한다</b> → 분량을 늘리지 말고 <b>목요일 실험을 딸이 직접 설계</b>하게 한다. 난이도는 위로, 시간은 그대로.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>12주 뒤에 남는 것</h3>
+      <ul class="list">
+        <li><b>노트 12장</b> — 개념 하나에 한 장씩. 시험 기간에 이것만 다시 본다.</li>
+        <li><b>실험 사진 12장과 관찰 기록</b> — 자유탐구·수행평가 소재가 그대로 쌓인다.</li>
+        <li><b>3분 설명 녹음 12개</b> — 1주차와 12주차를 나란히 들으면 성장이 귀로 들린다.</li>
+        <li><b>배지 12개</b> — 끝까지 해냈다는 증거. 다음 학기를 시작할 때의 자신감은 여기서 나온다.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="closing">
+  <h3>다음 단계</h3>
+  <p>이 문서는 <b>추진 계획</b>이다. 승인되면 다음으로 <b>1주차 학습 자료</b>부터 주차별로 만든다.
+    각 주차 자료에는 개념 설명(그림 위주), 노트 한 장 양식, 목요일 실험 안내와 안전 수칙, 보스전 문제 5개와 해설, 3분 설명 대본 틀이 들어간다.</p>
+  <p>진행 기록은 <b>가족 공부 앱</b>의 ‘과학’ 과목 타이머로 그대로 쌓인다. 하루 20분이 주간 그래프에 보이고, 아빠·엄마는 응원을 보낼 수 있다.
+    이 계획서의 체크박스는 이 기기에 저장되므로, 매주 금요일에 함께 열어 한 줄씩 체크하는 것으로 충분하다.</p>
+</div>
+
+<footer>
+  과학 등반 지도 · 12주 추진 계획 · 중2 딸과 아빠 · 교과 단원 이름과 순서는 교과서 출판사와 학교 진도에 따라 다를 수 있습니다.
+</footer>
+
+</div>
+
+<script>
+  (function () {
+    var boxes = Array.prototype.slice.call(document.querySelectorAll(".missions input[type=checkbox]"));
+    var bar = document.getElementById("pbar");
+    var num = document.getElementById("pnum");
+    var KEY = "science_quest_progress";
+
+    function load() {
+      try { return JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { return {}; }
+    }
+    function save(state) {
+      try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+    }
+    function paint() {
+      var done = boxes.filter(function (b) { return b.checked; }).length;
+      num.textContent = done + " / " + boxes.length;
+      bar.style.width = (done / boxes.length) * 100 + "%";
+    }
+
+    var state = load();
+    boxes.forEach(function (b) {
+      if (state[b.dataset.q]) b.checked = true;
+      b.addEventListener("change", function () {
+        var s = load();
+        if (b.checked) s[b.dataset.q] = 1; else delete s[b.dataset.q];
+        save(s);
+        paint();
+      });
+    });
+    paint();
+
+    document.getElementById("reset").addEventListener("click", function () {
+      if (!confirm("체크한 기록을 모두 지울까요?")) return;
+      save({});
+      boxes.forEach(function (b) { b.checked = false; });
+      paint();
+    });
+  })();
+</script>
+</body>
+</html>
