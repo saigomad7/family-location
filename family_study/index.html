@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#6d5bf0">
+<title>우리 가족 공부</title>
+<link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="가족공부">
+<style>
+  :root {
+    --bg: #f4f4fd;
+    --surface: #ffffff;
+    --text: #262b4d;
+    --text-dim: #8d92b5;
+    --accent: #6d5bf0;
+    --accent-deep: #5643d1;
+    --accent-soft: #ebe8ff;
+    --border: #e6e6f6;
+    --live: #10b981;
+    --danger: #ef5350;
+    --grid: #e9e9f4;
+    --shadow: 0 2px 14px rgba(70, 60, 180, 0.10);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    background: var(--bg); color: var(--text);
+  }
+  .view { min-height: 100%; display: flex; flex-direction: column; background: var(--bg); }
+  .view.hidden { display: none; }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  /* ── 헤더 ── */
+  .hero {
+    flex-shrink: 0; position: relative; text-align: center; color: #fff;
+    padding: calc(30px + env(safe-area-inset-top)) 22px 30px;
+    background: linear-gradient(160deg, #8a7bff, var(--accent-deep));
+    border-radius: 0 0 30px 30px;
+    box-shadow: 0 10px 26px rgba(86, 67, 209, 0.28);
+  }
+  .heroBtn {
+    position: absolute; top: calc(16px + env(safe-area-inset-top));
+    width: 38px; height: 38px; border-radius: 50%; border: none; cursor: pointer;
+    background: rgba(255, 255, 255, 0.22); color: #fff; font-size: 16px;
+  }
+  #inviteBtn { right: 18px; }
+  #settingsBtn { left: 18px; }
+  .heroLogo {
+    width: 74px; height: 74px; border-radius: 24px; margin: 0 auto 12px;
+    background: rgba(255, 255, 255, 0.18);
+    display: flex; align-items: center; justify-content: center; font-size: 36px;
+    animation: bob 3.2s ease-in-out infinite;
+  }
+  .hero h1 { font-size: 23px; font-weight: 800; letter-spacing: -0.4px; }
+  .hero .date { margin-top: 6px; font-size: 13px; font-weight: 600; opacity: 0.85; }
+
+  .body {
+    flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 12px;
+    padding: 16px 16px calc(20px + env(safe-area-inset-bottom));
+  }
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 20px; box-shadow: var(--shadow); padding: 16px;
+    animation: rise 0.45s ease both;
+  }
+  .cardTitle {
+    font-size: 14px; font-weight: 800; margin-bottom: 12px;
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  }
+  .cardTitle span.sub { color: var(--text-dim); font-weight: 700; font-size: 12px; }
+
+  /* ── 타이머 ── */
+  .timerBig {
+    text-align: center; font-size: 46px; font-weight: 800; letter-spacing: -1.5px;
+    font-variant-numeric: tabular-nums; margin: 4px 0 2px;
+  }
+  .timerBig.on { color: var(--accent); }
+  .timerSub { text-align: center; font-size: 12.5px; color: var(--text-dim); font-weight: 600; margin-bottom: 14px; }
+  #subjects { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 14px; }
+  .chip {
+    padding: 8px 14px; border: 1.5px solid var(--border); border-radius: 999px;
+    background: var(--bg); color: var(--text-dim); font-size: 13.5px; font-weight: 700; cursor: pointer;
+    transition: border-color 0.15s;
+  }
+  .chip.sel { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
+  .cta {
+    width: 100%; padding: 17px; border: none; border-radius: 16px;
+    font-size: 16px; font-weight: 800; cursor: pointer; color: #fff;
+    background: linear-gradient(135deg, #7d6bff, var(--accent-deep));
+    box-shadow: 0 6px 16px rgba(109, 91, 240, 0.35);
+    transition: transform 0.12s;
+  }
+  .cta:active { transform: scale(0.98); }
+  .cta.on {
+    background: linear-gradient(135deg, #f36c6c, #d9453f);
+    box-shadow: 0 6px 16px rgba(239, 83, 80, 0.3);
+  }
+  .ghost {
+    width: 100%; margin-top: 9px; padding: 13px; border-radius: 14px; cursor: pointer;
+    border: 1.5px solid var(--accent-soft); background: var(--surface); color: var(--accent);
+    font-size: 14px; font-weight: 800;
+  }
+
+  /* ── 진행 바 ── */
+  .goalRow { display: flex; align-items: baseline; justify-content: space-between; font-size: 12.5px; font-weight: 700; margin-bottom: 6px; }
+  .goalRow .dim { color: var(--text-dim); font-weight: 600; }
+  .bar { height: 10px; border-radius: 999px; background: var(--grid); overflow: hidden; }
+  .bar > i { display: block; height: 100%; border-radius: 999px; background: var(--accent); transition: width 0.4s ease; }
+  .bar > i.done { background: var(--live); }
+
+  /* ── 가족 목록 ── */
+  .hrow { display: flex; align-items: center; gap: 12px; padding: 11px 2px; }
+  .hrow + .hrow { border-top: 1px solid var(--border); }
+  .havatar {
+    width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 800; color: #fff;
+    box-shadow: inset 0 -2px 4px rgba(0,0,0,.12);
+  }
+  .hinfo { flex: 1; min-width: 0; }
+  .hname { font-size: 14.5px; font-weight: 700; display: flex; align-items: center; gap: 6px; }
+  .hname .tag { font-size: 10.5px; font-weight: 800; color: var(--accent); background: var(--accent-soft); padding: 2px 7px; border-radius: 999px; }
+  .hname .studying { font-size: 10.5px; font-weight: 800; color: #fff; background: var(--live); padding: 2px 7px; border-radius: 999px; }
+  .htime { font-size: 12.5px; color: var(--text-dim); font-weight: 600; margin: 2px 0 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-variant-numeric: tabular-nums; }
+  .hbtn {
+    flex-shrink: 0; padding: 8px 12px; border: none; border-radius: 999px;
+    background: var(--accent-soft); color: var(--accent);
+    font-weight: 800; font-size: 12.5px; cursor: pointer; font-variant-numeric: tabular-nums;
+  }
+  .hbtn:active { background: var(--accent); color: #fff; }
+  .empty { color: var(--text-dim); font-size: 13px; padding: 8px 2px; font-weight: 500; line-height: 1.6; }
+
+  /* ── 주간 그래프 ── */
+  #whoTabs { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 2px; margin-bottom: 12px; }
+  #whoTabs::-webkit-scrollbar { display: none; }
+  #whoTabs button {
+    flex: 0 0 auto; padding: 7px 13px; border: 1.5px solid var(--border); border-radius: 999px;
+    background: var(--surface); color: var(--text-dim); font-size: 12.5px; font-weight: 700; cursor: pointer;
+  }
+  #whoTabs button.sel { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
+  .chartWrap { position: relative; }
+  .chart {
+    display: flex; align-items: flex-end; gap: 2px;
+    height: 150px; position: relative; padding-top: 18px;
+  }
+  .gridline {
+    position: absolute; left: 0; right: 0; height: 1px; background: var(--grid);
+  }
+  .goalline { position: absolute; left: 0; right: 0; height: 1px; background: #c9c9de; }
+  .goalline b {
+    position: absolute; right: 0; top: -15px; font-size: 10.5px;
+    font-weight: 700; color: var(--text-dim); background: var(--surface); padding: 0 3px;
+  }
+  .col {
+    flex: 1; min-width: 0; height: 100%; display: flex; flex-direction: column;
+    justify-content: flex-end; align-items: center; cursor: pointer; position: relative;
+  }
+  .col .val {
+    font-size: 10.5px; font-weight: 800; color: var(--text); margin-bottom: 3px;
+    font-variant-numeric: tabular-nums; white-space: nowrap;
+  }
+  .col .barFill {
+    width: 100%; max-width: 24px; background: var(--accent);
+    border-radius: 4px 4px 0 0; min-height: 2px;
+  }
+  .col.today .barFill { background: var(--accent-deep); }
+  .col .barFill.zero { background: var(--grid); }
+  .xaxis { display: flex; gap: 2px; margin-top: 7px; }
+  .xaxis div {
+    flex: 1; min-width: 0; text-align: center; font-size: 11px;
+    font-weight: 700; color: var(--text-dim);
+  }
+  .xaxis div.today { color: var(--accent); }
+  #tip {
+    position: absolute; z-index: 20; transform: translate(-50%, -100%);
+    background: #262b4d; color: #fff; padding: 7px 11px; border-radius: 10px;
+    font-size: 12px; font-weight: 700; white-space: nowrap; pointer-events: none;
+    box-shadow: 0 6px 16px rgba(0,0,0,.22); opacity: 0; transition: opacity 0.15s;
+  }
+  #tip.show { opacity: 1; }
+  table.data {
+    width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px;
+  }
+  table.data th, table.data td {
+    padding: 7px 4px; text-align: right; border-bottom: 1px solid var(--border);
+    font-variant-numeric: tabular-nums;
+  }
+  table.data th:first-child, table.data td:first-child { text-align: left; }
+  table.data th { color: var(--text-dim); font-size: 11.5px; font-weight: 700; }
+  .linkBtn {
+    background: none; border: none; color: var(--accent); font-size: 12px;
+    font-weight: 700; cursor: pointer; padding: 0;
+  }
+
+  /* ── 과목 요약 ── */
+  .subjRow { display: flex; align-items: center; gap: 10px; padding: 7px 0; }
+  .subjRow + .subjRow { border-top: 1px solid var(--border); }
+  .subjRow .nm { font-size: 13.5px; font-weight: 700; width: 62px; flex-shrink: 0; }
+  .subjRow .bar { flex: 1; }
+  .subjRow .tm { font-size: 12.5px; font-weight: 700; color: var(--text-dim); width: 78px; text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+  /* ── 오버레이 ── */
+  .overlay {
+    position: fixed; inset: 0; background: var(--bg); z-index: 2000;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 24px; text-align: center; overflow-y: auto;
+  }
+  .overlay .box {
+    width: 100%; max-width: 380px; background: var(--surface);
+    border: 1px solid var(--border); border-radius: 22px;
+    box-shadow: var(--shadow); padding: 26px 22px;
+  }
+  .overlay .logo {
+    width: 58px; height: 58px; border-radius: 18px; margin: 0 auto 14px;
+    background: var(--accent-soft); color: var(--accent);
+    display: flex; align-items: center; justify-content: center; font-size: 28px;
+  }
+  .overlay h2 { font-size: 20px; font-weight: 800; margin-bottom: 6px; letter-spacing: -0.3px; }
+  .overlay p { font-size: 13.5px; color: var(--text-dim); margin-bottom: 18px; line-height: 1.65; font-weight: 500; }
+  .overlay input {
+    width: 100%; padding: 14px; margin-bottom: 12px;
+    border: 1.5px solid var(--border); border-radius: 13px; background: var(--bg);
+    color: var(--text); font-size: 15px; text-align: center; font-weight: 600;
+    outline: none; transition: border-color 0.15s;
+  }
+  .overlay input:focus { border-color: var(--accent); }
+  .overlay .big {
+    width: 100%; padding: 15px; border: none; border-radius: 14px;
+    background: linear-gradient(135deg, #7d6bff, var(--accent-deep));
+    color: #fff; font-size: 15.5px; font-weight: 800; cursor: pointer;
+    box-shadow: 0 6px 16px rgba(109, 91, 240, 0.35);
+  }
+  .overlay .big:disabled { background: #cbc9e8; box-shadow: none; }
+  .overlay .quit {
+    margin-top: 14px; background: none; border: none; color: var(--text-dim);
+    font-size: 13px; font-weight: 700; cursor: pointer;
+  }
+  .hidden { display: none !important; }
+  #memberList { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 16px; }
+  #memberList button {
+    padding: 13px 18px; border: 1.5px solid var(--border); border-radius: 14px;
+    background: var(--bg); color: var(--text); font-size: 15px; font-weight: 700; cursor: pointer;
+    display: flex; align-items: center; gap: 8px;
+  }
+  #memberList button:active { border-color: var(--accent); }
+  #memberList .dot { width: 14px; height: 14px; border-radius: 50%; }
+  #presets { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; justify-content: center; }
+  #presets button {
+    padding: 8px 15px; border: 1.5px solid var(--border); border-radius: 999px;
+    background: var(--surface); color: var(--text-dim); font-size: 13.5px; font-weight: 600; cursor: pointer;
+  }
+  .addrow { display: flex; gap: 8px; }
+  .addrow input { flex: 1; margin-bottom: 0; }
+  .addrow button {
+    flex: 0 0 auto; width: 52px; border: none; border-radius: 13px;
+    background: var(--accent-soft); color: var(--accent); font-size: 24px; font-weight: 800; cursor: pointer;
+  }
+  .divider { color: var(--text-dim); font-size: 12px; margin: 4px 0 12px; font-weight: 600; }
+  .toast {
+    position: fixed; top: calc(14px + env(safe-area-inset-top)); left: 50%;
+    transform: translate(-50%, -110px); z-index: 3000;
+    background: #262b4d; color: #fff; padding: 12px 18px; border-radius: 999px;
+    font-size: 13.5px; font-weight: 700; box-shadow: 0 8px 20px rgba(0,0,0,.25);
+    transition: transform 0.35s ease; max-width: 88vw; text-align: center;
+  }
+  .toast.show { transform: translate(-50%, 0); }
+</style>
+</head>
+<body>
+
+<!-- ── 메인 화면 ── -->
+<div class="view" id="mainView">
+  <div class="hero">
+    <button class="heroBtn" id="settingsBtn" aria-label="설정">⚙️</button>
+    <button class="heroBtn" id="inviteBtn" aria-label="가족 초대 링크 보내기">🔗</button>
+    <div class="heroLogo">📚</div>
+    <h1>우리 가족 공부</h1>
+    <div class="date" id="todayLabel"></div>
+  </div>
+
+  <div class="body">
+    <!-- 타이머 -->
+    <div class="card">
+      <div class="cardTitle">오늘 내 공부 <span class="sub" id="myName"></span></div>
+      <div class="timerBig" id="timerText">0:00:00</div>
+      <div class="timerSub" id="timerSub">과목을 고르고 시작을 누르세요</div>
+      <div id="subjects"></div>
+      <div class="goalRow">
+        <b id="goalNow">0분</b>
+        <span class="dim" id="goalTarget">목표 없음</span>
+      </div>
+      <div class="bar"><i id="goalBar" style="width:0%"></i></div>
+      <button class="cta" id="startBtn" style="margin-top:16px">▶️ 공부 시작</button>
+      <button class="ghost" id="manualBtn">✏️ 공부한 시간 직접 추가</button>
+    </div>
+
+    <!-- 오늘 가족 현황 -->
+    <div class="card">
+      <div class="cardTitle">오늘 우리 가족 <span class="sub" id="familySum"></span></div>
+      <div id="familyList"></div>
+    </div>
+
+    <!-- 주간 그래프 -->
+    <div class="card">
+      <div class="cardTitle">
+        최근 7일
+        <button class="linkBtn" id="tableToggle">표로 보기</button>
+      </div>
+      <div id="whoTabs"></div>
+      <div class="chartWrap">
+        <div class="chart" id="chart"></div>
+        <div class="xaxis" id="xaxis"></div>
+        <div id="tip"></div>
+      </div>
+      <div id="chartFoot" class="timerSub" style="margin:10px 0 0"></div>
+      <div id="tableView" class="hidden"></div>
+    </div>
+
+    <!-- 과목별 -->
+    <div class="card">
+      <div class="cardTitle">과목별 <span class="sub">최근 7일</span></div>
+      <div id="subjSummary"></div>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<!-- ── 최초 설정 ── -->
+<div class="overlay hidden" id="whoOverlay">
+  <div class="step" id="step1">
+    <div class="box">
+      <div class="logo">📚</div>
+      <h2>우리 가족 공부</h2>
+      <p>가족끼리만 아는 <b>가족 코드</b>를 입력하세요.<br>가족 위치 앱과 <b>같은 코드</b>를 쓰면<br>가족 이름이 그대로 나와요.</p>
+      <input id="famInput" type="text" placeholder="가족 코드 (6자 이상)" autocomplete="off">
+      <button class="big" id="nextBtn">다음</button>
+    </div>
+  </div>
+  <div class="step hidden" id="step2">
+    <div class="box">
+      <div class="logo">👋</div>
+      <h2>누구세요?</h2>
+      <p id="step2Hint">본인 이름을 선택하세요.</p>
+      <div id="memberList"></div>
+      <div class="divider">─ 새 가족 추가 (관리자) ─</div>
+      <div id="presets"></div>
+      <div class="addrow">
+        <input id="newName" type="text" placeholder="이름 (예: 딸)" maxlength="10" autocomplete="off">
+        <button id="addBtn">+</button>
+      </div>
+      <input id="adminPinInput" type="password" placeholder="관리자 코드" autocomplete="off" style="margin:10px 0 0;">
+    </div>
+  </div>
+</div>
+
+<!-- ── 설정 ── -->
+<div class="overlay hidden" id="settingsOverlay">
+  <div class="box">
+    <div class="logo">⚙️</div>
+    <h2>설정</h2>
+    <p>하루 공부 목표 시간을 정하면<br>진행 막대와 그래프에 표시돼요.</p>
+    <input id="goalInput" type="number" inputmode="numeric" placeholder="하루 목표 (분)" min="0" max="1440">
+    <button class="big" id="goalSaveBtn">목표 저장</button>
+    <button class="quit" id="switchBtn">다른 사람으로 바꾸기 / 가족 코드 변경</button>
+    <button class="quit" id="closeSettings">닫기</button>
+  </div>
+</div>
+
+<div class="overlay hidden" id="setupOverlay">
+  <div class="box">
+    <div class="logo">⚙️</div>
+    <h2>초기 설정이 필요해요</h2>
+    <p>Firebase 설정이 아직 입력되지 않았습니다.<br>README.md의 안내에 따라 index.html 안의<br><b>firebaseConfig</b>를 채워 주세요.</p>
+  </div>
+</div>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  getDatabase, ref, onValue, set, get, remove,
+  query, orderByKey, limitToLast, runTransaction
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+// 가족 위치 앱과 같은 Firebase 프로젝트 — 같은 가족 코드를 쓰면 가족 이름이 그대로 공유됩니다.
+const firebaseConfig = {
+  apiKey: "AIzaSyBQovL-c6q4RfuPKOnEiukw_aMzKBijqTE",
+  authDomain: "family-location-a3573.firebaseapp.com",
+  databaseURL: "https://family-location-a3573-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "family-location-a3573",
+  storageBucket: "family-location-a3573.firebasestorage.app",
+  messagingSenderId: "704140080979",
+  appId: "1:704140080979:web:02728b1822e393c25493a6"
+};
+
+const PALETTE = ["#3d7bfa", "#ec6aa8", "#f0a422", "#10b981", "#8b5cf6", "#f97354", "#0ea5c8", "#e05656"];
+const PRESETS = ["아빠", "엄마", "딸", "아들"];
+const SUBJECTS = ["국어", "영어", "수학", "과학", "사회", "독서", "기타"];
+const FLUSH_MS = 20000;   // 20초마다 서버에 누적 저장
+const LIVE_MS = 90000;    // 90초 안에 갱신됐으면 "공부 중"
+
+const $ = (id) => document.getElementById(id);
+
+if (firebaseConfig.apiKey === "REPLACE_ME") {
+  $("setupOverlay").classList.remove("hidden");
+  throw new Error("Firebase 설정 필요");
+}
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+let FAMILY_KEY = localStorage.getItem("family_key") || "";
+let me = localStorage.getItem("family_me") || "";
+const urlKey = (new URLSearchParams(location.search).get("f") || "").trim();
+
+const membersRef = () => ref(db, `families/${FAMILY_KEY}/members`);
+const memberRef = (id) => ref(db, `families/${FAMILY_KEY}/members/${id}`);
+const adminPinRef = () => ref(db, `families/${FAMILY_KEY}/adminPin`);
+const studyRef = () => ref(db, `families/${FAMILY_KEY}/study`);
+const dayMemberRef = (d, id) => ref(db, `families/${FAMILY_KEY}/study/${d}/${id}`);
+const goalsRef = () => ref(db, `families/${FAMILY_KEY}/studyGoals`);
+const goalRef = (id) => ref(db, `families/${FAMILY_KEY}/studyGoals/${id}`);
+const liveRef = () => ref(db, `families/${FAMILY_KEY}/studyLive`);
+const myLiveRef = () => ref(db, `families/${FAMILY_KEY}/studyLive/${me}`);
+const cheerDayRef = (d) => ref(db, `families/${FAMILY_KEY}/cheers/${d}`);
+const cheerRef = (d, to, from) => ref(db, `families/${FAMILY_KEY}/cheers/${d}/${to}/${from}`);
+
+async function sha256(s) {
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s));
+  return [...new Uint8Array(buf)].map((x) => x.toString(16).padStart(2, "0")).join("");
+}
+
+const pad2 = (n) => String(n).padStart(2, "0");
+const dateStr = (d) => `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}`;
+const todayStr = () => dateStr(new Date());
+
+function fmtHMS(sec) {
+  sec = Math.max(0, Math.floor(sec));
+  return `${Math.floor(sec / 3600)}:${pad2(Math.floor(sec / 60) % 60)}:${pad2(sec % 60)}`;
+}
+function fmtMin(sec) {
+  const m = Math.round(Math.max(0, sec) / 60);
+  if (m < 60) return `${m}분`;
+  const h = Math.floor(m / 60), r = m % 60;
+  return r ? `${h}시간 ${r}분` : `${h}시간`;
+}
+
+// ─────────────────────────────────────────────
+// 최초 설정 (가족 코드 → 이름 선택)
+// ─────────────────────────────────────────────
+function showSetup() {
+  $("whoOverlay").classList.remove("hidden");
+  $("famInput").value = FAMILY_KEY || urlKey;
+  $("nextBtn").onclick = () => goStep2($("famInput").value.trim());
+  $("famInput").onkeydown = (e) => { if (e.key === "Enter") $("nextBtn").click(); };
+  if (urlKey.length >= 6) goStep2(urlKey);
+}
+
+async function goStep2(key) {
+  if (key.length < 6) { alert("가족 코드를 6자 이상으로 입력해 주세요."); return; }
+  FAMILY_KEY = key;
+  $("nextBtn").disabled = true;
+  $("nextBtn").textContent = "확인 중…";
+  let existing = {}, adminPinStored = null;
+  try {
+    const snap = await get(ref(db, `families/${FAMILY_KEY}`));
+    const data = snap.val() || {};
+    existing = data.members || {};
+    adminPinStored = data.adminPin || null;
+  } catch (e) {
+    alert("연결에 실패했어요. 인터넷 상태를 확인해 주세요.");
+    $("nextBtn").disabled = false;
+    $("nextBtn").textContent = "다음";
+    return;
+  }
+  renderStep2(existing, adminPinStored);
+  $("step1").classList.add("hidden");
+  $("step2").classList.remove("hidden");
+}
+
+function renderStep2(existing, adminPinStored) {
+  const list = $("memberList");
+  list.innerHTML = "";
+  const entries = Object.entries(existing);
+  if (entries.length === 0) {
+    list.innerHTML = `<div class="empty">아직 등록된 가족이 없어요.<br>이름을 쓰고 관리자 코드를 만들어 주세요.</div>`;
+    $("step2Hint").innerHTML = "새 가족을 만듭니다.<br>이름을 쓰고 <b>관리자 코드를 새로 만들어</b> 주세요.";
+  }
+  $("adminPinInput").placeholder = adminPinStored ? "관리자 코드" : "관리자 코드 만들기 (4자 이상)";
+  for (const [id, m] of entries) {
+    const b = document.createElement("button");
+    b.innerHTML = `<span class="dot" style="background:${m.color || PALETTE[0]}"></span>${m.name}`;
+    b.onclick = () => finishSetup(id);
+    list.appendChild(b);
+  }
+
+  const presets = $("presets");
+  presets.innerHTML = "";
+  const taken = new Set(entries.map(([, m]) => m.name));
+  for (const name of PRESETS) {
+    if (taken.has(name)) continue;
+    const b = document.createElement("button");
+    b.textContent = name;
+    b.onclick = () => { $("newName").value = name; };
+    presets.appendChild(b);
+  }
+
+  $("addBtn").onclick = async () => {
+    const name = $("newName").value.trim();
+    if (!name) { alert("이름을 입력해 주세요."); return; }
+    if (taken.has(name)) { alert(`"${name}"은(는) 이미 있어요. 목록에서 선택해 주세요.`); return; }
+    const pin = $("adminPinInput").value.trim();
+    if (!adminPinStored) {
+      if (pin.length < 4) { alert("관리자 코드를 4자 이상으로 만들어 주세요.\n앞으로 가족을 추가할 때 이 코드가 필요해요."); return; }
+      await set(adminPinRef(), await sha256(pin));
+      localStorage.setItem("family_admin", "1");
+    } else {
+      if (!pin) { alert("가족 추가는 관리자 코드가 필요해요."); return; }
+      if ((await sha256(pin)) !== adminPinStored) { alert("관리자 코드가 틀렸어요."); return; }
+      localStorage.setItem("family_admin", "1");
+    }
+    const id = "m" + Date.now().toString(36);
+    await set(memberRef(id), { name, color: PALETTE[entries.length % PALETTE.length] });
+    finishSetup(id);
+  };
+}
+
+function finishSetup(id) {
+  localStorage.setItem("family_key", FAMILY_KEY);
+  localStorage.setItem("family_me", id);
+  location.reload();
+}
+
+// ─────────────────────────────────────────────
+// 메인 앱
+// ─────────────────────────────────────────────
+function startApp() {
+  if (urlKey !== FAMILY_KEY) {
+    history.replaceState(null, "", `${location.pathname}?f=${encodeURIComponent(FAMILY_KEY)}`);
+  }
+
+  let TODAY = todayStr();
+  let members = {};
+  let study = {};          // { "2026-09-04": { memberId: {total, subjects} } }
+  let goals = {};          // { memberId: 분 }
+  let live = {};           // { memberId: {subject, ts} }
+  let cheers = {};         // { toId: { fromId: ts } }
+  let cheerSeen = null;    // 나에게 온 응원 개수(알림용)
+  let chartWho = me;       // 그래프에 보여줄 사람
+  let subject = localStorage.getItem("study_subject") || SUBJECTS[0];
+  let run = null;          // { subject, since, date, flushed }
+  let wakeLock = null;
+  let unsubCheer = null;
+
+  try { run = JSON.parse(localStorage.getItem("study_run") || "null"); } catch (e) { run = null; }
+
+  $("todayLabel").textContent = new Date().toLocaleDateString("ko-KR", {
+    month: "long", day: "numeric", weekday: "long"
+  });
+
+  // ── 데이터 구독 ── (헬퍼 정의가 끝난 뒤 startApp 마지막에서 호출)
+  function subscribe() {
+  onValue(membersRef(), (s) => {
+    members = s.val() || {};
+    if (!members[me]) {   // 관리자가 나를 삭제한 경우
+      localStorage.removeItem("family_me");
+      location.reload();
+      return;
+    }
+    $("myName").textContent = members[me].name;
+    renderAll();
+  });
+  onValue(query(studyRef(), orderByKey(), limitToLast(14)), (s) => {
+    study = s.val() || {};
+    renderAll();
+  });
+  onValue(goalsRef(), (s) => { goals = s.val() || {}; renderAll(); });
+  onValue(liveRef(), (s) => { live = s.val() || {}; renderFamily(); });
+  subscribeCheers();
+  }
+
+  function subscribeCheers() {
+    if (unsubCheer) unsubCheer();
+    cheerSeen = null;
+    unsubCheer = onValue(cheerDayRef(TODAY), (s) => {
+      cheers = s.val() || {};
+      const mine = Object.keys(cheers[me] || {});
+      if (cheerSeen !== null && mine.length > cheerSeen) {
+        const last = Object.entries(cheers[me] || {}).sort((a, b) => b[1] - a[1])[0];
+        const who = last && members[last[0]] ? members[last[0]].name : "가족";
+        toast(`👏 ${who}님이 응원을 보냈어요!`);
+      }
+      cheerSeen = mine.length;
+      renderFamily();
+    });
+  }
+
+  // ── 값 읽기 헬퍼 ──
+  const dayOf = (d, id) => (study[d] && study[d][id]) || null;
+  const savedSec = (d, id) => (dayOf(d, id) ? dayOf(d, id).total || 0 : 0);
+  // 화면에 보이는 값 = 저장된 값 + 아직 저장 안 된 진행분
+  function shownSec(d, id) {
+    let v = savedSec(d, id);
+    if (id === me && run && run.date === d) v += pendingSec();
+    return v;
+  }
+  function pendingSec() {
+    if (!run) return 0;
+    return Math.max(0, Math.floor((Date.now() - run.since) / 1000) - (run.flushed || 0));
+  }
+  function last7() {
+    const out = [];
+    const base = new Date();
+    for (let i = 6; i >= 0; i--) {
+      const d = new Date(base);
+      d.setDate(base.getDate() - i);
+      out.push(dateStr(d));
+    }
+    return out;
+  }
+
+  // ── 타이머 ──
+  function setRun(v) {
+    run = v;
+    if (v) localStorage.setItem("study_run", JSON.stringify(v));
+    else localStorage.removeItem("study_run");
+  }
+
+  async function flush() {
+    if (!run) return;
+    const delta = pendingSec();
+    if (delta <= 0) return;
+    const d = run.date, sub = run.subject;
+    run.flushed = (run.flushed || 0) + delta;
+    setRun(run);
+    try {
+      await runTransaction(dayMemberRef(d, me), (cur) => {
+        cur = cur || { total: 0, subjects: {} };
+        cur.total = (cur.total || 0) + delta;
+        cur.subjects = cur.subjects || {};
+        cur.subjects[sub] = (cur.subjects[sub] || 0) + delta;
+        cur.updated = Date.now();
+        return cur;
+      });
+    } catch (e) {
+      run.flushed -= delta;   // 실패하면 다음 번에 다시 시도
+      setRun(run);
+    }
+  }
+
+  async function startRun() {
+    setRun({ subject, since: Date.now(), date: TODAY, flushed: 0 });
+    await set(myLiveRef(), { subject, ts: Date.now() });
+    requestWakeLock();
+    renderAll();
+    toast(`${subject} 공부 시작! 화이팅 💪`);
+  }
+
+  async function stopRun() {
+    const sec = run ? Math.floor((Date.now() - run.since) / 1000) : 0;
+    await flush();
+    setRun(null);
+    releaseWakeLock();
+    try { await remove(myLiveRef()); } catch (e) {}
+    renderAll();
+    if (sec >= 60) toast(`${fmtMin(sec)} 공부했어요. 수고했어요! 🎉`);
+  }
+
+  async function requestWakeLock() {
+    try { if ("wakeLock" in navigator) wakeLock = await navigator.wakeLock.request("screen"); } catch (e) {}
+  }
+  function releaseWakeLock() {
+    try { if (wakeLock) { wakeLock.release(); wakeLock = null; } } catch (e) {}
+  }
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible" && run && !wakeLock) requestWakeLock();
+    if (document.visibilityState === "hidden") flush();
+  });
+  window.addEventListener("pagehide", () => { flush(); });
+
+  // 1초마다 화면 갱신 + 자정 넘김 처리 + 주기적 저장
+  let lastFlush = Date.now();
+  setInterval(async () => {
+    if (todayStr() !== TODAY) {
+      await flush();
+      TODAY = todayStr();
+      if (run) setRun({ ...run, date: TODAY, since: Date.now(), flushed: 0 });
+      subscribeCheers();
+      $("todayLabel").textContent = new Date().toLocaleDateString("ko-KR", {
+        month: "long", day: "numeric", weekday: "long"
+      });
+      renderAll();
+      return;
+    }
+    if (run) {
+      renderTimer();
+      renderGoal();
+      if (Date.now() - lastFlush > FLUSH_MS) {
+        lastFlush = Date.now();
+        await flush();
+        set(myLiveRef(), { subject: run.subject, ts: Date.now() }).catch(() => {});
+      }
+    }
+    renderFamily();
+  }, 1000);
+
+  // ── 렌더링 ──
+  function renderAll() {
+    renderSubjects();
+    renderTimer();
+    renderGoal();
+    renderFamily();
+    renderChart();
+    renderSubjSummary();
+  }
+
+  function renderSubjects() {
+    const box = $("subjects");
+    box.innerHTML = "";
+    for (const s of SUBJECTS) {
+      const b = document.createElement("button");
+      b.className = "chip" + (s === subject ? " sel" : "");
+      b.textContent = s;
+      b.onclick = async () => {
+        if (run && run.subject !== s) {
+          await flush();                       // 과목만 바꿔서 이어서 진행
+          setRun({ ...run, subject: s, since: Date.now(), flushed: 0 });
+          set(myLiveRef(), { subject: s, ts: Date.now() }).catch(() => {});
+        }
+        subject = s;
+        localStorage.setItem("study_subject", s);
+        renderAll();
+      };
+      box.appendChild(b);
+    }
+  }
+
+  function renderTimer() {
+    const sec = run ? Math.floor((Date.now() - run.since) / 1000) : 0;
+    $("timerText").textContent = fmtHMS(sec);
+    $("timerText").classList.toggle("on", !!run);
+    $("timerSub").textContent = run
+      ? `${run.subject} 공부 중 · 오늘 합계 ${fmtMin(shownSec(TODAY, me))}`
+      : `오늘 합계 ${fmtMin(shownSec(TODAY, me))} · 과목을 고르고 시작을 누르세요`;
+    const btn = $("startBtn");
+    btn.textContent = run ? "⏹️ 그만하기" : "▶️ 공부 시작";
+    btn.classList.toggle("on", !!run);
+  }
+
+  function renderGoal() {
+    const goalMin = goals[me] || 0;
+    const now = shownSec(TODAY, me);
+    $("goalNow").textContent = fmtMin(now);
+    $("goalTarget").textContent = goalMin ? `목표 ${fmtMin(goalMin * 60)}` : "목표 없음 (⚙️에서 설정)";
+    const pct = goalMin ? Math.min(100, (now / (goalMin * 60)) * 100) : 0;
+    const bar = $("goalBar");
+    bar.style.width = pct + "%";
+    bar.classList.toggle("done", pct >= 100);
+  }
+
+  function renderFamily() {
+    const box = $("familyList");
+    const ids = Object.keys(members);
+    if (!ids.length) { box.innerHTML = `<div class="empty">등록된 가족이 없어요.</div>`; return; }
+    ids.sort((a, b) => shownSec(TODAY, b) - shownSec(TODAY, a));
+
+    let sum = 0;
+    box.innerHTML = "";
+    for (const id of ids) {
+      const m = members[id];
+      const sec = shownSec(TODAY, id);
+      sum += sec;
+      const goalMin = goals[id] || 0;
+      const pct = goalMin ? Math.min(100, (sec / (goalMin * 60)) * 100) : 0;
+      const isLive = live[id] && Date.now() - (live[id].ts || 0) < LIVE_MS;
+      const myCheer = (cheers[id] || {})[me];
+      const cheerCount = Object.keys(cheers[id] || {}).length;
+
+      const row = document.createElement("div");
+      row.className = "hrow";
+      row.innerHTML = `
+        <div class="havatar" style="background:${m.color || PALETTE[0]}">${(m.name || "?").slice(0, 1)}</div>
+        <div class="hinfo">
+          <div class="hname">${m.name}${id === me ? '<span class="tag">나</span>' : ""}${
+            isLive ? `<span class="studying">${(live[id].subject || "공부")} 중</span>` : ""}</div>
+          <div class="htime">${fmtMin(sec)}${goalMin ? ` / 목표 ${fmtMin(goalMin * 60)}` : ""}</div>
+          <div class="bar"><i style="width:${pct}%${pct >= 100 ? ";background:var(--live)" : ""}"></i></div>
+        </div>`;
+      if (id !== me) {
+        const b = document.createElement("button");
+        b.className = "hbtn";
+        b.textContent = `👏 ${cheerCount || ""}`.trim();
+        b.style.opacity = myCheer ? "1" : "0.75";
+        b.onclick = async () => {
+          if (myCheer) await remove(cheerRef(TODAY, id, me));
+          else { await set(cheerRef(TODAY, id, me), Date.now()); toast(`${m.name}님에게 응원을 보냈어요 👏`); }
+        };
+        row.appendChild(b);
+      }
+      box.appendChild(row);
+    }
+    $("familySum").textContent = `합계 ${fmtMin(sum)}`;
+  }
+
+  // 최근 7일 막대그래프 — 한 사람의 하루 공부량(단일 계열)
+  function renderChart() {
+    const tabs = $("whoTabs");
+    tabs.innerHTML = "";
+    for (const [id, m] of Object.entries(members)) {
+      const b = document.createElement("button");
+      b.textContent = id === me ? `${m.name} (나)` : m.name;
+      b.className = id === chartWho ? "sel" : "";
+      b.onclick = () => { chartWho = id; renderChart(); renderSubjSummary(); };
+      tabs.appendChild(b);
+    }
+    if (!members[chartWho]) chartWho = me;
+
+    const days = last7();
+    const vals = days.map((d) => shownSec(d, chartWho));
+    const goalSec = (goals[chartWho] || 0) * 60;
+    const max = Math.max(...vals, goalSec, 600);   // 최소 10분 기준
+    const PLOT = 132;
+    const maxIdx = vals.indexOf(Math.max(...vals));
+
+    const chart = $("chart");
+    chart.innerHTML = `<div class="gridline" style="top:18px"></div>`;
+    if (goalSec > 0 && goalSec <= max) {
+      const g = document.createElement("div");
+      g.className = "goalline";
+      g.style.bottom = Math.round((goalSec / max) * PLOT) + "px";
+      g.innerHTML = `<b>목표 ${fmtMin(goalSec)}</b>`;
+      chart.appendChild(g);
+    }
+
+    days.forEach((d, i) => {
+      const v = vals[i];
+      const h = Math.round((v / max) * PLOT);
+      const isToday = d === TODAY;
+      const col = document.createElement("div");
+      col.className = "col" + (isToday ? " today" : "");
+      // 값 라벨은 오늘과 최고 기록에만 (모든 막대에 숫자를 붙이지 않는다)
+      const showVal = v > 0 && (isToday || i === maxIdx);
+      col.innerHTML =
+        (showVal ? `<div class="val">${fmtMin(v)}</div>` : "") +
+        `<div class="barFill${v === 0 ? " zero" : ""}" style="height:${Math.max(h, 2)}px"></div>`;
+      col.onclick = () => showTip(col, d, v);
+      chart.appendChild(col);
+    });
+
+    const ax = $("xaxis");
+    ax.innerHTML = "";
+    for (const d of days) {
+      const dt = new Date(d + "T00:00:00");
+      const el = document.createElement("div");
+      el.className = d === TODAY ? "today" : "";
+      el.textContent = d === TODAY ? "오늘" : ["일", "월", "화", "수", "목", "금", "토"][dt.getDay()];
+      ax.appendChild(el);
+    }
+
+    const total = vals.reduce((a, b) => a + b, 0);
+    const studied = vals.filter((v) => v > 0).length;
+    $("chartFoot").textContent =
+      `${members[chartWho] ? members[chartWho].name : ""} · 7일 합계 ${fmtMin(total)} · 하루 평균 ${fmtMin(total / 7)} · 공부한 날 ${studied}일`;
+
+    renderTable(days, vals, goalSec);
+  }
+
+  function renderTable(days, vals, goalSec) {
+    const rows = days.map((d, i) => {
+      const dt = new Date(d + "T00:00:00");
+      const label = `${dt.getMonth() + 1}/${dt.getDate()} (${["일", "월", "화", "수", "목", "금", "토"][dt.getDay()]})`;
+      const pct = goalSec ? Math.round((vals[i] / goalSec) * 100) + "%" : "—";
+      return `<tr><td>${label}${d === TODAY ? " · 오늘" : ""}</td><td>${fmtMin(vals[i])}</td><td>${pct}</td></tr>`;
+    }).join("");
+    $("tableView").innerHTML =
+      `<table class="data"><thead><tr><th>날짜</th><th>공부 시간</th><th>목표 대비</th></tr></thead><tbody>${rows}</tbody></table>`;
+  }
+
+  function showTip(col, d, v) {
+    const tip = $("tip");
+    const dt = new Date(d + "T00:00:00");
+    tip.textContent = `${dt.getMonth() + 1}월 ${dt.getDate()}일 · ${fmtMin(v)}`;
+    tip.style.left = col.offsetLeft + col.offsetWidth / 2 + "px";
+    tip.style.top = $("chart").offsetTop + $("chart").offsetHeight - (col.lastElementChild.offsetHeight || 0) - 6 + "px";
+    tip.classList.add("show");
+    clearTimeout(showTip._t);
+    showTip._t = setTimeout(() => tip.classList.remove("show"), 2200);
+  }
+
+  function renderSubjSummary() {
+    const days = last7();
+    const agg = {};
+    for (const d of days) {
+      const rec = dayOf(d, chartWho);
+      if (rec && rec.subjects) for (const [s, v] of Object.entries(rec.subjects)) agg[s] = (agg[s] || 0) + v;
+    }
+    if (chartWho === me && run) agg[run.subject] = (agg[run.subject] || 0) + pendingSec();
+
+    const box = $("subjSummary");
+    const list = Object.entries(agg).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1]);
+    if (!list.length) { box.innerHTML = `<div class="empty">아직 기록이 없어요.<br>공부를 시작하면 과목별로 쌓여요.</div>`; return; }
+    const max = list[0][1];
+    box.innerHTML = list.map(([s, v]) => `
+      <div class="subjRow">
+        <div class="nm">${s}</div>
+        <div class="bar"><i style="width:${Math.round((v / max) * 100)}%"></i></div>
+        <div class="tm">${fmtMin(v)}</div>
+      </div>`).join("");
+  }
+
+  function toast(msg) {
+    const t = $("toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    clearTimeout(toast._t);
+    toast._t = setTimeout(() => t.classList.remove("show"), 2600);
+  }
+
+  // ── 버튼 ──
+  $("startBtn").onclick = () => (run ? stopRun() : startRun());
+
+  $("manualBtn").onclick = async () => {
+    const txt = prompt(`직접 추가할 시간을 분으로 입력하세요.\n(과목: ${subject})`, "30");
+    if (txt === null) return;
+    const min = parseInt(txt, 10);
+    if (!Number.isFinite(min) || min <= 0 || min > 1440) { alert("1~1440 사이의 분을 입력해 주세요."); return; }
+    const sub = subject;
+    await runTransaction(dayMemberRef(TODAY, me), (cur) => {
+      cur = cur || { total: 0, subjects: {} };
+      cur.total = (cur.total || 0) + min * 60;
+      cur.subjects = cur.subjects || {};
+      cur.subjects[sub] = (cur.subjects[sub] || 0) + min * 60;
+      cur.updated = Date.now();
+      return cur;
+    });
+    toast(`${sub} ${min}분을 추가했어요.`);
+  };
+
+  $("tableToggle").onclick = () => {
+    const hidden = $("tableView").classList.toggle("hidden");
+    $("tableToggle").textContent = hidden ? "표로 보기" : "그래프만 보기";
+  };
+
+  $("settingsBtn").onclick = () => {
+    $("goalInput").value = goals[me] || "";
+    $("settingsOverlay").classList.remove("hidden");
+  };
+  $("closeSettings").onclick = () => $("settingsOverlay").classList.add("hidden");
+  $("goalSaveBtn").onclick = async () => {
+    const v = parseInt($("goalInput").value, 10);
+    if (!Number.isFinite(v) || v < 0 || v > 1440) { alert("0~1440 사이의 분을 입력해 주세요."); return; }
+    await set(goalRef(me), v);
+    $("settingsOverlay").classList.add("hidden");
+    toast(v ? `하루 목표를 ${fmtMin(v * 60)}으로 정했어요.` : "목표를 지웠어요.");
+  };
+  $("switchBtn").onclick = async () => {
+    if (!confirm("이 폰에서 사용자/가족 코드를 다시 설정할까요?")) return;
+    if (run) await stopRun();
+    localStorage.removeItem("family_me");
+    localStorage.removeItem("family_key");
+    location.href = location.pathname;
+  };
+
+  $("inviteBtn").onclick = async () => {
+    const url = `${location.origin}${location.pathname}?f=${encodeURIComponent(FAMILY_KEY)}`;
+    const data = { title: "우리 가족 공부", text: "가족 공부 앱이야. 이 링크로 들어와서 이름만 고르면 돼!", url };
+    try {
+      if (navigator.share) await navigator.share(data);
+      else { await navigator.clipboard.writeText(url); toast("초대 링크를 복사했어요."); }
+    } catch (e) {}
+  };
+
+  // 앱을 다시 열었을 때 진행 중이던 타이머 복구
+  if (run) {
+    if (run.date !== TODAY) { flush().then(() => setRun({ ...run, date: TODAY, since: Date.now(), flushed: 0 })); }
+    requestWakeLock();
+    set(myLiveRef(), { subject: run.subject, ts: Date.now() }).catch(() => {});
+  }
+  renderAll();
+  subscribe();
+}
+
+if (FAMILY_KEY && me) startApp();
+else showSetup();
+</script>
+</body>
+</html>
