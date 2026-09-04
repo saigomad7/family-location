@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ko" class="c3">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d1117">
+<title>10주차 · 에너지 배달 경로</title>
+<meta name="description" content="소화·순환·호흡·배설을 따로 외우지 않고 한 줄로 꿰는 법.">
+<style>
+:root{
+  --bg:#0d1117; --bg2:#0b0f15; --panel:#161b22; --panel2:#1c2230; --line:#2a3340;
+  --ink:#e6edf3; --sub:#9aa7b4; --mut:#6b7886;
+  --acc:#4f9cff; --acc2:#7c5cff; --good:#3fb950; --warn:#d29922; --pink:#f778ba;
+  --chip:#21304a; --radius:16px;
+  --camp:#7c5cff; --camp-dim:#b7a4ff; --camp-bg:rgba(124,92,255,.14); --camp-line:#3d3470;
+}
+:root.c1{--camp:#7c5cff;--camp-dim:#b7a4ff;--camp-bg:rgba(124,92,255,.14);--camp-line:#3d3470}
+:root.c2{--camp:#d29922;--camp-dim:#f0c674;--camp-bg:rgba(210,153,34,.14);--camp-line:#5c4718}
+:root.c3{--camp:#3fb950;--camp-dim:#63d67c;--camp-bg:rgba(63,185,80,.14);--camp-line:#2c5c34}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);line-height:1.72;font-size:16.5px;
+  font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR","Segoe UI",system-ui,sans-serif;
+  word-break:keep-all;overflow-wrap:anywhere;
+  padding-bottom:calc(40px + env(safe-area-inset-bottom))}
+.wrap{max-width:720px;margin:0 auto;padding:0 18px}
+a{color:var(--acc);text-decoration:none}
+p{margin:0 0 13px}
+b,strong{font-weight:700;color:#fff}
+.sub{color:var(--sub)}
+.mut{color:var(--mut)}
+
+/* 헤더 */
+header.top{padding:26px 0 18px;background:linear-gradient(180deg,var(--bg2),var(--bg) 90%)}
+.kicker{display:inline-block;font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;font-weight:700;
+  color:var(--camp-dim);background:var(--camp-bg);border:1px solid var(--camp-line);
+  padding:6px 12px;border-radius:999px;margin-bottom:14px}
+h1{font-size:27px;line-height:1.3;margin:0 0 10px;font-weight:800;letter-spacing:-.01em}
+h1 .g{background:linear-gradient(90deg,var(--acc),var(--camp));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:15.5px;color:var(--sub);margin:0 0 16px}
+.meta{display:flex;flex-wrap:wrap;gap:7px}
+.meta .m{font-size:12.5px;color:var(--sub);background:var(--panel);border:1px solid var(--line);padding:5px 11px;border-radius:999px}
+
+/* 상단 이동 바 */
+nav.toc{position:sticky;top:0;z-index:30;background:rgba(13,17,23,.92);backdrop-filter:blur(8px);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:18px}
+nav.toc .row{display:flex;gap:6px;overflow-x:auto;padding:10px 18px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+nav.toc .row::-webkit-scrollbar{display:none}
+nav.toc a{flex:0 0 auto;font-size:13px;color:var(--sub);padding:7px 12px;border-radius:999px;
+  border:1px solid var(--line);background:var(--panel)}
+nav.toc a.now{color:#fff;background:var(--camp-bg);border-color:var(--camp-line)}
+
+/* 섹션 */
+section{padding:30px 0;border-bottom:1px solid var(--line)}
+.eyebrow{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--camp-dim);font-weight:700;margin-bottom:7px}
+h2{font-size:20px;margin:0 0 14px;font-weight:800;line-height:1.4}
+h2 .cell{display:inline-block;background:var(--camp);color:#0d1117;font-size:12.5px;font-weight:800;
+  border-radius:8px;padding:2px 9px;margin-right:8px;vertical-align:2px;font-family:ui-monospace,Menlo,monospace}
+h3{font-size:16.5px;margin:22px 0 9px;font-weight:700}
+h3:first-child{margin-top:0}
+
+/* 카드 · 콜아웃 */
+.grid{display:grid;gap:11px;margin:12px 0}
+.g2{grid-template-columns:1fr}
+@media(min-width:620px){.g2{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:15px 16px}
+.card h4{margin:0 0 7px;font-size:15px;font-weight:700}
+.card p{font-size:14.5px;margin:0}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px;margin-bottom:8px;
+  background:var(--camp-bg);color:var(--camp-dim);border:1px solid var(--camp-line)}
+.callout{border-left:4px solid var(--acc);background:var(--panel);border-radius:10px;padding:13px 15px;margin:14px 0;font-size:15px}
+.callout.good{border-left-color:var(--good)}
+.callout.warn{border-left-color:var(--warn)}
+.callout.p{border-left-color:var(--camp)}
+.callout b{display:inline}
+.callout .lbl{display:block;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);font-weight:700;margin-bottom:4px}
+
+/* 표 */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:12px;margin:12px 0}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:340px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--mut);font-weight:700;background:var(--panel)}
+tbody tr:last-child td{border-bottom:0}
+td b{color:#fff}
+code{background:#0b1020;border:1px solid var(--line);border-radius:6px;padding:1px 6px;font-size:14px;color:#c9d6e5;
+  font-family:ui-monospace,Menlo,monospace}
+
+/* 다이어그램 */
+.diagram{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:var(--radius);
+  background:var(--panel);padding:12px;margin:12px 0}
+.diagram svg{display:block}
+.figcap{font-size:12.5px;color:var(--mut);margin:-4px 0 12px;text-align:center}
+
+/* 할 일 체크 */
+.todo{list-style:none;margin:14px 0 0;padding:0;border:1px solid var(--line);border-radius:12px;background:var(--panel);overflow:hidden}
+.todo li+li{border-top:1px solid var(--line)}
+.todo label{display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start;
+  padding:14px 15px;cursor:pointer;font-size:15px;min-height:52px}
+.todo input{appearance:none;-webkit-appearance:none;width:21px;height:21px;margin:1px 0 0;
+  border:1.5px solid var(--mut);border-radius:6px;background:var(--panel2);display:grid;place-content:center;cursor:pointer}
+.todo input::after{content:"✓";font-size:13px;font-weight:800;color:#0d1117;transform:scale(0);transition:transform .12s}
+.todo input:checked{background:var(--good);border-color:var(--good)}
+.todo input:checked::after{transform:scale(1)}
+.todo input:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.todo input:checked ~ .tt{color:var(--mut);text-decoration:line-through}
+.todo .day{font-weight:700;color:var(--camp-dim)}
+
+/* 문제 */
+.q{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px 16px;margin:11px 0}
+.q .qn{font-family:ui-monospace,Menlo,monospace;font-size:12px;font-weight:700;color:var(--camp-dim);letter-spacing:.08em}
+.q p{margin:6px 0 0;font-size:15.5px}
+details{margin-top:11px;border-top:1px solid var(--line);padding-top:10px}
+details summary{cursor:pointer;font-size:14px;font-weight:700;color:var(--acc);list-style:none;padding:4px 0}
+details summary::-webkit-details-marker{display:none}
+details summary::before{content:"▸ ";color:var(--acc)}
+details[open] summary::before{content:"▾ "}
+details .ans{font-size:14.5px;color:var(--sub);margin-top:8px}
+details .ans b{color:var(--good)}
+
+/* 대본 틀 */
+.script{background:#0b1020;border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0;font-size:15px}
+.script .s{color:var(--camp-dim);font-weight:700}
+.script div+div{margin-top:10px}
+
+/* 배지 · 이동 */
+.badge{display:inline-block;font-size:15px;font-weight:700;color:var(--camp-dim);background:var(--camp-bg);
+  border:1px solid var(--camp-line);border-radius:999px;padding:8px 16px;margin-top:6px}
+.nav-b{display:flex;gap:10px;margin:22px 0 0}
+.nav-b a{flex:1;text-align:center;background:var(--panel);border:1px solid var(--line);border-radius:12px;
+  padding:14px 10px;font-size:14.5px;font-weight:700;color:var(--ink)}
+.nav-b a.main{background:var(--camp-bg);border-color:var(--camp-line);color:var(--camp-dim)}
+.nav-b a.off{color:var(--mut)}
+footer{padding:24px 0 40px;color:var(--mut);font-size:12.5px;text-align:center}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <span class="kicker">WEEK 10 · CAMP 3 생명과 지구 · 하루 20분 × 4일</span>
+  <h1>에너지 배달 경로 — <span class="g">밥이 근육에 닿기까지</span></h1>
+  <p class="lead">소화·순환·호흡·배설은 <b>따로 배우는 네 단원이 아니다</b>.
+  포도당과 산소를 세포까지 배달하고 쓰레기를 치우는 <b>하나의 배달 시스템</b>이다. 한 줄로 꿰면 외울 것이 절반으로 준다.</p>
+  <div class="meta">
+    <span class="m">9주차 연결 · 포도당</span>
+    <span class="m">소화 · 순환 · 호흡 · 배설</span>
+    <span class="m">심박수 측정</span>
+    <span class="m" id="wdone">0 / 4 완료</span>
+  </div>
+</div></header>
+
+<nav class="toc"><div class="row">
+  <a href="#map">이번 주 지도</a>
+  <a href="#mon">월 · 열기</a>
+  <a href="#tue">화 · 채우기</a>
+  <a href="#thu">목 · 손으로</a>
+  <a href="#fri">금 · 보스전</a>
+</div></nav>
+
+<div class="wrap">
+
+<section id="map">
+  <div class="eyebrow">This week</div>
+  <h2><span class="cell">MAP</span>배달 시스템 한 줄</h2>
+  <div class="diagram">
+    <svg viewBox="0 0 640 200" width="640" height="200" font-family="inherit" role="img" aria-label="소화 순환 호흡 배설로 이어지는 에너지 배달 경로">
+      <defs><marker id="a10" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#63d67c"/></marker></defs>
+      <rect x="14" y="60" width="130" height="66" rx="12" fill="#12190f" stroke="#2c5c34"/>
+      <text x="79" y="86" fill="#63d67c" font-size="13" font-weight="700" text-anchor="middle">소화</text>
+      <text x="79" y="106" fill="#9aa7b4" font-size="11" text-anchor="middle">밥 → 포도당</text>
+      <line x1="148" y1="93" x2="182" y2="93" stroke="#63d67c" stroke-width="2.2" marker-end="url(#a10)"/>
+
+      <rect x="186" y="60" width="130" height="66" rx="12" fill="#3a1d19" stroke="#b93a2c"/>
+      <text x="251" y="86" fill="#f5a79c" font-size="13" font-weight="700" text-anchor="middle">순환</text>
+      <text x="251" y="106" fill="#9aa7b4" font-size="11" text-anchor="middle">피가 실어 나른다</text>
+      <line x1="320" y1="93" x2="354" y2="93" stroke="#63d67c" stroke-width="2.2" marker-end="url(#a10)"/>
+
+      <rect x="358" y="60" width="130" height="66" rx="12" fill="#12233a" stroke="#2f4f7a"/>
+      <text x="423" y="86" fill="#8cc0ff" font-size="13" font-weight="700" text-anchor="middle">호흡</text>
+      <text x="423" y="106" fill="#9aa7b4" font-size="11" text-anchor="middle">산소로 태워 에너지</text>
+      <line x1="492" y1="93" x2="526" y2="93" stroke="#63d67c" stroke-width="2.2" marker-end="url(#a10)"/>
+
+      <rect x="530" y="60" width="96" height="66" rx="12" fill="#33240f" stroke="#5c4718"/>
+      <text x="578" y="86" fill="#f0c674" font-size="13" font-weight="700" text-anchor="middle">배설</text>
+      <text x="578" y="106" fill="#9aa7b4" font-size="11" text-anchor="middle">찌꺼기 내보내기</text>
+
+      <text x="320" y="34" fill="#9aa7b4" font-size="12" text-anchor="middle">목적지는 하나 — 온몸의 세포</text>
+      <text x="320" y="160" fill="#6b7886" font-size="11.5" text-anchor="middle">양분을 잘게 → 실어 나르고 → 산소로 태워 에너지 → 쓰레기 배출</text>
+      <text x="320" y="182" fill="#6b7886" font-size="11.5" text-anchor="middle">네 기관계 중 하나만 멈춰도 배달이 끊긴다</text>
+    </svg>
+  </div>
+</section>
+
+<section id="mon">
+  <div class="eyebrow">Monday · 열기</div>
+  <h2><span class="cell">[1]</span>왜 먹고, 왜 숨 쉬는가</h2>
+
+  <p>우리가 밥을 먹는 이유와 숨을 쉬는 이유는 <b>같은 하나의 목적</b> 때문이다. 세포에서 <b>에너지를 만들기 위해서</b>다.</p>
+  <div class="callout p"><span class="lbl">세포호흡 — 9주차와 정확히 반대</span>
+  <b>포도당 + 산소 → 이산화탄소 + 물 + 에너지</b><br>
+  식물의 광합성이 저금이라면 이건 인출이다. 그래서 밥(포도당)도 필요하고 산소도 필요하다.</div>
+
+  <p>이 반응은 <b>온몸의 세포 하나하나</b>에서 일어난다. 그러니 포도당과 산소를 <b>모든 세포까지 배달</b>해야 하고,
+  생긴 이산화탄소와 찌꺼기를 <b>도로 실어 내</b>야 한다. 그 배달을 맡은 것이 네 기관계다.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>기관계</th><th>맡은 일</th><th>기억할 한 마디</th></tr></thead>
+    <tbody>
+      <tr><td><b>소화계</b></td><td>음식을 흡수할 수 있게 잘게 분해</td><td>포장 뜯기</td></tr>
+      <tr><td><b>순환계</b></td><td>양분·산소를 온몸으로 운반</td><td>배달 트럭</td></tr>
+      <tr><td><b>호흡계</b></td><td>산소를 들이고 이산화탄소를 내보냄</td><td>연료 공급</td></tr>
+      <tr><td><b>배설계</b></td><td>몸에서 생긴 노폐물을 걸러 내보냄</td><td>쓰레기 처리</td></tr>
+    </tbody>
+  </table></div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w10m1"><span class="tt"><span class="day">월</span> — 세포호흡 식을 적고, 네 기관계 표를 읽으며 질문 3개를 만든다.</span></label></li>
+  </ul>
+</section>
+
+<section id="tue">
+  <div class="eyebrow">Tuesday · 채우기</div>
+  <h2><span class="cell">[2]</span>밥 한 숟갈의 여행</h2>
+
+  <p>밥 한 숟갈이 팔 근육에 닿기까지를 순서대로 따라가 본다. 이 한 줄이 이번 주 전부다.</p>
+  <div class="tw"><table>
+    <thead><tr><th>단계</th><th>어디서</th><th>무슨 일이</th></tr></thead>
+    <tbody>
+      <tr><td><b>①</b></td><td>입</td><td>침 속 소화 효소가 <b>녹말을 당으로</b> 분해하기 시작한다</td></tr>
+      <tr><td><b>②</b></td><td>위</td><td>위액이 단백질을 분해하고 음식을 죽처럼 만든다</td></tr>
+      <tr><td><b>③</b></td><td>작은창자</td><td>최종 분해 후 <b>융털</b>로 흡수 — 포도당이 여기서 피로 들어간다</td></tr>
+      <tr><td><b>④</b></td><td>심장 · 혈관</td><td>피가 포도당과 산소를 <b>온몸 세포로</b> 배달한다</td></tr>
+      <tr><td><b>⑤</b></td><td>세포</td><td>포도당 + 산소 → 에너지 (+ 이산화탄소·물)</td></tr>
+      <tr><td><b>⑥</b></td><td>폐 · 콩팥</td><td>이산화탄소는 폐로, 오줌 성분은 콩팥으로 내보낸다</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout warn"><span class="lbl">여기서 헷갈린다</span>
+  <b>호흡 ≠ 숨쉬기.</b> 숨쉬기(들숨·날숨)는 공기를 주고받는 <b>동작</b>이고,
+  진짜 ‘호흡’은 세포 안에서 포도당을 태워 <b>에너지를 만드는 일</b>이다. 시험에서 이 둘을 구별해 묻는다.</div>
+
+  <div class="callout good"><span class="lbl">왜 뛰면 숨이 차고 심장이 빨라질까</span>
+  근육이 에너지를 많이 쓰니 <b>산소가 더 필요</b>하고 <b>이산화탄소가 더 생긴다</b>.
+  그래서 호흡이 빨라져 산소를 더 들이고, 심장이 빨리 뛰어 배달 속도를 올린다. 네 기관계가 함께 반응하는 것이다.</div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w10m2"><span class="tt"><span class="day">화</span> — 밥 한 숟갈의 여행 6단계를 <b>그림 한 장</b>으로 그린다. 화살표로 이어 그리면 된다.</span></label></li>
+  </ul>
+</section>
+
+<section id="thu">
+  <div class="eyebrow">Thursday · 손으로</div>
+  <h2><span class="cell">[3]</span>내 몸으로 데이터 만들기</h2>
+
+  <div class="grid g2">
+    <div class="card"><span class="tag">실험 1</span><h4>심박수와 회복</h4>
+      <p class="sub">손목이나 목에 손가락을 대고 <b>15초 세어 4를 곱한다</b>(1분 심박수).
+      ① 가만히 앉아서 ② 제자리 뛰기 30초 직후 ③ 1분 뒤 ④ 2분 뒤를 각각 잰다.</p></div>
+    <div class="card"><span class="tag">실험 2</span><h4>침으로 녹말 분해</h4>
+      <p class="sub">밥 한 숟갈을 <b>아무 반찬 없이 30번 이상</b> 천천히 씹는다. 점점 <b>단맛</b>이 난다.
+      침 속 효소가 녹말을 당으로 바꾼 것이다. 소화 ①단계를 혀로 확인하는 실험이다.</p></div>
+    <div class="card"><span class="tag">실험 3</span><h4>날숨 속 이산화탄소</h4>
+      <p class="sub">4주차에서 쓴 석회수(또는 제습제+베이킹소다 방법)에 <b>빨대로 숨을 불면</b> 뿌옇게 된다.
+      내 세포가 만든 이산화탄소가 눈에 보이는 순간이다.</p></div>
+    <div class="card"><span class="tag">실험 4</span><h4>폐활량 비교</h4>
+      <p class="sub">한 번 크게 들이쉬고 풍선을 <b>한 번에</b> 분다. 풍선 둘레를 줄자로 잰다. 가족끼리 비교해 표로 만든다.</p></div>
+  </div>
+
+  <div class="tw"><table>
+    <thead><tr><th>측정</th><th>값</th></tr></thead>
+    <tbody>
+      <tr><td>안정 심박수</td><td>______ 회/분</td></tr>
+      <tr><td>운동 직후</td><td>______ 회/분</td></tr>
+      <tr><td>1분 뒤 / 2분 뒤</td><td>______ / ______ 회/분</td></tr>
+      <tr><td>풍선 둘레 (나 / 아빠)</td><td>______ / ______ cm</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout good"><span class="lbl">데이터에서 읽을 것</span>
+  운동 직후 심박수가 오르는 것보다 <b>몇 분 만에 원래대로 돌아오는지</b>가 더 중요한 정보다.
+  빨리 회복될수록 배달 시스템이 튼튼하다는 뜻이다.</div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w10m3"><span class="tt"><span class="day">목</span> — 심박수 실험을 하고 표를 채운다. 침 실험도 해 보고 몇 번째 씹을 때 단맛이 났는지 적는다.</span></label></li>
+  </ul>
+</section>
+
+<section id="fri">
+  <div class="eyebrow">Friday · 보스전</div>
+  <h2><span class="cell">[4]</span>문제 5개 + 3분 설명</h2>
+
+  <div class="q"><span class="qn">Q1</span>
+    <p>세포에서 일어나는 호흡을 식으로 쓰면?</p>
+    <details><summary>해설 보기</summary><div class="ans"><b>포도당 + 산소 → 이산화탄소 + 물 + 에너지.</b> 광합성과 방향이 정확히 반대다.</div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q2</span>
+    <p>밥을 오래 씹으면 단맛이 나는 이유는?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>침 속 소화 효소가 녹말을 당으로 분해했기 때문이다.</b> 소화의 첫 단계가 입에서 이미 시작된다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q3</span>
+    <p>작은창자 안쪽이 주름지고 융털로 덮여 있는 이유는?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>표면적을 넓혀 양분을 더 많이, 더 빨리 흡수하기 위해서다.</b> 같은 길이라도 접어 놓으면 닿는 면이 훨씬 넓어진다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q4</span>
+    <p>뛰고 나면 숨이 차고 심장이 빨리 뛰는 이유를 배달 시스템으로 설명해 보자.</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>근육이 에너지를 많이 써서 산소가 더 필요하고 이산화탄소가 많이 생기기 때문이다.</b>
+      호흡이 빨라져 산소를 더 들이고, 심장이 빨리 뛰어 배달 속도를 높인다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q5</span>
+    <p>‘숨쉬기’와 ‘호흡’은 어떻게 다를까?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>숨쉬기는 공기를 들이고 내보내는 동작이고, 호흡은 세포에서 포도당을 산소로 태워 에너지를 얻는 일이다.</b>
+      숨쉬기는 호흡에 필요한 산소를 공급하는 과정일 뿐이다.
+    </div></details>
+  </div>
+
+  <h3>아빠에게 3분 설명하기</h3>
+  <div class="script">
+    <div><span class="s">① 이번 주에 배운 건</span> — 소화·순환·호흡·배설이 세포까지 에너지를 배달하는 한 시스템이라는 것.</div>
+    <div><span class="s">② 예를 들면</span> — 밥을 30번 씹었더니 단맛이 났어. 침이 벌써 녹말을 당으로 바꾼 거야.</div>
+    <div><span class="s">③ 헷갈리기 쉬운 건</span> — 숨쉬기랑 호흡은 달라. 진짜 호흡은 세포 안에서 일어나.</div>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w10m4"><span class="tt"><span class="day">금</span> — 문제 5개 + “밥 한 숟갈의 여행”을 순서대로 3분 설명한다.</span></label></li>
+  </ul>
+
+  <p style="margin-top:18px"><span class="badge">🫀 에너지 배달부 획득</span></p>
+</section>
+
+<section style="border-bottom:0">
+  <div class="eyebrow">Next</div>
+  <h2><span class="cell">[5]</span>다음 주 예고</h2>
+  <p>11주차는 <b>지구와 달</b>이다. 몸에서 하늘로 나간다. 달 모양이 바뀌는 이유를
+  공 하나 들고 <b>손으로 보여줄 수 있게</b> 된다.</p>
+  <div class="nav-b">
+    <a href="week09.html">← 9주차</a>
+    <a href="index.html">전체 지도</a>
+    <a class="main" href="week11.html">11주차 →</a>
+  </div>
+</section>
+
+<footer>과학 등반 · 10주차 · 하루 20분 × 4일</footer>
+</div>
+<script>
+(function(){
+  var KEY="science_quest_progress";
+  function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){return{}}}
+  function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+  var boxes=[].slice.call(document.querySelectorAll(".todo input[type=checkbox]"));
+  var st=load();
+  boxes.forEach(function(b){
+    if(st[b.dataset.q])b.checked=true;
+    b.addEventListener("change",function(){
+      var s=load();
+      if(b.checked)s[b.dataset.q]=1;else delete s[b.dataset.q];
+      save(s);paint();
+    });
+  });
+  function paint(){
+    var el=document.getElementById("wdone");if(!el)return;
+    var n=boxes.filter(function(b){return b.checked}).length;
+    el.textContent=n+" / "+boxes.length+" 완료";
+  }
+  paint();
+  // 현재 섹션 표시
+  var links=[].slice.call(document.querySelectorAll("nav.toc a[href^='#']"));
+  var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1))});
+  function onScroll(){
+    var y=window.scrollY+120,idx=0;
+    secs.forEach(function(s,i){if(s&&s.offsetTop<=y)idx=i});
+    links.forEach(function(a,i){a.classList.toggle("now",i===idx)});
+  }
+  window.addEventListener("scroll",onScroll,{passive:true});onScroll();
+})();
+</script>
+</body>
+</html>
