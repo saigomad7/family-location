@@ -1,390 +1,557 @@
 <!DOCTYPE html>
-<html lang="ko" class="c1">
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0d1117">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#DCE2DB">
 <title>3주차 · 원자와 분자</title>
-<meta name="description" content="원자는 알갱이 한 개, 분자는 원자가 붙은 한 덩어리. 화학식을 읽는 눈을 만든다.">
+<meta name="description" content="원자는 알갱이 한 개, 분자는 원자가 붙은 덩어리. 화학식을 읽는 눈을 만듭니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#0d1117; --bg2:#0b0f15; --panel:#161b22; --panel2:#1c2230; --line:#2a3340;
-  --ink:#e6edf3; --sub:#9aa7b4; --mut:#6b7886;
-  --acc:#4f9cff; --acc2:#7c5cff; --good:#3fb950; --warn:#d29922; --pink:#f778ba;
-  --chip:#21304a; --radius:16px;
-  --camp:#7c5cff; --camp-dim:#b7a4ff; --camp-bg:rgba(124,92,255,.14); --camp-line:#3d3470;
-}
-:root.c1{--camp:#7c5cff;--camp-dim:#b7a4ff;--camp-bg:rgba(124,92,255,.14);--camp-line:#3d3470}
-:root.c2{--camp:#d29922;--camp-dim:#f0c674;--camp-bg:rgba(210,153,34,.14);--camp-line:#5c4718}
-:root.c3{--camp:#3fb950;--camp-dim:#63d67c;--camp-bg:rgba(63,185,80,.14);--camp-line:#2c5c34}
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);line-height:1.72;font-size:16.5px;
-  font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR","Segoe UI",system-ui,sans-serif;
-  word-break:keep-all;overflow-wrap:anywhere;
-  padding-bottom:calc(40px + env(safe-area-inset-bottom))}
-.wrap{max-width:720px;margin:0 auto;padding:0 18px}
-a{color:var(--acc);text-decoration:none}
-p{margin:0 0 13px}
-b,strong{font-weight:700;color:#fff}
-.sub{color:var(--sub)}
-.mut{color:var(--mut)}
+  :root{
+    --ink:#131C18; --ink2:#2C3A33; --muted:#5F6E66; --faint:#8A968F;
+    --mist:#DCE2DB; --surface:#F8FAF6; --surface2:#EFF3EC;
+    --line:#C3CCC1; --hair:#DDE4DB;
+    --kelp:#1F6249; --kelp-wash:#DEEDE4; --kelp-line:#8FBBA3;
+    --amber:#8F6209; --amber-wash:#F5EAD0; --amber-line:#DCC79B;
+    --berry:#8C2F3E; --berry-wash:#F3DFE2; --berry-line:#D9A8B0;
+    --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+    --mono:"IBM Plex Mono","SFMono-Regular",Consolas,"D2Coding",monospace;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{margin:0;background:var(--mist);color:var(--ink);font-family:var(--sans);
+    font-size:16px;line-height:1.75;letter-spacing:-0.01em;
+    padding:0 18px calc(70px + env(safe-area-inset-bottom));
+    word-break:keep-all;overflow-wrap:anywhere;}
+  .wrap{max-width:1040px;margin:0 auto;}
 
-/* 헤더 */
-header.top{padding:26px 0 18px;background:linear-gradient(180deg,var(--bg2),var(--bg) 90%)}
-.kicker{display:inline-block;font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;font-weight:700;
-  color:var(--camp-dim);background:var(--camp-bg);border:1px solid var(--camp-line);
-  padding:6px 12px;border-radius:999px;margin-bottom:14px}
-h1{font-size:27px;line-height:1.3;margin:0 0 10px;font-weight:800;letter-spacing:-.01em}
-h1 .g{background:linear-gradient(90deg,var(--acc),var(--camp));-webkit-background-clip:text;background-clip:text;color:transparent}
-.lead{font-size:15.5px;color:var(--sub);margin:0 0 16px}
-.meta{display:flex;flex-wrap:wrap;gap:7px}
-.meta .m{font-size:12.5px;color:var(--sub);background:var(--panel);border:1px solid var(--line);padding:5px 11px;border-radius:999px}
+  /* ===== 표지 ===== */
+  .cover{padding:44px 0 30px;border-bottom:2px solid var(--ink);}
+  .cover .kicker{font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:0.2em;text-transform:uppercase;color:var(--kelp);margin:0 0 16px;}
+  .cover h1{font-size:clamp(27px,6vw,44px);font-weight:700;line-height:1.24;
+    letter-spacing:-0.035em;margin:0 0 16px;max-width:21ch;}
+  .cover .lede{font-size:clamp(15.5px,2vw,18px);font-weight:300;color:var(--ink2);
+    max-width:62ch;margin:0 0 24px;line-height:1.72;}
+  .cover .lede b{font-weight:600;color:var(--ink);}
+  .metaline{display:flex;flex-wrap:wrap;gap:6px 22px;font-family:var(--mono);
+    font-size:11.5px;color:var(--muted);letter-spacing:0.03em;}
+  .metaline b{color:var(--ink);font-weight:500;}
 
-/* 상단 이동 바 */
-nav.toc{position:sticky;top:0;z-index:30;background:rgba(13,17,23,.92);backdrop-filter:blur(8px);
-  border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:18px}
-nav.toc .row{display:flex;gap:6px;overflow-x:auto;padding:10px 18px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-nav.toc .row::-webkit-scrollbar{display:none}
-nav.toc a{flex:0 0 auto;font-size:13px;color:var(--sub);padding:7px 12px;border-radius:999px;
-  border:1px solid var(--line);background:var(--panel)}
-nav.toc a.now{color:#fff;background:var(--camp-bg);border-color:var(--camp-line)}
+  .summary{background:var(--ink);border-radius:3px;padding:26px 22px 24px;margin:28px 0 0;}
+  .summary h2{color:#F6FAF5;font-size:18px;font-weight:600;margin:0 0 6px;letter-spacing:-0.02em;}
+  .summary .sd{color:#93A399;font-size:13.5px;font-weight:300;margin:0 0 22px;line-height:1.65;}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:18px;}
+  .kpi .kl{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:#7E8F84;display:block;margin-bottom:5px;}
+  .kpi .kv{font-size:clamp(21px,3.2vw,28px);font-weight:700;color:#8FD3B4;
+    letter-spacing:-0.03em;display:block;line-height:1.1;}
+  .kpi .kn{font-size:12px;color:#B9C6BC;display:block;margin-top:6px;
+    font-weight:300;line-height:1.5;}
 
-/* 섹션 */
-section{padding:30px 0;border-bottom:1px solid var(--line)}
-.eyebrow{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--camp-dim);font-weight:700;margin-bottom:7px}
-h2{font-size:20px;margin:0 0 14px;font-weight:800;line-height:1.4}
-h2 .cell{display:inline-block;background:var(--camp);color:#0d1117;font-size:12.5px;font-weight:800;
-  border-radius:8px;padding:2px 9px;margin-right:8px;vertical-align:2px;font-family:ui-monospace,Menlo,monospace}
-h3{font-size:16.5px;margin:22px 0 9px;font-weight:700}
-h3:first-child{margin-top:0}
+  /* ===== 이동 바 ===== */
+  nav.jump{position:sticky;top:0;z-index:40;margin:0 -18px;padding:0 18px;
+    background:rgba(220,226,219,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);}
+  nav.jump .row{display:flex;gap:6px;overflow-x:auto;padding:9px 0;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  nav.jump .row::-webkit-scrollbar{display:none;}
+  nav.jump a{flex:0 0 auto;font-family:var(--mono);font-size:11.5px;letter-spacing:0.04em;
+    color:var(--muted);background:var(--surface);border:1px solid var(--line);
+    padding:6px 11px;border-radius:2px;text-decoration:none;}
+  nav.jump a.now{color:#fff;background:var(--kelp);border-color:var(--kelp);}
 
-/* 카드 · 콜아웃 */
-.grid{display:grid;gap:11px;margin:12px 0}
-.g2{grid-template-columns:1fr}
-@media(min-width:620px){.g2{grid-template-columns:repeat(2,1fr)}}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:15px 16px}
-.card h4{margin:0 0 7px;font-size:15px;font-weight:700}
-.card p{font-size:14.5px;margin:0}
-.tag{display:inline-block;font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px;margin-bottom:8px;
-  background:var(--camp-bg);color:var(--camp-dim);border:1px solid var(--camp-line)}
-.callout{border-left:4px solid var(--acc);background:var(--panel);border-radius:10px;padding:13px 15px;margin:14px 0;font-size:15px}
-.callout.good{border-left-color:var(--good)}
-.callout.warn{border-left-color:var(--warn)}
-.callout.p{border-left-color:var(--camp)}
-.callout b{display:inline}
-.callout .lbl{display:block;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);font-weight:700;margin-bottom:4px}
+  /* ===== 섹션 ===== */
+  .sec{padding:44px 0 12px;border-bottom:1px solid var(--line);scroll-margin-top:56px;}
+  .sec:last-of-type{border-bottom:0;}
+  .step-no{display:flex;align-items:center;gap:11px;margin-bottom:14px;}
+  .step-no .num{font-family:var(--mono);font-size:12px;font-weight:600;color:#fff;
+    background:var(--kelp);width:28px;height:28px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-no .lbl{font-family:var(--mono);font-size:11px;letter-spacing:0.13em;
+    text-transform:uppercase;color:var(--muted);}
+  .step-no .day{margin-left:auto;font-family:var(--mono);font-size:11px;
+    letter-spacing:0.1em;color:var(--kelp);background:var(--kelp-wash);
+    border:1px solid var(--kelp-line);padding:3px 9px;border-radius:2px;}
+  .sec h2{font-size:clamp(22px,3.4vw,29px);font-weight:600;letter-spacing:-0.03em;
+    line-height:1.34;margin:0 0 14px;max-width:30ch;}
+  .sec h3{font-size:17.5px;font-weight:600;letter-spacing:-0.02em;margin:30px 0 10px;}
+  .sec > p{max-width:70ch;color:var(--ink2);margin:0 0 16px;}
+  .sec strong,.sec b{font-weight:600;color:var(--ink);}
+  .sec code{font-family:var(--mono);font-size:0.86em;background:var(--surface2);
+    border:1px solid var(--hair);padding:1px 5px;border-radius:2px;}
 
-/* 표 */
-.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:12px;margin:12px 0}
-table{width:100%;border-collapse:collapse;font-size:14px;min-width:340px}
-th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
-th{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--mut);font-weight:700;background:var(--panel)}
-tbody tr:last-child td{border-bottom:0}
-td b{color:#fff}
-code{background:#0b1020;border:1px solid var(--line);border-radius:6px;padding:1px 6px;font-size:14px;color:#c9d6e5;
-  font-family:ui-monospace,Menlo,monospace}
+  .plain{background:var(--surface2);border-left:3px solid var(--kelp);
+    padding:14px 17px;margin:0 0 20px;border-radius:0 2px 2px 0;max-width:74ch;}
+  .plain p{margin:0;font-size:14.5px;color:var(--ink2);line-height:1.72;}
+  .plain p + p{margin-top:10px;}
+  .plain b{color:var(--kelp);font-weight:600;}
 
-/* 다이어그램 */
-.diagram{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:var(--radius);
-  background:var(--panel);padding:12px;margin:12px 0}
-.diagram svg{display:block}
-.figcap{font-size:12.5px;color:var(--mut);margin:-4px 0 12px;text-align:center}
+  .fig{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:20px 16px 16px;margin:20px 0 12px;}
+  .fig-t{font-family:var(--mono);font-size:11px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--kelp);margin:0 0 16px;
+    padding-bottom:9px;border-bottom:1px solid var(--hair);}
+  .fig svg{display:block;width:100%;height:auto;}
+  .fig-c{font-size:13px;color:var(--muted);margin:14px 0 0;font-weight:300;
+    line-height:1.65;padding-top:12px;border-top:1px solid var(--hair);}
+  .fig-c b{color:var(--ink);font-weight:600;}
 
-/* 할 일 체크 */
-.todo{list-style:none;margin:14px 0 0;padding:0;border:1px solid var(--line);border-radius:12px;background:var(--panel);overflow:hidden}
-.todo li+li{border-top:1px solid var(--line)}
-.todo label{display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start;
-  padding:14px 15px;cursor:pointer;font-size:15px;min-height:52px}
-.todo input{appearance:none;-webkit-appearance:none;width:21px;height:21px;margin:1px 0 0;
-  border:1.5px solid var(--mut);border-radius:6px;background:var(--panel2);display:grid;place-content:center;cursor:pointer}
-.todo input::after{content:"✓";font-size:13px;font-weight:800;color:#0d1117;transform:scale(0);transition:transform .12s}
-.todo input:checked{background:var(--good);border-color:var(--good)}
-.todo input:checked::after{transform:scale(1)}
-.todo input:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
-.todo input:checked ~ .tt{color:var(--mut);text-decoration:line-through}
-.todo .day{font-weight:700;color:var(--camp-dim)}
+  .sb{fill:#fff;stroke:#C3CCC1;stroke-width:1.5;}
+  .sb-k{fill:#DEEDE4;stroke:#1F6249;stroke-width:2;}
+  .sb-b{fill:#F3DFE2;stroke:#D9A8B0;stroke-width:1.5;}
+  .sb-a{fill:#F5EAD0;stroke:#DCC79B;stroke-width:1.5;}
+  .sb-g{fill:#EFF3EC;stroke:#C3CCC1;stroke-width:1.5;}
+  .sb-d{fill:#fff;stroke:#1F6249;stroke-width:1.6;stroke-dasharray:5 4;}
+  .st{font-family:var(--sans);font-size:13.5px;font-weight:600;fill:#131C18;
+    text-anchor:middle;letter-spacing:-0.3px;}
+  .st-s{font-family:var(--sans);font-size:11.5px;font-weight:400;fill:#5F6E66;text-anchor:middle;}
+  .st-k{fill:#1F6249;} .st-b{fill:#8C2F3E;} .st-a{fill:#8F6209;}
+  .sm{font-family:var(--mono);font-size:12px;fill:#131C18;text-anchor:middle;font-weight:500;}
+  .sm-s{font-family:var(--mono);font-size:10.5px;fill:#5F6E66;text-anchor:middle;}
+  .st-m{font-family:var(--mono);font-size:11px;fill:#8A968F;text-anchor:middle;letter-spacing:0.5px;}
+  .sl{stroke:#8A968F;stroke-width:1.6;fill:none;}
+  .sl-k{stroke:#1F6249;stroke-width:2;fill:none;}
+  .sl-a{stroke:#8F6209;stroke-width:1.8;fill:none;}
+  .sl-d{stroke:#8A968F;stroke-width:1.4;fill:none;stroke-dasharray:4 4;}
+  .sa{fill:#8A968F;} .sa-k{fill:#1F6249;} .sa-a{fill:#8F6209;}
+  .dot-k{fill:#1F6249;} .dot-a{fill:#C99A2E;} .dot-b{fill:#8C2F3E;}
 
-/* 문제 */
-.q{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px 16px;margin:11px 0}
-.q .qn{font-family:ui-monospace,Menlo,monospace;font-size:12px;font-weight:700;color:var(--camp-dim);letter-spacing:.08em}
-.q p{margin:6px 0 0;font-size:15.5px}
-details{margin-top:11px;border-top:1px solid var(--line);padding-top:10px}
-details summary{cursor:pointer;font-size:14px;font-weight:700;color:var(--acc);list-style:none;padding:4px 0}
-details summary::-webkit-details-marker{display:none}
-details summary::before{content:"▸ ";color:var(--acc)}
-details[open] summary::before{content:"▾ "}
-details .ans{font-size:14.5px;color:var(--sub);margin-top:8px}
-details .ans b{color:var(--good)}
+  /* ===== 표 ===== */
+  .tw{overflow-x:auto;margin:20px 0 8px;border:1px solid var(--line);
+    border-radius:3px;background:var(--surface);}
+  table{border-collapse:collapse;width:100%;font-size:13.8px;}
+  .tw.wide table{min-width:560px;}
+  thead th{background:var(--ink);color:#E8EFE7;text-align:left;font-family:var(--mono);
+    font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
+    padding:11px 13px;}
+  tbody td{padding:11px 13px;border-top:1px solid var(--hair);vertical-align:top;
+    color:var(--ink2);line-height:1.62;}
+  tbody tr:nth-child(even) td{background:var(--surface2);}
+  td.hd{font-weight:600;color:var(--ink);}
+  td.mn{font-family:var(--mono);font-size:12.5px;}
+  td.ok{color:var(--kelp);font-weight:600;}
+  td.no{color:var(--berry);font-weight:600;}
+  td.wa{color:var(--amber);font-weight:600;}
+  td.fill{font-family:var(--mono);color:var(--faint);}
 
-/* 대본 틀 */
-.script{background:#0b1020;border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0;font-size:15px}
-.script .s{color:var(--camp-dim);font-weight:700}
-.script div+div{margin-top:10px}
+  .note{background:var(--amber-wash);border:1px solid var(--amber-line);
+    border-radius:3px;padding:17px 19px;margin:20px 0 8px;}
+  .note p{margin:0;font-size:14px;color:#5C440C;line-height:1.72;}
+  .note p + p{margin-top:9px;}
+  .note b{font-weight:600;}
+  .note .lb{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--amber);margin-bottom:6px;}
+  .alert{background:var(--berry-wash);border:1px solid var(--berry-line);
+    border-radius:3px;padding:17px 19px;margin:20px 0 8px;}
+  .alert p{margin:0;font-size:14px;color:#6B2430;line-height:1.72;}
+  .alert p + p{margin-top:9px;}
+  .alert b{font-weight:600;}
+  .alert .lb{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--berry);margin-bottom:6px;}
 
-/* 배지 · 이동 */
-.badge{display:inline-block;font-size:15px;font-weight:700;color:var(--camp-dim);background:var(--camp-bg);
-  border:1px solid var(--camp-line);border-radius:999px;padding:8px 16px;margin-top:6px}
-.nav-b{display:flex;gap:10px;margin:22px 0 0}
-.nav-b a{flex:1;text-align:center;background:var(--panel);border:1px solid var(--line);border-radius:12px;
-  padding:14px 10px;font-size:14.5px;font-weight:700;color:var(--ink)}
-.nav-b a.main{background:var(--camp-bg);border-color:var(--camp-line);color:var(--camp-dim)}
-.nav-b a.off{color:var(--mut)}
-footer{padding:24px 0 40px;color:var(--mut);font-size:12.5px;text-align:center}
-@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+  /* ===== 카드 묶음 ===== */
+  .cards{display:grid;gap:12px;margin:18px 0 8px;}
+  @media(min-width:680px){.cards.two{grid-template-columns:repeat(2,1fr);}}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:15px 17px;}
+  .card .ct{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;
+    color:var(--kelp);display:block;margin-bottom:7px;}
+  .card h4{margin:0 0 6px;font-size:15.5px;font-weight:600;letter-spacing:-0.02em;}
+  .card p{margin:0;font-size:14px;color:var(--ink2);line-height:1.68;}
+
+  /* ===== 요일 할 일 ===== */
+  .todo{list-style:none;margin:20px 0 8px;padding:0;background:var(--surface);
+    border:1px solid var(--line);border-radius:3px;overflow:hidden;}
+  .todo li + li{border-top:1px solid var(--hair);}
+  .todo label{display:grid;grid-template-columns:22px 1fr;gap:13px;align-items:start;
+    padding:15px 16px;cursor:pointer;font-size:14.5px;line-height:1.65;color:var(--ink2);min-height:54px;}
+  .todo input{appearance:none;-webkit-appearance:none;width:21px;height:21px;margin:1px 0 0;
+    border:1.5px solid var(--line);border-radius:2px;background:#fff;
+    display:grid;place-content:center;cursor:pointer;}
+  .todo input::after{content:"✓";font-size:13px;font-weight:700;color:#fff;transform:scale(0);}
+  .todo input:checked{background:var(--kelp);border-color:var(--kelp);}
+  .todo input:checked::after{transform:scale(1);}
+  .todo input:focus-visible{outline:2px solid var(--kelp);outline-offset:2px;}
+  .todo input:checked ~ .tt{color:var(--faint);text-decoration:line-through;}
+  .todo .tt b{color:var(--ink);font-weight:600;}
+
+  /* ===== 문제 ===== */
+  .q{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:15px 17px;margin:12px 0;}
+  .q .qn{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--kelp);
+    letter-spacing:0.12em;}
+  .q > p{margin:6px 0 0;font-size:15.5px;color:var(--ink);line-height:1.7;}
+  .q details{margin-top:12px;border-top:1px solid var(--hair);padding-top:10px;}
+  .q summary{cursor:pointer;list-style:none;font-family:var(--mono);font-size:12px;
+    font-weight:600;color:var(--kelp);letter-spacing:0.06em;padding:3px 0;}
+  .q summary::-webkit-details-marker{display:none;}
+  .q summary::before{content:"+ ";}
+  .q details[open] summary::before{content:"− ";}
+  .q .ans{margin-top:9px;background:var(--kelp-wash);border-radius:2px;padding:12px 14px;
+    font-size:14px;color:var(--ink2);line-height:1.7;}
+  .q .ans b{color:var(--kelp);font-weight:600;}
+
+  /* ===== 설명 대본 ===== */
+  .script{background:var(--surface);border:1px solid var(--kelp-line);border-radius:3px;
+    padding:16px 18px;margin:18px 0 8px;}
+  .script .row{display:grid;grid-template-columns:70px 1fr;gap:12px;font-size:14.5px;
+    color:var(--ink2);line-height:1.7;}
+  .script .row + .row{margin-top:11px;padding-top:11px;border-top:1px solid var(--hair);}
+  .script .s{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;color:var(--kelp);
+    font-weight:600;padding-top:4px;}
+
+  .badge{display:inline-block;font-family:var(--mono);font-size:12.5px;font-weight:600;
+    color:var(--amber);background:var(--amber-wash);border:1px solid var(--amber-line);
+    border-radius:2px;padding:7px 14px;margin-top:14px;letter-spacing:0.04em;}
+
+  /* ===== 주차 목록 (허브) ===== */
+  .wlist{display:flex;flex-direction:column;gap:10px;margin:18px 0 8px;}
+  a.wk{display:grid;grid-template-columns:1fr auto;grid-template-areas:"n p" "t p" "d d";
+    gap:2px 14px;background:var(--surface);border:1px solid var(--line);
+    border-left:3px solid var(--kelp);border-radius:3px;padding:15px 17px;
+    text-decoration:none;color:var(--ink);}
+  a.wk .n{grid-area:n;font-family:var(--mono);font-size:11px;font-weight:600;
+    letter-spacing:0.12em;color:var(--kelp);}
+  a.wk .t{grid-area:t;font-size:17px;font-weight:600;letter-spacing:-0.02em;}
+  a.wk .d{grid-area:d;font-size:13.5px;color:var(--muted);margin-top:5px;line-height:1.6;font-weight:300;}
+  a.wk .p{grid-area:p;align-self:center;font-family:var(--mono);font-size:11px;color:var(--muted);
+    background:var(--surface2);border:1px solid var(--hair);border-radius:2px;padding:4px 9px;white-space:nowrap;}
+  a.wk .p.done{color:#fff;background:var(--kelp);border-color:var(--kelp);}
+  a.wk .p.ing{color:var(--amber);background:var(--amber-wash);border-color:var(--amber-line);}
+  .wk.soon{border-left-color:var(--line);opacity:.62;pointer-events:none;}
+  .wk.soon .n,.wk.soon .t{color:var(--muted);}
+
+  /* ===== 진행 막대 ===== */
+  .bar{height:7px;background:var(--hair);border-radius:99px;overflow:hidden;margin-top:12px;
+    border:1px solid var(--line);}
+  .bar i{display:block;height:100%;background:var(--kelp);width:0;transition:width .3s;}
+
+  /* ===== 페이지 이동 ===== */
+  .pager{display:flex;gap:9px;margin:26px 0 0;}
+  .pager a{flex:1;text-align:center;font-size:13.5px;font-weight:600;text-decoration:none;
+    color:var(--ink2);background:var(--surface);border:1px solid var(--line);
+    border-radius:3px;padding:14px 8px;}
+  .pager a.main{background:var(--kelp);border-color:var(--kelp);color:#fff;}
+  footer{padding:26px 0 10px;font-family:var(--mono);font-size:11.5px;color:var(--faint);
+    letter-spacing:0.03em;line-height:1.8;}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;}}
 </style>
 </head>
 <body>
-<header class="top"><div class="wrap">
-  <span class="kicker">WEEK 03 · CAMP 1 물질 · 하루 20분 × 4일</span>
-  <h1>원자와 분자 — <span class="g">화학식을 읽는 눈</span></h1>
-  <p class="lead">2주차에서 원소가 “종류”라는 걸 알았다. 이번 주는 <b>알갱이 한 개(원자)</b>와
-  <b>그것들이 붙은 덩어리(분자)</b>를 구별한다. 여기가 되면 H₂O, CO₂ 같은 화학식이 글자처럼 읽힌다.</p>
-  <div class="meta">
-    <span class="m">1주차 연결 · 입자</span>
-    <span class="m">원자 · 분자 · 분자식</span>
-    <span class="m">모형 만들기</span>
-    <span class="m" id="wdone">0 / 4 완료</span>
+<div class="wrap">
+<header class="cover">
+  <p class="kicker">WEEK 03 · 캠프 1 물질 · 하루 20분 × 4일</p>
+  <h1>원자와 분자</h1>
+  <p class="lede">
+    2주차에서 원소가 “종류”라는 것을 알았습니다. 이번 주에는 <b>알갱이 한 개(원자)</b>와
+    <b>그것들이 붙은 덩어리(분자)</b>를 구별합니다. 여기가 되면 <code>H₂O</code>, <code>CO₂</code> 같은 화학식이 글자처럼 읽힙니다.
+  </p>
+  <div class="metaline">
+    <span>1주차 연결 <b>입자</b></span>
+    <span>개념 <b>원자 · 분자 · 분자식</b></span>
+    <span>실험 <b>분자 모형 만들기</b></span>
+    <span>진행 <b id="wdone">0 / 4</b></span>
   </div>
-</div></header>
 
-<nav class="toc"><div class="row">
+  <div class="summary">
+    <h2>이번 주에 남길 것</h2>
+    <p class="sd">3주차까지 오면 캠프 1의 절반을 넘습니다. 화학식을 읽을 수 있게 되는 주입니다.</p>
+    <div class="kpis">
+      <div class="kpi"><span class="kl">문장 1</span><span class="kv">원자</span>
+        <span class="kn">알갱이 한 개 · 원자핵(+)과 전자(−)</span></div>
+      <div class="kpi"><span class="kl">문장 2</span><span class="kv">분자</span>
+        <span class="kn">원자가 붙어 그 물질의 성질을 갖게 된 입자</span></div>
+      <div class="kpi"><span class="kl">문장 3</span><span class="kv">중성</span>
+        <span class="kn">+와 −의 개수가 같아 전기를 띠지 않는다</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="jump"><div class="row">
   <a href="#map">이번 주 지도</a>
   <a href="#mon">월 · 열기</a>
   <a href="#tue">화 · 채우기</a>
   <a href="#thu">목 · 손으로</a>
   <a href="#fri">금 · 보스전</a>
+  <a href="#next">다음 주</a>
 </div></nav>
 
-<div class="wrap">
+<section class="sec" id="map">
+  <div class="step-no"><span class="num">1</span><span class="lbl">이번 주 지도</span></div>
+  <h2>알갱이 한 개에서 덩어리 하나로</h2>
+  <p>원자는 <b>블록 한 조각</b>이고, 분자는 <b>조각을 붙여 만든 하나의 물건</b>입니다.
+  조각 하나만으로는 그 물건이 되지 않는다는 점이 이번 주의 핵심입니다.</p>
 
-<section id="map">
-  <div class="eyebrow">This week</div>
-  <h2><span class="cell">MAP</span>원자 한 개 → 분자 한 덩어리</h2>
-  <div class="diagram">
-    <svg viewBox="0 0 640 210" width="640" height="210" font-family="inherit" role="img" aria-label="원자의 구조와 물 분자 모형">
-      <rect x="16" y="20" width="270" height="170" rx="14" fill="#1c2230" stroke="#2a3340"/>
-      <text x="151" y="46" fill="#e6edf3" font-size="14" font-weight="700" text-anchor="middle">원자 — 알갱이 한 개</text>
-      <circle cx="151" cy="115" r="60" fill="none" stroke="#2a3340" stroke-dasharray="4 4"/>
-      <circle cx="151" cy="115" r="16" fill="#f778ba"/>
-      <text x="151" y="120" fill="#0d1117" font-size="11" font-weight="800" text-anchor="middle">+</text>
-      <circle cx="211" cy="115" r="7" fill="#4f9cff"/>
-      <circle cx="119" cy="63" r="7" fill="#4f9cff"/>
-      <text x="151" y="152" fill="#f778ba" font-size="11" text-anchor="middle">원자핵 (+)</text>
-      <text x="240" y="100" fill="#4f9cff" font-size="11" text-anchor="middle">전자 (−)</text>
-      <text x="151" y="180" fill="#6b7886" font-size="11">+와 −의 개수가 같아 전기를 띠지 않는다</text>
+  <div class="fig">
+    <p class="fig-t">도식 1 · 원자의 구조와 물 분자</p>
+    <svg viewBox="0 0 900 280" role="img" aria-label="원자핵과 전자로 이루어진 원자와, 원자 세 개가 붙은 물 분자">
+      <rect class="sb" x="10" y="16" width="420" height="230" rx="3"/>
+      <text class="st" x="220" y="46">원자 · 알갱이 한 개</text>
+      <circle cx="220" cy="146" r="78" fill="none" stroke="#C3CCC1" stroke-width="1.4" stroke-dasharray="5 5"/>
+      <circle cx="220" cy="146" r="22" fill="#F3DFE2" stroke="#8C2F3E" stroke-width="2"/>
+      <text class="sm st-b" x="220" y="152">+</text>
+      <circle cx="298" cy="146" r="9" fill="#1F6249"/>
+      <circle cx="172" cy="83" r="9" fill="#1F6249"/>
+      <text class="st-s st-b" x="220" y="196">원자핵 (+)</text>
+      <text class="st-s st-k" x="342" y="176">전자 (−)</text>
+      <text class="st-s" x="220" y="228">+와 −의 개수가 같아 전기를 띠지 않습니다</text>
 
-      <rect x="306" y="20" width="318" height="170" rx="14" fill="#1c2230" stroke="#2a3340"/>
-      <text x="465" y="46" fill="#e6edf3" font-size="14" font-weight="700" text-anchor="middle">분자 — 원자가 붙은 덩어리</text>
-      <line x1="465" y1="105" x2="420" y2="140" stroke="#9aa7b4" stroke-width="6"/>
-      <line x1="465" y1="105" x2="510" y2="140" stroke="#9aa7b4" stroke-width="6"/>
-      <circle cx="465" cy="105" r="24" fill="#3fb950"/>
-      <text x="465" y="111" fill="#0d1117" font-size="14" font-weight="800" text-anchor="middle">O</text>
-      <circle cx="418" cy="143" r="15" fill="#7c5cff"/>
-      <text x="418" y="148" fill="#fff" font-size="11" font-weight="800" text-anchor="middle">H</text>
-      <circle cx="512" cy="143" r="15" fill="#7c5cff"/>
-      <text x="512" y="148" fill="#fff" font-size="11" font-weight="800" text-anchor="middle">H</text>
-      <text x="465" y="180" fill="#6b7886" font-size="11.5" text-anchor="middle">물 분자 H₂O · 원자 3개가 붙어 있다</text>
+      <rect class="sb" x="446" y="16" width="444" height="230" rx="3"/>
+      <text class="st" x="668" y="46">분자 · 원자가 붙은 덩어리</text>
+      <line x1="668" y1="140" x2="606" y2="186" stroke="#8A968F" stroke-width="9"/>
+      <line x1="668" y1="140" x2="730" y2="186" stroke="#8A968F" stroke-width="9"/>
+      <circle cx="668" cy="140" r="34" fill="#DEEDE4" stroke="#1F6249" stroke-width="2"/>
+      <text class="st st-k" x="668" y="147">O</text>
+      <circle cx="602" cy="190" r="22" fill="#F5EAD0" stroke="#DCC79B" stroke-width="1.5"/>
+      <text class="sm st-a" x="602" y="196">H</text>
+      <circle cx="734" cy="190" r="22" fill="#F5EAD0" stroke="#DCC79B" stroke-width="1.5"/>
+      <text class="sm st-a" x="734" y="196">H</text>
+      <text class="st-s" x="668" y="228">물 분자 H₂O · 원자 3개가 붙어 있습니다</text>
+
+      <text class="st-m" x="450" y="270">산소 원자 하나(O)는 우리가 마시는 산소가 아닙니다 · 두 개가 붙은 O₂여야 합니다</text>
     </svg>
+    <p class="fig-c">원자 안쪽도 대부분 <b>빈 공간</b>입니다. 원자를 야구장 크기로 키우면 원자핵은 가운데 놓인 완두콩 한 알 정도입니다.</p>
   </div>
-  <p class="figcap">원자 = 블록 한 조각 · 분자 = 조각을 붙여 만든 하나의 물건</p>
 </section>
 
-<section id="mon">
-  <div class="eyebrow">Monday · 열기</div>
-  <h2><span class="cell">[1]</span>원자 — 가운데는 +, 주위는 −</h2>
+<section class="sec" id="mon">
+  <div class="step-no"><span class="num">2</span><span class="lbl">개념 하나</span><span class="day">MON · 열기</span></div>
+  <h2>원자 — 가운데는 +, 주위는 −</h2>
 
-  <p><b>원자는 물질을 이루는 알갱이 한 개</b>다. 1주차에서 “입자”라고 뭉뚱그려 부른 것의 정확한 이름이다.</p>
-  <p>원자 안은 두 부분으로 되어 있다. 가운데 <b>원자핵</b>은 <b>+</b> 전기를 띠고, 그 주위를 <b>전자</b>가 돌며 <b>−</b> 전기를 띤다.
-  보통 상태에서는 +와 −의 개수가 같아서 <b>원자 전체는 전기를 띠지 않는다</b>. 이 문장이 4주차 이온의 출발점이다.</p>
+  <p><b>원자는 물질을 이루는 알갱이 한 개</b>입니다. 1주차에서 “입자”라고 뭉뚱그려 부른 것의 정확한 이름입니다.</p>
+  <p>원자 안은 두 부분으로 되어 있습니다. 가운데 <b>원자핵</b>은 <b>+</b> 전기를 띠고, 그 주위를 <b>전자</b>가 돌며 <b>−</b> 전기를 띱니다.
+  보통 상태에서는 +와 −의 개수가 같아 <b>원자 전체는 전기를 띠지 않습니다.</b>
+  이 문장이 4주차 이온의 출발점이 됩니다.</p>
 
-  <div class="callout p"><span class="lbl">크기 감각</span>
-  원자를 <b>야구장</b> 크기로 키우면, 원자핵은 <b>가운데 놓인 완두콩 한 알</b> 정도다.
-  나머지는 거의 다 빈 공간이고 그 안을 전자가 돈다. 1주차의 “빈 공간”이 원자 안에도 있다.</div>
-
-  <h3>원소와 원자, 다시 한 번</h3>
   <div class="tw"><table>
-    <thead><tr><th>말</th><th>뜻</th><th>이렇게 쓴다</th></tr></thead>
+    <thead><tr><th>말</th><th>뜻</th><th>이렇게 씁니다</th></tr></thead>
     <tbody>
-      <tr><td><b>원소</b></td><td>종류·이름</td><td>“물은 수소와 산소, <b>두 원소</b>로 되어 있다”</td></tr>
-      <tr><td><b>원자</b></td><td>알갱이 한 개 (개수를 셀 수 있다)</td><td>“물 분자 하나에는 <b>원자 3개</b>가 있다”</td></tr>
+      <tr><td class="hd">원소</td><td>종류 · 이름</td><td>“물은 수소와 산소, <b>두 원소</b>로 되어 있다”</td></tr>
+      <tr><td class="hd">원자</td><td>알갱이 한 개 (개수를 셀 수 있음)</td><td>“물 분자 하나에는 <b>원자 3개</b>가 있다”</td></tr>
     </tbody>
   </table></div>
 
+  <div class="plain">
+    <p><b>크기 감각</b> — 원자를 야구장 크기로 키우면 원자핵은 가운데 놓인 <b>완두콩 한 알</b> 정도입니다.
+    나머지는 거의 다 빈 공간이고 그 안을 전자가 돕니다. 1주차의 “빈 공간”이 원자 안에도 있는 셈입니다.</p>
+  </div>
+
   <ul class="todo">
-    <li><label><input type="checkbox" data-q="w3m1"><span class="tt"><span class="day">월</span> — 원자 그림(원자핵 + 전자)을 직접 그리고, 질문 3개를 적는다.</span></label></li>
+    <li><label><input type="checkbox" data-q="w3m1"><span class="tt"><b>월요일</b> — 원자 그림(원자핵 + 전자)을 직접 그리고 질문 3개를 적습니다.</span></label></li>
   </ul>
 </section>
 
-<section id="tue">
-  <div class="eyebrow">Tuesday · 채우기</div>
-  <h2><span class="cell">[2]</span>분자와 분자식 읽는 법</h2>
+<section class="sec" id="tue">
+  <div class="step-no"><span class="num">3</span><span class="lbl">개념 둘</span><span class="day">TUE · 채우기</span></div>
+  <h2>분자식을 읽는 법</h2>
 
-  <p><b>분자는 원자 몇 개가 붙어서 그 물질의 성질을 갖게 된 입자</b>다.
-  산소 원자 하나(O)는 우리가 마시는 산소가 아니다. <b>두 개가 붙은 O₂</b>가 되어야 우리가 아는 산소가 된다.
-  물도 마찬가지다. 수소 원자 2개와 산소 원자 1개가 붙어야 비로소 ‘물’이다.</p>
+  <p><b>분자는 원자 몇 개가 붙어서 그 물질의 성질을 갖게 된 입자</b>입니다.
+  산소 원자 하나(O)는 우리가 마시는 산소가 아닙니다. <b>두 개가 붙은 O₂</b>가 되어야 우리가 아는 산소가 됩니다.</p>
 
   <h3>숫자 두 개의 자리</h3>
-  <p>분자식에는 숫자가 두 군데 나온다. 자리가 다르면 뜻이 완전히 다르다.</p>
+  <p>분자식에는 숫자가 두 군데 나옵니다. 자리가 다르면 뜻이 완전히 달라집니다.</p>
   <div class="tw"><table>
-    <thead><tr><th>쓰기</th><th>읽기</th><th>뜻</th></tr></thead>
+    <thead><tr><th>쓰기</th><th>어디에 있는 숫자</th><th>뜻</th></tr></thead>
     <tbody>
-      <tr><td><code>H₂O</code></td><td>아래 작은 2</td><td>한 분자 <b>안에</b> 수소 원자가 2개</td></tr>
-      <tr><td><code>2H₂O</code></td><td>앞의 큰 2</td><td>물 <b>분자가 2개</b> (원자로는 총 6개)</td></tr>
-      <tr><td><code>H₂O₂</code></td><td>둘 다 2</td><td>다른 물질이다 — 과산화수소(소독약)</td></tr>
+      <tr><td class="mn ok">H₂O</td><td>아래 작은 2</td><td>한 분자 <b>안에</b> 수소 원자가 2개</td></tr>
+      <tr><td class="mn ok">2H₂O</td><td>앞의 큰 2</td><td>물 <b>분자가 2개</b> (원자로는 모두 6개)</td></tr>
+      <tr><td class="mn no">H₂O₂</td><td>둘 다 2</td><td>다른 물질입니다 — 과산화수소(소독약)</td></tr>
     </tbody>
   </table></div>
 
-  <div class="callout warn"><span class="lbl">여기서 틀린다</span>
-  <b>H₂O₂는 물이 아니다.</b> 원자 하나만 더 붙어도 완전히 다른 물질이 된다.
-  분자식은 “원자 몇 개가 어떻게 붙었는지”를 적은 것이라서, 숫자 하나가 물질의 이름을 바꾼다.</div>
+  <div class="alert"><span class="lb">여기서 틀립니다</span>
+    <p><b>H₂O₂는 물이 아닙니다.</b> 원자 하나만 더 붙어도 완전히 다른 물질이 됩니다.
+    분자식은 “원자 몇 개가 어떻게 붙었는지”를 적은 것이라서, 숫자 하나가 물질의 이름을 바꿉니다.</p>
+  </div>
 
-  <h3>자주 나오는 분자 6개</h3>
+  <h3>자주 나오는 분자 여섯 개</h3>
   <div class="tw"><table>
     <thead><tr><th>분자식</th><th>이름</th><th>원자 구성</th><th>총 원자 수</th></tr></thead>
     <tbody>
-      <tr><td><code>H₂O</code></td><td>물</td><td>H 2개 + O 1개</td><td>3</td></tr>
-      <tr><td><code>CO₂</code></td><td>이산화탄소</td><td>C 1개 + O 2개</td><td>3</td></tr>
-      <tr><td><code>O₂</code></td><td>산소</td><td>O 2개</td><td>2</td></tr>
-      <tr><td><code>N₂</code></td><td>질소</td><td>N 2개</td><td>2</td></tr>
-      <tr><td><code>NH₃</code></td><td>암모니아</td><td>N 1개 + H 3개</td><td>4</td></tr>
-      <tr><td><code>CH₄</code></td><td>메테인(도시가스)</td><td>C 1개 + H 4개</td><td>5</td></tr>
+      <tr><td class="mn ok">H₂O</td><td class="hd">물</td><td>H 2개 + O 1개</td><td class="mn">3</td></tr>
+      <tr><td class="mn ok">CO₂</td><td class="hd">이산화탄소</td><td>C 1개 + O 2개</td><td class="mn">3</td></tr>
+      <tr><td class="mn ok">O₂</td><td class="hd">산소</td><td>O 2개</td><td class="mn">2</td></tr>
+      <tr><td class="mn ok">N₂</td><td class="hd">질소</td><td>N 2개</td><td class="mn">2</td></tr>
+      <tr><td class="mn ok">NH₃</td><td class="hd">암모니아</td><td>N 1개 + H 3개</td><td class="mn">4</td></tr>
+      <tr><td class="mn ok">CH₄</td><td class="hd">메테인 (도시가스)</td><td>C 1개 + H 4개</td><td class="mn">5</td></tr>
     </tbody>
   </table></div>
 
   <ul class="todo">
-    <li><label><input type="checkbox" data-q="w3m2"><span class="tt"><span class="day">화</span> — 위 6개를 노트에 옮겨 적고, 각각 <b>원자 개수</b>를 직접 세어 적는다.</span></label></li>
+    <li><label><input type="checkbox" data-q="w3m2"><span class="tt"><b>화요일</b> — 위 여섯 개를 노트에 옮겨 적고, 각각 <b>원자 개수를 직접 세어</b> 적습니다.</span></label></li>
   </ul>
 </section>
 
-<section id="thu">
-  <div class="eyebrow">Thursday · 손으로</div>
-  <h2><span class="cell">[3]</span>분자를 손으로 만든다</h2>
+<section class="sec" id="thu">
+  <div class="step-no"><span class="num">4</span><span class="lbl">실험</span><span class="day">THU · 손으로</span></div>
+  <h2>분자를 손으로 만듭니다</h2>
 
   <div class="tw"><table>
-    <thead><tr><th>준비물</th><th>대체 가능</th></tr></thead>
+    <thead><tr><th>준비물</th><th>없으면 이걸로</th></tr></thead>
     <tbody>
-      <tr><td>지점토 또는 찰흙 (2~3색)</td><td>초코볼·젤리·포도알</td></tr>
-      <tr><td>이쑤시개</td><td>짧게 자른 빨대</td></tr>
+      <tr><td class="hd">지점토 또는 찰흙 (2~3색)</td><td>초코볼 · 젤리 · 포도알</td></tr>
+      <tr><td class="hd">이쑤시개</td><td>짧게 자른 빨대</td></tr>
     </tbody>
   </table></div>
 
   <h3>순서</h3>
-  <div class="grid g2">
-    <div class="card"><span class="tag">01</span><h4>색 정하기</h4><p class="sub">O는 빨강, H는 흰색, C는 검정처럼 <b>원소마다 색을 정한다</b>. 실제 화학에서도 이렇게 약속해서 쓴다.</p></div>
-    <div class="card"><span class="tag">02</span><h4>크기 다르게</h4><p class="sub">원소마다 원자 크기가 다르다. O를 크게, H를 작게 만든다.</p></div>
-    <div class="card"><span class="tag">03</span><h4>4개 만들기</h4><p class="sub">H₂O · CO₂ · O₂ · NH₃ 네 개를 만들어 나란히 놓는다.</p></div>
-    <div class="card"><span class="tag">04</span><h4>집 안 화학식 찾기</h4><p class="sub">생수 성분표, 베이킹소다 봉지(NaHCO₃), 소독약 병(H₂O₂)에서 화학식을 찾아 사진 찍는다.</p></div>
+  <div class="cards two">
+    <div class="card"><span class="ct">01</span><h4>색을 정합니다</h4>
+      <p>O는 빨강, H는 흰색, C는 검정처럼 <b>원소마다 색을 약속</b>합니다. 실제 화학에서도 이렇게 약속해서 씁니다.</p></div>
+    <div class="card"><span class="ct">02</span><h4>크기를 다르게 합니다</h4>
+      <p>원소마다 원자 크기가 다릅니다. O를 크게, H를 작게 만듭니다.</p></div>
+    <div class="card"><span class="ct">03</span><h4>네 개를 만듭니다</h4>
+      <p>H₂O · CO₂ · O₂ · NH₃ 네 개를 만들어 나란히 놓습니다.</p></div>
+    <div class="card"><span class="ct">04</span><h4>집 안 화학식을 찾습니다</h4>
+      <p>생수 성분표, 베이킹소다 봉지(NaHCO₃), 소독약 병(H₂O₂)에서 화학식을 찾아 사진을 찍습니다.</p></div>
   </div>
 
-  <div class="callout good"><span class="lbl">확인 질문</span>
-  만든 모형을 늘어놓고 아빠가 묻는다. “이건 원자 몇 개짜리야?” “여기서 O를 하나 더 붙이면 무슨 물질이 될까?”
-  손에 든 채로 답하면 그 개념은 끝난 것이다.</div>
+  <div class="tw"><table>
+    <thead><tr><th>만든 분자</th><th>원자 개수</th><th>어디서 만나는 물질인가</th></tr></thead>
+    <tbody>
+      <tr><td class="mn ok">H₂O</td><td class="fill">______</td><td class="fill">______</td></tr>
+      <tr><td class="mn ok">CO₂</td><td class="fill">______</td><td class="fill">______</td></tr>
+      <tr><td class="mn ok">O₂</td><td class="fill">______</td><td class="fill">______</td></tr>
+      <tr><td class="mn ok">NH₃</td><td class="fill">______</td><td class="fill">______</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="plain">
+    <p><b>확인 질문</b> — 만든 모형을 늘어놓고 아빠가 묻습니다. “이건 원자 몇 개짜리야?”
+    “여기에 O를 하나 더 붙이면 무슨 물질이 될까?” 손에 든 채로 답할 수 있으면 그 개념은 끝난 것입니다.</p>
+  </div>
 
   <ul class="todo">
-    <li><label><input type="checkbox" data-q="w3m3"><span class="tt"><span class="day">목</span> — 분자 모형 4개를 만들고 사진을 남긴다. 집에서 찾은 화학식 2개를 적는다.</span></label></li>
+    <li><label><input type="checkbox" data-q="w3m3"><span class="tt"><b>목요일</b> — 분자 모형 4개를 만들고 사진을 남깁니다. 집에서 찾은 화학식 2개도 적습니다.</span></label></li>
   </ul>
 </section>
 
-<section id="fri">
-  <div class="eyebrow">Friday · 보스전</div>
-  <h2><span class="cell">[4]</span>문제 5개 + 3분 설명</h2>
+<section class="sec" id="fri">
+  <div class="step-no"><span class="num">5</span><span class="lbl">보스전</span><span class="day">FRI · 설명</span></div>
+  <h2>문제 5개와 3분 설명</h2>
 
   <div class="q"><span class="qn">Q1</span>
-    <p>물 분자 <code>H₂O</code> 하나에는 원자가 모두 몇 개 들어 있을까?</p>
-    <details><summary>해설 보기</summary><div class="ans"><b>3개.</b> 수소 원자 2개 + 산소 원자 1개다. 아래 작은 숫자는 그 원자의 개수를 뜻한다.</div></details>
+    <p>물 분자 <code>H₂O</code> 하나에는 원자가 모두 몇 개 들어 있을까요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>3개입니다.</b> 수소 원자 2개 + 산소 원자 1개입니다. 아래 작은 숫자가 그 원자의 개수를 뜻합니다.
+    </div></details>
   </div>
 
   <div class="q"><span class="qn">Q2</span>
-    <p><code>2H₂O</code>와 <code>H₂O₂</code>는 무엇이 다를까?</p>
+    <p><code>2H₂O</code>와 <code>H₂O₂</code>는 무엇이 다를까요?</p>
     <details><summary>해설 보기</summary><div class="ans">
-      <b>2H₂O는 물 분자가 2개</b>(같은 물질이 두 덩어리), <b>H₂O₂는 과산화수소라는 다른 물질</b>이다.
-      앞의 큰 숫자는 분자의 개수, 아래 작은 숫자는 분자 안 원자의 개수다.
+      <b>2H₂O는 물 분자가 2개이고, H₂O₂는 과산화수소라는 다른 물질입니다.</b>
+      앞의 큰 숫자는 분자의 개수, 아래 작은 숫자는 분자 안 원자의 개수입니다.
     </div></details>
   </div>
 
   <div class="q"><span class="qn">Q3</span>
-    <p>산소 원자 하나(O)와 산소 분자(O₂)는 같은 것일까?</p>
+    <p>산소 원자 하나(O)와 산소 분자(O₂)는 같은 것일까요?</p>
     <details><summary>해설 보기</summary><div class="ans">
-      <b>다르다.</b> 우리가 숨 쉬며 마시는 산소는 원자 2개가 붙은 <b>O₂</b>다.
-      원자 하나만으로는 그 물질의 성질이 나타나지 않는다.
+      <b>다릅니다.</b> 우리가 숨 쉬며 마시는 산소는 원자 2개가 붙은 <b>O₂</b>입니다.
+      원자 하나만으로는 그 물질의 성질이 나타나지 않습니다.
     </div></details>
   </div>
 
   <div class="q"><span class="qn">Q4</span>
-    <p>원자는 왜 전기를 띠지 않을까?</p>
+    <p>원자는 왜 전기를 띠지 않을까요?</p>
     <details><summary>해설 보기</summary><div class="ans">
-      <b>원자핵의 + 전기와 전자의 − 전기가 같은 크기로 상쇄되기 때문이다.</b>
-      이 균형이 깨지면(전자를 잃거나 얻으면) 전기를 띠게 되는데, 그게 다음 주에 배울 <b>이온</b>이다.
+      <b>원자핵의 + 전기와 전자의 − 전기가 같은 크기로 상쇄되기 때문입니다.</b>
+      이 균형이 깨지면(전자를 잃거나 얻으면) 전기를 띠게 되는데, 그것이 4주차에 배울 <b>이온</b>입니다.
     </div></details>
   </div>
 
   <div class="q"><span class="qn">Q5</span>
-    <p><code>CO₂</code> 분자 3개에는 산소 원자가 모두 몇 개 있을까?</p>
+    <p><code>CO₂</code> 분자 3개에는 산소 원자가 모두 몇 개 있을까요?</p>
     <details><summary>해설 보기</summary><div class="ans">
-      <b>6개.</b> 한 분자에 산소 원자가 2개이고 분자가 3개이므로 2 × 3 = 6이다. (탄소 원자는 3개)
+      <b>6개입니다.</b> 한 분자에 산소 원자가 2개이고 분자가 3개이므로 2 × 3 = 6입니다. (탄소 원자는 3개)
     </div></details>
   </div>
 
   <h3>아빠에게 3분 설명하기</h3>
   <div class="script">
-    <div><span class="s">① 이번 주에 배운 건</span> — 원자는 알갱이 한 개고, 그게 붙어서 성질을 갖게 된 게 분자라는 것.</div>
-    <div><span class="s">② 예를 들면</span> — H₂O는 수소 2개랑 산소 1개가 붙은 거야. 이걸 만들어 봤어. (모형 보여주기)</div>
-    <div><span class="s">③ 헷갈리기 쉬운 건</span> — 2H₂O는 물 분자 2개고, H₂O₂는 아예 다른 물질이야. 숫자 위치가 다르거든.</div>
+    <div class="row"><span class="s">배운 것</span><span>원자는 알갱이 한 개고, 그게 붙어서 성질을 갖게 된 것이 분자라는 것.</span></div>
+    <div class="row"><span class="s">예를 들면</span><span>H₂O는 수소 2개랑 산소 1개가 붙은 거야. 이렇게 만들어 봤어. (모형 보여주기)</span></div>
+    <div class="row"><span class="s">헷갈리는 것</span><span>2H₂O는 물 분자 2개고, H₂O₂는 아예 다른 물질이야. 숫자 위치가 다르거든.</span></div>
   </div>
 
   <ul class="todo">
-    <li><label><input type="checkbox" data-q="w3m4"><span class="tt"><span class="day">금</span> — 문제 5개 + 3분 설명. 모형을 들고 설명하면 더 쉽다.</span></label></li>
+    <li><label><input type="checkbox" data-q="w3m4"><span class="tt"><b>금요일</b> — 문제 5개와 3분 설명. 모형을 들고 설명하면 훨씬 쉽습니다.</span></label></li>
   </ul>
 
-  <p style="margin-top:18px"><span class="badge">⚛️ 분자 조립공 획득</span></p>
+  <p><span class="badge">획득 · 분자 조립공</span></p>
 </section>
 
-<section style="border-bottom:0">
-  <div class="eyebrow">Next</div>
-  <h2><span class="cell">[5]</span>다음 주 예고</h2>
-  <p>4주차는 <b>이온</b>이다. 오늘 “원자는 +와 −가 같아서 전기를 띠지 않는다”고 했는데,
-  그 균형이 깨지면 어떻게 될까. 소금물이 전기를 통하는 이유가 거기 있다. 캠프 1의 마지막이자 가장 중요한 주다.</p>
-  <div class="nav-b">
+<section class="sec" id="next">
+  <div class="step-no"><span class="num">6</span><span class="lbl">다음 주</span></div>
+  <h2>여기까지 하고 한 번 점검합니다</h2>
+  <p>3주차까지가 지금 준비된 분량입니다. 세 주를 실제로 돌려 보고 <b>리듬이 맞는지</b> 확인한 뒤 4주차부터 이어서 만듭니다.</p>
+
+  <div class="plain">
+    <p><b>3주를 마쳤다면 스스로 확인해 봅니다</b> — ① 하루 20분이 적당했는지 ② 목요일 실험이 부담스럽지 않았는지
+    ③ 금요일 설명에서 가장 자주 막힌 지점이 어디였는지. ③번이 4주차 문서에 반영됩니다.</p>
+  </div>
+
+  <p>다음은 <b>이온과 앙금</b>입니다. 오늘 “원자는 +와 −가 같아서 전기를 띠지 않는다”고 했는데,
+  그 균형이 깨지면 어떻게 될까요. 소금물이 전기를 통하는 이유가 거기에 있습니다.</p>
+
+  <div class="pager">
     <a href="week02.html">← 2주차</a>
-    <a href="index.html">전체 지도</a>
-    <a class="main" href="week04.html">4주차 →</a>
+    <a class="main" href="index.html">전체 지도</a>
   </div>
 </section>
 
-<footer>과학 등반 · 3주차 · 하루 20분 × 4일</footer>
+<footer>과학 등반 12주 · WEEK 03 원자와 분자 · 하루 20분 × 4일</footer>
 </div>
 <script>
-(function(){
-  var KEY="science_quest_progress";
-  function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){return{}}}
-  function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
-  var boxes=[].slice.call(document.querySelectorAll(".todo input[type=checkbox]"));
-  var st=load();
-  boxes.forEach(function(b){
-    if(st[b.dataset.q])b.checked=true;
-    b.addEventListener("change",function(){
-      var s=load();
-      if(b.checked)s[b.dataset.q]=1;else delete s[b.dataset.q];
-      save(s);paint();
+  (function(){
+    var KEY="science_quest_progress";
+    function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){return{}}}
+    function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+    var boxes=[].slice.call(document.querySelectorAll(".todo input[type=checkbox]"));
+    var st=load();
+    boxes.forEach(function(b){
+      if(st[b.dataset.q])b.checked=true;
+      b.addEventListener("change",function(){
+        var s=load();
+        if(b.checked)s[b.dataset.q]=1;else delete s[b.dataset.q];
+        save(s);paint();
+      });
     });
-  });
-  function paint(){
-    var el=document.getElementById("wdone");if(!el)return;
-    var n=boxes.filter(function(b){return b.checked}).length;
-    el.textContent=n+" / "+boxes.length+" 완료";
-  }
-  paint();
-  // 현재 섹션 표시
-  var links=[].slice.call(document.querySelectorAll("nav.toc a[href^='#']"));
-  var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1))});
-  function onScroll(){
-    var y=window.scrollY+120,idx=0;
-    secs.forEach(function(s,i){if(s&&s.offsetTop<=y)idx=i});
-    links.forEach(function(a,i){a.classList.toggle("now",i===idx)});
-  }
-  window.addEventListener("scroll",onScroll,{passive:true});onScroll();
-})();
+    function paint(){
+      var el=document.getElementById("wdone");
+      if(el){var n=boxes.filter(function(b){return b.checked}).length;
+        el.textContent=n+" / "+boxes.length;}
+      var hub=document.querySelector("[data-hub]");
+      if(hub){
+        var s=load(),total=0;
+        for(var w=1;w<=12;w++){
+          var n2=0;
+          for(var m=1;m<=4;m++) if(s["w"+w+"m"+m]) n2++;
+          total+=n2;
+          var p=document.querySelector('.p[data-p="'+w+'"]');
+          if(p&&!p.dataset.soon){p.textContent=n2===4?"완료":n2+" / 4";
+            p.className="p"+(n2===4?" done":(n2>0?" ing":""));}
+        }
+        var d=document.getElementById("allDone"),bar=document.getElementById("allBar");
+        if(d)d.textContent=total+" / 12";
+        if(bar)bar.style.width=(total/12*100)+"%";
+      }
+    }
+    paint();
+    var links=[].slice.call(document.querySelectorAll("nav.jump a[href^='#']"));
+    if(links.length){
+      var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1))});
+      var onScroll=function(){
+        var y=window.scrollY+130,idx=0;
+        secs.forEach(function(s,i){if(s&&s.offsetTop<=y)idx=i;});
+        links.forEach(function(a,i){a.classList.toggle("now",i===idx);});
+      };
+      window.addEventListener("scroll",onScroll,{passive:true});onScroll();
+    }
+  })();
 </script>
 </body>
 </html>

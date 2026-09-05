@@ -1,422 +1,582 @@
 <!DOCTYPE html>
-<html lang="ko" class="c1">
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0d1117">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#DCE2DB">
 <title>1주차 · 입자의 눈</title>
-<meta name="description" content="물질은 입자로 되어 있고 입자 사이에는 빈 공간이 있다 — 중2 과학의 모든 출발점.">
+<meta name="description" content="물질은 입자로 되어 있고 그 사이에는 빈 공간이 있습니다. 중2 과학의 출발점.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#0d1117; --bg2:#0b0f15; --panel:#161b22; --panel2:#1c2230; --line:#2a3340;
-  --ink:#e6edf3; --sub:#9aa7b4; --mut:#6b7886;
-  --acc:#4f9cff; --acc2:#7c5cff; --good:#3fb950; --warn:#d29922; --pink:#f778ba;
-  --chip:#21304a; --radius:16px;
-  --camp:#7c5cff; --camp-dim:#b7a4ff; --camp-bg:rgba(124,92,255,.14); --camp-line:#3d3470;
-}
-:root.c1{--camp:#7c5cff;--camp-dim:#b7a4ff;--camp-bg:rgba(124,92,255,.14);--camp-line:#3d3470}
-:root.c2{--camp:#d29922;--camp-dim:#f0c674;--camp-bg:rgba(210,153,34,.14);--camp-line:#5c4718}
-:root.c3{--camp:#3fb950;--camp-dim:#63d67c;--camp-bg:rgba(63,185,80,.14);--camp-line:#2c5c34}
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);line-height:1.72;font-size:16.5px;
-  font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR","Segoe UI",system-ui,sans-serif;
-  word-break:keep-all;overflow-wrap:anywhere;
-  padding-bottom:calc(40px + env(safe-area-inset-bottom))}
-.wrap{max-width:720px;margin:0 auto;padding:0 18px}
-a{color:var(--acc);text-decoration:none}
-p{margin:0 0 13px}
-b,strong{font-weight:700;color:#fff}
-.sub{color:var(--sub)}
-.mut{color:var(--mut)}
+  :root{
+    --ink:#131C18; --ink2:#2C3A33; --muted:#5F6E66; --faint:#8A968F;
+    --mist:#DCE2DB; --surface:#F8FAF6; --surface2:#EFF3EC;
+    --line:#C3CCC1; --hair:#DDE4DB;
+    --kelp:#1F6249; --kelp-wash:#DEEDE4; --kelp-line:#8FBBA3;
+    --amber:#8F6209; --amber-wash:#F5EAD0; --amber-line:#DCC79B;
+    --berry:#8C2F3E; --berry-wash:#F3DFE2; --berry-line:#D9A8B0;
+    --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+    --mono:"IBM Plex Mono","SFMono-Regular",Consolas,"D2Coding",monospace;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{margin:0;background:var(--mist);color:var(--ink);font-family:var(--sans);
+    font-size:16px;line-height:1.75;letter-spacing:-0.01em;
+    padding:0 18px calc(70px + env(safe-area-inset-bottom));
+    word-break:keep-all;overflow-wrap:anywhere;}
+  .wrap{max-width:1040px;margin:0 auto;}
 
-/* 헤더 */
-header.top{padding:26px 0 18px;background:linear-gradient(180deg,var(--bg2),var(--bg) 90%)}
-.kicker{display:inline-block;font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;font-weight:700;
-  color:var(--camp-dim);background:var(--camp-bg);border:1px solid var(--camp-line);
-  padding:6px 12px;border-radius:999px;margin-bottom:14px}
-h1{font-size:27px;line-height:1.3;margin:0 0 10px;font-weight:800;letter-spacing:-.01em}
-h1 .g{background:linear-gradient(90deg,var(--acc),var(--camp));-webkit-background-clip:text;background-clip:text;color:transparent}
-.lead{font-size:15.5px;color:var(--sub);margin:0 0 16px}
-.meta{display:flex;flex-wrap:wrap;gap:7px}
-.meta .m{font-size:12.5px;color:var(--sub);background:var(--panel);border:1px solid var(--line);padding:5px 11px;border-radius:999px}
+  /* ===== 표지 ===== */
+  .cover{padding:44px 0 30px;border-bottom:2px solid var(--ink);}
+  .cover .kicker{font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:0.2em;text-transform:uppercase;color:var(--kelp);margin:0 0 16px;}
+  .cover h1{font-size:clamp(27px,6vw,44px);font-weight:700;line-height:1.24;
+    letter-spacing:-0.035em;margin:0 0 16px;max-width:21ch;}
+  .cover .lede{font-size:clamp(15.5px,2vw,18px);font-weight:300;color:var(--ink2);
+    max-width:62ch;margin:0 0 24px;line-height:1.72;}
+  .cover .lede b{font-weight:600;color:var(--ink);}
+  .metaline{display:flex;flex-wrap:wrap;gap:6px 22px;font-family:var(--mono);
+    font-size:11.5px;color:var(--muted);letter-spacing:0.03em;}
+  .metaline b{color:var(--ink);font-weight:500;}
 
-/* 상단 이동 바 */
-nav.toc{position:sticky;top:0;z-index:30;background:rgba(13,17,23,.92);backdrop-filter:blur(8px);
-  border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:18px}
-nav.toc .row{display:flex;gap:6px;overflow-x:auto;padding:10px 18px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-nav.toc .row::-webkit-scrollbar{display:none}
-nav.toc a{flex:0 0 auto;font-size:13px;color:var(--sub);padding:7px 12px;border-radius:999px;
-  border:1px solid var(--line);background:var(--panel)}
-nav.toc a.now{color:#fff;background:var(--camp-bg);border-color:var(--camp-line)}
+  .summary{background:var(--ink);border-radius:3px;padding:26px 22px 24px;margin:28px 0 0;}
+  .summary h2{color:#F6FAF5;font-size:18px;font-weight:600;margin:0 0 6px;letter-spacing:-0.02em;}
+  .summary .sd{color:#93A399;font-size:13.5px;font-weight:300;margin:0 0 22px;line-height:1.65;}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:18px;}
+  .kpi .kl{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:#7E8F84;display:block;margin-bottom:5px;}
+  .kpi .kv{font-size:clamp(21px,3.2vw,28px);font-weight:700;color:#8FD3B4;
+    letter-spacing:-0.03em;display:block;line-height:1.1;}
+  .kpi .kn{font-size:12px;color:#B9C6BC;display:block;margin-top:6px;
+    font-weight:300;line-height:1.5;}
 
-/* 섹션 */
-section{padding:30px 0;border-bottom:1px solid var(--line)}
-.eyebrow{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--camp-dim);font-weight:700;margin-bottom:7px}
-h2{font-size:20px;margin:0 0 14px;font-weight:800;line-height:1.4}
-h2 .cell{display:inline-block;background:var(--camp);color:#0d1117;font-size:12.5px;font-weight:800;
-  border-radius:8px;padding:2px 9px;margin-right:8px;vertical-align:2px;font-family:ui-monospace,Menlo,monospace}
-h3{font-size:16.5px;margin:22px 0 9px;font-weight:700}
-h3:first-child{margin-top:0}
+  /* ===== 이동 바 ===== */
+  nav.jump{position:sticky;top:0;z-index:40;margin:0 -18px;padding:0 18px;
+    background:rgba(220,226,219,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);}
+  nav.jump .row{display:flex;gap:6px;overflow-x:auto;padding:9px 0;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  nav.jump .row::-webkit-scrollbar{display:none;}
+  nav.jump a{flex:0 0 auto;font-family:var(--mono);font-size:11.5px;letter-spacing:0.04em;
+    color:var(--muted);background:var(--surface);border:1px solid var(--line);
+    padding:6px 11px;border-radius:2px;text-decoration:none;}
+  nav.jump a.now{color:#fff;background:var(--kelp);border-color:var(--kelp);}
 
-/* 카드 · 콜아웃 */
-.grid{display:grid;gap:11px;margin:12px 0}
-.g2{grid-template-columns:1fr}
-@media(min-width:620px){.g2{grid-template-columns:repeat(2,1fr)}}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:15px 16px}
-.card h4{margin:0 0 7px;font-size:15px;font-weight:700}
-.card p{font-size:14.5px;margin:0}
-.tag{display:inline-block;font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px;margin-bottom:8px;
-  background:var(--camp-bg);color:var(--camp-dim);border:1px solid var(--camp-line)}
-.callout{border-left:4px solid var(--acc);background:var(--panel);border-radius:10px;padding:13px 15px;margin:14px 0;font-size:15px}
-.callout.good{border-left-color:var(--good)}
-.callout.warn{border-left-color:var(--warn)}
-.callout.p{border-left-color:var(--camp)}
-.callout b{display:inline}
-.callout .lbl{display:block;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);font-weight:700;margin-bottom:4px}
+  /* ===== 섹션 ===== */
+  .sec{padding:44px 0 12px;border-bottom:1px solid var(--line);scroll-margin-top:56px;}
+  .sec:last-of-type{border-bottom:0;}
+  .step-no{display:flex;align-items:center;gap:11px;margin-bottom:14px;}
+  .step-no .num{font-family:var(--mono);font-size:12px;font-weight:600;color:#fff;
+    background:var(--kelp);width:28px;height:28px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-no .lbl{font-family:var(--mono);font-size:11px;letter-spacing:0.13em;
+    text-transform:uppercase;color:var(--muted);}
+  .step-no .day{margin-left:auto;font-family:var(--mono);font-size:11px;
+    letter-spacing:0.1em;color:var(--kelp);background:var(--kelp-wash);
+    border:1px solid var(--kelp-line);padding:3px 9px;border-radius:2px;}
+  .sec h2{font-size:clamp(22px,3.4vw,29px);font-weight:600;letter-spacing:-0.03em;
+    line-height:1.34;margin:0 0 14px;max-width:30ch;}
+  .sec h3{font-size:17.5px;font-weight:600;letter-spacing:-0.02em;margin:30px 0 10px;}
+  .sec > p{max-width:70ch;color:var(--ink2);margin:0 0 16px;}
+  .sec strong,.sec b{font-weight:600;color:var(--ink);}
+  .sec code{font-family:var(--mono);font-size:0.86em;background:var(--surface2);
+    border:1px solid var(--hair);padding:1px 5px;border-radius:2px;}
 
-/* 표 */
-.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:12px;margin:12px 0}
-table{width:100%;border-collapse:collapse;font-size:14px;min-width:340px}
-th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
-th{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--mut);font-weight:700;background:var(--panel)}
-tbody tr:last-child td{border-bottom:0}
-td b{color:#fff}
-code{background:#0b1020;border:1px solid var(--line);border-radius:6px;padding:1px 6px;font-size:14px;color:#c9d6e5;
-  font-family:ui-monospace,Menlo,monospace}
+  .plain{background:var(--surface2);border-left:3px solid var(--kelp);
+    padding:14px 17px;margin:0 0 20px;border-radius:0 2px 2px 0;max-width:74ch;}
+  .plain p{margin:0;font-size:14.5px;color:var(--ink2);line-height:1.72;}
+  .plain p + p{margin-top:10px;}
+  .plain b{color:var(--kelp);font-weight:600;}
 
-/* 다이어그램 */
-.diagram{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:var(--radius);
-  background:var(--panel);padding:12px;margin:12px 0}
-.diagram svg{display:block}
-.figcap{font-size:12.5px;color:var(--mut);margin:-4px 0 12px;text-align:center}
+  .fig{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:20px 16px 16px;margin:20px 0 12px;}
+  .fig-t{font-family:var(--mono);font-size:11px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--kelp);margin:0 0 16px;
+    padding-bottom:9px;border-bottom:1px solid var(--hair);}
+  .fig svg{display:block;width:100%;height:auto;}
+  .fig-c{font-size:13px;color:var(--muted);margin:14px 0 0;font-weight:300;
+    line-height:1.65;padding-top:12px;border-top:1px solid var(--hair);}
+  .fig-c b{color:var(--ink);font-weight:600;}
 
-/* 할 일 체크 */
-.todo{list-style:none;margin:14px 0 0;padding:0;border:1px solid var(--line);border-radius:12px;background:var(--panel);overflow:hidden}
-.todo li+li{border-top:1px solid var(--line)}
-.todo label{display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start;
-  padding:14px 15px;cursor:pointer;font-size:15px;min-height:52px}
-.todo input{appearance:none;-webkit-appearance:none;width:21px;height:21px;margin:1px 0 0;
-  border:1.5px solid var(--mut);border-radius:6px;background:var(--panel2);display:grid;place-content:center;cursor:pointer}
-.todo input::after{content:"✓";font-size:13px;font-weight:800;color:#0d1117;transform:scale(0);transition:transform .12s}
-.todo input:checked{background:var(--good);border-color:var(--good)}
-.todo input:checked::after{transform:scale(1)}
-.todo input:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
-.todo input:checked ~ .tt{color:var(--mut);text-decoration:line-through}
-.todo .day{font-weight:700;color:var(--camp-dim)}
+  .sb{fill:#fff;stroke:#C3CCC1;stroke-width:1.5;}
+  .sb-k{fill:#DEEDE4;stroke:#1F6249;stroke-width:2;}
+  .sb-b{fill:#F3DFE2;stroke:#D9A8B0;stroke-width:1.5;}
+  .sb-a{fill:#F5EAD0;stroke:#DCC79B;stroke-width:1.5;}
+  .sb-g{fill:#EFF3EC;stroke:#C3CCC1;stroke-width:1.5;}
+  .sb-d{fill:#fff;stroke:#1F6249;stroke-width:1.6;stroke-dasharray:5 4;}
+  .st{font-family:var(--sans);font-size:13.5px;font-weight:600;fill:#131C18;
+    text-anchor:middle;letter-spacing:-0.3px;}
+  .st-s{font-family:var(--sans);font-size:11.5px;font-weight:400;fill:#5F6E66;text-anchor:middle;}
+  .st-k{fill:#1F6249;} .st-b{fill:#8C2F3E;} .st-a{fill:#8F6209;}
+  .sm{font-family:var(--mono);font-size:12px;fill:#131C18;text-anchor:middle;font-weight:500;}
+  .sm-s{font-family:var(--mono);font-size:10.5px;fill:#5F6E66;text-anchor:middle;}
+  .st-m{font-family:var(--mono);font-size:11px;fill:#8A968F;text-anchor:middle;letter-spacing:0.5px;}
+  .sl{stroke:#8A968F;stroke-width:1.6;fill:none;}
+  .sl-k{stroke:#1F6249;stroke-width:2;fill:none;}
+  .sl-a{stroke:#8F6209;stroke-width:1.8;fill:none;}
+  .sl-d{stroke:#8A968F;stroke-width:1.4;fill:none;stroke-dasharray:4 4;}
+  .sa{fill:#8A968F;} .sa-k{fill:#1F6249;} .sa-a{fill:#8F6209;}
+  .dot-k{fill:#1F6249;} .dot-a{fill:#C99A2E;} .dot-b{fill:#8C2F3E;}
 
-/* 문제 */
-.q{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px 16px;margin:11px 0}
-.q .qn{font-family:ui-monospace,Menlo,monospace;font-size:12px;font-weight:700;color:var(--camp-dim);letter-spacing:.08em}
-.q p{margin:6px 0 0;font-size:15.5px}
-details{margin-top:11px;border-top:1px solid var(--line);padding-top:10px}
-details summary{cursor:pointer;font-size:14px;font-weight:700;color:var(--acc);list-style:none;padding:4px 0}
-details summary::-webkit-details-marker{display:none}
-details summary::before{content:"▸ ";color:var(--acc)}
-details[open] summary::before{content:"▾ "}
-details .ans{font-size:14.5px;color:var(--sub);margin-top:8px}
-details .ans b{color:var(--good)}
+  /* ===== 표 ===== */
+  .tw{overflow-x:auto;margin:20px 0 8px;border:1px solid var(--line);
+    border-radius:3px;background:var(--surface);}
+  table{border-collapse:collapse;width:100%;font-size:13.8px;}
+  .tw.wide table{min-width:560px;}
+  thead th{background:var(--ink);color:#E8EFE7;text-align:left;font-family:var(--mono);
+    font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
+    padding:11px 13px;}
+  tbody td{padding:11px 13px;border-top:1px solid var(--hair);vertical-align:top;
+    color:var(--ink2);line-height:1.62;}
+  tbody tr:nth-child(even) td{background:var(--surface2);}
+  td.hd{font-weight:600;color:var(--ink);}
+  td.mn{font-family:var(--mono);font-size:12.5px;}
+  td.ok{color:var(--kelp);font-weight:600;}
+  td.no{color:var(--berry);font-weight:600;}
+  td.wa{color:var(--amber);font-weight:600;}
+  td.fill{font-family:var(--mono);color:var(--faint);}
 
-/* 대본 틀 */
-.script{background:#0b1020;border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0;font-size:15px}
-.script .s{color:var(--camp-dim);font-weight:700}
-.script div+div{margin-top:10px}
+  .note{background:var(--amber-wash);border:1px solid var(--amber-line);
+    border-radius:3px;padding:17px 19px;margin:20px 0 8px;}
+  .note p{margin:0;font-size:14px;color:#5C440C;line-height:1.72;}
+  .note p + p{margin-top:9px;}
+  .note b{font-weight:600;}
+  .note .lb{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--amber);margin-bottom:6px;}
+  .alert{background:var(--berry-wash);border:1px solid var(--berry-line);
+    border-radius:3px;padding:17px 19px;margin:20px 0 8px;}
+  .alert p{margin:0;font-size:14px;color:#6B2430;line-height:1.72;}
+  .alert p + p{margin-top:9px;}
+  .alert b{font-weight:600;}
+  .alert .lb{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--berry);margin-bottom:6px;}
 
-/* 배지 · 이동 */
-.badge{display:inline-block;font-size:15px;font-weight:700;color:var(--camp-dim);background:var(--camp-bg);
-  border:1px solid var(--camp-line);border-radius:999px;padding:8px 16px;margin-top:6px}
-.nav-b{display:flex;gap:10px;margin:22px 0 0}
-.nav-b a{flex:1;text-align:center;background:var(--panel);border:1px solid var(--line);border-radius:12px;
-  padding:14px 10px;font-size:14.5px;font-weight:700;color:var(--ink)}
-.nav-b a.main{background:var(--camp-bg);border-color:var(--camp-line);color:var(--camp-dim)}
-.nav-b a.off{color:var(--mut)}
-footer{padding:24px 0 40px;color:var(--mut);font-size:12.5px;text-align:center}
-@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+  /* ===== 카드 묶음 ===== */
+  .cards{display:grid;gap:12px;margin:18px 0 8px;}
+  @media(min-width:680px){.cards.two{grid-template-columns:repeat(2,1fr);}}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:15px 17px;}
+  .card .ct{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;
+    color:var(--kelp);display:block;margin-bottom:7px;}
+  .card h4{margin:0 0 6px;font-size:15.5px;font-weight:600;letter-spacing:-0.02em;}
+  .card p{margin:0;font-size:14px;color:var(--ink2);line-height:1.68;}
+
+  /* ===== 요일 할 일 ===== */
+  .todo{list-style:none;margin:20px 0 8px;padding:0;background:var(--surface);
+    border:1px solid var(--line);border-radius:3px;overflow:hidden;}
+  .todo li + li{border-top:1px solid var(--hair);}
+  .todo label{display:grid;grid-template-columns:22px 1fr;gap:13px;align-items:start;
+    padding:15px 16px;cursor:pointer;font-size:14.5px;line-height:1.65;color:var(--ink2);min-height:54px;}
+  .todo input{appearance:none;-webkit-appearance:none;width:21px;height:21px;margin:1px 0 0;
+    border:1.5px solid var(--line);border-radius:2px;background:#fff;
+    display:grid;place-content:center;cursor:pointer;}
+  .todo input::after{content:"✓";font-size:13px;font-weight:700;color:#fff;transform:scale(0);}
+  .todo input:checked{background:var(--kelp);border-color:var(--kelp);}
+  .todo input:checked::after{transform:scale(1);}
+  .todo input:focus-visible{outline:2px solid var(--kelp);outline-offset:2px;}
+  .todo input:checked ~ .tt{color:var(--faint);text-decoration:line-through;}
+  .todo .tt b{color:var(--ink);font-weight:600;}
+
+  /* ===== 문제 ===== */
+  .q{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:15px 17px;margin:12px 0;}
+  .q .qn{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--kelp);
+    letter-spacing:0.12em;}
+  .q > p{margin:6px 0 0;font-size:15.5px;color:var(--ink);line-height:1.7;}
+  .q details{margin-top:12px;border-top:1px solid var(--hair);padding-top:10px;}
+  .q summary{cursor:pointer;list-style:none;font-family:var(--mono);font-size:12px;
+    font-weight:600;color:var(--kelp);letter-spacing:0.06em;padding:3px 0;}
+  .q summary::-webkit-details-marker{display:none;}
+  .q summary::before{content:"+ ";}
+  .q details[open] summary::before{content:"− ";}
+  .q .ans{margin-top:9px;background:var(--kelp-wash);border-radius:2px;padding:12px 14px;
+    font-size:14px;color:var(--ink2);line-height:1.7;}
+  .q .ans b{color:var(--kelp);font-weight:600;}
+
+  /* ===== 설명 대본 ===== */
+  .script{background:var(--surface);border:1px solid var(--kelp-line);border-radius:3px;
+    padding:16px 18px;margin:18px 0 8px;}
+  .script .row{display:grid;grid-template-columns:70px 1fr;gap:12px;font-size:14.5px;
+    color:var(--ink2);line-height:1.7;}
+  .script .row + .row{margin-top:11px;padding-top:11px;border-top:1px solid var(--hair);}
+  .script .s{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;color:var(--kelp);
+    font-weight:600;padding-top:4px;}
+
+  .badge{display:inline-block;font-family:var(--mono);font-size:12.5px;font-weight:600;
+    color:var(--amber);background:var(--amber-wash);border:1px solid var(--amber-line);
+    border-radius:2px;padding:7px 14px;margin-top:14px;letter-spacing:0.04em;}
+
+  /* ===== 주차 목록 (허브) ===== */
+  .wlist{display:flex;flex-direction:column;gap:10px;margin:18px 0 8px;}
+  a.wk{display:grid;grid-template-columns:1fr auto;grid-template-areas:"n p" "t p" "d d";
+    gap:2px 14px;background:var(--surface);border:1px solid var(--line);
+    border-left:3px solid var(--kelp);border-radius:3px;padding:15px 17px;
+    text-decoration:none;color:var(--ink);}
+  a.wk .n{grid-area:n;font-family:var(--mono);font-size:11px;font-weight:600;
+    letter-spacing:0.12em;color:var(--kelp);}
+  a.wk .t{grid-area:t;font-size:17px;font-weight:600;letter-spacing:-0.02em;}
+  a.wk .d{grid-area:d;font-size:13.5px;color:var(--muted);margin-top:5px;line-height:1.6;font-weight:300;}
+  a.wk .p{grid-area:p;align-self:center;font-family:var(--mono);font-size:11px;color:var(--muted);
+    background:var(--surface2);border:1px solid var(--hair);border-radius:2px;padding:4px 9px;white-space:nowrap;}
+  a.wk .p.done{color:#fff;background:var(--kelp);border-color:var(--kelp);}
+  a.wk .p.ing{color:var(--amber);background:var(--amber-wash);border-color:var(--amber-line);}
+  .wk.soon{border-left-color:var(--line);opacity:.62;pointer-events:none;}
+  .wk.soon .n,.wk.soon .t{color:var(--muted);}
+
+  /* ===== 진행 막대 ===== */
+  .bar{height:7px;background:var(--hair);border-radius:99px;overflow:hidden;margin-top:12px;
+    border:1px solid var(--line);}
+  .bar i{display:block;height:100%;background:var(--kelp);width:0;transition:width .3s;}
+
+  /* ===== 페이지 이동 ===== */
+  .pager{display:flex;gap:9px;margin:26px 0 0;}
+  .pager a{flex:1;text-align:center;font-size:13.5px;font-weight:600;text-decoration:none;
+    color:var(--ink2);background:var(--surface);border:1px solid var(--line);
+    border-radius:3px;padding:14px 8px;}
+  .pager a.main{background:var(--kelp);border-color:var(--kelp);color:#fff;}
+  footer{padding:26px 0 10px;font-family:var(--mono);font-size:11.5px;color:var(--faint);
+    letter-spacing:0.03em;line-height:1.8;}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;}}
 </style>
 </head>
 <body>
-<header class="top"><div class="wrap">
-  <span class="kicker">WEEK 01 · CAMP 1 물질 · 하루 20분 × 4일</span>
-  <h1>입자의 눈 — <span class="g">보이지 않는 것을 보는 법</span></h1>
-  <p class="lead">중2 과학이 어려워지는 진짜 이유는 <b>눈에 안 보이는 알갱이를 머릿속에 그려야 하기 때문</b>이다.
-  이번 주에 그 눈을 만든다. 여기서 만든 그림 하나로 앞으로 12주를 버틴다.</p>
-  <div class="meta">
-    <span class="m">중1 연결 · 물질의 상태 변화</span>
-    <span class="m">핵심 개념 2개</span>
-    <span class="m">실험 1개</span>
-    <span class="m" id="wdone">0 / 4 완료</span>
+<div class="wrap">
+<header class="cover">
+  <p class="kicker">WEEK 01 · 캠프 1 물질 · 하루 20분 × 4일</p>
+  <h1>입자의 눈</h1>
+  <p class="lede">
+    중2 과학이 갑자기 어려워지는 진짜 이유는 <b>눈에 보이지 않는 알갱이를 머릿속에 그려야 하기 때문</b>입니다.
+    이번 주에는 그 눈을 만듭니다. 여기서 만든 그림 하나로 앞으로 12주를 버팁니다.
+  </p>
+  <div class="metaline">
+    <span>중1 연결 <b>물질의 상태 변화</b></span>
+    <span>개념 <b>입자 · 빈 공간</b></span>
+    <span>실험 <b>물 + 알코올 부피</b></span>
+    <span>진행 <b id="wdone">0 / 4</b></span>
   </div>
-</div></header>
 
-<nav class="toc"><div class="row">
+  <div class="summary">
+    <h2>이번 주에 남길 것</h2>
+    <p class="sd">금요일에 아래 세 가지를 아빠에게 설명할 수 있으면 이번 주는 끝난 것입니다.</p>
+    <div class="kpis">
+      <div class="kpi"><span class="kl">문장 1</span><span class="kv">입자</span>
+        <span class="kn">물질은 눈에 보이지 않는 알갱이로 되어 있다</span></div>
+      <div class="kpi"><span class="kl">문장 2</span><span class="kv">빈 공간</span>
+        <span class="kn">그 알갱이들 사이에는 빈 공간이 있다</span></div>
+      <div class="kpi"><span class="kl">문장 3</span><span class="kv">그대로</span>
+        <span class="kn">상태가 변해도 알갱이 자체는 변하지 않는다</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="jump"><div class="row">
   <a href="#map">이번 주 지도</a>
   <a href="#mon">월 · 열기</a>
   <a href="#tue">화 · 채우기</a>
   <a href="#thu">목 · 손으로</a>
   <a href="#fri">금 · 보스전</a>
+  <a href="#next">다음 주</a>
 </div></nav>
 
-<div class="wrap">
+<section class="sec" id="map">
+  <div class="step-no"><span class="num">1</span><span class="lbl">이번 주 지도</span></div>
+  <h2>이번 주에 만들 그림 한 장</h2>
+  <p>물질을 덩어리가 아니라 <b>알갱이의 모임</b>으로 보는 것. 이번 주의 전부는 아래 그림 하나입니다.
+  상태가 달라져도 알갱이의 종류와 개수는 어디서도 변하지 않습니다. 변하는 것은 <b>거리와 속도</b>뿐입니다.</p>
 
-<section id="map">
-  <div class="eyebrow">This week</div>
-  <h2><span class="cell">MAP</span>이번 주에 만들 그림 하나</h2>
-  <p class="sub">물질을 덩어리가 아니라 <b>알갱이의 모임</b>으로 보는 것. 상태가 달라져도 알갱이 자체는 그대로다.
-  아래 그림이 이번 주의 전부이고, 금요일에 이 그림을 아빠에게 설명하면 통과다.</p>
-  <div class="diagram">
-    <svg viewBox="0 0 640 220" width="640" height="220" font-family="inherit" role="img" aria-label="고체·액체·기체의 입자 배열 비교">
-      <rect x="8" y="30" width="190" height="150" rx="12" fill="#1c2230" stroke="#2a3340"/>
-      <text x="103" y="52" fill="#e6edf3" font-size="14" font-weight="700" text-anchor="middle">고체</text>
-      <g fill="#7c5cff">
-        <circle cx="48" cy="80" r="9"/><circle cx="78" cy="80" r="9"/><circle cx="108" cy="80" r="9"/><circle cx="138" cy="80" r="9"/>
-        <circle cx="48" cy="110" r="9"/><circle cx="78" cy="110" r="9"/><circle cx="108" cy="110" r="9"/><circle cx="138" cy="110" r="9"/>
-        <circle cx="48" cy="140" r="9"/><circle cx="78" cy="140" r="9"/><circle cx="108" cy="140" r="9"/><circle cx="138" cy="140" r="9"/>
+  <div class="fig">
+    <p class="fig-t">도식 1 · 고체 · 액체 · 기체의 입자 배열</p>
+    <svg viewBox="0 0 900 260" role="img" aria-label="고체 액체 기체의 입자 배열과 운동 비교">
+      <rect class="sb" x="8" y="14" width="280" height="176" rx="3"/>
+      <text class="st" x="148" y="42">고체</text>
+      <g class="dot-k">
+        <circle cx="76" cy="76" r="10"/><circle cx="112" cy="76" r="10"/><circle cx="148" cy="76" r="10"/><circle cx="184" cy="76" r="10"/><circle cx="220" cy="76" r="10"/>
+        <circle cx="76" cy="112" r="10"/><circle cx="112" cy="112" r="10"/><circle cx="148" cy="112" r="10"/><circle cx="184" cy="112" r="10"/><circle cx="220" cy="112" r="10"/>
+        <circle cx="76" cy="148" r="10"/><circle cx="112" cy="148" r="10"/><circle cx="148" cy="148" r="10"/><circle cx="184" cy="148" r="10"/><circle cx="220" cy="148" r="10"/>
       </g>
-      <text x="103" y="170" fill="#9aa7b4" font-size="11.5" text-anchor="middle">붙어서 제자리 진동</text>
+      <text class="st-s" x="148" y="180">규칙적으로 빽빽 · 제자리에서 진동</text>
 
-      <rect x="225" y="30" width="190" height="150" rx="12" fill="#1c2230" stroke="#2a3340"/>
-      <text x="320" y="52" fill="#e6edf3" font-size="14" font-weight="700" text-anchor="middle">액체</text>
-      <g fill="#4f9cff">
-        <circle cx="262" cy="86" r="9"/><circle cx="292" cy="96" r="9"/><circle cx="325" cy="82" r="9"/><circle cx="358" cy="95" r="9"/>
-        <circle cx="272" cy="120" r="9"/><circle cx="308" cy="128" r="9"/><circle cx="345" cy="118" r="9"/><circle cx="380" cy="130" r="9"/>
-        <circle cx="290" cy="152" r="9"/><circle cx="330" cy="150" r="9"/><circle cx="365" cy="156" r="9"/>
+      <rect class="sb" x="304" y="14" width="280" height="176" rx="3"/>
+      <text class="st" x="444" y="42">액체</text>
+      <g class="dot-k">
+        <circle cx="360" cy="82" r="10"/><circle cx="398" cy="94" r="10"/><circle cx="440" cy="78" r="10"/><circle cx="482" cy="92" r="10"/><circle cx="522" cy="80" r="10"/>
+        <circle cx="374" cy="122" r="10"/><circle cx="416" cy="132" r="10"/><circle cx="460" cy="120" r="10"/><circle cx="504" cy="130" r="10"/>
+        <circle cx="392" cy="160" r="10"/><circle cx="440" cy="158" r="10"/><circle cx="486" cy="164" r="10"/>
       </g>
-      <text x="320" y="172" fill="#9aa7b4" font-size="11.5" text-anchor="middle">가까이 있지만 미끄러짐</text>
+      <text class="st-s" x="444" y="180">가깝지만 불규칙 · 서로 미끄러짐</text>
 
-      <rect x="442" y="30" width="190" height="150" rx="12" fill="#1c2230" stroke="#2a3340"/>
-      <text x="537" y="52" fill="#e6edf3" font-size="14" font-weight="700" text-anchor="middle">기체</text>
-      <g fill="#3fb950">
-        <circle cx="475" cy="78" r="9"/><circle cx="560" cy="70" r="9"/><circle cx="612" cy="100" r="9"/>
-        <circle cx="500" cy="128" r="9"/><circle cx="575" cy="140" r="9"/><circle cx="462" cy="160" r="9"/>
-        <circle cx="530" cy="105" r="9"/>
+      <rect class="sb" x="600" y="14" width="292" height="176" rx="3"/>
+      <text class="st" x="746" y="42">기체</text>
+      <g class="dot-k">
+        <circle cx="648" cy="74" r="10"/><circle cx="762" cy="66" r="10"/><circle cx="856" cy="96" r="10"/>
+        <circle cx="690" cy="128" r="10"/><circle cx="800" cy="140" r="10"/><circle cx="634" cy="164" r="10"/>
+        <circle cx="736" cy="104" r="10"/><circle cx="866" cy="158" r="10"/>
       </g>
-      <text x="537" y="172" fill="#9aa7b4" font-size="11.5" text-anchor="middle">멀리 떨어져 자유롭게</text>
+      <text class="st-s" x="746" y="180">멀리 흩어져 · 사방으로 빠르게</text>
 
-      <text x="320" y="200" fill="#6b7886" font-size="11.5" text-anchor="middle">← 열을 얻으면 입자가 더 빠르게 움직이고 사이가 멀어진다 →</text>
-      <path d="M60 208 L580 208" stroke="#d29922" stroke-width="1.5" stroke-dasharray="5 4"/>
+      <line class="sl-a" x1="60" y1="222" x2="840" y2="222"/>
+      <polygon class="sa-a" points="840,217 852,222 840,227"/>
+      <polygon class="sa-a" points="60,217 48,222 60,227"/>
+      <text class="st-m st-a" x="450" y="246">열을 얻으면 입자가 빨라지고 사이가 멀어집니다 · 열을 잃으면 반대입니다</text>
     </svg>
+    <p class="fig-c">세 그림에서 <b>알갱이의 개수와 종류는 똑같습니다.</b> 달라진 것은 배열과 속도뿐입니다.
+    이 한 가지를 붙잡고 있으면 이번 학기 물질 단원 대부분이 설명됩니다.</p>
   </div>
-  <p class="figcap">알갱이의 개수와 종류는 어디서도 변하지 않는다. 변하는 건 거리와 속도뿐이다.</p>
 </section>
 
-<section id="mon">
-  <div class="eyebrow">Monday · 열기</div>
-  <h2><span class="cell">[1]</span>물질은 알갱이로 되어 있다</h2>
+<section class="sec" id="mon">
+  <div class="step-no"><span class="num">2</span><span class="lbl">개념 하나</span><span class="day">MON · 열기</span></div>
+  <h2>물질은 알갱이로 되어 있습니다</h2>
 
-  <h3>물을 계속 반으로 쪼개면</h3>
-  <p>물 한 컵을 반으로 나누고, 또 반으로 나눈다. 계속하면 언젠가 <b>더 나누면 물이 아니게 되는 크기</b>가 나온다.
-  그 알갱이를 <b>입자</b>라고 부른다. 세상의 모든 물질 — 물, 공기, 쇠, 내 몸 — 이 알갱이의 모임이다.</p>
-  <p>중요한 건 눈에 안 보인다는 사실이 아니라, <b>알갱이 사이에 빈 공간이 있다</b>는 사실이다.
-  중2 과학에서 헷갈리는 대부분이 이 빈 공간을 잊어서 생긴다.</p>
-
-  <h3>빈 공간이 있다는 증거 세 가지</h3>
-  <div class="grid g2">
-    <div class="card"><span class="tag">증거 1</span><h4>냄새가 퍼진다</h4>
-      <p class="sub">향수를 뿌리면 방 반대편까지 퍼진다. 향수 입자가 <b>공기 입자 사이의 빈 공간</b>으로 끼어들며 이동하기 때문이다. 이 현상을 <b>확산</b>이라고 한다.</p></div>
-    <div class="card"><span class="tag">증거 2</span><h4>공기는 눌린다</h4>
-      <p class="sub">주사기 입구를 막고 밀면 공기는 쑥 눌리는데 물은 거의 안 눌린다. 기체는 입자 사이 빈 공간이 크고, 액체는 작기 때문이다.</p></div>
-    <div class="card"><span class="tag">증거 3</span><h4>섞으면 부피가 준다</h4>
-      <p class="sub">물 50 mL와 알코올 50 mL를 섞으면 100 mL보다 적다. 서로 다른 크기의 입자가 <b>빈 공간에 끼어 들어가기</b> 때문이다. 목요일에 직접 확인한다.</p></div>
-    <div class="card"><span class="tag">착각 주의</span><h4>“작은 물방울”이 아니다</h4>
-      <p class="sub">입자는 아주 작은 물방울이 아니다. 물방울은 이미 입자 수억 개의 모임이다. 입자는 <b>그보다 훨씬 아래 단계</b>다.</p></div>
+  <div class="plain">
+    <p><b>오늘 할 일은 읽고 질문 3개를 적는 것뿐입니다.</b> 외우려 하지 않아도 됩니다.
+    답을 찾는 것은 이번 주 남은 사흘의 일입니다.</p>
   </div>
 
-  <div class="callout p"><span class="lbl">한 줄 정리</span>
-  물질은 <b>입자</b>로 되어 있고, 입자 사이에는 <b>빈 공간</b>이 있다.</div>
+  <h3>물을 계속 반으로 쪼개면</h3>
+  <p>물 한 컵을 반으로 나누고, 또 반으로 나눕니다. 계속하면 언젠가 <b>더 나누면 물이 아니게 되는 크기</b>가 나옵니다.
+  그 알갱이를 <b>입자</b>라고 부릅니다. 물, 공기, 쇠, 우리 몸까지 세상의 모든 물질이 이 알갱이의 모임입니다.</p>
+  <p>중요한 것은 눈에 보이지 않는다는 사실이 아니라 <b>알갱이 사이에 빈 공간이 있다</b>는 사실입니다.
+  중2에서 헷갈리는 문제의 상당수가 이 빈 공간을 잊어서 생깁니다.</p>
+
+  <h3>빈 공간이 있다는 증거</h3>
+  <div class="tw"><table>
+    <thead><tr><th>증거</th><th>무슨 일이</th><th>왜 그런가</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">냄새가 퍼진다</td><td>향수를 뿌리면 방 반대편에서도 냄새가 난다</td>
+        <td>향수 입자가 <b>공기 입자 사이의 빈 공간</b>으로 끼어들며 이동합니다. 이것을 <b>확산</b>이라고 합니다.</td></tr>
+      <tr><td class="hd">공기는 눌린다</td><td>주사기 입구를 막고 밀면 공기는 눌리는데 물은 거의 안 눌린다</td>
+        <td>기체는 입자 사이 빈 공간이 크고, 액체는 아주 작기 때문입니다.</td></tr>
+      <tr><td class="hd">섞으면 부피가 준다</td><td>물 50 mL와 알코올 50 mL를 섞으면 100 mL보다 적다</td>
+        <td>크기가 다른 입자가 <b>서로의 빈 공간에 끼어 들어가기</b> 때문입니다. 목요일에 직접 확인합니다.</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="alert"><span class="lb">자주 하는 착각</span>
+    <p>입자는 <b>아주 작은 물방울이 아닙니다.</b> 우리 눈에 보이는 가장 작은 물방울조차 이미 입자 수억 개의 모임입니다.
+    입자는 그보다 훨씬 아래 단계라고 생각해야 합니다.</p>
+  </div>
+
+  <div class="plain">
+    <p><b>한 줄 정리</b> — 물질은 <b>입자</b>로 되어 있고, 입자 사이에는 <b>빈 공간</b>이 있습니다.</p>
+  </div>
 
   <ul class="todo">
-    <li><label><input type="checkbox" data-q="w1m1"><span class="tt"><span class="day">월</span> — 위 내용을 읽고, <b>궁금한 질문 3개</b>를 노트에 적는다. 답은 찾지 않는다. 질문만 적는다.</span></label></li>
+    <li><label><input type="checkbox" data-q="w1m1"><span class="tt"><b>월요일</b> — 위를 읽고 <b>궁금한 질문 3개</b>를 노트에 적습니다. 답은 찾지 않습니다. 질문만 적습니다.</span></label></li>
   </ul>
 </section>
 
-<section id="tue">
-  <div class="eyebrow">Tuesday · 채우기</div>
-  <h2><span class="cell">[2]</span>상태가 달라도 알갱이는 그대로다</h2>
+<section class="sec" id="tue">
+  <div class="step-no"><span class="num">3</span><span class="lbl">개념 둘</span><span class="day">TUE · 채우기</span></div>
+  <h2>상태가 달라도 알갱이는 그대로입니다</h2>
 
-  <p>고체·액체·기체는 <b>다른 물질이 아니다</b>. 같은 입자가 얼마나 붙어 있고 얼마나 빠르게 움직이는지의 차이일 뿐이다.
-  얼음·물·수증기는 전부 같은 물 입자다.</p>
+  <p>고체·액체·기체는 <b>서로 다른 물질이 아닙니다.</b> 같은 입자가 얼마나 붙어 있고 얼마나 빠르게 움직이는지의 차이일 뿐입니다.
+  얼음·물·수증기는 전부 같은 물 입자입니다.</p>
 
   <div class="tw"><table>
     <thead><tr><th>상태</th><th>입자 배열</th><th>입자 운동</th><th>모양 · 부피</th></tr></thead>
     <tbody>
-      <tr><td><b>고체</b></td><td>규칙적으로 빽빽하게</td><td>제자리에서 진동</td><td>모양 일정 · 부피 일정</td></tr>
-      <tr><td><b>액체</b></td><td>가깝지만 불규칙</td><td>서로 미끄러지며 이동</td><td>모양 변함 · 부피 일정</td></tr>
-      <tr><td><b>기체</b></td><td>멀리 흩어져 불규칙</td><td>사방으로 빠르게 날아다님</td><td>모양 변함 · 부피 변함</td></tr>
+      <tr><td class="hd">고체</td><td>규칙적으로 빽빽하게</td><td>제자리에서 진동</td><td>모양 일정 · 부피 일정</td></tr>
+      <tr><td class="hd">액체</td><td>가깝지만 불규칙</td><td>서로 미끄러지며 이동</td><td>모양 변함 · 부피 일정</td></tr>
+      <tr><td class="hd">기체</td><td>멀리 흩어져 불규칙</td><td>사방으로 빠르게 날아다님</td><td>모양 변함 · 부피 변함</td></tr>
     </tbody>
   </table></div>
 
-  <h3>가장 많이 하는 착각</h3>
-  <div class="callout warn"><span class="lbl">여기서 틀린다</span>
-  “물이 끓어서 수증기가 되면 물 입자가 <b>사라진다</b>” — 아니다. 입자는 하나도 사라지지 않는다.
-  <b>멀리 흩어져서 눈에 안 보일 뿐</b>이다. 그래서 뚜껑을 덮으면 다시 물방울로 모인다.</div>
-  <p>같은 이유로 상태가 변해도 <b>질량은 변하지 않는다</b>. 알갱이의 개수가 그대로이기 때문이다.
-  변하는 건 <b>부피</b>다. 사이가 멀어지면 같은 개수라도 자리를 더 많이 차지한다.</p>
+  <div class="alert"><span class="lb">여기서 가장 많이 틀립니다</span>
+    <p>“물이 끓어 수증기가 되면 물 입자가 <b>사라진다</b>” — 아닙니다. 입자는 하나도 사라지지 않습니다.
+    <b>멀리 흩어져서 눈에 보이지 않을 뿐</b>입니다. 그래서 뚜껑을 덮어 두면 다시 물방울로 모입니다.</p>
+    <p>같은 이유로 상태가 변해도 <b>질량은 변하지 않습니다.</b> 알갱이의 개수가 그대로이기 때문입니다.
+    변하는 것은 <b>부피</b>입니다. 사이가 멀어지면 같은 개수라도 자리를 더 많이 차지합니다.</p>
+  </div>
 
   <h3>노트 한 장 양식</h3>
-  <p class="sub">A5 노트 한 장에 아래 네 칸만 그린다. 글보다 <b>동그라미 그림</b>이 먼저다.</p>
+  <p>A5 노트 한 장에 네 칸만 그립니다. 글보다 <b>동그라미 그림</b>이 먼저입니다.</p>
   <div class="tw"><table>
     <thead><tr><th>칸</th><th>여기에 쓸 것</th></tr></thead>
     <tbody>
-      <tr><td><b>① 그림</b></td><td>고체·액체·기체 입자 배열을 동그라미로 직접 그리기 (베끼지 말고 기억해서)</td></tr>
-      <tr><td><b>② 한 줄</b></td><td>“물질은 입자로 되어 있고 사이에 빈 공간이 있다”</td></tr>
-      <tr><td><b>③ 내 예시</b></td><td>내 생활에서 찾은 확산의 예 1개 (예: 라면 냄새, 방향제)</td></tr>
-      <tr><td><b>④ 질문</b></td><td>월요일에 적은 질문 3개 중, 답이 생긴 것에 ✓</td></tr>
+      <tr><td class="hd">① 그림</td><td>고체·액체·기체의 입자 배열을 동그라미로 <b>기억해서</b> 그리기 (베끼지 않기)</td></tr>
+      <tr><td class="hd">② 한 줄</td><td>“물질은 입자로 되어 있고 그 사이에 빈 공간이 있다”</td></tr>
+      <tr><td class="hd">③ 내 예시</td><td>생활에서 찾은 확산의 예 하나 (라면 냄새, 방향제, 물에 푼 물감 등)</td></tr>
+      <tr><td class="hd">④ 질문</td><td>월요일에 적은 질문 3개 중 답이 생긴 것에 표시</td></tr>
     </tbody>
   </table></div>
 
   <ul class="todo">
-    <li><label><input type="checkbox" data-q="w1m2"><span class="tt"><span class="day">화</span> — 노트 한 장을 위 양식대로 채운다. 20분이 되면 덜 채워졌어도 덮는다.</span></label></li>
+    <li><label><input type="checkbox" data-q="w1m2"><span class="tt"><b>화요일</b> — 노트 한 장을 위 양식대로 채웁니다. 20분이 지나면 덜 채워졌어도 덮습니다.</span></label></li>
   </ul>
 </section>
 
-<section id="thu">
-  <div class="eyebrow">Thursday · 손으로</div>
-  <h2><span class="cell">[3]</span>빈 공간을 눈으로 확인한다</h2>
+<section class="sec" id="thu">
+  <div class="step-no"><span class="num">4</span><span class="lbl">실험</span><span class="day">THU · 손으로</span></div>
+  <h2>빈 공간을 눈으로 확인합니다</h2>
 
-  <div class="callout warn"><span class="lbl">안전</span>
-  소독용 알코올은 <b>불 근처에서 절대 사용하지 않는다</b>. 창문을 열고 하고, 끝나면 손을 씻는다. 마시지 않는다.</div>
+  <div class="note"><span class="lb">안전</span>
+    <p>소독용 알코올은 <b>불 근처에서 절대 사용하지 않습니다.</b> 창문을 열고 하고, 끝나면 손을 씻습니다. 마시지 않습니다.</p>
+  </div>
 
   <div class="tw"><table>
-    <thead><tr><th>준비물</th><th>대체 가능</th></tr></thead>
+    <thead><tr><th>준비물</th><th>없으면 이걸로</th></tr></thead>
     <tbody>
-      <tr><td>눈금 있는 계량컵 또는 페트병 2개</td><td>같은 컵 2개 + 유성펜으로 눈금 표시</td></tr>
-      <tr><td>물 50 mL</td><td>—</td></tr>
-      <tr><td>소독용 알코올 50 mL</td><td>손소독제(젤 말고 액체)</td></tr>
-      <tr><td>투명한 좁은 병 1개</td><td>500 mL 생수병</td></tr>
+      <tr><td class="hd">눈금 있는 계량컵 2개</td><td>같은 컵 2개에 유성펜으로 눈금 표시</td></tr>
+      <tr><td class="hd">물 50 mL</td><td>—</td></tr>
+      <tr><td class="hd">소독용 알코올 50 mL</td><td>액체형 손소독제 (젤 제외)</td></tr>
+      <tr><td class="hd">투명하고 좁은 병</td><td>500 mL 생수병 — 좁을수록 차이가 잘 보입니다</td></tr>
     </tbody>
   </table></div>
 
-  <h3>실험 순서</h3>
-  <div class="grid g2">
-    <div class="card"><span class="tag">01</span><h4>예상 먼저</h4><p class="sub">섞으면 몇 mL가 될지 <b>먼저 적는다</b>. 예상을 적지 않으면 결과를 봐도 놀라지 않고, 놀라지 않으면 기억에 남지 않는다.</p></div>
-    <div class="card"><span class="tag">02</span><h4>따로 재기</h4><p class="sub">물 50 mL, 알코올 50 mL를 각각 정확히 잰다.</p></div>
-    <div class="card"><span class="tag">03</span><h4>섞고 다시 읽기</h4><p class="sub">좁은 병에 둘 다 붓고 눈금을 읽는다. 병이 좁을수록 차이가 잘 보인다.</p></div>
-    <div class="card"><span class="tag">04</span><h4>확산도 함께</h4><p class="sub">방 한쪽에서 향수를 한 번 뿌리고, 반대쪽에서 냄새가 날 때까지 <b>초를 잰다</b>.</p></div>
+  <h3>순서</h3>
+  <div class="cards two">
+    <div class="card"><span class="ct">01</span><h4>예상을 먼저 적습니다</h4>
+      <p>섞으면 몇 mL가 될지 <b>보기 전에</b> 적습니다. 예상을 적지 않으면 결과를 봐도 놀라지 않고, 놀라지 않으면 기억에 남지 않습니다.</p></div>
+    <div class="card"><span class="ct">02</span><h4>따로 정확히 잽니다</h4>
+      <p>물 50 mL, 알코올 50 mL를 각각 정확히 잽니다.</p></div>
+    <div class="card"><span class="ct">03</span><h4>섞고 눈금을 다시 읽습니다</h4>
+      <p>좁은 병에 둘 다 붓고 눈금을 읽습니다. 줄어든 양이 <b>입자 사이의 빈 공간</b>입니다.</p></div>
+    <div class="card"><span class="ct">04</span><h4>확산도 함께 잽니다</h4>
+      <p>방 한쪽에서 향수를 한 번 뿌리고, 반대쪽에서 냄새가 날 때까지 <b>초를 잽니다</b>.</p></div>
   </div>
 
   <div class="tw"><table>
     <thead><tr><th>기록</th><th>내가 적은 값</th></tr></thead>
     <tbody>
-      <tr><td>예상 부피</td><td>______ mL</td></tr>
-      <tr><td>실제 부피</td><td>______ mL</td></tr>
-      <tr><td>줄어든 양</td><td>______ mL</td></tr>
-      <tr><td>냄새가 퍼지는 데 걸린 시간</td><td>______ 초</td></tr>
+      <tr><td class="hd">예상 부피</td><td class="fill">______ mL</td></tr>
+      <tr><td class="hd">실제 부피</td><td class="fill">______ mL</td></tr>
+      <tr><td class="hd">줄어든 양</td><td class="fill">______ mL</td></tr>
+      <tr><td class="hd">냄새가 퍼지는 데 걸린 시간</td><td class="fill">______ 초</td></tr>
     </tbody>
   </table></div>
 
-  <div class="callout good"><span class="lbl">왜 이런 결과가 나오나</span>
-  물 입자와 알코올 입자는 크기가 다르다. 작은 입자가 큰 입자 사이의 <b>빈 공간에 들어가 앉기</b> 때문에
-  전체 부피가 둘을 더한 것보다 작아진다. 쌀과 좁쌀을 섞으면 부피가 줄어드는 것과 같은 이치다.</div>
+  <div class="plain">
+    <p><b>왜 이런 결과가 나오나</b> — 물 입자와 알코올 입자는 크기가 다릅니다.
+    작은 입자가 큰 입자 사이의 <b>빈 공간에 들어가 앉기</b> 때문에 전체 부피가 둘을 더한 것보다 작아집니다.
+    쌀과 좁쌀을 섞으면 부피가 줄어드는 것과 같은 이치입니다.</p>
+  </div>
 
   <ul class="todo">
-    <li><label><input type="checkbox" data-q="w1m3"><span class="tt"><span class="day">목</span> — 실험하고 위 표를 채운다. 사진 한 장을 남긴다. 예상과 달라도 성공이다.</span></label></li>
+    <li><label><input type="checkbox" data-q="w1m3"><span class="tt"><b>목요일</b> — 실험하고 위 표를 채웁니다. 사진 한 장을 남깁니다. 예상과 달라도 성공입니다.</span></label></li>
   </ul>
 </section>
 
-<section id="fri">
-  <div class="eyebrow">Friday · 보스전</div>
-  <h2><span class="cell">[4]</span>문제 5개 + 3분 설명</h2>
-  <p class="sub">먼저 답을 생각하고 나서 해설을 연다. 틀려도 감점은 없다. <b>틀린 문제가 다음 주의 출발점</b>이 된다.</p>
+<section class="sec" id="fri">
+  <div class="step-no"><span class="num">5</span><span class="lbl">보스전</span><span class="day">FRI · 설명</span></div>
+  <h2>문제 5개와 3분 설명</h2>
+  <p>먼저 답을 생각한 뒤에 해설을 엽니다. 틀려도 감점은 없습니다. <b>틀린 문제가 다음 주의 출발점</b>이 됩니다.</p>
 
   <div class="q"><span class="qn">Q1</span>
-    <p>컵에 물을 가득 채운 뒤 설탕을 한 숟가락 녹였는데 물이 넘치지 않았다. 왜 그럴까?</p>
+    <p>컵에 물을 가득 채운 뒤 설탕을 한 숟가락 녹였는데 물이 넘치지 않았습니다. 왜 그럴까요?</p>
     <details><summary>해설 보기</summary><div class="ans">
-      <b>물 입자 사이의 빈 공간에 설탕 입자가 들어갔기 때문이다.</b>
-      설탕이 사라진 것이 아니라 입자로 흩어져 빈 자리에 끼어 들어간 것이다. 그래서 물맛은 달아진다.
+      <b>물 입자 사이의 빈 공간에 설탕 입자가 들어갔기 때문입니다.</b>
+      설탕이 사라진 것이 아니라 입자로 흩어져 빈자리에 끼어 들어간 것입니다. 그래서 물맛은 달아집니다.
     </div></details>
   </div>
 
   <div class="q"><span class="qn">Q2</span>
-    <p>향수를 뿌리면 방 전체로 냄새가 퍼진다. 이 현상의 이름과, 이렇게 되는 이유를 말해 보자.</p>
+    <p>향수를 뿌리면 방 전체로 냄새가 퍼집니다. 이 현상의 이름과 그렇게 되는 이유를 말해 봅시다.</p>
     <details><summary>해설 보기</summary><div class="ans">
-      <b>확산.</b> 향수 입자가 스스로 움직이면서 공기 입자 사이의 빈 공간으로 퍼져 나가기 때문이다.
-      온도가 높을수록 입자가 빨라져서 더 빨리 퍼진다.
+      <b>확산입니다.</b> 향수 입자가 스스로 움직이면서 공기 입자 사이의 빈 공간으로 퍼져 나가기 때문입니다.
+      온도가 높을수록 입자가 빨라져서 더 빨리 퍼집니다.
     </div></details>
   </div>
 
   <div class="q"><span class="qn">Q3</span>
-    <p>주사기 입구를 손가락으로 막고 밀 때, 공기는 잘 눌리는데 물은 거의 안 눌린다. 입자로 설명해 보자.</p>
+    <p>주사기 입구를 손가락으로 막고 밀 때, 공기는 잘 눌리는데 물은 거의 눌리지 않습니다. 입자로 설명해 봅시다.</p>
     <details><summary>해설 보기</summary><div class="ans">
-      <b>기체는 입자 사이 거리가 멀어서 눌릴 공간이 있고, 액체는 입자가 이미 가까이 붙어 있어 눌릴 공간이 거의 없다.</b>
-      입자 자체가 찌그러지는 것이 아니라 <b>사이 거리</b>가 줄어드는 것이다.
+      <b>기체는 입자 사이 거리가 멀어 눌릴 공간이 있고, 액체는 입자가 이미 가까이 붙어 있어 눌릴 공간이 거의 없기 때문입니다.</b>
+      입자 자체가 찌그러지는 것이 아니라 <b>사이 거리</b>가 줄어드는 것입니다.
     </div></details>
   </div>
 
   <div class="q"><span class="qn">Q4</span>
-    <p>얼음이 녹아 물이 될 때, 물 입자 자체는 어떻게 될까? ① 작아진다 ② 개수가 준다 ③ 변하지 않는다</p>
+    <p>얼음이 녹아 물이 될 때 물 입자 자체는 어떻게 될까요? ① 작아진다 ② 개수가 줄어든다 ③ 변하지 않는다</p>
     <details><summary>해설 보기</summary><div class="ans">
-      <b>③ 변하지 않는다.</b> 입자의 종류·크기·개수는 그대로다. 달라지는 것은 <b>배열과 운동</b>뿐이다.
-      그래서 얼음이 녹아도 질량은 같다. 이 문장이 이번 주에서 가장 중요하다.
+      <b>③ 변하지 않습니다.</b> 입자의 종류·크기·개수는 그대로이고, 달라지는 것은 <b>배열과 운동</b>뿐입니다.
+      그래서 얼음이 녹아도 질량은 같습니다. 이 문장이 이번 주에서 가장 중요합니다.
     </div></details>
   </div>
 
   <div class="q"><span class="qn">Q5</span>
-    <p>빨래가 마르면 물은 어디로 갔을까? “사라졌다”가 아닌 말로 설명해 보자.</p>
+    <p>빨래가 마르면 물은 어디로 갔을까요? “사라졌다”가 아닌 말로 설명해 봅시다.</p>
     <details><summary>해설 보기</summary><div class="ans">
-      <b>물 입자가 공기 중으로 흩어져 날아갔다(증발).</b> 없어진 것이 아니라 눈에 안 보일 만큼 멀리 퍼진 것이다.
-      이 물 입자들은 나중에 다시 모여 구름이 되고 비가 된다.
+      <b>물 입자가 공기 중으로 흩어져 날아갔습니다(증발).</b> 없어진 것이 아니라 눈에 보이지 않을 만큼 멀리 퍼진 것입니다.
+      이 물 입자들은 나중에 다시 모여 구름이 되고 비가 됩니다.
     </div></details>
   </div>
 
   <h3>아빠에게 3분 설명하기</h3>
-  <p class="sub">이 틀대로 말하면 된다. 외워서 말하지 말고, 노트의 그림을 보여 주면서 말한다.</p>
+  <p>아래 틀대로 말하면 됩니다. 외워서 말하지 말고 <b>노트의 그림을 보여 주면서</b> 말합니다.</p>
   <div class="script">
-    <div><span class="s">① 이번 주에 배운 건</span> — 모든 물질이 눈에 안 보이는 입자로 되어 있고, 그 사이에 빈 공간이 있다는 것.</div>
-    <div><span class="s">② 예를 들면</span> — 물이랑 알코올을 50 mL씩 섞었더니 100 mL가 안 됐어. 빈 공간에 끼어 들어가서.</div>
-    <div><span class="s">③ 헷갈리기 쉬운 건</span> — 물이 마르면 입자가 사라진 것 같지만, 흩어졌을 뿐이고 개수는 그대로야.</div>
+    <div class="row"><span class="s">배운 것</span><span>모든 물질이 눈에 보이지 않는 입자로 되어 있고, 그 사이에 빈 공간이 있다는 것.</span></div>
+    <div class="row"><span class="s">예를 들면</span><span>물이랑 알코올을 50 mL씩 섞었더니 100 mL가 안 됐어. 빈 공간에 끼어 들어가서.</span></div>
+    <div class="row"><span class="s">헷갈리는 것</span><span>물이 마르면 입자가 사라진 것 같지만, 흩어졌을 뿐이고 개수는 그대로야.</span></div>
   </div>
 
   <ul class="todo">
-    <li><label><input type="checkbox" data-q="w1m4"><span class="tt"><span class="day">금</span> — 문제 5개를 풀고, 아빠에게 3분 설명한다. 설명이 되면 배지 획득.</span></label></li>
+    <li><label><input type="checkbox" data-q="w1m4"><span class="tt"><b>금요일</b> — 문제 5개를 풀고 아빠에게 3분 설명합니다. 설명이 되면 이번 주 통과입니다.</span></label></li>
   </ul>
 
-  <p style="margin-top:18px"><span class="badge">🔍 입자의 눈 획득</span></p>
+  <p><span class="badge">획득 · 입자의 눈</span></p>
 </section>
 
-<section style="border-bottom:0">
-  <div class="eyebrow">Next</div>
-  <h2><span class="cell">[5]</span>다음 주 예고</h2>
-  <p>2주차는 <b>원소</b>다. 이번 주에 “물질은 입자로 되어 있다”를 알았으니,
-  다음은 “그 입자는 몇 종류나 있을까”로 간다. 소금을 불에 태우면 왜 노란색이 나오는지도 그때 알게 된다.</p>
-  <div class="nav-b">
-    <a href="index.html">← 전체 지도</a>
+<section class="sec" id="next">
+  <div class="step-no"><span class="num">6</span><span class="lbl">다음 주</span></div>
+  <h2>원소와 불꽃</h2>
+  <p>이번 주에 “물질은 입자로 되어 있다”를 알았습니다. 2주차의 질문은 하나입니다.
+  <b>그 입자는 몇 종류나 있을까요.</b> 소금을 불에 대면 왜 노란색이 나오는지도 그때 알게 됩니다.</p>
+  <div class="pager">
+    <a href="index.html">전체 지도</a>
     <a class="main" href="week02.html">2주차 →</a>
   </div>
 </section>
 
-<footer>과학 등반 · 1주차 · 하루 20분 × 4일</footer>
+<footer>과학 등반 12주 · WEEK 01 입자의 눈 · 하루 20분 × 4일</footer>
 </div>
 <script>
-(function(){
-  var KEY="science_quest_progress";
-  function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){return{}}}
-  function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
-  var boxes=[].slice.call(document.querySelectorAll(".todo input[type=checkbox]"));
-  var st=load();
-  boxes.forEach(function(b){
-    if(st[b.dataset.q])b.checked=true;
-    b.addEventListener("change",function(){
-      var s=load();
-      if(b.checked)s[b.dataset.q]=1;else delete s[b.dataset.q];
-      save(s);paint();
+  (function(){
+    var KEY="science_quest_progress";
+    function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){return{}}}
+    function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+    var boxes=[].slice.call(document.querySelectorAll(".todo input[type=checkbox]"));
+    var st=load();
+    boxes.forEach(function(b){
+      if(st[b.dataset.q])b.checked=true;
+      b.addEventListener("change",function(){
+        var s=load();
+        if(b.checked)s[b.dataset.q]=1;else delete s[b.dataset.q];
+        save(s);paint();
+      });
     });
-  });
-  function paint(){
-    var el=document.getElementById("wdone");if(!el)return;
-    var n=boxes.filter(function(b){return b.checked}).length;
-    el.textContent=n+" / "+boxes.length+" 완료";
-  }
-  paint();
-  // 현재 섹션 표시
-  var links=[].slice.call(document.querySelectorAll("nav.toc a[href^='#']"));
-  var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1))});
-  function onScroll(){
-    var y=window.scrollY+120,idx=0;
-    secs.forEach(function(s,i){if(s&&s.offsetTop<=y)idx=i});
-    links.forEach(function(a,i){a.classList.toggle("now",i===idx)});
-  }
-  window.addEventListener("scroll",onScroll,{passive:true});onScroll();
-})();
+    function paint(){
+      var el=document.getElementById("wdone");
+      if(el){var n=boxes.filter(function(b){return b.checked}).length;
+        el.textContent=n+" / "+boxes.length;}
+      var hub=document.querySelector("[data-hub]");
+      if(hub){
+        var s=load(),total=0;
+        for(var w=1;w<=12;w++){
+          var n2=0;
+          for(var m=1;m<=4;m++) if(s["w"+w+"m"+m]) n2++;
+          total+=n2;
+          var p=document.querySelector('.p[data-p="'+w+'"]');
+          if(p&&!p.dataset.soon){p.textContent=n2===4?"완료":n2+" / 4";
+            p.className="p"+(n2===4?" done":(n2>0?" ing":""));}
+        }
+        var d=document.getElementById("allDone"),bar=document.getElementById("allBar");
+        if(d)d.textContent=total+" / 12";
+        if(bar)bar.style.width=(total/12*100)+"%";
+      }
+    }
+    paint();
+    var links=[].slice.call(document.querySelectorAll("nav.jump a[href^='#']"));
+    if(links.length){
+      var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1))});
+      var onScroll=function(){
+        var y=window.scrollY+130,idx=0;
+        secs.forEach(function(s,i){if(s&&s.offsetTop<=y)idx=i;});
+        links.forEach(function(a,i){a.classList.toggle("now",i===idx);});
+      };
+      window.addEventListener("scroll",onScroll,{passive:true});onScroll();
+    }
+  })();
 </script>
 </body>
 </html>

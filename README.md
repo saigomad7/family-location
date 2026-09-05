@@ -82,8 +82,12 @@ GitHub 저장소 → **Settings → Pages → Branch: main, / (root)** 선택 �
 | `index.html` | 앱 전체 (지도 + Firebase 연동 + UI) |
 | `manifest.json` | 홈 화면 설치(PWA)용 매니페스트 |
 | `family_study/` | **우리 가족 공부** 앱 (공부 시간 기록·응원) — [설명 보기](family_study/README.md) |
+| `science_quest/` | **과학 등반 12주** 중2 과학 주차별 학습 문서 — [설명 보기](science_quest/README.md) |
 
 ## 같이 쓰는 앱
 
 - 📚 **우리 가족 공부**: `https://saigomad7.github.io/family-location/family_study/`
   같은 Firebase 프로젝트와 **같은 가족 코드**를 쓰므로, 여기서 등록한 가족 이름이 그대로 나옵니다.
+
+- 🔬 **과학 등반 12주**: `https://saigomad7.github.io/family-location/science_quest/`
+  중2 과학을 하루 20분씩 밟아 가는 주차별 학습 문서입니다. 폰에서 보도록 만들었습니다.

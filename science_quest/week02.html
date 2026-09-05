@@ -1,413 +1,574 @@
 <!DOCTYPE html>
-<html lang="ko" class="c1">
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0d1117">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#DCE2DB">
 <title>2주차 · 원소와 불꽃</title>
-<meta name="description" content="더 이상 쪼갤 수 없는 성분이 원소다. 불꽃 색은 원소가 가진 이름표다.">
+<meta name="description" content="더 이상 쪼갤 수 없는 성분이 원소입니다. 불꽃 색은 원소가 가진 이름표입니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#0d1117; --bg2:#0b0f15; --panel:#161b22; --panel2:#1c2230; --line:#2a3340;
-  --ink:#e6edf3; --sub:#9aa7b4; --mut:#6b7886;
-  --acc:#4f9cff; --acc2:#7c5cff; --good:#3fb950; --warn:#d29922; --pink:#f778ba;
-  --chip:#21304a; --radius:16px;
-  --camp:#7c5cff; --camp-dim:#b7a4ff; --camp-bg:rgba(124,92,255,.14); --camp-line:#3d3470;
-}
-:root.c1{--camp:#7c5cff;--camp-dim:#b7a4ff;--camp-bg:rgba(124,92,255,.14);--camp-line:#3d3470}
-:root.c2{--camp:#d29922;--camp-dim:#f0c674;--camp-bg:rgba(210,153,34,.14);--camp-line:#5c4718}
-:root.c3{--camp:#3fb950;--camp-dim:#63d67c;--camp-bg:rgba(63,185,80,.14);--camp-line:#2c5c34}
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);line-height:1.72;font-size:16.5px;
-  font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR","Segoe UI",system-ui,sans-serif;
-  word-break:keep-all;overflow-wrap:anywhere;
-  padding-bottom:calc(40px + env(safe-area-inset-bottom))}
-.wrap{max-width:720px;margin:0 auto;padding:0 18px}
-a{color:var(--acc);text-decoration:none}
-p{margin:0 0 13px}
-b,strong{font-weight:700;color:#fff}
-.sub{color:var(--sub)}
-.mut{color:var(--mut)}
+  :root{
+    --ink:#131C18; --ink2:#2C3A33; --muted:#5F6E66; --faint:#8A968F;
+    --mist:#DCE2DB; --surface:#F8FAF6; --surface2:#EFF3EC;
+    --line:#C3CCC1; --hair:#DDE4DB;
+    --kelp:#1F6249; --kelp-wash:#DEEDE4; --kelp-line:#8FBBA3;
+    --amber:#8F6209; --amber-wash:#F5EAD0; --amber-line:#DCC79B;
+    --berry:#8C2F3E; --berry-wash:#F3DFE2; --berry-line:#D9A8B0;
+    --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+    --mono:"IBM Plex Mono","SFMono-Regular",Consolas,"D2Coding",monospace;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{margin:0;background:var(--mist);color:var(--ink);font-family:var(--sans);
+    font-size:16px;line-height:1.75;letter-spacing:-0.01em;
+    padding:0 18px calc(70px + env(safe-area-inset-bottom));
+    word-break:keep-all;overflow-wrap:anywhere;}
+  .wrap{max-width:1040px;margin:0 auto;}
 
-/* 헤더 */
-header.top{padding:26px 0 18px;background:linear-gradient(180deg,var(--bg2),var(--bg) 90%)}
-.kicker{display:inline-block;font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;font-weight:700;
-  color:var(--camp-dim);background:var(--camp-bg);border:1px solid var(--camp-line);
-  padding:6px 12px;border-radius:999px;margin-bottom:14px}
-h1{font-size:27px;line-height:1.3;margin:0 0 10px;font-weight:800;letter-spacing:-.01em}
-h1 .g{background:linear-gradient(90deg,var(--acc),var(--camp));-webkit-background-clip:text;background-clip:text;color:transparent}
-.lead{font-size:15.5px;color:var(--sub);margin:0 0 16px}
-.meta{display:flex;flex-wrap:wrap;gap:7px}
-.meta .m{font-size:12.5px;color:var(--sub);background:var(--panel);border:1px solid var(--line);padding:5px 11px;border-radius:999px}
+  /* ===== 표지 ===== */
+  .cover{padding:44px 0 30px;border-bottom:2px solid var(--ink);}
+  .cover .kicker{font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:0.2em;text-transform:uppercase;color:var(--kelp);margin:0 0 16px;}
+  .cover h1{font-size:clamp(27px,6vw,44px);font-weight:700;line-height:1.24;
+    letter-spacing:-0.035em;margin:0 0 16px;max-width:21ch;}
+  .cover .lede{font-size:clamp(15.5px,2vw,18px);font-weight:300;color:var(--ink2);
+    max-width:62ch;margin:0 0 24px;line-height:1.72;}
+  .cover .lede b{font-weight:600;color:var(--ink);}
+  .metaline{display:flex;flex-wrap:wrap;gap:6px 22px;font-family:var(--mono);
+    font-size:11.5px;color:var(--muted);letter-spacing:0.03em;}
+  .metaline b{color:var(--ink);font-weight:500;}
 
-/* 상단 이동 바 */
-nav.toc{position:sticky;top:0;z-index:30;background:rgba(13,17,23,.92);backdrop-filter:blur(8px);
-  border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:18px}
-nav.toc .row{display:flex;gap:6px;overflow-x:auto;padding:10px 18px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-nav.toc .row::-webkit-scrollbar{display:none}
-nav.toc a{flex:0 0 auto;font-size:13px;color:var(--sub);padding:7px 12px;border-radius:999px;
-  border:1px solid var(--line);background:var(--panel)}
-nav.toc a.now{color:#fff;background:var(--camp-bg);border-color:var(--camp-line)}
+  .summary{background:var(--ink);border-radius:3px;padding:26px 22px 24px;margin:28px 0 0;}
+  .summary h2{color:#F6FAF5;font-size:18px;font-weight:600;margin:0 0 6px;letter-spacing:-0.02em;}
+  .summary .sd{color:#93A399;font-size:13.5px;font-weight:300;margin:0 0 22px;line-height:1.65;}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:18px;}
+  .kpi .kl{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:#7E8F84;display:block;margin-bottom:5px;}
+  .kpi .kv{font-size:clamp(21px,3.2vw,28px);font-weight:700;color:#8FD3B4;
+    letter-spacing:-0.03em;display:block;line-height:1.1;}
+  .kpi .kn{font-size:12px;color:#B9C6BC;display:block;margin-top:6px;
+    font-weight:300;line-height:1.5;}
 
-/* 섹션 */
-section{padding:30px 0;border-bottom:1px solid var(--line)}
-.eyebrow{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--camp-dim);font-weight:700;margin-bottom:7px}
-h2{font-size:20px;margin:0 0 14px;font-weight:800;line-height:1.4}
-h2 .cell{display:inline-block;background:var(--camp);color:#0d1117;font-size:12.5px;font-weight:800;
-  border-radius:8px;padding:2px 9px;margin-right:8px;vertical-align:2px;font-family:ui-monospace,Menlo,monospace}
-h3{font-size:16.5px;margin:22px 0 9px;font-weight:700}
-h3:first-child{margin-top:0}
+  /* ===== 이동 바 ===== */
+  nav.jump{position:sticky;top:0;z-index:40;margin:0 -18px;padding:0 18px;
+    background:rgba(220,226,219,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);}
+  nav.jump .row{display:flex;gap:6px;overflow-x:auto;padding:9px 0;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  nav.jump .row::-webkit-scrollbar{display:none;}
+  nav.jump a{flex:0 0 auto;font-family:var(--mono);font-size:11.5px;letter-spacing:0.04em;
+    color:var(--muted);background:var(--surface);border:1px solid var(--line);
+    padding:6px 11px;border-radius:2px;text-decoration:none;}
+  nav.jump a.now{color:#fff;background:var(--kelp);border-color:var(--kelp);}
 
-/* 카드 · 콜아웃 */
-.grid{display:grid;gap:11px;margin:12px 0}
-.g2{grid-template-columns:1fr}
-@media(min-width:620px){.g2{grid-template-columns:repeat(2,1fr)}}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:15px 16px}
-.card h4{margin:0 0 7px;font-size:15px;font-weight:700}
-.card p{font-size:14.5px;margin:0}
-.tag{display:inline-block;font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px;margin-bottom:8px;
-  background:var(--camp-bg);color:var(--camp-dim);border:1px solid var(--camp-line)}
-.callout{border-left:4px solid var(--acc);background:var(--panel);border-radius:10px;padding:13px 15px;margin:14px 0;font-size:15px}
-.callout.good{border-left-color:var(--good)}
-.callout.warn{border-left-color:var(--warn)}
-.callout.p{border-left-color:var(--camp)}
-.callout b{display:inline}
-.callout .lbl{display:block;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);font-weight:700;margin-bottom:4px}
+  /* ===== 섹션 ===== */
+  .sec{padding:44px 0 12px;border-bottom:1px solid var(--line);scroll-margin-top:56px;}
+  .sec:last-of-type{border-bottom:0;}
+  .step-no{display:flex;align-items:center;gap:11px;margin-bottom:14px;}
+  .step-no .num{font-family:var(--mono);font-size:12px;font-weight:600;color:#fff;
+    background:var(--kelp);width:28px;height:28px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-no .lbl{font-family:var(--mono);font-size:11px;letter-spacing:0.13em;
+    text-transform:uppercase;color:var(--muted);}
+  .step-no .day{margin-left:auto;font-family:var(--mono);font-size:11px;
+    letter-spacing:0.1em;color:var(--kelp);background:var(--kelp-wash);
+    border:1px solid var(--kelp-line);padding:3px 9px;border-radius:2px;}
+  .sec h2{font-size:clamp(22px,3.4vw,29px);font-weight:600;letter-spacing:-0.03em;
+    line-height:1.34;margin:0 0 14px;max-width:30ch;}
+  .sec h3{font-size:17.5px;font-weight:600;letter-spacing:-0.02em;margin:30px 0 10px;}
+  .sec > p{max-width:70ch;color:var(--ink2);margin:0 0 16px;}
+  .sec strong,.sec b{font-weight:600;color:var(--ink);}
+  .sec code{font-family:var(--mono);font-size:0.86em;background:var(--surface2);
+    border:1px solid var(--hair);padding:1px 5px;border-radius:2px;}
 
-/* 표 */
-.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:12px;margin:12px 0}
-table{width:100%;border-collapse:collapse;font-size:14px;min-width:340px}
-th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
-th{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--mut);font-weight:700;background:var(--panel)}
-tbody tr:last-child td{border-bottom:0}
-td b{color:#fff}
-code{background:#0b1020;border:1px solid var(--line);border-radius:6px;padding:1px 6px;font-size:14px;color:#c9d6e5;
-  font-family:ui-monospace,Menlo,monospace}
+  .plain{background:var(--surface2);border-left:3px solid var(--kelp);
+    padding:14px 17px;margin:0 0 20px;border-radius:0 2px 2px 0;max-width:74ch;}
+  .plain p{margin:0;font-size:14.5px;color:var(--ink2);line-height:1.72;}
+  .plain p + p{margin-top:10px;}
+  .plain b{color:var(--kelp);font-weight:600;}
 
-/* 다이어그램 */
-.diagram{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:var(--radius);
-  background:var(--panel);padding:12px;margin:12px 0}
-.diagram svg{display:block}
-.figcap{font-size:12.5px;color:var(--mut);margin:-4px 0 12px;text-align:center}
+  .fig{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:20px 16px 16px;margin:20px 0 12px;}
+  .fig-t{font-family:var(--mono);font-size:11px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--kelp);margin:0 0 16px;
+    padding-bottom:9px;border-bottom:1px solid var(--hair);}
+  .fig svg{display:block;width:100%;height:auto;}
+  .fig-c{font-size:13px;color:var(--muted);margin:14px 0 0;font-weight:300;
+    line-height:1.65;padding-top:12px;border-top:1px solid var(--hair);}
+  .fig-c b{color:var(--ink);font-weight:600;}
 
-/* 할 일 체크 */
-.todo{list-style:none;margin:14px 0 0;padding:0;border:1px solid var(--line);border-radius:12px;background:var(--panel);overflow:hidden}
-.todo li+li{border-top:1px solid var(--line)}
-.todo label{display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start;
-  padding:14px 15px;cursor:pointer;font-size:15px;min-height:52px}
-.todo input{appearance:none;-webkit-appearance:none;width:21px;height:21px;margin:1px 0 0;
-  border:1.5px solid var(--mut);border-radius:6px;background:var(--panel2);display:grid;place-content:center;cursor:pointer}
-.todo input::after{content:"✓";font-size:13px;font-weight:800;color:#0d1117;transform:scale(0);transition:transform .12s}
-.todo input:checked{background:var(--good);border-color:var(--good)}
-.todo input:checked::after{transform:scale(1)}
-.todo input:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
-.todo input:checked ~ .tt{color:var(--mut);text-decoration:line-through}
-.todo .day{font-weight:700;color:var(--camp-dim)}
+  .sb{fill:#fff;stroke:#C3CCC1;stroke-width:1.5;}
+  .sb-k{fill:#DEEDE4;stroke:#1F6249;stroke-width:2;}
+  .sb-b{fill:#F3DFE2;stroke:#D9A8B0;stroke-width:1.5;}
+  .sb-a{fill:#F5EAD0;stroke:#DCC79B;stroke-width:1.5;}
+  .sb-g{fill:#EFF3EC;stroke:#C3CCC1;stroke-width:1.5;}
+  .sb-d{fill:#fff;stroke:#1F6249;stroke-width:1.6;stroke-dasharray:5 4;}
+  .st{font-family:var(--sans);font-size:13.5px;font-weight:600;fill:#131C18;
+    text-anchor:middle;letter-spacing:-0.3px;}
+  .st-s{font-family:var(--sans);font-size:11.5px;font-weight:400;fill:#5F6E66;text-anchor:middle;}
+  .st-k{fill:#1F6249;} .st-b{fill:#8C2F3E;} .st-a{fill:#8F6209;}
+  .sm{font-family:var(--mono);font-size:12px;fill:#131C18;text-anchor:middle;font-weight:500;}
+  .sm-s{font-family:var(--mono);font-size:10.5px;fill:#5F6E66;text-anchor:middle;}
+  .st-m{font-family:var(--mono);font-size:11px;fill:#8A968F;text-anchor:middle;letter-spacing:0.5px;}
+  .sl{stroke:#8A968F;stroke-width:1.6;fill:none;}
+  .sl-k{stroke:#1F6249;stroke-width:2;fill:none;}
+  .sl-a{stroke:#8F6209;stroke-width:1.8;fill:none;}
+  .sl-d{stroke:#8A968F;stroke-width:1.4;fill:none;stroke-dasharray:4 4;}
+  .sa{fill:#8A968F;} .sa-k{fill:#1F6249;} .sa-a{fill:#8F6209;}
+  .dot-k{fill:#1F6249;} .dot-a{fill:#C99A2E;} .dot-b{fill:#8C2F3E;}
 
-/* 문제 */
-.q{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px 16px;margin:11px 0}
-.q .qn{font-family:ui-monospace,Menlo,monospace;font-size:12px;font-weight:700;color:var(--camp-dim);letter-spacing:.08em}
-.q p{margin:6px 0 0;font-size:15.5px}
-details{margin-top:11px;border-top:1px solid var(--line);padding-top:10px}
-details summary{cursor:pointer;font-size:14px;font-weight:700;color:var(--acc);list-style:none;padding:4px 0}
-details summary::-webkit-details-marker{display:none}
-details summary::before{content:"▸ ";color:var(--acc)}
-details[open] summary::before{content:"▾ "}
-details .ans{font-size:14.5px;color:var(--sub);margin-top:8px}
-details .ans b{color:var(--good)}
+  /* ===== 표 ===== */
+  .tw{overflow-x:auto;margin:20px 0 8px;border:1px solid var(--line);
+    border-radius:3px;background:var(--surface);}
+  table{border-collapse:collapse;width:100%;font-size:13.8px;}
+  .tw.wide table{min-width:560px;}
+  thead th{background:var(--ink);color:#E8EFE7;text-align:left;font-family:var(--mono);
+    font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
+    padding:11px 13px;}
+  tbody td{padding:11px 13px;border-top:1px solid var(--hair);vertical-align:top;
+    color:var(--ink2);line-height:1.62;}
+  tbody tr:nth-child(even) td{background:var(--surface2);}
+  td.hd{font-weight:600;color:var(--ink);}
+  td.mn{font-family:var(--mono);font-size:12.5px;}
+  td.ok{color:var(--kelp);font-weight:600;}
+  td.no{color:var(--berry);font-weight:600;}
+  td.wa{color:var(--amber);font-weight:600;}
+  td.fill{font-family:var(--mono);color:var(--faint);}
 
-/* 대본 틀 */
-.script{background:#0b1020;border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0;font-size:15px}
-.script .s{color:var(--camp-dim);font-weight:700}
-.script div+div{margin-top:10px}
+  .note{background:var(--amber-wash);border:1px solid var(--amber-line);
+    border-radius:3px;padding:17px 19px;margin:20px 0 8px;}
+  .note p{margin:0;font-size:14px;color:#5C440C;line-height:1.72;}
+  .note p + p{margin-top:9px;}
+  .note b{font-weight:600;}
+  .note .lb{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--amber);margin-bottom:6px;}
+  .alert{background:var(--berry-wash);border:1px solid var(--berry-line);
+    border-radius:3px;padding:17px 19px;margin:20px 0 8px;}
+  .alert p{margin:0;font-size:14px;color:#6B2430;line-height:1.72;}
+  .alert p + p{margin-top:9px;}
+  .alert b{font-weight:600;}
+  .alert .lb{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--berry);margin-bottom:6px;}
 
-/* 배지 · 이동 */
-.badge{display:inline-block;font-size:15px;font-weight:700;color:var(--camp-dim);background:var(--camp-bg);
-  border:1px solid var(--camp-line);border-radius:999px;padding:8px 16px;margin-top:6px}
-.nav-b{display:flex;gap:10px;margin:22px 0 0}
-.nav-b a{flex:1;text-align:center;background:var(--panel);border:1px solid var(--line);border-radius:12px;
-  padding:14px 10px;font-size:14.5px;font-weight:700;color:var(--ink)}
-.nav-b a.main{background:var(--camp-bg);border-color:var(--camp-line);color:var(--camp-dim)}
-.nav-b a.off{color:var(--mut)}
-footer{padding:24px 0 40px;color:var(--mut);font-size:12.5px;text-align:center}
-@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+  /* ===== 카드 묶음 ===== */
+  .cards{display:grid;gap:12px;margin:18px 0 8px;}
+  @media(min-width:680px){.cards.two{grid-template-columns:repeat(2,1fr);}}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:15px 17px;}
+  .card .ct{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;
+    color:var(--kelp);display:block;margin-bottom:7px;}
+  .card h4{margin:0 0 6px;font-size:15.5px;font-weight:600;letter-spacing:-0.02em;}
+  .card p{margin:0;font-size:14px;color:var(--ink2);line-height:1.68;}
+
+  /* ===== 요일 할 일 ===== */
+  .todo{list-style:none;margin:20px 0 8px;padding:0;background:var(--surface);
+    border:1px solid var(--line);border-radius:3px;overflow:hidden;}
+  .todo li + li{border-top:1px solid var(--hair);}
+  .todo label{display:grid;grid-template-columns:22px 1fr;gap:13px;align-items:start;
+    padding:15px 16px;cursor:pointer;font-size:14.5px;line-height:1.65;color:var(--ink2);min-height:54px;}
+  .todo input{appearance:none;-webkit-appearance:none;width:21px;height:21px;margin:1px 0 0;
+    border:1.5px solid var(--line);border-radius:2px;background:#fff;
+    display:grid;place-content:center;cursor:pointer;}
+  .todo input::after{content:"✓";font-size:13px;font-weight:700;color:#fff;transform:scale(0);}
+  .todo input:checked{background:var(--kelp);border-color:var(--kelp);}
+  .todo input:checked::after{transform:scale(1);}
+  .todo input:focus-visible{outline:2px solid var(--kelp);outline-offset:2px;}
+  .todo input:checked ~ .tt{color:var(--faint);text-decoration:line-through;}
+  .todo .tt b{color:var(--ink);font-weight:600;}
+
+  /* ===== 문제 ===== */
+  .q{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:15px 17px;margin:12px 0;}
+  .q .qn{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--kelp);
+    letter-spacing:0.12em;}
+  .q > p{margin:6px 0 0;font-size:15.5px;color:var(--ink);line-height:1.7;}
+  .q details{margin-top:12px;border-top:1px solid var(--hair);padding-top:10px;}
+  .q summary{cursor:pointer;list-style:none;font-family:var(--mono);font-size:12px;
+    font-weight:600;color:var(--kelp);letter-spacing:0.06em;padding:3px 0;}
+  .q summary::-webkit-details-marker{display:none;}
+  .q summary::before{content:"+ ";}
+  .q details[open] summary::before{content:"− ";}
+  .q .ans{margin-top:9px;background:var(--kelp-wash);border-radius:2px;padding:12px 14px;
+    font-size:14px;color:var(--ink2);line-height:1.7;}
+  .q .ans b{color:var(--kelp);font-weight:600;}
+
+  /* ===== 설명 대본 ===== */
+  .script{background:var(--surface);border:1px solid var(--kelp-line);border-radius:3px;
+    padding:16px 18px;margin:18px 0 8px;}
+  .script .row{display:grid;grid-template-columns:70px 1fr;gap:12px;font-size:14.5px;
+    color:var(--ink2);line-height:1.7;}
+  .script .row + .row{margin-top:11px;padding-top:11px;border-top:1px solid var(--hair);}
+  .script .s{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;color:var(--kelp);
+    font-weight:600;padding-top:4px;}
+
+  .badge{display:inline-block;font-family:var(--mono);font-size:12.5px;font-weight:600;
+    color:var(--amber);background:var(--amber-wash);border:1px solid var(--amber-line);
+    border-radius:2px;padding:7px 14px;margin-top:14px;letter-spacing:0.04em;}
+
+  /* ===== 주차 목록 (허브) ===== */
+  .wlist{display:flex;flex-direction:column;gap:10px;margin:18px 0 8px;}
+  a.wk{display:grid;grid-template-columns:1fr auto;grid-template-areas:"n p" "t p" "d d";
+    gap:2px 14px;background:var(--surface);border:1px solid var(--line);
+    border-left:3px solid var(--kelp);border-radius:3px;padding:15px 17px;
+    text-decoration:none;color:var(--ink);}
+  a.wk .n{grid-area:n;font-family:var(--mono);font-size:11px;font-weight:600;
+    letter-spacing:0.12em;color:var(--kelp);}
+  a.wk .t{grid-area:t;font-size:17px;font-weight:600;letter-spacing:-0.02em;}
+  a.wk .d{grid-area:d;font-size:13.5px;color:var(--muted);margin-top:5px;line-height:1.6;font-weight:300;}
+  a.wk .p{grid-area:p;align-self:center;font-family:var(--mono);font-size:11px;color:var(--muted);
+    background:var(--surface2);border:1px solid var(--hair);border-radius:2px;padding:4px 9px;white-space:nowrap;}
+  a.wk .p.done{color:#fff;background:var(--kelp);border-color:var(--kelp);}
+  a.wk .p.ing{color:var(--amber);background:var(--amber-wash);border-color:var(--amber-line);}
+  .wk.soon{border-left-color:var(--line);opacity:.62;pointer-events:none;}
+  .wk.soon .n,.wk.soon .t{color:var(--muted);}
+
+  /* ===== 진행 막대 ===== */
+  .bar{height:7px;background:var(--hair);border-radius:99px;overflow:hidden;margin-top:12px;
+    border:1px solid var(--line);}
+  .bar i{display:block;height:100%;background:var(--kelp);width:0;transition:width .3s;}
+
+  /* ===== 페이지 이동 ===== */
+  .pager{display:flex;gap:9px;margin:26px 0 0;}
+  .pager a{flex:1;text-align:center;font-size:13.5px;font-weight:600;text-decoration:none;
+    color:var(--ink2);background:var(--surface);border:1px solid var(--line);
+    border-radius:3px;padding:14px 8px;}
+  .pager a.main{background:var(--kelp);border-color:var(--kelp);color:#fff;}
+  footer{padding:26px 0 10px;font-family:var(--mono);font-size:11.5px;color:var(--faint);
+    letter-spacing:0.03em;line-height:1.8;}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;}}
 </style>
 </head>
 <body>
-<header class="top"><div class="wrap">
-  <span class="kicker">WEEK 02 · CAMP 1 물질 · 하루 20분 × 4일</span>
-  <h1>원소와 불꽃 — <span class="g">색이 곧 이름표다</span></h1>
-  <p class="lead">1주차에서 “물질은 입자로 되어 있다”를 알았다. 이번 주 질문은 하나다.
-  <b>그 입자는 몇 종류나 있을까.</b> 그리고 종류를 어떻게 알아볼까.</p>
-  <div class="meta">
-    <span class="m">중1 연결 · 기체의 성질</span>
-    <span class="m">원소기호 20개</span>
-    <span class="m">불꽃반응 실험</span>
-    <span class="m" id="wdone">0 / 4 완료</span>
+<div class="wrap">
+<header class="cover">
+  <p class="kicker">WEEK 02 · 캠프 1 물질 · 하루 20분 × 4일</p>
+  <h1>원소와 불꽃</h1>
+  <p class="lede">
+    1주차에서 “물질은 입자로 되어 있다”를 알았습니다. 이번 주의 질문은 하나입니다.
+    <b>그 입자는 몇 종류나 있을까요.</b> 그리고 종류를 어떻게 알아볼 수 있을까요.
+  </p>
+  <div class="metaline">
+    <span>중1 연결 <b>기체의 성질</b></span>
+    <span>개념 <b>원소 · 원소기호</b></span>
+    <span>실험 <b>불꽃반응</b></span>
+    <span>진행 <b id="wdone">0 / 4</b></span>
   </div>
-</div></header>
 
-<nav class="toc"><div class="row">
+  <div class="summary">
+    <h2>이번 주에 남길 것</h2>
+    <p class="sd">원소기호 20개는 외우는 것이 목표가 아니라, 화학식을 읽기 위한 준비물입니다.</p>
+    <div class="kpis">
+      <div class="kpi"><span class="kl">문장 1</span><span class="kv">원소</span>
+        <span class="kn">더 이상 다른 물질로 쪼개지지 않는 성분</span></div>
+      <div class="kpi"><span class="kl">문장 2</span><span class="kv">118종</span>
+        <span class="kn">세상 물질은 이 원소들의 조합이다</span></div>
+      <div class="kpi"><span class="kl">문장 3</span><span class="kv">이름표</span>
+        <span class="kn">원소마다 불꽃 색이 정해져 있다</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="jump"><div class="row">
   <a href="#map">이번 주 지도</a>
   <a href="#mon">월 · 열기</a>
   <a href="#tue">화 · 채우기</a>
   <a href="#thu">목 · 손으로</a>
   <a href="#fri">금 · 보스전</a>
+  <a href="#next">다음 주</a>
 </div></nav>
 
-<div class="wrap">
+<section class="sec" id="map">
+  <div class="step-no"><span class="num">1</span><span class="lbl">이번 주 지도</span></div>
+  <h2>쪼개고 쪼개다 멈추는 지점</h2>
+  <p>물은 쪼개집니다. 전기를 흘리면 수소와 산소로 나뉩니다.
+  그런데 수소는 아무리 해도 다른 물질로 쪼개지지 않습니다. <b>거기서 멈추는 성분</b>이 원소입니다.</p>
 
-<section id="map">
-  <div class="eyebrow">This week</div>
-  <h2><span class="cell">MAP</span>쪼개고 쪼개다 멈추는 지점</h2>
-  <p class="sub">물은 쪼개진다. 수소와 산소로. 그런데 수소는 더 이상 다른 물질로 쪼개지지 않는다.
-  <b>거기서 멈추는 성분</b>이 원소다.</p>
-  <div class="diagram">
-    <svg viewBox="0 0 640 190" width="640" height="190" font-family="inherit" role="img" aria-label="물의 전기분해로 수소와 산소가 나오는 과정">
-      <defs><marker id="a2" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#4f9cff"/></marker></defs>
-      <rect x="16" y="52" width="150" height="70" rx="12" fill="#1c2230" stroke="#2a3340"/>
-      <text x="91" y="82" fill="#e6edf3" font-size="15" font-weight="700" text-anchor="middle">물 (H₂O)</text>
-      <text x="91" y="103" fill="#9aa7b4" font-size="11.5" text-anchor="middle">두 원소로 된 물질</text>
+  <div class="fig">
+    <p class="fig-t">도식 1 · 물의 전기분해와 원소</p>
+    <svg viewBox="0 0 900 250" role="img" aria-label="물을 전기분해하면 수소와 산소로 나뉘고 그것이 원소라는 것을 보여주는 도식">
+      <rect class="sb" x="10" y="86" width="200" height="80" rx="3"/>
+      <text class="st" x="110" y="122">물 · H₂O</text>
+      <text class="st-s" x="110" y="144">두 원소로 이루어진 물질</text>
 
-      <line x1="168" y1="87" x2="232" y2="87" stroke="#4f9cff" stroke-width="2.4" marker-end="url(#a2)"/>
-      <text x="200" y="76" fill="#4f9cff" font-size="11" text-anchor="middle">전기분해</text>
+      <line class="sl-k" x1="214" y1="126" x2="286" y2="126"/>
+      <polygon class="sa-k" points="286,120 300,126 286,132"/>
+      <text class="st-m st-k" x="252" y="112">전기분해</text>
 
-      <rect x="240" y="20" width="150" height="60" rx="12" fill="#161b22" stroke="#3d3470"/>
-      <text x="315" y="46" fill="#b7a4ff" font-size="15" font-weight="700" text-anchor="middle">수소 (H)</text>
-      <text x="315" y="66" fill="#6b7886" font-size="11" text-anchor="middle">더 쪼개지지 않는다</text>
+      <rect class="sb-k" x="306" y="34" width="212" height="80" rx="3"/>
+      <text class="st st-k" x="412" y="70">수소 · H</text>
+      <text class="st-s" x="412" y="92">더 쪼개지지 않습니다</text>
 
-      <rect x="240" y="98" width="150" height="60" rx="12" fill="#161b22" stroke="#3d3470"/>
-      <text x="315" y="124" fill="#b7a4ff" font-size="15" font-weight="700" text-anchor="middle">산소 (O)</text>
-      <text x="315" y="144" fill="#6b7886" font-size="11" text-anchor="middle">더 쪼개지지 않는다</text>
+      <rect class="sb-k" x="306" y="140" width="212" height="80" rx="3"/>
+      <text class="st st-k" x="412" y="176">산소 · O</text>
+      <text class="st-s" x="412" y="198">더 쪼개지지 않습니다</text>
 
-      <line x1="392" y1="50" x2="452" y2="76" stroke="#7c5cff" stroke-width="2.2" marker-end="url(#a2)"/>
-      <line x1="392" y1="128" x2="452" y2="100" stroke="#7c5cff" stroke-width="2.2" marker-end="url(#a2)"/>
-      <rect x="460" y="52" width="164" height="70" rx="12" fill="#241a2e" stroke="#7c5cff"/>
-      <text x="542" y="80" fill="#c9b6ff" font-size="15" font-weight="800" text-anchor="middle">원소</text>
-      <text x="542" y="101" fill="#9aa7b4" font-size="11.5" text-anchor="middle">현재까지 약 118종</text>
-      <text x="320" y="180" fill="#6b7886" font-size="11.5" text-anchor="middle">물은 원소가 아니다 · 수소와 산소는 원소다</text>
+      <line class="sl-k" x1="522" y1="74" x2="596" y2="112"/>
+      <polygon class="sa-k" points="596,106 610,114 594,118"/>
+      <line class="sl-k" x1="522" y1="180" x2="596" y2="142"/>
+      <polygon class="sa-k" points="596,148 610,140 594,136"/>
+
+      <rect class="sb-a" x="616" y="86" width="274" height="80" rx="3"/>
+      <text class="st st-a" x="753" y="118">원소</text>
+      <text class="st-s" x="753" y="140">현재까지 약 118종 · 이번 주에는 20개만</text>
+
+      <text class="st-m" x="450" y="240">물은 원소가 아닙니다 · 수소와 산소는 원소입니다</text>
     </svg>
+    <p class="fig-c">글자 24개로 모든 한글 단어를 만들 듯, <b>원소 118종의 조합으로 세상의 모든 물질이 만들어집니다.</b></p>
   </div>
 </section>
 
-<section id="mon">
-  <div class="eyebrow">Monday · 열기</div>
-  <h2><span class="cell">[1]</span>원소 — 거기서 멈추는 성분</h2>
+<section class="sec" id="mon">
+  <div class="step-no"><span class="num">2</span><span class="lbl">개념 하나</span><span class="day">MON · 열기</span></div>
+  <h2>원소 — 거기서 멈추는 성분</h2>
 
-  <p><b>원소는 더 이상 다른 물질로 쪼갤 수 없는 성분</b>이다. 물은 전기를 흘리면 수소와 산소로 나뉘니까 원소가 아니다.
-  하지만 수소에 아무리 전기를 흘려도 다른 물질이 나오지 않는다. 수소는 원소다.</p>
-  <p>지구와 우주의 모든 물질은 약 <b>118종의 원소</b>가 이리저리 조합된 결과다.
-  글자 24개로 모든 한글 단어를 만드는 것과 같다. 이번 주에는 그중 자주 쓰이는 20개만 외운다.</p>
-
-  <div class="callout warn"><span class="lbl">여기서 헷갈린다</span>
-  <b>원소</b>는 “종류·이름”이고, <b>원자</b>는 “알갱이 한 개”다.
-  레고로 치면 원소는 <b>블록의 종류</b>, 원자는 <b>블록 한 조각</b>이다. 원자는 3주차에서 자세히 본다.</div>
-
-  <h3>원소는 어디에 있나</h3>
-  <div class="grid g2">
-    <div class="card"><span class="tag">내 몸</span><h4>산소 · 탄소 · 수소</h4><p class="sub">사람 몸의 약 93 %가 이 세 원소다. 나머지가 질소·칼슘·인 등이다.</p></div>
-    <div class="card"><span class="tag">공기</span><h4>질소 · 산소</h4><p class="sub">공기의 약 78 %가 질소(N), 21 %가 산소(O)다. 중1에서 배운 ‘기체의 성질’이 여기로 이어진다.</p></div>
-    <div class="card"><span class="tag">부엌</span><h4>나트륨 · 염소</h4><p class="sub">소금은 나트륨(Na)과 염소(Cl)가 붙은 물질이다. 소금 자체는 원소가 아니다.</p></div>
-    <div class="card"><span class="tag">액세서리</span><h4>금 · 은 · 구리</h4><p class="sub">금(Au)·은(Ag)·구리(Cu)는 각각 하나의 원소로만 된 물질이라 이름이 곧 원소다.</p></div>
+  <div class="plain">
+    <p><b>원소는 더 이상 다른 물질로 쪼갤 수 없는 성분입니다.</b>
+    물은 수소와 산소로 나뉘니 원소가 아니고, 수소는 더 나뉘지 않으니 원소입니다.</p>
   </div>
 
-  <div class="callout p"><span class="lbl">한 줄 정리</span>
-  원소는 <b>더 쪼개지지 않는 성분</b>이고, 세상 물질은 그 원소들의 조합이다.</div>
+  <h3>원소는 어디에 있나</h3>
+  <div class="cards two">
+    <div class="card"><span class="ct">내 몸</span><h4>산소 · 탄소 · 수소</h4>
+      <p>사람 몸의 약 93 %가 이 세 원소입니다. 나머지가 질소·칼슘·인 등입니다.</p></div>
+    <div class="card"><span class="ct">공기</span><h4>질소 · 산소</h4>
+      <p>공기의 약 78 %가 질소(N), 21 %가 산소(O)입니다. 중1의 ‘기체의 성질’이 여기로 이어집니다.</p></div>
+    <div class="card"><span class="ct">부엌</span><h4>나트륨 · 염소</h4>
+      <p>소금은 나트륨(Na)과 염소(Cl)가 결합한 물질입니다. 소금 자체는 원소가 아닙니다.</p></div>
+    <div class="card"><span class="ct">액세서리</span><h4>금 · 은 · 구리</h4>
+      <p>금(Au)·은(Ag)·구리(Cu)는 한 종류의 원소로만 되어 있어 이름이 곧 원소입니다.</p></div>
+  </div>
+
+  <div class="alert"><span class="lb">여기서 헷갈립니다</span>
+    <p><b>원소</b>는 “종류·이름”이고, <b>원자</b>는 “알갱이 한 개”입니다.
+    레고로 치면 원소는 <b>블록의 종류</b>, 원자는 <b>블록 한 조각</b>입니다.
+    원자는 3주차에서 제대로 다룹니다. 지금은 “원소 = 종류”만 붙잡으면 됩니다.</p>
+  </div>
 
   <ul class="todo">
-    <li><label><input type="checkbox" data-q="w2m1"><span class="tt"><span class="day">월</span> — 위를 읽고 질문 3개를 적는다. 그리고 “물 전기분해” 영상을 1분만 찾아본다.</span></label></li>
+    <li><label><input type="checkbox" data-q="w2m1"><span class="tt"><b>월요일</b> — 위를 읽고 질문 3개를 적습니다. “물 전기분해” 영상을 1분만 찾아봅니다.</span></label></li>
   </ul>
 </section>
 
-<section id="tue">
-  <div class="eyebrow">Tuesday · 채우기</div>
-  <h2><span class="cell">[2]</span>원소기호 20개, 규칙부터</h2>
+<section class="sec" id="tue">
+  <div class="step-no"><span class="num">3</span><span class="lbl">개념 둘</span><span class="day">TUE · 채우기</span></div>
+  <h2>원소기호는 규칙부터 봅니다</h2>
 
-  <h3>쓰는 규칙 두 줄</h3>
-  <p>① 첫 글자는 <b>대문자</b>, 둘째 글자는 <b>소문자</b>.<br>
-  ② 옛 라틴어 이름에서 따온 것들이 있다. Na(나트륨)·K(칼륨)·Fe(철)·Cu(구리)·Ag(은)·Au(금)이 그렇다.</p>
-  <div class="callout warn"><span class="lbl">시험에 꼭 나온다</span>
-  <code>Co</code>는 <b>코발트</b>(원소 하나), <code>CO</code>는 <b>일산화탄소</b>(탄소 + 산소).
-  대소문자 하나로 완전히 다른 것이 된다.</div>
+  <p>규칙은 두 줄입니다. ① 첫 글자는 <b>대문자</b>, 둘째 글자는 <b>소문자</b>.
+  ② 옛 라틴어 이름에서 따온 것이 있습니다 — Na(나트륨)·K(칼륨)·Fe(철)·Cu(구리)·Ag(은)·Au(금).</p>
+
+  <div class="alert"><span class="lb">시험에 꼭 나옵니다</span>
+    <p><code>Co</code>는 <b>코발트</b>(원소 하나), <code>CO</code>는 <b>일산화탄소</b>(탄소 + 산소)입니다.
+    대소문자 하나로 완전히 다른 것이 됩니다.</p>
+  </div>
 
   <div class="tw"><table>
     <thead><tr><th>기호</th><th>이름</th><th>어디서 만나나</th></tr></thead>
     <tbody>
-      <tr><td><b>H</b></td><td>수소</td><td>물의 재료, 가장 가벼운 원소</td></tr>
-      <tr><td><b>He</b></td><td>헬륨</td><td>풍선을 띄우는 기체</td></tr>
-      <tr><td><b>Li</b></td><td>리튬</td><td>휴대폰 배터리</td></tr>
-      <tr><td><b>C</b></td><td>탄소</td><td>연필심, 다이아몬드, 모든 생물</td></tr>
-      <tr><td><b>N</b></td><td>질소</td><td>공기의 78 %, 과자 봉지 속</td></tr>
-      <tr><td><b>O</b></td><td>산소</td><td>숨 쉴 때, 물의 재료</td></tr>
-      <tr><td><b>Na</b></td><td>나트륨</td><td>소금, 불꽃 노란색</td></tr>
-      <tr><td><b>Mg</b></td><td>마그네슘</td><td>영양제, 밝은 흰빛으로 탄다</td></tr>
-      <tr><td><b>Al</b></td><td>알루미늄</td><td>은박지, 음료 캔</td></tr>
-      <tr><td><b>Si</b></td><td>규소</td><td>모래, 반도체</td></tr>
-      <tr><td><b>P</b></td><td>인</td><td>뼈, 성냥</td></tr>
-      <tr><td><b>S</b></td><td>황</td><td>온천 냄새, 고무</td></tr>
-      <tr><td><b>Cl</b></td><td>염소</td><td>소금의 반쪽, 수영장 소독</td></tr>
-      <tr><td><b>K</b></td><td>칼륨</td><td>바나나, 불꽃 보라색</td></tr>
-      <tr><td><b>Ca</b></td><td>칼슘</td><td>뼈, 우유, 분필</td></tr>
-      <tr><td><b>Fe</b></td><td>철</td><td>못, 피 속 헤모글로빈</td></tr>
-      <tr><td><b>Cu</b></td><td>구리</td><td>전선, 10원 동전</td></tr>
-      <tr><td><b>Zn</b></td><td>아연</td><td>건전지, 영양제</td></tr>
-      <tr><td><b>Ag</b></td><td>은</td><td>은수저, 사진 필름</td></tr>
-      <tr><td><b>Au</b></td><td>금</td><td>금반지</td></tr>
+      <tr><td class="mn ok">H</td><td class="hd">수소</td><td>물의 재료, 가장 가벼운 원소</td></tr>
+      <tr><td class="mn ok">He</td><td class="hd">헬륨</td><td>풍선을 띄우는 기체</td></tr>
+      <tr><td class="mn ok">Li</td><td class="hd">리튬</td><td>휴대폰 배터리</td></tr>
+      <tr><td class="mn ok">C</td><td class="hd">탄소</td><td>연필심, 다이아몬드, 모든 생물</td></tr>
+      <tr><td class="mn ok">N</td><td class="hd">질소</td><td>공기의 78 %, 과자 봉지 속</td></tr>
+      <tr><td class="mn ok">O</td><td class="hd">산소</td><td>숨 쉴 때, 물의 재료</td></tr>
+      <tr><td class="mn ok">Na</td><td class="hd">나트륨</td><td>소금 · 불꽃 노란색</td></tr>
+      <tr><td class="mn ok">Mg</td><td class="hd">마그네슘</td><td>영양제, 밝은 흰빛으로 탐</td></tr>
+      <tr><td class="mn ok">Al</td><td class="hd">알루미늄</td><td>은박지, 음료 캔</td></tr>
+      <tr><td class="mn ok">Si</td><td class="hd">규소</td><td>모래, 반도체</td></tr>
+      <tr><td class="mn ok">P</td><td class="hd">인</td><td>뼈, 성냥</td></tr>
+      <tr><td class="mn ok">S</td><td class="hd">황</td><td>온천 냄새, 고무</td></tr>
+      <tr><td class="mn ok">Cl</td><td class="hd">염소</td><td>소금의 반쪽, 수영장 소독</td></tr>
+      <tr><td class="mn ok">K</td><td class="hd">칼륨</td><td>바나나 · 불꽃 보라색</td></tr>
+      <tr><td class="mn ok">Ca</td><td class="hd">칼슘</td><td>뼈, 우유, 분필</td></tr>
+      <tr><td class="mn ok">Fe</td><td class="hd">철</td><td>못, 피 속 헤모글로빈</td></tr>
+      <tr><td class="mn ok">Cu</td><td class="hd">구리</td><td>전선, 10원 동전</td></tr>
+      <tr><td class="mn ok">Zn</td><td class="hd">아연</td><td>건전지, 영양제</td></tr>
+      <tr><td class="mn ok">Ag</td><td class="hd">은</td><td>은수저, 사진 필름</td></tr>
+      <tr><td class="mn ok">Au</td><td class="hd">금</td><td>금반지</td></tr>
     </tbody>
   </table></div>
 
-  <div class="callout good"><span class="lbl">외우는 법</span>
-  한 번에 20개를 외우지 않는다. <b>하루 5개씩 4일</b>이면 끝난다.
-  카드 앞면에 기호, 뒷면에 이름과 “어디서 만나나”를 쓰고, 자기 전 1분만 넘겨 본다.</div>
+  <div class="note"><span class="lb">외우는 법</span>
+    <p>한 번에 20개를 외우지 않습니다. <b>하루 5개씩 나흘</b>이면 끝납니다.
+    카드 앞면에 기호, 뒷면에 이름과 “어디서 만나나”를 쓰고 자기 전에 1분만 넘겨 봅니다.</p>
+  </div>
 
   <ul class="todo">
-    <li><label><input type="checkbox" data-q="w2m2"><span class="tt"><span class="day">화</span> — 원소기호 카드 20장을 만든다. 오늘은 <b>5개만</b> 외운다.</span></label></li>
+    <li><label><input type="checkbox" data-q="w2m2"><span class="tt"><b>화요일</b> — 원소기호 카드 20장을 만듭니다. 오늘 외우는 것은 <b>5개까지만</b>입니다.</span></label></li>
   </ul>
 </section>
 
-<section id="thu">
-  <div class="eyebrow">Thursday · 손으로</div>
-  <h2><span class="cell">[3]</span>불꽃반응 — 색으로 원소 알아내기</h2>
+<section class="sec" id="thu">
+  <div class="step-no"><span class="num">4</span><span class="lbl">실험</span><span class="day">THU · 손으로</span></div>
+  <h2>색으로 원소를 알아냅니다</h2>
 
-  <div class="callout warn"><span class="lbl">안전 — 반드시 아빠와 함께</span>
-  긴 머리는 묶고 소매는 걷는다. 가스레인지는 <b>파란 불</b>로 약하게. 한 번에 <b>3초</b>만 대고 뗀다.
-  젖은 나무젓가락을 쓰고, 얼굴을 가까이 대지 않는다. 끝나면 반드시 불을 끄고 환기한다.</div>
+  <div class="note"><span class="lb">안전 · 반드시 아빠와 함께</span>
+    <p>긴 머리는 묶고 소매는 걷습니다. 가스레인지는 <b>파란 불로 약하게</b> 켜고, 한 번에 <b>3초</b>만 대었다 뗍니다.
+    젖은 나무젓가락을 쓰고 얼굴을 가까이 대지 않습니다. 끝나면 불을 끄고 환기합니다.</p>
+  </div>
 
-  <div class="tw"><table>
+  <div class="tw wide"><table>
     <thead><tr><th>시료</th><th>어디서 구하나</th><th>들어 있는 원소</th><th>예상 불꽃색</th></tr></thead>
     <tbody>
-      <tr><td>소금</td><td>부엌</td><td><b>Na</b> 나트륨</td><td>노란색</td></tr>
-      <tr><td>염화칼슘 제습제</td><td>물먹는하마 알갱이</td><td><b>Ca</b> 칼슘</td><td>주황빛 붉은색</td></tr>
-      <tr><td>저염 소금 (염화칼륨 포함)</td><td>마트</td><td><b>K</b> 칼륨</td><td>연한 보라색</td></tr>
-      <tr><td>구리선 조각</td><td>전선 껍질을 벗겨서</td><td><b>Cu</b> 구리</td><td>청록색</td></tr>
+      <tr><td class="hd">소금</td><td>부엌</td><td class="mn ok">Na</td><td>노란색</td></tr>
+      <tr><td class="hd">염화칼슘 제습제</td><td>물먹는하마 알갱이</td><td class="mn ok">Ca</td><td>주황빛 붉은색</td></tr>
+      <tr><td class="hd">저염 소금</td><td>마트 (염화칼륨 포함)</td><td class="mn ok">K</td><td>연한 보라색</td></tr>
+      <tr><td class="hd">구리선 조각</td><td>전선 껍질을 벗겨서</td><td class="mn ok">Cu</td><td>청록색</td></tr>
     </tbody>
   </table></div>
 
   <h3>순서</h3>
-  <div class="grid g2">
-    <div class="card"><span class="tag">01</span><h4>예상 적기</h4><p class="sub">각 시료의 색을 <b>보기 전에</b> 예상해서 적는다.</p></div>
-    <div class="card"><span class="tag">02</span><h4>묻히기</h4><p class="sub">나무젓가락 끝을 물에 적신 뒤 시료를 묻힌다.</p></div>
-    <div class="card"><span class="tag">03</span><h4>3초</h4><p class="sub">불 가장자리에 3초 대고 뗀다. 색이 나타나는 순간을 본다.</p></div>
-    <div class="card"><span class="tag">04</span><h4>사진</h4><p class="sub">어두운 배경에서 찍으면 색이 잘 보인다. 영상으로 찍어도 좋다.</p></div>
+  <div class="cards two">
+    <div class="card"><span class="ct">01</span><h4>예상을 적습니다</h4><p>각 시료의 색을 <b>보기 전에</b> 예상해서 적습니다.</p></div>
+    <div class="card"><span class="ct">02</span><h4>묻힙니다</h4><p>나무젓가락 끝을 물에 적신 뒤 시료를 묻힙니다.</p></div>
+    <div class="card"><span class="ct">03</span><h4>3초</h4><p>불 가장자리에 3초 대었다 뗍니다. 색이 나타나는 순간을 봅니다.</p></div>
+    <div class="card"><span class="ct">04</span><h4>기록합니다</h4><p>어두운 배경에서 찍으면 색이 잘 보입니다. 영상으로 남겨도 좋습니다.</p></div>
   </div>
 
+  <div class="tw"><table>
+    <thead><tr><th>시료</th><th>예상한 색</th><th>실제 색</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">소금</td><td class="fill">______</td><td class="fill">______</td></tr>
+      <tr><td class="hd">제습제 액</td><td class="fill">______</td><td class="fill">______</td></tr>
+      <tr><td class="hd">그 밖의 시료</td><td class="fill">______</td><td class="fill">______</td></tr>
+    </tbody>
+  </table></div>
+
   <h3>왜 원소마다 색이 다를까</h3>
-  <p>불꽃의 열을 받으면 원소 속 <b>전자가 잠깐 들떴다가 제자리로 돌아온다</b>.
-  이때 남는 에너지를 <b>빛</b>으로 내놓는데, 원소마다 그 에너지 크기가 정해져 있어서 <b>색이 정해진다</b>.
-  그래서 색만 보고도 어떤 원소인지 알 수 있다.</p>
-  <div class="callout good"><span class="lbl">여기까지 오면</span>
-  천문학자가 <b>가보지도 않은 별의 성분을 아는 이유</b>가 설명된다. 별빛을 나눠서(스펙트럼) 어떤 색이 들어 있는지 보면
-  그 별에 어떤 원소가 있는지 알 수 있다. 불꽃반응의 확대판이다.</div>
+  <p>불꽃의 열을 받으면 원소 속 <b>전자가 잠깐 들떴다가 제자리로 돌아옵니다.</b>
+  이때 남는 에너지를 <b>빛</b>으로 내놓는데, 원소마다 그 에너지의 크기가 정해져 있어 <b>색도 정해집니다.</b>
+  그래서 색만 보고 어떤 원소인지 알 수 있습니다.</p>
+
+  <div class="plain">
+    <p><b>여기까지 오면</b> — 천문학자가 가보지도 않은 별의 성분을 아는 이유가 설명됩니다.
+    별빛을 나눠서(스펙트럼) 어떤 색이 들어 있는지 보면 그 별에 어떤 원소가 있는지 알 수 있습니다.
+    <b>불꽃반응의 확대판</b>인 셈입니다.</p>
+  </div>
 
   <ul class="todo">
-    <li><label><input type="checkbox" data-q="w2m3"><span class="tt"><span class="day">목</span> — 불꽃반응을 2가지 이상 관찰하고, 예상과 실제 색을 나란히 적는다.</span></label></li>
+    <li><label><input type="checkbox" data-q="w2m3"><span class="tt"><b>목요일</b> — 불꽃반응을 두 가지 이상 관찰하고 예상과 실제 색을 나란히 적습니다.</span></label></li>
   </ul>
 </section>
 
-<section id="fri">
-  <div class="eyebrow">Friday · 보스전</div>
-  <h2><span class="cell">[4]</span>문제 5개 + 3분 설명</h2>
+<section class="sec" id="fri">
+  <div class="step-no"><span class="num">5</span><span class="lbl">보스전</span><span class="day">FRI · 설명</span></div>
+  <h2>문제 5개와 3분 설명</h2>
 
   <div class="q"><span class="qn">Q1</span>
-    <p>물에 전기를 흘렸더니 수소와 산소가 나왔다. 물은 원소일까?</p>
+    <p>물에 전기를 흘렸더니 수소와 산소가 나왔습니다. 물은 원소일까요?</p>
     <details><summary>해설 보기</summary><div class="ans">
-      <b>원소가 아니다.</b> 두 가지 원소(수소·산소)로 쪼개졌으니 물은 원소가 아니라 <b>두 원소로 이루어진 물질</b>이다.
-      반대로 수소는 더 쪼개지지 않으므로 원소다.
+      <b>원소가 아닙니다.</b> 두 가지 원소로 쪼개졌으니 물은 <b>두 원소로 이루어진 물질</b>입니다.
+      반대로 수소는 더 쪼개지지 않으므로 원소입니다.
     </div></details>
   </div>
 
   <div class="q"><span class="qn">Q2</span>
-    <p><code>Co</code>와 <code>CO</code>는 무엇이 다를까?</p>
+    <p><code>Co</code>와 <code>CO</code>는 무엇이 다를까요?</p>
     <details><summary>해설 보기</summary><div class="ans">
-      <b>Co는 코발트라는 원소 하나, CO는 탄소(C)와 산소(O)가 붙은 일산화탄소다.</b>
-      둘째 글자가 소문자면 한 원소, 대문자면 다른 원소가 이어진 것이다.
+      <b>Co는 코발트라는 원소 하나이고, CO는 탄소(C)와 산소(O)가 결합한 일산화탄소입니다.</b>
+      둘째 글자가 소문자면 한 원소, 대문자면 다른 원소가 이어진 것입니다.
     </div></details>
   </div>
 
   <div class="q"><span class="qn">Q3</span>
-    <p>겉보기에 똑같은 무색 액체 두 병이 있다. 하나는 소금물, 하나는 염화칼슘 용액이다. 어떻게 구별할까?</p>
+    <p>겉보기에 똑같은 무색 액체 두 병이 있습니다. 하나는 소금물, 하나는 염화칼슘 용액입니다. 어떻게 구별할까요?</p>
     <details><summary>해설 보기</summary><div class="ans">
-      <b>불꽃반응을 시켜 색을 본다.</b> 노란색이면 나트륨(소금물), 주황빛 붉은색이면 칼슘(염화칼슘 용액)이다.
-      맛보거나 냄새 맡아 확인하지 않는다.
+      <b>불꽃반응을 시켜 색을 봅니다.</b> 노란색이면 나트륨(소금물), 주황빛 붉은색이면 칼슘(염화칼슘 용액)입니다.
+      맛보거나 냄새 맡아 확인하지 않습니다.
     </div></details>
   </div>
 
   <div class="q"><span class="qn">Q4</span>
-    <p>수백 광년 떨어진 별에 어떤 원소가 있는지 어떻게 알 수 있을까?</p>
+    <p>수백 광년 떨어진 별에 어떤 원소가 있는지 어떻게 알 수 있을까요?</p>
     <details><summary>해설 보기</summary><div class="ans">
-      <b>별빛을 나눠 보면(스펙트럼) 원소마다 정해진 색의 빛이 나타나기 때문이다.</b>
-      불꽃반응과 같은 원리다. 원소가 내는 빛의 색이 곧 이름표다.
+      <b>별빛을 나눠 보면 원소마다 정해진 색의 빛이 나타나기 때문입니다.</b>
+      불꽃반응과 같은 원리입니다. 원소가 내는 빛의 색이 곧 이름표입니다.
     </div></details>
   </div>
 
   <div class="q"><span class="qn">Q5</span>
     <p>다음 중 원소가 <b>아닌</b> 것은? ① 산소 ② 금 ③ 소금 ④ 철</p>
     <details><summary>해설 보기</summary><div class="ans">
-      <b>③ 소금.</b> 소금은 나트륨(Na)과 염소(Cl)가 결합한 물질이라 두 원소로 나뉜다.
-      산소·금·철은 각각 한 종류의 원소다.
+      <b>③ 소금입니다.</b> 소금은 나트륨(Na)과 염소(Cl)가 결합한 물질이라 두 원소로 나뉩니다.
+      산소·금·철은 각각 한 종류의 원소입니다.
     </div></details>
   </div>
 
   <h3>아빠에게 3분 설명하기</h3>
   <div class="script">
-    <div><span class="s">① 이번 주에 배운 건</span> — 원소는 더 이상 쪼갤 수 없는 성분이고, 세상 물질은 원소 118종의 조합이라는 것.</div>
-    <div><span class="s">② 예를 들면</span> — 소금을 불에 대면 노란색이 나오는데, 그건 나트륨이 내는 색이야. 색이 이름표라서 별 성분도 알 수 있어.</div>
-    <div><span class="s">③ 헷갈리기 쉬운 건</span> — 물이나 소금은 원소가 아니야. 두 원소가 합쳐진 물질이야.</div>
+    <div class="row"><span class="s">배운 것</span><span>원소는 더 이상 쪼갤 수 없는 성분이고, 세상 물질은 원소 118종의 조합이라는 것.</span></div>
+    <div class="row"><span class="s">예를 들면</span><span>소금을 불에 대면 노란색이 나오는데, 그건 나트륨이 내는 색이야. 색이 이름표라서 별의 성분도 알 수 있어.</span></div>
+    <div class="row"><span class="s">헷갈리는 것</span><span>물이나 소금은 원소가 아니야. 두 원소가 합쳐진 물질이야.</span></div>
   </div>
 
   <ul class="todo">
-    <li><label><input type="checkbox" data-q="w2m4"><span class="tt"><span class="day">금</span> — 문제 5개 + 3분 설명. 원소기호 20개도 한 번 훑는다.</span></label></li>
+    <li><label><input type="checkbox" data-q="w2m4"><span class="tt"><b>금요일</b> — 문제 5개와 3분 설명. 원소기호 20개도 한 번 훑습니다.</span></label></li>
   </ul>
 
-  <p style="margin-top:18px"><span class="badge">🔥 불꽃 판독기 획득</span></p>
+  <p><span class="badge">획득 · 불꽃 판독기</span></p>
 </section>
 
-<section style="border-bottom:0">
-  <div class="eyebrow">Next</div>
-  <h2><span class="cell">[5]</span>다음 주 예고</h2>
-  <p>3주차는 <b>원자와 분자</b>다. “원소는 종류”라고 했는데, 그럼 알갱이 한 개는 뭐라고 부를까?
-  그리고 H₂O의 작은 2는 무슨 뜻일까. 다음 주에 정리된다.</p>
-  <div class="nav-b">
+<section class="sec" id="next">
+  <div class="step-no"><span class="num">6</span><span class="lbl">다음 주</span></div>
+  <h2>원자와 분자</h2>
+  <p>“원소는 종류”라고 했는데, 그러면 알갱이 한 개는 뭐라고 부를까요.
+  그리고 <code>H₂O</code>의 작은 2는 무슨 뜻일까요. 3주차에 정리됩니다.</p>
+  <div class="pager">
     <a href="week01.html">← 1주차</a>
     <a href="index.html">전체 지도</a>
     <a class="main" href="week03.html">3주차 →</a>
   </div>
 </section>
 
-<footer>과학 등반 · 2주차 · 하루 20분 × 4일</footer>
+<footer>과학 등반 12주 · WEEK 02 원소와 불꽃 · 하루 20분 × 4일</footer>
 </div>
 <script>
-(function(){
-  var KEY="science_quest_progress";
-  function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){return{}}}
-  function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
-  var boxes=[].slice.call(document.querySelectorAll(".todo input[type=checkbox]"));
-  var st=load();
-  boxes.forEach(function(b){
-    if(st[b.dataset.q])b.checked=true;
-    b.addEventListener("change",function(){
-      var s=load();
-      if(b.checked)s[b.dataset.q]=1;else delete s[b.dataset.q];
-      save(s);paint();
+  (function(){
+    var KEY="science_quest_progress";
+    function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){return{}}}
+    function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+    var boxes=[].slice.call(document.querySelectorAll(".todo input[type=checkbox]"));
+    var st=load();
+    boxes.forEach(function(b){
+      if(st[b.dataset.q])b.checked=true;
+      b.addEventListener("change",function(){
+        var s=load();
+        if(b.checked)s[b.dataset.q]=1;else delete s[b.dataset.q];
+        save(s);paint();
+      });
     });
-  });
-  function paint(){
-    var el=document.getElementById("wdone");if(!el)return;
-    var n=boxes.filter(function(b){return b.checked}).length;
-    el.textContent=n+" / "+boxes.length+" 완료";
-  }
-  paint();
-  // 현재 섹션 표시
-  var links=[].slice.call(document.querySelectorAll("nav.toc a[href^='#']"));
-  var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1))});
-  function onScroll(){
-    var y=window.scrollY+120,idx=0;
-    secs.forEach(function(s,i){if(s&&s.offsetTop<=y)idx=i});
-    links.forEach(function(a,i){a.classList.toggle("now",i===idx)});
-  }
-  window.addEventListener("scroll",onScroll,{passive:true});onScroll();
-})();
+    function paint(){
+      var el=document.getElementById("wdone");
+      if(el){var n=boxes.filter(function(b){return b.checked}).length;
+        el.textContent=n+" / "+boxes.length;}
+      var hub=document.querySelector("[data-hub]");
+      if(hub){
+        var s=load(),total=0;
+        for(var w=1;w<=12;w++){
+          var n2=0;
+          for(var m=1;m<=4;m++) if(s["w"+w+"m"+m]) n2++;
+          total+=n2;
+          var p=document.querySelector('.p[data-p="'+w+'"]');
+          if(p&&!p.dataset.soon){p.textContent=n2===4?"완료":n2+" / 4";
+            p.className="p"+(n2===4?" done":(n2>0?" ing":""));}
+        }
+        var d=document.getElementById("allDone"),bar=document.getElementById("allBar");
+        if(d)d.textContent=total+" / 12";
+        if(bar)bar.style.width=(total/12*100)+"%";
+      }
+    }
+    paint();
+    var links=[].slice.call(document.querySelectorAll("nav.jump a[href^='#']"));
+    if(links.length){
+      var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1))});
+      var onScroll=function(){
+        var y=window.scrollY+130,idx=0;
+        secs.forEach(function(s,i){if(s&&s.offsetTop<=y)idx=i;});
+        links.forEach(function(a,i){a.classList.toggle("now",i===idx);});
+      };
+      window.addEventListener("scroll",onScroll,{passive:true});onScroll();
+    }
+  })();
 </script>
 </body>
 </html>

@@ -1,275 +1,421 @@
 <!DOCTYPE html>
-<html lang="ko" class="">
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0d1117">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#DCE2DB">
 <title>과학 등반 12주</title>
-<meta name="description" content="중2 과학을 하루 20분씩 12주 동안 개념 하나씩 밟아 올라가는 주차별 학습 문서.">
+<meta name="description" content="중2 과학을 하루 20분씩 개념 하나로 밟아 올라가는 주차별 학습 문서.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#0d1117; --bg2:#0b0f15; --panel:#161b22; --panel2:#1c2230; --line:#2a3340;
-  --ink:#e6edf3; --sub:#9aa7b4; --mut:#6b7886;
-  --acc:#4f9cff; --acc2:#7c5cff; --good:#3fb950; --warn:#d29922; --pink:#f778ba;
-  --chip:#21304a; --radius:16px;
-  --camp:#7c5cff; --camp-dim:#b7a4ff; --camp-bg:rgba(124,92,255,.14); --camp-line:#3d3470;
-}
-:root.c1{--camp:#7c5cff;--camp-dim:#b7a4ff;--camp-bg:rgba(124,92,255,.14);--camp-line:#3d3470}
-:root.c2{--camp:#d29922;--camp-dim:#f0c674;--camp-bg:rgba(210,153,34,.14);--camp-line:#5c4718}
-:root.c3{--camp:#3fb950;--camp-dim:#63d67c;--camp-bg:rgba(63,185,80,.14);--camp-line:#2c5c34}
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);line-height:1.72;font-size:16.5px;
-  font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR","Segoe UI",system-ui,sans-serif;
-  word-break:keep-all;overflow-wrap:anywhere;
-  padding-bottom:calc(40px + env(safe-area-inset-bottom))}
-.wrap{max-width:720px;margin:0 auto;padding:0 18px}
-a{color:var(--acc);text-decoration:none}
-p{margin:0 0 13px}
-b,strong{font-weight:700;color:#fff}
-.sub{color:var(--sub)}
-.mut{color:var(--mut)}
+  :root{
+    --ink:#131C18; --ink2:#2C3A33; --muted:#5F6E66; --faint:#8A968F;
+    --mist:#DCE2DB; --surface:#F8FAF6; --surface2:#EFF3EC;
+    --line:#C3CCC1; --hair:#DDE4DB;
+    --kelp:#1F6249; --kelp-wash:#DEEDE4; --kelp-line:#8FBBA3;
+    --amber:#8F6209; --amber-wash:#F5EAD0; --amber-line:#DCC79B;
+    --berry:#8C2F3E; --berry-wash:#F3DFE2; --berry-line:#D9A8B0;
+    --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+    --mono:"IBM Plex Mono","SFMono-Regular",Consolas,"D2Coding",monospace;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{margin:0;background:var(--mist);color:var(--ink);font-family:var(--sans);
+    font-size:16px;line-height:1.75;letter-spacing:-0.01em;
+    padding:0 18px calc(70px + env(safe-area-inset-bottom));
+    word-break:keep-all;overflow-wrap:anywhere;}
+  .wrap{max-width:1040px;margin:0 auto;}
 
-/* 헤더 */
-header.top{padding:26px 0 18px;background:linear-gradient(180deg,var(--bg2),var(--bg) 90%)}
-.kicker{display:inline-block;font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;font-weight:700;
-  color:var(--camp-dim);background:var(--camp-bg);border:1px solid var(--camp-line);
-  padding:6px 12px;border-radius:999px;margin-bottom:14px}
-h1{font-size:27px;line-height:1.3;margin:0 0 10px;font-weight:800;letter-spacing:-.01em}
-h1 .g{background:linear-gradient(90deg,var(--acc),var(--camp));-webkit-background-clip:text;background-clip:text;color:transparent}
-.lead{font-size:15.5px;color:var(--sub);margin:0 0 16px}
-.meta{display:flex;flex-wrap:wrap;gap:7px}
-.meta .m{font-size:12.5px;color:var(--sub);background:var(--panel);border:1px solid var(--line);padding:5px 11px;border-radius:999px}
+  /* ===== 표지 ===== */
+  .cover{padding:44px 0 30px;border-bottom:2px solid var(--ink);}
+  .cover .kicker{font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:0.2em;text-transform:uppercase;color:var(--kelp);margin:0 0 16px;}
+  .cover h1{font-size:clamp(27px,6vw,44px);font-weight:700;line-height:1.24;
+    letter-spacing:-0.035em;margin:0 0 16px;max-width:21ch;}
+  .cover .lede{font-size:clamp(15.5px,2vw,18px);font-weight:300;color:var(--ink2);
+    max-width:62ch;margin:0 0 24px;line-height:1.72;}
+  .cover .lede b{font-weight:600;color:var(--ink);}
+  .metaline{display:flex;flex-wrap:wrap;gap:6px 22px;font-family:var(--mono);
+    font-size:11.5px;color:var(--muted);letter-spacing:0.03em;}
+  .metaline b{color:var(--ink);font-weight:500;}
 
-/* 상단 이동 바 */
-nav.toc{position:sticky;top:0;z-index:30;background:rgba(13,17,23,.92);backdrop-filter:blur(8px);
-  border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:18px}
-nav.toc .row{display:flex;gap:6px;overflow-x:auto;padding:10px 18px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-nav.toc .row::-webkit-scrollbar{display:none}
-nav.toc a{flex:0 0 auto;font-size:13px;color:var(--sub);padding:7px 12px;border-radius:999px;
-  border:1px solid var(--line);background:var(--panel)}
-nav.toc a.now{color:#fff;background:var(--camp-bg);border-color:var(--camp-line)}
+  .summary{background:var(--ink);border-radius:3px;padding:26px 22px 24px;margin:28px 0 0;}
+  .summary h2{color:#F6FAF5;font-size:18px;font-weight:600;margin:0 0 6px;letter-spacing:-0.02em;}
+  .summary .sd{color:#93A399;font-size:13.5px;font-weight:300;margin:0 0 22px;line-height:1.65;}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:18px;}
+  .kpi .kl{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:#7E8F84;display:block;margin-bottom:5px;}
+  .kpi .kv{font-size:clamp(21px,3.2vw,28px);font-weight:700;color:#8FD3B4;
+    letter-spacing:-0.03em;display:block;line-height:1.1;}
+  .kpi .kn{font-size:12px;color:#B9C6BC;display:block;margin-top:6px;
+    font-weight:300;line-height:1.5;}
 
-/* 섹션 */
-section{padding:30px 0;border-bottom:1px solid var(--line)}
-.eyebrow{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--camp-dim);font-weight:700;margin-bottom:7px}
-h2{font-size:20px;margin:0 0 14px;font-weight:800;line-height:1.4}
-h2 .cell{display:inline-block;background:var(--camp);color:#0d1117;font-size:12.5px;font-weight:800;
-  border-radius:8px;padding:2px 9px;margin-right:8px;vertical-align:2px;font-family:ui-monospace,Menlo,monospace}
-h3{font-size:16.5px;margin:22px 0 9px;font-weight:700}
-h3:first-child{margin-top:0}
+  /* ===== 이동 바 ===== */
+  nav.jump{position:sticky;top:0;z-index:40;margin:0 -18px;padding:0 18px;
+    background:rgba(220,226,219,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);}
+  nav.jump .row{display:flex;gap:6px;overflow-x:auto;padding:9px 0;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  nav.jump .row::-webkit-scrollbar{display:none;}
+  nav.jump a{flex:0 0 auto;font-family:var(--mono);font-size:11.5px;letter-spacing:0.04em;
+    color:var(--muted);background:var(--surface);border:1px solid var(--line);
+    padding:6px 11px;border-radius:2px;text-decoration:none;}
+  nav.jump a.now{color:#fff;background:var(--kelp);border-color:var(--kelp);}
 
-/* 카드 · 콜아웃 */
-.grid{display:grid;gap:11px;margin:12px 0}
-.g2{grid-template-columns:1fr}
-@media(min-width:620px){.g2{grid-template-columns:repeat(2,1fr)}}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:15px 16px}
-.card h4{margin:0 0 7px;font-size:15px;font-weight:700}
-.card p{font-size:14.5px;margin:0}
-.tag{display:inline-block;font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px;margin-bottom:8px;
-  background:var(--camp-bg);color:var(--camp-dim);border:1px solid var(--camp-line)}
-.callout{border-left:4px solid var(--acc);background:var(--panel);border-radius:10px;padding:13px 15px;margin:14px 0;font-size:15px}
-.callout.good{border-left-color:var(--good)}
-.callout.warn{border-left-color:var(--warn)}
-.callout.p{border-left-color:var(--camp)}
-.callout b{display:inline}
-.callout .lbl{display:block;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);font-weight:700;margin-bottom:4px}
+  /* ===== 섹션 ===== */
+  .sec{padding:44px 0 12px;border-bottom:1px solid var(--line);scroll-margin-top:56px;}
+  .sec:last-of-type{border-bottom:0;}
+  .step-no{display:flex;align-items:center;gap:11px;margin-bottom:14px;}
+  .step-no .num{font-family:var(--mono);font-size:12px;font-weight:600;color:#fff;
+    background:var(--kelp);width:28px;height:28px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-no .lbl{font-family:var(--mono);font-size:11px;letter-spacing:0.13em;
+    text-transform:uppercase;color:var(--muted);}
+  .step-no .day{margin-left:auto;font-family:var(--mono);font-size:11px;
+    letter-spacing:0.1em;color:var(--kelp);background:var(--kelp-wash);
+    border:1px solid var(--kelp-line);padding:3px 9px;border-radius:2px;}
+  .sec h2{font-size:clamp(22px,3.4vw,29px);font-weight:600;letter-spacing:-0.03em;
+    line-height:1.34;margin:0 0 14px;max-width:30ch;}
+  .sec h3{font-size:17.5px;font-weight:600;letter-spacing:-0.02em;margin:30px 0 10px;}
+  .sec > p{max-width:70ch;color:var(--ink2);margin:0 0 16px;}
+  .sec strong,.sec b{font-weight:600;color:var(--ink);}
+  .sec code{font-family:var(--mono);font-size:0.86em;background:var(--surface2);
+    border:1px solid var(--hair);padding:1px 5px;border-radius:2px;}
 
-/* 표 */
-.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:12px;margin:12px 0}
-table{width:100%;border-collapse:collapse;font-size:14px;min-width:340px}
-th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
-th{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--mut);font-weight:700;background:var(--panel)}
-tbody tr:last-child td{border-bottom:0}
-td b{color:#fff}
-code{background:#0b1020;border:1px solid var(--line);border-radius:6px;padding:1px 6px;font-size:14px;color:#c9d6e5;
-  font-family:ui-monospace,Menlo,monospace}
+  .plain{background:var(--surface2);border-left:3px solid var(--kelp);
+    padding:14px 17px;margin:0 0 20px;border-radius:0 2px 2px 0;max-width:74ch;}
+  .plain p{margin:0;font-size:14.5px;color:var(--ink2);line-height:1.72;}
+  .plain p + p{margin-top:10px;}
+  .plain b{color:var(--kelp);font-weight:600;}
 
-/* 다이어그램 */
-.diagram{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:var(--radius);
-  background:var(--panel);padding:12px;margin:12px 0}
-.diagram svg{display:block}
-.figcap{font-size:12.5px;color:var(--mut);margin:-4px 0 12px;text-align:center}
+  .fig{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:20px 16px 16px;margin:20px 0 12px;}
+  .fig-t{font-family:var(--mono);font-size:11px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--kelp);margin:0 0 16px;
+    padding-bottom:9px;border-bottom:1px solid var(--hair);}
+  .fig svg{display:block;width:100%;height:auto;}
+  .fig-c{font-size:13px;color:var(--muted);margin:14px 0 0;font-weight:300;
+    line-height:1.65;padding-top:12px;border-top:1px solid var(--hair);}
+  .fig-c b{color:var(--ink);font-weight:600;}
 
-/* 할 일 체크 */
-.todo{list-style:none;margin:14px 0 0;padding:0;border:1px solid var(--line);border-radius:12px;background:var(--panel);overflow:hidden}
-.todo li+li{border-top:1px solid var(--line)}
-.todo label{display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start;
-  padding:14px 15px;cursor:pointer;font-size:15px;min-height:52px}
-.todo input{appearance:none;-webkit-appearance:none;width:21px;height:21px;margin:1px 0 0;
-  border:1.5px solid var(--mut);border-radius:6px;background:var(--panel2);display:grid;place-content:center;cursor:pointer}
-.todo input::after{content:"✓";font-size:13px;font-weight:800;color:#0d1117;transform:scale(0);transition:transform .12s}
-.todo input:checked{background:var(--good);border-color:var(--good)}
-.todo input:checked::after{transform:scale(1)}
-.todo input:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
-.todo input:checked ~ .tt{color:var(--mut);text-decoration:line-through}
-.todo .day{font-weight:700;color:var(--camp-dim)}
+  .sb{fill:#fff;stroke:#C3CCC1;stroke-width:1.5;}
+  .sb-k{fill:#DEEDE4;stroke:#1F6249;stroke-width:2;}
+  .sb-b{fill:#F3DFE2;stroke:#D9A8B0;stroke-width:1.5;}
+  .sb-a{fill:#F5EAD0;stroke:#DCC79B;stroke-width:1.5;}
+  .sb-g{fill:#EFF3EC;stroke:#C3CCC1;stroke-width:1.5;}
+  .sb-d{fill:#fff;stroke:#1F6249;stroke-width:1.6;stroke-dasharray:5 4;}
+  .st{font-family:var(--sans);font-size:13.5px;font-weight:600;fill:#131C18;
+    text-anchor:middle;letter-spacing:-0.3px;}
+  .st-s{font-family:var(--sans);font-size:11.5px;font-weight:400;fill:#5F6E66;text-anchor:middle;}
+  .st-k{fill:#1F6249;} .st-b{fill:#8C2F3E;} .st-a{fill:#8F6209;}
+  .sm{font-family:var(--mono);font-size:12px;fill:#131C18;text-anchor:middle;font-weight:500;}
+  .sm-s{font-family:var(--mono);font-size:10.5px;fill:#5F6E66;text-anchor:middle;}
+  .st-m{font-family:var(--mono);font-size:11px;fill:#8A968F;text-anchor:middle;letter-spacing:0.5px;}
+  .sl{stroke:#8A968F;stroke-width:1.6;fill:none;}
+  .sl-k{stroke:#1F6249;stroke-width:2;fill:none;}
+  .sl-a{stroke:#8F6209;stroke-width:1.8;fill:none;}
+  .sl-d{stroke:#8A968F;stroke-width:1.4;fill:none;stroke-dasharray:4 4;}
+  .sa{fill:#8A968F;} .sa-k{fill:#1F6249;} .sa-a{fill:#8F6209;}
+  .dot-k{fill:#1F6249;} .dot-a{fill:#C99A2E;} .dot-b{fill:#8C2F3E;}
 
-/* 문제 */
-.q{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px 16px;margin:11px 0}
-.q .qn{font-family:ui-monospace,Menlo,monospace;font-size:12px;font-weight:700;color:var(--camp-dim);letter-spacing:.08em}
-.q p{margin:6px 0 0;font-size:15.5px}
-details{margin-top:11px;border-top:1px solid var(--line);padding-top:10px}
-details summary{cursor:pointer;font-size:14px;font-weight:700;color:var(--acc);list-style:none;padding:4px 0}
-details summary::-webkit-details-marker{display:none}
-details summary::before{content:"▸ ";color:var(--acc)}
-details[open] summary::before{content:"▾ "}
-details .ans{font-size:14.5px;color:var(--sub);margin-top:8px}
-details .ans b{color:var(--good)}
+  /* ===== 표 ===== */
+  .tw{overflow-x:auto;margin:20px 0 8px;border:1px solid var(--line);
+    border-radius:3px;background:var(--surface);}
+  table{border-collapse:collapse;width:100%;font-size:13.8px;}
+  .tw.wide table{min-width:560px;}
+  thead th{background:var(--ink);color:#E8EFE7;text-align:left;font-family:var(--mono);
+    font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
+    padding:11px 13px;}
+  tbody td{padding:11px 13px;border-top:1px solid var(--hair);vertical-align:top;
+    color:var(--ink2);line-height:1.62;}
+  tbody tr:nth-child(even) td{background:var(--surface2);}
+  td.hd{font-weight:600;color:var(--ink);}
+  td.mn{font-family:var(--mono);font-size:12.5px;}
+  td.ok{color:var(--kelp);font-weight:600;}
+  td.no{color:var(--berry);font-weight:600;}
+  td.wa{color:var(--amber);font-weight:600;}
+  td.fill{font-family:var(--mono);color:var(--faint);}
 
-/* 대본 틀 */
-.script{background:#0b1020;border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0;font-size:15px}
-.script .s{color:var(--camp-dim);font-weight:700}
-.script div+div{margin-top:10px}
+  .note{background:var(--amber-wash);border:1px solid var(--amber-line);
+    border-radius:3px;padding:17px 19px;margin:20px 0 8px;}
+  .note p{margin:0;font-size:14px;color:#5C440C;line-height:1.72;}
+  .note p + p{margin-top:9px;}
+  .note b{font-weight:600;}
+  .note .lb{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--amber);margin-bottom:6px;}
+  .alert{background:var(--berry-wash);border:1px solid var(--berry-line);
+    border-radius:3px;padding:17px 19px;margin:20px 0 8px;}
+  .alert p{margin:0;font-size:14px;color:#6B2430;line-height:1.72;}
+  .alert p + p{margin-top:9px;}
+  .alert b{font-weight:600;}
+  .alert .lb{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--berry);margin-bottom:6px;}
 
-/* 배지 · 이동 */
-.badge{display:inline-block;font-size:15px;font-weight:700;color:var(--camp-dim);background:var(--camp-bg);
-  border:1px solid var(--camp-line);border-radius:999px;padding:8px 16px;margin-top:6px}
-.nav-b{display:flex;gap:10px;margin:22px 0 0}
-.nav-b a{flex:1;text-align:center;background:var(--panel);border:1px solid var(--line);border-radius:12px;
-  padding:14px 10px;font-size:14.5px;font-weight:700;color:var(--ink)}
-.nav-b a.main{background:var(--camp-bg);border-color:var(--camp-line);color:var(--camp-dim)}
-.nav-b a.off{color:var(--mut)}
-footer{padding:24px 0 40px;color:var(--mut);font-size:12.5px;text-align:center}
-@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+  /* ===== 카드 묶음 ===== */
+  .cards{display:grid;gap:12px;margin:18px 0 8px;}
+  @media(min-width:680px){.cards.two{grid-template-columns:repeat(2,1fr);}}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:15px 17px;}
+  .card .ct{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;
+    color:var(--kelp);display:block;margin-bottom:7px;}
+  .card h4{margin:0 0 6px;font-size:15.5px;font-weight:600;letter-spacing:-0.02em;}
+  .card p{margin:0;font-size:14px;color:var(--ink2);line-height:1.68;}
+
+  /* ===== 요일 할 일 ===== */
+  .todo{list-style:none;margin:20px 0 8px;padding:0;background:var(--surface);
+    border:1px solid var(--line);border-radius:3px;overflow:hidden;}
+  .todo li + li{border-top:1px solid var(--hair);}
+  .todo label{display:grid;grid-template-columns:22px 1fr;gap:13px;align-items:start;
+    padding:15px 16px;cursor:pointer;font-size:14.5px;line-height:1.65;color:var(--ink2);min-height:54px;}
+  .todo input{appearance:none;-webkit-appearance:none;width:21px;height:21px;margin:1px 0 0;
+    border:1.5px solid var(--line);border-radius:2px;background:#fff;
+    display:grid;place-content:center;cursor:pointer;}
+  .todo input::after{content:"✓";font-size:13px;font-weight:700;color:#fff;transform:scale(0);}
+  .todo input:checked{background:var(--kelp);border-color:var(--kelp);}
+  .todo input:checked::after{transform:scale(1);}
+  .todo input:focus-visible{outline:2px solid var(--kelp);outline-offset:2px;}
+  .todo input:checked ~ .tt{color:var(--faint);text-decoration:line-through;}
+  .todo .tt b{color:var(--ink);font-weight:600;}
+
+  /* ===== 문제 ===== */
+  .q{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:15px 17px;margin:12px 0;}
+  .q .qn{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--kelp);
+    letter-spacing:0.12em;}
+  .q > p{margin:6px 0 0;font-size:15.5px;color:var(--ink);line-height:1.7;}
+  .q details{margin-top:12px;border-top:1px solid var(--hair);padding-top:10px;}
+  .q summary{cursor:pointer;list-style:none;font-family:var(--mono);font-size:12px;
+    font-weight:600;color:var(--kelp);letter-spacing:0.06em;padding:3px 0;}
+  .q summary::-webkit-details-marker{display:none;}
+  .q summary::before{content:"+ ";}
+  .q details[open] summary::before{content:"− ";}
+  .q .ans{margin-top:9px;background:var(--kelp-wash);border-radius:2px;padding:12px 14px;
+    font-size:14px;color:var(--ink2);line-height:1.7;}
+  .q .ans b{color:var(--kelp);font-weight:600;}
+
+  /* ===== 설명 대본 ===== */
+  .script{background:var(--surface);border:1px solid var(--kelp-line);border-radius:3px;
+    padding:16px 18px;margin:18px 0 8px;}
+  .script .row{display:grid;grid-template-columns:70px 1fr;gap:12px;font-size:14.5px;
+    color:var(--ink2);line-height:1.7;}
+  .script .row + .row{margin-top:11px;padding-top:11px;border-top:1px solid var(--hair);}
+  .script .s{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;color:var(--kelp);
+    font-weight:600;padding-top:4px;}
+
+  .badge{display:inline-block;font-family:var(--mono);font-size:12.5px;font-weight:600;
+    color:var(--amber);background:var(--amber-wash);border:1px solid var(--amber-line);
+    border-radius:2px;padding:7px 14px;margin-top:14px;letter-spacing:0.04em;}
+
+  /* ===== 주차 목록 (허브) ===== */
+  .wlist{display:flex;flex-direction:column;gap:10px;margin:18px 0 8px;}
+  a.wk{display:grid;grid-template-columns:1fr auto;grid-template-areas:"n p" "t p" "d d";
+    gap:2px 14px;background:var(--surface);border:1px solid var(--line);
+    border-left:3px solid var(--kelp);border-radius:3px;padding:15px 17px;
+    text-decoration:none;color:var(--ink);}
+  a.wk .n{grid-area:n;font-family:var(--mono);font-size:11px;font-weight:600;
+    letter-spacing:0.12em;color:var(--kelp);}
+  a.wk .t{grid-area:t;font-size:17px;font-weight:600;letter-spacing:-0.02em;}
+  a.wk .d{grid-area:d;font-size:13.5px;color:var(--muted);margin-top:5px;line-height:1.6;font-weight:300;}
+  a.wk .p{grid-area:p;align-self:center;font-family:var(--mono);font-size:11px;color:var(--muted);
+    background:var(--surface2);border:1px solid var(--hair);border-radius:2px;padding:4px 9px;white-space:nowrap;}
+  a.wk .p.done{color:#fff;background:var(--kelp);border-color:var(--kelp);}
+  a.wk .p.ing{color:var(--amber);background:var(--amber-wash);border-color:var(--amber-line);}
+  .wk.soon{border-left-color:var(--line);opacity:.62;pointer-events:none;}
+  .wk.soon .n,.wk.soon .t{color:var(--muted);}
+
+  /* ===== 진행 막대 ===== */
+  .bar{height:7px;background:var(--hair);border-radius:99px;overflow:hidden;margin-top:12px;
+    border:1px solid var(--line);}
+  .bar i{display:block;height:100%;background:var(--kelp);width:0;transition:width .3s;}
+
+  /* ===== 페이지 이동 ===== */
+  .pager{display:flex;gap:9px;margin:26px 0 0;}
+  .pager a{flex:1;text-align:center;font-size:13.5px;font-weight:600;text-decoration:none;
+    color:var(--ink2);background:var(--surface);border:1px solid var(--line);
+    border-radius:3px;padding:14px 8px;}
+  .pager a.main{background:var(--kelp);border-color:var(--kelp);color:#fff;}
+  footer{padding:26px 0 10px;font-family:var(--mono);font-size:11.5px;color:var(--faint);
+    letter-spacing:0.03em;line-height:1.8;}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;}}
 </style>
 </head>
 <body>
-<header class="top"><div class="wrap">
-  <span class="kicker">중2 과학 · 12주 · 하루 20분 × 주 4일</span>
-  <h1>과학 등반 <span class="g">12주</span></h1>
-  <p class="lead">한 주에 개념 하나. 매주 <b>중1에서 비어 있는 칸 하나를 먼저 메우고</b> 그 위에 지금 배우는 칸을 올린다.
-  월요일에 열고, 화요일에 채우고, 목요일에 손으로 확인하고, 금요일에 설명하면 그 주는 끝난다.</p>
-  <div class="meta">
-    <span class="m" id="allDone">0 / 48 완료</span>
-    <span class="m">주차별 문서 12개</span>
-    <span class="m"><a href="plan.html">추진 계획 보기</a></span>
-  </div>
-  <div style="margin-top:14px;height:8px;border-radius:999px;background:#1c2230;overflow:hidden;border:1px solid var(--line)">
-    <i id="allBar" style="display:block;height:100%;width:0;background:linear-gradient(90deg,#4f9cff,#7c5cff)"></i>
-  </div>
-</div></header>
-
 <div class="wrap">
-
-<section id="how">
-  <div class="eyebrow">How to use</div>
-  <h2><span class="cell">[0]</span>쓰는 법</h2>
-  <div class="grid g2">
-    <div class="card"><span class="tag">1</span><h4>주차 하나를 연다</h4><p class="sub">아래에서 이번 주 문서를 연다. 한 문서가 <b>일주일치</b>다. 다음 주 것은 미리 보지 않아도 된다.</p></div>
-    <div class="card"><span class="tag">2</span><h4>요일마다 한 칸씩</h4><p class="sub">문서 안이 월·화·목·금으로 나뉘어 있다. 그날 것만 하고 덮는다. <b>20분이 지나면 끝낸다.</b></p></div>
-    <div class="card"><span class="tag">3</span><h4>체크한다</h4><p class="sub">끝낸 칸의 네모를 누른다. 진행률은 <b>이 폰에 저장</b>되고, 여기 위쪽 막대에 모인다.</p></div>
-    <div class="card"><span class="tag">4</span><h4>금요일에 설명한다</h4><p class="sub">문제를 맞히는 것보다 <b>아빠에게 3분 설명</b>이 진짜 시험이다. 설명이 되면 그 주는 통과.</p></div>
+<div data-hub></div>
+<header class="cover">
+  <p class="kicker">중2 과학 · 주차별 학습 문서 · 하루 20분</p>
+  <h1>과학 등반 12주</h1>
+  <p class="lede">
+    과학은 머리가 좋아야 하는 과목이 아니라 <b>앞에서 쌓은 개념 위에 다음 개념을 얹는 과목</b>입니다.
+    지금 어렵게 느껴진다면 중1에서 지나간 칸 몇 개가 비어 있기 때문입니다.
+    그래서 이 문서는 진도를 앞서 나가지 않습니다. 매주 <b>비어 있는 칸 하나를 메우고 그 위에 지금 배우는 칸 하나를 올립니다.</b>
+  </p>
+  <div class="metaline">
+    <span>전체 <b>12주 · 3개월</b></span>
+    <span>하루 <b>20분 · 주 4일</b></span>
+    <span>한 주 <b>개념 1개</b></span>
+    <span>지금 <b>1~3주차 공개</b></span>
   </div>
-  <div class="callout p"><span class="lbl">막히면</span>
-  3분 넘게 막히면 더 밀지 않는다. 그 개념이 기대고 있는 <b>앞 주차 문서</b>로 돌아가서 그 칸을 다시 본다. 내려가는 건 정식 경로다.</div>
+
+  <div class="summary">
+    <h2>이 문서를 쓰는 법</h2>
+    <p class="sd">한 문서가 일주일치입니다. 월·화·목·금 네 칸만 하면 그 주는 끝납니다.</p>
+    <div class="kpis">
+      <div class="kpi"><span class="kl">한 주</span><span class="kv">4칸</span>
+        <span class="kn">월 열기 · 화 채우기 · 목 손으로 · 금 보스전</span></div>
+      <div class="kpi"><span class="kl">하루</span><span class="kv">20분</span>
+        <span class="kn">시간이 되면 이해가 덜 됐어도 덮습니다</span></div>
+      <div class="kpi"><span class="kl">통과 기준</span><span class="kv">설명</span>
+        <span class="kn">점수가 아니라 아빠에게 3분 설명하기</span></div>
+      <div class="kpi"><span class="kl">내 진행</span><span class="kv" id="allDone">0 / 12</span>
+        <span class="kn">완료한 칸 수 · 이 폰에만 저장됩니다</span></div>
+    </div>
+    <div class="bar"><i id="allBar"></i></div>
+  </div>
+</header>
+
+<nav class="jump"><div class="row">
+  <a href="#how">쓰는 법</a>
+  <a href="#camp1">캠프 1 · 물질</a>
+  <a href="#next">앞으로</a>
+</div></nav>
+
+<section class="sec" id="how">
+  <div class="step-no"><span class="num">1</span><span class="lbl">읽는 법</span></div>
+  <h2>한 주에 개념 하나, 요일마다 한 칸</h2>
+
+  <div class="plain">
+    <p><b>먼저 알아둘 것</b> — 모든 주차 문서는 <b>똑같은 순서</b>로 되어 있습니다.
+    한 번 익히면 12주 내내 “오늘 뭘 하지”를 고민하지 않아도 됩니다.</p>
+    <p>월요일에 열고, 화요일에 정리하고, 목요일에 손으로 확인하고, 금요일에 설명합니다.
+    수요일과 주말은 비워 둡니다. <b>쉬는 것도 계획에 들어 있습니다.</b></p>
+  </div>
+
+  <div class="tw"><table>
+    <thead><tr><th>요일</th><th>하는 일</th><th>시간</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">월 · 열기</td><td>개념을 읽고 <b>궁금한 질문 3개</b>를 적습니다. 답은 아직 찾지 않습니다.</td><td class="mn">20분</td></tr>
+      <tr><td class="hd">화 · 채우기</td><td>노트 한 장으로 정리합니다. 글보다 그림이 먼저입니다.</td><td class="mn">20분</td></tr>
+      <tr><td class="hd">목 · 손으로</td><td>집에 있는 물건으로 실험 하나. 예상과 달라도 성공입니다.</td><td class="mn">20~30분</td></tr>
+      <tr><td class="hd">금 · 보스전</td><td>문제 5개를 풀고 <b>아빠에게 3분 설명</b>합니다. 설명이 되면 통과입니다.</td><td class="mn">20분</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="cards two">
+    <div class="card"><span class="ct">체크</span><h4>끝낸 칸은 눌러 둡니다</h4>
+      <p>각 요일 끝에 네모 칸이 있습니다. 누르면 이 폰에 저장되고, 위쪽 진행 막대에 모입니다.</p></div>
+    <div class="card"><span class="ct">막힐 때</span><h4>3분 규칙</h4>
+      <p>한 곳에서 3분 넘게 막히면 더 밀지 않습니다. 그 개념이 기대고 있는 <b>앞 주차 문서</b>로 돌아갔다 옵니다. 내려가는 것은 정식 경로입니다.</p></div>
+  </div>
+
+  <div class="note"><span class="lb">아빠에게</span>
+    <p>이 프로그램에서 아빠는 선생님이 아니라 <b>관객</b>입니다. 가르치려 들면 학원이 하나 더 생깁니다.
+    할 일은 세 가지입니다 — <b>20분 타이머를 지키고</b>, <b>모르는 척 설명을 부탁하고</b>, <b>금요일 설명을 녹음해 두는 것</b>입니다.
+    자세한 운영 방법은 <a href="plan.html">추진 계획 문서</a>에 있습니다.</p>
+  </div>
 </section>
 
-<section id="c1">
-  <div class="eyebrow">Camp 1 · Week 01–04</div>
-  <h2>물질 · 세상은 무엇으로 되어 있나</h2>
-  <p class="sub">눈에 안 보이는 입자를 그림으로 그리는 연습. 중2에서 가장 자주 막히는 구간이라 가장 먼저 한다.</p>
-  <div class="wlist" data-camp="c1">
-    <a class="wk" href="week01.html" data-w="1"><span class="n">WEEK 01</span><span class="t">입자의 눈</span><span class="d">물질은 알갱이로 되어 있고 사이에 빈 공간이 있다</span><span class="p" data-p="1"></span></a>
-    <a class="wk" href="week02.html" data-w="2"><span class="n">WEEK 02</span><span class="t">원소와 불꽃</span><span class="d">더 쪼갤 수 없는 성분, 그리고 불꽃 색이라는 이름표</span><span class="p" data-p="2"></span></a>
-    <a class="wk" href="week03.html" data-w="3"><span class="n">WEEK 03</span><span class="t">원자와 분자</span><span class="d">원자핵과 전자, H₂O의 작은 2가 뜻하는 것</span><span class="p" data-p="3"></span></a>
-    <a class="wk" href="week04.html" data-w="4"><span class="n">WEEK 04</span><span class="t">이온과 앙금</span><span class="d">전자를 잃거나 얻은 입자, 물속에서 보이는 증거</span><span class="p" data-p="4"></span></a>
+<section class="sec" id="camp1">
+  <div class="step-no"><span class="num">2</span><span class="lbl">캠프 1 · 물질</span><span class="day">공개됨</span></div>
+  <h2>세상은 무엇으로 되어 있나</h2>
+  <p>중2 과학에서 가장 먼저, 그리고 가장 자주 막히는 곳이 ‘물질의 구성’입니다.
+  눈에 보이지 않는 입자를 머릿속에 그려야 하기 때문입니다.
+  그래서 첫 캠프는 <b>보이지 않는 것을 그림으로 그리는 연습</b>부터 시작합니다.</p>
+
+  <div class="wlist">
+    <a class="wk" href="week01.html"><span class="n">WEEK 01</span><span class="t">입자의 눈</span>
+      <span class="d">물질은 알갱이로 되어 있고, 그 사이에는 빈 공간이 있습니다</span><span class="p" data-p="1">0 / 4</span></a>
+    <a class="wk" href="week02.html"><span class="n">WEEK 02</span><span class="t">원소와 불꽃</span>
+      <span class="d">더 쪼갤 수 없는 성분이 원소입니다. 불꽃 색이 곧 이름표입니다</span><span class="p" data-p="2">0 / 4</span></a>
+    <a class="wk" href="week03.html"><span class="n">WEEK 03</span><span class="t">원자와 분자</span>
+      <span class="d">알갱이 한 개와 그것이 붙은 덩어리. 화학식을 읽는 눈을 만듭니다</span><span class="p" data-p="3">0 / 4</span></a>
+    <span class="wk soon"><span class="n">WEEK 04</span><span class="t">이온과 앙금</span>
+      <span class="d">3주차를 마친 뒤에 만듭니다</span><span class="p" data-p="4" data-soon="1">준비 중</span></span>
   </div>
 </section>
 
-<section id="c2">
-  <div class="eyebrow">Camp 2 · Week 05–08</div>
-  <h2>전기와 성질 · 보이지 않는 것이 일을 한다</h2>
-  <p class="sub">공식보다 그림이 먼저다. 전류를 물의 흐름으로 이해한 다음에야 숫자를 넣는다.</p>
-  <div class="wlist" data-camp="c2">
-    <a class="wk" href="week05.html" data-w="5"><span class="n">WEEK 05</span><span class="t">정전기와 전하</span><span class="d">문고리에서 따끔한 이유, 전자의 이사</span><span class="p" data-p="5"></span></a>
-    <a class="wk" href="week06.html" data-w="6"><span class="n">WEEK 06</span><span class="t">전류·전압·저항</span><span class="d">물탱크 그림으로 이해하는 V = I × R</span><span class="p" data-p="6"></span></a>
-    <a class="wk" href="week07.html" data-w="7"><span class="n">WEEK 07</span><span class="t">전류의 자기 작용</span><span class="d">전기가 힘이 되는 순간, 전자석과 모터</span><span class="p" data-p="7"></span></a>
-    <a class="wk" href="week08.html" data-w="8"><span class="n">WEEK 08</span><span class="t">물질의 특성</span><span class="d">밀도·용해도·끓는점, 물질마다의 번호표</span><span class="p" data-p="8"></span></a>
+<section class="sec" id="next">
+  <div class="step-no"><span class="num">3</span><span class="lbl">앞으로</span></div>
+  <h2>12주 전체 지도</h2>
+  <p>먼저 <b>3주차까지 해 보고</b>, 리듬이 맞는지 확인한 뒤 다음 주차를 만듭니다.
+  학교 진도와 순서가 다르면 그 주의 개념 자리에 학교에서 배우는 단원을 끼워 넣으면 됩니다. <b>순서보다 리듬이 중요합니다.</b></p>
+
+  <div class="tw wide"><table>
+    <thead><tr><th>캠프</th><th>주차</th><th>개념</th><th>상태</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">캠프 1<br>물질</td><td class="mn">01</td><td>입자의 눈</td><td class="ok">공개</td></tr>
+      <tr><td></td><td class="mn">02</td><td>원소와 불꽃</td><td class="ok">공개</td></tr>
+      <tr><td></td><td class="mn">03</td><td>원자와 분자</td><td class="ok">공개</td></tr>
+      <tr><td></td><td class="mn">04</td><td>이온과 앙금</td><td class="wa">준비 중</td></tr>
+      <tr><td class="hd">캠프 2<br>전기와 성질</td><td class="mn">05</td><td>정전기와 전하</td><td class="wa">준비 중</td></tr>
+      <tr><td></td><td class="mn">06</td><td>전류·전압·저항</td><td class="wa">준비 중</td></tr>
+      <tr><td></td><td class="mn">07</td><td>전류의 자기 작용</td><td class="wa">준비 중</td></tr>
+      <tr><td></td><td class="mn">08</td><td>물질의 특성</td><td class="wa">준비 중</td></tr>
+      <tr><td class="hd">캠프 3<br>생명과 지구</td><td class="mn">09</td><td>광합성과 호흡</td><td class="wa">준비 중</td></tr>
+      <tr><td></td><td class="mn">10</td><td>에너지 배달 경로</td><td class="wa">준비 중</td></tr>
+      <tr><td></td><td class="mn">11</td><td>지구와 달의 운동</td><td class="wa">준비 중</td></tr>
+      <tr><td></td><td class="mn">12</td><td>열의 이동 · 마무리 강의</td><td class="wa">준비 중</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="pager">
+    <a href="plan.html">추진 계획 문서</a>
+    <a class="main" href="week01.html">1주차 시작 →</a>
   </div>
 </section>
 
-<section id="c3">
-  <div class="eyebrow">Camp 3 · Week 09–12</div>
-  <h2>생명과 지구 · 나와 세계가 이어진다</h2>
-  <p class="sub">암기 단원처럼 보이지만, 에너지가 어디서 와서 어디로 가는지 하나로 꿰면 외울 것이 크게 준다.</p>
-  <div class="wlist" data-camp="c3">
-    <a class="wk" href="week09.html" data-w="9"><span class="n">WEEK 09</span><span class="t">광합성과 호흡</span><span class="d">식물이 밥을 스스로 만든다는 말의 뜻</span><span class="p" data-p="9"></span></a>
-    <a class="wk" href="week10.html" data-w="10"><span class="n">WEEK 10</span><span class="t">에너지 배달 경로</span><span class="d">소화·순환·호흡·배설을 한 줄로</span><span class="p" data-p="10"></span></a>
-    <a class="wk" href="week11.html" data-w="11"><span class="n">WEEK 11</span><span class="t">지구와 달의 운동</span><span class="d">달 모양이 바뀌는 이유를 손으로 보여주기</span><span class="p" data-p="11"></span></a>
-    <a class="wk" href="week12.html" data-w="12"><span class="n">WEEK 12</span><span class="t">열의 이동, 그리고 정상</span><span class="d">전도·대류·복사 + 12주 마무리 강의</span><span class="p" data-p="12"></span></a>
-  </div>
-</section>
-
-<footer>과학 등반 · 12주 · 진행 기록은 이 폰에만 저장된다</footer>
+<footer>
+  과학 등반 12주 · 중2 과학 주차별 학습 문서 · 진행 기록은 이 기기에만 저장됩니다<br>
+  교과 단원의 이름과 순서는 교과서 출판사와 학교 진도에 따라 다를 수 있습니다
+</footer>
 </div>
-
-<style>
-  .wlist{display:flex;flex-direction:column;gap:10px;margin-top:14px}
-  .wlist[data-camp=c1]{--camp:#7c5cff;--camp-dim:#b7a4ff;--camp-bg:rgba(124,92,255,.14);--camp-line:#3d3470}
-  .wlist[data-camp=c2]{--camp:#d29922;--camp-dim:#f0c674;--camp-bg:rgba(210,153,34,.14);--camp-line:#5c4718}
-  .wlist[data-camp=c3]{--camp:#3fb950;--camp-dim:#63d67c;--camp-bg:rgba(63,185,80,.14);--camp-line:#2c5c34}
-  a.wk{display:grid;grid-template-columns:1fr auto;grid-template-areas:"n p" "t p" "d d";
-    gap:2px 12px;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--camp);
-    border-radius:14px;padding:14px 16px;color:var(--ink)}
-  a.wk .n{grid-area:n;font-family:ui-monospace,Menlo,monospace;font-size:11.5px;font-weight:700;
-    letter-spacing:.1em;color:var(--camp-dim)}
-  a.wk .t{grid-area:t;font-size:17px;font-weight:800}
-  a.wk .d{grid-area:d;font-size:13.5px;color:var(--sub);margin-top:5px;line-height:1.55}
-  a.wk .p{grid-area:p;align-self:center;font-size:12px;font-weight:700;color:var(--mut);
-    background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:4px 10px;white-space:nowrap}
-  a.wk .p.done{color:#0d1117;background:var(--good);border-color:var(--good)}
-  a.wk .p.ing{color:var(--camp-dim);background:var(--camp-bg);border-color:var(--camp-line)}
-</style>
 <script>
   (function(){
-    var st={};
-    try{st=JSON.parse(localStorage.getItem("science_quest_progress")||"{}")||{}}catch(e){}
-    var total=0;
-    for(var w=1;w<=12;w++){
-      var n=0;
-      for(var m=1;m<=4;m++) if(st["w"+w+"m"+m]) n++;
-      total+=n;
-      var el=document.querySelector('.p[data-p="'+w+'"]');
-      if(!el)continue;
-      el.textContent = n===4 ? "완료" : (n===0 ? "0 / 4" : n+" / 4");
-      el.className = "p" + (n===4?" done":(n>0?" ing":""));
-    }
-    document.getElementById("allDone").textContent=total+" / 48 완료";
-    document.getElementById("allBar").style.width=(total/48*100)+"%";
-  })();
-</script>
-<script>
-(function(){
-  var KEY="science_quest_progress";
-  function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){return{}}}
-  function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
-  var boxes=[].slice.call(document.querySelectorAll(".todo input[type=checkbox]"));
-  var st=load();
-  boxes.forEach(function(b){
-    if(st[b.dataset.q])b.checked=true;
-    b.addEventListener("change",function(){
-      var s=load();
-      if(b.checked)s[b.dataset.q]=1;else delete s[b.dataset.q];
-      save(s);paint();
+    var KEY="science_quest_progress";
+    function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){return{}}}
+    function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+    var boxes=[].slice.call(document.querySelectorAll(".todo input[type=checkbox]"));
+    var st=load();
+    boxes.forEach(function(b){
+      if(st[b.dataset.q])b.checked=true;
+      b.addEventListener("change",function(){
+        var s=load();
+        if(b.checked)s[b.dataset.q]=1;else delete s[b.dataset.q];
+        save(s);paint();
+      });
     });
-  });
-  function paint(){
-    var el=document.getElementById("wdone");if(!el)return;
-    var n=boxes.filter(function(b){return b.checked}).length;
-    el.textContent=n+" / "+boxes.length+" 완료";
-  }
-  paint();
-  // 현재 섹션 표시
-  var links=[].slice.call(document.querySelectorAll("nav.toc a[href^='#']"));
-  var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1))});
-  function onScroll(){
-    var y=window.scrollY+120,idx=0;
-    secs.forEach(function(s,i){if(s&&s.offsetTop<=y)idx=i});
-    links.forEach(function(a,i){a.classList.toggle("now",i===idx)});
-  }
-  window.addEventListener("scroll",onScroll,{passive:true});onScroll();
-})();
+    function paint(){
+      var el=document.getElementById("wdone");
+      if(el){var n=boxes.filter(function(b){return b.checked}).length;
+        el.textContent=n+" / "+boxes.length;}
+      var hub=document.querySelector("[data-hub]");
+      if(hub){
+        var s=load(),total=0;
+        for(var w=1;w<=12;w++){
+          var n2=0;
+          for(var m=1;m<=4;m++) if(s["w"+w+"m"+m]) n2++;
+          total+=n2;
+          var p=document.querySelector('.p[data-p="'+w+'"]');
+          if(p&&!p.dataset.soon){p.textContent=n2===4?"완료":n2+" / 4";
+            p.className="p"+(n2===4?" done":(n2>0?" ing":""));}
+        }
+        var d=document.getElementById("allDone"),bar=document.getElementById("allBar");
+        if(d)d.textContent=total+" / 12";
+        if(bar)bar.style.width=(total/12*100)+"%";
+      }
+    }
+    paint();
+    var links=[].slice.call(document.querySelectorAll("nav.jump a[href^='#']"));
+    if(links.length){
+      var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1))});
+      var onScroll=function(){
+        var y=window.scrollY+130,idx=0;
+        secs.forEach(function(s,i){if(s&&s.offsetTop<=y)idx=i;});
+        links.forEach(function(a,i){a.classList.toggle("now",i===idx);});
+      };
+      window.addEventListener("scroll",onScroll,{passive:true});onScroll();
+    }
+  })();
 </script>
 </body>
 </html>
