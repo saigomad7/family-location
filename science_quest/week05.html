@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#DCE2DB">
-<title>과학 등반 12주</title>
-<meta name="description" content="중2 과학을 하루 20분씩 개념 하나로 밟아 올라가는 주차별 학습 문서.">
+<title>5주차 · 정전기와 전하</title>
+<meta name="description" content="문고리에서 따끔한 이유. 마찰로 전자가 옮겨 가며 생기는 전하를 배웁니다.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -241,160 +241,249 @@
 </head>
 <body>
 <div class="wrap">
-<div data-hub></div>
 <header class="cover">
-  <p class="kicker">중2 과학 · 주차별 학습 문서 · 하루 20분</p>
-  <h1>과학 등반 12주</h1>
+  <p class="kicker">WEEK 05 · 캠프 2 전기와 성질 · 하루 20분 × 4일</p>
+  <h1>정전기와 전하</h1>
   <p class="lede">
-    과학은 머리가 좋아야 하는 과목이 아니라 <b>앞에서 쌓은 개념 위에 다음 개념을 얹는 과목</b>입니다.
-    지금 어렵게 느껴진다면 중1에서 지나간 칸 몇 개가 비어 있기 때문입니다.
-    그래서 이 문서는 진도를 앞서 나가지 않습니다. 매주 <b>비어 있는 칸 하나를 메우고 그 위에 지금 배우는 칸 하나를 올립니다.</b>
+    캠프 1의 주인공이었던 <b>전자</b>가 그대로 캠프 2의 주인공이 됩니다.
+    전자가 <b>한 번 옮겨 가면</b> 정전기, 전자가 <b>계속 흐르면</b> 전류입니다. 이번 주는 앞쪽 이야기입니다.
   </p>
   <div class="metaline">
-    <span>전체 <b>12주 · 3개월</b></span>
-    <span>하루 <b>20분 · 주 4일</b></span>
-    <span>한 주 <b>개념 1개</b></span>
-    <span>문서 <b>12주차 전체 공개</b></span>
+    <span>4주차 연결 <b>전자와 전기</b></span>
+    <span>개념 <b>마찰전기 · 전하</b></span>
+    <span>실험 <b>풍선 3종</b></span>
+    <span>진행 <b id="wdone">0 / 4</b></span>
   </div>
 
   <div class="summary">
-    <h2>이 문서를 쓰는 법</h2>
-    <p class="sd">한 문서가 일주일치입니다. 월·화·목·금 네 칸만 하면 그 주는 끝납니다.</p>
+    <h2>이번 주에 남길 것</h2>
+    <p class="sd">규칙은 한 줄입니다. 이번 주 실험 세 개가 전부 이 한 줄로 설명됩니다.</p>
     <div class="kpis">
-      <div class="kpi"><span class="kl">한 주</span><span class="kv">4칸</span>
-        <span class="kn">월 열기 · 화 채우기 · 목 손으로 · 금 보스전</span></div>
-      <div class="kpi"><span class="kl">하루</span><span class="kv">20분</span>
-        <span class="kn">시간이 되면 이해가 덜 됐어도 덮습니다</span></div>
-      <div class="kpi"><span class="kl">통과 기준</span><span class="kv">설명</span>
-        <span class="kn">점수가 아니라 아빠에게 3분 설명하기</span></div>
-      <div class="kpi"><span class="kl">내 진행</span><span class="kv" id="allDone">0 / 12</span>
-        <span class="kn">완료한 칸 수 · 이 폰에만 저장됩니다</span></div>
+      <div class="kpi"><span class="kl">문장 1</span><span class="kv">이동</span>
+        <span class="kn">문지르면 전자가 한쪽으로 옮겨 간다</span></div>
+      <div class="kpi"><span class="kl">문장 2</span><span class="kv">+ 와 −</span>
+        <span class="kn">잃은 쪽이 +, 얻은 쪽이 −</span></div>
+      <div class="kpi"><span class="kl">문장 3</span><span class="kv">밀고 당김</span>
+        <span class="kn">같은 전하는 밀고, 다른 전하는 당긴다</span></div>
     </div>
-    <div class="bar"><i id="allBar"></i></div>
   </div>
 </header>
 
 <nav class="jump"><div class="row">
-  <a href="#how">쓰는 법</a>
-  <a href="#camp1">캠프 1 · 물질</a>
-  <a href="#next">앞으로</a>
+  <a href="#map">이번 주 지도</a>
+  <a href="#mon">월 · 열기</a>
+  <a href="#tue">화 · 채우기</a>
+  <a href="#thu">목 · 손으로</a>
+  <a href="#fri">금 · 보스전</a>
+  <a href="#next">다음 주</a>
 </div></nav>
 
-<section class="sec" id="how">
-  <div class="step-no"><span class="num">1</span><span class="lbl">읽는 법</span></div>
-  <h2>한 주에 개념 하나, 요일마다 한 칸</h2>
+<section class="sec" id="map">
+  <div class="step-no"><span class="num">1</span><span class="lbl">이번 주 지도</span></div>
+  <h2>문지르면 전자가 넘어갑니다</h2>
+  <p>없던 전기가 새로 생기는 것이 아닙니다. 원래 있던 전자가 <b>자리를 옮길 뿐</b>입니다.
+  그래서 한쪽이 −가 되면 반대쪽은 반드시 +가 됩니다.</p>
+
+  <div class="fig">
+    <p class="fig-t">도식 1 · 마찰로 생기는 전하</p>
+    <svg viewBox="0 0 900 250" role="img" aria-label="문지르기 전과 후에 머리카락과 풍선이 띠는 전하 변화">
+      <text class="st-s" x="180" y="34">문지르기 전 — 둘 다 중성</text>
+      <ellipse class="sb" cx="100" cy="112" rx="66" ry="52"/>
+      <text class="st" x="100" y="110">머리카락</text>
+      <text class="st-m" x="100" y="134">중성</text>
+      <ellipse class="sb" cx="262" cy="112" rx="60" ry="52"/>
+      <text class="st" x="262" y="110">풍선</text>
+      <text class="st-m" x="262" y="134">중성</text>
+      <text class="st-m" x="180" y="192">+ 와 − 의 개수가 같습니다</text>
+
+      <line class="sl-k" x1="340" y1="112" x2="404" y2="112"/>
+      <polygon class="sa-k" points="404,106 420,112 404,118"/>
+      <text class="st-m st-k" x="380" y="98">문지름</text>
+
+      <text class="st-s" x="672" y="34">문지른 뒤 — 전자가 풍선으로 이동</text>
+      <ellipse class="sb-b" cx="560" cy="112" rx="66" ry="52"/>
+      <text class="st st-b" x="560" y="106">머리카락</text>
+      <text class="st st-b" x="560" y="134">+</text>
+      <ellipse class="sb-k" cx="790" cy="112" rx="60" ry="52"/>
+      <text class="st st-k" x="790" y="106">풍선</text>
+      <text class="st st-k" x="790" y="134">−</text>
+      <path class="sl-a" d="M626 74 Q676 42 728 74"/>
+      <polygon class="sa-a" points="728,68 742,78 725,80"/>
+      <text class="st-m st-a" x="676" y="36">전자 이동</text>
+      <text class="st-m" x="672" y="192">잃은 쪽 + · 얻은 쪽 −</text>
+
+      <text class="st-m" x="450" y="234">전자만 움직입니다 · 전체 전기의 양은 변하지 않습니다</text>
+    </svg>
+    <p class="fig-c">4주차의 이온과 원리가 같습니다. 다른 점은 하나입니다 — 이온은 <b>물속에서 입자 하나 단위</b>로,
+    마찰전기는 <b>물체 전체</b>가 전자를 얻거나 잃은 것입니다.</p>
+  </div>
+</section>
+
+<section class="sec" id="mon">
+  <div class="step-no"><span class="num">2</span><span class="lbl">개념 하나</span><span class="day">MON · 열기</span></div>
+  <h2>왜 겨울에만 따끔할까</h2>
+
+  <p>서로 다른 두 물체를 문지르면 <b>한쪽에서 다른 쪽으로 전자가 옮겨 갑니다.</b>
+  전자를 잃은 쪽은 <b>+ 전하</b>를, 얻은 쪽은 <b>− 전하</b>를 띱니다. 이렇게 생긴 전기가 <b>마찰전기</b>입니다.</p>
 
   <div class="plain">
-    <p><b>먼저 알아둘 것</b> — 모든 주차 문서는 <b>똑같은 순서</b>로 되어 있습니다.
-    한 번 익히면 12주 내내 “오늘 뭘 하지”를 고민하지 않아도 됩니다.</p>
-    <p>월요일에 열고, 화요일에 정리하고, 목요일에 손으로 확인하고, 금요일에 설명합니다.
-    수요일과 주말은 비워 둡니다. <b>쉬는 것도 계획에 들어 있습니다.</b></p>
+    <p><b>규칙 한 줄</b> — 같은 전하끼리는 <b>밀어내고</b>, 다른 전하끼리는 <b>끌어당깁니다.</b>
+    이 한 줄로 이번 주 실험이 전부 설명됩니다.</p>
   </div>
 
-  <div class="tw"><table>
-    <thead><tr><th>요일</th><th>하는 일</th><th>시간</th></tr></thead>
-    <tbody>
-      <tr><td class="hd">월 · 열기</td><td>개념을 읽고 <b>궁금한 질문 3개</b>를 적습니다. 답은 아직 찾지 않습니다.</td><td class="mn">20분</td></tr>
-      <tr><td class="hd">화 · 채우기</td><td>노트 한 장으로 정리합니다. 글보다 그림이 먼저입니다.</td><td class="mn">20분</td></tr>
-      <tr><td class="hd">목 · 손으로</td><td>집에 있는 물건으로 실험 하나. 예상과 달라도 성공입니다.</td><td class="mn">20~30분</td></tr>
-      <tr><td class="hd">금 · 보스전</td><td>문제 5개를 풀고 <b>아빠에게 3분 설명</b>합니다. 설명이 되면 통과입니다.</td><td class="mn">20분</td></tr>
-    </tbody>
-  </table></div>
+  <h3>겨울에 정전기가 심한 이유</h3>
+  <p>공기가 습하면 옮겨 간 전자가 <b>공기 중 물기를 타고 조금씩 빠져나갑니다.</b> 그래서 여름에는 전기가 쌓이지 않습니다.
+  겨울은 건조해서 빠져나갈 길이 없으니 몸에 계속 쌓이고, 금속 문고리에 닿는 순간 한꺼번에 이동하면서 따끔합니다.</p>
 
   <div class="cards two">
-    <div class="card"><span class="ct">체크</span><h4>끝낸 칸은 눌러 둡니다</h4>
-      <p>각 요일 끝에 네모 칸이 있습니다. 누르면 이 폰에 저장되고, 위쪽 진행 막대에 모입니다.</p></div>
-    <div class="card"><span class="ct">막힐 때</span><h4>3분 규칙</h4>
-      <p>한 곳에서 3분 넘게 막히면 더 밀지 않습니다. 그 개념이 기대고 있는 <b>앞 주차 문서</b>로 돌아갔다 옵니다. 내려가는 것은 정식 경로입니다.</p></div>
+    <div class="card"><span class="ct">생활</span><h4>스웨터를 벗을 때 파직</h4>
+      <p>옷과 몸이 문질러지며 전자가 옮겨 간 뒤, 떨어질 때 되돌아가면서 소리와 빛이 납니다.</p></div>
+    <div class="card"><span class="ct">자연</span><h4>번개</h4>
+      <p>구름 속 얼음 알갱이들이 부딪치며 전하가 갈라지고, 쌓인 전하가 한꺼번에 이동하는 것이 번개입니다. 정전기의 초대형 판입니다.</p></div>
   </div>
 
-  <div class="note"><span class="lb">아빠에게</span>
-    <p>이 프로그램에서 아빠는 선생님이 아니라 <b>관객</b>입니다. 가르치려 들면 학원이 하나 더 생깁니다.
-    할 일은 세 가지입니다 — <b>20분 타이머를 지키고</b>, <b>모르는 척 설명을 부탁하고</b>, <b>금요일 설명을 녹음해 두는 것</b>입니다.
-    자세한 운영 방법은 <a href="plan.html">추진 계획 문서</a>에 있습니다.</p>
-  </div>
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w5m1"><span class="tt"><b>월요일</b> — 위를 읽고 질문 3개를 적습니다. 오늘 하루 정전기를 느낀 순간을 하나 기록합니다.</span></label></li>
+  </ul>
 </section>
 
-<section class="sec" id="camp1">
-  <div class="step-no"><span class="num">2</span><span class="lbl">캠프 1 · 물질</span><span class="day">공개됨</span></div>
-  <h2>세상은 무엇으로 되어 있나</h2>
-  <p>중2 과학에서 가장 먼저, 그리고 가장 자주 막히는 곳이 ‘물질의 구성’입니다.
-  눈에 보이지 않는 입자를 머릿속에 그려야 하기 때문입니다.
-  그래서 첫 캠프는 <b>보이지 않는 것을 그림으로 그리는 연습</b>부터 시작합니다.</p>
+<section class="sec" id="tue">
+  <div class="step-no"><span class="num">3</span><span class="lbl">개념 둘</span><span class="day">TUE · 채우기</span></div>
+  <h2>풍선은 왜 아무것도 하지 않은 벽에 붙을까</h2>
 
-  <div class="wlist">
-    <a class="wk" href="week01.html"><span class="n">WEEK 01</span><span class="t">입자의 눈</span>
-      <span class="d">물질은 알갱이로 되어 있고, 그 사이에는 빈 공간이 있습니다</span><span class="p" data-p="1">0 / 4</span></a>
-    <a class="wk" href="week02.html"><span class="n">WEEK 02</span><span class="t">원소와 불꽃</span>
-      <span class="d">더 쪼갤 수 없는 성분이 원소입니다. 불꽃 색이 곧 이름표입니다</span><span class="p" data-p="2">0 / 4</span></a>
-    <a class="wk" href="week03.html"><span class="n">WEEK 03</span><span class="t">원자와 분자</span>
-      <span class="d">알갱이 한 개와 그것이 붙은 덩어리. 화학식을 읽는 눈을 만듭니다</span><span class="p" data-p="3">0 / 4</span></a>
-    <a class="wk" href="week04.html"><span class="n">WEEK 04</span><span class="t">이온과 앙금</span>
-      <span class="d">전자를 잃거나 얻은 입자, 물속에서 눈에 보이는 증거</span><span class="p" data-p="4">0 / 4</span></a>
+  <p>벽은 문지르지도 않았으니 전기를 띠지 않았습니다. 그런데 왜 − 전하를 띤 풍선이 붙을까요.</p>
+  <p>답은 <b>벽 속 전자가 밀려나기 때문</b>입니다. −를 띤 풍선을 가까이 대면 벽 표면의 전자들이 같은 −끼리 밀려
+  <b>안쪽으로 물러납니다.</b> 그러면 벽 표면은 상대적으로 +가 되고, 풍선(−)과 서로 끌어당깁니다.
+  <b>물체 전체는 여전히 중성인데 표면에서만 전하가 갈라진 것</b>입니다.</p>
+
+  <div class="plain">
+    <p><b>이 원리로 설명되는 것</b> — ① 문지른 풍선이 벽이나 천장에 붙습니다
+    ② 가는 물줄기가 풍선 쪽으로 휩니다 ③ 문지른 자가 종잇조각을 들어 올립니다.
+    셋 다 <b>상대는 중성인데도 끌려온다</b>는 공통점이 있습니다.</p>
   </div>
-</section>
 
-<section class="sec" id="camp2">
-  <div class="step-no"><span class="num">3</span><span class="lbl">캠프 2 · 전기와 성질</span><span class="day">공개됨</span></div>
-  <h2>보이지 않는 것이 일을 합니다</h2>
-  <p>공식보다 그림이 먼저입니다. 전류를 물의 흐름으로 이해한 다음에야 숫자를 넣습니다.
-  캠프 1의 주인공이었던 <b>전자</b>가 그대로 이 캠프의 주인공입니다.</p>
-
-  <div class="wlist" data-camp="c2">
-    <a class="wk" href="week05.html"><span class="n">WEEK 05</span><span class="t">정전기와 전하</span>
-      <span class="d">문고리에서 따끔한 이유, 전자의 이사</span><span class="p" data-p="5">0 / 4</span></a>
-    <a class="wk" href="week06.html"><span class="n">WEEK 06</span><span class="t">전류 · 전압 · 저항</span>
-      <span class="d">물탱크 그림으로 이해하는 V = I × R</span><span class="p" data-p="6">0 / 4</span></a>
-    <a class="wk" href="week07.html"><span class="n">WEEK 07</span><span class="t">전류의 자기 작용</span>
-      <span class="d">전기가 힘이 되는 순간, 전자석과 모터</span><span class="p" data-p="7">0 / 4</span></a>
-    <a class="wk" href="week08.html"><span class="n">WEEK 08</span><span class="t">물질의 특성</span>
-      <span class="d">밀도 · 용해도 · 끓는점, 물질마다의 번호표</span><span class="p" data-p="8">0 / 4</span></a>
-  </div>
-</section>
-
-<section class="sec" id="camp3">
-  <div class="step-no"><span class="num">4</span><span class="lbl">캠프 3 · 생명과 지구</span><span class="day">공개됨</span></div>
-  <h2>나와 세계가 이어집니다</h2>
-  <p>암기 단원처럼 보이지만, <b>에너지가 어디서 와서 어디로 가는지</b> 하나로 꿰면 외울 것이 크게 줄어듭니다.
-  캠프 1에서 배운 분자가 식물과 몸 안에서 실제로 움직입니다.</p>
-
-  <div class="wlist" data-camp="c3">
-    <a class="wk" href="week09.html"><span class="n">WEEK 09</span><span class="t">광합성과 호흡</span>
-      <span class="d">식물이 밥을 스스로 만든다는 말의 뜻</span><span class="p" data-p="9">0 / 4</span></a>
-    <a class="wk" href="week10.html"><span class="n">WEEK 10</span><span class="t">에너지 배달 경로</span>
-      <span class="d">소화 · 순환 · 호흡 · 배설을 한 줄로</span><span class="p" data-p="10">0 / 4</span></a>
-    <a class="wk" href="week11.html"><span class="n">WEEK 11</span><span class="t">지구와 달의 운동</span>
-      <span class="d">달 모양이 바뀌는 이유를 손으로 보여주기</span><span class="p" data-p="11">0 / 4</span></a>
-    <a class="wk" href="week12.html"><span class="n">WEEK 12</span><span class="t">열의 이동과 마무리</span>
-      <span class="d">전도 · 대류 · 복사 + 12주 마무리 강의</span><span class="p" data-p="12">0 / 4</span></a>
-  </div>
-</section>
-
-<section class="sec" id="how2">
-  <div class="step-no"><span class="num">5</span><span class="lbl">진행 방법</span></div>
-  <h2>순서보다 리듬이 중요합니다</h2>
-  <p>12주 문서가 모두 준비되어 있지만, <b>미리 앞질러 볼 필요는 없습니다.</b> 이번 주 것만 열면 됩니다.</p>
-
+  <h3>노트 한 장 양식</h3>
   <div class="tw"><table>
-    <thead><tr><th>이런 경우</th><th>이렇게 합니다</th></tr></thead>
+    <thead><tr><th>칸</th><th>여기에 쓸 것</th></tr></thead>
     <tbody>
-      <tr><td class="hd">학교 진도와 순서가 다르다</td><td>그 주 문서의 <b>개념 부분만</b> 학교 단원으로 바꿔 끼웁니다. 요일 리듬과 보스전 구조는 그대로 씁니다.</td></tr>
-      <tr><td class="hd">시험 기간이 겹친다</td><td>그 주는 <b>시험 범위 복습</b>으로 바꾸고 전체를 한 주 뒤로 밉니다.</td></tr>
-      <tr><td class="hd">한 주를 통째로 못 했다</td><td>따라잡지 않습니다. 그 주는 없던 것으로 하고 다음 주부터 다시 시작합니다.</td></tr>
-      <tr><td class="hd">너무 쉬워한다</td><td>분량을 늘리지 말고 <b>목요일 실험을 직접 설계</b>하게 합니다. 난이도는 위로, 시간은 그대로.</td></tr>
+      <tr><td class="hd">① 그림</td><td>머리카락 → 풍선으로 전자가 이동하는 화살표 그림</td></tr>
+      <tr><td class="hd">② 규칙</td><td>같은 전하는 밀고, 다른 전하는 당긴다</td></tr>
+      <tr><td class="hd">③ 이유</td><td>중성인 벽에 붙는 이유 (표면 전자가 밀려나 +가 된다) — <b>자기 말로</b></td></tr>
+      <tr><td class="hd">④ 내 예시</td><td>오늘 겪은 정전기 하나</td></tr>
     </tbody>
   </table></div>
 
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w5m2"><span class="tt"><b>화요일</b> — 노트 한 장을 채웁니다. 특히 ③번을 자기 말로 씁니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="thu">
+  <div class="step-no"><span class="num">4</span><span class="lbl">실험</span><span class="day">THU · 손으로</span></div>
+  <h2>풍선 실험 세 가지</h2>
+
+  <p>준비물은 고무풍선 1~2개, 수도꼭지, 종잇조각, 그리고 머리카락입니다.
+  습한 날에는 잘 안 되니 <b>건조한 날 실내</b>에서 합니다.</p>
+
+  <div class="cards two">
+    <div class="card"><span class="ct">실험 1</span><h4>머리카락 세우기</h4>
+      <p>풍선을 머리카락에 20번 문지른 뒤 천천히 듭니다. 머리카락이 따라 올라옵니다.
+      머리카락은 +, 풍선은 −라서 서로 당기고, 머리카락끼리는 같은 +라서 서로 밀려 흩어집니다.</p></div>
+    <div class="card"><span class="ct">실험 2</span><h4>벽에 붙이기</h4>
+      <p>문지른 풍선을 벽에 대고 손을 뗍니다. 몇 초에서 몇 분까지 붙어 있습니다.
+      시간이 지나면 전하가 빠져나가 떨어집니다.</p></div>
+    <div class="card"><span class="ct">실험 3</span><h4>물줄기 휘게 하기</h4>
+      <p>수도꼭지를 <b>실처럼 가늘게</b> 틀고 문지른 풍선을 3 cm 옆에 가까이 댑니다. 물줄기가 풍선 쪽으로 휩니다.
+      물 분자가 전기적으로 한쪽에 치우쳐 있어 방향을 맞추고 끌려옵니다.</p></div>
+    <div class="card"><span class="ct">기록</span><h4>조건을 바꿔 봅니다</h4>
+      <p>문지르는 횟수를 5번 · 20번 · 40번으로 바꿔 가며 <b>붙어 있는 시간</b>을 잽니다.
+      숫자가 생기면 관찰이 <b>탐구</b>가 됩니다.</p></div>
+  </div>
+
+  <div class="tw"><table>
+    <thead><tr><th>문지른 횟수</th><th>벽에 붙어 있던 시간</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">5번</td><td class="fill">______ 초</td></tr>
+      <tr><td class="hd">20번</td><td class="fill">______ 초</td></tr>
+      <tr><td class="hd">40번</td><td class="fill">______ 초</td></tr>
+    </tbody>
+  </table></div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w5m3"><span class="tt"><b>목요일</b> — 실험 3종을 하고 표를 채웁니다. 물줄기가 휘는 장면은 영상으로 찍습니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="fri">
+  <div class="step-no"><span class="num">5</span><span class="lbl">보스전</span><span class="day">FRI · 설명</span></div>
+  <h2>문제 5개와 3분 설명</h2>
+
+  <div class="q"><span class="qn">Q1</span>
+    <p>풍선을 머리카락에 문질렀더니 풍선이 − 전하를 띠었습니다. 머리카락은 어떻게 되었을까요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>+ 전하를 띱니다.</b> 머리카락에서 풍선으로 전자가 옮겨 갔기 때문입니다.
+      없던 전기가 생긴 것이 아니라 <b>자리만 옮긴 것</b>입니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q2</span>
+    <p>문지른 풍선을 아무 처리도 하지 않은 벽에 붙이면 붙습니다. 벽은 전기를 띠지 않았는데 왜 그럴까요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>풍선의 − 전하가 벽 표면의 전자를 안쪽으로 밀어내서 벽 표면이 상대적으로 +가 되기 때문입니다.</b>
+      벽 전체는 여전히 중성이지만 표면에서 전하가 갈라져 서로 끌어당깁니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q3</span>
+    <p>여름보다 겨울에 정전기가 심한 이유는 무엇일까요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>공기가 건조해서 몸에 쌓인 전하가 빠져나가지 못하기 때문입니다.</b>
+      습한 날에는 공기 중 물기를 통해 전하가 조금씩 흘러나가 쌓이지 않습니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q4</span>
+    <p>같은 방법으로 문지른 풍선 두 개를 실에 매달아 가까이 하면 어떻게 될까요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>서로 밀어냅니다.</b> 둘 다 − 전하를 띠고 있기 때문입니다. 같은 전하는 밀고 다른 전하는 당깁니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q5</span>
+    <p>정전기와 4주차의 이온은 어떤 점이 같고 무엇이 다를까요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>같은 점 —</b> 둘 다 전자가 옮겨 가서 전기를 띠게 된 것입니다.<br>
+      <b>다른 점 —</b> 이온은 <b>원자 하나</b> 단위로 물속에서 일어나고, 마찰전기는 <b>물체 전체</b>가 전자를 얻거나 잃은 것입니다.
+    </div></details>
+  </div>
+
+  <h3>아빠에게 3분 설명하기</h3>
+  <div class="script">
+    <div class="row"><span class="s">배운 것</span><span>문지르면 전자가 한쪽으로 옮겨 가서 한쪽은 +, 한쪽은 −가 된다는 것.</span></div>
+    <div class="row"><span class="s">예를 들면</span><span>풍선을 문질러서 벽에 붙였어. 벽은 중성인데도 표면 전자가 밀려나서 붙어.</span></div>
+    <div class="row"><span class="s">헷갈리는 것</span><span>전기가 새로 생기는 게 아니야. 원래 있던 전자가 자리를 옮긴 것뿐이야.</span></div>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w5m4"><span class="tt"><b>금요일</b> — 문제 5개와 3분 설명. 풍선을 들고 설명하면 더 쉽습니다.</span></label></li>
+  </ul>
+
+  <p><span class="badge">획득 · 전하 감지기</span></p>
+</section>
+
+<section class="sec" id="next">
+  <div class="step-no"><span class="num">6</span><span class="lbl">다음 주</span></div>
+  <h2>전류 · 전압 · 저항</h2>
+  <p>이번 주에는 전자가 <b>한 번 옮겨 갔습니다.</b> 다음 주에는 전자가 <b>계속 흐릅니다.</b>
+  <code>V = I × R</code>이라는 식이 나오지만, 공식보다 <b>물탱크 그림</b>을 먼저 그립니다.</p>
   <div class="pager">
-    <a href="plan.html">추진 계획 문서</a>
-    <a class="main" href="week01.html">1주차 시작 →</a>
+    <a href="week04.html">← 4주차</a>
+    <a href="index.html">전체 지도</a>
+    <a class="main" href="week06.html">6주차 →</a>
   </div>
 </section>
 
-<footer>
-  과학 등반 12주 · 중2 과학 주차별 학습 문서 · 진행 기록은 이 기기에만 저장됩니다<br>
-  교과 단원의 이름과 순서는 교과서 출판사와 학교 진도에 따라 다를 수 있습니다
-</footer>
+<footer>과학 등반 12주 · WEEK 05 정전기와 전하 · 하루 20분 × 4일</footer>
 </div>
 <script>
   (function(){

@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#DCE2DB">
-<title>과학 등반 12주</title>
-<meta name="description" content="중2 과학을 하루 20분씩 개념 하나로 밟아 올라가는 주차별 학습 문서.">
+<title>9주차 · 광합성과 호흡</title>
+<meta name="description" content="식물이 밥을 스스로 만든다는 말의 뜻. 광합성과 호흡을 한 그림으로.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -241,160 +241,247 @@
 </head>
 <body>
 <div class="wrap">
-<div data-hub></div>
 <header class="cover">
-  <p class="kicker">중2 과학 · 주차별 학습 문서 · 하루 20분</p>
-  <h1>과학 등반 12주</h1>
+  <p class="kicker">WEEK 09 · 캠프 3 생명과 지구 · 하루 20분 × 4일</p>
+  <h1>광합성과 호흡</h1>
   <p class="lede">
-    과학은 머리가 좋아야 하는 과목이 아니라 <b>앞에서 쌓은 개념 위에 다음 개념을 얹는 과목</b>입니다.
-    지금 어렵게 느껴진다면 중1에서 지나간 칸 몇 개가 비어 있기 때문입니다.
-    그래서 이 문서는 진도를 앞서 나가지 않습니다. 매주 <b>비어 있는 칸 하나를 메우고 그 위에 지금 배우는 칸 하나를 올립니다.</b>
+    캠프 1에서 배운 분자 <b>CO₂</b>와 <b>H₂O</b>가 여기서 다시 나옵니다.
+    식물은 이 두 가지와 햇빛만으로 <b>양분을 만들어 냅니다.</b> 지구의 거의 모든 먹이사슬이 여기서 시작됩니다.
   </p>
   <div class="metaline">
-    <span>전체 <b>12주 · 3개월</b></span>
-    <span>하루 <b>20분 · 주 4일</b></span>
-    <span>한 주 <b>개념 1개</b></span>
-    <span>문서 <b>12주차 전체 공개</b></span>
+    <span>3주차 연결 <b>분자식</b></span>
+    <span>개념 <b>광합성 · 호흡 · 증산</b></span>
+    <span>실험 <b>잎 관찰</b></span>
+    <span>진행 <b id="wdone">0 / 4</b></span>
   </div>
 
   <div class="summary">
-    <h2>이 문서를 쓰는 법</h2>
-    <p class="sd">한 문서가 일주일치입니다. 월·화·목·금 네 칸만 하면 그 주는 끝납니다.</p>
+    <h2>이번 주에 남길 것</h2>
+    <p class="sd">들어가는 것 셋, 나오는 것 둘. 이 구조만 잡으면 이 단원은 외울 것이 거의 없습니다.</p>
     <div class="kpis">
-      <div class="kpi"><span class="kl">한 주</span><span class="kv">4칸</span>
-        <span class="kn">월 열기 · 화 채우기 · 목 손으로 · 금 보스전</span></div>
-      <div class="kpi"><span class="kl">하루</span><span class="kv">20분</span>
-        <span class="kn">시간이 되면 이해가 덜 됐어도 덮습니다</span></div>
-      <div class="kpi"><span class="kl">통과 기준</span><span class="kv">설명</span>
-        <span class="kn">점수가 아니라 아빠에게 3분 설명하기</span></div>
-      <div class="kpi"><span class="kl">내 진행</span><span class="kv" id="allDone">0 / 12</span>
-        <span class="kn">완료한 칸 수 · 이 폰에만 저장됩니다</span></div>
+      <div class="kpi"><span class="kl">문장 1</span><span class="kv">광합성</span>
+        <span class="kn">이산화탄소 + 물 + 빛 → 포도당 + 산소</span></div>
+      <div class="kpi"><span class="kl">문장 2</span><span class="kv">엽록체</span>
+        <span class="kn">잎 세포 속 초록 알갱이에서 일어난다</span></div>
+      <div class="kpi"><span class="kl">문장 3</span><span class="kv">24시간</span>
+        <span class="kn">식물도 낮·밤 가리지 않고 호흡한다</span></div>
     </div>
-    <div class="bar"><i id="allBar"></i></div>
   </div>
 </header>
 
 <nav class="jump"><div class="row">
-  <a href="#how">쓰는 법</a>
-  <a href="#camp1">캠프 1 · 물질</a>
-  <a href="#next">앞으로</a>
+  <a href="#map">이번 주 지도</a>
+  <a href="#mon">월 · 열기</a>
+  <a href="#tue">화 · 채우기</a>
+  <a href="#thu">목 · 손으로</a>
+  <a href="#fri">금 · 보스전</a>
+  <a href="#next">다음 주</a>
 </div></nav>
 
-<section class="sec" id="how">
-  <div class="step-no"><span class="num">1</span><span class="lbl">읽는 법</span></div>
-  <h2>한 주에 개념 하나, 요일마다 한 칸</h2>
+<section class="sec" id="map">
+  <div class="step-no"><span class="num">1</span><span class="lbl">이번 주 지도</span></div>
+  <h2>재료 셋이 들어가고 둘이 나옵니다</h2>
+
+  <div class="fig">
+    <p class="fig-t">도식 1 · 광합성의 재료와 결과</p>
+    <svg viewBox="0 0 900 260" role="img" aria-label="이산화탄소와 물과 빛이 엽록체로 들어가 포도당과 산소가 나오는 과정">
+      <rect class="sb" x="16" y="40" width="180" height="56" rx="3"/>
+      <text class="st" x="106" y="66">이산화탄소 CO₂</text>
+      <text class="st-s" x="106" y="86">잎의 기공으로</text>
+      <rect class="sb" x="16" y="120" width="180" height="56" rx="3"/>
+      <text class="st" x="106" y="146">물 H₂O</text>
+      <text class="st-s" x="106" y="166">뿌리로 흡수</text>
+      <text class="st st-a" x="106" y="216">+ 햇빛 에너지</text>
+
+      <line class="sl-k" x1="204" y1="80" x2="286" y2="112"/>
+      <polygon class="sa-k" points="286,106 300,116 283,118"/>
+      <line class="sl-k" x1="204" y1="150" x2="286" y2="128"/>
+      <polygon class="sa-k" points="286,134 300,124 283,122"/>
+
+      <rect class="sb-k" x="308" y="76" width="230" height="104" rx="3"/>
+      <text class="st st-k" x="423" y="112">엽록체</text>
+      <text class="st-s" x="423" y="136">잎 세포 속 초록 알갱이</text>
+      <text class="st-s" x="423" y="158">여기서 광합성이 일어납니다</text>
+
+      <line class="sl-k" x1="546" y1="112" x2="626" y2="80"/>
+      <polygon class="sa-k" points="626,86 640,76 623,74"/>
+      <line class="sl-k" x1="546" y1="146" x2="626" y2="178"/>
+      <polygon class="sa-k" points="626,172 640,182 623,184"/>
+
+      <rect class="sb-a" x="648" y="46" width="238" height="60" rx="3"/>
+      <text class="st st-a" x="767" y="74">포도당</text>
+      <text class="st-s" x="767" y="94">식물이 쓰는 양분 · 에너지 저장</text>
+      <rect class="sb-a" x="648" y="150" width="238" height="60" rx="3"/>
+      <text class="st st-a" x="767" y="178">산소 O₂</text>
+      <text class="st-s" x="767" y="198">우리가 마시는 것</text>
+
+      <text class="st-m" x="423" y="244">이산화탄소 + 물 + 빛 → 포도당 + 산소</text>
+    </svg>
+    <p class="fig-c">우리가 숨 쉬는 산소는 <b>원래 식물이 만든 것</b>입니다. 광합성의 부산물이 대기에 쌓인 덕분에 동물이 살 수 있게 되었습니다.</p>
+  </div>
+</section>
+
+<section class="sec" id="mon">
+  <div class="step-no"><span class="num">2</span><span class="lbl">개념 하나</span><span class="day">MON · 열기</span></div>
+  <h2>광합성 — 빛으로 밥을 만듭니다</h2>
+
+  <p>동물은 먹어서 양분을 얻습니다. 식물은 <b>스스로 만듭니다.</b> 재료는 세 가지입니다.
+  잎의 <b>기공</b>으로 들어온 이산화탄소, 뿌리가 빨아올린 <b>물</b>, 그리고 <b>햇빛</b>.
+  이 셋으로 <b>포도당</b>을 만들고, 그 과정에서 <b>산소</b>가 남아 밖으로 나옵니다.</p>
 
   <div class="plain">
-    <p><b>먼저 알아둘 것</b> — 모든 주차 문서는 <b>똑같은 순서</b>로 되어 있습니다.
-    한 번 익히면 12주 내내 “오늘 뭘 하지”를 고민하지 않아도 됩니다.</p>
-    <p>월요일에 열고, 화요일에 정리하고, 목요일에 손으로 확인하고, 금요일에 설명합니다.
-    수요일과 주말은 비워 둡니다. <b>쉬는 것도 계획에 들어 있습니다.</b></p>
+    <p><b>외울 한 줄</b> — 이산화탄소 + 물 + 빛 → <b>포도당 + 산소</b>. 들어가는 것 셋, 나오는 것 둘.</p>
   </div>
 
-  <div class="tw"><table>
-    <thead><tr><th>요일</th><th>하는 일</th><th>시간</th></tr></thead>
-    <tbody>
-      <tr><td class="hd">월 · 열기</td><td>개념을 읽고 <b>궁금한 질문 3개</b>를 적습니다. 답은 아직 찾지 않습니다.</td><td class="mn">20분</td></tr>
-      <tr><td class="hd">화 · 채우기</td><td>노트 한 장으로 정리합니다. 글보다 그림이 먼저입니다.</td><td class="mn">20분</td></tr>
-      <tr><td class="hd">목 · 손으로</td><td>집에 있는 물건으로 실험 하나. 예상과 달라도 성공입니다.</td><td class="mn">20~30분</td></tr>
-      <tr><td class="hd">금 · 보스전</td><td>문제 5개를 풀고 <b>아빠에게 3분 설명</b>합니다. 설명이 되면 통과입니다.</td><td class="mn">20분</td></tr>
-    </tbody>
-  </table></div>
+  <p>일어나는 장소는 잎 세포 속 <b>엽록체</b>입니다. 엽록체 속 초록색 색소(엽록소)가 빛을 흡수합니다.
+  잎이 초록으로 보이는 이유는 <b>초록빛만 흡수하지 않고 반사</b>하기 때문입니다.</p>
 
   <div class="cards two">
-    <div class="card"><span class="ct">체크</span><h4>끝낸 칸은 눌러 둡니다</h4>
-      <p>각 요일 끝에 네모 칸이 있습니다. 누르면 이 폰에 저장되고, 위쪽 진행 막대에 모입니다.</p></div>
-    <div class="card"><span class="ct">막힐 때</span><h4>3분 규칙</h4>
-      <p>한 곳에서 3분 넘게 막히면 더 밀지 않습니다. 그 개념이 기대고 있는 <b>앞 주차 문서</b>로 돌아갔다 옵니다. 내려가는 것은 정식 경로입니다.</p></div>
+    <div class="card"><span class="ct">기공</span><h4>잎 뒷면의 숨구멍</h4>
+      <p>주로 잎 뒷면에 있는 작은 구멍입니다. 이산화탄소가 들어오고 산소와 수증기가 나갑니다.</p></div>
+    <div class="card"><span class="ct">증산</span><h4>물이 빠져나가는 통로</h4>
+      <p>기공으로 물이 수증기가 되어 나가는 것을 <b>증산</b>이라고 합니다. 이 힘으로 뿌리의 물이 잎까지 끌려 올라옵니다.</p></div>
   </div>
 
-  <div class="note"><span class="lb">아빠에게</span>
-    <p>이 프로그램에서 아빠는 선생님이 아니라 <b>관객</b>입니다. 가르치려 들면 학원이 하나 더 생깁니다.
-    할 일은 세 가지입니다 — <b>20분 타이머를 지키고</b>, <b>모르는 척 설명을 부탁하고</b>, <b>금요일 설명을 녹음해 두는 것</b>입니다.
-    자세한 운영 방법은 <a href="plan.html">추진 계획 문서</a>에 있습니다.</p>
-  </div>
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w9m1"><span class="tt"><b>월요일</b> — 광합성 식을 그림과 함께 그리고 질문 3개를 적습니다.</span></label></li>
+  </ul>
 </section>
 
-<section class="sec" id="camp1">
-  <div class="step-no"><span class="num">2</span><span class="lbl">캠프 1 · 물질</span><span class="day">공개됨</span></div>
-  <h2>세상은 무엇으로 되어 있나</h2>
-  <p>중2 과학에서 가장 먼저, 그리고 가장 자주 막히는 곳이 ‘물질의 구성’입니다.
-  눈에 보이지 않는 입자를 머릿속에 그려야 하기 때문입니다.
-  그래서 첫 캠프는 <b>보이지 않는 것을 그림으로 그리는 연습</b>부터 시작합니다.</p>
+<section class="sec" id="tue">
+  <div class="step-no"><span class="num">3</span><span class="lbl">개념 둘</span><span class="day">TUE · 채우기</span></div>
+  <h2>광합성과 호흡은 반대일까</h2>
 
-  <div class="wlist">
-    <a class="wk" href="week01.html"><span class="n">WEEK 01</span><span class="t">입자의 눈</span>
-      <span class="d">물질은 알갱이로 되어 있고, 그 사이에는 빈 공간이 있습니다</span><span class="p" data-p="1">0 / 4</span></a>
-    <a class="wk" href="week02.html"><span class="n">WEEK 02</span><span class="t">원소와 불꽃</span>
-      <span class="d">더 쪼갤 수 없는 성분이 원소입니다. 불꽃 색이 곧 이름표입니다</span><span class="p" data-p="2">0 / 4</span></a>
-    <a class="wk" href="week03.html"><span class="n">WEEK 03</span><span class="t">원자와 분자</span>
-      <span class="d">알갱이 한 개와 그것이 붙은 덩어리. 화학식을 읽는 눈을 만듭니다</span><span class="p" data-p="3">0 / 4</span></a>
-    <a class="wk" href="week04.html"><span class="n">WEEK 04</span><span class="t">이온과 앙금</span>
-      <span class="d">전자를 잃거나 얻은 입자, 물속에서 눈에 보이는 증거</span><span class="p" data-p="4">0 / 4</span></a>
-  </div>
-</section>
+  <p>식물도 <b>호흡을 합니다.</b> 그것도 낮·밤 가리지 않고 24시간 합니다.
+  광합성으로 만든 포도당을 <b>산소로 태워 에너지를 얻는 것</b>이 호흡입니다. 방향이 정확히 반대입니다.</p>
 
-<section class="sec" id="camp2">
-  <div class="step-no"><span class="num">3</span><span class="lbl">캠프 2 · 전기와 성질</span><span class="day">공개됨</span></div>
-  <h2>보이지 않는 것이 일을 합니다</h2>
-  <p>공식보다 그림이 먼저입니다. 전류를 물의 흐름으로 이해한 다음에야 숫자를 넣습니다.
-  캠프 1의 주인공이었던 <b>전자</b>가 그대로 이 캠프의 주인공입니다.</p>
-
-  <div class="wlist" data-camp="c2">
-    <a class="wk" href="week05.html"><span class="n">WEEK 05</span><span class="t">정전기와 전하</span>
-      <span class="d">문고리에서 따끔한 이유, 전자의 이사</span><span class="p" data-p="5">0 / 4</span></a>
-    <a class="wk" href="week06.html"><span class="n">WEEK 06</span><span class="t">전류 · 전압 · 저항</span>
-      <span class="d">물탱크 그림으로 이해하는 V = I × R</span><span class="p" data-p="6">0 / 4</span></a>
-    <a class="wk" href="week07.html"><span class="n">WEEK 07</span><span class="t">전류의 자기 작용</span>
-      <span class="d">전기가 힘이 되는 순간, 전자석과 모터</span><span class="p" data-p="7">0 / 4</span></a>
-    <a class="wk" href="week08.html"><span class="n">WEEK 08</span><span class="t">물질의 특성</span>
-      <span class="d">밀도 · 용해도 · 끓는점, 물질마다의 번호표</span><span class="p" data-p="8">0 / 4</span></a>
-  </div>
-</section>
-
-<section class="sec" id="camp3">
-  <div class="step-no"><span class="num">4</span><span class="lbl">캠프 3 · 생명과 지구</span><span class="day">공개됨</span></div>
-  <h2>나와 세계가 이어집니다</h2>
-  <p>암기 단원처럼 보이지만, <b>에너지가 어디서 와서 어디로 가는지</b> 하나로 꿰면 외울 것이 크게 줄어듭니다.
-  캠프 1에서 배운 분자가 식물과 몸 안에서 실제로 움직입니다.</p>
-
-  <div class="wlist" data-camp="c3">
-    <a class="wk" href="week09.html"><span class="n">WEEK 09</span><span class="t">광합성과 호흡</span>
-      <span class="d">식물이 밥을 스스로 만든다는 말의 뜻</span><span class="p" data-p="9">0 / 4</span></a>
-    <a class="wk" href="week10.html"><span class="n">WEEK 10</span><span class="t">에너지 배달 경로</span>
-      <span class="d">소화 · 순환 · 호흡 · 배설을 한 줄로</span><span class="p" data-p="10">0 / 4</span></a>
-    <a class="wk" href="week11.html"><span class="n">WEEK 11</span><span class="t">지구와 달의 운동</span>
-      <span class="d">달 모양이 바뀌는 이유를 손으로 보여주기</span><span class="p" data-p="11">0 / 4</span></a>
-    <a class="wk" href="week12.html"><span class="n">WEEK 12</span><span class="t">열의 이동과 마무리</span>
-      <span class="d">전도 · 대류 · 복사 + 12주 마무리 강의</span><span class="p" data-p="12">0 / 4</span></a>
-  </div>
-</section>
-
-<section class="sec" id="how2">
-  <div class="step-no"><span class="num">5</span><span class="lbl">진행 방법</span></div>
-  <h2>순서보다 리듬이 중요합니다</h2>
-  <p>12주 문서가 모두 준비되어 있지만, <b>미리 앞질러 볼 필요는 없습니다.</b> 이번 주 것만 열면 됩니다.</p>
-
-  <div class="tw"><table>
-    <thead><tr><th>이런 경우</th><th>이렇게 합니다</th></tr></thead>
+  <div class="tw wide"><table>
+    <thead><tr><th></th><th>광합성</th><th>호흡</th></tr></thead>
     <tbody>
-      <tr><td class="hd">학교 진도와 순서가 다르다</td><td>그 주 문서의 <b>개념 부분만</b> 학교 단원으로 바꿔 끼웁니다. 요일 리듬과 보스전 구조는 그대로 씁니다.</td></tr>
-      <tr><td class="hd">시험 기간이 겹친다</td><td>그 주는 <b>시험 범위 복습</b>으로 바꾸고 전체를 한 주 뒤로 밉니다.</td></tr>
-      <tr><td class="hd">한 주를 통째로 못 했다</td><td>따라잡지 않습니다. 그 주는 없던 것으로 하고 다음 주부터 다시 시작합니다.</td></tr>
-      <tr><td class="hd">너무 쉬워한다</td><td>분량을 늘리지 말고 <b>목요일 실험을 직접 설계</b>하게 합니다. 난이도는 위로, 시간은 그대로.</td></tr>
+      <tr><td class="hd">언제</td><td>빛이 있을 때만 (낮)</td><td>항상 (낮 · 밤)</td></tr>
+      <tr><td class="hd">어디서</td><td>엽록체</td><td>모든 살아 있는 세포</td></tr>
+      <tr><td class="hd">들어가는 것</td><td>이산화탄소 + 물</td><td>포도당 + 산소</td></tr>
+      <tr><td class="hd">나오는 것</td><td>포도당 + 산소</td><td>이산화탄소 + 물 + <b>에너지</b></td></tr>
+      <tr><td class="hd">에너지</td><td class="ok">빛 에너지를 저장한다</td><td class="wa">저장된 에너지를 꺼내 쓴다</td></tr>
     </tbody>
   </table></div>
 
+  <div class="alert"><span class="lb">여기서 헷갈립니다</span>
+    <p>“식물은 낮에 광합성, 밤에 호흡한다” — <b>틀렸습니다.</b> 호흡은 <b>24시간 내내</b> 합니다.
+    다만 낮에는 광합성 양이 호흡보다 훨씬 많아서 <b>결과적으로</b> 산소가 남아 나갈 뿐입니다.</p>
+  </div>
+
+  <h3>노트 한 장 양식</h3>
+  <div class="tw"><table>
+    <thead><tr><th>칸</th><th>여기에 쓸 것</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">① 그림</td><td>잎 하나에 화살표 두 개 — 들어가는 CO₂·물, 나오는 O₂</td></tr>
+      <tr><td class="hd">② 식</td><td>이산화탄소 + 물 + 빛 → 포도당 + 산소</td></tr>
+      <tr><td class="hd">③ 비교표</td><td>광합성 / 호흡 4줄 표 (언제 · 어디서 · 들어가는 것 · 나오는 것)</td></tr>
+      <tr><td class="hd">④ 질문</td><td>월요일 질문 3개 중 답이 생긴 것에 표시</td></tr>
+    </tbody>
+  </table></div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w9m2"><span class="tt"><b>화요일</b> — 노트 한 장을 채웁니다. 비교표는 보지 않고 다시 써 봅니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="thu">
+  <div class="step-no"><span class="num">4</span><span class="lbl">실험</span><span class="day">THU · 손으로</span></div>
+  <h2>잎이 일하고 있다는 증거 찾기</h2>
+
+  <div class="cards two">
+    <div class="card"><span class="ct">관찰 1</span><h4>기공 찾기</h4>
+      <p>잎 뒷면을 <b>스마트폰 카메라로 최대한 확대</b>해 찍습니다. 물방울을 한 방울 올리고 찍으면 렌즈 효과로 더 잘 보입니다.
+      앞면과 뒷면을 비교해 어느 쪽이 더 거친지 봅니다.</p></div>
+    <div class="card"><span class="ct">관찰 2</span><h4>증산 확인</h4>
+      <p>화분의 잎이 달린 가지에 <b>투명 비닐봉지</b>를 씌우고 입구를 묶습니다. 3~4시간 뒤 안쪽에 <b>물방울</b>이 맺힙니다.</p></div>
+    <div class="card"><span class="ct">관찰 3</span><h4>빛과 잎 색</h4>
+      <p>잎 하나를 <b>알루미늄 포일로 반만 감싸고</b> 이틀 둡니다. 가린 쪽이 옅어지는지 봅니다. 빛이 광합성에 필요한지 확인하는 방법입니다.</p></div>
+    <div class="card"><span class="ct">선택</span><h4>수초의 기포</h4>
+      <p>검정말이나 물풀을 물컵에 넣고 밝은 창가에 두면 잎에서 <b>작은 기포</b>가 올라옵니다. 그 기포가 광합성으로 나온 산소입니다.</p></div>
+  </div>
+
+  <div class="tw"><table>
+    <thead><tr><th>관찰</th><th>본 것</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">잎 뒷면 확대 사진</td><td class="fill">______</td></tr>
+      <tr><td class="hd">비닐봉지 안 물방울 (몇 시간 뒤)</td><td class="fill">______</td></tr>
+      <tr><td class="hd">포일로 가린 잎의 변화</td><td class="fill">______</td></tr>
+    </tbody>
+  </table></div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w9m3"><span class="tt"><b>목요일</b> — 관찰 두 가지 이상을 하고 사진을 남깁니다. 포일 실험은 오늘 시작해 주말에 확인합니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="fri">
+  <div class="step-no"><span class="num">5</span><span class="lbl">보스전</span><span class="day">FRI · 설명</span></div>
+  <h2>문제 5개와 3분 설명</h2>
+
+  <div class="q"><span class="qn">Q1</span>
+    <p>광합성에 필요한 세 가지와 만들어지는 두 가지는 무엇일까요?</p>
+    <details><summary>해설 보기</summary><div class="ans"><b>필요한 것은 이산화탄소·물·빛이고, 만들어지는 것은 포도당과 산소입니다.</b> 장소는 엽록체입니다.</div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q2</span>
+    <p>식물은 밤에 호흡만 할까요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>호흡은 낮·밤 24시간 계속합니다.</b> 다만 낮에는 광합성 양이 호흡보다 많아 산소가 남아 나갈 뿐입니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q3</span>
+    <p>잎에 비닐봉지를 씌웠더니 안쪽에 물방울이 맺혔습니다. 무슨 현상일까요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>증산입니다.</b> 뿌리가 빨아올린 물이 잎의 기공으로 수증기가 되어 나간 뒤, 봉지 안에서 식어 물방울이 된 것입니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q4</span>
+    <p>우리가 숨 쉬는 산소는 원래 어디서 온 것일까요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>식물과 바다의 식물성 플랑크톤이 하는 광합성에서 나왔습니다.</b> 그 부산물인 산소가 대기에 쌓인 덕분에 동물이 살 수 있게 되었습니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q5</span>
+    <p>광합성과 호흡을 <b>에너지</b>로 설명하면 어떻게 다를까요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>광합성은 빛 에너지를 포도당 속에 저장하는 것이고, 호흡은 그 저장된 에너지를 꺼내 쓰는 것입니다.</b>
+      저금과 인출의 관계입니다.
+    </div></details>
+  </div>
+
+  <h3>아빠에게 3분 설명하기</h3>
+  <div class="script">
+    <div class="row"><span class="s">배운 것</span><span>식물이 이산화탄소·물·빛으로 포도당을 만들고 산소를 내놓는다는 것.</span></div>
+    <div class="row"><span class="s">예를 들면</span><span>잎에 봉지를 씌웠더니 물방울이 맺혔어. 잎이 물을 내보내고 있다는 증거야.</span></div>
+    <div class="row"><span class="s">헷갈리는 것</span><span>식물도 24시간 호흡해. 낮에는 광합성이 더 많아서 산소가 남는 것뿐이야.</span></div>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w9m4"><span class="tt"><b>금요일</b> — 문제 5개와 3분 설명. 관찰 사진을 보여주면서 하면 좋습니다.</span></label></li>
+  </ul>
+
+  <p><span class="badge">획득 · 광합성 관찰자</span></p>
+</section>
+
+<section class="sec" id="next">
+  <div class="step-no"><span class="num">6</span><span class="lbl">다음 주</span></div>
+  <h2>에너지 배달 경로</h2>
+  <p>식물이 만든 포도당이 이제 <b>내 몸으로</b> 들어옵니다.
+  소화·순환·호흡·배설을 따로 외우지 않고 <b>한 줄로</b> 꿰어 봅니다.</p>
   <div class="pager">
-    <a href="plan.html">추진 계획 문서</a>
-    <a class="main" href="week01.html">1주차 시작 →</a>
+    <a href="week08.html">← 8주차</a>
+    <a href="index.html">전체 지도</a>
+    <a class="main" href="week10.html">10주차 →</a>
   </div>
 </section>
 
-<footer>
-  과학 등반 12주 · 중2 과학 주차별 학습 문서 · 진행 기록은 이 기기에만 저장됩니다<br>
-  교과 단원의 이름과 순서는 교과서 출판사와 학교 진도에 따라 다를 수 있습니다
-</footer>
+<footer>과학 등반 12주 · WEEK 09 광합성과 호흡 · 하루 20분 × 4일</footer>
 </div>
 <script>
   (function(){

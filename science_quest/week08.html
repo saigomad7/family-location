@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#DCE2DB">
-<title>과학 등반 12주</title>
-<meta name="description" content="중2 과학을 하루 20분씩 개념 하나로 밟아 올라가는 주차별 학습 문서.">
+<title>8주차 · 물질의 특성</title>
+<meta name="description" content="밀도·용해도·끓는점은 물질마다 정해진 번호표입니다. 캠프 2 보스전.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -241,160 +241,254 @@
 </head>
 <body>
 <div class="wrap">
-<div data-hub></div>
 <header class="cover">
-  <p class="kicker">중2 과학 · 주차별 학습 문서 · 하루 20분</p>
-  <h1>과학 등반 12주</h1>
+  <p class="kicker">WEEK 08 · 캠프 2 전기와 성질 · 캠프 2 마지막 주</p>
+  <h1>물질의 특성</h1>
   <p class="lede">
-    과학은 머리가 좋아야 하는 과목이 아니라 <b>앞에서 쌓은 개념 위에 다음 개념을 얹는 과목</b>입니다.
-    지금 어렵게 느껴진다면 중1에서 지나간 칸 몇 개가 비어 있기 때문입니다.
-    그래서 이 문서는 진도를 앞서 나가지 않습니다. 매주 <b>비어 있는 칸 하나를 메우고 그 위에 지금 배우는 칸 하나를 올립니다.</b>
+    물질을 구별하는 방법은 색이나 냄새가 아닙니다. <b>양이 달라져도 변하지 않는 값</b>,
+    즉 밀도 · 녹는점 · 끓는점 · 용해도로 구별합니다. 1주차의 입자 개념이 여기서 다시 쓰입니다.
   </p>
   <div class="metaline">
-    <span>전체 <b>12주 · 3개월</b></span>
-    <span>하루 <b>20분 · 주 4일</b></span>
-    <span>한 주 <b>개념 1개</b></span>
-    <span>문서 <b>12주차 전체 공개</b></span>
+    <span>1주차 연결 <b>입자와 상태</b></span>
+    <span>개념 <b>밀도 · 끓는점 · 용해도</b></span>
+    <span>실험 <b>밀도탑 쌓기</b></span>
+    <span>진행 <b id="wdone">0 / 4</b></span>
   </div>
 
   <div class="summary">
-    <h2>이 문서를 쓰는 법</h2>
-    <p class="sd">한 문서가 일주일치입니다. 월·화·목·금 네 칸만 하면 그 주는 끝납니다.</p>
+    <h2>이번 주에 남길 것</h2>
+    <p class="sd">“양이 변해도 그대로”라는 한 문장이 이 단원 전체를 관통합니다.</p>
     <div class="kpis">
-      <div class="kpi"><span class="kl">한 주</span><span class="kv">4칸</span>
-        <span class="kn">월 열기 · 화 채우기 · 목 손으로 · 금 보스전</span></div>
-      <div class="kpi"><span class="kl">하루</span><span class="kv">20분</span>
-        <span class="kn">시간이 되면 이해가 덜 됐어도 덮습니다</span></div>
-      <div class="kpi"><span class="kl">통과 기준</span><span class="kv">설명</span>
-        <span class="kn">점수가 아니라 아빠에게 3분 설명하기</span></div>
-      <div class="kpi"><span class="kl">내 진행</span><span class="kv" id="allDone">0 / 12</span>
-        <span class="kn">완료한 칸 수 · 이 폰에만 저장됩니다</span></div>
+      <div class="kpi"><span class="kl">문장 1</span><span class="kv">밀도</span>
+        <span class="kn">질량 ÷ 부피 · 단위 g/cm³</span></div>
+      <div class="kpi"><span class="kl">문장 2</span><span class="kv">그대로</span>
+        <span class="kn">크기를 반으로 잘라도 밀도는 같다</span></div>
+      <div class="kpi"><span class="kl">문장 3</span><span class="kv">번호표</span>
+        <span class="kn">그래서 물질을 구별하는 데 쓸 수 있다</span></div>
     </div>
-    <div class="bar"><i id="allBar"></i></div>
   </div>
 </header>
 
 <nav class="jump"><div class="row">
-  <a href="#how">쓰는 법</a>
-  <a href="#camp1">캠프 1 · 물질</a>
-  <a href="#next">앞으로</a>
+  <a href="#map">이번 주 지도</a>
+  <a href="#mon">월 · 열기</a>
+  <a href="#tue">화 · 채우기</a>
+  <a href="#thu">목 · 손으로</a>
+  <a href="#fri">금 · 보스전</a>
+  <a href="#next">다음 주</a>
 </div></nav>
 
-<section class="sec" id="how">
-  <div class="step-no"><span class="num">1</span><span class="lbl">읽는 법</span></div>
-  <h2>한 주에 개념 하나, 요일마다 한 칸</h2>
+<section class="sec" id="map">
+  <div class="step-no"><span class="num">1</span><span class="lbl">이번 주 지도</span></div>
+  <h2>양이 변해도 그대로인 값</h2>
+  <p>같은 물질이면 크기가 달라도 밀도는 같습니다. 질량과 부피가 <b>같은 비율로</b> 변하기 때문입니다.
+  그래서 밀도는 그 물질의 <b>번호표</b>가 됩니다.</p>
+
+  <div class="fig">
+    <p class="fig-t">도식 1 · 밀도는 크기와 무관합니다</p>
+    <svg viewBox="0 0 900 250" role="img" aria-label="같은 물질의 크기가 달라도 밀도가 같다는 것과 밀도 차이로 층이 생기는 것">
+      <text class="st-s" x="220" y="30">같은 물질 · 다른 크기</text>
+      <rect class="sb-a" x="96" y="56" width="60" height="60" rx="3"/>
+      <text class="st-s" x="126" y="140">질량 10 g</text>
+      <text class="st-s" x="126" y="158">부피 5 cm³</text>
+      <rect class="sb-a" x="240" y="44" width="96" height="96" rx="3"/>
+      <text class="st-s" x="288" y="158">질량 40 g · 부피 20 cm³</text>
+      <text class="st" x="220" y="192">10 ÷ 5 = 2 · 40 ÷ 20 = 2</text>
+      <text class="st st-k" x="220" y="220">크기가 달라도 밀도는 같습니다</text>
+
+      <line class="sl-d" x1="450" y1="30" x2="450" y2="226"/>
+
+      <text class="st-s" x="676" y="30">밀도가 다르면 층이 생깁니다</text>
+      <rect class="sb-a" x="566" y="48" width="220" height="42" rx="2"/>
+      <text class="st st-a" x="676" y="75">식용유 0.92</text>
+      <rect class="sb-k" x="566" y="94" width="220" height="42" rx="2"/>
+      <text class="st st-k" x="676" y="121">물 1.00</text>
+      <rect class="sb-b" x="566" y="140" width="220" height="46" rx="2"/>
+      <text class="st st-b" x="676" y="169">꿀 1.4</text>
+      <text class="st-m" x="676" y="212">가벼운 것이 위 · 무거운 것이 아래</text>
+      <text class="st-m" x="450" y="242">단위 g/cm³ · 물의 밀도 1 g/cm³ 를 기준으로 외웁니다</text>
+    </svg>
+    <p class="fig-c">1주차의 그림으로 보면 밀도는 <b>같은 상자에 알갱이가 얼마나 빽빽하게 들어 있는가</b>입니다.</p>
+  </div>
+</section>
+
+<section class="sec" id="mon">
+  <div class="step-no"><span class="num">2</span><span class="lbl">개념 하나</span><span class="day">MON · 열기</span></div>
+  <h2>밀도 — 같은 부피에 얼마나 빽빽한가</h2>
+
+  <p><b>밀도 = 질량 ÷ 부피</b>이고 단위는 <code>g/cm³</code>입니다. 뜻은 “같은 크기에 얼마나 많이 들어 있나”입니다.</p>
+
+  <div class="alert"><span class="lb">가장 많이 하는 착각</span>
+    <p>“큰 것이 더 무거우니까 밀도도 크다” — <b>아닙니다.</b> 쇠구슬을 반으로 잘라도 밀도는 그대로입니다.
+    질량과 부피가 같은 비율로 줄기 때문입니다. 그래서 밀도가 <b>물질을 구별하는 번호표</b>가 됩니다.</p>
+  </div>
+
+  <div class="tw"><table>
+    <thead><tr><th>물질</th><th>밀도 (g/cm³)</th><th>물에 넣으면</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">스타이로폼</td><td class="mn">약 0.03</td><td class="ok">뜬다</td></tr>
+      <tr><td class="hd">식용유</td><td class="mn">0.92</td><td class="ok">뜬다</td></tr>
+      <tr><td class="hd">얼음</td><td class="mn">0.92</td><td class="ok">뜬다</td></tr>
+      <tr><td class="hd">물</td><td class="mn">1.00</td><td>기준</td></tr>
+      <tr><td class="hd">꿀</td><td class="mn">약 1.4</td><td class="no">가라앉는다</td></tr>
+      <tr><td class="hd">철</td><td class="mn">7.9</td><td class="no">가라앉는다</td></tr>
+      <tr><td class="hd">금</td><td class="mn">19.3</td><td class="no">가라앉는다</td></tr>
+    </tbody>
+  </table></div>
 
   <div class="plain">
-    <p><b>먼저 알아둘 것</b> — 모든 주차 문서는 <b>똑같은 순서</b>로 되어 있습니다.
-    한 번 익히면 12주 내내 “오늘 뭘 하지”를 고민하지 않아도 됩니다.</p>
-    <p>월요일에 열고, 화요일에 정리하고, 목요일에 손으로 확인하고, 금요일에 설명합니다.
-    수요일과 주말은 비워 둡니다. <b>쉬는 것도 계획에 들어 있습니다.</b></p>
+    <p><b>얼음이 뜨는 이유</b> — 물은 얼면 입자 배열이 <b>육각형 구조로 벌어져</b> 부피가 커집니다.
+    질량은 그대로인데 부피가 커지니 밀도가 작아져 뜹니다. 대부분의 물질은 얼면 밀도가 커지는데 물은 반대입니다.
+    겨울에 호수가 <b>위부터 어는</b> 덕분에 물고기가 살 수 있습니다.</p>
   </div>
 
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w8m1"><span class="tt"><b>월요일</b> — 밀도 표를 읽고 질문 3개를 적습니다. 물보다 밀도가 작은 물건을 집에서 3개 찾습니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="tue">
+  <div class="step-no"><span class="num">3</span><span class="lbl">개념 둘</span><span class="day">TUE · 채우기</span></div>
+  <h2>끓는점 · 녹는점 · 용해도</h2>
+
+  <p>밀도 말고도 물질마다 정해진 값이 있습니다. 모두 <b>양이 달라져도 변하지 않는다</b>는 공통점이 있습니다.</p>
   <div class="tw"><table>
-    <thead><tr><th>요일</th><th>하는 일</th><th>시간</th></tr></thead>
+    <thead><tr><th>특성</th><th>뜻</th><th>예</th></tr></thead>
     <tbody>
-      <tr><td class="hd">월 · 열기</td><td>개념을 읽고 <b>궁금한 질문 3개</b>를 적습니다. 답은 아직 찾지 않습니다.</td><td class="mn">20분</td></tr>
-      <tr><td class="hd">화 · 채우기</td><td>노트 한 장으로 정리합니다. 글보다 그림이 먼저입니다.</td><td class="mn">20분</td></tr>
-      <tr><td class="hd">목 · 손으로</td><td>집에 있는 물건으로 실험 하나. 예상과 달라도 성공입니다.</td><td class="mn">20~30분</td></tr>
-      <tr><td class="hd">금 · 보스전</td><td>문제 5개를 풀고 <b>아빠에게 3분 설명</b>합니다. 설명이 되면 통과입니다.</td><td class="mn">20분</td></tr>
+      <tr><td class="hd">녹는점</td><td>고체가 액체로 되는 온도</td><td>물 0 ℃ · 철 1538 ℃</td></tr>
+      <tr><td class="hd">끓는점</td><td>액체가 기체로 되는 온도</td><td>물 100 ℃ · 알코올 78 ℃</td></tr>
+      <tr><td class="hd">용해도</td><td>일정한 물에 최대로 녹는 양</td><td>온도가 높을수록 대개 커집니다</td></tr>
+      <tr><td class="hd">밀도</td><td>질량 ÷ 부피</td><td>물 1 g/cm³</td></tr>
     </tbody>
   </table></div>
 
+  <div class="alert"><span class="lb">여기서 틀립니다</span>
+    <p>물을 <b>많이</b> 끓이면 끓는점이 높아질까요? <b>아닙니다.</b>
+    양이 많으면 <b>끓는 데 걸리는 시간</b>이 길어질 뿐, 끓는 <b>온도</b>는 100 ℃ 그대로입니다.
+    시간과 온도를 구별하는 것이 이 단원의 핵심입니다.</p>
+  </div>
+
+  <h3>순물질과 혼합물</h3>
+  <p>소금물처럼 <b>섞인 것(혼합물)</b>은 끓는점이 일정하지 않고 100 ℃보다 높아집니다.
+  반대로 <b>끓는점이 딱 정해져 있으면 순물질</b>이라는 뜻입니다. 이 성질로 물질을 분리할 수도 있습니다.</p>
   <div class="cards two">
-    <div class="card"><span class="ct">체크</span><h4>끝낸 칸은 눌러 둡니다</h4>
-      <p>각 요일 끝에 네모 칸이 있습니다. 누르면 이 폰에 저장되고, 위쪽 진행 막대에 모입니다.</p></div>
-    <div class="card"><span class="ct">막힐 때</span><h4>3분 규칙</h4>
-      <p>한 곳에서 3분 넘게 막히면 더 밀지 않습니다. 그 개념이 기대고 있는 <b>앞 주차 문서</b>로 돌아갔다 옵니다. 내려가는 것은 정식 경로입니다.</p></div>
+    <div class="card"><span class="ct">분리 1</span><h4>바닷물 → 마실 물</h4>
+      <p>끓여서 나온 수증기를 식혀 모으면 소금은 남고 <b>물만</b> 얻습니다. 끓는점 차이를 이용한 <b>증류</b>입니다.</p></div>
+    <div class="card"><span class="ct">분리 2</span><h4>기름 유출 사고</h4>
+      <p>기름은 밀도가 작아 바다 <b>위에 뜹니다.</b> 그래서 흡착포를 물 위에 띄워 걷어냅니다. 밀도 차이를 이용한 분리입니다.</p></div>
   </div>
 
-  <div class="note"><span class="lb">아빠에게</span>
-    <p>이 프로그램에서 아빠는 선생님이 아니라 <b>관객</b>입니다. 가르치려 들면 학원이 하나 더 생깁니다.
-    할 일은 세 가지입니다 — <b>20분 타이머를 지키고</b>, <b>모르는 척 설명을 부탁하고</b>, <b>금요일 설명을 녹음해 두는 것</b>입니다.
-    자세한 운영 방법은 <a href="plan.html">추진 계획 문서</a>에 있습니다.</p>
-  </div>
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w8m2"><span class="tt"><b>화요일</b> — 네 가지 특성 표를 노트에 옮기고, “양이 변해도 그대로”라는 문장을 크게 적습니다.</span></label></li>
+  </ul>
 </section>
 
-<section class="sec" id="camp1">
-  <div class="step-no"><span class="num">2</span><span class="lbl">캠프 1 · 물질</span><span class="day">공개됨</span></div>
-  <h2>세상은 무엇으로 되어 있나</h2>
-  <p>중2 과학에서 가장 먼저, 그리고 가장 자주 막히는 곳이 ‘물질의 구성’입니다.
-  눈에 보이지 않는 입자를 머릿속에 그려야 하기 때문입니다.
-  그래서 첫 캠프는 <b>보이지 않는 것을 그림으로 그리는 연습</b>부터 시작합니다.</p>
-
-  <div class="wlist">
-    <a class="wk" href="week01.html"><span class="n">WEEK 01</span><span class="t">입자의 눈</span>
-      <span class="d">물질은 알갱이로 되어 있고, 그 사이에는 빈 공간이 있습니다</span><span class="p" data-p="1">0 / 4</span></a>
-    <a class="wk" href="week02.html"><span class="n">WEEK 02</span><span class="t">원소와 불꽃</span>
-      <span class="d">더 쪼갤 수 없는 성분이 원소입니다. 불꽃 색이 곧 이름표입니다</span><span class="p" data-p="2">0 / 4</span></a>
-    <a class="wk" href="week03.html"><span class="n">WEEK 03</span><span class="t">원자와 분자</span>
-      <span class="d">알갱이 한 개와 그것이 붙은 덩어리. 화학식을 읽는 눈을 만듭니다</span><span class="p" data-p="3">0 / 4</span></a>
-    <a class="wk" href="week04.html"><span class="n">WEEK 04</span><span class="t">이온과 앙금</span>
-      <span class="d">전자를 잃거나 얻은 입자, 물속에서 눈에 보이는 증거</span><span class="p" data-p="4">0 / 4</span></a>
-  </div>
-</section>
-
-<section class="sec" id="camp2">
-  <div class="step-no"><span class="num">3</span><span class="lbl">캠프 2 · 전기와 성질</span><span class="day">공개됨</span></div>
-  <h2>보이지 않는 것이 일을 합니다</h2>
-  <p>공식보다 그림이 먼저입니다. 전류를 물의 흐름으로 이해한 다음에야 숫자를 넣습니다.
-  캠프 1의 주인공이었던 <b>전자</b>가 그대로 이 캠프의 주인공입니다.</p>
-
-  <div class="wlist" data-camp="c2">
-    <a class="wk" href="week05.html"><span class="n">WEEK 05</span><span class="t">정전기와 전하</span>
-      <span class="d">문고리에서 따끔한 이유, 전자의 이사</span><span class="p" data-p="5">0 / 4</span></a>
-    <a class="wk" href="week06.html"><span class="n">WEEK 06</span><span class="t">전류 · 전압 · 저항</span>
-      <span class="d">물탱크 그림으로 이해하는 V = I × R</span><span class="p" data-p="6">0 / 4</span></a>
-    <a class="wk" href="week07.html"><span class="n">WEEK 07</span><span class="t">전류의 자기 작용</span>
-      <span class="d">전기가 힘이 되는 순간, 전자석과 모터</span><span class="p" data-p="7">0 / 4</span></a>
-    <a class="wk" href="week08.html"><span class="n">WEEK 08</span><span class="t">물질의 특성</span>
-      <span class="d">밀도 · 용해도 · 끓는점, 물질마다의 번호표</span><span class="p" data-p="8">0 / 4</span></a>
-  </div>
-</section>
-
-<section class="sec" id="camp3">
-  <div class="step-no"><span class="num">4</span><span class="lbl">캠프 3 · 생명과 지구</span><span class="day">공개됨</span></div>
-  <h2>나와 세계가 이어집니다</h2>
-  <p>암기 단원처럼 보이지만, <b>에너지가 어디서 와서 어디로 가는지</b> 하나로 꿰면 외울 것이 크게 줄어듭니다.
-  캠프 1에서 배운 분자가 식물과 몸 안에서 실제로 움직입니다.</p>
-
-  <div class="wlist" data-camp="c3">
-    <a class="wk" href="week09.html"><span class="n">WEEK 09</span><span class="t">광합성과 호흡</span>
-      <span class="d">식물이 밥을 스스로 만든다는 말의 뜻</span><span class="p" data-p="9">0 / 4</span></a>
-    <a class="wk" href="week10.html"><span class="n">WEEK 10</span><span class="t">에너지 배달 경로</span>
-      <span class="d">소화 · 순환 · 호흡 · 배설을 한 줄로</span><span class="p" data-p="10">0 / 4</span></a>
-    <a class="wk" href="week11.html"><span class="n">WEEK 11</span><span class="t">지구와 달의 운동</span>
-      <span class="d">달 모양이 바뀌는 이유를 손으로 보여주기</span><span class="p" data-p="11">0 / 4</span></a>
-    <a class="wk" href="week12.html"><span class="n">WEEK 12</span><span class="t">열의 이동과 마무리</span>
-      <span class="d">전도 · 대류 · 복사 + 12주 마무리 강의</span><span class="p" data-p="12">0 / 4</span></a>
-  </div>
-</section>
-
-<section class="sec" id="how2">
-  <div class="step-no"><span class="num">5</span><span class="lbl">진행 방법</span></div>
-  <h2>순서보다 리듬이 중요합니다</h2>
-  <p>12주 문서가 모두 준비되어 있지만, <b>미리 앞질러 볼 필요는 없습니다.</b> 이번 주 것만 열면 됩니다.</p>
+<section class="sec" id="thu">
+  <div class="step-no"><span class="num">4</span><span class="lbl">실험</span><span class="day">THU · 손으로</span></div>
+  <h2>밀도탑을 쌓습니다</h2>
 
   <div class="tw"><table>
-    <thead><tr><th>이런 경우</th><th>이렇게 합니다</th></tr></thead>
+    <thead><tr><th>준비물</th><th>비고</th></tr></thead>
     <tbody>
-      <tr><td class="hd">학교 진도와 순서가 다르다</td><td>그 주 문서의 <b>개념 부분만</b> 학교 단원으로 바꿔 끼웁니다. 요일 리듬과 보스전 구조는 그대로 씁니다.</td></tr>
-      <tr><td class="hd">시험 기간이 겹친다</td><td>그 주는 <b>시험 범위 복습</b>으로 바꾸고 전체를 한 주 뒤로 밉니다.</td></tr>
-      <tr><td class="hd">한 주를 통째로 못 했다</td><td>따라잡지 않습니다. 그 주는 없던 것으로 하고 다음 주부터 다시 시작합니다.</td></tr>
-      <tr><td class="hd">너무 쉬워한다</td><td>분량을 늘리지 말고 <b>목요일 실험을 직접 설계</b>하게 합니다. 난이도는 위로, 시간은 그대로.</td></tr>
+      <tr><td class="hd">투명한 긴 컵 1개</td><td>좁고 길수록 층이 잘 보입니다</td></tr>
+      <tr><td class="hd">꿀 · 주방세제 · 물 · 식용유</td><td>이 순서가 아래에서 위로 쌓이는 순서입니다</td></tr>
+      <tr><td class="hd">물에 색소 한 방울</td><td>색이 있어야 층이 보입니다 (식용색소 · 물감)</td></tr>
+      <tr><td class="hd">포도알 · 방울토마토 · 클립 · 스타이로폼</td><td>띄워 볼 물건들</td></tr>
     </tbody>
   </table></div>
 
+  <h3>순서</h3>
+  <div class="cards two">
+    <div class="card"><span class="ct">01</span><h4>예상을 먼저</h4><p>네 액체가 <b>어떤 순서로 쌓일지</b> 먼저 적습니다. 물건들이 어느 층에 멈출지도 예상합니다.</p></div>
+    <div class="card"><span class="ct">02</span><h4>무거운 것부터</h4><p>꿀 → 주방세제 → 색소물 → 식용유 순서로 <b>컵 벽을 타고 천천히</b> 붓습니다. 숟가락 뒷면에 대고 부으면 잘 섞이지 않습니다.</p></div>
+    <div class="card"><span class="ct">03</span><h4>물건을 넣습니다</h4><p>포도알·클립·스타이로폼을 하나씩 떨어뜨립니다. 각자 자기 밀도에 맞는 층에서 멈춥니다.</p></div>
+    <div class="card"><span class="ct">04</span><h4>달걀 실험</h4><p>물에 달걀을 넣으면 가라앉습니다. 소금을 계속 녹이면 어느 순간 <b>떠오릅니다.</b> 소금물의 밀도가 달걀보다 커졌기 때문입니다.</p></div>
+  </div>
+
+  <div class="tw"><table>
+    <thead><tr><th>물건</th><th>예상 위치</th><th>실제 위치</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">포도알</td><td class="fill">______</td><td class="fill">______</td></tr>
+      <tr><td class="hd">클립</td><td class="fill">______</td><td class="fill">______</td></tr>
+      <tr><td class="hd">스타이로폼</td><td class="fill">______</td><td class="fill">______</td></tr>
+      <tr><td class="hd">달걀 (소금 넣기 전 / 후)</td><td class="fill">______</td><td class="fill">______</td></tr>
+    </tbody>
+  </table></div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w8m3"><span class="tt"><b>목요일</b> — 밀도탑을 만들고 표를 채웁니다. 층이 섞였다면 다시 천천히 부어 봅니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="fri">
+  <div class="step-no"><span class="num">5</span><span class="lbl">캠프 2 보스전</span><span class="day">FRI · 설명</span></div>
+  <h2>문제 5개와 캠프 전체 설명</h2>
+
+  <div class="q"><span class="qn">Q1</span>
+    <p>질량 40 g, 부피 20 cm³인 물체의 밀도는 얼마이고, 물에 넣으면 어떻게 될까요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>밀도는 2 g/cm³이고 가라앉습니다.</b> 40 ÷ 20 = 2 이고, 물(1 g/cm³)보다 크기 때문입니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q2</span>
+    <p>쇠구슬을 반으로 잘랐습니다. 밀도는 어떻게 될까요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>그대로입니다.</b> 질량과 부피가 똑같은 비율로 줄기 때문입니다. 밀도는 양이 아니라 <b>물질의 종류</b>가 정합니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q3</span>
+    <p>물을 두 배로 많이 넣고 끓이면 끓는점은 어떻게 될까요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>변하지 않습니다(100 ℃).</b> 끓는 데 걸리는 <b>시간</b>만 길어집니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q4</span>
+    <p>바닷물에서 마실 물을 얻는 방법과 그 원리는 무엇일까요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>끓여서 나온 수증기를 식혀 모읍니다(증류).</b> 물은 100 ℃에서 끓어 나가지만 소금은 훨씬 높은 온도라야 하므로 남습니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q5</span>
+    <p><b>캠프 2 통합</b> — 전하 · 전류 · 자기장 · 밀도를 각각 한 문장으로 설명해 봅시다.</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      ① <b>전하</b> — 전자가 옮겨 가서 물체가 띠게 된 전기 (5주차)<br>
+      ② <b>전류</b> — 전하가 계속 흐르는 것. V = I × R (6주차)<br>
+      ③ <b>자기장</b> — 전류 주위에 생기는, 자석의 힘이 미치는 공간 (7주차)<br>
+      ④ <b>밀도</b> — 질량 ÷ 부피. 양이 변해도 그대로인 물질의 번호표 (8주차)
+    </div></details>
+  </div>
+
+  <h3>아빠에게 3분 설명하기</h3>
+  <div class="script">
+    <div class="row"><span class="s">배운 것</span><span>밀도·끓는점 같은 값은 양이 달라져도 변하지 않아서 물질을 구별하는 데 쓴다는 것.</span></div>
+    <div class="row"><span class="s">예를 들면</span><span>꿀·물·기름을 부었더니 층이 생겼어. 밀도가 큰 게 아래로 가서.</span></div>
+    <div class="row"><span class="s">헷갈리는 것</span><span>물을 많이 끓여도 끓는점은 100 ℃ 그대로야. 시간만 오래 걸려.</span></div>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w8m4"><span class="tt"><b>금요일</b> — 문제 5개와 캠프 2의 네 가지를 한 문장씩 설명합니다. 여기까지가 전반전입니다.</span></label></li>
+  </ul>
+
+  <p><span class="badge">획득 · 밀도 감정사 · 캠프 2 완주</span></p>
+</section>
+
+<section class="sec" id="next">
+  <div class="step-no"><span class="num">6</span><span class="lbl">다음 주</span></div>
+  <h2>광합성과 호흡</h2>
+  <p>9주차부터 <b>캠프 3 · 생명과 지구</b>입니다. 지금까지 배운 분자(CO₂, H₂O)와 에너지가
+  <b>식물과 내 몸 안에서</b> 어떻게 움직이는지로 이어집니다.</p>
   <div class="pager">
-    <a href="plan.html">추진 계획 문서</a>
-    <a class="main" href="week01.html">1주차 시작 →</a>
+    <a href="week07.html">← 7주차</a>
+    <a href="index.html">전체 지도</a>
+    <a class="main" href="week09.html">9주차 →</a>
   </div>
 </section>
 
-<footer>
-  과학 등반 12주 · 중2 과학 주차별 학습 문서 · 진행 기록은 이 기기에만 저장됩니다<br>
-  교과 단원의 이름과 순서는 교과서 출판사와 학교 진도에 따라 다를 수 있습니다
-</footer>
+<footer>과학 등반 12주 · WEEK 08 물질의 특성 · 하루 20분 × 4일</footer>
 </div>
 <script>
   (function(){

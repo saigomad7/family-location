@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#DCE2DB">
-<title>과학 등반 12주</title>
-<meta name="description" content="중2 과학을 하루 20분씩 개념 하나로 밟아 올라가는 주차별 학습 문서.">
+<title>4주차 · 이온과 앙금</title>
+<meta name="description" content="전자를 잃거나 얻으면 이온이 됩니다. 소금물이 전기를 통하는 이유와 앙금 반응.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -241,160 +241,298 @@
 </head>
 <body>
 <div class="wrap">
-<div data-hub></div>
 <header class="cover">
-  <p class="kicker">중2 과학 · 주차별 학습 문서 · 하루 20분</p>
-  <h1>과학 등반 12주</h1>
+  <p class="kicker">WEEK 04 · 캠프 1 물질 · 캠프 1 마지막 주</p>
+  <h1>이온과 앙금</h1>
   <p class="lede">
-    과학은 머리가 좋아야 하는 과목이 아니라 <b>앞에서 쌓은 개념 위에 다음 개념을 얹는 과목</b>입니다.
-    지금 어렵게 느껴진다면 중1에서 지나간 칸 몇 개가 비어 있기 때문입니다.
-    그래서 이 문서는 진도를 앞서 나가지 않습니다. 매주 <b>비어 있는 칸 하나를 메우고 그 위에 지금 배우는 칸 하나를 올립니다.</b>
+    3주차에서 “원자는 +와 −가 같아서 전기를 띠지 않는다”고 했습니다.
+    <b>그 균형이 깨지면 어떻게 될까요.</b> 중2 물질 단원의 마지막 관문이고, 여기만 넘으면 캠프 1이 끝납니다.
   </p>
   <div class="metaline">
-    <span>전체 <b>12주 · 3개월</b></span>
-    <span>하루 <b>20분 · 주 4일</b></span>
-    <span>한 주 <b>개념 1개</b></span>
-    <span>문서 <b>12주차 전체 공개</b></span>
+    <span>3주차 연결 <b>원자 구조</b></span>
+    <span>개념 <b>이온 · 전해질 · 앙금</b></span>
+    <span>실험 <b>흰 앙금 만들기</b></span>
+    <span>진행 <b id="wdone">0 / 4</b></span>
   </div>
 
   <div class="summary">
-    <h2>이 문서를 쓰는 법</h2>
-    <p class="sd">한 문서가 일주일치입니다. 월·화·목·금 네 칸만 하면 그 주는 끝납니다.</p>
+    <h2>이번 주에 남길 것</h2>
+    <p class="sd">이온은 새로운 개념이 아니라 3주차 원자 그림에서 전자 하나가 움직인 것뿐입니다.</p>
     <div class="kpis">
-      <div class="kpi"><span class="kl">한 주</span><span class="kv">4칸</span>
-        <span class="kn">월 열기 · 화 채우기 · 목 손으로 · 금 보스전</span></div>
-      <div class="kpi"><span class="kl">하루</span><span class="kv">20분</span>
-        <span class="kn">시간이 되면 이해가 덜 됐어도 덮습니다</span></div>
-      <div class="kpi"><span class="kl">통과 기준</span><span class="kv">설명</span>
-        <span class="kn">점수가 아니라 아빠에게 3분 설명하기</span></div>
-      <div class="kpi"><span class="kl">내 진행</span><span class="kv" id="allDone">0 / 12</span>
-        <span class="kn">완료한 칸 수 · 이 폰에만 저장됩니다</span></div>
+      <div class="kpi"><span class="kl">문장 1</span><span class="kv">이온</span>
+        <span class="kn">전자를 잃거나 얻어 전기를 띠게 된 입자</span></div>
+      <div class="kpi"><span class="kl">문장 2</span><span class="kv">전해질</span>
+        <span class="kn">물에서 이온으로 나뉘어 전기가 통하는 물질</span></div>
+      <div class="kpi"><span class="kl">문장 3</span><span class="kv">앙금</span>
+        <span class="kn">이온이 만나 생긴, 물에 녹지 않는 고체</span></div>
     </div>
-    <div class="bar"><i id="allBar"></i></div>
   </div>
 </header>
 
 <nav class="jump"><div class="row">
-  <a href="#how">쓰는 법</a>
-  <a href="#camp1">캠프 1 · 물질</a>
-  <a href="#next">앞으로</a>
+  <a href="#map">이번 주 지도</a>
+  <a href="#mon">월 · 열기</a>
+  <a href="#tue">화 · 채우기</a>
+  <a href="#thu">목 · 손으로</a>
+  <a href="#fri">금 · 보스전</a>
+  <a href="#next">다음 주</a>
 </div></nav>
 
-<section class="sec" id="how">
-  <div class="step-no"><span class="num">1</span><span class="lbl">읽는 법</span></div>
-  <h2>한 주에 개념 하나, 요일마다 한 칸</h2>
+<section class="sec" id="map">
+  <div class="step-no"><span class="num">1</span><span class="lbl">이번 주 지도</span></div>
+  <h2>전자 하나가 이사하면</h2>
+  <p>움직이는 것은 <b>전자뿐</b>입니다. 원자핵은 제자리에 있습니다.
+  전자를 잃으면 +가 남아 <b>양이온</b>, 전자를 얻으면 −가 많아져 <b>음이온</b>이 됩니다.</p>
+
+  <div class="fig">
+    <p class="fig-t">도식 1 · 양이온과 음이온이 만들어지는 과정</p>
+    <svg viewBox="0 0 900 230" role="img" aria-label="나트륨 원자가 전자를 잃어 양이온이 되고 염소 원자가 전자를 얻어 음이온이 되는 과정">
+      <circle class="sb" cx="86" cy="104" r="52"/>
+      <text class="st" x="86" y="100">Na</text>
+      <text class="st-s" x="86" y="122">중성 원자</text>
+      <text class="st-m" x="86" y="180">+ 개수 = − 개수</text>
+
+      <line class="sl-a" x1="146" y1="104" x2="206" y2="104"/>
+      <polygon class="sa-a" points="206,98 220,104 206,110"/>
+      <text class="st-m st-a" x="183" y="90">전자 1개</text>
+      <text class="st-m st-a" x="183" y="130">잃음</text>
+
+      <circle class="sb-k" cx="288" cy="104" r="52"/>
+      <text class="st st-k" x="288" y="100">Na⁺</text>
+      <text class="st-s" x="288" y="122">양이온</text>
+      <text class="st-m" x="288" y="180">+ 가 하나 남습니다</text>
+
+      <line class="sl-d" x1="356" y1="104" x2="404" y2="104"/>
+
+      <circle class="sb" cx="480" cy="104" r="52"/>
+      <text class="st" x="480" y="100">Cl</text>
+      <text class="st-s" x="480" y="122">중성 원자</text>
+      <text class="st-m" x="480" y="180">+ 개수 = − 개수</text>
+
+      <line class="sl-a" x1="540" y1="104" x2="600" y2="104"/>
+      <polygon class="sa-a" points="600,98 614,104 600,110"/>
+      <text class="st-m st-a" x="577" y="90">전자 1개</text>
+      <text class="st-m st-a" x="577" y="130">얻음</text>
+
+      <circle class="sb-k" cx="682" cy="104" r="52"/>
+      <text class="st st-k" x="682" y="100">Cl⁻</text>
+      <text class="st-s" x="682" y="122">음이온</text>
+      <text class="st-m" x="682" y="180">− 가 하나 많습니다</text>
+
+      <rect class="sb-a" x="756" y="60" width="136" height="88" rx="3"/>
+      <text class="st st-a" x="824" y="96">소금물</text>
+      <text class="st-s" x="824" y="118">Na⁺ 와 Cl⁻ 가</text>
+      <text class="st-s" x="824" y="136">따로 떠다닙니다</text>
+      <text class="st-m" x="450" y="216">전자만 움직입니다 · 원자핵은 그대로입니다</text>
+    </svg>
+    <p class="fig-c">시소를 생각하면 쉽습니다. <b>− 하나가 빠져나가면 남은 +가 하나 더 세지는 셈</b>입니다.</p>
+  </div>
+</section>
+
+<section class="sec" id="mon">
+  <div class="step-no"><span class="num">2</span><span class="lbl">개념 하나</span><span class="day">MON · 열기</span></div>
+  <h2>이온 — 전기를 띠게 된 입자</h2>
 
   <div class="plain">
-    <p><b>먼저 알아둘 것</b> — 모든 주차 문서는 <b>똑같은 순서</b>로 되어 있습니다.
-    한 번 익히면 12주 내내 “오늘 뭘 하지”를 고민하지 않아도 됩니다.</p>
-    <p>월요일에 열고, 화요일에 정리하고, 목요일에 손으로 확인하고, 금요일에 설명합니다.
-    수요일과 주말은 비워 둡니다. <b>쉬는 것도 계획에 들어 있습니다.</b></p>
+    <p><b>이온은 원자가 전자를 잃거나 얻어서 전기를 띠게 된 입자입니다.</b> 이 한 줄이 전부입니다.</p>
   </div>
 
-  <div class="tw"><table>
-    <thead><tr><th>요일</th><th>하는 일</th><th>시간</th></tr></thead>
+  <div class="tw wide"><table>
+    <thead><tr><th>무슨 일이</th><th>결과</th><th>이름</th><th>예</th></tr></thead>
     <tbody>
-      <tr><td class="hd">월 · 열기</td><td>개념을 읽고 <b>궁금한 질문 3개</b>를 적습니다. 답은 아직 찾지 않습니다.</td><td class="mn">20분</td></tr>
-      <tr><td class="hd">화 · 채우기</td><td>노트 한 장으로 정리합니다. 글보다 그림이 먼저입니다.</td><td class="mn">20분</td></tr>
-      <tr><td class="hd">목 · 손으로</td><td>집에 있는 물건으로 실험 하나. 예상과 달라도 성공입니다.</td><td class="mn">20~30분</td></tr>
-      <tr><td class="hd">금 · 보스전</td><td>문제 5개를 풀고 <b>아빠에게 3분 설명</b>합니다. 설명이 되면 통과입니다.</td><td class="mn">20분</td></tr>
+      <tr><td class="hd">전자(−)를 잃는다</td><td>− 가 줄어 + 가 남는다</td><td class="ok">양이온</td><td class="mn">Na⁺ · Ca²⁺ · Ag⁺</td></tr>
+      <tr><td class="hd">전자(−)를 얻는다</td><td>− 가 많아진다</td><td class="ok">음이온</td><td class="mn">Cl⁻ · O²⁻ · CO₃²⁻</td></tr>
     </tbody>
   </table></div>
 
+  <div class="alert"><span class="lb">여기서 헷갈립니다</span>
+    <p>전자를 <b>잃었는데</b> 왜 <b>+</b>가 될까요? 전자가 − 이기 때문입니다.
+    − 하나가 빠져나가면 남은 +가 하나 더 세지는 셈입니다.</p>
+  </div>
+
+  <h3>이온식 쓰는 법</h3>
+  <p>원소기호 오른쪽 위에 잃거나 얻은 <b>전자의 개수와 부호</b>를 씁니다. 1개일 때는 숫자를 생략합니다.</p>
+  <div class="tw"><table>
+    <thead><tr><th>이온식</th><th>읽기</th><th>무슨 일이 있었나</th></tr></thead>
+    <tbody>
+      <tr><td class="mn ok">Na⁺</td><td class="hd">나트륨 이온</td><td>전자 1개를 잃었습니다</td></tr>
+      <tr><td class="mn ok">Ca²⁺</td><td class="hd">칼슘 이온</td><td>전자 2개를 잃었습니다</td></tr>
+      <tr><td class="mn ok">Cl⁻</td><td class="hd">염화 이온</td><td>전자 1개를 얻었습니다</td></tr>
+      <tr><td class="mn ok">CO₃²⁻</td><td class="hd">탄산 이온</td><td>여러 원자가 뭉친 채로 전자 2개를 얻었습니다</td></tr>
+    </tbody>
+  </table></div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w4m1"><span class="tt"><b>월요일</b> — 위 표를 읽고 이온식 4개를 그대로 옮겨 적으며 질문 3개를 만듭니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="tue">
+  <div class="step-no"><span class="num">3</span><span class="lbl">개념 둘</span><span class="day">TUE · 채우기</span></div>
+  <h2>소금물은 통하고 설탕물은 통하지 않습니다</h2>
+
+  <p>소금(NaCl)을 물에 넣으면 <b>Na⁺와 Cl⁻로 흩어집니다.</b> 물속에 <b>전기를 띤 입자가 돌아다니게</b> 되므로 전기가 흐릅니다.
+  이런 물질을 <b>전해질</b>이라고 합니다.</p>
+  <p>설탕은 물에 녹아도 이온으로 나뉘지 않습니다. 설탕 분자 그대로 흩어질 뿐이라 <b>전기를 띤 입자가 없습니다.</b>
+  그래서 전기가 흐르지 않습니다. 이런 물질이 <b>비전해질</b>입니다.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th></th><th>전해질</th><th>비전해질</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">물에 녹으면</td><td>이온으로 나뉜다</td><td>분자 그대로 흩어진다</td></tr>
+      <tr><td class="hd">전기</td><td class="ok">통한다</td><td class="no">통하지 않는다</td></tr>
+      <tr><td class="hd">예</td><td>소금 · 염화칼슘 · 이온음료</td><td>설탕 · 알코올 · 녹말</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="plain">
+    <p><b>이래서 배웁니다</b> — 땀을 많이 흘렸을 때 <b>이온음료</b>를 마시라고 하는 이유가 이것입니다.
+    땀으로 나트륨 이온 같은 전해질이 빠져나가기 때문입니다. 몸속 신경 신호도 이온의 이동으로 전달됩니다.</p>
+  </div>
+
+  <h3>앙금 — 이온이 만나 생기는 고체</h3>
+  <p>서로 다른 두 전해질 용액을 섞으면, 특정 이온끼리 만나 <b>물에 녹지 않는 고체</b>가 생기기도 합니다.
+  이 고체를 <b>앙금</b>이라고 하고, 물이 뿌옇게 흐려지는 것으로 알 수 있습니다.</p>
+  <div class="tw"><table>
+    <thead><tr><th>만나는 이온</th><th>생기는 앙금</th><th>색</th></tr></thead>
+    <tbody>
+      <tr><td class="mn">Ca²⁺ + CO₃²⁻</td><td class="hd">탄산칼슘 (CaCO₃)</td><td>흰색</td></tr>
+      <tr><td class="mn">Ag⁺ + Cl⁻</td><td class="hd">염화은 (AgCl)</td><td>흰색</td></tr>
+      <tr><td class="mn">Pb²⁺ + I⁻</td><td class="hd">아이오딘화납 (PbI₂)</td><td>노란색</td></tr>
+    </tbody>
+  </table></div>
+  <p>앙금이 생기는지 보면 <b>물속에 어떤 이온이 있는지</b> 알 수 있습니다. 눈에 보이지 않던 이온을 눈으로 확인하는 방법입니다.</p>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w4m2"><span class="tt"><b>화요일</b> — 전해질·비전해질 표를 노트 한 장에 옮기고, 집에서 전해질이 들어간 것 2개를 찾아 적습니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="thu">
+  <div class="step-no"><span class="num">4</span><span class="lbl">실험</span><span class="day">THU · 손으로</span></div>
+  <h2>흰 앙금을 만들어 봅니다</h2>
+
+  <div class="note"><span class="lb">안전</span>
+    <p>제습제 액은 <b>마시지 않습니다.</b> 피부에 닿으면 물로 씻습니다. 다 쓴 액은 물을 많이 흘려보내며 버립니다. 아빠와 함께 합니다.</p>
+  </div>
+
+  <div class="tw"><table>
+    <thead><tr><th>준비물</th><th>설명</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">염화칼슘 제습제 액</td><td>‘물먹는하마’에 고인 물 — 칼슘 이온(Ca²⁺)이 들어 있습니다</td></tr>
+      <tr><td class="hd">베이킹소다</td><td>탄산수소나트륨 — 탄산 이온 쪽을 담당합니다</td></tr>
+      <tr><td class="hd">투명 컵 2개 · 물 · 숟가락</td><td>—</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>순서</h3>
   <div class="cards two">
-    <div class="card"><span class="ct">체크</span><h4>끝낸 칸은 눌러 둡니다</h4>
-      <p>각 요일 끝에 네모 칸이 있습니다. 누르면 이 폰에 저장되고, 위쪽 진행 막대에 모입니다.</p></div>
-    <div class="card"><span class="ct">막힐 때</span><h4>3분 규칙</h4>
-      <p>한 곳에서 3분 넘게 막히면 더 밀지 않습니다. 그 개념이 기대고 있는 <b>앞 주차 문서</b>로 돌아갔다 옵니다. 내려가는 것은 정식 경로입니다.</p></div>
+    <div class="card"><span class="ct">01</span><h4>두 용액을 만듭니다</h4>
+      <p>컵 A는 물 반 컵 + 제습제 액 한 숟갈, 컵 B는 물 반 컵 + 베이킹소다 한 숟갈을 잘 저어 녹입니다. <b>둘 다 투명한지</b> 확인합니다.</p></div>
+    <div class="card"><span class="ct">02</span><h4>예상을 적습니다</h4>
+      <p>섞으면 어떻게 될지 먼저 적습니다.</p></div>
+    <div class="card"><span class="ct">03</span><h4>섞습니다</h4>
+      <p>B를 A에 천천히 붓습니다. <b>뿌옇게 흐려지는 순간</b>을 봅니다. 그것이 탄산칼슘 앙금입니다.</p></div>
+    <div class="card"><span class="ct">04</span><h4>가라앉힙니다</h4>
+      <p>5분쯤 두면 흰 가루가 바닥에 가라앉습니다. 사진을 찍습니다.</p></div>
   </div>
-
-  <div class="note"><span class="lb">아빠에게</span>
-    <p>이 프로그램에서 아빠는 선생님이 아니라 <b>관객</b>입니다. 가르치려 들면 학원이 하나 더 생깁니다.
-    할 일은 세 가지입니다 — <b>20분 타이머를 지키고</b>, <b>모르는 척 설명을 부탁하고</b>, <b>금요일 설명을 녹음해 두는 것</b>입니다.
-    자세한 운영 방법은 <a href="plan.html">추진 계획 문서</a>에 있습니다.</p>
-  </div>
-</section>
-
-<section class="sec" id="camp1">
-  <div class="step-no"><span class="num">2</span><span class="lbl">캠프 1 · 물질</span><span class="day">공개됨</span></div>
-  <h2>세상은 무엇으로 되어 있나</h2>
-  <p>중2 과학에서 가장 먼저, 그리고 가장 자주 막히는 곳이 ‘물질의 구성’입니다.
-  눈에 보이지 않는 입자를 머릿속에 그려야 하기 때문입니다.
-  그래서 첫 캠프는 <b>보이지 않는 것을 그림으로 그리는 연습</b>부터 시작합니다.</p>
-
-  <div class="wlist">
-    <a class="wk" href="week01.html"><span class="n">WEEK 01</span><span class="t">입자의 눈</span>
-      <span class="d">물질은 알갱이로 되어 있고, 그 사이에는 빈 공간이 있습니다</span><span class="p" data-p="1">0 / 4</span></a>
-    <a class="wk" href="week02.html"><span class="n">WEEK 02</span><span class="t">원소와 불꽃</span>
-      <span class="d">더 쪼갤 수 없는 성분이 원소입니다. 불꽃 색이 곧 이름표입니다</span><span class="p" data-p="2">0 / 4</span></a>
-    <a class="wk" href="week03.html"><span class="n">WEEK 03</span><span class="t">원자와 분자</span>
-      <span class="d">알갱이 한 개와 그것이 붙은 덩어리. 화학식을 읽는 눈을 만듭니다</span><span class="p" data-p="3">0 / 4</span></a>
-    <a class="wk" href="week04.html"><span class="n">WEEK 04</span><span class="t">이온과 앙금</span>
-      <span class="d">전자를 잃거나 얻은 입자, 물속에서 눈에 보이는 증거</span><span class="p" data-p="4">0 / 4</span></a>
-  </div>
-</section>
-
-<section class="sec" id="camp2">
-  <div class="step-no"><span class="num">3</span><span class="lbl">캠프 2 · 전기와 성질</span><span class="day">공개됨</span></div>
-  <h2>보이지 않는 것이 일을 합니다</h2>
-  <p>공식보다 그림이 먼저입니다. 전류를 물의 흐름으로 이해한 다음에야 숫자를 넣습니다.
-  캠프 1의 주인공이었던 <b>전자</b>가 그대로 이 캠프의 주인공입니다.</p>
-
-  <div class="wlist" data-camp="c2">
-    <a class="wk" href="week05.html"><span class="n">WEEK 05</span><span class="t">정전기와 전하</span>
-      <span class="d">문고리에서 따끔한 이유, 전자의 이사</span><span class="p" data-p="5">0 / 4</span></a>
-    <a class="wk" href="week06.html"><span class="n">WEEK 06</span><span class="t">전류 · 전압 · 저항</span>
-      <span class="d">물탱크 그림으로 이해하는 V = I × R</span><span class="p" data-p="6">0 / 4</span></a>
-    <a class="wk" href="week07.html"><span class="n">WEEK 07</span><span class="t">전류의 자기 작용</span>
-      <span class="d">전기가 힘이 되는 순간, 전자석과 모터</span><span class="p" data-p="7">0 / 4</span></a>
-    <a class="wk" href="week08.html"><span class="n">WEEK 08</span><span class="t">물질의 특성</span>
-      <span class="d">밀도 · 용해도 · 끓는점, 물질마다의 번호표</span><span class="p" data-p="8">0 / 4</span></a>
-  </div>
-</section>
-
-<section class="sec" id="camp3">
-  <div class="step-no"><span class="num">4</span><span class="lbl">캠프 3 · 생명과 지구</span><span class="day">공개됨</span></div>
-  <h2>나와 세계가 이어집니다</h2>
-  <p>암기 단원처럼 보이지만, <b>에너지가 어디서 와서 어디로 가는지</b> 하나로 꿰면 외울 것이 크게 줄어듭니다.
-  캠프 1에서 배운 분자가 식물과 몸 안에서 실제로 움직입니다.</p>
-
-  <div class="wlist" data-camp="c3">
-    <a class="wk" href="week09.html"><span class="n">WEEK 09</span><span class="t">광합성과 호흡</span>
-      <span class="d">식물이 밥을 스스로 만든다는 말의 뜻</span><span class="p" data-p="9">0 / 4</span></a>
-    <a class="wk" href="week10.html"><span class="n">WEEK 10</span><span class="t">에너지 배달 경로</span>
-      <span class="d">소화 · 순환 · 호흡 · 배설을 한 줄로</span><span class="p" data-p="10">0 / 4</span></a>
-    <a class="wk" href="week11.html"><span class="n">WEEK 11</span><span class="t">지구와 달의 운동</span>
-      <span class="d">달 모양이 바뀌는 이유를 손으로 보여주기</span><span class="p" data-p="11">0 / 4</span></a>
-    <a class="wk" href="week12.html"><span class="n">WEEK 12</span><span class="t">열의 이동과 마무리</span>
-      <span class="d">전도 · 대류 · 복사 + 12주 마무리 강의</span><span class="p" data-p="12">0 / 4</span></a>
-  </div>
-</section>
-
-<section class="sec" id="how2">
-  <div class="step-no"><span class="num">5</span><span class="lbl">진행 방법</span></div>
-  <h2>순서보다 리듬이 중요합니다</h2>
-  <p>12주 문서가 모두 준비되어 있지만, <b>미리 앞질러 볼 필요는 없습니다.</b> 이번 주 것만 열면 됩니다.</p>
 
   <div class="tw"><table>
-    <thead><tr><th>이런 경우</th><th>이렇게 합니다</th></tr></thead>
+    <thead><tr><th>기록</th><th>내가 적은 것</th></tr></thead>
     <tbody>
-      <tr><td class="hd">학교 진도와 순서가 다르다</td><td>그 주 문서의 <b>개념 부분만</b> 학교 단원으로 바꿔 끼웁니다. 요일 리듬과 보스전 구조는 그대로 씁니다.</td></tr>
-      <tr><td class="hd">시험 기간이 겹친다</td><td>그 주는 <b>시험 범위 복습</b>으로 바꾸고 전체를 한 주 뒤로 밉니다.</td></tr>
-      <tr><td class="hd">한 주를 통째로 못 했다</td><td>따라잡지 않습니다. 그 주는 없던 것으로 하고 다음 주부터 다시 시작합니다.</td></tr>
-      <tr><td class="hd">너무 쉬워한다</td><td>분량을 늘리지 말고 <b>목요일 실험을 직접 설계</b>하게 합니다. 난이도는 위로, 시간은 그대로.</td></tr>
+      <tr><td class="hd">섞기 전 두 용액의 모습</td><td class="fill">______</td></tr>
+      <tr><td class="hd">예상</td><td class="fill">______</td></tr>
+      <tr><td class="hd">섞은 직후</td><td class="fill">______</td></tr>
+      <tr><td class="hd">5분 뒤</td><td class="fill">______</td></tr>
     </tbody>
   </table></div>
 
+  <div class="plain">
+    <p><b>다른 방법</b> — 석회수가 있다면 더 간단합니다. 컵에 담고 <b>빨대로 숨을 불어넣으면</b>
+    날숨 속 이산화탄소가 칼슘 이온과 만나 똑같은 흰 앙금(탄산칼슘)을 만듭니다. <b>내 숨으로 만든 돌</b>인 셈입니다.</p>
+    <p>두 컵 모두 투명했는데 섞자마자 흰 고체가 생겼습니다. 물속에 <b>눈에 보이지 않는 이온이 돌아다니고 있었다는 증거</b>입니다.
+    조개껍데기와 분필도 같은 탄산칼슘입니다.</p>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w4m3"><span class="tt"><b>목요일</b> — 앙금을 만들고 표를 채웁니다. 사진을 남깁니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="fri">
+  <div class="step-no"><span class="num">5</span><span class="lbl">캠프 1 보스전</span><span class="day">FRI · 설명</span></div>
+  <h2>문제 5개와 캠프 전체 설명</h2>
+
+  <div class="q"><span class="qn">Q1</span>
+    <p>나트륨 원자(Na)가 전자 1개를 잃었습니다. 어떤 입자가 되고, 어떻게 쓸까요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>양이온이 되고 Na⁺라고 씁니다.</b> − 하나가 빠져나가 + 가 하나 남은 상태입니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q2</span>
+    <p>소금물에는 전기가 통하는데 설탕물에는 통하지 않습니다. 왜 그럴까요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>소금은 물에서 Na⁺와 Cl⁻ 이온으로 나뉘어 전기를 띤 입자가 돌아다니지만, 설탕은 분자 그대로 흩어져 이온이 없기 때문입니다.</b>
+      소금은 전해질, 설탕은 비전해질입니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q3</span>
+    <p>투명한 두 용액을 섞었더니 뿌옇게 흐려졌습니다. 무슨 일이 일어난 것일까요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>두 용액 속 이온이 만나 물에 녹지 않는 고체(앙금)를 만들었습니다.</b>
+      칼슘 이온과 탄산 이온이 만나면 흰색 탄산칼슘 앙금이 생깁니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q4</span>
+    <p><code>Ca²⁺</code>는 전자를 몇 개 잃은 것일까요? <code>CO₃²⁻</code>는 어떨까요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>Ca²⁺는 전자 2개를 잃었고, CO₃²⁻는 전자 2개를 얻었습니다.</b>
+      오른쪽 위 숫자는 개수, 부호는 잃었는지(+) 얻었는지(−)를 뜻합니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q5</span>
+    <p><b>캠프 1 통합</b> — 1주차부터 지금까지 배운 말을 순서대로 이어 봅시다. 입자 · 원소 · 원자 · 분자 · 이온.</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      ① 물질은 <b>입자</b>로 되어 있습니다.<br>
+      ② 그 입자의 <b>종류</b>가 원소입니다 (약 118종).<br>
+      ③ 알갱이 <b>한 개</b>가 원자이고, 원자핵(+)과 전자(−)로 되어 있습니다.<br>
+      ④ 원자가 붙어 성질을 가지면 <b>분자</b>입니다 (H₂O).<br>
+      ⑤ 원자가 전자를 잃거나 얻어 전기를 띠면 <b>이온</b>입니다 (Na⁺).<br>
+      이 다섯 줄이 캠프 1 전체입니다.
+    </div></details>
+  </div>
+
+  <h3>아빠에게 3분 설명하기</h3>
+  <div class="script">
+    <div class="row"><span class="s">배운 것</span><span>원자가 전자를 잃거나 얻으면 전기를 띤 이온이 된다는 것.</span></div>
+    <div class="row"><span class="s">예를 들면</span><span>투명한 물 두 컵을 섞었더니 흰 게 생겼어. 안에 이온이 돌아다니고 있었다는 증거야.</span></div>
+    <div class="row"><span class="s">헷갈리는 것</span><span>전자를 잃으면 +가 돼. 전자가 −라서 그게 빠지면 +가 남거든.</span></div>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w4m4"><span class="tt"><b>금요일</b> — 문제 5개와 캠프 1 전체를 다섯 줄로 설명합니다. 여기까지 하면 물질 단원은 끝입니다.</span></label></li>
+  </ul>
+
+  <p><span class="badge">획득 · 앙금 탐정 · 캠프 1 완주</span></p>
+</section>
+
+<section class="sec" id="next">
+  <div class="step-no"><span class="num">6</span><span class="lbl">다음 주</span></div>
+  <h2>정전기와 전하</h2>
+  <p>5주차부터 <b>캠프 2 · 전기</b>입니다. 이번 주의 주인공이었던 <b>전자</b>가 그대로 다음 캠프의 주인공이 됩니다.
+  겨울에 문고리에서 따끔한 이유부터 시작합니다.</p>
   <div class="pager">
-    <a href="plan.html">추진 계획 문서</a>
-    <a class="main" href="week01.html">1주차 시작 →</a>
+    <a href="week03.html">← 3주차</a>
+    <a href="index.html">전체 지도</a>
+    <a class="main" href="week05.html">5주차 →</a>
   </div>
 </section>
 
-<footer>
-  과학 등반 12주 · 중2 과학 주차별 학습 문서 · 진행 기록은 이 기기에만 저장됩니다<br>
-  교과 단원의 이름과 순서는 교과서 출판사와 학교 진도에 따라 다를 수 있습니다
-</footer>
+<footer>과학 등반 12주 · WEEK 04 이온과 앙금 · 하루 20분 × 4일</footer>
 </div>
 <script>
   (function(){
