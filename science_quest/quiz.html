@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#DCE2DB">
+<title>과학 문제집 120제</title>
+<meta name="description" content="과학 등반 12주 과정에 맞춘 120문제. 주차별 10문제씩 풀고 바로 채점합니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#131C18; --ink2:#2C3A33; --muted:#5F6E66; --faint:#8A968F;
+    --mist:#DCE2DB; --surface:#F8FAF6; --surface2:#EFF3EC;
+    --line:#C3CCC1; --hair:#DDE4DB;
+    --key:#1F6249; --wash:#DEEDE4; --kline:#8FBBA3;
+    --good:#1F6249; --bad:#8C2F3E; --good-bg:#DEEDE4; --bad-bg:#F6E4E7;
+    --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+    --mono:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--mist);color:var(--ink);font-family:var(--sans);
+    font-size:16px;line-height:1.72;letter-spacing:-0.01em;
+    padding:0 18px calc(80px + env(safe-area-inset-bottom));
+    word-break:keep-all;overflow-wrap:anywhere;}
+  .wrap{max-width:760px;margin:0 auto}
+  p{margin:0 0 12px}
+  b,strong{font-weight:600;color:var(--ink)}
+
+  .cover{padding:40px 0 26px;border-bottom:2px solid var(--ink)}
+  .kicker{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--key);margin:0 0 14px}
+  h1{font-size:clamp(26px,6vw,40px);font-weight:700;line-height:1.26;letter-spacing:-.035em;margin:0 0 14px}
+  .lede{font-size:15.5px;font-weight:300;color:var(--ink2);margin:0 0 20px;max-width:62ch}
+  .lede b{font-weight:600;color:var(--ink)}
+  .metaline{display:flex;flex-wrap:wrap;gap:6px 20px;font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+  .metaline b{color:var(--ink);font-weight:500}
+
+  .summary{background:var(--ink);border-radius:3px;padding:22px 20px;margin:24px 0 0}
+  .summary h2{color:#F6FAF5;font-size:17px;font-weight:600;margin:0 0 5px}
+  .summary .sd{color:#93A399;font-size:13px;font-weight:300;margin:0 0 18px;line-height:1.6}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:16px}
+  .kpi .kl{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+    color:#7E8F84;display:block;margin-bottom:4px}
+  .kpi .kv{font-size:clamp(20px,3vw,26px);font-weight:700;color:#8FD3B4;letter-spacing:-.03em;display:block;line-height:1.1}
+  .kpi .kn{font-size:11.5px;color:#B9C6BC;display:block;margin-top:5px;font-weight:300;line-height:1.5}
+  .bar{height:7px;background:#26332C;border-radius:99px;overflow:hidden;margin-top:16px}
+  .bar i{display:block;height:100%;width:0;background:#8FD3B4;transition:width .3s}
+
+  nav.jump{position:sticky;top:0;z-index:40;margin:0 -18px;padding:0 18px;
+    background:rgba(220,226,219,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+  nav.jump .row{display:flex;gap:5px;overflow-x:auto;padding:9px 0;scrollbar-width:none}
+  nav.jump .row::-webkit-scrollbar{display:none}
+  nav.jump a{flex:0 0 auto;font-family:var(--mono);font-size:11.5px;color:var(--muted);
+    background:var(--surface);border:1px solid var(--line);padding:6px 10px;border-radius:2px;text-decoration:none}
+  nav.jump a.now{color:#fff;background:var(--key);border-color:var(--key)}
+
+  section.wk{padding:38px 0 10px;border-bottom:1px solid var(--line);scroll-margin-top:56px}
+  .wkhead{display:flex;align-items:center;gap:11px;margin-bottom:12px}
+  .wkhead .num{font-family:var(--mono);font-size:12px;font-weight:600;color:#fff;background:var(--key);
+    width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .wkhead .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+  .wkhead .sc{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--key);
+    background:var(--wash);border:1px solid var(--kline);padding:3px 9px;border-radius:2px}
+  section.wk h2{font-size:clamp(21px,3.2vw,26px);font-weight:600;letter-spacing:-.03em;margin:0 0 6px;line-height:1.35}
+  section.wk .sub{font-size:13.5px;color:var(--muted);margin:0 0 18px}
+
+  .qbox{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:16px 17px;margin:12px 0}
+  .qbox .qn{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--key);letter-spacing:.1em}
+  .qbox .qt{margin:7px 0 0;font-size:16px;line-height:1.68}
+  .qbox code{font-family:var(--mono);font-size:.9em;background:var(--surface2);border:1px solid var(--hair);
+    padding:1px 5px;border-radius:2px}
+  .opts{display:flex;flex-direction:column;gap:7px;margin-top:13px}
+  .opt{display:grid;grid-template-columns:24px 1fr;gap:10px;align-items:start;width:100%;text-align:left;
+    background:#fff;border:1px solid var(--line);border-radius:3px;padding:11px 13px;font:inherit;
+    font-size:15px;color:var(--ink2);cursor:pointer;min-height:46px}
+  .opt .n{font-family:var(--mono);font-size:12.5px;color:var(--muted);padding-top:2px}
+  .opt:active{background:var(--surface2)}
+  .opt.ok{background:var(--good-bg);border-color:var(--good);color:var(--good);font-weight:600}
+  .opt.ok .n{color:var(--good)}
+  .opt.no{background:var(--bad-bg);border-color:var(--bad);color:var(--bad)}
+  .opt.no .n{color:var(--bad)}
+  .opt[disabled]{cursor:default}
+  .sa{display:flex;gap:8px;margin-top:13px;flex-wrap:wrap}
+  .sa input{flex:1 1 180px;min-width:0;padding:11px 13px;border:1px solid var(--line);border-radius:3px;
+    background:#fff;font:inherit;font-size:15px;color:var(--ink)}
+  .sa input:focus{outline:2px solid var(--kline);outline-offset:-1px}
+  .sa button{flex:0 0 auto;padding:11px 18px;border:0;border-radius:3px;background:var(--key);color:#fff;
+    font:inherit;font-size:14.5px;font-weight:600;cursor:pointer}
+  .sa input.ok{border-color:var(--good);background:var(--good-bg);color:var(--good);font-weight:600}
+  .sa input.no{border-color:var(--bad);background:var(--bad-bg);color:var(--bad)}
+  .exp{margin-top:12px;padding-top:11px;border-top:1px solid var(--hair);font-size:14.5px;color:var(--ink2);
+    line-height:1.7;display:none}
+  .exp.show{display:block}
+  .exp b{color:var(--key)}
+  .exp .ans{font-family:var(--mono);font-size:13px;color:var(--key);display:block;margin-bottom:5px}
+
+  .wkfoot{display:flex;align-items:center;gap:10px;margin:16px 0 0;padding:12px 14px;
+    background:var(--surface2);border-radius:3px;font-size:14px;color:var(--muted)}
+  .wkfoot b{font-family:var(--mono);color:var(--key)}
+  .reset{margin-left:auto;background:none;border:0;color:var(--faint);font:inherit;font-size:12.5px;
+    text-decoration:underline;cursor:pointer;padding:0}
+  footer{padding:26px 0 10px;font-family:var(--mono);font-size:11.5px;color:var(--faint);line-height:1.8}
+  footer a{color:var(--key)}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="cover">
+  <p class="kicker">중2 과학 · 12주 × 10문제 · 객관식 7 · 단답형 3</p>
+  <h1>과학 문제집 120제</h1>
+  <p class="lede"><b>과학 등반 12주</b>에서 배운 내용을 주차마다 10문제로 확인합니다. 객관식 7문제, 단답형 3문제. 그 주 공부를 끝낸 금요일에 풀면 딱 좋습니다.</p>
+  <div class="metaline">
+    <span>주차 <b>12주</b></span><span>문항 <b>120문제</b></span>
+    <span>구성 <b>객관식 7 · 단답형 3</b></span><span>학습 문서 <b><a href="index.html" style="color:inherit">과학 등반 12주</a></b></span>
+  </div>
+  <div class="summary">
+    <h2>푸는 법</h2>
+    <p class="sd">선택지를 누르면 바로 채점되고 해설이 열립니다. 단답형은 답을 쓰고 확인을 누릅니다. 기록은 이 기기에 저장됩니다.</p>
+    <div class="kpis">
+      <div class="kpi"><span class="kl">한 주</span><span class="kv">10문제</span><span class="kn">객관식 7 · 단답형 3</span></div>
+      <div class="kpi"><span class="kl">권장</span><span class="kv">금요일</span><span class="kn">그 주 공부를 마친 뒤 풀기</span></div>
+      <div class="kpi"><span class="kl">채점</span><span class="kv">즉시</span><span class="kn">누르면 정답과 해설이 나옵니다</span></div>
+      <div class="kpi"><span class="kl">내 점수</span><span class="kv" id="total">0 / 120</span><span class="kn">이 기기에만 저장됩니다</span></div>
+    </div>
+    <div class="bar"><i id="bar"></i></div>
+  </div>
+</header>
+
+<nav class="jump"><div class="row">
+<a href="#w1">1주</a>
+<a href="#w2">2주</a>
+<a href="#w3">3주</a>
+<a href="#w4">4주</a>
+<a href="#w5">5주</a>
+<a href="#w6">6주</a>
+<a href="#w7">7주</a>
+<a href="#w8">8주</a>
+<a href="#w9">9주</a>
+<a href="#w10">10주</a>
+<a href="#w11">11주</a>
+<a href="#w12">12주</a>
+</div></nav>
+
+<section class="wk" id="w1">
+  <div class="wkhead"><span class="num">01</span><span class="lbl">WEEK 01</span>
+    <span class="sc" data-w="1">0 / 10</span></div>
+  <h2>입자의 눈</h2>
+  <p class="sub">확산 · 상태 변화 · 질량 보존</p>
+  <div class="qbox" id="s1q1" data-w="1" data-type="mc" data-a="0">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">물이 담긴 컵에 잉크를 한 방울 떨어뜨리면 젓지 않아도 잉크가 물 전체로 퍼진다. 이렇게 되는 까닭은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>입자가 스스로 끊임없이 움직이기 때문</span></button><button class="opt" type="button"><span class="n">②</span><span>잉크의 질량이 줄어들기 때문</span></button><button class="opt" type="button"><span class="n">③</span><span>잉크가 물에 녹아 없어지기 때문</span></button><button class="opt" type="button"><span class="n">④</span><span>물 입자가 잉크를 밀어내기 때문</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>이것이 확산입니다. 물질을 이루는 입자는 누가 밀지 않아도 스스로 계속 움직입니다. 그래서 시간이 지나면 저절로 고르게 퍼집니다.</div>
+  </div>
+  <div class="qbox" id="s1q2" data-w="1" data-type="mc" data-a="3">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">다음 중 확산이 가장 빠르게 일어나는 경우는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>냉장고 안에서 향수를 뿌릴 때</span></button><button class="opt" type="button"><span class="n">②</span><span>얼음 위에 잉크를 떨어뜨릴 때</span></button><button class="opt" type="button"><span class="n">③</span><span>차가운 물에 잉크를 떨어뜨릴 때</span></button><button class="opt" type="button"><span class="n">④</span><span>뜨거운 물에 잉크를 떨어뜨릴 때</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>온도가 높을수록 입자 운동이 활발해집니다. 그래서 뜨거운 물에서 확산이 가장 빠릅니다.</div>
+  </div>
+  <div class="qbox" id="s1q3" data-w="1" data-type="mc" data-a="1">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">입자 사이의 거리가 가장 멀고 입자가 가장 자유롭게 돌아다니는 상태는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>세 상태가 모두 같다</span></button><button class="opt" type="button"><span class="n">②</span><span>기체</span></button><button class="opt" type="button"><span class="n">③</span><span>고체</span></button><button class="opt" type="button"><span class="n">④</span><span>액체</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>고체 → 액체 → 기체로 갈수록 입자 사이가 멀어지고 자유로워집니다. 기체는 그중 가장 헐렁한 상태입니다.</div>
+  </div>
+  <div class="qbox" id="s1q4" data-w="1" data-type="mc" data-a="3">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">물이 얼어 얼음이 될 때 <b>변하지 않는</b> 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>부피</span></button><button class="opt" type="button"><span class="n">②</span><span>입자 사이의 거리</span></button><button class="opt" type="button"><span class="n">③</span><span>입자의 배열</span></button><button class="opt" type="button"><span class="n">④</span><span>입자의 개수와 질량</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>상태가 변해도 입자 자체가 사라지거나 새로 생기지는 않습니다. 배열과 거리만 달라지고 개수와 질량은 그대로입니다.</div>
+  </div>
+  <div class="qbox" id="s1q5" data-w="1" data-type="mc" data-a="1">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">밀폐된 용기 안에서 초를 태웠다. 타기 전과 다 탄 뒤 용기 전체의 질량을 비교하면?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>늘어난다</span></button><button class="opt" type="button"><span class="n">②</span><span>변하지 않는다</span></button><button class="opt" type="button"><span class="n">③</span><span>줄어든다</span></button><button class="opt" type="button"><span class="n">④</span><span>절반으로 준다</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>질량 보존 법칙입니다. 초가 사라진 것처럼 보여도 기체가 되어 용기 안에 남아 있으므로 전체 질량은 그대로입니다.</div>
+  </div>
+  <div class="qbox" id="s1q6" data-w="1" data-type="mc" data-a="0">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">젖은 빨래가 마르는 현상과 <b>같은 원리</b>인 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>젖은 머리카락이 저절로 마른다</span></button><button class="opt" type="button"><span class="n">②</span><span>차가운 유리창에 물방울이 맺힌다</span></button><button class="opt" type="button"><span class="n">③</span><span>주전자의 물이 끓는다</span></button><button class="opt" type="button"><span class="n">④</span><span>얼음이 녹는다</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>빨래가 마르는 것은 증발입니다. 액체 표면에서 조용히 기체로 바뀌는 현상이며, 젖은 머리카락이 마르는 것도 같습니다.</div>
+  </div>
+  <div class="qbox" id="s1q7" data-w="1" data-type="mc" data-a="0">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">주사기 끝을 막고 피스톤을 세게 누르면 안의 기체 부피가 줄어든다. 그 까닭은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>입자 사이의 빈 공간이 좁아져서</span></button><button class="opt" type="button"><span class="n">②</span><span>입자의 개수가 줄어서</span></button><button class="opt" type="button"><span class="n">③</span><span>입자가 액체로 녹아서</span></button><button class="opt" type="button"><span class="n">④</span><span>입자의 크기가 작아져서</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>기체 입자 자체가 눌려 작아지는 것이 아닙니다. 입자 사이에 있던 넓은 빈 공간이 좁아지는 것입니다.</div>
+  </div>
+  <div class="qbox" id="s1q8" data-w="1" data-type="sa" data-a="확산">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">물질을 이루는 입자가 스스로 움직여 저절로 고르게 퍼지는 현상을 무엇이라고 하는가?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 확산</span>확산입니다. 교실 뒤에서 뿌린 향수 냄새가 앞자리까지 오는 것도 확산입니다.</div>
+  </div>
+  <div class="qbox" id="s1q9" data-w="1" data-type="sa" data-a="질량 보존 법칙|질량보존법칙|질량 보존의 법칙|질량보존의법칙">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">화학 변화가 일어나도 반응 전과 후의 전체 질량이 같다는 법칙의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 질량 보존 법칙</span>질량 보존 법칙입니다. 입자는 자리만 바꿔 앉을 뿐 사라지지 않습니다.</div>
+  </div>
+  <div class="qbox" id="s1q10" data-w="1" data-type="sa" data-a="증발">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">액체 표면에서 액체가 기체로 변하는 현상을 무엇이라고 하는가?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 증발</span>증발입니다. 끓음과 달리 표면에서만, 끓는점보다 낮은 온도에서도 일어납니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="1">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w2">
+  <div class="wkhead"><span class="num">02</span><span class="lbl">WEEK 02</span>
+    <span class="sc" data-w="2">0 / 10</span></div>
+  <h2>원소와 불꽃</h2>
+  <p class="sub">원소 · 원소 기호 · 불꽃 반응 · 선 스펙트럼</p>
+  <div class="qbox" id="s2q1" data-w="2" data-type="mc" data-a="3">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">더 이상 다른 물질로 쪼갤 수 없는, 물질을 이루는 기본 성분을 무엇이라 하는가?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>혼합물</span></button><button class="opt" type="button"><span class="n">②</span><span>용액</span></button><button class="opt" type="button"><span class="n">③</span><span>앙금</span></button><button class="opt" type="button"><span class="n">④</span><span>원소</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>원소입니다. 산소, 수소, 철처럼 더 단순한 물질로 나눌 수 없는 성분입니다.</div>
+  </div>
+  <div class="qbox" id="s2q2" data-w="2" data-type="mc" data-a="2">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">원소 기호를 <b>바르게</b> 쓴 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>칼슘 — CL</span></button><button class="opt" type="button"><span class="n">②</span><span>나트륨 — NA</span></button><button class="opt" type="button"><span class="n">③</span><span>마그네슘 — Mg</span></button><button class="opt" type="button"><span class="n">④</span><span>산소 — o</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>첫 글자는 대문자, 두 번째 글자는 소문자로 씁니다. Na, O, Mg, Ca가 맞는 표기입니다.</div>
+  </div>
+  <div class="qbox" id="s2q3" data-w="2" data-type="mc" data-a="3">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">불꽃 반응 색이 <b>노란색</b>으로 나타나는 원소는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>칼륨</span></button><button class="opt" type="button"><span class="n">②</span><span>구리</span></button><button class="opt" type="button"><span class="n">③</span><span>칼슘</span></button><button class="opt" type="button"><span class="n">④</span><span>나트륨</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>나트륨은 노란색입니다. 칼륨은 보라색, 구리는 청록색, 칼슘은 주황색입니다.</div>
+  </div>
+  <div class="qbox" id="s2q4" data-w="2" data-type="mc" data-a="1">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">불꽃 반응 색이 <b>청록색</b>인 원소는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>리튬</span></button><button class="opt" type="button"><span class="n">②</span><span>구리</span></button><button class="opt" type="button"><span class="n">③</span><span>스트론튬</span></button><button class="opt" type="button"><span class="n">④</span><span>칼슘</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>구리는 청록색 불꽃을 냅니다. 리튬과 스트론튬은 붉은 계열, 칼슘은 주황색입니다.</div>
+  </div>
+  <div class="qbox" id="s2q5" data-w="2" data-type="mc" data-a="2">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">불꽃 반응 색이 비슷해서 눈으로는 구별하기 어려운 원소끼리 짝지은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>칼슘과 구리</span></button><button class="opt" type="button"><span class="n">②</span><span>칼륨과 나트륨</span></button><button class="opt" type="button"><span class="n">③</span><span>리튬과 스트론튬</span></button><button class="opt" type="button"><span class="n">④</span><span>나트륨과 구리</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>리튬(빨강)과 스트론튬(진한 빨강)은 둘 다 붉은 계열이라 색만으로 구별이 어렵습니다.</div>
+  </div>
+  <div class="qbox" id="s2q6" data-w="2" data-type="mc" data-a="0">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">불꽃 색이 비슷한 두 원소를 구별하려면 무엇을 관찰해야 하는가?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>분광기로 선 스펙트럼을 본다</span></button><button class="opt" type="button"><span class="n">②</span><span>물에 녹여 본다</span></button><button class="opt" type="button"><span class="n">③</span><span>질량을 잰다</span></button><button class="opt" type="button"><span class="n">④</span><span>냄새를 맡는다</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>원소마다 선 스펙트럼의 위치와 개수가 다릅니다. 원소의 지문과 같아서 확실하게 구별할 수 있습니다.</div>
+  </div>
+  <div class="qbox" id="s2q7" data-w="2" data-type="mc" data-a="1">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">물에 전류를 흘리면 수소와 산소가 생긴다. 이 실험에서 알 수 있는 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>물은 원소이다</span></button><button class="opt" type="button"><span class="n">②</span><span>물은 두 종류의 원소로 이루어져 있다</span></button><button class="opt" type="button"><span class="n">③</span><span>물은 여러 물질이 섞인 혼합물이다</span></button><button class="opt" type="button"><span class="n">④</span><span>물은 더 이상 나눌 수 없다</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>물이 수소와 산소로 나뉘었으므로 물은 원소가 아니라 두 원소가 결합해 만들어진 물질입니다.</div>
+  </div>
+  <div class="qbox" id="s2q8" data-w="2" data-type="sa" data-a="보라색|보라|연보라색">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">칼륨의 불꽃 반응 색은 무슨 색인가?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 보라색</span>칼륨은 보라색입니다.</div>
+  </div>
+  <div class="qbox" id="s2q9" data-w="2" data-type="sa" data-a="철">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">원소 기호 <b>Fe</b>가 나타내는 원소의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 철</span>철(Fe)입니다. 라틴어 이름 ferrum에서 왔습니다.</div>
+  </div>
+  <div class="qbox" id="s2q10" data-w="2" data-type="sa" data-a="선 스펙트럼|선스펙트럼">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">원소가 내는 빛을 분광기로 볼 때 나타나는, 원소마다 다른 선의 무늬를 무엇이라 하는가?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 선 스펙트럼</span>선 스펙트럼입니다. 원소의 지문이라고 부릅니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="2">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w3">
+  <div class="wkhead"><span class="num">03</span><span class="lbl">WEEK 03</span>
+    <span class="sc" data-w="3">0 / 10</span></div>
+  <h2>원자와 분자</h2>
+  <p class="sub">원자의 구조 · 분자식 읽기</p>
+  <div class="qbox" id="s3q1" data-w="3" data-type="mc" data-a="3">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">원자의 중심에 있으며 (+)전하를 띠는 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>분자</span></button><button class="opt" type="button"><span class="n">②</span><span>전자</span></button><button class="opt" type="button"><span class="n">③</span><span>이온</span></button><button class="opt" type="button"><span class="n">④</span><span>원자핵</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>원자핵이 중심에 있고 (+)전하를 띱니다. (−)전하를 띤 전자가 그 주위에 있습니다.</div>
+  </div>
+  <div class="qbox" id="s3q2" data-w="3" data-type="mc" data-a="0">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">원자가 전기적으로 중성인 까닭은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>(+)전하량과 (−)전하량이 같아서</span></button><button class="opt" type="button"><span class="n">②</span><span>중성자가 있어서</span></button><button class="opt" type="button"><span class="n">③</span><span>전자가 아예 없어서</span></button><button class="opt" type="button"><span class="n">④</span><span>원자핵이 (−)전하를 띠어서</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>원자핵의 (+)전하량과 전자들의 (−)전하량이 같기 때문에 전체로는 0, 즉 중성입니다.</div>
+  </div>
+  <div class="qbox" id="s3q3" data-w="3" data-type="mc" data-a="0">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">물 분자(H₂O) 한 개를 이루는 원자는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>수소 2개, 산소 1개</span></button><button class="opt" type="button"><span class="n">②</span><span>수소 1개, 산소 2개</span></button><button class="opt" type="button"><span class="n">③</span><span>수소 1개, 산소 1개</span></button><button class="opt" type="button"><span class="n">④</span><span>수소 2개, 산소 2개</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>H 오른쪽 아래의 2는 수소 원자 2개, O는 산소 원자 1개를 뜻합니다.</div>
+  </div>
+  <div class="qbox" id="s3q4" data-w="3" data-type="mc" data-a="0">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt"><b>2H₂O</b>가 나타내는 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>물 분자 2개</span></button><button class="opt" type="button"><span class="n">②</span><span>산소 분자 2개</span></button><button class="opt" type="button"><span class="n">③</span><span>물 원자 2개</span></button><button class="opt" type="button"><span class="n">④</span><span>수소 원자 2개</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>앞의 큰 숫자(계수)는 분자의 개수입니다. 그래서 물 분자 2개입니다.</div>
+  </div>
+  <div class="qbox" id="s3q5" data-w="3" data-type="mc" data-a="3">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt"><b>3O₂</b>에 들어 있는 산소 원자는 모두 몇 개인가?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>3개</span></button><button class="opt" type="button"><span class="n">②</span><span>5개</span></button><button class="opt" type="button"><span class="n">③</span><span>2개</span></button><button class="opt" type="button"><span class="n">④</span><span>6개</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>한 분자에 산소 원자 2개, 분자가 3개이므로 2 × 3 = 6개입니다.</div>
+  </div>
+  <div class="qbox" id="s3q6" data-w="3" data-type="mc" data-a="0">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">분자식 CO₂에 대한 설명으로 옳은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>탄소 1개와 산소 2개로 이루어져 있다</span></button><button class="opt" type="button"><span class="n">②</span><span>이산화탄소 분자 2개를 뜻한다</span></button><button class="opt" type="button"><span class="n">③</span><span>탄소와 산소를 섞은 혼합물이다</span></button><button class="opt" type="button"><span class="n">④</span><span>탄소 2개와 산소 1개로 이루어져 있다</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>C는 탄소 1개, O₂는 산소 2개입니다.</div>
+  </div>
+  <div class="qbox" id="s3q7" data-w="3" data-type="mc" data-a="1">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">분자식에서 앞의 숫자(계수)와 원소 기호 오른쪽 아래 숫자(첨자)에 대한 설명으로 옳은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>앞의 수는 원자의 개수를 뜻한다</span></button><button class="opt" type="button"><span class="n">②</span><span>앞의 수는 분자의 개수, 아래 수는 한 분자 속 원자의 개수</span></button><button class="opt" type="button"><span class="n">③</span><span>둘 다 원자의 개수를 뜻한다</span></button><button class="opt" type="button"><span class="n">④</span><span>아래 수는 분자의 개수를 뜻한다</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>앞은 분자가 몇 개인지, 아래는 그 분자 하나에 원자가 몇 개 들어 있는지를 나타냅니다.</div>
+  </div>
+  <div class="qbox" id="s3q8" data-w="3" data-type="sa" data-a="전자">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">원자를 이루는 입자 중 (−)전하를 띠고 원자핵 주위에 있는 것은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 전자</span>전자입니다. 원자핵보다 훨씬 가볍습니다.</div>
+  </div>
+  <div class="qbox" id="s3q9" data-w="3" data-type="sa" data-a="3|3개|세개|세 개">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">암모니아 분자식 NH₃에서 한 분자에 들어 있는 수소 원자는 몇 개인가? (숫자만)</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 3</span>H 오른쪽 아래의 3이 수소 원자 3개를 뜻합니다.</div>
+  </div>
+  <div class="qbox" id="s3q10" data-w="3" data-type="sa" data-a="분자">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">원자가 결합해 만들어진, 물질의 성질을 나타내는 가장 작은 입자를 무엇이라 하는가?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 분자</span>분자입니다. 물의 성질은 물 분자 하나에서부터 나타납니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="3">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w4">
+  <div class="wkhead"><span class="num">04</span><span class="lbl">WEEK 04</span>
+    <span class="sc" data-w="4">0 / 10</span></div>
+  <h2>이온과 앙금</h2>
+  <p class="sub">이온 · 전해질 · 앙금 생성 반응</p>
+  <div class="qbox" id="s4q1" data-w="4" data-type="mc" data-a="1">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">중성인 원자가 전자를 <b>잃으면</b> 무엇이 되는가?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>그대로 중성 원자</span></button><button class="opt" type="button"><span class="n">②</span><span>(+)전하를 띤 양이온</span></button><button class="opt" type="button"><span class="n">③</span><span>분자</span></button><button class="opt" type="button"><span class="n">④</span><span>(−)전하를 띤 음이온</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>(−)인 전자를 잃으면 (+)가 남습니다. 그래서 양이온이 됩니다.</div>
+  </div>
+  <div class="qbox" id="s4q2" data-w="4" data-type="mc" data-a="0">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">나트륨 이온 Na⁺가 만들어지는 과정으로 옳은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>전자 1개를 잃는다</span></button><button class="opt" type="button"><span class="n">②</span><span>전자 1개를 얻는다</span></button><button class="opt" type="button"><span class="n">③</span><span>중성자 1개를 잃는다</span></button><button class="opt" type="button"><span class="n">④</span><span>양성자 1개를 얻는다</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>전자 1개를 잃어 (+)전하 1개만큼 남은 것이 Na⁺입니다.</div>
+  </div>
+  <div class="qbox" id="s4q3" data-w="4" data-type="mc" data-a="2">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">염화 이온을 나타내는 이온식으로 옳은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>Cl²⁻</span></button><button class="opt" type="button"><span class="n">②</span><span>Cl₂</span></button><button class="opt" type="button"><span class="n">③</span><span>Cl⁻</span></button><button class="opt" type="button"><span class="n">④</span><span>Cl⁺</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>염소 원자가 전자 1개를 얻어 (−)전하 1개를 띤 Cl⁻입니다.</div>
+  </div>
+  <div class="qbox" id="s4q4" data-w="4" data-type="mc" data-a="2">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">다음 중 물에 녹였을 때 전류가 흐르는 물질은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>설탕</span></button><button class="opt" type="button"><span class="n">②</span><span>에탄올</span></button><button class="opt" type="button"><span class="n">③</span><span>염화나트륨</span></button><button class="opt" type="button"><span class="n">④</span><span>녹말</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>염화나트륨은 물에서 Na⁺와 Cl⁻로 나뉘어 전기를 나릅니다. 설탕물은 이온이 생기지 않아 전류가 흐르지 않습니다.</div>
+  </div>
+  <div class="qbox" id="s4q5" data-w="4" data-type="mc" data-a="3">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">염화나트륨 수용액에 질산은 수용액을 떨어뜨리면 어떤 일이 일어나는가?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>노란색 기체가 발생한다</span></button><button class="opt" type="button"><span class="n">②</span><span>아무 변화가 없다</span></button><button class="opt" type="button"><span class="n">③</span><span>용액이 파랗게 변한다</span></button><button class="opt" type="button"><span class="n">④</span><span>흰색 앙금이 생긴다</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>Ag⁺와 Cl⁻가 만나 물에 녹지 않는 흰색 앙금인 염화은(AgCl)이 생깁니다.</div>
+  </div>
+  <div class="qbox" id="s4q6" data-w="4" data-type="mc" data-a="3">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">납 이온(Pb²⁺)과 아이오딘화 이온(I⁻)이 만나면 어떤 색 앙금이 생기는가?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>검은색</span></button><button class="opt" type="button"><span class="n">②</span><span>흰색</span></button><button class="opt" type="button"><span class="n">③</span><span>앙금이 생기지 않는다</span></button><button class="opt" type="button"><span class="n">④</span><span>노란색</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>노란색 앙금인 아이오딘화 납(PbI₂)이 생깁니다.</div>
+  </div>
+  <div class="qbox" id="s4q7" data-w="4" data-type="mc" data-a="0">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">앙금 생성 반응을 실제로 이용하는 예로 알맞은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>수돗물 속 염화 이온을 확인하는 일</span></button><button class="opt" type="button"><span class="n">②</span><span>금속의 녹는점을 재는 일</span></button><button class="opt" type="button"><span class="n">③</span><span>공기의 무게를 재는 일</span></button><button class="opt" type="button"><span class="n">④</span><span>물의 온도를 재는 일</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>질산은 수용액을 넣어 흰 앙금이 생기는지 보면 염화 이온이 있는지 알 수 있습니다.</div>
+  </div>
+  <div class="qbox" id="s4q8" data-w="4" data-type="sa" data-a="이온">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">원자가 전자를 잃거나 얻어 전하를 띠게 된 입자를 무엇이라 하는가?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 이온</span>이온입니다. 전자를 잃으면 양이온, 얻으면 음이온입니다.</div>
+  </div>
+  <div class="qbox" id="s4q9" data-w="4" data-type="sa" data-a="전해질">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">물에 녹았을 때 전류가 흐르는 물질을 무엇이라 하는가?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 전해질</span>전해질입니다. 반대로 전류가 흐르지 않는 물질은 비전해질입니다.</div>
+  </div>
+  <div class="qbox" id="s4q10" data-w="4" data-type="sa" data-a="염화은|염화 은|AgCl">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">은 이온(Ag⁺)과 염화 이온(Cl⁻)이 만나 생기는 흰색 앙금의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 염화은</span>염화은(AgCl)입니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="4">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w5">
+  <div class="wkhead"><span class="num">05</span><span class="lbl">WEEK 05</span>
+    <span class="sc" data-w="5">0 / 10</span></div>
+  <h2>정전기와 전하</h2>
+  <p class="sub">마찰 전기 · 대전 · 정전기 유도</p>
+  <div class="qbox" id="s5q1" data-w="5" data-type="mc" data-a="1">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">두 물체를 마찰했을 때 전기를 띠게 되는 까닭은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>원자핵이 옮겨 가서</span></button><button class="opt" type="button"><span class="n">②</span><span>전자가 옮겨 가서</span></button><button class="opt" type="button"><span class="n">③</span><span>양성자가 옮겨 가서</span></button><button class="opt" type="button"><span class="n">④</span><span>중성자가 옮겨 가서</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>움직일 수 있는 것은 전자뿐입니다. 전자가 한쪽에서 다른 쪽으로 옮겨 가며 전기를 띱니다.</div>
+  </div>
+  <div class="qbox" id="s5q2" data-w="5" data-type="mc" data-a="1">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">마찰할 때 전자를 <b>잃은</b> 물체가 띠는 전하는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>(−)전하</span></button><button class="opt" type="button"><span class="n">②</span><span>(+)전하</span></button><button class="opt" type="button"><span class="n">③</span><span>때에 따라 다르다</span></button><button class="opt" type="button"><span class="n">④</span><span>전하를 띠지 않는다</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>(−)인 전자가 빠져나갔으므로 (+)전하를 띱니다.</div>
+  </div>
+  <div class="qbox" id="s5q3" data-w="5" data-type="mc" data-a="0">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">같은 종류의 전하를 띤 두 물체 사이에 작용하는 힘은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>서로 밀어낸다</span></button><button class="opt" type="button"><span class="n">②</span><span>아무 힘도 없다</span></button><button class="opt" type="button"><span class="n">③</span><span>붙었다 떨어졌다 한다</span></button><button class="opt" type="button"><span class="n">④</span><span>서로 잡아당긴다</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>같은 전하끼리는 밀어내고(척력), 다른 전하끼리는 잡아당깁니다(인력).</div>
+  </div>
+  <div class="qbox" id="s5q4" data-w="5" data-type="mc" data-a="3">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">겨울에 문고리를 잡을 때 찌릿한 까닭으로 알맞은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>문고리가 뜨거워서</span></button><button class="opt" type="button"><span class="n">②</span><span>문고리가 자석이어서</span></button><button class="opt" type="button"><span class="n">③</span><span>공기 중 수증기가 많아서</span></button><button class="opt" type="button"><span class="n">④</span><span>몸에 모여 있던 전하가 한꺼번에 이동해서</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>몸에 쌓여 있던 전하가 순간적으로 이동하는 방전 현상입니다. 건조한 겨울에 잘 일어납니다.</div>
+  </div>
+  <div class="qbox" id="s5q5" data-w="5" data-type="mc" data-a="2">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">대전된 플라스틱 막대를 빈 알루미늄 캔에 가까이 가져가면 캔이 끌려온다. 이 현상은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>열의 전도</span></button><button class="opt" type="button"><span class="n">②</span><span>전자석</span></button><button class="opt" type="button"><span class="n">③</span><span>정전기 유도</span></button><button class="opt" type="button"><span class="n">④</span><span>마찰 전기</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>정전기 유도입니다. 캔 안의 전자가 이동해 가까운 쪽에 반대 전하가 모이면서 끌려옵니다.</div>
+  </div>
+  <div class="qbox" id="s5q6" data-w="5" data-type="mc" data-a="0">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">대전된 막대를 검전기에 가까이 하면 금속박이 벌어진다. 그 까닭은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>두 금속박이 같은 종류의 전하를 띠어 서로 밀어내서</span></button><button class="opt" type="button"><span class="n">②</span><span>금속박이 뜨거워져서</span></button><button class="opt" type="button"><span class="n">③</span><span>금속박이 자석이 되어서</span></button><button class="opt" type="button"><span class="n">④</span><span>금속박이 무거워져서</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>전자가 한쪽으로 몰리면서 두 금속박이 같은 전하를 띠게 되고, 같은 전하는 밀어내므로 벌어집니다.</div>
+  </div>
+  <div class="qbox" id="s5q7" data-w="5" data-type="mc" data-a="2">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">정전기를 이용한 예로 알맞은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>나침반</span></button><button class="opt" type="button"><span class="n">②</span><span>백열전구</span></button><button class="opt" type="button"><span class="n">③</span><span>복사기와 공기 청정기</span></button><button class="opt" type="button"><span class="n">④</span><span>건전지</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>복사기는 정전기로 토너 가루를 붙이고, 공기 청정기는 정전기로 먼지를 끌어당깁니다.</div>
+  </div>
+  <div class="qbox" id="s5q8" data-w="5" data-type="sa" data-a="대전">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">물체가 전기를 띠게 되는 현상을 무엇이라 하는가?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 대전</span>대전입니다. 전기를 띤 물체는 대전체라고 합니다.</div>
+  </div>
+  <div class="qbox" id="s5q9" data-w="5" data-type="sa" data-a="정전기 유도|정전기유도">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">대전체를 도체에 가까이 할 때 도체의 양 끝에 서로 다른 전하가 나뉘어 모이는 현상은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 정전기 유도</span>정전기 유도입니다.</div>
+  </div>
+  <div class="qbox" id="s5q10" data-w="5" data-type="sa" data-a="방전">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">물체에 쌓여 있던 전하가 한꺼번에 흘러 나가는 현상을 무엇이라 하는가?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 방전</span>방전입니다. 번개도 아주 큰 규모의 방전입니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="5">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w6">
+  <div class="wkhead"><span class="num">06</span><span class="lbl">WEEK 06</span>
+    <span class="sc" data-w="6">0 / 10</span></div>
+  <h2>전류 · 전압 · 저항</h2>
+  <p class="sub">옴의 법칙 · 직렬과 병렬</p>
+  <div class="qbox" id="s6q1" data-w="6" data-type="mc" data-a="0">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">옴의 법칙을 바르게 나타낸 식은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>전압 = 전류 × 저항</span></button><button class="opt" type="button"><span class="n">②</span><span>저항 = 전압 × 전류</span></button><button class="opt" type="button"><span class="n">③</span><span>전압 = 전류 ÷ 저항</span></button><button class="opt" type="button"><span class="n">④</span><span>전류 = 전압 × 저항</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>V = I × R 입니다. 여기서 전류 I = V ÷ R, 저항 R = V ÷ I 도 함께 나옵니다.</div>
+  </div>
+  <div class="qbox" id="s6q2" data-w="6" data-type="mc" data-a="2">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">3 V 전지에 6 Ω 저항을 연결하면 흐르는 전류의 세기는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>3 A</span></button><button class="opt" type="button"><span class="n">②</span><span>2 A</span></button><button class="opt" type="button"><span class="n">③</span><span>0.5 A</span></button><button class="opt" type="button"><span class="n">④</span><span>18 A</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>I = V ÷ R = 3 ÷ 6 = 0.5 A 입니다.</div>
+  </div>
+  <div class="qbox" id="s6q3" data-w="6" data-type="mc" data-a="1">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">전압이 일정할 때 저항을 크게 하면 전류의 세기는 어떻게 되는가?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>커진다</span></button><button class="opt" type="button"><span class="n">②</span><span>작아진다</span></button><button class="opt" type="button"><span class="n">③</span><span>0이 된다</span></button><button class="opt" type="button"><span class="n">④</span><span>변하지 않는다</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>저항은 전류의 흐름을 방해합니다. I = V ÷ R 이므로 R이 커지면 I는 작아집니다.</div>
+  </div>
+  <div class="qbox" id="s6q4" data-w="6" data-type="mc" data-a="2">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">저항 두 개를 직렬로 연결한 회로에서 각 지점에 흐르는 전류의 세기는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>앞쪽이 더 세다</span></button><button class="opt" type="button"><span class="n">②</span><span>저항마다 반씩 나뉜다</span></button><button class="opt" type="button"><span class="n">③</span><span>모든 곳에서 같다</span></button><button class="opt" type="button"><span class="n">④</span><span>뒤쪽이 더 세다</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>직렬은 길이 하나뿐이라 전류가 나뉠 곳이 없습니다. 어디서나 같습니다.</div>
+  </div>
+  <div class="qbox" id="s6q5" data-w="6" data-type="mc" data-a="2">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">전구 두 개를 병렬로 연결했을 때 한 전구를 빼면 나머지 전구는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>더 어두워진다</span></button><button class="opt" type="button"><span class="n">②</span><span>깜빡거린다</span></button><button class="opt" type="button"><span class="n">③</span><span>그대로 켜져 있다</span></button><button class="opt" type="button"><span class="n">④</span><span>함께 꺼진다</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>병렬은 길이 따로 나 있어 한쪽이 끊겨도 다른 쪽 길은 살아 있습니다. 집안 전등이 병렬인 이유입니다.</div>
+  </div>
+  <div class="qbox" id="s6q6" data-w="6" data-type="mc" data-a="2">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">2 Ω과 3 Ω 저항을 직렬로 연결했을 때 전체 저항은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>1 Ω</span></button><button class="opt" type="button"><span class="n">②</span><span>6 Ω</span></button><button class="opt" type="button"><span class="n">③</span><span>5 Ω</span></button><button class="opt" type="button"><span class="n">④</span><span>1.2 Ω</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>직렬에서는 저항을 그냥 더합니다. 2 + 3 = 5 Ω 입니다.</div>
+  </div>
+  <div class="qbox" id="s6q7" data-w="6" data-type="mc" data-a="1">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">같은 재질의 도선을 더 길게 하면 저항은 어떻게 되는가?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>작아진다</span></button><button class="opt" type="button"><span class="n">②</span><span>커진다</span></button><button class="opt" type="button"><span class="n">③</span><span>변하지 않는다</span></button><button class="opt" type="button"><span class="n">④</span><span>0이 된다</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>길이가 길수록 저항은 커지고, 굵을수록 저항은 작아집니다.</div>
+  </div>
+  <div class="qbox" id="s6q8" data-w="6" data-type="sa" data-a="암페어|A|amper|ampere">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">전류의 세기를 나타내는 단위의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 암페어</span>암페어(A)입니다. 전압은 볼트(V), 저항은 옴(Ω)을 씁니다.</div>
+  </div>
+  <div class="qbox" id="s6q9" data-w="6" data-type="sa" data-a="3|3A|3 A">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">12 V 전지에 4 Ω 저항을 연결했을 때 흐르는 전류는 몇 A인가? (숫자만)</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 3</span>I = V ÷ R = 12 ÷ 4 = 3 A 입니다.</div>
+  </div>
+  <div class="qbox" id="s6q10" data-w="6" data-type="sa" data-a="저항|전기 저항|전기저항">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">도선에서 전류의 흐름을 방해하는 정도를 무엇이라 하는가?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 저항</span>저항입니다. 단위는 옴(Ω)입니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="6">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w7">
+  <div class="wkhead"><span class="num">07</span><span class="lbl">WEEK 07</span>
+    <span class="sc" data-w="7">0 / 10</span></div>
+  <h2>전류의 자기 작용</h2>
+  <p class="sub">자기장 · 전자석 · 전동기</p>
+  <div class="qbox" id="s7q1" data-w="7" data-type="mc" data-a="2">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">직선 도선에 전류를 흘렸더니 옆에 둔 나침반 바늘이 움직였다. 그 까닭은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>도선이 무거워져서</span></button><button class="opt" type="button"><span class="n">②</span><span>나침반이 고장 나서</span></button><button class="opt" type="button"><span class="n">③</span><span>전류가 흐르는 도선 주위에 자기장이 생겨서</span></button><button class="opt" type="button"><span class="n">④</span><span>도선이 뜨거워져서</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>전류는 주위에 자기장을 만듭니다. 그래서 나침반 바늘이 그 방향을 따라 움직입니다.</div>
+  </div>
+  <div class="qbox" id="s7q2" data-w="7" data-type="mc" data-a="1">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">도선에 흐르는 전류의 방향을 반대로 하면 자기장의 방향은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>그대로다</span></button><button class="opt" type="button"><span class="n">②</span><span>반대가 된다</span></button><button class="opt" type="button"><span class="n">③</span><span>두 배가 된다</span></button><button class="opt" type="button"><span class="n">④</span><span>사라진다</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>전류 방향이 뒤집히면 자기장 방향도 함께 뒤집힙니다.</div>
+  </div>
+  <div class="qbox" id="s7q3" data-w="7" data-type="mc" data-a="2">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">코일을 여러 번 감고 그 속에 철심을 넣은 뒤 전류를 흘리면?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>전류가 멈춘다</span></button><button class="opt" type="button"><span class="n">②</span><span>코일이 녹는다</span></button><button class="opt" type="button"><span class="n">③</span><span>자석과 같은 성질을 띤다</span></button><button class="opt" type="button"><span class="n">④</span><span>아무 변화가 없다</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>전자석이 됩니다. 코일이 만든 자기장을 철심이 크게 키워 줍니다.</div>
+  </div>
+  <div class="qbox" id="s7q4" data-w="7" data-type="mc" data-a="3">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">전자석의 세기를 <b>더 세게</b> 하는 방법으로 알맞은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>도선을 더 길게 늘인다</span></button><button class="opt" type="button"><span class="n">②</span><span>철심을 뺀다</span></button><button class="opt" type="button"><span class="n">③</span><span>코일을 더 적게 감는다</span></button><button class="opt" type="button"><span class="n">④</span><span>전류를 더 세게 흘린다</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>전류를 세게 하거나 코일을 더 많이 감으면 전자석이 세집니다.</div>
+  </div>
+  <div class="qbox" id="s7q5" data-w="7" data-type="mc" data-a="2">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">전자석이 영구 자석과 다른 가장 큰 점은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>쇠붙이를 당기지 못한다</span></button><button class="opt" type="button"><span class="n">②</span><span>색이 다르다</span></button><button class="opt" type="button"><span class="n">③</span><span>전류를 끊으면 자석의 성질이 사라진다</span></button><button class="opt" type="button"><span class="n">④</span><span>N극과 S극이 없다</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>스위치로 켜고 끌 수 있다는 것이 전자석의 가장 큰 장점입니다. 폐차장 기중기가 그 예입니다.</div>
+  </div>
+  <div class="qbox" id="s7q6" data-w="7" data-type="mc" data-a="2">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">자기장 속에서 전류가 흐르는 도선이 힘을 받는 원리를 이용한 장치는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>돋보기</span></button><button class="opt" type="button"><span class="n">②</span><span>온도계</span></button><button class="opt" type="button"><span class="n">③</span><span>전동기</span></button><button class="opt" type="button"><span class="n">④</span><span>건전지</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>전동기(모터)입니다. 이 힘으로 회전 운동을 만듭니다.</div>
+  </div>
+  <div class="qbox" id="s7q7" data-w="7" data-type="mc" data-a="1">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">선풍기, 세탁기, 드론에 공통으로 들어 있는 부품은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>전구</span></button><button class="opt" type="button"><span class="n">②</span><span>전동기</span></button><button class="opt" type="button"><span class="n">③</span><span>저항기</span></button><button class="opt" type="button"><span class="n">④</span><span>나침반</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>모두 무언가를 돌리는 기계이므로 전동기가 들어 있습니다.</div>
+  </div>
+  <div class="qbox" id="s7q8" data-w="7" data-type="sa" data-a="자기장">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">자석이나 전류가 흐르는 도선 주위에서 자기력이 작용하는 공간을 무엇이라 하는가?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 자기장</span>자기장입니다. 나침반 바늘의 N극이 가리키는 쪽이 그 지점의 자기장 방향입니다.</div>
+  </div>
+  <div class="qbox" id="s7q9" data-w="7" data-type="sa" data-a="전자석">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">코일에 전류를 흘려 만든, 켜고 끌 수 있는 자석을 무엇이라 하는가?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 전자석</span>전자석입니다.</div>
+  </div>
+  <div class="qbox" id="s7q10" data-w="7" data-type="sa" data-a="전동기|모터">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">자기장 속에서 전류가 받는 힘을 회전 운동으로 바꾸어 주는 장치의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 전동기</span>전동기(모터)입니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="7">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w8">
+  <div class="wkhead"><span class="num">08</span><span class="lbl">WEEK 08</span>
+    <span class="sc" data-w="8">0 / 10</span></div>
+  <h2>물질의 특성</h2>
+  <p class="sub">밀도 · 끓는점 · 용해도 · 혼합물의 분리</p>
+  <div class="qbox" id="s8q1" data-w="8" data-type="mc" data-a="1">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">다음 중 물질의 특성이 <b>아닌</b> 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>용해도</span></button><button class="opt" type="button"><span class="n">②</span><span>질량</span></button><button class="opt" type="button"><span class="n">③</span><span>밀도</span></button><button class="opt" type="button"><span class="n">④</span><span>끓는점</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>질량과 부피는 양에 따라 달라지므로 물질의 특성이 아닙니다. 밀도·끓는점·용해도는 양과 상관없이 일정합니다.</div>
+  </div>
+  <div class="qbox" id="s8q2" data-w="8" data-type="mc" data-a="2">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">질량이 20 g이고 부피가 10 cm³인 물질의 밀도는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>10 g/cm³</span></button><button class="opt" type="button"><span class="n">②</span><span>0.5 g/cm³</span></button><button class="opt" type="button"><span class="n">③</span><span>2 g/cm³</span></button><button class="opt" type="button"><span class="n">④</span><span>200 g/cm³</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>밀도 = 질량 ÷ 부피 = 20 ÷ 10 = 2 g/cm³ 입니다.</div>
+  </div>
+  <div class="qbox" id="s8q3" data-w="8" data-type="mc" data-a="0">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">어떤 물질이 물 위에 뜬다면 그 물질의 밀도는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>물보다 작다</span></button><button class="opt" type="button"><span class="n">②</span><span>물보다 크다</span></button><button class="opt" type="button"><span class="n">③</span><span>알 수 없다</span></button><button class="opt" type="button"><span class="n">④</span><span>물과 같다</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>밀도가 작은 물질이 위로 뜹니다. 물의 밀도는 약 1 g/cm³ 입니다.</div>
+  </div>
+  <div class="qbox" id="s8q4" data-w="8" data-type="mc" data-a="1">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">순물질을 가열할 때의 온도 변화에 대한 설명으로 옳은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>끓는 동안 온도가 계속 올라간다</span></button><button class="opt" type="button"><span class="n">②</span><span>끓는 동안 온도가 일정하게 유지된다</span></button><button class="opt" type="button"><span class="n">③</span><span>끓지 않는다</span></button><button class="opt" type="button"><span class="n">④</span><span>끓는 동안 온도가 내려간다</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>순물질은 끓는 동안 온도가 일정합니다. 혼합물은 끓는 동안에도 온도가 조금씩 올라갑니다.</div>
+  </div>
+  <div class="qbox" id="s8q5" data-w="8" data-type="mc" data-a="1">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">물과 에탄올이 섞인 액체에서 에탄올만 얻으려면 어떤 방법을 쓰는가?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>크로마토그래피</span></button><button class="opt" type="button"><span class="n">②</span><span>증류</span></button><button class="opt" type="button"><span class="n">③</span><span>자석으로 분리</span></button><button class="opt" type="button"><span class="n">④</span><span>거름</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>끓는점 차이를 이용한 증류입니다. 에탄올(약 78 ℃)이 물(100 ℃)보다 먼저 끓어 나옵니다.</div>
+  </div>
+  <div class="qbox" id="s8q6" data-w="8" data-type="mc" data-a="0">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">소금물에서 소금을 얻는 가장 알맞은 방법은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>가열해 물을 증발시킨다</span></button><button class="opt" type="button"><span class="n">②</span><span>체로 친다</span></button><button class="opt" type="button"><span class="n">③</span><span>거름종이로 거른다</span></button><button class="opt" type="button"><span class="n">④</span><span>자석을 댄다</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>소금은 물에 완전히 녹아 있어 거를 수 없습니다. 물을 증발시켜야 소금이 남습니다.</div>
+  </div>
+  <div class="qbox" id="s8q7" data-w="8" data-type="mc" data-a="3">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">검은색 사인펜 잉크에 여러 색소가 섞여 있는지 알아보는 방법은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>거름</span></button><button class="opt" type="button"><span class="n">②</span><span>증류</span></button><button class="opt" type="button"><span class="n">③</span><span>증발</span></button><button class="opt" type="button"><span class="n">④</span><span>크로마토그래피</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>크로마토그래피입니다. 성분마다 이동 속도가 달라 여러 색 띠로 나뉩니다.</div>
+  </div>
+  <div class="qbox" id="s8q8" data-w="8" data-type="sa" data-a="밀도">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">단위 부피에 들어 있는 물질의 질량을 무엇이라 하는가?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 밀도</span>밀도입니다. 밀도 = 질량 ÷ 부피 입니다.</div>
+  </div>
+  <div class="qbox" id="s8q9" data-w="8" data-type="sa" data-a="증류">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">끓는점 차이를 이용해 액체 혼합물을 분리하는 방법의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 증류</span>증류입니다. 소주를 내리거나 바닷물에서 식수를 얻을 때 씁니다.</div>
+  </div>
+  <div class="qbox" id="s8q10" data-w="8" data-type="sa" data-a="용해도">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">어떤 온도에서 물 100 g에 최대로 녹을 수 있는 물질의 g수를 무엇이라 하는가?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 용해도</span>용해도입니다. 대부분의 고체는 온도가 높을수록 용해도가 커집니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="8">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w9">
+  <div class="wkhead"><span class="num">09</span><span class="lbl">WEEK 09</span>
+    <span class="sc" data-w="9">0 / 10</span></div>
+  <h2>광합성과 호흡</h2>
+  <p class="sub">엽록체 · 기공 · 증산 작용</p>
+  <div class="qbox" id="s9q1" data-w="9" data-type="mc" data-a="1">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">식물에서 광합성이 일어나는 곳은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>기공</span></button><button class="opt" type="button"><span class="n">②</span><span>엽록체</span></button><button class="opt" type="button"><span class="n">③</span><span>뿌리털</span></button><button class="opt" type="button"><span class="n">④</span><span>물관</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>잎의 세포 속 초록색 알갱이인 엽록체에서 일어납니다.</div>
+  </div>
+  <div class="qbox" id="s9q2" data-w="9" data-type="mc" data-a="0">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">광합성에 반드시 필요한 것끼리 바르게 묶은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>빛, 물, 이산화탄소</span></button><button class="opt" type="button"><span class="n">②</span><span>빛, 물, 산소</span></button><button class="opt" type="button"><span class="n">③</span><span>어둠, 물, 산소</span></button><button class="opt" type="button"><span class="n">④</span><span>빛, 산소, 포도당</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>빛에너지로 물과 이산화탄소를 재료 삼아 포도당과 산소를 만듭니다.</div>
+  </div>
+  <div class="qbox" id="s9q3" data-w="9" data-type="mc" data-a="2">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">광합성 결과로 공기 중에 나오는 기체는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>수소</span></button><button class="opt" type="button"><span class="n">②</span><span>질소</span></button><button class="opt" type="button"><span class="n">③</span><span>산소</span></button><button class="opt" type="button"><span class="n">④</span><span>이산화탄소</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>산소가 나옵니다. 우리가 숨 쉬는 산소의 출처입니다.</div>
+  </div>
+  <div class="qbox" id="s9q4" data-w="9" data-type="mc" data-a="1">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">잎에서 기공이 주로 많이 있는 곳은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>뿌리 끝</span></button><button class="opt" type="button"><span class="n">②</span><span>잎의 뒷면</span></button><button class="opt" type="button"><span class="n">③</span><span>잎의 앞면</span></button><button class="opt" type="button"><span class="n">④</span><span>줄기 속</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>대부분 잎 뒷면에 있습니다. 햇빛에 직접 마르는 것을 피하기 위해서입니다.</div>
+  </div>
+  <div class="qbox" id="s9q5" data-w="9" data-type="mc" data-a="2">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">증산 작용이 가장 활발하게 일어나는 조건은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>비가 올 때</span></button><button class="opt" type="button"><span class="n">②</span><span>어둡고 습할 때</span></button><button class="opt" type="button"><span class="n">③</span><span>햇빛이 강하고 바람이 불며 건조할 때</span></button><button class="opt" type="button"><span class="n">④</span><span>기온이 낮을 때</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>햇빛이 강하고 바람이 불고 습도가 낮을수록 물이 잘 빠져나갑니다.</div>
+  </div>
+  <div class="qbox" id="s9q6" data-w="9" data-type="mc" data-a="3">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">식물의 호흡은 언제 일어나는가?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>비가 올 때만</span></button><button class="opt" type="button"><span class="n">②</span><span>밤에만</span></button><button class="opt" type="button"><span class="n">③</span><span>낮에만</span></button><button class="opt" type="button"><span class="n">④</span><span>낮과 밤 모두 항상</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>호흡은 살아 있는 동안 계속됩니다. 광합성만 빛이 있을 때 일어납니다.</div>
+  </div>
+  <div class="qbox" id="s9q7" data-w="9" data-type="mc" data-a="1">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">낮에 식물이 산소를 내보내는 것처럼 보이는 까닭은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>잎이 산소를 만들어 저장해서</span></button><button class="opt" type="button"><span class="n">②</span><span>광합성량이 호흡량보다 훨씬 많아서</span></button><button class="opt" type="button"><span class="n">③</span><span>낮에는 호흡을 하지 않아서</span></button><button class="opt" type="button"><span class="n">④</span><span>밤에 모아 둔 산소를 내보내서</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>낮에도 호흡은 계속되지만 광합성이 훨씬 활발해서 남는 산소가 밖으로 나갑니다.</div>
+  </div>
+  <div class="qbox" id="s9q8" data-w="9" data-type="sa" data-a="포도당">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">광합성으로 처음 만들어지는 양분의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 포도당</span>포도당입니다. 나중에 녹말로 바뀌어 저장됩니다.</div>
+  </div>
+  <div class="qbox" id="s9q9" data-w="9" data-type="sa" data-a="기공">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">잎의 표피에 있는 작은 구멍으로, 기체가 드나드는 통로를 무엇이라 하는가?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 기공</span>기공입니다. 공변세포 두 개가 여닫습니다.</div>
+  </div>
+  <div class="qbox" id="s9q10" data-w="9" data-type="sa" data-a="증산 작용|증산작용|증산">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">식물체 속의 물이 수증기가 되어 잎 밖으로 빠져나가는 현상은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 증산 작용</span>증산 작용입니다. 뿌리에서 물을 끌어올리는 힘이 되기도 합니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="9">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w10">
+  <div class="wkhead"><span class="num">10</span><span class="lbl">WEEK 10</span>
+    <span class="sc" data-w="10">0 / 10</span></div>
+  <h2>에너지 배달 경로</h2>
+  <p class="sub">소화 · 순환 · 호흡 · 배설</p>
+  <div class="qbox" id="s10q1" data-w="10" data-type="mc" data-a="2">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">침 속에 들어 있어 녹말을 분해하는 소화 효소는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>쓸개즙</span></button><button class="opt" type="button"><span class="n">②</span><span>라이페이스</span></button><button class="opt" type="button"><span class="n">③</span><span>아밀레이스</span></button><button class="opt" type="button"><span class="n">④</span><span>펩신</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>아밀레이스입니다. 밥을 오래 씹으면 단맛이 나는 이유입니다.</div>
+  </div>
+  <div class="qbox" id="s10q2" data-w="10" data-type="mc" data-a="2">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">위액에 들어 있으며 단백질을 분해하는 소화 효소는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>아밀레이스</span></button><button class="opt" type="button"><span class="n">②</span><span>인슐린</span></button><button class="opt" type="button"><span class="n">③</span><span>펩신</span></button><button class="opt" type="button"><span class="n">④</span><span>라이페이스</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>펩신입니다. 위액의 강한 산성 환경에서 잘 작용합니다.</div>
+  </div>
+  <div class="qbox" id="s10q3" data-w="10" data-type="mc" data-a="3">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">소화된 영양소가 실제로 몸속으로 흡수되는 곳은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>대장</span></button><button class="opt" type="button"><span class="n">②</span><span>위</span></button><button class="opt" type="button"><span class="n">③</span><span>입</span></button><button class="opt" type="button"><span class="n">④</span><span>소장</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>소장 안쪽 벽의 융털에서 흡수됩니다.</div>
+  </div>
+  <div class="qbox" id="s10q4" data-w="10" data-type="mc" data-a="2">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">지방의 소화를 돕는 쓸개즙을 만드는 기관은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>콩팥</span></button><button class="opt" type="button"><span class="n">②</span><span>폐</span></button><button class="opt" type="button"><span class="n">③</span><span>간</span></button><button class="opt" type="button"><span class="n">④</span><span>위</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>간에서 만들고 쓸개에 저장했다가 소장으로 보냅니다. 쓸개즙에는 소화 효소가 없고 지방을 잘게 쪼개 주는 역할만 합니다.</div>
+  </div>
+  <div class="qbox" id="s10q5" data-w="10" data-type="mc" data-a="1">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">심장에서 온몸으로 혈액을 내보내는 곳은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>우심방</span></button><button class="opt" type="button"><span class="n">②</span><span>좌심실</span></button><button class="opt" type="button"><span class="n">③</span><span>좌심방</span></button><button class="opt" type="button"><span class="n">④</span><span>우심실</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>좌심실입니다. 가장 멀리 보내야 하므로 심장에서 벽이 가장 두껍습니다.</div>
+  </div>
+  <div class="qbox" id="s10q6" data-w="10" data-type="mc" data-a="0">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">혈액에서 산소를 운반하는 성분은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>적혈구</span></button><button class="opt" type="button"><span class="n">②</span><span>혈소판</span></button><button class="opt" type="button"><span class="n">③</span><span>백혈구</span></button><button class="opt" type="button"><span class="n">④</span><span>혈장</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>적혈구 속 헤모글로빈이 산소를 붙잡아 나릅니다.</div>
+  </div>
+  <div class="qbox" id="s10q7" data-w="10" data-type="mc" data-a="0">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">세포 호흡에 대한 설명으로 옳은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>포도당과 산소를 써서 에너지를 얻는다</span></button><button class="opt" type="button"><span class="n">②</span><span>이산화탄소를 써서 포도당을 만든다</span></button><button class="opt" type="button"><span class="n">③</span><span>밤에만 일어난다</span></button><button class="opt" type="button"><span class="n">④</span><span>산소만 있으면 에너지가 생긴다</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>포도당 + 산소 → 이산화탄소 + 물 + 에너지 입니다. 몸속 모든 세포에서 늘 일어납니다.</div>
+  </div>
+  <div class="qbox" id="s10q8" data-w="10" data-type="sa" data-a="콩팥|신장">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">혈액 속 노폐물을 걸러 오줌을 만드는 기관의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 콩팥</span>콩팥(신장)입니다.</div>
+  </div>
+  <div class="qbox" id="s10q9" data-w="10" data-type="sa" data-a="폐포">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">폐를 이루는 작은 공기주머니로, 산소와 이산화탄소가 교환되는 곳은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 폐포</span>폐포입니다. 수억 개가 모여 표면적을 크게 넓힙니다.</div>
+  </div>
+  <div class="qbox" id="s10q10" data-w="10" data-type="sa" data-a="융털|융모">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">소장 안쪽 벽에 나 있는 작은 돌기로, 표면적을 넓혀 영양소 흡수를 돕는 것은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 융털</span>융털입니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="10">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w11">
+  <div class="wkhead"><span class="num">11</span><span class="lbl">WEEK 11</span>
+    <span class="sc" data-w="11">0 / 10</span></div>
+  <h2>지구와 달의 운동</h2>
+  <p class="sub">자전과 공전 · 달의 위상 · 일식과 월식</p>
+  <div class="qbox" id="s11q1" data-w="11" data-type="mc" data-a="2">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">지구의 자전 방향으로 옳은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>북에서 남</span></button><button class="opt" type="button"><span class="n">②</span><span>남에서 북</span></button><button class="opt" type="button"><span class="n">③</span><span>서에서 동</span></button><button class="opt" type="button"><span class="n">④</span><span>동에서 서</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>지구는 서 → 동으로 하루에 한 바퀴 돕니다.</div>
+  </div>
+  <div class="qbox" id="s11q2" data-w="11" data-type="mc" data-a="2">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">해와 별이 동쪽에서 떠서 서쪽으로 지는 것처럼 보이는 까닭은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>별이 실제로 움직여서</span></button><button class="opt" type="button"><span class="n">②</span><span>달이 움직여서</span></button><button class="opt" type="button"><span class="n">③</span><span>지구가 자전해서</span></button><button class="opt" type="button"><span class="n">④</span><span>지구가 공전해서</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>지구가 서 → 동으로 돌기 때문에 하늘의 천체는 반대로 동 → 서로 움직이는 것처럼 보입니다.</div>
+  </div>
+  <div class="qbox" id="s11q3" data-w="11" data-type="mc" data-a="3">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">계절이 변하는 가장 큰 까닭은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>달이 지구를 돌아서</span></button><button class="opt" type="button"><span class="n">②</span><span>태양이 커졌다 작아져서</span></button><button class="opt" type="button"><span class="n">③</span><span>지구와 태양의 거리가 크게 달라져서</span></button><button class="opt" type="button"><span class="n">④</span><span>지구가 자전축을 기울인 채 공전해서</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>자전축이 약 23.5° 기울어진 채 공전하기 때문에 계절에 따라 햇빛을 받는 각도가 달라집니다.</div>
+  </div>
+  <div class="qbox" id="s11q4" data-w="11" data-type="mc" data-a="3">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">달의 모양이 날마다 달라 보이는 까닭은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>지구 그림자가 매일 져서</span></button><button class="opt" type="button"><span class="n">②</span><span>달이 실제로 커졌다 작아져서</span></button><button class="opt" type="button"><span class="n">③</span><span>구름에 가려져서</span></button><button class="opt" type="button"><span class="n">④</span><span>달이 지구를 공전하며 햇빛을 받는 부분이 달라 보여서</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>달은 늘 반쪽만 햇빛을 받습니다. 달이 지구를 돌면서 그 밝은 부분이 우리에게 보이는 정도가 달라집니다.</div>
+  </div>
+  <div class="qbox" id="s11q5" data-w="11" data-type="mc" data-a="2">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">보름달이 보일 때 태양, 지구, 달의 위치 관계는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>셋이 직각을 이룬다</span></button><button class="opt" type="button"><span class="n">②</span><span>달이 태양과 지구 사이에 있다</span></button><button class="opt" type="button"><span class="n">③</span><span>지구가 태양과 달 사이에 있다</span></button><button class="opt" type="button"><span class="n">④</span><span>달이 지구 뒤에 숨는다</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>지구가 가운데 있어 달의 밝은 면 전체가 우리 쪽을 향합니다.</div>
+  </div>
+  <div class="qbox" id="s11q6" data-w="11" data-type="mc" data-a="3">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">일식이 일어날 때 달의 위치는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>지구 옆쪽</span></button><button class="opt" type="button"><span class="n">②</span><span>상관없다</span></button><button class="opt" type="button"><span class="n">③</span><span>지구 뒤쪽</span></button><button class="opt" type="button"><span class="n">④</span><span>태양과 지구 사이</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>달이 태양을 가리려면 태양과 지구 사이에 있어야 합니다. 즉 삭일 때 일어납니다.</div>
+  </div>
+  <div class="qbox" id="s11q7" data-w="11" data-type="mc" data-a="0">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">지구에서 달의 뒷면을 볼 수 없는 까닭은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>달의 자전 주기와 공전 주기가 같아서</span></button><button class="opt" type="button"><span class="n">②</span><span>달 뒷면이 어두워서</span></button><button class="opt" type="button"><span class="n">③</span><span>달이 자전하지 않아서</span></button><button class="opt" type="button"><span class="n">④</span><span>달이 너무 멀어서</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>달은 도는 만큼 정확히 돌기 때문에 늘 같은 면만 지구를 향합니다.</div>
+  </div>
+  <div class="qbox" id="s11q8" data-w="11" data-type="sa" data-a="자전">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">지구가 하루에 한 바퀴 스스로 도는 운동을 무엇이라 하는가?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 자전</span>자전입니다. 태양 주위를 도는 것은 공전입니다.</div>
+  </div>
+  <div class="qbox" id="s11q9" data-w="11" data-type="sa" data-a="일식">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">달이 태양을 가려 태양이 보이지 않게 되는 현상은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 일식</span>일식입니다. 지구 그림자에 달이 들어가면 월식입니다.</div>
+  </div>
+  <div class="qbox" id="s11q10" data-w="11" data-type="sa" data-a="1년|일년|한 해|365일|약 1년">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">지구가 태양 주위를 한 바퀴 도는 데 걸리는 시간은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 1년</span>약 1년(365일)입니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="11">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w12">
+  <div class="wkhead"><span class="num">12</span><span class="lbl">WEEK 12</span>
+    <span class="sc" data-w="12">0 / 10</span></div>
+  <h2>열의 이동, 그리고 정상</h2>
+  <p class="sub">전도 · 대류 · 복사 · 비열</p>
+  <div class="qbox" id="s12q1" data-w="12" data-type="mc" data-a="1">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">뜨거운 국에 담근 금속 숟가락의 손잡이까지 뜨거워지는 열의 이동 방법은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>증발</span></button><button class="opt" type="button"><span class="n">②</span><span>전도</span></button><button class="opt" type="button"><span class="n">③</span><span>복사</span></button><button class="opt" type="button"><span class="n">④</span><span>대류</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>전도입니다. 입자가 이웃 입자에게 차례로 진동을 전달합니다.</div>
+  </div>
+  <div class="qbox" id="s12q2" data-w="12" data-type="mc" data-a="2">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">난방기를 방의 아래쪽에 두는 것이 좋은 까닭은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>더운 공기가 아래로 내려가기 때문</span></button><button class="opt" type="button"><span class="n">②</span><span>전도가 잘 일어나기 때문</span></button><button class="opt" type="button"><span class="n">③</span><span>더운 공기가 위로 올라가 방 전체를 돌기 때문</span></button><button class="opt" type="button"><span class="n">④</span><span>복사가 잘 되기 때문</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>대류 때문입니다. 데워진 공기가 위로 오르고 찬 공기가 내려오며 순환합니다.</div>
+  </div>
+  <div class="qbox" id="s12q3" data-w="12" data-type="mc" data-a="1">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">태양의 열이 우주 공간을 지나 지구까지 오는 방법은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>전달 매질을 통해서</span></button><button class="opt" type="button"><span class="n">②</span><span>복사</span></button><button class="opt" type="button"><span class="n">③</span><span>대류</span></button><button class="opt" type="button"><span class="n">④</span><span>전도</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>복사입니다. 물질 없이도 열이 직접 전달됩니다.</div>
+  </div>
+  <div class="qbox" id="s12q4" data-w="12" data-type="mc" data-a="1">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">뜨거운 물과 찬물을 섞어 두면 시간이 지나 두 물의 온도가 같아진다. 이 상태를 무엇이라 하는가?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>단열</span></button><button class="opt" type="button"><span class="n">②</span><span>열평형</span></button><button class="opt" type="button"><span class="n">③</span><span>열팽창</span></button><button class="opt" type="button"><span class="n">④</span><span>비열</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>열평형입니다. 열은 늘 뜨거운 쪽에서 차가운 쪽으로 이동합니다.</div>
+  </div>
+  <div class="qbox" id="s12q5" data-w="12" data-type="mc" data-a="1">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">보온병이 온도를 오래 유지할 수 있는 까닭으로 알맞은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>물을 많이 담아서</span></button><button class="opt" type="button"><span class="n">②</span><span>벽 사이를 진공으로 만들어 전도와 대류를 막아서</span></button><button class="opt" type="button"><span class="n">③</span><span>벽을 두껍게 해서 무거워서</span></button><button class="opt" type="button"><span class="n">④</span><span>안쪽을 검게 칠해서</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>진공층이 전도와 대류를 막고, 은색 벽이 복사열을 되반사합니다.</div>
+  </div>
+  <div class="qbox" id="s12q6" data-w="12" data-type="mc" data-a="2">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">비열이 큰 물질의 특징으로 옳은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>금방 뜨거워지고 금방 식는다</span></button><button class="opt" type="button"><span class="n">②</span><span>항상 가볍다</span></button><button class="opt" type="button"><span class="n">③</span><span>온도가 잘 변하지 않는다</span></button><button class="opt" type="button"><span class="n">④</span><span>열을 전혀 받지 않는다</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>같은 열을 받아도 온도가 조금밖에 오르지 않습니다. 물이 대표적입니다.</div>
+  </div>
+  <div class="qbox" id="s12q7" data-w="12" data-type="mc" data-a="3">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">바닷가에서 낮에 바다에서 육지로 바람이 부는 까닭은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>바다가 더 넓어서</span></button><button class="opt" type="button"><span class="n">②</span><span>바다에 파도가 쳐서</span></button><button class="opt" type="button"><span class="n">③</span><span>육지에 나무가 많아서</span></button><button class="opt" type="button"><span class="n">④</span><span>육지와 바다의 비열이 달라서</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>비열이 작은 육지가 더 빨리 데워져 공기가 오르고, 그 자리를 바다 쪽 공기가 채우며 해풍이 붑니다.</div>
+  </div>
+  <div class="qbox" id="s12q8" data-w="12" data-type="sa" data-a="열평형">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">온도가 다른 두 물체가 닿아 있다가 결국 같은 온도가 되는 상태를 무엇이라 하는가?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 열평형</span>열평형입니다.</div>
+  </div>
+  <div class="qbox" id="s12q9" data-w="12" data-type="sa" data-a="비열">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">어떤 물질 1 kg의 온도를 1 ℃ 높이는 데 필요한 열량을 무엇이라 하는가?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 비열</span>비열입니다. 물은 비열이 커서 잘 데워지지도, 잘 식지도 않습니다.</div>
+  </div>
+  <div class="qbox" id="s12q10" data-w="12" data-type="sa" data-a="열팽창">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">물질이 열을 받아 부피가 늘어나는 현상을 무엇이라 하는가?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 열팽창</span>열팽창입니다. 다리 이음매에 틈을 두는 이유입니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="12">0 / 10</b></div>
+</section>
+
+<footer>
+  과학 문제집 120제 · 12주 × 10문제 · 기록은 이 기기에만 저장됩니다<br>
+  <button class="reset" id="resetAll" style="margin:8px 0 0">전체 기록 지우고 처음부터</button><br>
+  학습 문서 · <a href="index.html">과학 등반 12주</a>
+</footer>
+</div>
+<script>
+(function(){
+  var KEY="science_quiz_v1";
+  function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){return{}}}
+  function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+  var state=load();
+
+  function norm(s){return (s||"").replace(/\s+/g,"").replace(/[.,·’'"]/g,"").toLowerCase();}
+
+  function mark(box,right){
+    box.dataset.done="1";
+    box.querySelector(".exp").classList.add("show");
+    var s=load(); s[box.id]=right?1:0; save(s); paint();
+  }
+
+  document.querySelectorAll(".qbox[data-type=mc]").forEach(function(box){
+    var ans=parseInt(box.dataset.a,10);
+    box.querySelectorAll(".opt").forEach(function(btn,i){
+      btn.addEventListener("click",function(){
+        if(box.dataset.done) return;
+        box.querySelectorAll(".opt").forEach(function(b,j){
+          b.disabled=true;
+          if(j===ans) b.classList.add("ok");
+          else if(j===i) b.classList.add("no");
+        });
+        mark(box, i===ans);
+      });
+    });
+  });
+
+  document.querySelectorAll(".qbox[data-type=sa]").forEach(function(box){
+    var accept=(box.dataset.a||"").split("|").map(norm);
+    var input=box.querySelector("input"), btn=box.querySelector("button");
+    function check(){
+      if(box.dataset.done) return;
+      var right=accept.indexOf(norm(input.value))>=0;
+      input.classList.add(right?"ok":"no");
+      input.readOnly=true; btn.disabled=true;
+      mark(box,right);
+    }
+    btn.addEventListener("click",check);
+    input.addEventListener("keydown",function(e){if(e.key==="Enter")check();});
+  });
+
+  function paint(){
+    var s=load(), total=0;
+    for(var w=1;w<=12;w++){
+      var right=0, done=0;
+      document.querySelectorAll('.qbox[data-w="'+w+'"]').forEach(function(b){
+        if(b.id in s){done++; if(s[b.id]===1) right++;}
+      });
+      total+=right;
+      var el=document.querySelector('.sc[data-w="'+w+'"]');
+      if(el) el.textContent = done? (right+" / "+done+" 맞음") : "0 / 10";
+      var fo=document.querySelector('.wkfoot b[data-w="'+w+'"]');
+      if(fo) fo.textContent = right+" / 10";
+    }
+    var t=document.getElementById("total"); if(t) t.textContent=total+" / 120";
+    var bar=document.getElementById("bar"); if(bar) bar.style.width=(total/120*100)+"%";
+  }
+
+  // 새로고침해도 푼 문제는 유지
+  document.querySelectorAll(".qbox").forEach(function(box){
+    if(!(box.id in state)) return;
+    var right=state[box.id]===1;
+    box.dataset.done="1";
+    box.querySelector(".exp").classList.add("show");
+    if(box.dataset.type==="mc"){
+      var ans=parseInt(box.dataset.a,10);
+      box.querySelectorAll(".opt").forEach(function(b,j){
+        b.disabled=true;
+        if(j===ans) b.classList.add("ok");
+      });
+      if(!right) box.querySelector(".qn").insertAdjacentHTML("beforeend"," · 틀림");
+    }else{
+      var inp=box.querySelector("input"), bt=box.querySelector("button");
+      inp.readOnly=true; bt.disabled=true;
+      inp.classList.add(right?"ok":"no");
+      if(right && !inp.value) inp.value=(box.dataset.a||"").split("|")[0];
+    }
+  });
+  paint();
+
+  var rs=document.getElementById("resetAll");
+  if(rs) rs.addEventListener("click",function(){
+    if(!confirm("푼 기록을 모두 지우고 처음부터 다시 풀까요?")) return;
+    save({}); location.reload();
+  });
+
+  var links=[].slice.call(document.querySelectorAll("nav.jump a[href^='#']"));
+  var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1))});
+  function onScroll(){
+    var y=window.scrollY+120,idx=0;
+    secs.forEach(function(s,i){if(s&&s.offsetTop<=y)idx=i});
+    links.forEach(function(a,i){a.classList.toggle("now",i===idx)});
+  }
+  window.addEventListener("scroll",onScroll,{passive:true});onScroll();
+})();
+</script>
+</body>
+</html>

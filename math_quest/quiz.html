@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#DCE2DB">
+<title>수학 문제집 120제</title>
+<meta name="description" content="수학 사다리 12주 과정에 맞춘 120문제. 주차별 10문제씩 풀고 바로 채점합니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#131C18; --ink2:#2C3A33; --muted:#5F6E66; --faint:#8A968F;
+    --mist:#DCE2DB; --surface:#F8FAF6; --surface2:#EFF3EC;
+    --line:#C3CCC1; --hair:#DDE4DB;
+    --key:#2A5480; --wash:#E3EBF4; --kline:#A3BBD5;
+    --good:#1F6249; --bad:#8C2F3E; --good-bg:#DEEDE4; --bad-bg:#F6E4E7;
+    --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+    --mono:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--mist);color:var(--ink);font-family:var(--sans);
+    font-size:16px;line-height:1.72;letter-spacing:-0.01em;
+    padding:0 18px calc(80px + env(safe-area-inset-bottom));
+    word-break:keep-all;overflow-wrap:anywhere;}
+  .wrap{max-width:760px;margin:0 auto}
+  p{margin:0 0 12px}
+  b,strong{font-weight:600;color:var(--ink)}
+
+  .cover{padding:40px 0 26px;border-bottom:2px solid var(--ink)}
+  .kicker{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--key);margin:0 0 14px}
+  h1{font-size:clamp(26px,6vw,40px);font-weight:700;line-height:1.26;letter-spacing:-.035em;margin:0 0 14px}
+  .lede{font-size:15.5px;font-weight:300;color:var(--ink2);margin:0 0 20px;max-width:62ch}
+  .lede b{font-weight:600;color:var(--ink)}
+  .metaline{display:flex;flex-wrap:wrap;gap:6px 20px;font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+  .metaline b{color:var(--ink);font-weight:500}
+
+  .summary{background:var(--ink);border-radius:3px;padding:22px 20px;margin:24px 0 0}
+  .summary h2{color:#F6FAF5;font-size:17px;font-weight:600;margin:0 0 5px}
+  .summary .sd{color:#93A399;font-size:13px;font-weight:300;margin:0 0 18px;line-height:1.6}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:16px}
+  .kpi .kl{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+    color:#7E8F84;display:block;margin-bottom:4px}
+  .kpi .kv{font-size:clamp(20px,3vw,26px);font-weight:700;color:#9DC6EE;letter-spacing:-.03em;display:block;line-height:1.1}
+  .kpi .kn{font-size:11.5px;color:#B9C6BC;display:block;margin-top:5px;font-weight:300;line-height:1.5}
+  .bar{height:7px;background:#26332C;border-radius:99px;overflow:hidden;margin-top:16px}
+  .bar i{display:block;height:100%;width:0;background:#9DC6EE;transition:width .3s}
+
+  nav.jump{position:sticky;top:0;z-index:40;margin:0 -18px;padding:0 18px;
+    background:rgba(220,226,219,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+  nav.jump .row{display:flex;gap:5px;overflow-x:auto;padding:9px 0;scrollbar-width:none}
+  nav.jump .row::-webkit-scrollbar{display:none}
+  nav.jump a{flex:0 0 auto;font-family:var(--mono);font-size:11.5px;color:var(--muted);
+    background:var(--surface);border:1px solid var(--line);padding:6px 10px;border-radius:2px;text-decoration:none}
+  nav.jump a.now{color:#fff;background:var(--key);border-color:var(--key)}
+
+  section.wk{padding:38px 0 10px;border-bottom:1px solid var(--line);scroll-margin-top:56px}
+  .wkhead{display:flex;align-items:center;gap:11px;margin-bottom:12px}
+  .wkhead .num{font-family:var(--mono);font-size:12px;font-weight:600;color:#fff;background:var(--key);
+    width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .wkhead .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+  .wkhead .sc{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--key);
+    background:var(--wash);border:1px solid var(--kline);padding:3px 9px;border-radius:2px}
+  section.wk h2{font-size:clamp(21px,3.2vw,26px);font-weight:600;letter-spacing:-.03em;margin:0 0 6px;line-height:1.35}
+  section.wk .sub{font-size:13.5px;color:var(--muted);margin:0 0 18px}
+
+  .qbox{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:16px 17px;margin:12px 0}
+  .qbox .qn{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--key);letter-spacing:.1em}
+  .qbox .qt{margin:7px 0 0;font-size:16px;line-height:1.68}
+  .qbox code{font-family:var(--mono);font-size:.9em;background:var(--surface2);border:1px solid var(--hair);
+    padding:1px 5px;border-radius:2px}
+  .opts{display:flex;flex-direction:column;gap:7px;margin-top:13px}
+  .opt{display:grid;grid-template-columns:24px 1fr;gap:10px;align-items:start;width:100%;text-align:left;
+    background:#fff;border:1px solid var(--line);border-radius:3px;padding:11px 13px;font:inherit;
+    font-size:15px;color:var(--ink2);cursor:pointer;min-height:46px}
+  .opt .n{font-family:var(--mono);font-size:12.5px;color:var(--muted);padding-top:2px}
+  .opt:active{background:var(--surface2)}
+  .opt.ok{background:var(--good-bg);border-color:var(--good);color:var(--good);font-weight:600}
+  .opt.ok .n{color:var(--good)}
+  .opt.no{background:var(--bad-bg);border-color:var(--bad);color:var(--bad)}
+  .opt.no .n{color:var(--bad)}
+  .opt[disabled]{cursor:default}
+  .sa{display:flex;gap:8px;margin-top:13px;flex-wrap:wrap}
+  .sa input{flex:1 1 180px;min-width:0;padding:11px 13px;border:1px solid var(--line);border-radius:3px;
+    background:#fff;font:inherit;font-size:15px;color:var(--ink)}
+  .sa input:focus{outline:2px solid var(--kline);outline-offset:-1px}
+  .sa button{flex:0 0 auto;padding:11px 18px;border:0;border-radius:3px;background:var(--key);color:#fff;
+    font:inherit;font-size:14.5px;font-weight:600;cursor:pointer}
+  .sa input.ok{border-color:var(--good);background:var(--good-bg);color:var(--good);font-weight:600}
+  .sa input.no{border-color:var(--bad);background:var(--bad-bg);color:var(--bad)}
+  .exp{margin-top:12px;padding-top:11px;border-top:1px solid var(--hair);font-size:14.5px;color:var(--ink2);
+    line-height:1.7;display:none}
+  .exp.show{display:block}
+  .exp b{color:var(--key)}
+  .exp .ans{font-family:var(--mono);font-size:13px;color:var(--key);display:block;margin-bottom:5px}
+
+  .wkfoot{display:flex;align-items:center;gap:10px;margin:16px 0 0;padding:12px 14px;
+    background:var(--surface2);border-radius:3px;font-size:14px;color:var(--muted)}
+  .wkfoot b{font-family:var(--mono);color:var(--key)}
+  .reset{margin-left:auto;background:none;border:0;color:var(--faint);font:inherit;font-size:12.5px;
+    text-decoration:underline;cursor:pointer;padding:0}
+  footer{padding:26px 0 10px;font-family:var(--mono);font-size:11.5px;color:var(--faint);line-height:1.8}
+  footer a{color:var(--key)}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="cover">
+  <p class="kicker">중2 수학 · 12주 × 10문제 · 객관식 7 · 단답형 3</p>
+  <h1>수학 문제집 120제</h1>
+  <p class="lede"><b>수학 사다리 12주</b>에서 배운 내용을 주차마다 10문제로 확인합니다. 객관식 7문제, 단답형 3문제. 답만 맞히지 말고, 틀린 문제는 오답 노트에 옮겨 적으세요.</p>
+  <div class="metaline">
+    <span>주차 <b>12주</b></span><span>문항 <b>120문제</b></span>
+    <span>구성 <b>객관식 7 · 단답형 3</b></span><span>학습 문서 <b><a href="index.html" style="color:inherit">수학 사다리 12주</a></b></span>
+  </div>
+  <div class="summary">
+    <h2>푸는 법</h2>
+    <p class="sd">선택지를 누르면 바로 채점되고 해설이 열립니다. 단답형은 답을 쓰고 확인을 누릅니다. 기록은 이 기기에 저장됩니다.</p>
+    <div class="kpis">
+      <div class="kpi"><span class="kl">한 주</span><span class="kv">10문제</span><span class="kn">객관식 7 · 단답형 3</span></div>
+      <div class="kpi"><span class="kl">권장</span><span class="kv">금요일</span><span class="kn">그 주 공부를 마친 뒤 풀기</span></div>
+      <div class="kpi"><span class="kl">채점</span><span class="kv">즉시</span><span class="kn">누르면 정답과 해설이 나옵니다</span></div>
+      <div class="kpi"><span class="kl">내 점수</span><span class="kv" id="total">0 / 120</span><span class="kn">이 기기에만 저장됩니다</span></div>
+    </div>
+    <div class="bar"><i id="bar"></i></div>
+  </div>
+</header>
+
+<nav class="jump"><div class="row">
+<a href="#w1">1주</a>
+<a href="#w2">2주</a>
+<a href="#w3">3주</a>
+<a href="#w4">4주</a>
+<a href="#w5">5주</a>
+<a href="#w6">6주</a>
+<a href="#w7">7주</a>
+<a href="#w8">8주</a>
+<a href="#w9">9주</a>
+<a href="#w10">10주</a>
+<a href="#w11">11주</a>
+<a href="#w12">12주</a>
+</div></nav>
+
+<section class="wk" id="w1">
+  <div class="wkhead"><span class="num">01</span><span class="lbl">WEEK 01</span>
+    <span class="sc" data-w="1">0 / 10</span></div>
+  <h2>유리수와 순환소수</h2>
+  <p class="sub">분수 ↔ 소수 · 순환마디</p>
+  <div class="qbox" id="m1q1" data-w="1" data-type="mc" data-a="0">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">소수 0.333… 을 분수로 나타내면?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>1/3</span></button><button class="opt" type="button"><span class="n">②</span><span>1/30</span></button><button class="opt" type="button"><span class="n">③</span><span>3/10</span></button><button class="opt" type="button"><span class="n">④</span><span>3/100</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>0.333… = 1/3 입니다. 3이 끝없이 반복되는 순환소수입니다.</div>
+  </div>
+  <div class="qbox" id="m1q2" data-w="1" data-type="mc" data-a="2">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">순환소수 0.454545… 의 순환마디는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>5</span></button><button class="opt" type="button"><span class="n">②</span><span>454</span></button><button class="opt" type="button"><span class="n">③</span><span>45</span></button><button class="opt" type="button"><span class="n">④</span><span>4</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>반복되는 가장 짧은 숫자 덩어리가 순환마디입니다. 여기서는 45 입니다.</div>
+  </div>
+  <div class="qbox" id="m1q3" data-w="1" data-type="mc" data-a="0">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">다음 중 유한소수로 나타낼 수 있는 분수는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>3/8</span></button><button class="opt" type="button"><span class="n">②</span><span>2/7</span></button><button class="opt" type="button"><span class="n">③</span><span>1/3</span></button><button class="opt" type="button"><span class="n">④</span><span>5/6</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>기약분수의 분모를 소인수분해했을 때 2와 5만 있으면 유한소수입니다. 8 = 2³ 이므로 3/8 = 0.375 입니다.</div>
+  </div>
+  <div class="qbox" id="m1q4" data-w="1" data-type="mc" data-a="3">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">분수 1/6을 소수로 나타내면 어떤 소수인가?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>정수</span></button><button class="opt" type="button"><span class="n">②</span><span>무리수</span></button><button class="opt" type="button"><span class="n">③</span><span>유한소수</span></button><button class="opt" type="button"><span class="n">④</span><span>순환소수</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>6 = 2 × 3 이라 분모에 3이 남습니다. 1/6 = 0.1666… 인 순환소수입니다.</div>
+  </div>
+  <div class="qbox" id="m1q5" data-w="1" data-type="mc" data-a="3">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">순환소수 0.777… 을 분수로 나타내면?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>7/99</span></button><button class="opt" type="button"><span class="n">②</span><span>70/99</span></button><button class="opt" type="button"><span class="n">③</span><span>7/10</span></button><button class="opt" type="button"><span class="n">④</span><span>7/9</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>소수점 아래 한 자리가 순환하면 분모가 9입니다. 0.777… = 7/9 입니다.</div>
+  </div>
+  <div class="qbox" id="m1q6" data-w="1" data-type="mc" data-a="3">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">순환소수 0.242424… 를 기약분수로 나타내면?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>12/49</span></button><button class="opt" type="button"><span class="n">②</span><span>4/15</span></button><button class="opt" type="button"><span class="n">③</span><span>24/100</span></button><button class="opt" type="button"><span class="n">④</span><span>8/33</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>두 자리가 순환하므로 24/99, 약분하면 8/33 입니다.</div>
+  </div>
+  <div class="qbox" id="m1q7" data-w="1" data-type="mc" data-a="2">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">순환소수는 어떤 수에 속하는가?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>자연수</span></button><button class="opt" type="button"><span class="n">②</span><span>무리수</span></button><button class="opt" type="button"><span class="n">③</span><span>유리수</span></button><button class="opt" type="button"><span class="n">④</span><span>정수</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>순환소수는 항상 분수로 바꿀 수 있으므로 유리수입니다.</div>
+  </div>
+  <div class="qbox" id="m1q8" data-w="1" data-type="sa" data-a="2/3">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">0.666… 을 기약분수로 나타내면? (예: 1/2 처럼 쓰세요)</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 2/3</span>0.666… = 6/9 = 2/3 입니다.</div>
+  </div>
+  <div class="qbox" id="m1q9" data-w="1" data-type="sa" data-a="0.35|.35">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">분수 7/20 을 소수로 나타내면?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 0.35</span>7/20 = 35/100 = 0.35 입니다. 분모가 2와 5뿐이라 유한소수가 됩니다.</div>
+  </div>
+  <div class="qbox" id="m1q10" data-w="1" data-type="sa" data-a="135">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">순환소수 0.135135135… 의 순환마디를 쓰시오.</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 135</span>135가 반복되므로 순환마디는 135 입니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="1">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w2">
+  <div class="wkhead"><span class="num">02</span><span class="lbl">WEEK 02</span>
+    <span class="sc" data-w="2">0 / 10</span></div>
+  <h2>지수법칙</h2>
+  <p class="sub">같은 수의 곱을 다루는 규칙</p>
+  <div class="qbox" id="m2q1" data-w="2" data-type="mc" data-a="3">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">a³ × a⁴ 을 간단히 하면?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>a¹</span></button><button class="opt" type="button"><span class="n">②</span><span>2a⁷</span></button><button class="opt" type="button"><span class="n">③</span><span>a¹²</span></button><button class="opt" type="button"><span class="n">④</span><span>a⁷</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>밑이 같은 거듭제곱의 곱은 지수를 더합니다. 3 + 4 = 7 이므로 a⁷ 입니다.</div>
+  </div>
+  <div class="qbox" id="m2q2" data-w="2" data-type="mc" data-a="3">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">(a²)³ 을 간단히 하면?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>3a²</span></button><button class="opt" type="button"><span class="n">②</span><span>a⁵</span></button><button class="opt" type="button"><span class="n">③</span><span>a⁸</span></button><button class="opt" type="button"><span class="n">④</span><span>a⁶</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>거듭제곱의 거듭제곱은 지수를 곱합니다. 2 × 3 = 6 이므로 a⁶ 입니다.</div>
+  </div>
+  <div class="qbox" id="m2q3" data-w="2" data-type="mc" data-a="1">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">a⁷ ÷ a³ 을 간단히 하면?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>a²¹</span></button><button class="opt" type="button"><span class="n">②</span><span>a⁴</span></button><button class="opt" type="button"><span class="n">③</span><span>a¹⁰</span></button><button class="opt" type="button"><span class="n">④</span><span>a³</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>밑이 같은 거듭제곱의 나눗셈은 지수를 뺍니다. 7 − 3 = 4 이므로 a⁴ 입니다.</div>
+  </div>
+  <div class="qbox" id="m2q4" data-w="2" data-type="mc" data-a="1">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">(2a³)² 을 간단히 하면?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>2a⁶</span></button><button class="opt" type="button"><span class="n">②</span><span>4a⁶</span></button><button class="opt" type="button"><span class="n">③</span><span>4a⁵</span></button><button class="opt" type="button"><span class="n">④</span><span>2a⁹</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>괄호 안 모든 것에 지수 2가 걸립니다. 2² = 4, (a³)² = a⁶ 이므로 4a⁶ 입니다.</div>
+  </div>
+  <div class="qbox" id="m2q5" data-w="2" data-type="mc" data-a="1">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">(ab²)³ 을 간단히 하면?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>a³b²</span></button><button class="opt" type="button"><span class="n">②</span><span>a³b⁶</span></button><button class="opt" type="button"><span class="n">③</span><span>ab⁶</span></button><button class="opt" type="button"><span class="n">④</span><span>a³b⁵</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>a에도 b²에도 지수 3이 걸립니다. a³ × b⁶ 입니다.</div>
+  </div>
+  <div class="qbox" id="m2q6" data-w="2" data-type="mc" data-a="2">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">2³ × 2² 의 값은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>64</span></button><button class="opt" type="button"><span class="n">②</span><span>16</span></button><button class="opt" type="button"><span class="n">③</span><span>32</span></button><button class="opt" type="button"><span class="n">④</span><span>10</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>2³⁺² = 2⁵ = 32 입니다.</div>
+  </div>
+  <div class="qbox" id="m2q7" data-w="2" data-type="mc" data-a="1">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">x⁵ ÷ x⁵ 의 값은? (단, x ≠ 0)</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>x¹⁰</span></button><button class="opt" type="button"><span class="n">②</span><span>1</span></button><button class="opt" type="button"><span class="n">③</span><span>x</span></button><button class="opt" type="button"><span class="n">④</span><span>0</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>같은 수로 나누었으므로 1입니다. 지수로 보면 x⁵⁻⁵ = x⁰ = 1 입니다.</div>
+  </div>
+  <div class="qbox" id="m2q8" data-w="2" data-type="sa" data-a="243">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">3² × 3³ 의 값을 계산하시오. (숫자만)</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 243</span>3²⁺³ = 3⁵ = 243 입니다.</div>
+  </div>
+  <div class="qbox" id="m2q9" data-w="2" data-type="sa" data-a="12">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">(x³)⁴ 은 x의 몇 제곱인가? (숫자만)</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 12</span>3 × 4 = 12 이므로 x¹² 입니다.</div>
+  </div>
+  <div class="qbox" id="m2q10" data-w="2" data-type="sa" data-a="4">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">2⁶ ÷ 2⁴ 의 값은? (숫자만)</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 4</span>2⁶⁻⁴ = 2² = 4 입니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="2">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w3">
+  <div class="wkhead"><span class="num">03</span><span class="lbl">WEEK 03</span>
+    <span class="sc" data-w="3">0 / 10</span></div>
+  <h2>다항식의 계산</h2>
+  <p class="sub">덧셈 · 뺄셈 · 곱셈 · 나눗셈</p>
+  <div class="qbox" id="m3q1" data-w="3" data-type="mc" data-a="2">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">(3x + 2y) + (x − 5y) 를 간단히 하면?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>4x − 7y</span></button><button class="opt" type="button"><span class="n">②</span><span>4x + 7y</span></button><button class="opt" type="button"><span class="n">③</span><span>4x − 3y</span></button><button class="opt" type="button"><span class="n">④</span><span>2x − 3y</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>x끼리 3x + x = 4x, y끼리 2y − 5y = −3y 입니다.</div>
+  </div>
+  <div class="qbox" id="m3q2" data-w="3" data-type="mc" data-a="3">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">(5a − 3b) − (2a − 7b) 를 간단히 하면?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>3a − 10b</span></button><button class="opt" type="button"><span class="n">②</span><span>3a − 4b</span></button><button class="opt" type="button"><span class="n">③</span><span>7a − 10b</span></button><button class="opt" type="button"><span class="n">④</span><span>3a + 4b</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>괄호 앞이 빼기이므로 부호를 모두 바꿉니다. 5a − 2a = 3a, −3b + 7b = 4b 입니다.</div>
+  </div>
+  <div class="qbox" id="m3q3" data-w="3" data-type="mc" data-a="2">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">2x(3x − 4) 를 전개하면?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>6x² − 4</span></button><button class="opt" type="button"><span class="n">②</span><span>6x − 8x</span></button><button class="opt" type="button"><span class="n">③</span><span>6x² − 8x</span></button><button class="opt" type="button"><span class="n">④</span><span>5x − 4x</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>2x를 각 항에 곱합니다. 2x × 3x = 6x², 2x × (−4) = −8x 입니다.</div>
+  </div>
+  <div class="qbox" id="m3q4" data-w="3" data-type="mc" data-a="3">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">(6x²y − 4xy) ÷ 2xy 를 간단히 하면?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>6x − 2</span></button><button class="opt" type="button"><span class="n">②</span><span>3x − 4</span></button><button class="opt" type="button"><span class="n">③</span><span>3x² − 2</span></button><button class="opt" type="button"><span class="n">④</span><span>3x − 2</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>각 항을 2xy로 나눕니다. 6x²y ÷ 2xy = 3x, −4xy ÷ 2xy = −2 입니다.</div>
+  </div>
+  <div class="qbox" id="m3q5" data-w="3" data-type="mc" data-a="3">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">(x + 3)(x + 5) 를 전개하면?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>x² + 8x + 8</span></button><button class="opt" type="button"><span class="n">②</span><span>x² + 15</span></button><button class="opt" type="button"><span class="n">③</span><span>x² + 15x + 8</span></button><button class="opt" type="button"><span class="n">④</span><span>x² + 8x + 15</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>x² + 5x + 3x + 15 = x² + 8x + 15 입니다.</div>
+  </div>
+  <div class="qbox" id="m3q6" data-w="3" data-type="mc" data-a="1">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">3(2x − 1) − 2(x + 4) 를 간단히 하면?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>8x − 11</span></button><button class="opt" type="button"><span class="n">②</span><span>4x − 11</span></button><button class="opt" type="button"><span class="n">③</span><span>4x − 3</span></button><button class="opt" type="button"><span class="n">④</span><span>4x + 5</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>6x − 3 − 2x − 8 = 4x − 11 입니다. 괄호 앞의 부호를 꼭 분배하세요.</div>
+  </div>
+  <div class="qbox" id="m3q7" data-w="3" data-type="mc" data-a="2">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">x = 2 일 때 x² + 3x − 1 의 값은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>7</span></button><button class="opt" type="button"><span class="n">②</span><span>11</span></button><button class="opt" type="button"><span class="n">③</span><span>9</span></button><button class="opt" type="button"><span class="n">④</span><span>4</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>4 + 6 − 1 = 9 입니다.</div>
+  </div>
+  <div class="qbox" id="m3q8" data-w="3" data-type="sa" data-a="5x-3|5x−3">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">(2x + 5) + (3x − 8) 을 간단히 하시오. (예: 5x-3 처럼 쓰세요)</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 5x-3</span>2x + 3x = 5x, 5 − 8 = −3 이므로 5x − 3 입니다.</div>
+  </div>
+  <div class="qbox" id="m3q9" data-w="3" data-type="sa" data-a="4">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">a = 3, b = −2 일 때 2a + b 의 값은? (숫자만)</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 4</span>2 × 3 + (−2) = 6 − 2 = 4 입니다.</div>
+  </div>
+  <div class="qbox" id="m3q10" data-w="3" data-type="sa" data-a="6">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">(x + 2)(x + 4) 를 전개했을 때 x의 계수는? (숫자만)</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 6</span>x² + 4x + 2x + 8 이므로 x의 계수는 6입니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="3">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w4">
+  <div class="wkhead"><span class="num">04</span><span class="lbl">WEEK 04</span>
+    <span class="sc" data-w="4">0 / 10</span></div>
+  <h2>일차부등식</h2>
+  <p class="sub">부등호의 방향 · 해 구하기</p>
+  <div class="qbox" id="m4q1" data-w="4" data-type="mc" data-a="3">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">부등식 x + 3 &gt; 7 의 해는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>x &lt; 10</span></button><button class="opt" type="button"><span class="n">②</span><span>x &gt; 10</span></button><button class="opt" type="button"><span class="n">③</span><span>x &lt; 4</span></button><button class="opt" type="button"><span class="n">④</span><span>x &gt; 4</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>양변에서 3을 빼면 x &gt; 4 입니다.</div>
+  </div>
+  <div class="qbox" id="m4q2" data-w="4" data-type="mc" data-a="2">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">부등식 −2x &gt; 6 의 해는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>x &lt; 3</span></button><button class="opt" type="button"><span class="n">②</span><span>x &gt; 3</span></button><button class="opt" type="button"><span class="n">③</span><span>x &lt; −3</span></button><button class="opt" type="button"><span class="n">④</span><span>x &gt; −3</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>양변을 −2로 나누면 부등호의 방향이 뒤집혀 x &lt; −3 이 됩니다.</div>
+  </div>
+  <div class="qbox" id="m4q3" data-w="4" data-type="mc" data-a="1">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">부등식의 양변에 같은 음수를 곱하면 부등호의 방향은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>그대로다</span></button><button class="opt" type="button"><span class="n">②</span><span>반대로 바뀐다</span></button><button class="opt" type="button"><span class="n">③</span><span>없어진다</span></button><button class="opt" type="button"><span class="n">④</span><span>등호가 된다</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>음수를 곱하거나 나누면 부등호의 방향이 반드시 뒤집힙니다. 부등식에서 가장 잘 틀리는 부분입니다.</div>
+  </div>
+  <div class="qbox" id="m4q4" data-w="4" data-type="mc" data-a="3">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">부등식 3x − 1 ≤ 8 의 해는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>x ≥ 9</span></button><button class="opt" type="button"><span class="n">②</span><span>x ≥ 3</span></button><button class="opt" type="button"><span class="n">③</span><span>x ≤ 9</span></button><button class="opt" type="button"><span class="n">④</span><span>x ≤ 3</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>3x ≤ 9 이므로 x ≤ 3 입니다.</div>
+  </div>
+  <div class="qbox" id="m4q5" data-w="4" data-type="mc" data-a="0">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">'x는 5보다 작지 않다'를 부등식으로 나타내면?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>x ≥ 5</span></button><button class="opt" type="button"><span class="n">②</span><span>x &gt; 5</span></button><button class="opt" type="button"><span class="n">③</span><span>x &lt; 5</span></button><button class="opt" type="button"><span class="n">④</span><span>x ≤ 5</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>작지 않다 = 같거나 크다 이므로 x ≥ 5 입니다.</div>
+  </div>
+  <div class="qbox" id="m4q6" data-w="4" data-type="mc" data-a="3">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">부등식 2x + 1 &lt; x + 6 의 해는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>x &gt; 7</span></button><button class="opt" type="button"><span class="n">②</span><span>x &lt; 7</span></button><button class="opt" type="button"><span class="n">③</span><span>x &gt; 5</span></button><button class="opt" type="button"><span class="n">④</span><span>x &lt; 5</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>양변에서 x를 빼면 x + 1 &lt; 6, 즉 x &lt; 5 입니다.</div>
+  </div>
+  <div class="qbox" id="m4q7" data-w="4" data-type="mc" data-a="3">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">한 개에 800원인 사탕을 5000원으로 살 수 있는 최대 개수는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>7개</span></button><button class="opt" type="button"><span class="n">②</span><span>5개</span></button><button class="opt" type="button"><span class="n">③</span><span>8개</span></button><button class="opt" type="button"><span class="n">④</span><span>6개</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>800x ≤ 5000 → x ≤ 6.25 이고 개수는 자연수이므로 6개입니다.</div>
+  </div>
+  <div class="qbox" id="m4q8" data-w="4" data-type="sa" data-a="3">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">부등식 4x ≥ 12 를 만족하는 가장 작은 정수는? (숫자만)</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 3</span>x ≥ 3 이므로 가장 작은 정수는 3입니다.</div>
+  </div>
+  <div class="qbox" id="m4q9" data-w="4" data-type="sa" data-a="바뀐다|반대가 된다|방향이 바뀐다|반대로 바뀐다">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">부등식의 양변에 −1을 곱하면 부등호의 방향은 어떻게 되는가? (바뀐다 / 그대로다)</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 바뀐다</span>음수를 곱하면 부등호의 방향이 바뀝니다.</div>
+  </div>
+  <div class="qbox" id="m4q10" data-w="4" data-type="sa" data-a="3">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">부등식 5x − 2 ≤ 13 을 만족하는 가장 큰 정수는? (숫자만)</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 3</span>5x ≤ 15 → x ≤ 3 이므로 가장 큰 정수는 3입니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="4">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w5">
+  <div class="wkhead"><span class="num">05</span><span class="lbl">WEEK 05</span>
+    <span class="sc" data-w="5">0 / 10</span></div>
+  <h2>연립일차방정식</h2>
+  <p class="sub">가감법과 대입법</p>
+  <div class="qbox" id="m5q1" data-w="5" data-type="mc" data-a="2">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">연립방정식 x + y = 5, x − y = 1 의 해는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>x = 2, y = 3</span></button><button class="opt" type="button"><span class="n">②</span><span>x = 1, y = 4</span></button><button class="opt" type="button"><span class="n">③</span><span>x = 3, y = 2</span></button><button class="opt" type="button"><span class="n">④</span><span>x = 4, y = 1</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>두 식을 더하면 2x = 6, x = 3. 다시 넣으면 y = 2 입니다.</div>
+  </div>
+  <div class="qbox" id="m5q2" data-w="5" data-type="mc" data-a="1">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">가감법이란 무엇인가?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>한 식을 다른 식에 넣는 방법</span></button><button class="opt" type="button"><span class="n">②</span><span>두 식을 더하거나 빼서 한 문자를 없애는 방법</span></button><button class="opt" type="button"><span class="n">③</span><span>값을 찍어 보는 방법</span></button><button class="opt" type="button"><span class="n">④</span><span>그래프를 그리는 방법</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>계수를 맞춘 뒤 더하거나 빼서 문자 하나를 지웁니다.</div>
+  </div>
+  <div class="qbox" id="m5q3" data-w="5" data-type="mc" data-a="2">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">대입법이란 무엇인가?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>해를 찍어 맞히는 방법</span></button><button class="opt" type="button"><span class="n">②</span><span>두 식을 곱하는 방법</span></button><button class="opt" type="button"><span class="n">③</span><span>한 식을 한 문자에 대해 정리해 다른 식에 넣는 방법</span></button><button class="opt" type="button"><span class="n">④</span><span>두 식을 더하는 방법</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>y = (x에 대한 식) 꼴이 이미 있을 때 특히 편합니다.</div>
+  </div>
+  <div class="qbox" id="m5q4" data-w="5" data-type="mc" data-a="2">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">연립방정식 2x + y = 7, y = x + 1 의 해는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>x = 3, y = 2</span></button><button class="opt" type="button"><span class="n">②</span><span>x = 2, y = 5</span></button><button class="opt" type="button"><span class="n">③</span><span>x = 2, y = 3</span></button><button class="opt" type="button"><span class="n">④</span><span>x = 1, y = 2</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>대입하면 2x + x + 1 = 7 → 3x = 6 → x = 2, y = 3 입니다.</div>
+  </div>
+  <div class="qbox" id="m5q5" data-w="5" data-type="mc" data-a="1">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">연립방정식 x + 2y = 8, x = 2y 의 해는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>x = 6, y = 1</span></button><button class="opt" type="button"><span class="n">②</span><span>x = 4, y = 2</span></button><button class="opt" type="button"><span class="n">③</span><span>x = 8, y = 0</span></button><button class="opt" type="button"><span class="n">④</span><span>x = 2, y = 4</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>대입하면 2y + 2y = 8 → y = 2, x = 4 입니다.</div>
+  </div>
+  <div class="qbox" id="m5q6" data-w="5" data-type="mc" data-a="2">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">3x + 2y = 12 에 x = 2 를 대입하면 y의 값은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>4</span></button><button class="opt" type="button"><span class="n">②</span><span>6</span></button><button class="opt" type="button"><span class="n">③</span><span>3</span></button><button class="opt" type="button"><span class="n">④</span><span>2</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>6 + 2y = 12 → 2y = 6 → y = 3 입니다.</div>
+  </div>
+  <div class="qbox" id="m5q7" data-w="5" data-type="mc" data-a="1">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">연립방정식의 해란 무엇인가?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>x의 값만 뜻한다</span></button><button class="opt" type="button"><span class="n">②</span><span>두 방정식을 동시에 만족하는 x, y의 짝</span></button><button class="opt" type="button"><span class="n">③</span><span>한 방정식만 만족하는 값</span></button><button class="opt" type="button"><span class="n">④</span><span>항상 정수인 값</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>두 식을 모두 참으로 만드는 (x, y)의 짝이 연립방정식의 해입니다.</div>
+  </div>
+  <div class="qbox" id="m5q8" data-w="5" data-type="sa" data-a="7">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">x + y = 10, x − y = 4 일 때 x의 값은? (숫자만)</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 7</span>두 식을 더하면 2x = 14 → x = 7 입니다.</div>
+  </div>
+  <div class="qbox" id="m5q9" data-w="5" data-type="sa" data-a="3">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">x + y = 10, x − y = 4 일 때 y의 값은? (숫자만)</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 3</span>x = 7 이므로 y = 10 − 7 = 3 입니다.</div>
+  </div>
+  <div class="qbox" id="m5q10" data-w="5" data-type="sa" data-a="3">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">2x + y = 9 에 x = 3 을 대입했을 때 y의 값은? (숫자만)</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 3</span>6 + y = 9 → y = 3 입니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="5">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w6">
+  <div class="wkhead"><span class="num">06</span><span class="lbl">WEEK 06</span>
+    <span class="sc" data-w="6">0 / 10</span></div>
+  <h2>연립방정식의 활용</h2>
+  <p class="sub">문장을 식으로 바꾸기</p>
+  <div class="qbox" id="m6q1" data-w="6" data-type="mc" data-a="3">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">두 수의 합이 20, 차가 4일 때 큰 수는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>10</span></button><button class="opt" type="button"><span class="n">②</span><span>14</span></button><button class="opt" type="button"><span class="n">③</span><span>16</span></button><button class="opt" type="button"><span class="n">④</span><span>12</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>x + y = 20, x − y = 4 → 2x = 24 → x = 12 입니다.</div>
+  </div>
+  <div class="qbox" id="m6q2" data-w="6" data-type="mc" data-a="3">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">오리와 돼지가 모두 10마리이고 다리가 26개일 때 오리는 몇 마리인가?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>6마리</span></button><button class="opt" type="button"><span class="n">②</span><span>5마리</span></button><button class="opt" type="button"><span class="n">③</span><span>3마리</span></button><button class="opt" type="button"><span class="n">④</span><span>7마리</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>오리 x, 돼지 y라 하면 x + y = 10, 2x + 4y = 26. 풀면 x = 7 입니다.</div>
+  </div>
+  <div class="qbox" id="m6q3" data-w="6" data-type="mc" data-a="0">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">500원짜리 사과와 800원짜리 배를 합쳐 7개 사고 4700원을 냈다. 사과는 몇 개인가?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>3개</span></button><button class="opt" type="button"><span class="n">②</span><span>2개</span></button><button class="opt" type="button"><span class="n">③</span><span>4개</span></button><button class="opt" type="button"><span class="n">④</span><span>5개</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>500x + 800(7 − x) = 4700 → 5600 − 300x = 4700 → x = 3 입니다.</div>
+  </div>
+  <div class="qbox" id="m6q4" data-w="6" data-type="mc" data-a="1">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">두 자리 자연수의 각 자리 숫자의 합이 9이고, 자리를 바꾼 수가 원래 수보다 27 크다. 원래 수는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>54</span></button><button class="opt" type="button"><span class="n">②</span><span>36</span></button><button class="opt" type="button"><span class="n">③</span><span>45</span></button><button class="opt" type="button"><span class="n">④</span><span>63</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>십의 자리 a, 일의 자리 b라 하면 a + b = 9, b − a = 3 → a = 3, b = 6 이므로 36 입니다.</div>
+  </div>
+  <div class="qbox" id="m6q5" data-w="6" data-type="mc" data-a="2">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">어른 3000원, 학생 2000원인 입장권을 8명이 사고 20000원을 냈다. 어른은 몇 명인가?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>5명</span></button><button class="opt" type="button"><span class="n">②</span><span>6명</span></button><button class="opt" type="button"><span class="n">③</span><span>4명</span></button><button class="opt" type="button"><span class="n">④</span><span>3명</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>3000x + 2000(8 − x) = 20000 → 16000 + 1000x = 20000 → x = 4 입니다.</div>
+  </div>
+  <div class="qbox" id="m6q6" data-w="6" data-type="mc" data-a="0">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">활용 문제를 풀 때 가장 먼저 해야 할 일은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>구하려는 것을 x, y로 놓는다</span></button><button class="opt" type="button"><span class="n">②</span><span>그래프를 그린다</span></button><button class="opt" type="button"><span class="n">③</span><span>바로 계산한다</span></button><button class="opt" type="button"><span class="n">④</span><span>답을 찍어 본다</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>무엇을 x와 y로 둘지 정하는 것이 절반입니다. 그다음에 조건을 식 두 개로 옮깁니다.</div>
+  </div>
+  <div class="qbox" id="m6q7" data-w="6" data-type="mc" data-a="1">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">아버지의 나이가 딸 나이의 3배이고 두 사람 나이의 합이 48세일 때 딸의 나이는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>16세</span></button><button class="opt" type="button"><span class="n">②</span><span>12세</span></button><button class="opt" type="button"><span class="n">③</span><span>14세</span></button><button class="opt" type="button"><span class="n">④</span><span>10세</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>딸 x, 아버지 3x → 4x = 48 → x = 12 입니다.</div>
+  </div>
+  <div class="qbox" id="m6q8" data-w="6" data-type="sa" data-a="9">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">합이 15, 차가 3인 두 수 중 큰 수는? (숫자만)</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 9</span>x + y = 15, x − y = 3 → 2x = 18 → x = 9 입니다.</div>
+  </div>
+  <div class="qbox" id="m6q9" data-w="6" data-type="sa" data-a="7|7마리">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">닭과 소가 모두 12마리이고 다리가 34개일 때 닭은 몇 마리인가? (숫자만)</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 7</span>2x + 4(12 − x) = 34 → 48 − 2x = 34 → x = 7 입니다.</div>
+  </div>
+  <div class="qbox" id="m6q10" data-w="6" data-type="sa" data-a="3|3개">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">500원과 100원짜리 동전이 모두 8개이고 금액의 합이 2000원일 때 500원 동전은 몇 개인가? (숫자만)</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 3</span>500x + 100(8 − x) = 2000 → 800 + 400x = 2000 → x = 3 입니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="6">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w7">
+  <div class="wkhead"><span class="num">07</span><span class="lbl">WEEK 07</span>
+    <span class="sc" data-w="7">0 / 10</span></div>
+  <h2>일차함수와 그래프</h2>
+  <p class="sub">기울기와 y절편</p>
+  <div class="qbox" id="m7q1" data-w="7" data-type="mc" data-a="3">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">일차함수 y = 2x + 3 에서 기울기는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>3</span></button><button class="opt" type="button"><span class="n">②</span><span>1</span></button><button class="opt" type="button"><span class="n">③</span><span>−2</span></button><button class="opt" type="button"><span class="n">④</span><span>2</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>y = ax + b 에서 x 앞의 수 a가 기울기입니다. 여기서는 2입니다.</div>
+  </div>
+  <div class="qbox" id="m7q2" data-w="7" data-type="mc" data-a="0">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">일차함수 y = 2x + 3 에서 y절편은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>3</span></button><button class="opt" type="button"><span class="n">②</span><span>2</span></button><button class="opt" type="button"><span class="n">③</span><span>−3</span></button><button class="opt" type="button"><span class="n">④</span><span>0</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>상수항 b가 y절편입니다. 그래프가 y축과 만나는 점의 y좌표로 3입니다.</div>
+  </div>
+  <div class="qbox" id="m7q3" data-w="7" data-type="mc" data-a="1">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">y = −x + 4 의 그래프 모양으로 옳은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>오른쪽으로 갈수록 올라가는 직선</span></button><button class="opt" type="button"><span class="n">②</span><span>오른쪽으로 갈수록 내려가는 직선</span></button><button class="opt" type="button"><span class="n">③</span><span>세로로 선 직선</span></button><button class="opt" type="button"><span class="n">④</span><span>가로로 평평한 직선</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>기울기가 음수(−1)이므로 오른쪽 아래로 내려갑니다.</div>
+  </div>
+  <div class="qbox" id="m7q4" data-w="7" data-type="mc" data-a="2">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">y = 3x − 2 에서 x = 2 일 때 y의 값은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>6</span></button><button class="opt" type="button"><span class="n">②</span><span>1</span></button><button class="opt" type="button"><span class="n">③</span><span>4</span></button><button class="opt" type="button"><span class="n">④</span><span>8</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>3 × 2 − 2 = 4 입니다.</div>
+  </div>
+  <div class="qbox" id="m7q5" data-w="7" data-type="mc" data-a="2">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">두 점 (0, 1)과 (2, 5)를 지나는 직선의 기울기는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>3</span></button><button class="opt" type="button"><span class="n">②</span><span>4</span></button><button class="opt" type="button"><span class="n">③</span><span>2</span></button><button class="opt" type="button"><span class="n">④</span><span>1/2</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>기울기 = (y의 변화량) ÷ (x의 변화량) = (5 − 1) ÷ (2 − 0) = 2 입니다.</div>
+  </div>
+  <div class="qbox" id="m7q6" data-w="7" data-type="mc" data-a="1">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">기울기가 같고 y절편이 다른 두 일차함수의 그래프는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>한 점에서 만난다</span></button><button class="opt" type="button"><span class="n">②</span><span>서로 평행하다</span></button><button class="opt" type="button"><span class="n">③</span><span>수직으로 만난다</span></button><button class="opt" type="button"><span class="n">④</span><span>완전히 겹친다</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>기울어진 정도가 같고 출발점만 다르므로 나란히 갑니다.</div>
+  </div>
+  <div class="qbox" id="m7q7" data-w="7" data-type="mc" data-a="3">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">y = ax + b 에서 a &lt; 0 일 때 옳은 설명은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>x가 커지면 y도 커진다</span></button><button class="opt" type="button"><span class="n">②</span><span>y는 항상 0이다</span></button><button class="opt" type="button"><span class="n">③</span><span>그래프가 곡선이다</span></button><button class="opt" type="button"><span class="n">④</span><span>x가 커지면 y는 작아진다</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>기울기가 음수이면 오른쪽으로 갈수록 값이 줄어듭니다.</div>
+  </div>
+  <div class="qbox" id="m7q8" data-w="7" data-type="sa" data-a="4">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">일차함수 y = 4x − 5 의 기울기는? (숫자만)</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 4</span>x 앞의 수인 4가 기울기입니다.</div>
+  </div>
+  <div class="qbox" id="m7q9" data-w="7" data-type="sa" data-a="6">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">일차함수 y = −2x + 6 의 y절편은? (숫자만)</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 6</span>상수항 6이 y절편입니다.</div>
+  </div>
+  <div class="qbox" id="m7q10" data-w="7" data-type="sa" data-a="3">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">일차함수 y = 2x − 6 의 그래프가 x축과 만나는 점의 x좌표는? (숫자만)</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 3</span>y = 0 을 넣으면 2x − 6 = 0 → x = 3 입니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="7">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w8">
+  <div class="wkhead"><span class="num">08</span><span class="lbl">WEEK 08</span>
+    <span class="sc" data-w="8">0 / 10</span></div>
+  <h2>일차함수와 일차방정식</h2>
+  <p class="sub">그래프의 교점 = 연립방정식의 해</p>
+  <div class="qbox" id="m8q1" data-w="8" data-type="mc" data-a="2">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">일차방정식 2x + y = 4 를 y에 대해 풀면?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>y = −2x − 4</span></button><button class="opt" type="button"><span class="n">②</span><span>y = 2x − 4</span></button><button class="opt" type="button"><span class="n">③</span><span>y = −2x + 4</span></button><button class="opt" type="button"><span class="n">④</span><span>y = 2x + 4</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>양변에서 2x를 빼면 y = −2x + 4 입니다.</div>
+  </div>
+  <div class="qbox" id="m8q2" data-w="8" data-type="mc" data-a="2">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">방정식 x = 3 의 그래프는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>원점을 지나는 직선</span></button><button class="opt" type="button"><span class="n">②</span><span>점 하나</span></button><button class="opt" type="button"><span class="n">③</span><span>y축에 평행한 세로 직선</span></button><button class="opt" type="button"><span class="n">④</span><span>x축에 평행한 가로 직선</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>x가 항상 3인 점들이 모여 세로 직선이 됩니다.</div>
+  </div>
+  <div class="qbox" id="m8q3" data-w="8" data-type="mc" data-a="2">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">방정식 y = −2 의 그래프는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>y축에 평행한 세로 직선</span></button><button class="opt" type="button"><span class="n">②</span><span>곡선</span></button><button class="opt" type="button"><span class="n">③</span><span>x축에 평행한 가로 직선</span></button><button class="opt" type="button"><span class="n">④</span><span>기울어진 직선</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>y가 항상 −2인 점들이 모여 가로 직선이 됩니다.</div>
+  </div>
+  <div class="qbox" id="m8q4" data-w="8" data-type="mc" data-a="3">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">두 일차방정식의 그래프가 만나는 점이 뜻하는 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>x절편</span></button><button class="opt" type="button"><span class="n">②</span><span>기울기</span></button><button class="opt" type="button"><span class="n">③</span><span>y절편</span></button><button class="opt" type="button"><span class="n">④</span><span>연립방정식의 해</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>두 식을 모두 만족하는 점이므로 교점의 좌표가 곧 연립방정식의 해입니다.</div>
+  </div>
+  <div class="qbox" id="m8q5" data-w="8" data-type="mc" data-a="2">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">두 직선이 서로 평행할 때 연립방정식의 해의 개수는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>하나</span></button><button class="opt" type="button"><span class="n">②</span><span>둘</span></button><button class="opt" type="button"><span class="n">③</span><span>없다</span></button><button class="opt" type="button"><span class="n">④</span><span>무수히 많다</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>만나지 않으므로 두 식을 동시에 만족하는 값이 없습니다.</div>
+  </div>
+  <div class="qbox" id="m8q6" data-w="8" data-type="mc" data-a="3">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">두 직선이 완전히 겹칠 때 연립방정식의 해의 개수는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>없다</span></button><button class="opt" type="button"><span class="n">②</span><span>하나</span></button><button class="opt" type="button"><span class="n">③</span><span>둘</span></button><button class="opt" type="button"><span class="n">④</span><span>무수히 많다</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>모든 점이 두 식을 동시에 만족하므로 해가 무수히 많습니다.</div>
+  </div>
+  <div class="qbox" id="m8q7" data-w="8" data-type="mc" data-a="1">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">연립방정식 x + y = 4, x − y = 2 의 그래프가 만나는 점의 좌표는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>(4, 0)</span></button><button class="opt" type="button"><span class="n">②</span><span>(3, 1)</span></button><button class="opt" type="button"><span class="n">③</span><span>(2, 2)</span></button><button class="opt" type="button"><span class="n">④</span><span>(1, 3)</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>더하면 2x = 6 → x = 3, y = 1 이므로 교점은 (3, 1) 입니다.</div>
+  </div>
+  <div class="qbox" id="m8q8" data-w="8" data-type="sa" data-a="-3|−3">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">3x + y = 5 를 y에 대해 풀면 y = □x + 5 이다. □에 알맞은 수는? (숫자만, 예: -3)</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 -3</span>y = −3x + 5 이므로 □는 −3 입니다.</div>
+  </div>
+  <div class="qbox" id="m8q9" data-w="8" data-type="sa" data-a="해">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">두 직선의 그래프가 한 점에서 만날 때, 그 점의 좌표는 연립방정식의 무엇인가?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 해</span>교점의 좌표가 곧 연립방정식의 해입니다.</div>
+  </div>
+  <div class="qbox" id="m8q10" data-w="8" data-type="sa" data-a="x축|엑스축|가로축">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">직선 y = 5 는 어느 축에 평행한가?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 x축</span>y값이 항상 5인 가로 직선이므로 x축에 평행합니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="8">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w9">
+  <div class="wkhead"><span class="num">09</span><span class="lbl">WEEK 09</span>
+    <span class="sc" data-w="9">0 / 10</span></div>
+  <h2>삼각형과 사각형의 성질</h2>
+  <p class="sub">이등변삼각형 · 평행사변형 · 마름모</p>
+  <div class="qbox" id="m9q1" data-w="9" data-type="mc" data-a="2">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">이등변삼각형의 성질로 옳은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>세 변의 길이가 모두 같다</span></button><button class="opt" type="button"><span class="n">②</span><span>한 각이 반드시 직각이다</span></button><button class="opt" type="button"><span class="n">③</span><span>두 밑각의 크기가 같다</span></button><button class="opt" type="button"><span class="n">④</span><span>넓이가 항상 같다</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>두 변의 길이가 같으면 그 대각인 두 밑각의 크기도 같습니다.</div>
+  </div>
+  <div class="qbox" id="m9q2" data-w="9" data-type="mc" data-a="1">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">삼각형의 세 내각의 크기의 합은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>360°</span></button><button class="opt" type="button"><span class="n">②</span><span>180°</span></button><button class="opt" type="button"><span class="n">③</span><span>90°</span></button><button class="opt" type="button"><span class="n">④</span><span>270°</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>어떤 삼각형이든 세 내각의 합은 180°입니다.</div>
+  </div>
+  <div class="qbox" id="m9q3" data-w="9" data-type="mc" data-a="1">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">직각삼각형의 합동 조건에 해당하는 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>세 각의 크기가 각각 같다</span></button><button class="opt" type="button"><span class="n">②</span><span>빗변의 길이와 한 예각의 크기가 각각 같다</span></button><button class="opt" type="button"><span class="n">③</span><span>넓이가 같다</span></button><button class="opt" type="button"><span class="n">④</span><span>한 변의 길이만 같다</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>RHA(빗변과 한 예각), RHS(빗변과 다른 한 변)가 직각삼각형의 합동 조건입니다.</div>
+  </div>
+  <div class="qbox" id="m9q4" data-w="9" data-type="mc" data-a="0">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">평행사변형의 성질로 옳지 <b>않은</b> 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>두 대각선의 길이가 항상 같다</span></button><button class="opt" type="button"><span class="n">②</span><span>두 대각선이 서로 다른 것을 이등분한다</span></button><button class="opt" type="button"><span class="n">③</span><span>두 쌍의 대변의 길이가 각각 같다</span></button><button class="opt" type="button"><span class="n">④</span><span>두 쌍의 대각의 크기가 각각 같다</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>대각선의 길이가 같은 것은 직사각형의 성질입니다. 평행사변형에서는 대각선이 서로를 이등분할 뿐입니다.</div>
+  </div>
+  <div class="qbox" id="m9q5" data-w="9" data-type="mc" data-a="0">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">마름모의 대각선에 대한 설명으로 옳은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>두 대각선이 서로 수직으로 만난다</span></button><button class="opt" type="button"><span class="n">②</span><span>대각선이 만나지 않는다</span></button><button class="opt" type="button"><span class="n">③</span><span>대각선이 한 개뿐이다</span></button><button class="opt" type="button"><span class="n">④</span><span>두 대각선의 길이가 같다</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>네 변의 길이가 같은 마름모는 두 대각선이 수직으로 만나며 서로를 이등분합니다.</div>
+  </div>
+  <div class="qbox" id="m9q6" data-w="9" data-type="mc" data-a="3">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">직사각형의 성질로 옳은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>두 대각선이 수직이다</span></button><button class="opt" type="button"><span class="n">②</span><span>네 변의 길이가 같다</span></button><button class="opt" type="button"><span class="n">③</span><span>대각선이 서로 만나지 않는다</span></button><button class="opt" type="button"><span class="n">④</span><span>두 대각선의 길이가 같다</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>네 각이 직각인 직사각형은 두 대각선의 길이가 같습니다.</div>
+  </div>
+  <div class="qbox" id="m9q7" data-w="9" data-type="mc" data-a="0">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">삼각형의 두 내각이 각각 50°와 70°일 때 나머지 한 내각의 크기는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>60°</span></button><button class="opt" type="button"><span class="n">②</span><span>70°</span></button><button class="opt" type="button"><span class="n">③</span><span>120°</span></button><button class="opt" type="button"><span class="n">④</span><span>50°</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>180° − (50° + 70°) = 60° 입니다.</div>
+  </div>
+  <div class="qbox" id="m9q8" data-w="9" data-type="sa" data-a="이등변삼각형|이등변 삼각형">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">두 변의 길이가 같은 삼각형을 무엇이라 하는가?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 이등변삼각형</span>이등변삼각형입니다.</div>
+  </div>
+  <div class="qbox" id="m9q9" data-w="9" data-type="sa" data-a="내각|내각의 크기">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">삼각형의 한 외각의 크기는 그와 이웃하지 않는 두 □의 크기의 합과 같다. □에 알맞은 말은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 내각</span>내각입니다. 외각 = 이웃하지 않는 두 내각의 합입니다.</div>
+  </div>
+  <div class="qbox" id="m9q10" data-w="9" data-type="sa" data-a="마름모">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">네 변의 길이가 모두 같은 사각형을 무엇이라 하는가?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 마름모</span>마름모입니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="9">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w10">
+  <div class="wkhead"><span class="num">10</span><span class="lbl">WEEK 10</span>
+    <span class="sc" data-w="10">0 / 10</span></div>
+  <h2>도형의 닮음</h2>
+  <p class="sub">닮음비 · 넓이비 · 부피비</p>
+  <div class="qbox" id="m10q1" data-w="10" data-type="mc" data-a="2">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">두 도형이 닮음이라는 것은 어떤 뜻인가?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>각의 크기만 같다</span></button><button class="opt" type="button"><span class="n">②</span><span>넓이가 같다</span></button><button class="opt" type="button"><span class="n">③</span><span>모양이 같고 대응하는 변의 길이의 비가 일정하다</span></button><button class="opt" type="button"><span class="n">④</span><span>크기가 완전히 같다</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>확대·축소하면 완전히 포개어지는 관계입니다. 대응각은 같고 대응변의 비는 일정합니다.</div>
+  </div>
+  <div class="qbox" id="m10q2" data-w="10" data-type="mc" data-a="3">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">두 삼각형의 닮음 조건이 <b>아닌</b> 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>두 쌍의 대응각의 크기가 각각 같다</span></button><button class="opt" type="button"><span class="n">②</span><span>세 쌍의 대응변의 길이의 비가 같다</span></button><button class="opt" type="button"><span class="n">③</span><span>두 쌍의 대응변의 비가 같고 끼인각이 같다</span></button><button class="opt" type="button"><span class="n">④</span><span>두 삼각형의 넓이가 같다</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>닮음 조건은 SSS, SAS, AA 세 가지입니다. 넓이가 같다고 닮음이 되지는 않습니다.</div>
+  </div>
+  <div class="qbox" id="m10q3" data-w="10" data-type="mc" data-a="2">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">닮음비가 2 : 3 인 두 도형의 둘레의 길이의 비는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>4 : 9</span></button><button class="opt" type="button"><span class="n">②</span><span>1 : 1</span></button><button class="opt" type="button"><span class="n">③</span><span>2 : 3</span></button><button class="opt" type="button"><span class="n">④</span><span>8 : 27</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>둘레는 길이이므로 닮음비와 같은 2 : 3 입니다.</div>
+  </div>
+  <div class="qbox" id="m10q4" data-w="10" data-type="mc" data-a="1">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">닮음비가 2 : 3 인 두 평면도형의 넓이의 비는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>2 : 3</span></button><button class="opt" type="button"><span class="n">②</span><span>4 : 9</span></button><button class="opt" type="button"><span class="n">③</span><span>8 : 27</span></button><button class="opt" type="button"><span class="n">④</span><span>6 : 9</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>넓이의 비는 닮음비의 제곱입니다. 2² : 3² = 4 : 9 입니다.</div>
+  </div>
+  <div class="qbox" id="m10q5" data-w="10" data-type="mc" data-a="1">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">닮음비가 1 : 2 인 두 입체도형의 부피의 비는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>1 : 6</span></button><button class="opt" type="button"><span class="n">②</span><span>1 : 8</span></button><button class="opt" type="button"><span class="n">③</span><span>1 : 2</span></button><button class="opt" type="button"><span class="n">④</span><span>1 : 4</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>부피의 비는 닮음비의 세제곱입니다. 1³ : 2³ = 1 : 8 입니다.</div>
+  </div>
+  <div class="qbox" id="m10q6" data-w="10" data-type="mc" data-a="2">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">삼각형에서 두 변의 중점을 이은 선분에 대한 설명으로 옳은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>항상 밑변을 지난다</span></button><button class="opt" type="button"><span class="n">②</span><span>나머지 한 변과 길이가 같다</span></button><button class="opt" type="button"><span class="n">③</span><span>나머지 한 변과 평행하고 길이는 그 절반이다</span></button><button class="opt" type="button"><span class="n">④</span><span>나머지 한 변과 수직이다</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>삼각형의 중점 연결 정리입니다.</div>
+  </div>
+  <div class="qbox" id="m10q7" data-w="10" data-type="mc" data-a="3">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">지도의 축척은 무엇을 이용한 것인가?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>대칭</span></button><button class="opt" type="button"><span class="n">②</span><span>확률</span></button><button class="opt" type="button"><span class="n">③</span><span>합동</span></button><button class="opt" type="button"><span class="n">④</span><span>닮음</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>실제 땅을 일정한 비로 줄여 그린 것이므로 닮음의 이용입니다.</div>
+  </div>
+  <div class="qbox" id="m10q8" data-w="10" data-type="sa" data-a="닮음비">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">닮은 두 도형에서 대응하는 변의 길이의 비를 무엇이라 하는가?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 닮음비</span>닮음비입니다.</div>
+  </div>
+  <div class="qbox" id="m10q9" data-w="10" data-type="sa" data-a="25">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">닮음비가 3 : 5 인 두 도형의 넓이의 비를 9 : □ 로 나타낼 때 □에 알맞은 수는? (숫자만)</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 25</span>넓이의 비는 3² : 5² = 9 : 25 입니다.</div>
+  </div>
+  <div class="qbox" id="m10q10" data-w="10" data-type="sa" data-a="1/2|2분의 1|0.5">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">삼각형 ABC에서 변 AB, AC의 중점을 각각 M, N이라 할 때 선분 MN의 길이는 BC의 몇 분의 몇인가? (예: 1/2)</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 1/2</span>중점 연결 정리에 따라 MN은 BC의 1/2 입니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="10">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w11">
+  <div class="wkhead"><span class="num">11</span><span class="lbl">WEEK 11</span>
+    <span class="sc" data-w="11">0 / 10</span></div>
+  <h2>피타고라스 정리</h2>
+  <p class="sub">직각삼각형의 세 변</p>
+  <div class="qbox" id="m11q1" data-w="11" data-type="mc" data-a="0">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">피타고라스 정리를 바르게 나타낸 것은? (c는 빗변)</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>a² + b² = c²</span></button><button class="opt" type="button"><span class="n">②</span><span>a² − b² = c²</span></button><button class="opt" type="button"><span class="n">③</span><span>a × b = c</span></button><button class="opt" type="button"><span class="n">④</span><span>a + b = c</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>직각을 낀 두 변의 제곱의 합이 빗변의 제곱과 같습니다.</div>
+  </div>
+  <div class="qbox" id="m11q2" data-w="11" data-type="mc" data-a="1">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">직각을 낀 두 변이 3과 4인 직각삼각형의 빗변의 길이는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>12</span></button><button class="opt" type="button"><span class="n">②</span><span>5</span></button><button class="opt" type="button"><span class="n">③</span><span>6</span></button><button class="opt" type="button"><span class="n">④</span><span>7</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>3² + 4² = 9 + 16 = 25 = 5² 이므로 빗변은 5입니다.</div>
+  </div>
+  <div class="qbox" id="m11q3" data-w="11" data-type="mc" data-a="3">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">직각을 낀 두 변이 6과 8인 직각삼각형의 빗변의 길이는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>48</span></button><button class="opt" type="button"><span class="n">②</span><span>14</span></button><button class="opt" type="button"><span class="n">③</span><span>12</span></button><button class="opt" type="button"><span class="n">④</span><span>10</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>36 + 64 = 100 = 10² 이므로 10입니다.</div>
+  </div>
+  <div class="qbox" id="m11q4" data-w="11" data-type="mc" data-a="1">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">빗변이 13, 한 변이 5인 직각삼각형의 나머지 한 변의 길이는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>11</span></button><button class="opt" type="button"><span class="n">②</span><span>12</span></button><button class="opt" type="button"><span class="n">③</span><span>8</span></button><button class="opt" type="button"><span class="n">④</span><span>9</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>13² − 5² = 169 − 25 = 144 = 12² 이므로 12입니다.</div>
+  </div>
+  <div class="qbox" id="m11q5" data-w="11" data-type="mc" data-a="1">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">세 변의 길이가 5, 12, 13인 삼각형은 어떤 삼각형인가?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>정삼각형</span></button><button class="opt" type="button"><span class="n">②</span><span>직각삼각형</span></button><button class="opt" type="button"><span class="n">③</span><span>예각삼각형</span></button><button class="opt" type="button"><span class="n">④</span><span>둔각삼각형</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>25 + 144 = 169 이므로 피타고라스 정리를 만족합니다. 직각삼각형입니다.</div>
+  </div>
+  <div class="qbox" id="m11q6" data-w="11" data-type="mc" data-a="3">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">세 변의 길이가 4, 5, 6인 삼각형에 대한 설명으로 옳은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>정삼각형이다</span></button><button class="opt" type="button"><span class="n">②</span><span>존재할 수 없다</span></button><button class="opt" type="button"><span class="n">③</span><span>직각삼각형이다</span></button><button class="opt" type="button"><span class="n">④</span><span>직각삼각형이 아니다</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>4² + 5² = 41 이지만 6² = 36 이므로 같지 않습니다. 직각삼각형이 아닙니다.</div>
+  </div>
+  <div class="qbox" id="m11q7" data-w="11" data-type="mc" data-a="3">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">한 변의 길이가 1인 정사각형의 대각선의 길이는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>√3</span></button><button class="opt" type="button"><span class="n">②</span><span>2</span></button><button class="opt" type="button"><span class="n">③</span><span>1</span></button><button class="opt" type="button"><span class="n">④</span><span>√2</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>1² + 1² = 2 이므로 대각선은 √2 입니다.</div>
+  </div>
+  <div class="qbox" id="m11q8" data-w="11" data-type="sa" data-a="15">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">직각을 낀 두 변의 길이가 9와 12인 직각삼각형의 빗변의 길이는? (숫자만)</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 15</span>81 + 144 = 225 = 15² 이므로 15입니다.</div>
+  </div>
+  <div class="qbox" id="m11q9" data-w="11" data-type="sa" data-a="24">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">빗변이 25, 한 변이 7인 직각삼각형의 나머지 한 변의 길이는? (숫자만)</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 24</span>625 − 49 = 576 = 24² 이므로 24입니다.</div>
+  </div>
+  <div class="qbox" id="m11q10" data-w="11" data-type="sa" data-a="17">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">가로 8, 세로 15인 직사각형의 대각선의 길이는? (숫자만)</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 17</span>64 + 225 = 289 = 17² 이므로 17입니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="11">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w12">
+  <div class="wkhead"><span class="num">12</span><span class="lbl">WEEK 12</span>
+    <span class="sc" data-w="12">0 / 10</span></div>
+  <h2>경우의 수와 확률</h2>
+  <p class="sub">세는 법 · 확률의 뜻</p>
+  <div class="qbox" id="m12q1" data-w="12" data-type="mc" data-a="0">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">주사위 한 개를 던질 때 일어나는 모든 경우의 수는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>6</span></button><button class="opt" type="button"><span class="n">②</span><span>12</span></button><button class="opt" type="button"><span class="n">③</span><span>1</span></button><button class="opt" type="button"><span class="n">④</span><span>36</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>1부터 6까지 6가지입니다.</div>
+  </div>
+  <div class="qbox" id="m12q2" data-w="12" data-type="mc" data-a="1">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">동전 2개를 동시에 던질 때 일어나는 모든 경우의 수는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>3</span></button><button class="opt" type="button"><span class="n">②</span><span>4</span></button><button class="opt" type="button"><span class="n">③</span><span>8</span></button><button class="opt" type="button"><span class="n">④</span><span>2</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>(앞,앞) (앞,뒤) (뒤,앞) (뒤,뒤)로 4가지입니다.</div>
+  </div>
+  <div class="qbox" id="m12q3" data-w="12" data-type="mc" data-a="2">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">주사위 한 개를 던질 때 짝수가 나올 확률은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>1/6</span></button><button class="opt" type="button"><span class="n">②</span><span>2/3</span></button><button class="opt" type="button"><span class="n">③</span><span>1/2</span></button><button class="opt" type="button"><span class="n">④</span><span>1/3</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>짝수는 2, 4, 6으로 3가지이므로 3/6 = 1/2 입니다.</div>
+  </div>
+  <div class="qbox" id="m12q4" data-w="12" data-type="mc" data-a="2">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">서로 다른 옷 3벌과 신발 2켤레로 만들 수 있는 옷차림의 수는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>9가지</span></button><button class="opt" type="button"><span class="n">②</span><span>5가지</span></button><button class="opt" type="button"><span class="n">③</span><span>6가지</span></button><button class="opt" type="button"><span class="n">④</span><span>3가지</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>옷을 고른 뒤 신발을 고르므로 3 × 2 = 6가지입니다.</div>
+  </div>
+  <div class="qbox" id="m12q5" data-w="12" data-type="mc" data-a="1">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">사건 A와 B가 동시에 일어나지 않을 때 'A 또는 B'가 일어나는 경우의 수는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>항상 1이다</span></button><button class="opt" type="button"><span class="n">②</span><span>두 경우의 수를 더한다</span></button><button class="opt" type="button"><span class="n">③</span><span>두 경우의 수를 곱한다</span></button><button class="opt" type="button"><span class="n">④</span><span>두 경우의 수를 뺀다</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>'또는'은 더하기, '그리고(동시에)'는 곱하기입니다.</div>
+  </div>
+  <div class="qbox" id="m12q6" data-w="12" data-type="mc" data-a="2">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">확률의 값이 가질 수 있는 범위는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>−1 이상 1 이하</span></button><button class="opt" type="button"><span class="n">②</span><span>1 이상</span></button><button class="opt" type="button"><span class="n">③</span><span>0 이상 1 이하</span></button><button class="opt" type="button"><span class="n">④</span><span>0 이상 100 이하</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>절대 일어나지 않으면 0, 반드시 일어나면 1입니다.</div>
+  </div>
+  <div class="qbox" id="m12q7" data-w="12" data-type="mc" data-a="3">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">주머니에 빨간 공 3개와 파란 공 2개가 있다. 한 개를 꺼낼 때 빨간 공일 확률은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>2/5</span></button><button class="opt" type="button"><span class="n">②</span><span>3/2</span></button><button class="opt" type="button"><span class="n">③</span><span>1/2</span></button><button class="opt" type="button"><span class="n">④</span><span>3/5</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>전체 5개 중 빨간 공 3개이므로 3/5 입니다.</div>
+  </div>
+  <div class="qbox" id="m12q8" data-w="12" data-type="sa" data-a="8|8가지">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">동전 3개를 동시에 던질 때 일어나는 모든 경우의 수는? (숫자만)</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 8</span>2 × 2 × 2 = 8가지입니다.</div>
+  </div>
+  <div class="qbox" id="m12q9" data-w="12" data-type="sa" data-a="1/3|3분의 1">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">주사위 한 개를 던질 때 3의 배수가 나올 확률을 기약분수로 쓰시오. (예: 1/2)</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 1/3</span>3의 배수는 3과 6으로 2가지이므로 2/6 = 1/3 입니다.</div>
+  </div>
+  <div class="qbox" id="m12q10" data-w="12" data-type="sa" data-a="1">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">어떤 사건이 반드시 일어날 때 그 확률의 값은? (숫자만)</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 1</span>반드시 일어나면 확률은 1입니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="12">0 / 10</b></div>
+</section>
+
+<footer>
+  수학 문제집 120제 · 12주 × 10문제 · 기록은 이 기기에만 저장됩니다<br>
+  <button class="reset" id="resetAll" style="margin:8px 0 0">전체 기록 지우고 처음부터</button><br>
+  학습 문서 · <a href="index.html">수학 사다리 12주</a>
+</footer>
+</div>
+<script>
+(function(){
+  var KEY="math_quiz_v1";
+  function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){return{}}}
+  function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+  var state=load();
+
+  function norm(s){return (s||"").replace(/\s+/g,"").replace(/[.,·’'"]/g,"").toLowerCase();}
+
+  function mark(box,right){
+    box.dataset.done="1";
+    box.querySelector(".exp").classList.add("show");
+    var s=load(); s[box.id]=right?1:0; save(s); paint();
+  }
+
+  document.querySelectorAll(".qbox[data-type=mc]").forEach(function(box){
+    var ans=parseInt(box.dataset.a,10);
+    box.querySelectorAll(".opt").forEach(function(btn,i){
+      btn.addEventListener("click",function(){
+        if(box.dataset.done) return;
+        box.querySelectorAll(".opt").forEach(function(b,j){
+          b.disabled=true;
+          if(j===ans) b.classList.add("ok");
+          else if(j===i) b.classList.add("no");
+        });
+        mark(box, i===ans);
+      });
+    });
+  });
+
+  document.querySelectorAll(".qbox[data-type=sa]").forEach(function(box){
+    var accept=(box.dataset.a||"").split("|").map(norm);
+    var input=box.querySelector("input"), btn=box.querySelector("button");
+    function check(){
+      if(box.dataset.done) return;
+      var right=accept.indexOf(norm(input.value))>=0;
+      input.classList.add(right?"ok":"no");
+      input.readOnly=true; btn.disabled=true;
+      mark(box,right);
+    }
+    btn.addEventListener("click",check);
+    input.addEventListener("keydown",function(e){if(e.key==="Enter")check();});
+  });
+
+  function paint(){
+    var s=load(), total=0;
+    for(var w=1;w<=12;w++){
+      var right=0, done=0;
+      document.querySelectorAll('.qbox[data-w="'+w+'"]').forEach(function(b){
+        if(b.id in s){done++; if(s[b.id]===1) right++;}
+      });
+      total+=right;
+      var el=document.querySelector('.sc[data-w="'+w+'"]');
+      if(el) el.textContent = done? (right+" / "+done+" 맞음") : "0 / 10";
+      var fo=document.querySelector('.wkfoot b[data-w="'+w+'"]');
+      if(fo) fo.textContent = right+" / 10";
+    }
+    var t=document.getElementById("total"); if(t) t.textContent=total+" / 120";
+    var bar=document.getElementById("bar"); if(bar) bar.style.width=(total/120*100)+"%";
+  }
+
+  // 새로고침해도 푼 문제는 유지
+  document.querySelectorAll(".qbox").forEach(function(box){
+    if(!(box.id in state)) return;
+    var right=state[box.id]===1;
+    box.dataset.done="1";
+    box.querySelector(".exp").classList.add("show");
+    if(box.dataset.type==="mc"){
+      var ans=parseInt(box.dataset.a,10);
+      box.querySelectorAll(".opt").forEach(function(b,j){
+        b.disabled=true;
+        if(j===ans) b.classList.add("ok");
+      });
+      if(!right) box.querySelector(".qn").insertAdjacentHTML("beforeend"," · 틀림");
+    }else{
+      var inp=box.querySelector("input"), bt=box.querySelector("button");
+      inp.readOnly=true; bt.disabled=true;
+      inp.classList.add(right?"ok":"no");
+      if(right && !inp.value) inp.value=(box.dataset.a||"").split("|")[0];
+    }
+  });
+  paint();
+
+  var rs=document.getElementById("resetAll");
+  if(rs) rs.addEventListener("click",function(){
+    if(!confirm("푼 기록을 모두 지우고 처음부터 다시 풀까요?")) return;
+    save({}); location.reload();
+  });
+
+  var links=[].slice.call(document.querySelectorAll("nav.jump a[href^='#']"));
+  var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1))});
+  function onScroll(){
+    var y=window.scrollY+120,idx=0;
+    secs.forEach(function(s,i){if(s&&s.offsetTop<=y)idx=i});
+    links.forEach(function(a,i){a.classList.toggle("now",i===idx)});
+  }
+  window.addEventListener("scroll",onScroll,{passive:true});onScroll();
+})();
+</script>
+</body>
+</html>

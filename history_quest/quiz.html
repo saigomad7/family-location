@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#DCE2DB">
+<title>역사 문제집 120제</title>
+<meta name="description" content="역사 항해 12주 과정에 맞춘 120문제. 주차별 10문제씩 풀고 바로 채점합니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#131C18; --ink2:#2C3A33; --muted:#5F6E66; --faint:#8A968F;
+    --mist:#DCE2DB; --surface:#F8FAF6; --surface2:#EFF3EC;
+    --line:#C3CCC1; --hair:#DDE4DB;
+    --key:#8C2F3E; --wash:#F6E4E7; --kline:#D9A8B0;
+    --good:#1F6249; --bad:#8C2F3E; --good-bg:#DEEDE4; --bad-bg:#F6E4E7;
+    --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+    --mono:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--mist);color:var(--ink);font-family:var(--sans);
+    font-size:16px;line-height:1.72;letter-spacing:-0.01em;
+    padding:0 18px calc(80px + env(safe-area-inset-bottom));
+    word-break:keep-all;overflow-wrap:anywhere;}
+  .wrap{max-width:760px;margin:0 auto}
+  p{margin:0 0 12px}
+  b,strong{font-weight:600;color:var(--ink)}
+
+  .cover{padding:40px 0 26px;border-bottom:2px solid var(--ink)}
+  .kicker{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--key);margin:0 0 14px}
+  h1{font-size:clamp(26px,6vw,40px);font-weight:700;line-height:1.26;letter-spacing:-.035em;margin:0 0 14px}
+  .lede{font-size:15.5px;font-weight:300;color:var(--ink2);margin:0 0 20px;max-width:62ch}
+  .lede b{font-weight:600;color:var(--ink)}
+  .metaline{display:flex;flex-wrap:wrap;gap:6px 20px;font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+  .metaline b{color:var(--ink);font-weight:500}
+
+  .summary{background:var(--ink);border-radius:3px;padding:22px 20px;margin:24px 0 0}
+  .summary h2{color:#F6FAF5;font-size:17px;font-weight:600;margin:0 0 5px}
+  .summary .sd{color:#93A399;font-size:13px;font-weight:300;margin:0 0 18px;line-height:1.6}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:16px}
+  .kpi .kl{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+    color:#7E8F84;display:block;margin-bottom:4px}
+  .kpi .kv{font-size:clamp(20px,3vw,26px);font-weight:700;color:#F0AEB8;letter-spacing:-.03em;display:block;line-height:1.1}
+  .kpi .kn{font-size:11.5px;color:#B9C6BC;display:block;margin-top:5px;font-weight:300;line-height:1.5}
+  .bar{height:7px;background:#26332C;border-radius:99px;overflow:hidden;margin-top:16px}
+  .bar i{display:block;height:100%;width:0;background:#F0AEB8;transition:width .3s}
+
+  nav.jump{position:sticky;top:0;z-index:40;margin:0 -18px;padding:0 18px;
+    background:rgba(220,226,219,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+  nav.jump .row{display:flex;gap:5px;overflow-x:auto;padding:9px 0;scrollbar-width:none}
+  nav.jump .row::-webkit-scrollbar{display:none}
+  nav.jump a{flex:0 0 auto;font-family:var(--mono);font-size:11.5px;color:var(--muted);
+    background:var(--surface);border:1px solid var(--line);padding:6px 10px;border-radius:2px;text-decoration:none}
+  nav.jump a.now{color:#fff;background:var(--key);border-color:var(--key)}
+
+  section.wk{padding:38px 0 10px;border-bottom:1px solid var(--line);scroll-margin-top:56px}
+  .wkhead{display:flex;align-items:center;gap:11px;margin-bottom:12px}
+  .wkhead .num{font-family:var(--mono);font-size:12px;font-weight:600;color:#fff;background:var(--key);
+    width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .wkhead .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+  .wkhead .sc{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--key);
+    background:var(--wash);border:1px solid var(--kline);padding:3px 9px;border-radius:2px}
+  section.wk h2{font-size:clamp(21px,3.2vw,26px);font-weight:600;letter-spacing:-.03em;margin:0 0 6px;line-height:1.35}
+  section.wk .sub{font-size:13.5px;color:var(--muted);margin:0 0 18px}
+
+  .qbox{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:16px 17px;margin:12px 0}
+  .qbox .qn{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--key);letter-spacing:.1em}
+  .qbox .qt{margin:7px 0 0;font-size:16px;line-height:1.68}
+  .qbox code{font-family:var(--mono);font-size:.9em;background:var(--surface2);border:1px solid var(--hair);
+    padding:1px 5px;border-radius:2px}
+  .opts{display:flex;flex-direction:column;gap:7px;margin-top:13px}
+  .opt{display:grid;grid-template-columns:24px 1fr;gap:10px;align-items:start;width:100%;text-align:left;
+    background:#fff;border:1px solid var(--line);border-radius:3px;padding:11px 13px;font:inherit;
+    font-size:15px;color:var(--ink2);cursor:pointer;min-height:46px}
+  .opt .n{font-family:var(--mono);font-size:12.5px;color:var(--muted);padding-top:2px}
+  .opt:active{background:var(--surface2)}
+  .opt.ok{background:var(--good-bg);border-color:var(--good);color:var(--good);font-weight:600}
+  .opt.ok .n{color:var(--good)}
+  .opt.no{background:var(--bad-bg);border-color:var(--bad);color:var(--bad)}
+  .opt.no .n{color:var(--bad)}
+  .opt[disabled]{cursor:default}
+  .sa{display:flex;gap:8px;margin-top:13px;flex-wrap:wrap}
+  .sa input{flex:1 1 180px;min-width:0;padding:11px 13px;border:1px solid var(--line);border-radius:3px;
+    background:#fff;font:inherit;font-size:15px;color:var(--ink)}
+  .sa input:focus{outline:2px solid var(--kline);outline-offset:-1px}
+  .sa button{flex:0 0 auto;padding:11px 18px;border:0;border-radius:3px;background:var(--key);color:#fff;
+    font:inherit;font-size:14.5px;font-weight:600;cursor:pointer}
+  .sa input.ok{border-color:var(--good);background:var(--good-bg);color:var(--good);font-weight:600}
+  .sa input.no{border-color:var(--bad);background:var(--bad-bg);color:var(--bad)}
+  .exp{margin-top:12px;padding-top:11px;border-top:1px solid var(--hair);font-size:14.5px;color:var(--ink2);
+    line-height:1.7;display:none}
+  .exp.show{display:block}
+  .exp b{color:var(--key)}
+  .exp .ans{font-family:var(--mono);font-size:13px;color:var(--key);display:block;margin-bottom:5px}
+
+  .wkfoot{display:flex;align-items:center;gap:10px;margin:16px 0 0;padding:12px 14px;
+    background:var(--surface2);border-radius:3px;font-size:14px;color:var(--muted)}
+  .wkfoot b{font-family:var(--mono);color:var(--key)}
+  .reset{margin-left:auto;background:none;border:0;color:var(--faint);font:inherit;font-size:12.5px;
+    text-decoration:underline;cursor:pointer;padding:0}
+  footer{padding:26px 0 10px;font-family:var(--mono);font-size:11.5px;color:var(--faint);line-height:1.8}
+  footer a{color:var(--key)}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="cover">
+  <p class="kicker">중2 역사 · 12주 × 10문제 · 객관식 7 · 단답형 3</p>
+  <h1>역사 문제집 120제</h1>
+  <p class="lede"><b>역사 항해 12주</b>에서 배운 내용을 주차마다 10문제로 확인합니다. 객관식 7문제, 단답형 3문제. 그 주 공부를 끝낸 금요일에 풀면 딱 좋습니다.</p>
+  <div class="metaline">
+    <span>주차 <b>12주</b></span><span>문항 <b>120문제</b></span>
+    <span>구성 <b>객관식 7 · 단답형 3</b></span><span>학습 문서 <b><a href="index.html" style="color:inherit">역사 항해 12주</a></b></span>
+  </div>
+  <div class="summary">
+    <h2>푸는 법</h2>
+    <p class="sd">선택지를 누르면 바로 채점되고 해설이 열립니다. 단답형은 답을 쓰고 확인을 누릅니다. 기록은 이 기기에 저장됩니다.</p>
+    <div class="kpis">
+      <div class="kpi"><span class="kl">한 주</span><span class="kv">10문제</span><span class="kn">객관식 7 · 단답형 3</span></div>
+      <div class="kpi"><span class="kl">권장</span><span class="kv">금요일</span><span class="kn">그 주 공부를 마친 뒤 풀기</span></div>
+      <div class="kpi"><span class="kl">채점</span><span class="kv">즉시</span><span class="kn">누르면 정답과 해설이 나옵니다</span></div>
+      <div class="kpi"><span class="kl">내 점수</span><span class="kv" id="total">0 / 120</span><span class="kn">이 기기에만 저장됩니다</span></div>
+    </div>
+    <div class="bar"><i id="bar"></i></div>
+  </div>
+</header>
+
+<nav class="jump"><div class="row">
+<a href="#w1">1주</a>
+<a href="#w2">2주</a>
+<a href="#w3">3주</a>
+<a href="#w4">4주</a>
+<a href="#w5">5주</a>
+<a href="#w6">6주</a>
+<a href="#w7">7주</a>
+<a href="#w8">8주</a>
+<a href="#w9">9주</a>
+<a href="#w10">10주</a>
+<a href="#w11">11주</a>
+<a href="#w12">12주</a>
+</div></nav>
+
+<section class="wk" id="w1">
+  <div class="wkhead"><span class="num">01</span><span class="lbl">WEEK 01</span>
+    <span class="sc" data-w="1">0 / 10</span></div>
+  <h2>선사와 고조선</h2>
+  <p class="sub">구석기 · 신석기 · 청동기 · 고조선</p>
+  <div class="qbox" id="h1q1" data-w="1" data-type="mc" data-a="3">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">구석기 시대 사람들이 주로 사용한 도구는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>청동검</span></button><button class="opt" type="button"><span class="n">②</span><span>철제 농기구</span></button><button class="opt" type="button"><span class="n">③</span><span>간석기</span></button><button class="opt" type="button"><span class="n">④</span><span>뗀석기</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>돌을 깨뜨려 날을 세운 뗀석기를 썼습니다. 주먹도끼가 대표적입니다.</div>
+  </div>
+  <div class="qbox" id="h1q2" data-w="1" data-type="mc" data-a="1">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">신석기 시대에 시작된 가장 큰 생활의 변화는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>철로 무기를 만들었다</span></button><button class="opt" type="button"><span class="n">②</span><span>농사를 짓고 한곳에 정착하기 시작했다</span></button><button class="opt" type="button"><span class="n">③</span><span>문자를 만들었다</span></button><button class="opt" type="button"><span class="n">④</span><span>나라를 세웠다</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>농경과 목축이 시작되면서 떠돌이 생활을 접고 강가에 움집을 짓고 살았습니다.</div>
+  </div>
+  <div class="qbox" id="h1q3" data-w="1" data-type="mc" data-a="0">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">신석기 시대를 대표하는 유물은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>빗살무늬 토기</span></button><button class="opt" type="button"><span class="n">②</span><span>금관</span></button><button class="opt" type="button"><span class="n">③</span><span>고인돌</span></button><button class="opt" type="button"><span class="n">④</span><span>비파형 동검</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>밑이 뾰족하고 겉에 빗살 무늬가 새겨진 토기입니다. 곡식을 담고 조리하는 데 썼습니다.</div>
+  </div>
+  <div class="qbox" id="h1q4" data-w="1" data-type="mc" data-a="1">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">청동기 시대 지배자의 무덤으로, 우리나라에 특히 많이 남아 있는 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>석굴암</span></button><button class="opt" type="button"><span class="n">②</span><span>고인돌</span></button><button class="opt" type="button"><span class="n">③</span><span>움집</span></button><button class="opt" type="button"><span class="n">④</span><span>돌무지덧널무덤</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>고인돌입니다. 큰 돌을 옮기려면 많은 사람을 동원해야 하므로 강한 지배자가 있었음을 보여 줍니다.</div>
+  </div>
+  <div class="qbox" id="h1q5" data-w="1" data-type="mc" data-a="0">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">고조선의 건국 이야기(단군 이야기)가 실려 있는 책은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>삼국유사</span></button><button class="opt" type="button"><span class="n">②</span><span>경국대전</span></button><button class="opt" type="button"><span class="n">③</span><span>동의보감</span></button><button class="opt" type="button"><span class="n">④</span><span>삼국사기</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>고려 시대 일연이 쓴 『삼국유사』에 실려 있습니다.</div>
+  </div>
+  <div class="qbox" id="h1q6" data-w="1" data-type="mc" data-a="0">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">고조선의 8조법에서 알 수 있는 당시 사회의 모습은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>개인의 재산과 신분의 구분이 있었다</span></button><button class="opt" type="button"><span class="n">②</span><span>화폐가 없었다</span></button><button class="opt" type="button"><span class="n">③</span><span>모두가 평등했다</span></button><button class="opt" type="button"><span class="n">④</span><span>농사를 짓지 않았다</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>도둑질하면 노비로 삼는다는 조항에서 사유 재산과 신분 제도가 있었음을 알 수 있습니다.</div>
+  </div>
+  <div class="qbox" id="h1q7" data-w="1" data-type="mc" data-a="3">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">고조선을 멸망시킨 나라와 그 시기로 옳은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>고구려, 기원전 37년</span></button><button class="opt" type="button"><span class="n">②</span><span>일본, 기원후 108년</span></button><button class="opt" type="button"><span class="n">③</span><span>몽골, 1231년</span></button><button class="opt" type="button"><span class="n">④</span><span>중국 한나라, 기원전 108년</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>기원전 108년 중국 한나라의 침입으로 왕검성이 함락되며 멸망했습니다.</div>
+  </div>
+  <div class="qbox" id="h1q8" data-w="1" data-type="sa" data-a="고조선">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">우리 역사에 처음으로 등장한 나라의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 고조선</span>고조선입니다. 단군왕검이 세웠다고 전해집니다.</div>
+  </div>
+  <div class="qbox" id="h1q9" data-w="1" data-type="sa" data-a="빗살무늬 토기|빗살무늬토기">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">신석기 시대 사람들이 곡식을 담고 조리하는 데 쓴, 겉에 빗살 무늬가 있는 토기의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 빗살무늬 토기</span>빗살무늬 토기입니다.</div>
+  </div>
+  <div class="qbox" id="h1q10" data-w="1" data-type="sa" data-a="8조법|팔조법|8조의 법">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">고조선의 법 가운데 오늘날 세 조항만 전해지는 법을 무엇이라 하는가?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 8조법</span>8조법입니다. 그중 세 조항이 『한서』에 전해집니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="1">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w2">
+  <div class="wkhead"><span class="num">02</span><span class="lbl">WEEK 02</span>
+    <span class="sc" data-w="2">0 / 10</span></div>
+  <h2>삼국의 성장</h2>
+  <p class="sub">고구려 · 백제 · 신라의 전성기</p>
+  <div class="qbox" id="h2q1" data-w="2" data-type="mc" data-a="1">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">4세기에 백제의 전성기를 이끈 왕은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>무령왕</span></button><button class="opt" type="button"><span class="n">②</span><span>근초고왕</span></button><button class="opt" type="button"><span class="n">③</span><span>진흥왕</span></button><button class="opt" type="button"><span class="n">④</span><span>광개토대왕</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>근초고왕입니다. 백제는 삼국 중 가장 먼저 전성기를 맞았습니다.</div>
+  </div>
+  <div class="qbox" id="h2q2" data-w="2" data-type="mc" data-a="0">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">5세기에 평양으로 수도를 옮기고 남쪽으로 영토를 넓힌 고구려의 왕은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>장수왕</span></button><button class="opt" type="button"><span class="n">②</span><span>소수림왕</span></button><button class="opt" type="button"><span class="n">③</span><span>영양왕</span></button><button class="opt" type="button"><span class="n">④</span><span>동명왕</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>장수왕입니다. 아버지 광개토대왕이 넓힌 땅을 지키며 남진 정책을 폈습니다.</div>
+  </div>
+  <div class="qbox" id="h2q3" data-w="2" data-type="mc" data-a="3">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">6세기에 한강 유역을 차지하고 신라의 전성기를 연 왕은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>법흥왕</span></button><button class="opt" type="button"><span class="n">②</span><span>무열왕</span></button><button class="opt" type="button"><span class="n">③</span><span>문무왕</span></button><button class="opt" type="button"><span class="n">④</span><span>진흥왕</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>진흥왕입니다. 한강을 차지한 뒤 여러 곳에 순수비를 세웠습니다.</div>
+  </div>
+  <div class="qbox" id="h2q4" data-w="2" data-type="mc" data-a="1">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">삼국이 모두 한강 유역을 차지하려고 다툰 까닭으로 알맞은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>금이 많이 나서</span></button><button class="opt" type="button"><span class="n">②</span><span>넓은 평야가 있고 중국과 교류하기 좋아서</span></button><button class="opt" type="button"><span class="n">③</span><span>산이 높아 방어에 좋아서</span></button><button class="opt" type="button"><span class="n">④</span><span>바다가 가까워 어업이 발달해서</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>농사지을 넓은 땅과 바다로 이어지는 뱃길이 있어 중국과 교류하기에 유리했습니다.</div>
+  </div>
+  <div class="qbox" id="h2q5" data-w="2" data-type="mc" data-a="2">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">광개토대왕의 업적을 기록해 아들 장수왕이 세운 비석의 이름은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>진흥왕 순수비</span></button><button class="opt" type="button"><span class="n">②</span><span>삼국사기</span></button><button class="opt" type="button"><span class="n">③</span><span>광개토대왕릉비</span></button><button class="opt" type="button"><span class="n">④</span><span>단양 적성비</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>중국 지린성 지안에 남아 있는 광개토대왕릉비입니다.</div>
+  </div>
+  <div class="qbox" id="h2q6" data-w="2" data-type="mc" data-a="2">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">신라의 화랑도에 대한 설명으로 옳은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>불교 사원의 이름</span></button><button class="opt" type="button"><span class="n">②</span><span>왕이 사는 궁궐</span></button><button class="opt" type="button"><span class="n">③</span><span>청소년들이 몸과 마음을 닦던 수련 단체</span></button><button class="opt" type="button"><span class="n">④</span><span>세금을 걷던 관청</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>화랑도는 청소년 수련 단체로, 삼국 통일에 큰 역할을 한 인재들을 길러 냈습니다.</div>
+  </div>
+  <div class="qbox" id="h2q7" data-w="2" data-type="mc" data-a="1">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">삼국의 왕들이 불교를 적극 받아들인 까닭은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>전쟁을 피하기 위해</span></button><button class="opt" type="button"><span class="n">②</span><span>왕의 힘을 높이고 백성의 마음을 하나로 모으기 위해</span></button><button class="opt" type="button"><span class="n">③</span><span>문자를 만들기 위해</span></button><button class="opt" type="button"><span class="n">④</span><span>세금을 걷기 위해</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>불교는 왕권을 뒷받침하고 여러 부족으로 나뉜 백성을 하나로 묶는 역할을 했습니다.</div>
+  </div>
+  <div class="qbox" id="h2q8" data-w="2" data-type="sa" data-a="광개토대왕|광개토왕|광개토 대왕">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">고구려의 영토를 크게 넓혀 만주까지 세력을 뻗친, 능비의 주인공인 왕은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 광개토대왕</span>광개토대왕입니다.</div>
+  </div>
+  <div class="qbox" id="h2q9" data-w="2" data-type="sa" data-a="화백회의|화백 회의|화백">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">신라에서 귀족들이 모여 나라의 중요한 일을 만장일치로 결정하던 회의의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 화백회의</span>화백 회의입니다.</div>
+  </div>
+  <div class="qbox" id="h2q10" data-w="2" data-type="sa" data-a="순수비|진흥왕 순수비|진흥왕순수비">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">진흥왕이 한강 유역을 차지한 뒤 그 지역을 돌아보며 세운 비석을 무엇이라 하는가?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 순수비</span>순수비입니다. 북한산 순수비가 대표적입니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="2">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w3">
+  <div class="wkhead"><span class="num">03</span><span class="lbl">WEEK 03</span>
+    <span class="sc" data-w="3">0 / 10</span></div>
+  <h2>통일신라와 발해</h2>
+  <p class="sub">삼국 통일 · 남북국 시대</p>
+  <div class="qbox" id="h3q1" data-w="3" data-type="mc" data-a="0">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">신라가 당과 손잡고 660년에 먼저 멸망시킨 나라는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>백제</span></button><button class="opt" type="button"><span class="n">②</span><span>가야</span></button><button class="opt" type="button"><span class="n">③</span><span>고구려</span></button><button class="opt" type="button"><span class="n">④</span><span>발해</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>660년 백제를 멸망시키고 668년에 고구려를 멸망시켰습니다.</div>
+  </div>
+  <div class="qbox" id="h3q2" data-w="3" data-type="mc" data-a="0">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">신라가 당의 군대를 몰아내고 삼국 통일을 완성한 해는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>676년</span></button><button class="opt" type="button"><span class="n">②</span><span>698년</span></button><button class="opt" type="button"><span class="n">③</span><span>660년</span></button><button class="opt" type="button"><span class="n">④</span><span>668년</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>매소성·기벌포 전투에서 당을 물리친 676년입니다.</div>
+  </div>
+  <div class="qbox" id="h3q3" data-w="3" data-type="mc" data-a="1">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">신라의 삼국 통일이 갖는 한계로 알맞은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>백성의 도움을 받지 못했다</span></button><button class="opt" type="button"><span class="n">②</span><span>외세인 당을 끌어들였고 대동강 이남만 차지했다</span></button><button class="opt" type="button"><span class="n">③</span><span>불교를 금지했다</span></button><button class="opt" type="button"><span class="n">④</span><span>문화가 발전하지 못했다</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>당의 힘을 빌렸고 고구려의 넓은 땅을 잃었다는 점이 한계로 꼽힙니다.</div>
+  </div>
+  <div class="qbox" id="h3q4" data-w="3" data-type="mc" data-a="3">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">고구려 유민을 이끌고 698년에 발해를 세운 인물은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>연개소문</span></button><button class="opt" type="button"><span class="n">②</span><span>장보고</span></button><button class="opt" type="button"><span class="n">③</span><span>김유신</span></button><button class="opt" type="button"><span class="n">④</span><span>대조영</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>대조영입니다. 발해는 스스로 고구려를 잇는 나라임을 밝혔습니다.</div>
+  </div>
+  <div class="qbox" id="h3q5" data-w="3" data-type="mc" data-a="2">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">발해가 전성기에 중국으로부터 얻은 별칭은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>동방예의지국</span></button><button class="opt" type="button"><span class="n">②</span><span>소중화</span></button><button class="opt" type="button"><span class="n">③</span><span>해동성국</span></button><button class="opt" type="button"><span class="n">④</span><span>황금의 나라</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>바다 동쪽의 융성한 나라라는 뜻의 해동성국입니다.</div>
+  </div>
+  <div class="qbox" id="h3q6" data-w="3" data-type="mc" data-a="1">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">통일 이후 신문왕이 왕권을 강화하기 위해 실시한 정책은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>불교를 금지했다</span></button><button class="opt" type="button"><span class="n">②</span><span>국학을 세우고 귀족의 녹읍을 없앴다</span></button><button class="opt" type="button"><span class="n">③</span><span>과거제를 실시했다</span></button><button class="opt" type="button"><span class="n">④</span><span>수도를 평양으로 옮겼다</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>인재를 기르는 국학을 세우고 귀족의 경제 기반인 녹읍을 없애 왕권을 세웠습니다.</div>
+  </div>
+  <div class="qbox" id="h3q7" data-w="3" data-type="mc" data-a="0">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">신라 말에 사회가 혼란해진 모습으로 알맞은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>지방에서 호족이 성장하고 농민 봉기가 일어났다</span></button><button class="opt" type="button"><span class="n">②</span><span>당과의 교류가 시작되었다</span></button><button class="opt" type="button"><span class="n">③</span><span>불교가 사라졌다</span></button><button class="opt" type="button"><span class="n">④</span><span>인구가 갑자기 늘었다</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>왕위 다툼으로 중앙이 흔들리자 지방 호족이 힘을 키우고 세금에 시달린 농민이 봉기했습니다.</div>
+  </div>
+  <div class="qbox" id="h3q8" data-w="3" data-type="sa" data-a="남북국 시대|남북국시대|남북국">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">신라와 발해가 남과 북에 나란히 있던 시기를 무엇이라 부르는가?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 남북국 시대</span>남북국 시대입니다.</div>
+  </div>
+  <div class="qbox" id="h3q9" data-w="3" data-type="sa" data-a="대조영">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">발해를 세운 인물의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 대조영</span>대조영입니다.</div>
+  </div>
+  <div class="qbox" id="h3q10" data-w="3" data-type="sa" data-a="완도|완도 섬">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">장보고가 해상 무역을 이끌며 청해진을 설치한 섬은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 완도</span>오늘날의 전남 완도입니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="3">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w4">
+  <div class="wkhead"><span class="num">04</span><span class="lbl">WEEK 04</span>
+    <span class="sc" data-w="4">0 / 10</span></div>
+  <h2>고려의 성립</h2>
+  <p class="sub">후삼국 통일 · 왕건 · 광종 · 거란의 침입</p>
+  <div class="qbox" id="h4q1" data-w="4" data-type="mc" data-a="2">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">후삼국을 통일하고 고려를 세운 인물은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>이성계</span></button><button class="opt" type="button"><span class="n">②</span><span>궁예</span></button><button class="opt" type="button"><span class="n">③</span><span>왕건</span></button><button class="opt" type="button"><span class="n">④</span><span>견훤</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>왕건입니다. 918년 고려를 세우고 936년 후삼국을 통일했습니다.</div>
+  </div>
+  <div class="qbox" id="h4q2" data-w="4" data-type="mc" data-a="0">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">왕건이 나라를 안정시키기 위해 편 정책으로 알맞은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>호족과 혼인해 세력을 끌어안고 북진 정책을 폈다</span></button><button class="opt" type="button"><span class="n">②</span><span>불교를 금지했다</span></button><button class="opt" type="button"><span class="n">③</span><span>과거제를 실시했다</span></button><button class="opt" type="button"><span class="n">④</span><span>호족을 모두 없앴다</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>혼인 정책으로 호족을 포섭하고, 고구려를 잇는다는 뜻에서 북진 정책을 폈습니다.</div>
+  </div>
+  <div class="qbox" id="h4q3" data-w="4" data-type="mc" data-a="1">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">광종이 억울하게 노비가 된 사람을 조사해 양인으로 되돌린 법은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>대동법</span></button><button class="opt" type="button"><span class="n">②</span><span>노비안검법</span></button><button class="opt" type="button"><span class="n">③</span><span>균역법</span></button><button class="opt" type="button"><span class="n">④</span><span>과전법</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>노비안검법입니다. 호족의 힘을 약하게 하고 세금을 낼 양인을 늘리는 효과가 있었습니다.</div>
+  </div>
+  <div class="qbox" id="h4q4" data-w="4" data-type="mc" data-a="1">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">우리 역사에서 과거제를 처음으로 실시한 왕은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>태조 왕건</span></button><button class="opt" type="button"><span class="n">②</span><span>광종</span></button><button class="opt" type="button"><span class="n">③</span><span>성종</span></button><button class="opt" type="button"><span class="n">④</span><span>세종</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>고려 광종이 쌍기의 건의를 받아들여 실시했습니다. 시험으로 관리를 뽑아 왕이 직접 인재를 고를 수 있게 되었습니다.</div>
+  </div>
+  <div class="qbox" id="h4q5" data-w="4" data-type="mc" data-a="3">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">성종에게 최승로가 올려 고려의 정치 방향을 정한 글은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>직지심체요절</span></button><button class="opt" type="button"><span class="n">②</span><span>훈요 10조</span></button><button class="opt" type="button"><span class="n">③</span><span>삼국유사</span></button><button class="opt" type="button"><span class="n">④</span><span>시무 28조</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>시무 28조입니다. 유교를 정치의 기준으로 삼자는 내용입니다.</div>
+  </div>
+  <div class="qbox" id="h4q6" data-w="4" data-type="mc" data-a="3">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">서희가 담판으로 강동 6주를 얻어 낸 상대 나라는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>여진</span></button><button class="opt" type="button"><span class="n">②</span><span>일본</span></button><button class="opt" type="button"><span class="n">③</span><span>몽골</span></button><button class="opt" type="button"><span class="n">④</span><span>거란</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>거란입니다. 993년 1차 침입 때 소손녕과 담판을 벌였습니다.</div>
+  </div>
+  <div class="qbox" id="h4q7" data-w="4" data-type="mc" data-a="2">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">강감찬이 귀주 대첩에서 크게 물리친 나라는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>여진</span></button><button class="opt" type="button"><span class="n">②</span><span>몽골</span></button><button class="opt" type="button"><span class="n">③</span><span>거란</span></button><button class="opt" type="button"><span class="n">④</span><span>왜</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>1019년 거란의 3차 침입을 귀주에서 크게 물리쳤습니다.</div>
+  </div>
+  <div class="qbox" id="h4q8" data-w="4" data-type="sa" data-a="개경|개성">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">고려의 수도였던 도시의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 개경</span>개경(오늘날 개성)입니다.</div>
+  </div>
+  <div class="qbox" id="h4q9" data-w="4" data-type="sa" data-a="서희">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">거란의 1차 침입 때 외교 담판으로 강동 6주를 얻은 인물은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 서희</span>서희입니다. 싸우지 않고 땅을 얻은 대표적인 외교 사례입니다.</div>
+  </div>
+  <div class="qbox" id="h4q10" data-w="4" data-type="sa" data-a="노비안검법">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">광종이 호족의 힘을 약하게 하려고 실시한, 노비를 조사해 양인으로 되돌린 법의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 노비안검법</span>노비안검법입니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="4">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w5">
+  <div class="wkhead"><span class="num">05</span><span class="lbl">WEEK 05</span>
+    <span class="sc" data-w="5">0 / 10</span></div>
+  <h2>고려 후기</h2>
+  <p class="sub">무신 정권 · 몽골 항쟁 · 공민왕</p>
+  <div class="qbox" id="h5q1" data-w="5" data-type="mc" data-a="0">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">무신정변이 일어난 배경으로 알맞은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>문신은 우대받고 무신은 차별받았다</span></button><button class="opt" type="button"><span class="n">②</span><span>외적이 쳐들어왔다</span></button><button class="opt" type="button"><span class="n">③</span><span>왕이 무신만 아꼈다</span></button><button class="opt" type="button"><span class="n">④</span><span>과거제가 없어졌다</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>차별에 쌓인 불만이 폭발해 1170년 무신들이 정권을 잡았습니다.</div>
+  </div>
+  <div class="qbox" id="h5q2" data-w="5" data-type="mc" data-a="0">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">최씨 무신 정권이 나라의 일을 처리하던 최고 권력 기구는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>교정도감</span></button><button class="opt" type="button"><span class="n">②</span><span>성균관</span></button><button class="opt" type="button"><span class="n">③</span><span>집현전</span></button><button class="opt" type="button"><span class="n">④</span><span>도병마사</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>교정도감입니다. 최충헌이 설치해 사실상 최고 기구 역할을 했습니다.</div>
+  </div>
+  <div class="qbox" id="h5q3" data-w="5" data-type="mc" data-a="1">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">몽골이 쳐들어오자 고려가 수도를 옮긴 곳은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>진도</span></button><button class="opt" type="button"><span class="n">②</span><span>강화도</span></button><button class="opt" type="button"><span class="n">③</span><span>평양</span></button><button class="opt" type="button"><span class="n">④</span><span>제주도</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>바다에 약한 몽골군을 피해 강화도로 도읍을 옮겼습니다.</div>
+  </div>
+  <div class="qbox" id="h5q4" data-w="5" data-type="mc" data-a="2">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">몽골의 침입을 부처의 힘으로 이겨 내려 만든 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>직지심체요절</span></button><button class="opt" type="button"><span class="n">②</span><span>고려청자</span></button><button class="opt" type="button"><span class="n">③</span><span>팔만대장경</span></button><button class="opt" type="button"><span class="n">④</span><span>삼국사기</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>팔만대장경입니다. 오늘날 합천 해인사에 보관되어 있습니다.</div>
+  </div>
+  <div class="qbox" id="h5q5" data-w="5" data-type="mc" data-a="0">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">삼별초가 몽골에 맞서 옮겨 다니며 항쟁한 순서로 옳은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>강화도 → 진도 → 제주도</span></button><button class="opt" type="button"><span class="n">②</span><span>개경 → 평양 → 강화도</span></button><button class="opt" type="button"><span class="n">③</span><span>제주도 → 진도 → 강화도</span></button><button class="opt" type="button"><span class="n">④</span><span>진도 → 개경 → 제주도</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>강화도에서 진도로, 다시 제주도로 옮기며 끝까지 싸웠습니다.</div>
+  </div>
+  <div class="qbox" id="h5q6" data-w="5" data-type="mc" data-a="2">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">공민왕이 펼친 개혁 정책으로 알맞은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>몽골과 혼인 동맹을 맺었다</span></button><button class="opt" type="button"><span class="n">②</span><span>과거제를 폐지했다</span></button><button class="opt" type="button"><span class="n">③</span><span>쌍성총관부를 되찾고 몽골 풍습을 금지했다</span></button><button class="opt" type="button"><span class="n">④</span><span>수도를 강화도로 옮겼다</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>원의 간섭에서 벗어나려 쌍성총관부를 되찾고 권문세족을 눌렀습니다.</div>
+  </div>
+  <div class="qbox" id="h5q7" data-w="5" data-type="mc" data-a="3">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">현재 남아 있는 세계에서 가장 오래된 금속 활자 인쇄본은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>팔만대장경</span></button><button class="opt" type="button"><span class="n">②</span><span>무구정광대다라니경</span></button><button class="opt" type="button"><span class="n">③</span><span>삼국유사</span></button><button class="opt" type="button"><span class="n">④</span><span>직지심체요절</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>1377년 청주 흥덕사에서 찍은 『직지심체요절』입니다. 지금은 프랑스 국립도서관에 있습니다.</div>
+  </div>
+  <div class="qbox" id="h5q8" data-w="5" data-type="sa" data-a="삼별초">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">무신 정권 시기에 만들어져 몽골에 끝까지 맞서 싸운 군대의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 삼별초</span>삼별초입니다.</div>
+  </div>
+  <div class="qbox" id="h5q9" data-w="5" data-type="sa" data-a="팔만대장경|고려대장경">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">몽골의 침입을 물리치기 위해 부처의 힘에 기대어 만든 대장경의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 팔만대장경</span>팔만대장경(고려대장경)입니다.</div>
+  </div>
+  <div class="qbox" id="h5q10" data-w="5" data-type="sa" data-a="공민왕">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">원의 간섭에서 벗어나기 위해 개혁을 펼친 고려 후기의 왕은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 공민왕</span>공민왕입니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="5">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w6">
+  <div class="wkhead"><span class="num">06</span><span class="lbl">WEEK 06</span>
+    <span class="sc" data-w="6">0 / 10</span></div>
+  <h2>조선의 건국</h2>
+  <p class="sub">이성계 · 세종 · 경국대전 · 신분제</p>
+  <div class="qbox" id="h6q1" data-w="6" data-type="mc" data-a="3">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">조선을 세운 인물은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>최영</span></button><button class="opt" type="button"><span class="n">②</span><span>왕건</span></button><button class="opt" type="button"><span class="n">③</span><span>정몽주</span></button><button class="opt" type="button"><span class="n">④</span><span>이성계</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>이성계입니다. 1392년 조선을 세우고 이듬해 나라 이름을 조선으로 정했습니다.</div>
+  </div>
+  <div class="qbox" id="h6q2" data-w="6" data-type="mc" data-a="0">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">위화도 회군에 대한 설명으로 옳은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>요동을 치러 가던 이성계가 군대를 돌려 정권을 잡은 일</span></button><button class="opt" type="button"><span class="n">②</span><span>왜구를 막은 전투</span></button><button class="opt" type="button"><span class="n">③</span><span>수도를 옮긴 일</span></button><button class="opt" type="button"><span class="n">④</span><span>몽골을 물리친 전투</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>1388년 이성계가 위화도에서 군대를 되돌려 실권을 잡은 사건입니다.</div>
+  </div>
+  <div class="qbox" id="h6q3" data-w="6" data-type="mc" data-a="1">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">조선이 나라를 다스리는 기준으로 삼은 학문은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>불교</span></button><button class="opt" type="button"><span class="n">②</span><span>성리학</span></button><button class="opt" type="button"><span class="n">③</span><span>실학</span></button><button class="opt" type="button"><span class="n">④</span><span>도교</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>성리학입니다. 고려의 불교 중심 사회와 크게 달라진 점입니다.</div>
+  </div>
+  <div class="qbox" id="h6q4" data-w="6" data-type="mc" data-a="3">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">세종이 훈민정음을 만든 가장 큰 까닭은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>불경을 번역하려고</span></button><button class="opt" type="button"><span class="n">②</span><span>중국과 무역하려고</span></button><button class="opt" type="button"><span class="n">③</span><span>관리를 뽑으려고</span></button><button class="opt" type="button"><span class="n">④</span><span>백성이 자기 뜻을 쉽게 글로 적게 하려고</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>글을 몰라 억울한 일을 당하는 백성을 안타깝게 여겨 만들었습니다.</div>
+  </div>
+  <div class="qbox" id="h6q5" data-w="6" data-type="mc" data-a="1">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">세종 때의 업적으로 알맞지 <b>않은</b> 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>훈민정음 창제</span></button><button class="opt" type="button"><span class="n">②</span><span>경국대전 완성</span></button><button class="opt" type="button"><span class="n">③</span><span>측우기 제작</span></button><button class="opt" type="button"><span class="n">④</span><span>4군 6진 개척</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>경국대전은 세조 때 만들기 시작해 성종 때 완성되었습니다.</div>
+  </div>
+  <div class="qbox" id="h6q6" data-w="6" data-type="mc" data-a="1">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">성종 때 완성된 조선의 기본 법전은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>삼국사기</span></button><button class="opt" type="button"><span class="n">②</span><span>경국대전</span></button><button class="opt" type="button"><span class="n">③</span><span>대전회통</span></button><button class="opt" type="button"><span class="n">④</span><span>속대전</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>경국대전입니다. 조선의 통치 기준이 되었습니다.</div>
+  </div>
+  <div class="qbox" id="h6q7" data-w="6" data-type="mc" data-a="3">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">조선의 신분 구분으로 옳은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>왕족 · 귀족 · 평민</span></button><button class="opt" type="button"><span class="n">②</span><span>사림 · 훈구 · 상민</span></button><button class="opt" type="button"><span class="n">③</span><span>호족 · 농민 · 노비</span></button><button class="opt" type="button"><span class="n">④</span><span>양반 · 중인 · 상민 · 천민</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>법으로는 양인과 천민으로 나뉘었지만 실제로는 양반·중인·상민·천민의 네 층으로 살았습니다.</div>
+  </div>
+  <div class="qbox" id="h6q8" data-w="6" data-type="sa" data-a="훈민정음">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">세종이 1443년에 만들어 1446년에 반포한 우리 글자의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 훈민정음</span>훈민정음입니다. '백성을 가르치는 바른 소리'라는 뜻입니다.</div>
+  </div>
+  <div class="qbox" id="h6q9" data-w="6" data-type="sa" data-a="경국대전">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">성종 때 완성된, 조선의 통치 기준이 된 법전의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 경국대전</span>경국대전입니다.</div>
+  </div>
+  <div class="qbox" id="h6q10" data-w="6" data-type="sa" data-a="세종|세종대왕|세종 대왕">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">4군 6진을 개척해 오늘날과 비슷한 국경을 만든 조선의 왕은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 세종</span>세종입니다. 최윤덕과 김종서가 이를 수행했습니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="6">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w7">
+  <div class="wkhead"><span class="num">07</span><span class="lbl">WEEK 07</span>
+    <span class="sc" data-w="7">0 / 10</span></div>
+  <h2>사림과 두 전쟁</h2>
+  <p class="sub">사화와 붕당 · 임진왜란 · 병자호란</p>
+  <div class="qbox" id="h7q1" data-w="7" data-type="mc" data-a="3">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">사화(士禍)란 무엇인가?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>전쟁에서 진 사건</span></button><button class="opt" type="button"><span class="n">②</span><span>흉년이 든 사건</span></button><button class="opt" type="button"><span class="n">③</span><span>왕이 바뀐 사건</span></button><button class="opt" type="button"><span class="n">④</span><span>사림이 훈구 세력에게 큰 화를 입은 사건</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>새로 등장한 사림이 기존 훈구 세력과 부딪히며 여러 차례 화를 입은 사건입니다.</div>
+  </div>
+  <div class="qbox" id="h7q2" data-w="7" data-type="mc" data-a="3">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">붕당이 처음 생겨난 계기로 알맞은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>왕이 신하를 내쫓은 일</span></button><button class="opt" type="button"><span class="n">②</span><span>왜구가 쳐들어온 일</span></button><button class="opt" type="button"><span class="n">③</span><span>과거제가 없어진 일</span></button><button class="opt" type="button"><span class="n">④</span><span>사림이 동인과 서인으로 나뉜 일</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>인사권을 둘러싼 갈등으로 사림이 동인과 서인으로 갈라진 것이 시작입니다.</div>
+  </div>
+  <div class="qbox" id="h7q3" data-w="7" data-type="mc" data-a="2">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">임진왜란이 일어난 해는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>1392년</span></button><button class="opt" type="button"><span class="n">②</span><span>1876년</span></button><button class="opt" type="button"><span class="n">③</span><span>1592년</span></button><button class="opt" type="button"><span class="n">④</span><span>1636년</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>1592년입니다. 1597년의 재침입은 정유재란이라고 합니다.</div>
+  </div>
+  <div class="qbox" id="h7q4" data-w="7" data-type="mc" data-a="0">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">이순신이 학익진 전법으로 큰 승리를 거둔 해전은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>한산도 대첩</span></button><button class="opt" type="button"><span class="n">②</span><span>행주 대첩</span></button><button class="opt" type="button"><span class="n">③</span><span>귀주 대첩</span></button><button class="opt" type="button"><span class="n">④</span><span>살수 대첩</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>1592년 한산도 대첩입니다. 학이 날개를 편 모양으로 적을 감쌌습니다.</div>
+  </div>
+  <div class="qbox" id="h7q5" data-w="7" data-type="mc" data-a="2">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">임진왜란 때 백성들이 스스로 조직해 싸운 군대를 무엇이라 하는가?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>별기군</span></button><button class="opt" type="button"><span class="n">②</span><span>관군</span></button><button class="opt" type="button"><span class="n">③</span><span>의병</span></button><button class="opt" type="button"><span class="n">④</span><span>삼별초</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>의병입니다. 곽재우, 조헌, 승려 유정 등이 이끌었습니다.</div>
+  </div>
+  <div class="qbox" id="h7q6" data-w="7" data-type="mc" data-a="0">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">광해군이 명과 후금 사이에서 편 외교 정책은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>어느 한쪽에 치우치지 않는 중립 외교</span></button><button class="opt" type="button"><span class="n">②</span><span>외국과 교류를 끊는 정책</span></button><button class="opt" type="button"><span class="n">③</span><span>명을 무조건 돕는 외교</span></button><button class="opt" type="button"><span class="n">④</span><span>후금과 동맹을 맺는 외교</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>전쟁의 피해를 피하려는 실리 외교였으나 이후 반발을 사기도 했습니다.</div>
+  </div>
+  <div class="qbox" id="h7q7" data-w="7" data-type="mc" data-a="1">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">병자호란의 결과로 옳은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>조선이 크게 이겨 청을 물리쳤다</span></button><button class="opt" type="button"><span class="n">②</span><span>인조가 삼전도에서 항복하고 청과 군신 관계를 맺었다</span></button><button class="opt" type="button"><span class="n">③</span><span>조선이 일본과 조약을 맺었다</span></button><button class="opt" type="button"><span class="n">④</span><span>조선이 수도를 옮겼다</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>1637년 인조가 남한산성에서 나와 삼전도에서 항복했습니다.</div>
+  </div>
+  <div class="qbox" id="h7q8" data-w="7" data-type="sa" data-a="거북선|귀선">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">임진왜란 때 이순신이 이끈, 지붕을 덮어 적이 오르지 못하게 만든 돌격선의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 거북선</span>거북선입니다.</div>
+  </div>
+  <div class="qbox" id="h7q9" data-w="7" data-type="sa" data-a="병자호란">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">1636년 청이 조선을 침입해 일어난 전쟁의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 병자호란</span>병자호란입니다. 1627년의 침입은 정묘호란입니다.</div>
+  </div>
+  <div class="qbox" id="h7q10" data-w="7" data-type="sa" data-a="의병">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">임진왜란 때 나라를 지키려고 백성이 스스로 일어나 만든 군대를 무엇이라 하는가?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 의병</span>의병입니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="7">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w8">
+  <div class="wkhead"><span class="num">08</span><span class="lbl">WEEK 08</span>
+    <span class="sc" data-w="8">0 / 10</span></div>
+  <h2>조선 후기</h2>
+  <p class="sub">대동법 · 탕평책 · 실학 · 서민 문화</p>
+  <div class="qbox" id="h8q1" data-w="8" data-type="mc" data-a="1">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">대동법에 대한 설명으로 옳은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>노비를 없앤 제도</span></button><button class="opt" type="button"><span class="n">②</span><span>특산물로 내던 공납을 토지를 기준으로 쌀 등으로 내게 한 제도</span></button><button class="opt" type="button"><span class="n">③</span><span>군대에 가는 대신 베를 내게 한 제도</span></button><button class="opt" type="button"><span class="n">④</span><span>과거를 없앤 제도</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>가진 땅에 따라 내게 하여 가난한 백성의 부담을 크게 줄였습니다.</div>
+  </div>
+  <div class="qbox" id="h8q2" data-w="8" data-type="mc" data-a="0">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">영조와 정조가 붕당 사이의 싸움을 줄이려고 편 정책은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>탕평책</span></button><button class="opt" type="button"><span class="n">②</span><span>호패법</span></button><button class="opt" type="button"><span class="n">③</span><span>균역법</span></button><button class="opt" type="button"><span class="n">④</span><span>대동법</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>탕평책입니다. 어느 한 붕당에 치우치지 않고 인재를 고루 쓰려 했습니다.</div>
+  </div>
+  <div class="qbox" id="h8q3" data-w="8" data-type="mc" data-a="1">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">영조가 백성의 군포 부담을 절반으로 줄여 준 제도는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>대동법</span></button><button class="opt" type="button"><span class="n">②</span><span>균역법</span></button><button class="opt" type="button"><span class="n">③</span><span>과전법</span></button><button class="opt" type="button"><span class="n">④</span><span>영정법</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>균역법입니다. 군포를 2필에서 1필로 줄였습니다.</div>
+  </div>
+  <div class="qbox" id="h8q4" data-w="8" data-type="mc" data-a="0">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">정조가 개혁의 뜻을 담아 새로 건설한 도시이자 성은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>수원 화성</span></button><button class="opt" type="button"><span class="n">②</span><span>남한산성</span></button><button class="opt" type="button"><span class="n">③</span><span>한양 도성</span></button><button class="opt" type="button"><span class="n">④</span><span>강화 산성</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>수원 화성입니다. 정약용이 만든 거중기가 쓰였습니다.</div>
+  </div>
+  <div class="qbox" id="h8q5" data-w="8" data-type="mc" data-a="1">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">실학이란 어떤 학문인가?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>외국어를 배우는 학문</span></button><button class="opt" type="button"><span class="n">②</span><span>백성의 실제 생활에 도움이 되는 것을 연구한 학문</span></button><button class="opt" type="button"><span class="n">③</span><span>불교를 연구한 학문</span></button><button class="opt" type="button"><span class="n">④</span><span>한자를 연구한 학문</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>농업·상공업·우리 것에 대한 연구 등 현실 문제를 풀려는 학문이었습니다.</div>
+  </div>
+  <div class="qbox" id="h8q6" data-w="8" data-type="mc" data-a="1">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">조선 후기에 모내기법이 널리 퍼지면서 나타난 변화는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>농민이 모두 노비가 되었다</span></button><button class="opt" type="button"><span class="n">②</span><span>수확량이 늘고 일손이 줄어 넓은 땅을 짓는 농민이 생겼다</span></button><button class="opt" type="button"><span class="n">③</span><span>쌀 생산이 줄었다</span></button><button class="opt" type="button"><span class="n">④</span><span>농사가 어려워졌다</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>모내기법으로 생산량이 늘고 일손이 절약되어 넓은 땅을 경작하는 광작이 나타났습니다.</div>
+  </div>
+  <div class="qbox" id="h8q7" data-w="8" data-type="mc" data-a="0">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">조선 후기 서민 문화에 해당하지 <b>않는</b> 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>성리학 경전 연구</span></button><button class="opt" type="button"><span class="n">②</span><span>탈춤</span></button><button class="opt" type="button"><span class="n">③</span><span>판소리</span></button><button class="opt" type="button"><span class="n">④</span><span>한글 소설</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>판소리·탈춤·한글 소설·풍속화가 서민 문화입니다. 성리학 경전 연구는 양반의 학문입니다.</div>
+  </div>
+  <div class="qbox" id="h8q8" data-w="8" data-type="sa" data-a="탕평책|탕평 정책">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">영조와 정조가 인재를 고루 뽑아 붕당의 다툼을 줄이려 한 정책의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 탕평책</span>탕평책입니다.</div>
+  </div>
+  <div class="qbox" id="h8q9" data-w="8" data-type="sa" data-a="대동법">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">공납을 토지 기준으로 쌀·베·돈으로 내게 바꾼 조선 후기의 제도는?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 대동법</span>대동법입니다.</div>
+  </div>
+  <div class="qbox" id="h8q10" data-w="8" data-type="sa" data-a="김홍도|단원 김홍도">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">씨름, 서당 등 백성의 생활 모습을 그린 조선 후기의 대표 화가는?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 김홍도</span>김홍도입니다. 신윤복도 대표적인 풍속화가입니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="8">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w9">
+  <div class="wkhead"><span class="num">09</span><span class="lbl">WEEK 09</span>
+    <span class="sc" data-w="9">0 / 10</span></div>
+  <h2>개항과 근대화</h2>
+  <p class="sub">흥선대원군 · 강화도 조약 · 갑오개혁 · 대한제국</p>
+  <div class="qbox" id="h9q1" data-w="9" data-type="mc" data-a="1">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">흥선대원군이 펼친 정책으로 알맞은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>한글을 만들었다</span></button><button class="opt" type="button"><span class="n">②</span><span>서원을 정리하고 통상 수교를 거부했다</span></button><button class="opt" type="button"><span class="n">③</span><span>과거제를 없앴다</span></button><button class="opt" type="button"><span class="n">④</span><span>외국과 적극 교류했다</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>세도 정치를 정리하고 왕권을 세우려 했으며, 외세와의 통상은 거부했습니다.</div>
+  </div>
+  <div class="qbox" id="h9q2" data-w="9" data-type="mc" data-a="2">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">1876년 일본과 맺은 강화도 조약의 성격으로 옳은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>청과 맺은 조약</span></button><button class="opt" type="button"><span class="n">②</span><span>전쟁을 끝낸 조약</span></button><button class="opt" type="button"><span class="n">③</span><span>우리나라 최초의 근대적 조약이자 불평등 조약</span></button><button class="opt" type="button"><span class="n">④</span><span>우리나라에 유리한 조약</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>해안 측량권과 영사 재판권을 일본에 준 불평등 조약이었습니다.</div>
+  </div>
+  <div class="qbox" id="h9q3" data-w="9" data-type="mc" data-a="0">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">1882년 임오군란이 일어난 배경은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>구식 군인들이 차별 대우에 불만을 품었다</span></button><button class="opt" type="button"><span class="n">②</span><span>일본이 쳐들어왔다</span></button><button class="opt" type="button"><span class="n">③</span><span>왕이 바뀌었다</span></button><button class="opt" type="button"><span class="n">④</span><span>농민이 세금을 못 냈다</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>신식 군대인 별기군과의 차별, 밀린 급료가 원인이었습니다.</div>
+  </div>
+  <div class="qbox" id="h9q4" data-w="9" data-type="mc" data-a="2">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">1884년 김옥균 등 급진 개화파가 일으켰다가 3일 만에 실패한 사건은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>동학 농민 운동</span></button><button class="opt" type="button"><span class="n">②</span><span>임오군란</span></button><button class="opt" type="button"><span class="n">③</span><span>갑신정변</span></button><button class="opt" type="button"><span class="n">④</span><span>아관파천</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>갑신정변입니다. 일본의 힘에 기댄 점과 백성의 지지를 얻지 못한 점이 한계였습니다.</div>
+  </div>
+  <div class="qbox" id="h9q5" data-w="9" data-type="mc" data-a="0">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">1894년 동학 농민군이 내세운 요구로 알맞은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>탐관오리 처벌과 신분 차별 폐지</span></button><button class="opt" type="button"><span class="n">②</span><span>수도 이전</span></button><button class="opt" type="button"><span class="n">③</span><span>불교 장려</span></button><button class="opt" type="button"><span class="n">④</span><span>과거제 부활</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>부패한 관리를 벌하고 신분 차별을 없애며 외세를 물리치자고 했습니다.</div>
+  </div>
+  <div class="qbox" id="h9q6" data-w="9" data-type="mc" data-a="3">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">갑오개혁의 내용으로 옳은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>한글을 만들었다</span></button><button class="opt" type="button"><span class="n">②</span><span>서원을 세웠다</span></button><button class="opt" type="button"><span class="n">③</span><span>군대를 없앴다</span></button><button class="opt" type="button"><span class="n">④</span><span>신분제와 과거제를 폐지했다</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>신분제·과거제 폐지, 도량형 통일 등 근대적 개혁이 이루어졌습니다.</div>
+  </div>
+  <div class="qbox" id="h9q7" data-w="9" data-type="mc" data-a="2">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">1897년 고종이 황제로 즉위하며 선포한 나라의 이름은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>고려</span></button><button class="opt" type="button"><span class="n">②</span><span>조선</span></button><button class="opt" type="button"><span class="n">③</span><span>대한제국</span></button><button class="opt" type="button"><span class="n">④</span><span>대한민국</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>대한제국입니다. 자주 독립국임을 안팎에 알리려는 뜻이었습니다.</div>
+  </div>
+  <div class="qbox" id="h9q8" data-w="9" data-type="sa" data-a="강화도 조약|강화도조약|조일수호조규">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">1876년 일본과 맺은, 우리나라 최초의 근대적 조약의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 강화도 조약</span>강화도 조약(조일 수호 조규)입니다.</div>
+  </div>
+  <div class="qbox" id="h9q9" data-w="9" data-type="sa" data-a="동학 농민 운동|동학농민운동|동학 농민 혁명|동학운동">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">1894년 전봉준을 중심으로 일어난 농민들의 큰 운동의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 동학 농민 운동</span>동학 농민 운동입니다.</div>
+  </div>
+  <div class="qbox" id="h9q10" data-w="9" data-type="sa" data-a="독립협회|독립 협회">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">독립문을 세우고 독립신문을 펴낸 단체의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 독립협회</span>독립협회입니다. 서재필 등이 중심이 되었습니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="9">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w10">
+  <div class="wkhead"><span class="num">10</span><span class="lbl">WEEK 10</span>
+    <span class="sc" data-w="10">0 / 10</span></div>
+  <h2>일제 강점기</h2>
+  <p class="sub">무단 통치 · 3·1 운동 · 무장 독립 투쟁</p>
+  <div class="qbox" id="h10q1" data-w="10" data-type="mc" data-a="0">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">1910년대 일제가 실시한 통치 방식은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>헌병 경찰을 앞세운 무단 통치</span></button><button class="opt" type="button"><span class="n">②</span><span>자치 허용</span></button><button class="opt" type="button"><span class="n">③</span><span>민족 말살 통치</span></button><button class="opt" type="button"><span class="n">④</span><span>문화 통치</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>헌병이 경찰 역할까지 하며 무력으로 억눌렀습니다.</div>
+  </div>
+  <div class="qbox" id="h10q2" data-w="10" data-type="mc" data-a="1">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">3·1 운동이 일어난 해는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>1945년</span></button><button class="opt" type="button"><span class="n">②</span><span>1919년</span></button><button class="opt" type="button"><span class="n">③</span><span>1929년</span></button><button class="opt" type="button"><span class="n">④</span><span>1910년</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>1919년 3월 1일 전국에서 만세 시위가 일어났습니다.</div>
+  </div>
+  <div class="qbox" id="h10q3" data-w="10" data-type="mc" data-a="3">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">3·1 운동의 결과로 세워진 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>독립협회</span></button><button class="opt" type="button"><span class="n">②</span><span>대한제국</span></button><button class="opt" type="button"><span class="n">③</span><span>신간회</span></button><button class="opt" type="button"><span class="n">④</span><span>대한민국 임시정부</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>흩어진 독립운동을 하나로 모으기 위해 상하이에 대한민국 임시정부가 세워졌습니다.</div>
+  </div>
+  <div class="qbox" id="h10q4" data-w="10" data-type="mc" data-a="1">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">1920년 봉오동 전투와 청산리 대첩을 이끈 인물로 짝지어진 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>서재필 · 이승만</span></button><button class="opt" type="button"><span class="n">②</span><span>홍범도 · 김좌진</span></button><button class="opt" type="button"><span class="n">③</span><span>안중근 · 윤봉길</span></button><button class="opt" type="button"><span class="n">④</span><span>김구 · 이봉창</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>봉오동은 홍범도, 청산리는 김좌진이 이끌었습니다.</div>
+  </div>
+  <div class="qbox" id="h10q5" data-w="10" data-type="mc" data-a="0">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">1930년대 이후 일제가 실시한 민족 말살 통치의 내용은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>신사 참배와 창씨개명을 강요하고 우리말 사용을 금지했다</span></button><button class="opt" type="button"><span class="n">②</span><span>한글 교육을 늘렸다</span></button><button class="opt" type="button"><span class="n">③</span><span>세금을 없앴다</span></button><button class="opt" type="button"><span class="n">④</span><span>자치권을 주었다</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>우리 민족의 정신 자체를 없애려 한 정책이었습니다.</div>
+  </div>
+  <div class="qbox" id="h10q6" data-w="10" data-type="mc" data-a="1">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">국산품을 쓰자며 벌인 1920년대의 경제적 민족 운동은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>금 모으기 운동</span></button><button class="opt" type="button"><span class="n">②</span><span>물산 장려 운동</span></button><button class="opt" type="button"><span class="n">③</span><span>형평 운동</span></button><button class="opt" type="button"><span class="n">④</span><span>새마을 운동</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>'내 살림 내 것으로'를 내걸고 조만식 등이 이끌었습니다.</div>
+  </div>
+  <div class="qbox" id="h10q7" data-w="10" data-type="mc" data-a="0">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">김구가 조직한 한인애국단에서 활동한 인물은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>이봉창과 윤봉길</span></button><button class="opt" type="button"><span class="n">②</span><span>전봉준과 최제우</span></button><button class="opt" type="button"><span class="n">③</span><span>김좌진과 홍범도</span></button><button class="opt" type="button"><span class="n">④</span><span>안창호와 서재필</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>이봉창은 일왕에게, 윤봉길은 상하이 훙커우 공원에서 의거를 일으켰습니다.</div>
+  </div>
+  <div class="qbox" id="h10q8" data-w="10" data-type="sa" data-a="3·1 운동|3.1운동|삼일운동|3·1운동|삼일 운동">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">1919년 3월 1일 전국에서 일어난 만세 운동의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 3·1 운동</span>3·1 운동입니다.</div>
+  </div>
+  <div class="qbox" id="h10q9" data-w="10" data-type="sa" data-a="김좌진">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">1920년 청산리 대첩에서 일본군을 크게 물리친 인물은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 김좌진</span>김좌진입니다. 북로 군정서를 이끌었습니다.</div>
+  </div>
+  <div class="qbox" id="h10q10" data-w="10" data-type="sa" data-a="대한민국 임시정부|대한민국임시정부|임시정부">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">3·1 운동 이후 중국 상하이에 세워진 임시 정부의 정식 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 대한민국 임시정부</span>대한민국 임시정부입니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="10">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w11">
+  <div class="wkhead"><span class="num">11</span><span class="lbl">WEEK 11</span>
+    <span class="sc" data-w="11">0 / 10</span></div>
+  <h2>광복과 전쟁</h2>
+  <p class="sub">8·15 광복 · 정부 수립 · 6·25 전쟁</p>
+  <div class="qbox" id="h11q1" data-w="11" data-type="mc" data-a="3">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">우리나라가 광복을 맞은 날은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>1919년 3월 1일</span></button><button class="opt" type="button"><span class="n">②</span><span>1950년 6월 25일</span></button><button class="opt" type="button"><span class="n">③</span><span>1948년 8월 15일</span></button><button class="opt" type="button"><span class="n">④</span><span>1945년 8월 15일</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>1945년 8월 15일 일본이 항복하면서 광복을 맞았습니다.</div>
+  </div>
+  <div class="qbox" id="h11q2" data-w="11" data-type="mc" data-a="0">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">38도선이 그어진 까닭으로 알맞은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>미국과 소련이 일본군의 무장 해제를 나누어 맡기로 해서</span></button><button class="opt" type="button"><span class="n">②</span><span>우리 정부가 정해서</span></button><button class="opt" type="button"><span class="n">③</span><span>일본이 정해서</span></button><button class="opt" type="button"><span class="n">④</span><span>전쟁이 끝나서</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>임시로 그은 선이었지만 결국 분단의 시작이 되었습니다.</div>
+  </div>
+  <div class="qbox" id="h11q3" data-w="11" data-type="mc" data-a="2">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">대한민국 정부가 수립된 날은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>1953년 7월 27일</span></button><button class="opt" type="button"><span class="n">②</span><span>1950년 6월 25일</span></button><button class="opt" type="button"><span class="n">③</span><span>1948년 8월 15일</span></button><button class="opt" type="button"><span class="n">④</span><span>1945년 8월 15일</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>1948년 5·10 총선거를 거쳐 8월 15일 정부가 수립되었습니다.</div>
+  </div>
+  <div class="qbox" id="h11q4" data-w="11" data-type="mc" data-a="2">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">6·25 전쟁이 시작된 날과 상황으로 옳은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>1948년 8월 15일 전쟁이 났다</span></button><button class="opt" type="button"><span class="n">②</span><span>1953년에 전쟁이 시작되었다</span></button><button class="opt" type="button"><span class="n">③</span><span>1950년 6월 25일 북한이 남침했다</span></button><button class="opt" type="button"><span class="n">④</span><span>1950년 6월 25일 남한이 북진했다</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>1950년 6월 25일 새벽 북한군이 38도선을 넘어 남침했습니다.</div>
+  </div>
+  <div class="qbox" id="h11q5" data-w="11" data-type="mc" data-a="0">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">6·25 전쟁의 전세를 뒤집은 1950년 9월의 작전은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>인천 상륙 작전</span></button><button class="opt" type="button"><span class="n">②</span><span>정전 협정</span></button><button class="opt" type="button"><span class="n">③</span><span>다부동 전투</span></button><button class="opt" type="button"><span class="n">④</span><span>흥남 철수</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>맥아더가 이끈 인천 상륙 작전으로 국군과 유엔군이 서울을 되찾았습니다.</div>
+  </div>
+  <div class="qbox" id="h11q6" data-w="11" data-type="mc" data-a="1">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">6·25 전쟁을 멈춘 정전 협정이 체결된 해는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>1950년</span></button><button class="opt" type="button"><span class="n">②</span><span>1953년</span></button><button class="opt" type="button"><span class="n">③</span><span>1948년</span></button><button class="opt" type="button"><span class="n">④</span><span>1960년</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>1953년 7월 27일 정전 협정이 맺어졌습니다. 전쟁이 끝난 것이 아니라 멈춘 것입니다.</div>
+  </div>
+  <div class="qbox" id="h11q7" data-w="11" data-type="mc" data-a="1">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">6·25 전쟁이 남긴 결과로 알맞은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>경제가 크게 발전했다</span></button><button class="opt" type="button"><span class="n">②</span><span>수많은 사상자와 이산가족이 생기고 국토가 황폐해졌다</span></button><button class="opt" type="button"><span class="n">③</span><span>일제 강점기가 시작되었다</span></button><button class="opt" type="button"><span class="n">④</span><span>남북이 통일되었다</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>인명 피해와 이산가족, 국토 파괴 그리고 분단의 고착이라는 상처를 남겼습니다.</div>
+  </div>
+  <div class="qbox" id="h11q8" data-w="11" data-type="sa" data-a="인천 상륙 작전|인천상륙작전">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">1950년 9월 유엔군이 전세를 뒤집기 위해 실시한 상륙 작전의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 인천 상륙 작전</span>인천 상륙 작전입니다.</div>
+  </div>
+  <div class="qbox" id="h11q9" data-w="11" data-type="sa" data-a="정전 협정|정전협정|휴전 협정|휴전협정">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">1953년 7월에 맺어져 6·25 전쟁을 멈추게 한 협정의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 정전 협정</span>정전 협정(휴전 협정)입니다.</div>
+  </div>
+  <div class="qbox" id="h11q10" data-w="11" data-type="sa" data-a="광복절">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">우리나라가 일제로부터 해방된 것을 기념하는 국경일의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 광복절</span>광복절(8월 15일)입니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="11">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w12">
+  <div class="wkhead"><span class="num">12</span><span class="lbl">WEEK 12</span>
+    <span class="sc" data-w="12">0 / 10</span></div>
+  <h2>산업화와 민주화</h2>
+  <p class="sub">4·19 · 경제 개발 · 5·18 · 6월 민주 항쟁</p>
+  <div class="qbox" id="h12q1" data-w="12" data-type="mc" data-a="0">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">1960년 3·15 부정 선거에 항의해 일어난 사건은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>4·19 혁명</span></button><button class="opt" type="button"><span class="n">②</span><span>5·16 군사 정변</span></button><button class="opt" type="button"><span class="n">③</span><span>6월 민주 항쟁</span></button><button class="opt" type="button"><span class="n">④</span><span>5·18 민주화 운동</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>4·19 혁명입니다. 그 결과 이승만 대통령이 물러났습니다.</div>
+  </div>
+  <div class="qbox" id="h12q2" data-w="12" data-type="mc" data-a="1">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">1961년 군사력으로 정권을 잡은 사건과 그 중심 인물은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>12·12 사태 · 김구</span></button><button class="opt" type="button"><span class="n">②</span><span>5·16 군사 정변 · 박정희</span></button><button class="opt" type="button"><span class="n">③</span><span>4·19 혁명 · 이승만</span></button><button class="opt" type="button"><span class="n">④</span><span>6·29 선언 · 노태우</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>1961년 5·16 군사 정변으로 박정희가 정권을 잡았습니다.</div>
+  </div>
+  <div class="qbox" id="h12q3" data-w="12" data-type="mc" data-a="3">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">1960~70년대에 추진된 경제 개발 5개년 계획의 특징은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>외국과 교류를 끊었다</span></button><button class="opt" type="button"><span class="n">②</span><span>농업만 발전시켰다</span></button><button class="opt" type="button"><span class="n">③</span><span>중공업을 없앴다</span></button><button class="opt" type="button"><span class="n">④</span><span>수출 중심의 산업화를 빠르게 추진했다</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>값싼 노동력을 바탕으로 수출 중심 공업화를 밀어붙여 '한강의 기적'을 이뤘습니다.</div>
+  </div>
+  <div class="qbox" id="h12q4" data-w="12" data-type="mc" data-a="0">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">1970년대에 농촌의 생활 환경을 바꾸기 위해 벌인 운동은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>새마을 운동</span></button><button class="opt" type="button"><span class="n">②</span><span>금 모으기 운동</span></button><button class="opt" type="button"><span class="n">③</span><span>형평 운동</span></button><button class="opt" type="button"><span class="n">④</span><span>물산 장려 운동</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>새마을 운동입니다. 근면·자조·협동을 내걸었습니다.</div>
+  </div>
+  <div class="qbox" id="h12q5" data-w="12" data-type="mc" data-a="2">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">1980년 광주에서 신군부에 맞서 일어난 민주화 운동은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>6월 민주 항쟁</span></button><button class="opt" type="button"><span class="n">②</span><span>3·1 운동</span></button><button class="opt" type="button"><span class="n">③</span><span>5·18 민주화 운동</span></button><button class="opt" type="button"><span class="n">④</span><span>4·19 혁명</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>5·18 민주화 운동입니다. 관련 기록물은 유네스코 세계기록유산에 올랐습니다.</div>
+  </div>
+  <div class="qbox" id="h12q6" data-w="12" data-type="mc" data-a="1">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">1987년 6월 민주 항쟁의 가장 큰 성과는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>남북이 통일되었다</span></button><button class="opt" type="button"><span class="n">②</span><span>대통령 직선제 개헌을 이끌어 냈다</span></button><button class="opt" type="button"><span class="n">③</span><span>경제를 발전시켰다</span></button><button class="opt" type="button"><span class="n">④</span><span>전쟁을 끝냈다</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>6·29 선언으로 대통령을 국민이 직접 뽑는 직선제가 되살아났습니다.</div>
+  </div>
+  <div class="qbox" id="h12q7" data-w="12" data-type="mc" data-a="2">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">1997년 외환 위기 때 국민들이 벌인 운동은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>물산 장려 운동</span></button><button class="opt" type="button"><span class="n">②</span><span>국채 보상 운동</span></button><button class="opt" type="button"><span class="n">③</span><span>금 모으기 운동</span></button><button class="opt" type="button"><span class="n">④</span><span>새마을 운동</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>집에 있던 금을 모아 나라 빚을 갚자는 금 모으기 운동이 벌어졌습니다.</div>
+  </div>
+  <div class="qbox" id="h12q8" data-w="12" data-type="sa" data-a="4·19 혁명|4.19혁명|사일구 혁명|4·19혁명|419혁명">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">1960년 3·15 부정 선거에 맞서 학생과 시민이 일으킨 혁명의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 4·19 혁명</span>4·19 혁명입니다.</div>
+  </div>
+  <div class="qbox" id="h12q9" data-w="12" data-type="sa" data-a="6월 민주 항쟁|6월민주항쟁|6월 항쟁|유월 민주 항쟁">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">1987년 대통령 직선제를 이끌어 낸 민주화 운동의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 6월 민주 항쟁</span>6월 민주 항쟁입니다.</div>
+  </div>
+  <div class="qbox" id="h12q10" data-w="12" data-type="sa" data-a="서울 올림픽|서울올림픽|올림픽|88 서울 올림픽">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">1988년 서울에서 열려 우리나라를 세계에 알린 국제 스포츠 대회는?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 서울 올림픽</span>1988년 서울 올림픽입니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="12">0 / 10</b></div>
+</section>
+
+<footer>
+  역사 문제집 120제 · 12주 × 10문제 · 기록은 이 기기에만 저장됩니다<br>
+  <button class="reset" id="resetAll" style="margin:8px 0 0">전체 기록 지우고 처음부터</button><br>
+  학습 문서 · <a href="index.html">역사 항해 12주</a>
+</footer>
+</div>
+<script>
+(function(){
+  var KEY="history_quiz_v1";
+  function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){return{}}}
+  function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+  var state=load();
+
+  function norm(s){return (s||"").replace(/\s+/g,"").replace(/[.,·’'"]/g,"").toLowerCase();}
+
+  function mark(box,right){
+    box.dataset.done="1";
+    box.querySelector(".exp").classList.add("show");
+    var s=load(); s[box.id]=right?1:0; save(s); paint();
+  }
+
+  document.querySelectorAll(".qbox[data-type=mc]").forEach(function(box){
+    var ans=parseInt(box.dataset.a,10);
+    box.querySelectorAll(".opt").forEach(function(btn,i){
+      btn.addEventListener("click",function(){
+        if(box.dataset.done) return;
+        box.querySelectorAll(".opt").forEach(function(b,j){
+          b.disabled=true;
+          if(j===ans) b.classList.add("ok");
+          else if(j===i) b.classList.add("no");
+        });
+        mark(box, i===ans);
+      });
+    });
+  });
+
+  document.querySelectorAll(".qbox[data-type=sa]").forEach(function(box){
+    var accept=(box.dataset.a||"").split("|").map(norm);
+    var input=box.querySelector("input"), btn=box.querySelector("button");
+    function check(){
+      if(box.dataset.done) return;
+      var right=accept.indexOf(norm(input.value))>=0;
+      input.classList.add(right?"ok":"no");
+      input.readOnly=true; btn.disabled=true;
+      mark(box,right);
+    }
+    btn.addEventListener("click",check);
+    input.addEventListener("keydown",function(e){if(e.key==="Enter")check();});
+  });
+
+  function paint(){
+    var s=load(), total=0;
+    for(var w=1;w<=12;w++){
+      var right=0, done=0;
+      document.querySelectorAll('.qbox[data-w="'+w+'"]').forEach(function(b){
+        if(b.id in s){done++; if(s[b.id]===1) right++;}
+      });
+      total+=right;
+      var el=document.querySelector('.sc[data-w="'+w+'"]');
+      if(el) el.textContent = done? (right+" / "+done+" 맞음") : "0 / 10";
+      var fo=document.querySelector('.wkfoot b[data-w="'+w+'"]');
+      if(fo) fo.textContent = right+" / 10";
+    }
+    var t=document.getElementById("total"); if(t) t.textContent=total+" / 120";
+    var bar=document.getElementById("bar"); if(bar) bar.style.width=(total/120*100)+"%";
+  }
+
+  // 새로고침해도 푼 문제는 유지
+  document.querySelectorAll(".qbox").forEach(function(box){
+    if(!(box.id in state)) return;
+    var right=state[box.id]===1;
+    box.dataset.done="1";
+    box.querySelector(".exp").classList.add("show");
+    if(box.dataset.type==="mc"){
+      var ans=parseInt(box.dataset.a,10);
+      box.querySelectorAll(".opt").forEach(function(b,j){
+        b.disabled=true;
+        if(j===ans) b.classList.add("ok");
+      });
+      if(!right) box.querySelector(".qn").insertAdjacentHTML("beforeend"," · 틀림");
+    }else{
+      var inp=box.querySelector("input"), bt=box.querySelector("button");
+      inp.readOnly=true; bt.disabled=true;
+      inp.classList.add(right?"ok":"no");
+      if(right && !inp.value) inp.value=(box.dataset.a||"").split("|")[0];
+    }
+  });
+  paint();
+
+  var rs=document.getElementById("resetAll");
+  if(rs) rs.addEventListener("click",function(){
+    if(!confirm("푼 기록을 모두 지우고 처음부터 다시 풀까요?")) return;
+    save({}); location.reload();
+  });
+
+  var links=[].slice.call(document.querySelectorAll("nav.jump a[href^='#']"));
+  var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1))});
+  function onScroll(){
+    var y=window.scrollY+120,idx=0;
+    secs.forEach(function(s,i){if(s&&s.offsetTop<=y)idx=i});
+    links.forEach(function(a,i){a.classList.toggle("now",i===idx)});
+  }
+  window.addEventListener("scroll",onScroll,{passive:true});onScroll();
+})();
+</script>
+</body>
+</html>

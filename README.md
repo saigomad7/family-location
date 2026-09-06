@@ -97,3 +97,10 @@ GitHub 저장소 → **Settings → Pages → Branch: main, / (root)** 선택 �
   한국사 전체 흐름을 연표 한 장으로 잇는 주차별 학습 문서입니다. 과학과 같은 리듬으로 진행합니다.
 - 📐 **수학 사다리 12주**: `https://saigomad7.github.io/family-location/math_quest/`
   중2 수학 전 범위를 개념 사다리로 밟아 오릅니다. 목요일은 일부러 틀려 보는 날입니다.
+
+- ✏️ **주차별 문제집 120제** (세 과목 각각 한 문서, 12주 × 10문제 · 객관식 7 · 단답형 3)
+  - 과학: `https://saigomad7.github.io/family-location/science_quest/quiz.html`
+  - 역사: `https://saigomad7.github.io/family-location/history_quest/quiz.html`
+  - 수학: `https://saigomad7.github.io/family-location/math_quest/quiz.html`
+
+  선택지를 누르면 바로 채점되고 해설이 열립니다. 점수는 폰 안에만 저장됩니다.
