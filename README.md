@@ -84,6 +84,7 @@ GitHub 저장소 → **Settings → Pages → Branch: main, / (root)** 선택 �
 | `family_study/` | **우리 가족 공부** 앱 (공부 시간 기록·응원) — [설명 보기](family_study/README.md) |
 | `science_quest/` | **과학 등반 12주** 중2 과학 주차별 학습 문서 — [설명 보기](science_quest/README.md) |
 | `history_quest/` | **역사 항해 12주** 중2 한국사 주차별 학습 문서 — [설명 보기](history_quest/README.md) |
+| `math_quest/` | **수학 사다리 12주** 중2 수학 주차별 학습 문서 — [설명 보기](math_quest/README.md) |
 
 ## 같이 쓰는 앱
 
@@ -94,3 +95,5 @@ GitHub 저장소 → **Settings → Pages → Branch: main, / (root)** 선택 �
   중2 과학을 하루 20분씩 밟아 가는 주차별 학습 문서입니다. 폰에서 보도록 만들었습니다.
 - 🏛️ **역사 항해 12주**: `https://saigomad7.github.io/family-location/history_quest/`
   한국사 전체 흐름을 연표 한 장으로 잇는 주차별 학습 문서입니다. 과학과 같은 리듬으로 진행합니다.
+- 📐 **수학 사다리 12주**: `https://saigomad7.github.io/family-location/math_quest/`
+  중2 수학 전 범위를 개념 사다리로 밟아 오릅니다. 목요일은 일부러 틀려 보는 날입니다.
