@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#DCE2DB">
+<title>6주차 · 연립방정식의 활용</title>
+<meta name="description" content="문장을 식으로 바꾸는 네 단계. 푸는 것은 이미 배웠습니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#131C18; --ink2:#2C3A33; --muted:#5F6E66; --faint:#8A968F;
+    --mist:#DCE2DB; --surface:#F8FAF6; --surface2:#EFF3EC;
+    --line:#C3CCC1; --hair:#DDE4DB;
+    --kelp:#2A5480; --kelp-wash:#E3EBF4; --kelp-line:#A3BBD5;
+    --amber:#8F6209; --amber-wash:#F5EAD0; --amber-line:#DCC79B;
+    --berry:#8C2F3E; --berry-wash:#F3DFE2; --berry-line:#D9A8B0;
+    --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+    --mono:"IBM Plex Mono","SFMono-Regular",Consolas,"D2Coding",monospace;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{margin:0;background:var(--mist);color:var(--ink);font-family:var(--sans);
+    font-size:16px;line-height:1.75;letter-spacing:-0.01em;
+    padding:0 18px calc(70px + env(safe-area-inset-bottom));
+    word-break:keep-all;overflow-wrap:anywhere;}
+  .wrap{max-width:1040px;margin:0 auto;}
+
+  /* ===== 표지 ===== */
+  .cover{padding:44px 0 30px;border-bottom:2px solid var(--ink);}
+  .cover .kicker{font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:0.2em;text-transform:uppercase;color:var(--kelp);margin:0 0 16px;}
+  .cover h1{font-size:clamp(27px,6vw,44px);font-weight:700;line-height:1.24;
+    letter-spacing:-0.035em;margin:0 0 16px;max-width:21ch;}
+  .cover .lede{font-size:clamp(15.5px,2vw,18px);font-weight:300;color:var(--ink2);
+    max-width:62ch;margin:0 0 24px;line-height:1.72;}
+  .cover .lede b{font-weight:600;color:var(--ink);}
+  .metaline{display:flex;flex-wrap:wrap;gap:6px 22px;font-family:var(--mono);
+    font-size:11.5px;color:var(--muted);letter-spacing:0.03em;}
+  .metaline b{color:var(--ink);font-weight:500;}
+
+  .summary{background:var(--ink);border-radius:3px;padding:26px 22px 24px;margin:28px 0 0;}
+  .summary h2{color:#F6FAF5;font-size:18px;font-weight:600;margin:0 0 6px;letter-spacing:-0.02em;}
+  .summary .sd{color:#93A399;font-size:13.5px;font-weight:300;margin:0 0 22px;line-height:1.65;}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:18px;}
+  .kpi .kl{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:#7E8F84;display:block;margin-bottom:5px;}
+  .kpi .kv{font-size:clamp(21px,3.2vw,28px);font-weight:700;color:#9DC6EE;
+    letter-spacing:-0.03em;display:block;line-height:1.1;}
+  .kpi .kn{font-size:12px;color:#B9C6BC;display:block;margin-top:6px;
+    font-weight:300;line-height:1.5;}
+
+  /* ===== 이동 바 ===== */
+  nav.jump{position:sticky;top:0;z-index:40;margin:0 -18px;padding:0 18px;
+    background:rgba(220,226,219,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);}
+  nav.jump .row{display:flex;gap:6px;overflow-x:auto;padding:9px 0;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  nav.jump .row::-webkit-scrollbar{display:none;}
+  nav.jump a{flex:0 0 auto;font-family:var(--mono);font-size:11.5px;letter-spacing:0.04em;
+    color:var(--muted);background:var(--surface);border:1px solid var(--line);
+    padding:6px 11px;border-radius:2px;text-decoration:none;}
+  nav.jump a.now{color:#fff;background:var(--kelp);border-color:var(--kelp);}
+
+  /* ===== 섹션 ===== */
+  .sec{padding:44px 0 12px;border-bottom:1px solid var(--line);scroll-margin-top:56px;}
+  .sec:last-of-type{border-bottom:0;}
+  .step-no{display:flex;align-items:center;gap:11px;margin-bottom:14px;}
+  .step-no .num{font-family:var(--mono);font-size:12px;font-weight:600;color:#fff;
+    background:var(--kelp);width:28px;height:28px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-no .lbl{font-family:var(--mono);font-size:11px;letter-spacing:0.13em;
+    text-transform:uppercase;color:var(--muted);}
+  .step-no .day{margin-left:auto;font-family:var(--mono);font-size:11px;
+    letter-spacing:0.1em;color:var(--kelp);background:var(--kelp-wash);
+    border:1px solid var(--kelp-line);padding:3px 9px;border-radius:2px;}
+  .sec h2{font-size:clamp(22px,3.4vw,29px);font-weight:600;letter-spacing:-0.03em;
+    line-height:1.34;margin:0 0 14px;max-width:30ch;}
+  .sec h3{font-size:17.5px;font-weight:600;letter-spacing:-0.02em;margin:30px 0 10px;}
+  .sec > p{max-width:70ch;color:var(--ink2);margin:0 0 16px;}
+  .sec strong,.sec b{font-weight:600;color:var(--ink);}
+  .sec code{font-family:var(--mono);font-size:0.86em;background:var(--surface2);
+    border:1px solid var(--hair);padding:1px 5px;border-radius:2px;}
+
+  .plain{background:var(--surface2);border-left:3px solid var(--kelp);
+    padding:14px 17px;margin:0 0 20px;border-radius:0 2px 2px 0;max-width:74ch;}
+  .plain p{margin:0;font-size:14.5px;color:var(--ink2);line-height:1.72;}
+  .plain p + p{margin-top:10px;}
+  .plain b{color:var(--kelp);font-weight:600;}
+
+  .fig{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:20px 16px 16px;margin:20px 0 12px;}
+  .fig-t{font-family:var(--mono);font-size:11px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--kelp);margin:0 0 16px;
+    padding-bottom:9px;border-bottom:1px solid var(--hair);}
+  .fig svg{display:block;width:100%;height:auto;}
+  .fig.wide{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .fig.wide svg{min-width:640px;}
+  .fig-c{font-size:13px;color:var(--muted);margin:14px 0 0;font-weight:300;
+    line-height:1.65;padding-top:12px;border-top:1px solid var(--hair);}
+  .fig-c b{color:var(--ink);font-weight:600;}
+
+  .sb{fill:#fff;stroke:#C3CCC1;stroke-width:1.5;}
+  .sb-k{fill:#E3EBF4;stroke:#2A5480;stroke-width:2;}
+  .sb-b{fill:#F3DFE2;stroke:#D9A8B0;stroke-width:1.5;}
+  .sb-a{fill:#F5EAD0;stroke:#DCC79B;stroke-width:1.5;}
+  .sb-g{fill:#EFF3EC;stroke:#C3CCC1;stroke-width:1.5;}
+  .sb-d{fill:#fff;stroke:#2A5480;stroke-width:1.6;stroke-dasharray:5 4;}
+  .st{font-family:var(--sans);font-size:13.5px;font-weight:600;fill:#131C18;
+    text-anchor:middle;letter-spacing:-0.3px;}
+  .st-s{font-family:var(--sans);font-size:11.5px;font-weight:400;fill:#5F6E66;text-anchor:middle;}
+  .st-k{fill:#2A5480;} .st-b{fill:#8C2F3E;} .st-a{fill:#8F6209;}
+  .sm{font-family:var(--mono);font-size:12px;fill:#131C18;text-anchor:middle;font-weight:500;}
+  .sm-s{font-family:var(--mono);font-size:10.5px;fill:#5F6E66;text-anchor:middle;}
+  .st-m{font-family:var(--mono);font-size:11px;fill:#8A968F;text-anchor:middle;letter-spacing:0.5px;}
+  .sl{stroke:#8A968F;stroke-width:1.6;fill:none;}
+  .sl-k{stroke:#2A5480;stroke-width:2;fill:none;}
+  .sl-a{stroke:#8F6209;stroke-width:1.8;fill:none;}
+  .sl-d{stroke:#8A968F;stroke-width:1.4;fill:none;stroke-dasharray:4 4;}
+  .sa{fill:#8A968F;} .sa-k{fill:#2A5480;} .sa-a{fill:#8F6209;}
+  .dot-k{fill:#2A5480;} .dot-a{fill:#C99A2E;} .dot-b{fill:#8C2F3E;}
+
+  /* ===== 수식 ===== */
+  .frac{display:inline-flex;flex-direction:column;vertical-align:-0.45em;text-align:center;
+    line-height:1.18;font-size:0.94em;margin:0 .12em;}
+  .frac span:first-child{border-bottom:1.3px solid currentColor;padding:0 .3em;}
+  .frac span:last-child{padding:0 .3em;}
+  .rd{position:relative;}
+  .rd::after{content:"\2022";position:absolute;top:-0.72em;left:50%;transform:translateX(-50%);
+    font-size:0.5em;line-height:1;}
+  .eq{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:13px 15px;margin:14px 0;font-size:17px;text-align:center;color:var(--ink);}
+  .eq .step{display:block;font-size:12.5px;color:var(--muted);font-family:var(--mono);margin-top:6px;}
+  .eq + .eq{margin-top:-6px;}
+  .why{font-size:13.5px;color:var(--muted);margin:-6px 0 14px;padding-left:14px;
+    border-left:2px solid var(--hair);}
+
+  /* ===== 표 ===== */
+  .tw{overflow-x:auto;margin:20px 0 8px;border:1px solid var(--line);
+    border-radius:3px;background:var(--surface);}
+  table{border-collapse:collapse;width:100%;font-size:13.8px;}
+  .tw.wide table{min-width:560px;}
+  thead th{background:var(--ink);color:#E8EFE7;text-align:left;font-family:var(--mono);
+    font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
+    padding:11px 13px;}
+  tbody td{padding:11px 13px;border-top:1px solid var(--hair);vertical-align:top;
+    color:var(--ink2);line-height:1.62;}
+  tbody tr:nth-child(even) td{background:var(--surface2);}
+  td.hd{font-weight:600;color:var(--ink);}
+  td.mn{font-family:var(--mono);font-size:12.5px;}
+  td.ok{color:var(--kelp);font-weight:600;}
+  td.no{color:var(--berry);font-weight:600;}
+  td.wa{color:var(--amber);font-weight:600;}
+  td.fill{font-family:var(--mono);color:var(--faint);}
+
+  .note{background:var(--amber-wash);border:1px solid var(--amber-line);
+    border-radius:3px;padding:17px 19px;margin:20px 0 8px;}
+  .note p{margin:0;font-size:14px;color:#5C440C;line-height:1.72;}
+  .note p + p{margin-top:9px;}
+  .note b{font-weight:600;}
+  .note .lb{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--amber);margin-bottom:6px;}
+  .alert{background:var(--berry-wash);border:1px solid var(--berry-line);
+    border-radius:3px;padding:17px 19px;margin:20px 0 8px;}
+  .alert p{margin:0;font-size:14px;color:#6B2430;line-height:1.72;}
+  .alert p + p{margin-top:9px;}
+  .alert b{font-weight:600;}
+  .alert .lb{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--berry);margin-bottom:6px;}
+
+  /* ===== 카드 묶음 ===== */
+  .cards{display:grid;gap:12px;margin:18px 0 8px;}
+  @media(min-width:680px){.cards.two{grid-template-columns:repeat(2,1fr);}}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:15px 17px;}
+  .card .ct{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;
+    color:var(--kelp);display:block;margin-bottom:7px;}
+  .card h4{margin:0 0 6px;font-size:15.5px;font-weight:600;letter-spacing:-0.02em;}
+  .card p{margin:0;font-size:14px;color:var(--ink2);line-height:1.68;}
+
+  /* ===== 요일 할 일 ===== */
+  .todo{list-style:none;margin:20px 0 8px;padding:0;background:var(--surface);
+    border:1px solid var(--line);border-radius:3px;overflow:hidden;}
+  .todo li + li{border-top:1px solid var(--hair);}
+  .todo label{display:grid;grid-template-columns:22px 1fr;gap:13px;align-items:start;
+    padding:15px 16px;cursor:pointer;font-size:14.5px;line-height:1.65;color:var(--ink2);min-height:54px;}
+  .todo input{appearance:none;-webkit-appearance:none;width:21px;height:21px;margin:1px 0 0;
+    border:1.5px solid var(--line);border-radius:2px;background:#fff;
+    display:grid;place-content:center;cursor:pointer;}
+  .todo input::after{content:"✓";font-size:13px;font-weight:700;color:#fff;transform:scale(0);}
+  .todo input:checked{background:var(--kelp);border-color:var(--kelp);}
+  .todo input:checked::after{transform:scale(1);}
+  .todo input:focus-visible{outline:2px solid var(--kelp);outline-offset:2px;}
+  .todo input:checked ~ .tt{color:var(--faint);text-decoration:line-through;}
+  .todo .tt b{color:var(--ink);font-weight:600;}
+
+  /* ===== 문제 ===== */
+  .q{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:15px 17px;margin:12px 0;}
+  .q .qn{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--kelp);
+    letter-spacing:0.12em;}
+  .q > p{margin:6px 0 0;font-size:15.5px;color:var(--ink);line-height:1.7;}
+  .q details{margin-top:12px;border-top:1px solid var(--hair);padding-top:10px;}
+  .q summary{cursor:pointer;list-style:none;font-family:var(--mono);font-size:12px;
+    font-weight:600;color:var(--kelp);letter-spacing:0.06em;padding:3px 0;}
+  .q summary::-webkit-details-marker{display:none;}
+  .q summary::before{content:"+ ";}
+  .q details[open] summary::before{content:"− ";}
+  .q .ans{margin-top:9px;background:var(--kelp-wash);border-radius:2px;padding:12px 14px;
+    font-size:14px;color:var(--ink2);line-height:1.7;}
+  .q .ans b{color:var(--kelp);font-weight:600;}
+
+  /* ===== 설명 대본 ===== */
+  .script{background:var(--surface);border:1px solid var(--kelp-line);border-radius:3px;
+    padding:16px 18px;margin:18px 0 8px;}
+  .script .row{display:grid;grid-template-columns:70px 1fr;gap:12px;font-size:14.5px;
+    color:var(--ink2);line-height:1.7;}
+  .script .row + .row{margin-top:11px;padding-top:11px;border-top:1px solid var(--hair);}
+  .script .s{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;color:var(--kelp);
+    font-weight:600;padding-top:4px;}
+
+  .badge{display:inline-block;font-family:var(--mono);font-size:12.5px;font-weight:600;
+    color:var(--amber);background:var(--amber-wash);border:1px solid var(--amber-line);
+    border-radius:2px;padding:7px 14px;margin-top:14px;letter-spacing:0.04em;}
+
+  /* ===== 주차 목록 (허브) ===== */
+  .wlist{display:flex;flex-direction:column;gap:10px;margin:18px 0 8px;}
+  a.wk{display:grid;grid-template-columns:1fr auto;grid-template-areas:"n p" "t p" "d d";
+    gap:2px 14px;background:var(--surface);border:1px solid var(--line);
+    border-left:3px solid var(--kelp);border-radius:3px;padding:15px 17px;
+    text-decoration:none;color:var(--ink);}
+  a.wk .n{grid-area:n;font-family:var(--mono);font-size:11px;font-weight:600;
+    letter-spacing:0.12em;color:var(--kelp);}
+  a.wk .t{grid-area:t;font-size:17px;font-weight:600;letter-spacing:-0.02em;}
+  a.wk .d{grid-area:d;font-size:13.5px;color:var(--muted);margin-top:5px;line-height:1.6;font-weight:300;}
+  a.wk .p{grid-area:p;align-self:center;font-family:var(--mono);font-size:11px;color:var(--muted);
+    background:var(--surface2);border:1px solid var(--hair);border-radius:2px;padding:4px 9px;white-space:nowrap;}
+  a.wk .p.done{color:#fff;background:var(--kelp);border-color:var(--kelp);}
+  a.wk .p.ing{color:var(--amber);background:var(--amber-wash);border-color:var(--amber-line);}
+  .wk.soon{border-left-color:var(--line);opacity:.62;pointer-events:none;}
+  .wk.soon .n,.wk.soon .t{color:var(--muted);}
+
+  /* ===== 진행 막대 ===== */
+  .bar{height:7px;background:var(--hair);border-radius:99px;overflow:hidden;margin-top:12px;
+    border:1px solid var(--line);}
+  .bar i{display:block;height:100%;background:var(--kelp);width:0;transition:width .3s;}
+
+  /* ===== 페이지 이동 ===== */
+  .pager{display:flex;gap:9px;margin:26px 0 0;}
+  .pager a{flex:1;text-align:center;font-size:13.5px;font-weight:600;text-decoration:none;
+    color:var(--ink2);background:var(--surface);border:1px solid var(--line);
+    border-radius:3px;padding:14px 8px;}
+  .pager a.main{background:var(--kelp);border-color:var(--kelp);color:#fff;}
+  footer{padding:26px 0 10px;font-family:var(--mono);font-size:11.5px;color:var(--faint);
+    letter-spacing:0.03em;line-height:1.8;}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="cover">
+  <p class="kicker">WEEK 06 · 2구간 방정식과 함수 · 하루 20분 × 4일</p>
+  <h1>연립방정식의 활용</h1>
+  <p class="lede">
+    문장제는 어려운 것이 아니라 <b>낯선 것</b>입니다. 푸는 방법은 5주차에서 이미 다 배웠습니다.
+    이번 주에 배우는 것은 <b>문장을 식으로 바꾸는 네 단계</b> 하나뿐입니다.
+  </p>
+  <div class="metaline">
+    <span>사다리 <b>6번째 칸</b></span>
+    <span>아래 칸 <b>5주차 · 연립방정식 풀이</b></span>
+    <span>문제 <b>13개</b></span>
+    <span>진행 <b id="wdone">0 / 4</b></span>
+  </div>
+
+  <div class="summary">
+    <h2>이번 주에 남길 것</h2>
+    <p class="sd">모든 문장제를 같은 네 단계로 풉니다. 순서를 지키는 것이 전부입니다.</p>
+    <div class="kpis">
+      <div class="kpi"><span class="kl">1단계</span><span class="kv">정하기</span>
+        <span class="kn">구하려는 것을 x, y로 정한다</span></div>
+      <div class="kpi"><span class="kl">2단계</span><span class="kv">세우기</span>
+        <span class="kn">조건 두 개를 식 두 개로</span></div>
+      <div class="kpi"><span class="kl">3·4단계</span><span class="kv">풀고 확인</span>
+        <span class="kn">풀고 나서 <b>문제로 되돌아가</b> 확인한다</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="jump"><div class="row">
+  <a href="#map">이번 주 칸</a>
+  <a href="#mon">월 · 열기</a>
+  <a href="#tue">화 · 채우기</a>
+  <a href="#thu">목 · 오답으로</a>
+  <a href="#fri">금 · 보스전</a>
+  <a href="#next">다음 주</a>
+</div></nav>
+
+<section class="sec" id="map">
+  <div class="step-no"><span class="num">1</span><span class="lbl">이번 주 칸</span></div>
+  <h2>문장을 식으로 바꾸는 네 단계</h2>
+
+  <div class="fig">
+    <p class="fig-t">도식 1 · 12주 사다리에서 이번 주의 자리</p>
+    <svg viewBox="0 0 420 196" role="img" aria-label="12주 개념 사다리에서 이번 주의 자리"><rect x="10" y="162" width="133" height="18" rx="2" fill="#EFF3EC"/><text class="st-m" x="76" y="175" style="font-size:9px">1구간 · 수와 식</text><rect x="146" y="162" width="133" height="18" rx="2" fill="#EFF3EC"/><text class="st-m" x="212" y="175" style="font-size:9px">2구간 · 방정식과 함수</text><rect x="282" y="162" width="133" height="18" rx="2" fill="#EFF3EC"/><text class="st-m" x="348" y="175" style="font-size:9px">3구간 · 도형과 확률</text><rect x="10" y="132" width="31" height="26" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="26" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">01</text><rect x="44" y="124" width="31" height="34" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="60" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">02</text><rect x="78" y="116" width="31" height="42" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="94" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">03</text><rect x="112" y="108" width="31" height="50" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="128" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">04</text><rect x="146" y="100" width="31" height="58" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="162" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">05</text><rect x="180" y="92" width="31" height="66" rx="2" fill="#2A5480" stroke="#2A5480" stroke-width="1.2"/><text x="196" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#fff">06</text><text x="196" y="18" text-anchor="middle" font-family="IBM Plex Sans KR,sans-serif" font-size="13" font-weight="700" fill="#2A5480">연립방정식 활용</text><text x="196" y="34" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" fill="#5F6E66">문장을 식으로</text><path d="M196 40 L196 88" stroke="#2A5480" stroke-width="1.2" stroke-dasharray="3 3"/><rect x="214" y="84" width="31" height="74" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="230" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">07</text><rect x="248" y="76" width="31" height="82" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="264" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">08</text><rect x="282" y="68" width="31" height="90" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="298" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">09</text><rect x="316" y="60" width="31" height="98" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="332" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">10</text><rect x="350" y="52" width="31" height="106" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="366" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">11</text><rect x="384" y="44" width="31" height="114" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="400" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">12</text><text class="st-m" x="10" y="192" style="font-size:9.5px;text-anchor:start">아래 칸부터</text><text class="st-m" x="410" y="192" style="font-size:9.5px;text-anchor:end">밟고 올라갑니다</text></svg>
+  </div>
+
+  <div class="fig">
+    <p class="fig-t">도식 2 · 모든 문장제는 이 순서로</p>
+    <svg viewBox="0 0 420 224" role="img" aria-label="문장제를 푸는 네 단계">
+      <rect class="sb-k" x="8" y="10" width="404" height="44" rx="3"/>
+      <text class="st st-k" x="210" y="30">① 정하기 — 구하려는 것을 x, y로</text>
+      <text class="st-s" x="210" y="47">“연필 수를 x, 지우개 수를 y라 하자”</text>
+      <line class="sl-k" x1="210" y1="54" x2="210" y2="64"/><polygon class="sa-k" points="204,64 210,72 216,64"/>
+      <rect class="sb-k" x="8" y="74" width="404" height="44" rx="3"/>
+      <text class="st st-k" x="210" y="94">② 세우기 — 조건 두 개를 식 두 개로</text>
+      <text class="st-s" x="210" y="111">“모두 10개” → x + y = 10 / “값은 …” → 식 하나 더</text>
+      <line class="sl-k" x1="210" y1="118" x2="210" y2="128"/><polygon class="sa-k" points="204,128 210,136 216,128"/>
+      <rect class="sb" x="8" y="138" width="404" height="36" rx="3"/>
+      <text class="st" x="210" y="161">③ 풀기 — 5주차 방법 그대로</text>
+      <line class="sl-k" x1="210" y1="174" x2="210" y2="184"/><polygon class="sa-k" points="204,184 210,192 216,184"/>
+      <rect class="sb-a" x="8" y="194" width="404" height="26" rx="3"/>
+      <text class="st st-a" x="210" y="212">④ 확인 — 문제로 되돌아가 말이 되는지 본다</text>
+    </svg>
+    <p class="fig-c">틀리는 곳은 거의 언제나 <b>②단계</b>입니다. 그래서 이번 주 연습의 대부분이 “식 세우기”입니다.</p>
+  </div>
+</section>
+
+<section class="sec" id="mon">
+  <div class="step-no"><span class="num">2</span><span class="lbl">개념</span><span class="day">MON · 열기</span></div>
+  <h2>문장에서 식을 뽑아내는 법</h2>
+
+  <p>문장제에는 <b>거의 언제나 조건이 두 개</b> 들어 있습니다. 조건 하나가 식 하나입니다.
+  그 두 조건을 찾는 것이 이번 주의 핵심 기술입니다.</p>
+
+  <div class="tw wide"><table>
+    <thead><tr><th>이런 말이 나오면</th><th>이런 식</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">“모두 합해서 10개”</td><td class="mn ok">x + y = 10</td></tr>
+      <tr><td class="hd">“A가 B보다 3 크다”</td><td class="mn ok">A = B + 3</td></tr>
+      <tr><td class="hd">“400원짜리 x개, 700원짜리 y개, 합계 4600원”</td><td class="mn ok">400x + 700y = 4600</td></tr>
+      <tr><td class="hd">“두 자리 자연수의 십의 자리가 x, 일의 자리가 y”</td><td class="mn ok">그 수 = 10x + y</td></tr>
+      <tr><td class="hd">“거리 = 속력 × 시간”</td><td class="mn ok">시간 = 거리 ÷ 속력</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="alert"><span class="lb">여기서 가장 많이 막힙니다</span>
+    <p><b>“몇 개인가”와 “얼마인가”를 섞는 것</b>입니다.
+    x가 <b>개수</b>인지 <b>금액</b>인지 처음에 분명히 정해 두어야 합니다.
+    ①단계에서 <b>“연필 <u>수</u>를 x”</b>라고 <b>단위까지 적어 두면</b> 이 실수가 사라집니다.</p>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w6m1"><span class="tt"><b>월요일</b> — 위 표를 읽고 질문 3개를 적습니다. 표의 문장을 <b>가리고 식만 보고</b> 문장을 만들어 봅니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="tue">
+  <div class="step-no"><span class="num">3</span><span class="lbl">예제 3개</span><span class="day">TUE · 채우기</span></div>
+  <h2>절차대로 따라 풀어 봅니다</h2>
+
+  <div class="q"><span class="qn">예제 1 · 개수와 금액</span>
+    <p>500원짜리 볼펜과 800원짜리 형광펜을 <b>모두 9자루</b> 사고 <b>6000원</b>을 냈습니다. 각각 몇 자루씩 샀을까요?</p>
+    <details><summary>풀이 보기</summary><div class="ans">
+      <b>① 정하기.</b> 볼펜 수 x, 형광펜 수 y<br>
+      <b>② 세우기.</b> x + y = 9 / 500x + 800y = 6000<br>
+      <b>③ 풀기.</b> 첫 식에 500을 곱하면 500x + 500y = 4500. 두 식을 빼면 300y = 1500 → <b>y = 5</b>, x = <b>4</b><br>
+      <b>④ 확인.</b> 4자루 + 5자루 = 9자루 ✔ / 2000 + 4000 = 6000원 ✔<br>
+      <b>답 · 볼펜 4자루, 형광펜 5자루</b>
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">예제 2 · 두 자리 수</span>
+    <p>두 자리 자연수가 있습니다. 각 자리 숫자의 합은 <b>9</b>이고, 십의 자리와 일의 자리를 바꾼 수는 원래 수보다 <b>27만큼 큽니다.</b> 원래 수는?</p>
+    <details><summary>풀이 보기</summary><div class="ans">
+      <b>① 정하기.</b> 십의 자리 x, 일의 자리 y → 원래 수 = 10x + y<br>
+      <b>② 세우기.</b> x + y = 9 / (10y + x) = (10x + y) + 27<br>
+      <b>③ 정리하면</b> 9y − 9x = 27 → y − x = 3. x + y = 9 와 연립하면 <b>x = 3, y = 6</b><br>
+      <b>④ 확인.</b> 원래 수 36, 바꾼 수 63, 63 − 36 = 27 ✔<br>
+      <b>답 · 36</b>
+      <span class="step">두 자리 수를 <b>10x + y</b>로 쓰는 것이 이 유형의 열쇠입니다.</span>
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">예제 3 · 거리·속력·시간</span>
+    <p>집에서 학교까지 총 <b>6 km</b>를 가는데, 처음에는 시속 <b>4 km</b>로 걷다가 나중에는 시속 <b>12 km</b>로 뛰어서 <b>1시간</b>이 걸렸습니다. 걸은 거리는?</p>
+    <details><summary>풀이 보기</summary><div class="ans">
+      <b>① 정하기.</b> 걸은 거리 x km, 뛴 거리 y km<br>
+      <b>② 세우기.</b> 거리: x + y = 6 / 시간: <span class="frac"><span>x</span><span>4</span></span> + <span class="frac"><span>y</span><span>12</span></span> = 1<br>
+      <b>③ 풀기.</b> 두 번째 식에 12를 곱하면 3x + y = 12. 첫 식을 빼면 2x = 6 → <b>x = 3</b>, y = 3<br>
+      <b>④ 확인.</b> 3÷4 + 3÷12 = 0.75 + 0.25 = 1시간 ✔<br>
+      <b>답 · 걸은 거리 3 km</b>
+      <span class="step">거리 문제는 <b>거리 식 하나, 시간 식 하나</b>로 두 조건이 나옵니다.</span>
+    </div></details>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w6m2"><span class="tt"><b>화요일</b> — 예제 3개를 직접 풀고, <b>네 단계</b>를 노트 한 장에 적습니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="thu">
+  <div class="step-no"><span class="num">4</span><span class="lbl">오답 노트</span><span class="day">THU · 오답으로</span></div>
+  <h2>오늘은 일부러 틀려 보는 날</h2>
+
+  <h3>이 단원에서 자주 걸리는 함정</h3>
+  <div class="cards two">
+    <div class="card"><span class="ct">함정 1</span><h4>단위를 안 맞춤</h4>
+      <p>분과 시간, m와 km를 섞으면 반드시 틀립니다. <b>식 세우기 전에 단위를 통일</b>합니다.</p></div>
+    <div class="card"><span class="ct">함정 2</span><h4>구하는 것을 안 정함</h4>
+      <p>x, y를 무엇으로 뒀는지 적지 않으면 마지막에 <b>무엇이 답인지</b> 헷갈립니다. 반드시 ①단계를 씁니다.</p></div>
+    <div class="card"><span class="ct">함정 3</span><h4>답을 그대로 씀</h4>
+      <p>x를 구했는데 문제가 묻는 것은 <b>y</b>이거나 <b>x + y</b>인 경우가 많습니다. <b>마지막에 문제를 다시 읽습니다.</b></p></div>
+    <div class="card"><span class="ct">함정 4</span><h4>말이 안 되는 답</h4>
+      <p>사람 수가 소수나 음수로 나오면 <b>식이 잘못된 것</b>입니다. ④단계 확인에서 잡아냅니다.</p></div>
+  </div>
+
+  <h3>연습 5문제 — 식 세우기 중심</h3>
+  <div class="q"><span class="qn">연습 1</span><p>어른 x명, 어린이 y명이 모두 12명이고 입장료가 어른 5000원, 어린이 3000원으로 총 46000원일 때의 연립방정식을 세워 봅시다.</p>
+    <details><summary>답 보기</summary><div class="ans"><b>x + y = 12 / 5000x + 3000y = 46000</b> (답: 어른 5명, 어린이 7명)</div></details></div>
+  <div class="q"><span class="qn">연습 2</span><p>두 수의 합이 20이고 차가 4일 때 두 수는?</p>
+    <details><summary>답 보기</summary><div class="ans"><b>12와 8</b> — x + y = 20, x − y = 4</div></details></div>
+  <div class="q"><span class="qn">연습 3</span><p>연필 3자루와 지우개 2개가 3200원, 연필 1자루와 지우개 1개가 1300원일 때 연필 한 자루의 값은?</p>
+    <details><summary>답 보기</summary><div class="ans"><b>600원</b> — 3x + 2y = 3200, x + y = 1300 → 두 번째에 2를 곱해 빼면 x = 600 (지우개 700원)</div></details></div>
+  <div class="q"><span class="qn">연습 4</span><p>닭과 돼지가 모두 20마리이고 다리 수의 합이 56개일 때 닭은 몇 마리?</p>
+    <details><summary>답 보기</summary><div class="ans"><b>12마리</b> — x + y = 20, 2x + 4y = 56 → y = 8(돼지), x = 12(닭)</div></details></div>
+  <div class="q"><span class="qn">연습 5</span><p>둘레가 30 cm인 직사각형에서 가로가 세로보다 3 cm 길 때 가로 길이는?</p>
+    <details><summary>답 보기</summary><div class="ans"><b>9 cm</b> — 2(x + y) = 30 → x + y = 15, x = y + 3 → x = 9, y = 6
+    <span class="step">둘레 공식에서 <b>2를 먼저 나누는 것</b>이 요령입니다.</span></div></details></div>
+
+  <div class="tw"><table>
+    <thead><tr><th>오답 노트</th><th>내가 적어 보기</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">틀린 문제 번호</td><td class="fill">______</td></tr>
+      <tr><td class="hd">어디서 틀렸나 (식 세우기? 계산? 마지막 답?)</td><td class="fill">______</td></tr>
+      <tr><td class="hd">다음에 쓸 한 줄 규칙</td><td class="fill">______</td></tr>
+    </tbody>
+  </table></div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w6m3"><span class="tt"><b>목요일</b> — 연습 5문제를 풀고 <b>틀린 것만</b> 오답 노트에 세 줄로 옮깁니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="fri">
+  <div class="step-no"><span class="num">5</span><span class="lbl">보스전</span><span class="day">FRI · 설명</span></div>
+  <h2>문제 5개와 3분 설명</h2>
+
+  <div class="q"><span class="qn">Q1</span><p>사과 2개와 배 3개가 7500원, 사과 4개와 배 1개가 5500원일 때 사과 한 개의 값은?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>900원</b><br>
+      <b>①</b> 사과 x원, 배 y원 → 2x + 3y = 7500 / 4x + y = 5500<br>
+      <b>②</b> 두 번째 식에 3을 곱합니다 → 12x + 3y = 16500<br>
+      <b>③</b> 첫 식을 빼면 10x = 9000 → <b>x = 900</b>, 대입하면 y = 1900<br>
+      <span class="step">검산: 2(900) + 3(1900) = 7500 ✔ / 4(900) + 1900 = 5500 ✔</span>
+    </div></details></div>
+  <div class="q"><span class="qn">Q2</span><p>두 자리 자연수에서 각 자리 숫자의 합이 11이고, 자리를 바꾼 수가 원래 수보다 45 크다면 원래 수는?</p>
+    <details><summary>해설 보기</summary><div class="ans"><b>38</b> — x + y = 11, (10y + x) − (10x + y) = 45 → 9y − 9x = 45 → y − x = 5 → x = 3, y = 8</div></details></div>
+  <div class="q"><span class="qn">Q3</span><p>형과 동생의 나이 합은 25살이고, 형이 동생보다 5살 많습니다. 형의 나이는?</p>
+    <details><summary>해설 보기</summary><div class="ans"><b>15살</b> — x + y = 25, x = y + 5 → x = 15, y = 10</div></details></div>
+  <div class="q"><span class="qn">Q4</span><p>총 8 km를 가는데 시속 3 km로 걷다가 시속 6 km로 뛰어 2시간이 걸렸습니다. 뛴 거리는?</p>
+    <details><summary>해설 보기</summary><div class="ans"><b>4 km</b> — x + y = 8, x/3 + y/6 = 2 → 양변에 6을 곱하면 2x + y = 12 → x = 4(걸은 거리), y = 4(뛴 거리)</div></details></div>
+  <div class="q"><span class="qn">Q5</span><p>문장제를 푸는 네 단계를 순서대로 말해 봅시다.</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>① 구하려는 것을 x, y로 정한다(단위까지) ② 조건 두 개를 식 두 개로 세운다
+      ③ 5주차 방법으로 푼다 ④ 문제로 되돌아가 말이 되는지 확인한다.</b>
+      틀리는 곳은 거의 언제나 ②단계입니다.
+    </div></details></div>
+
+  <h3>아빠에게 3분 설명하기</h3>
+  <div class="script">
+    <div class="row"><span class="s">배운 것</span><span>문장제는 조건 두 개를 식 두 개로 바꾸면 끝난다는 것.</span></div>
+    <div class="row"><span class="s">왜</span><span>미지수가 두 개면 식도 두 개 있어야 답이 하나로 정해지거든.</span></div>
+    <div class="row"><span class="s">내가 틀린 곳</span><span>x를 개수로 뒀는지 금액으로 뒀는지 헷갈렸어. 이제 단위까지 적어.</span></div>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w6m4"><span class="tt"><b>금요일</b> — 문제 5개를 풀고, <b>식을 어떻게 세웠는지</b> 3분 설명합니다.</span></label></li>
+  </ul>
+
+  <p><span class="badge">획득 · 사다리 6칸</span></p>
+</section>
+
+<section class="sec" id="next">
+  <div class="step-no"><span class="num">6</span><span class="lbl">다음 주</span></div>
+  <h2>일차함수와 그래프</h2>
+  <p>7주차부터 <b>식이 그림</b>이 됩니다. 중2에서 가장 중요한 단원이고, 고등학교까지 이어집니다.
+  좌표평면이 흔들리면 여기서 막히니, 자신 없다면 <b>중1 좌표평면부터</b> 5분만 다시 보고 오세요.</p>
+  <div class="pager">
+    <a href="week05.html">← 5주차</a>
+    <a href="index.html">전체 사다리</a>
+    <a class="main" href="week07.html">7주차 →</a>
+  </div>
+</section>
+
+<footer>수학 사다리 12주 · WEEK 06 연립방정식의 활용 · 하루 20분 × 4일</footer>
+</div>
+<script>
+  (function(){
+    var KEY="math_quest_progress";
+    function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){return{}}}
+    function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+    var boxes=[].slice.call(document.querySelectorAll(".todo input[type=checkbox]"));
+    var st=load();
+    boxes.forEach(function(b){
+      if(st[b.dataset.q])b.checked=true;
+      b.addEventListener("change",function(){
+        var s=load();
+        if(b.checked)s[b.dataset.q]=1;else delete s[b.dataset.q];
+        save(s);paint();
+      });
+    });
+    function paint(){
+      var el=document.getElementById("wdone");
+      if(el){var n=boxes.filter(function(b){return b.checked}).length;
+        el.textContent=n+" / "+boxes.length;}
+      var hub=document.querySelector("[data-hub]");
+      if(hub){
+        var s=load(),total=0;
+        for(var w=1;w<=12;w++){
+          var n2=0;
+          for(var m=1;m<=4;m++) if(s["w"+w+"m"+m]) n2++;
+          total+=n2;
+          var p=document.querySelector('.p[data-p="'+w+'"]');
+          if(p&&!p.dataset.soon){p.textContent=n2===4?"완료":n2+" / 4";
+            p.className="p"+(n2===4?" done":(n2>0?" ing":""));}
+        }
+        var d=document.getElementById("allDone"),bar=document.getElementById("allBar");
+        if(d)d.textContent=total+" / 12";
+        if(bar)bar.style.width=(total/12*100)+"%";
+      }
+    }
+    paint();
+    var links=[].slice.call(document.querySelectorAll("nav.jump a[href^='#']"));
+    if(links.length){
+      var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1))});
+      var onScroll=function(){
+        var y=window.scrollY+130,idx=0;
+        secs.forEach(function(s,i){if(s&&s.offsetTop<=y)idx=i;});
+        links.forEach(function(a,i){a.classList.toggle("now",i===idx);});
+      };
+      window.addEventListener("scroll",onScroll,{passive:true});onScroll();
+    }
+  })();
+</script>
+</body>
+</html>

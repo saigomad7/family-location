@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#DCE2DB">
+<title>10주차 · 도형의 닮음</title>
+<meta name="description" content="모양은 같고 크기만 다를 때. 닮음비 하나로 길이와 넓이를 모두 구합니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#131C18; --ink2:#2C3A33; --muted:#5F6E66; --faint:#8A968F;
+    --mist:#DCE2DB; --surface:#F8FAF6; --surface2:#EFF3EC;
+    --line:#C3CCC1; --hair:#DDE4DB;
+    --kelp:#2A5480; --kelp-wash:#E3EBF4; --kelp-line:#A3BBD5;
+    --amber:#8F6209; --amber-wash:#F5EAD0; --amber-line:#DCC79B;
+    --berry:#8C2F3E; --berry-wash:#F3DFE2; --berry-line:#D9A8B0;
+    --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+    --mono:"IBM Plex Mono","SFMono-Regular",Consolas,"D2Coding",monospace;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{margin:0;background:var(--mist);color:var(--ink);font-family:var(--sans);
+    font-size:16px;line-height:1.75;letter-spacing:-0.01em;
+    padding:0 18px calc(70px + env(safe-area-inset-bottom));
+    word-break:keep-all;overflow-wrap:anywhere;}
+  .wrap{max-width:1040px;margin:0 auto;}
+
+  /* ===== 표지 ===== */
+  .cover{padding:44px 0 30px;border-bottom:2px solid var(--ink);}
+  .cover .kicker{font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:0.2em;text-transform:uppercase;color:var(--kelp);margin:0 0 16px;}
+  .cover h1{font-size:clamp(27px,6vw,44px);font-weight:700;line-height:1.24;
+    letter-spacing:-0.035em;margin:0 0 16px;max-width:21ch;}
+  .cover .lede{font-size:clamp(15.5px,2vw,18px);font-weight:300;color:var(--ink2);
+    max-width:62ch;margin:0 0 24px;line-height:1.72;}
+  .cover .lede b{font-weight:600;color:var(--ink);}
+  .metaline{display:flex;flex-wrap:wrap;gap:6px 22px;font-family:var(--mono);
+    font-size:11.5px;color:var(--muted);letter-spacing:0.03em;}
+  .metaline b{color:var(--ink);font-weight:500;}
+
+  .summary{background:var(--ink);border-radius:3px;padding:26px 22px 24px;margin:28px 0 0;}
+  .summary h2{color:#F6FAF5;font-size:18px;font-weight:600;margin:0 0 6px;letter-spacing:-0.02em;}
+  .summary .sd{color:#93A399;font-size:13.5px;font-weight:300;margin:0 0 22px;line-height:1.65;}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:18px;}
+  .kpi .kl{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:#7E8F84;display:block;margin-bottom:5px;}
+  .kpi .kv{font-size:clamp(21px,3.2vw,28px);font-weight:700;color:#9DC6EE;
+    letter-spacing:-0.03em;display:block;line-height:1.1;}
+  .kpi .kn{font-size:12px;color:#B9C6BC;display:block;margin-top:6px;
+    font-weight:300;line-height:1.5;}
+
+  /* ===== 이동 바 ===== */
+  nav.jump{position:sticky;top:0;z-index:40;margin:0 -18px;padding:0 18px;
+    background:rgba(220,226,219,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);}
+  nav.jump .row{display:flex;gap:6px;overflow-x:auto;padding:9px 0;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  nav.jump .row::-webkit-scrollbar{display:none;}
+  nav.jump a{flex:0 0 auto;font-family:var(--mono);font-size:11.5px;letter-spacing:0.04em;
+    color:var(--muted);background:var(--surface);border:1px solid var(--line);
+    padding:6px 11px;border-radius:2px;text-decoration:none;}
+  nav.jump a.now{color:#fff;background:var(--kelp);border-color:var(--kelp);}
+
+  /* ===== 섹션 ===== */
+  .sec{padding:44px 0 12px;border-bottom:1px solid var(--line);scroll-margin-top:56px;}
+  .sec:last-of-type{border-bottom:0;}
+  .step-no{display:flex;align-items:center;gap:11px;margin-bottom:14px;}
+  .step-no .num{font-family:var(--mono);font-size:12px;font-weight:600;color:#fff;
+    background:var(--kelp);width:28px;height:28px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-no .lbl{font-family:var(--mono);font-size:11px;letter-spacing:0.13em;
+    text-transform:uppercase;color:var(--muted);}
+  .step-no .day{margin-left:auto;font-family:var(--mono);font-size:11px;
+    letter-spacing:0.1em;color:var(--kelp);background:var(--kelp-wash);
+    border:1px solid var(--kelp-line);padding:3px 9px;border-radius:2px;}
+  .sec h2{font-size:clamp(22px,3.4vw,29px);font-weight:600;letter-spacing:-0.03em;
+    line-height:1.34;margin:0 0 14px;max-width:30ch;}
+  .sec h3{font-size:17.5px;font-weight:600;letter-spacing:-0.02em;margin:30px 0 10px;}
+  .sec > p{max-width:70ch;color:var(--ink2);margin:0 0 16px;}
+  .sec strong,.sec b{font-weight:600;color:var(--ink);}
+  .sec code{font-family:var(--mono);font-size:0.86em;background:var(--surface2);
+    border:1px solid var(--hair);padding:1px 5px;border-radius:2px;}
+
+  .plain{background:var(--surface2);border-left:3px solid var(--kelp);
+    padding:14px 17px;margin:0 0 20px;border-radius:0 2px 2px 0;max-width:74ch;}
+  .plain p{margin:0;font-size:14.5px;color:var(--ink2);line-height:1.72;}
+  .plain p + p{margin-top:10px;}
+  .plain b{color:var(--kelp);font-weight:600;}
+
+  .fig{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:20px 16px 16px;margin:20px 0 12px;}
+  .fig-t{font-family:var(--mono);font-size:11px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--kelp);margin:0 0 16px;
+    padding-bottom:9px;border-bottom:1px solid var(--hair);}
+  .fig svg{display:block;width:100%;height:auto;}
+  .fig.wide{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .fig.wide svg{min-width:640px;}
+  .fig-c{font-size:13px;color:var(--muted);margin:14px 0 0;font-weight:300;
+    line-height:1.65;padding-top:12px;border-top:1px solid var(--hair);}
+  .fig-c b{color:var(--ink);font-weight:600;}
+
+  .sb{fill:#fff;stroke:#C3CCC1;stroke-width:1.5;}
+  .sb-k{fill:#E3EBF4;stroke:#2A5480;stroke-width:2;}
+  .sb-b{fill:#F3DFE2;stroke:#D9A8B0;stroke-width:1.5;}
+  .sb-a{fill:#F5EAD0;stroke:#DCC79B;stroke-width:1.5;}
+  .sb-g{fill:#EFF3EC;stroke:#C3CCC1;stroke-width:1.5;}
+  .sb-d{fill:#fff;stroke:#2A5480;stroke-width:1.6;stroke-dasharray:5 4;}
+  .st{font-family:var(--sans);font-size:13.5px;font-weight:600;fill:#131C18;
+    text-anchor:middle;letter-spacing:-0.3px;}
+  .st-s{font-family:var(--sans);font-size:11.5px;font-weight:400;fill:#5F6E66;text-anchor:middle;}
+  .st-k{fill:#2A5480;} .st-b{fill:#8C2F3E;} .st-a{fill:#8F6209;}
+  .sm{font-family:var(--mono);font-size:12px;fill:#131C18;text-anchor:middle;font-weight:500;}
+  .sm-s{font-family:var(--mono);font-size:10.5px;fill:#5F6E66;text-anchor:middle;}
+  .st-m{font-family:var(--mono);font-size:11px;fill:#8A968F;text-anchor:middle;letter-spacing:0.5px;}
+  .sl{stroke:#8A968F;stroke-width:1.6;fill:none;}
+  .sl-k{stroke:#2A5480;stroke-width:2;fill:none;}
+  .sl-a{stroke:#8F6209;stroke-width:1.8;fill:none;}
+  .sl-d{stroke:#8A968F;stroke-width:1.4;fill:none;stroke-dasharray:4 4;}
+  .sa{fill:#8A968F;} .sa-k{fill:#2A5480;} .sa-a{fill:#8F6209;}
+  .dot-k{fill:#2A5480;} .dot-a{fill:#C99A2E;} .dot-b{fill:#8C2F3E;}
+
+  /* ===== 수식 ===== */
+  .frac{display:inline-flex;flex-direction:column;vertical-align:-0.45em;text-align:center;
+    line-height:1.18;font-size:0.94em;margin:0 .12em;}
+  .frac span:first-child{border-bottom:1.3px solid currentColor;padding:0 .3em;}
+  .frac span:last-child{padding:0 .3em;}
+  .rd{position:relative;}
+  .rd::after{content:"\2022";position:absolute;top:-0.72em;left:50%;transform:translateX(-50%);
+    font-size:0.5em;line-height:1;}
+  .eq{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:13px 15px;margin:14px 0;font-size:17px;text-align:center;color:var(--ink);}
+  .eq .step{display:block;font-size:12.5px;color:var(--muted);font-family:var(--mono);margin-top:6px;}
+  .eq + .eq{margin-top:-6px;}
+  .why{font-size:13.5px;color:var(--muted);margin:-6px 0 14px;padding-left:14px;
+    border-left:2px solid var(--hair);}
+
+  /* ===== 표 ===== */
+  .tw{overflow-x:auto;margin:20px 0 8px;border:1px solid var(--line);
+    border-radius:3px;background:var(--surface);}
+  table{border-collapse:collapse;width:100%;font-size:13.8px;}
+  .tw.wide table{min-width:560px;}
+  thead th{background:var(--ink);color:#E8EFE7;text-align:left;font-family:var(--mono);
+    font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
+    padding:11px 13px;}
+  tbody td{padding:11px 13px;border-top:1px solid var(--hair);vertical-align:top;
+    color:var(--ink2);line-height:1.62;}
+  tbody tr:nth-child(even) td{background:var(--surface2);}
+  td.hd{font-weight:600;color:var(--ink);}
+  td.mn{font-family:var(--mono);font-size:12.5px;}
+  td.ok{color:var(--kelp);font-weight:600;}
+  td.no{color:var(--berry);font-weight:600;}
+  td.wa{color:var(--amber);font-weight:600;}
+  td.fill{font-family:var(--mono);color:var(--faint);}
+
+  .note{background:var(--amber-wash);border:1px solid var(--amber-line);
+    border-radius:3px;padding:17px 19px;margin:20px 0 8px;}
+  .note p{margin:0;font-size:14px;color:#5C440C;line-height:1.72;}
+  .note p + p{margin-top:9px;}
+  .note b{font-weight:600;}
+  .note .lb{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--amber);margin-bottom:6px;}
+  .alert{background:var(--berry-wash);border:1px solid var(--berry-line);
+    border-radius:3px;padding:17px 19px;margin:20px 0 8px;}
+  .alert p{margin:0;font-size:14px;color:#6B2430;line-height:1.72;}
+  .alert p + p{margin-top:9px;}
+  .alert b{font-weight:600;}
+  .alert .lb{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--berry);margin-bottom:6px;}
+
+  /* ===== 카드 묶음 ===== */
+  .cards{display:grid;gap:12px;margin:18px 0 8px;}
+  @media(min-width:680px){.cards.two{grid-template-columns:repeat(2,1fr);}}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:15px 17px;}
+  .card .ct{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;
+    color:var(--kelp);display:block;margin-bottom:7px;}
+  .card h4{margin:0 0 6px;font-size:15.5px;font-weight:600;letter-spacing:-0.02em;}
+  .card p{margin:0;font-size:14px;color:var(--ink2);line-height:1.68;}
+
+  /* ===== 요일 할 일 ===== */
+  .todo{list-style:none;margin:20px 0 8px;padding:0;background:var(--surface);
+    border:1px solid var(--line);border-radius:3px;overflow:hidden;}
+  .todo li + li{border-top:1px solid var(--hair);}
+  .todo label{display:grid;grid-template-columns:22px 1fr;gap:13px;align-items:start;
+    padding:15px 16px;cursor:pointer;font-size:14.5px;line-height:1.65;color:var(--ink2);min-height:54px;}
+  .todo input{appearance:none;-webkit-appearance:none;width:21px;height:21px;margin:1px 0 0;
+    border:1.5px solid var(--line);border-radius:2px;background:#fff;
+    display:grid;place-content:center;cursor:pointer;}
+  .todo input::after{content:"✓";font-size:13px;font-weight:700;color:#fff;transform:scale(0);}
+  .todo input:checked{background:var(--kelp);border-color:var(--kelp);}
+  .todo input:checked::after{transform:scale(1);}
+  .todo input:focus-visible{outline:2px solid var(--kelp);outline-offset:2px;}
+  .todo input:checked ~ .tt{color:var(--faint);text-decoration:line-through;}
+  .todo .tt b{color:var(--ink);font-weight:600;}
+
+  /* ===== 문제 ===== */
+  .q{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:15px 17px;margin:12px 0;}
+  .q .qn{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--kelp);
+    letter-spacing:0.12em;}
+  .q > p{margin:6px 0 0;font-size:15.5px;color:var(--ink);line-height:1.7;}
+  .q details{margin-top:12px;border-top:1px solid var(--hair);padding-top:10px;}
+  .q summary{cursor:pointer;list-style:none;font-family:var(--mono);font-size:12px;
+    font-weight:600;color:var(--kelp);letter-spacing:0.06em;padding:3px 0;}
+  .q summary::-webkit-details-marker{display:none;}
+  .q summary::before{content:"+ ";}
+  .q details[open] summary::before{content:"− ";}
+  .q .ans{margin-top:9px;background:var(--kelp-wash);border-radius:2px;padding:12px 14px;
+    font-size:14px;color:var(--ink2);line-height:1.7;}
+  .q .ans b{color:var(--kelp);font-weight:600;}
+
+  /* ===== 설명 대본 ===== */
+  .script{background:var(--surface);border:1px solid var(--kelp-line);border-radius:3px;
+    padding:16px 18px;margin:18px 0 8px;}
+  .script .row{display:grid;grid-template-columns:70px 1fr;gap:12px;font-size:14.5px;
+    color:var(--ink2);line-height:1.7;}
+  .script .row + .row{margin-top:11px;padding-top:11px;border-top:1px solid var(--hair);}
+  .script .s{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;color:var(--kelp);
+    font-weight:600;padding-top:4px;}
+
+  .badge{display:inline-block;font-family:var(--mono);font-size:12.5px;font-weight:600;
+    color:var(--amber);background:var(--amber-wash);border:1px solid var(--amber-line);
+    border-radius:2px;padding:7px 14px;margin-top:14px;letter-spacing:0.04em;}
+
+  /* ===== 주차 목록 (허브) ===== */
+  .wlist{display:flex;flex-direction:column;gap:10px;margin:18px 0 8px;}
+  a.wk{display:grid;grid-template-columns:1fr auto;grid-template-areas:"n p" "t p" "d d";
+    gap:2px 14px;background:var(--surface);border:1px solid var(--line);
+    border-left:3px solid var(--kelp);border-radius:3px;padding:15px 17px;
+    text-decoration:none;color:var(--ink);}
+  a.wk .n{grid-area:n;font-family:var(--mono);font-size:11px;font-weight:600;
+    letter-spacing:0.12em;color:var(--kelp);}
+  a.wk .t{grid-area:t;font-size:17px;font-weight:600;letter-spacing:-0.02em;}
+  a.wk .d{grid-area:d;font-size:13.5px;color:var(--muted);margin-top:5px;line-height:1.6;font-weight:300;}
+  a.wk .p{grid-area:p;align-self:center;font-family:var(--mono);font-size:11px;color:var(--muted);
+    background:var(--surface2);border:1px solid var(--hair);border-radius:2px;padding:4px 9px;white-space:nowrap;}
+  a.wk .p.done{color:#fff;background:var(--kelp);border-color:var(--kelp);}
+  a.wk .p.ing{color:var(--amber);background:var(--amber-wash);border-color:var(--amber-line);}
+  .wk.soon{border-left-color:var(--line);opacity:.62;pointer-events:none;}
+  .wk.soon .n,.wk.soon .t{color:var(--muted);}
+
+  /* ===== 진행 막대 ===== */
+  .bar{height:7px;background:var(--hair);border-radius:99px;overflow:hidden;margin-top:12px;
+    border:1px solid var(--line);}
+  .bar i{display:block;height:100%;background:var(--kelp);width:0;transition:width .3s;}
+
+  /* ===== 페이지 이동 ===== */
+  .pager{display:flex;gap:9px;margin:26px 0 0;}
+  .pager a{flex:1;text-align:center;font-size:13.5px;font-weight:600;text-decoration:none;
+    color:var(--ink2);background:var(--surface);border:1px solid var(--line);
+    border-radius:3px;padding:14px 8px;}
+  .pager a.main{background:var(--kelp);border-color:var(--kelp);color:#fff;}
+  footer{padding:26px 0 10px;font-family:var(--mono);font-size:11.5px;color:var(--faint);
+    letter-spacing:0.03em;line-height:1.8;}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="cover">
+  <p class="kicker">WEEK 10 · 3구간 도형과 확률 · 하루 20분 × 4일</p>
+  <h1>도형의 닮음</h1>
+  <p class="lede">
+    <b>모양은 같고 크기만 다른</b> 도형을 닮았다고 합니다. 지도, 사진 확대, 모형 자동차가 모두 닮음입니다.
+    닮음비 하나만 구하면 <b>모르는 길이를 전부 구할 수 있습니다.</b>
+  </p>
+  <div class="metaline">
+    <span>사다리 <b>10번째 칸</b></span>
+    <span>아래 칸 <b>9주차 도형 · 중1 비례식</b></span>
+    <span>문제 <b>13개</b></span>
+    <span>진행 <b id="wdone">0 / 4</b></span>
+  </div>
+
+  <div class="summary">
+    <h2>이번 주에 남길 것</h2>
+    <p class="sd">닮음비가 m : n일 때 길이·넓이·부피가 각각 어떻게 되는지가 핵심입니다.</p>
+    <div class="kpis">
+      <div class="kpi"><span class="kl">길이</span><span class="kv">m : n</span>
+        <span class="kn">대응하는 변의 길이 비</span></div>
+      <div class="kpi"><span class="kl">넓이</span><span class="kv">m² : n²</span>
+        <span class="kn">가로도 세로도 늘어나므로 제곱</span></div>
+      <div class="kpi"><span class="kl">각</span><span class="kv">그대로</span>
+        <span class="kn">크기가 달라도 <b>각은 변하지 않는다</b></span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="jump"><div class="row">
+  <a href="#map">이번 주 칸</a>
+  <a href="#mon">월 · 열기</a>
+  <a href="#tue">화 · 채우기</a>
+  <a href="#thu">목 · 오답으로</a>
+  <a href="#fri">금 · 보스전</a>
+  <a href="#next">다음 주</a>
+</div></nav>
+
+<section class="sec" id="map">
+  <div class="step-no"><span class="num">1</span><span class="lbl">이번 주 칸</span></div>
+  <h2>길이는 그대로, 넓이는 제곱</h2>
+
+  <div class="fig">
+    <p class="fig-t">도식 1 · 12주 사다리에서 이번 주의 자리</p>
+    <svg viewBox="0 0 420 196" role="img" aria-label="12주 개념 사다리에서 이번 주의 자리"><rect x="10" y="162" width="133" height="18" rx="2" fill="#EFF3EC"/><text class="st-m" x="76" y="175" style="font-size:9px">1구간 · 수와 식</text><rect x="146" y="162" width="133" height="18" rx="2" fill="#EFF3EC"/><text class="st-m" x="212" y="175" style="font-size:9px">2구간 · 방정식과 함수</text><rect x="282" y="162" width="133" height="18" rx="2" fill="#EFF3EC"/><text class="st-m" x="348" y="175" style="font-size:9px">3구간 · 도형과 확률</text><rect x="10" y="132" width="31" height="26" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="26" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">01</text><rect x="44" y="124" width="31" height="34" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="60" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">02</text><rect x="78" y="116" width="31" height="42" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="94" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">03</text><rect x="112" y="108" width="31" height="50" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="128" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">04</text><rect x="146" y="100" width="31" height="58" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="162" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">05</text><rect x="180" y="92" width="31" height="66" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="196" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">06</text><rect x="214" y="84" width="31" height="74" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="230" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">07</text><rect x="248" y="76" width="31" height="82" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="264" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">08</text><rect x="282" y="68" width="31" height="90" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="298" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">09</text><rect x="316" y="60" width="31" height="98" rx="2" fill="#2A5480" stroke="#2A5480" stroke-width="1.2"/><text x="332" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#fff">10</text><text x="410" y="18" text-anchor="end" font-family="IBM Plex Sans KR,sans-serif" font-size="13" font-weight="700" fill="#2A5480">도형의 닮음</text><text x="410" y="34" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="10" fill="#5F6E66">모양은 같고 크기만</text><path d="M332 40 L332 56" stroke="#2A5480" stroke-width="1.2" stroke-dasharray="3 3"/><rect x="350" y="52" width="31" height="106" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="366" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">11</text><rect x="384" y="44" width="31" height="114" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="400" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">12</text><text class="st-m" x="10" y="192" style="font-size:9.5px;text-anchor:start">아래 칸부터</text><text class="st-m" x="410" y="192" style="font-size:9.5px;text-anchor:end">밟고 올라갑니다</text></svg>
+  </div>
+
+  <div class="fig">
+    <p class="fig-t">도식 2 · 두 배로 키우면 넓이는 네 배</p>
+    <svg viewBox="0 0 420 200" role="img" aria-label="닮음비가 1대2이면 넓이비는 1대4가 된다">
+      <rect x="30" y="100" width="50" height="50" fill="#E3EBF4" stroke="#2A5480" stroke-width="2"/>
+      <text class="st-m" x="55" y="168">한 변 1</text>
+      <text class="st-s st-k" x="55" y="186">넓이 1</text>
+
+      <text class="st" x="150" y="130">→</text>
+      <text class="st-m st-a" x="150" y="150">2배로</text>
+
+      <rect x="210" y="50" width="100" height="100" fill="#E3EBF4" stroke="#2A5480" stroke-width="2"/>
+      <g stroke="#A3BBD5" stroke-width="1">
+        <line x1="260" y1="50" x2="260" y2="150"/><line x1="210" y1="100" x2="310" y2="100"/>
+      </g>
+      <text class="st-m" x="260" y="168">한 변 2</text>
+      <text class="st-s st-k" x="260" y="186">넓이 4 (작은 정사각형 4개)</text>
+
+      <rect class="sb-a" x="330" y="80" width="84" height="60" rx="3"/>
+      <text class="st st-a" x="372" y="104">길이 1:2</text>
+      <text class="st st-a" x="372" y="126">넓이 1:4</text>
+    </svg>
+    <p class="fig-c">외우지 말고 <b>그림으로 확인</b>합니다. 가로도 2배, 세로도 2배이니 넓이는 <b>2 × 2 = 4배</b>입니다.</p>
+  </div>
+</section>
+
+<section class="sec" id="mon">
+  <div class="step-no"><span class="num">2</span><span class="lbl">개념</span><span class="day">MON · 열기</span></div>
+  <h2>닮음이란 무엇인가</h2>
+
+  <p>두 도형이 <b>닮았다</b>는 것은 <b>대응하는 각의 크기가 같고, 대응하는 변의 길이의 비가 일정하다</b>는 뜻입니다.
+  그 일정한 비를 <b>닮음비</b>라고 합니다. 기호로는 <span class="mn">△ABC ∽ △DEF</span> 로 씁니다.</p>
+
+  <div class="tw wide"><table>
+    <thead><tr><th>닮음비가 m : n 이면</th><th>비는</th><th>왜</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">대응하는 변의 길이</td><td class="mn ok">m : n</td><td>정의 그대로</td></tr>
+      <tr><td class="hd">둘레의 길이</td><td class="mn ok">m : n</td><td>길이를 모두 더한 것이므로 같은 비</td></tr>
+      <tr><td class="hd">넓이</td><td class="mn ok">m² : n²</td><td>가로도 세로도 늘어나므로 <b>두 번</b> 곱해짐</td></tr>
+      <tr><td class="hd">대응하는 각</td><td class="mn ok">같음</td><td>모양이 같으므로 <b>각은 변하지 않음</b></td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>삼각형이 닮았다고 말할 수 있는 조건</h3>
+  <div class="cards two">
+    <div class="card"><span class="ct">조건 1 · AA</span><h4>두 각이 같으면</h4>
+      <p>두 각의 크기가 같으면 나머지 한 각도 자동으로 같아집니다(합이 180°). <b>가장 많이 쓰이는 조건</b>입니다.</p></div>
+    <div class="card"><span class="ct">조건 2 · SSS</span><h4>세 변의 비가 같으면</h4>
+      <p>세 쌍의 대응변의 길이의 비가 모두 같으면 닮음입니다.</p></div>
+    <div class="card"><span class="ct">조건 3 · SAS</span><h4>두 변의 비와 낀 각</h4>
+      <p>두 쌍의 변의 비가 같고 그 <b>사이의 각</b>이 같으면 닮음입니다.</p></div>
+    <div class="card"><span class="ct">활용</span><h4>평행선이 보이면</h4>
+      <p>삼각형 안에 <b>평행선</b>이 있으면 동위각·엇각이 같아져 <b>AA 조건</b>이 만들어집니다. 닮음 문제의 대부분이 이 형태입니다.</p></div>
+  </div>
+
+  <div class="alert"><span class="lb">합동과 닮음의 차이</span>
+    <p><b>합동(≡)</b>은 모양도 크기도 같은 것, <b>닮음(∽)</b>은 모양만 같은 것입니다.
+    합동은 <b>닮음비가 1 : 1</b>인 특별한 닮음입니다.</p>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w10m1"><span class="tt"><b>월요일</b> — 위를 읽고 질문 3개를 적습니다. 집에서 <b>닮음인 물건 두 개</b>(사진 원본과 확대본 등)를 찾아봅니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="tue">
+  <div class="step-no"><span class="num">3</span><span class="lbl">예제 3개</span><span class="day">TUE · 채우기</span></div>
+  <h2>절차대로 따라 풀어 봅니다</h2>
+
+  <div class="q"><span class="qn">예제 1 · 길이 구하기</span>
+    <p>닮은 두 삼각형의 닮음비가 <b>2 : 3</b>입니다. 작은 삼각형의 한 변이 6 cm일 때, 대응하는 큰 삼각형의 변의 길이는?</p>
+    <details><summary>풀이 보기</summary><div class="ans">
+      <b>① 비례식을 세웁니다.</b> 2 : 3 = 6 : x<br>
+      <b>② 외항과 내항의 곱은 같습니다.</b> 2x = 18<br>
+      <b>③ 답 · x = 9 cm</b>
+      <span class="step">중1의 비례식이 그대로 쓰입니다. 아래 칸이 튼튼하면 이 단원은 쉽습니다.</span>
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">예제 2 · 넓이 구하기</span>
+    <p>닮음비가 <b>1 : 3</b>인 두 도형이 있습니다. 작은 도형의 넓이가 5 cm²일 때 큰 도형의 넓이는?</p>
+    <details><summary>풀이 보기</summary><div class="ans">
+      <b>① 넓이의 비는 닮음비의 제곱.</b> 1² : 3² = 1 : 9<br>
+      <b>② 비례식.</b> 1 : 9 = 5 : x → <b>x = 45 cm²</b>
+      <span class="step">3배가 아니라 <b>9배</b>입니다. 이 단원에서 가장 많이 틀리는 부분입니다.</span>
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">예제 3 · 평행선과 선분의 비</span>
+    <p>△ABC에서 변 BC에 평행한 직선이 AB와 AC를 각각 D, E에서 만납니다.
+    <span class="mn">AD = 4, DB = 2, AE = 6</span> 일 때 <span class="mn">EC</span>의 길이는?</p>
+    <details><summary>풀이 보기</summary><div class="ans">
+      <b>① 평행선이 있으므로 △ADE ∽ △ABC</b> (AA 조건)<br>
+      <b>② 대응변의 비가 같습니다.</b> AD : DB = AE : EC → 4 : 2 = 6 : x<br>
+      <b>③ 답 · x = 3</b>
+      <span class="step">평행선이 보이면 <b>“닮음이다”</b>부터 떠올립니다.</span>
+    </div></details>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w10m2"><span class="tt"><b>화요일</b> — 예제 3개를 직접 풀고, <b>길이 비와 넓이 비</b>를 노트 한 장에 그림과 함께 정리합니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="thu">
+  <div class="step-no"><span class="num">4</span><span class="lbl">오답 노트</span><span class="day">THU · 오답으로</span></div>
+  <h2>오늘은 일부러 틀려 보는 날</h2>
+
+  <h3>이 단원에서 자주 걸리는 함정</h3>
+  <div class="cards two">
+    <div class="card"><span class="ct">함정 1</span><h4>넓이를 그냥 곱함</h4>
+      <p>닮음비 1:3이면 넓이는 3배가 <b>아니라 9배</b>입니다. <b>제곱</b>을 잊지 마세요.</p></div>
+    <div class="card"><span class="ct">함정 2</span><h4>대응 순서를 틀림</h4>
+      <p>△ABC ∽ △DEF 라면 A↔D, B↔E, C↔F 입니다. <b>기호 순서가 곧 대응 순서</b>입니다.</p></div>
+    <div class="card"><span class="ct">함정 3</span><h4>전체와 부분을 섞음</h4>
+      <p>AD : DB (부분끼리)와 AD : AB (부분과 전체)는 다릅니다. <b>무엇과 무엇의 비인지</b> 표시하며 풉니다.</p></div>
+    <div class="card"><span class="ct">함정 4</span><h4>비례식 계산 실수</h4>
+      <p>a : b = c : d 에서 <b>ad = bc</b>입니다. 자리를 헷갈리면 답이 완전히 달라집니다.</p></div>
+  </div>
+
+  <h3>연습 5문제</h3>
+  <div class="q"><span class="qn">연습 1</span><p>닮음비가 3 : 5인 두 삼각형에서 작은 쪽의 변이 9 cm일 때 큰 쪽의 대응변은?</p>
+    <details><summary>답 보기</summary><div class="ans"><b>15 cm</b> — 3 : 5 = 9 : x → 3x = 45</div></details></div>
+  <div class="q"><span class="qn">연습 2</span><p>닮음비가 2 : 5인 두 도형의 넓이의 비는?</p>
+    <details><summary>답 보기</summary><div class="ans"><b>4 : 25</b> — 2² : 5²</div></details></div>
+  <div class="q"><span class="qn">연습 3</span><p>닮음비 1 : 4인 두 도형에서 큰 도형의 둘레가 40 cm일 때 작은 도형의 둘레는?</p>
+    <details><summary>답 보기</summary><div class="ans"><b>10 cm</b> — 둘레의 비는 <b>닮음비와 같습니다</b>(제곱이 아닙니다).</div></details></div>
+  <div class="q"><span class="qn">연습 4</span><p>△ABC ∽ △DEF 이고 ∠A = 50°일 때 ∠D는?</p>
+    <details><summary>답 보기</summary><div class="ans"><b>50°</b> — 닮은 도형의 대응각은 같습니다. 기호 순서상 A와 D가 대응합니다.</div></details></div>
+  <div class="q"><span class="qn">연습 5</span><p>△ABC에서 BC와 평행한 DE가 있고 AD : DB = 3 : 2, AE = 9 일 때 EC는?</p>
+    <details><summary>답 보기</summary><div class="ans"><b>6</b> — 3 : 2 = 9 : x → 3x = 18</div></details></div>
+
+  <div class="tw"><table>
+    <thead><tr><th>오답 노트</th><th>내가 적어 보기</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">틀린 문제 번호</td><td class="fill">______</td></tr>
+      <tr><td class="hd">어디서 틀렸나 (제곱? 대응? 비례식?)</td><td class="fill">______</td></tr>
+      <tr><td class="hd">다음에 쓸 한 줄 규칙</td><td class="fill">______</td></tr>
+    </tbody>
+  </table></div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w10m3"><span class="tt"><b>목요일</b> — 연습 5문제를 풀고 <b>틀린 것만</b> 오답 노트에 옮깁니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="fri">
+  <div class="step-no"><span class="num">5</span><span class="lbl">보스전</span><span class="day">FRI · 설명</span></div>
+  <h2>문제 5개와 3분 설명</h2>
+
+  <div class="q"><span class="qn">Q1</span><p>닮음비가 4 : 7인 두 도형에서 작은 도형의 넓이가 32 cm²일 때 큰 도형의 넓이는?</p>
+    <details><summary>해설 보기</summary><div class="ans"><b>98 cm²</b> — 넓이의 비 16 : 49, 16 : 49 = 32 : x → x = 98</div></details></div>
+  <div class="q"><span class="qn">Q2</span><p>키가 160 cm인 사람의 그림자가 2 m이고 같은 시각 나무의 그림자가 5 m입니다. 나무의 높이는?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>4 m</b> — 같은 시각의 그림자는 <b>닮은 삼각형</b>을 만듭니다.
+      1.6 : 2 = x : 5 → 2x = 8 → x = 4 m
+      <span class="step">단위를 m로 통일하는 것을 잊지 않습니다. 닮음의 대표적인 실생활 활용입니다.</span>
+    </div></details></div>
+  <div class="q"><span class="qn">Q3</span><p>축척이 1 : 50000인 지도에서 두 지점 사이가 4 cm입니다. 실제 거리는?</p>
+    <details><summary>해설 보기</summary><div class="ans"><b>2 km</b> — 4 × 50000 = 200000 cm = 2000 m = 2 km</div></details></div>
+  <div class="q"><span class="qn">Q4</span><p>두 삼각형이 닮았다고 말할 수 있는 조건 세 가지를 말해 봅시다.</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>① 두 각의 크기가 각각 같다(AA) ② 세 쌍의 변의 길이의 비가 같다(SSS)
+      ③ 두 쌍의 변의 비가 같고 그 사이의 각이 같다(SAS)</b>
+    </div></details></div>
+  <div class="q"><span class="qn">Q5</span><p>넓이가 4배가 되려면 길이는 몇 배가 되어야 할까요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>2배</b> — 넓이비가 닮음비의 제곱이므로, 제곱해서 4가 되는 수는 2입니다.
+      <span class="step">거꾸로 묻는 문제입니다. 넓이 → 길이는 <b>제곱근</b>을 생각합니다.</span>
+    </div></details></div>
+
+  <h3>아빠에게 3분 설명하기</h3>
+  <div class="script">
+    <div class="row"><span class="s">배운 것</span><span>닮음은 모양은 같고 크기만 다른 것. 각은 그대로고 길이는 일정한 비라는 것.</span></div>
+    <div class="row"><span class="s">왜</span><span>가로도 2배, 세로도 2배면 넓이는 4배야. 그래서 넓이비는 제곱이야.</span></div>
+    <div class="row"><span class="s">내가 틀린 곳</span><span>넓이를 그냥 3배 했어. 9배였어.</span></div>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w10m4"><span class="tt"><b>금요일</b> — 문제 5개를 풀고, 그림을 그려 가며 3분 설명합니다.</span></label></li>
+  </ul>
+
+  <p><span class="badge">획득 · 사다리 10칸</span></p>
+</section>
+
+<section class="sec" id="next">
+  <div class="step-no"><span class="num">6</span><span class="lbl">다음 주</span></div>
+  <h2>피타고라스 정리</h2>
+  <p>11주차는 <b>직각삼각형 하나로 거리를 재는 법</b>입니다.
+  공식은 딱 하나(<span class="mn">a² + b² = c²</span>)인데, 쓸 곳이 굉장히 많습니다.
+  고등학교와 실생활에서 가장 자주 쓰이는 정리입니다.</p>
+  <div class="pager">
+    <a href="week09.html">← 9주차</a>
+    <a href="index.html">전체 사다리</a>
+    <a class="main" href="week11.html">11주차 →</a>
+  </div>
+</section>
+
+<footer>수학 사다리 12주 · WEEK 10 도형의 닮음 · 하루 20분 × 4일</footer>
+</div>
+<script>
+  (function(){
+    var KEY="math_quest_progress";
+    function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){return{}}}
+    function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+    var boxes=[].slice.call(document.querySelectorAll(".todo input[type=checkbox]"));
+    var st=load();
+    boxes.forEach(function(b){
+      if(st[b.dataset.q])b.checked=true;
+      b.addEventListener("change",function(){
+        var s=load();
+        if(b.checked)s[b.dataset.q]=1;else delete s[b.dataset.q];
+        save(s);paint();
+      });
+    });
+    function paint(){
+      var el=document.getElementById("wdone");
+      if(el){var n=boxes.filter(function(b){return b.checked}).length;
+        el.textContent=n+" / "+boxes.length;}
+      var hub=document.querySelector("[data-hub]");
+      if(hub){
+        var s=load(),total=0;
+        for(var w=1;w<=12;w++){
+          var n2=0;
+          for(var m=1;m<=4;m++) if(s["w"+w+"m"+m]) n2++;
+          total+=n2;
+          var p=document.querySelector('.p[data-p="'+w+'"]');
+          if(p&&!p.dataset.soon){p.textContent=n2===4?"완료":n2+" / 4";
+            p.className="p"+(n2===4?" done":(n2>0?" ing":""));}
+        }
+        var d=document.getElementById("allDone"),bar=document.getElementById("allBar");
+        if(d)d.textContent=total+" / 12";
+        if(bar)bar.style.width=(total/12*100)+"%";
+      }
+    }
+    paint();
+    var links=[].slice.call(document.querySelectorAll("nav.jump a[href^='#']"));
+    if(links.length){
+      var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1))});
+      var onScroll=function(){
+        var y=window.scrollY+130,idx=0;
+        secs.forEach(function(s,i){if(s&&s.offsetTop<=y)idx=i;});
+        links.forEach(function(a,i){a.classList.toggle("now",i===idx);});
+      };
+      window.addEventListener("scroll",onScroll,{passive:true});onScroll();
+    }
+  })();
+</script>
+</body>
+</html>

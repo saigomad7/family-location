@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#DCE2DB">
+<title>7주차 · 일차함수와 그래프</title>
+<meta name="description" content="식이 그림이 됩니다. 기울기와 절편만 알면 그래프를 그릴 수 있습니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#131C18; --ink2:#2C3A33; --muted:#5F6E66; --faint:#8A968F;
+    --mist:#DCE2DB; --surface:#F8FAF6; --surface2:#EFF3EC;
+    --line:#C3CCC1; --hair:#DDE4DB;
+    --kelp:#2A5480; --kelp-wash:#E3EBF4; --kelp-line:#A3BBD5;
+    --amber:#8F6209; --amber-wash:#F5EAD0; --amber-line:#DCC79B;
+    --berry:#8C2F3E; --berry-wash:#F3DFE2; --berry-line:#D9A8B0;
+    --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+    --mono:"IBM Plex Mono","SFMono-Regular",Consolas,"D2Coding",monospace;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{margin:0;background:var(--mist);color:var(--ink);font-family:var(--sans);
+    font-size:16px;line-height:1.75;letter-spacing:-0.01em;
+    padding:0 18px calc(70px + env(safe-area-inset-bottom));
+    word-break:keep-all;overflow-wrap:anywhere;}
+  .wrap{max-width:1040px;margin:0 auto;}
+
+  /* ===== 표지 ===== */
+  .cover{padding:44px 0 30px;border-bottom:2px solid var(--ink);}
+  .cover .kicker{font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:0.2em;text-transform:uppercase;color:var(--kelp);margin:0 0 16px;}
+  .cover h1{font-size:clamp(27px,6vw,44px);font-weight:700;line-height:1.24;
+    letter-spacing:-0.035em;margin:0 0 16px;max-width:21ch;}
+  .cover .lede{font-size:clamp(15.5px,2vw,18px);font-weight:300;color:var(--ink2);
+    max-width:62ch;margin:0 0 24px;line-height:1.72;}
+  .cover .lede b{font-weight:600;color:var(--ink);}
+  .metaline{display:flex;flex-wrap:wrap;gap:6px 22px;font-family:var(--mono);
+    font-size:11.5px;color:var(--muted);letter-spacing:0.03em;}
+  .metaline b{color:var(--ink);font-weight:500;}
+
+  .summary{background:var(--ink);border-radius:3px;padding:26px 22px 24px;margin:28px 0 0;}
+  .summary h2{color:#F6FAF5;font-size:18px;font-weight:600;margin:0 0 6px;letter-spacing:-0.02em;}
+  .summary .sd{color:#93A399;font-size:13.5px;font-weight:300;margin:0 0 22px;line-height:1.65;}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:18px;}
+  .kpi .kl{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:#7E8F84;display:block;margin-bottom:5px;}
+  .kpi .kv{font-size:clamp(21px,3.2vw,28px);font-weight:700;color:#9DC6EE;
+    letter-spacing:-0.03em;display:block;line-height:1.1;}
+  .kpi .kn{font-size:12px;color:#B9C6BC;display:block;margin-top:6px;
+    font-weight:300;line-height:1.5;}
+
+  /* ===== 이동 바 ===== */
+  nav.jump{position:sticky;top:0;z-index:40;margin:0 -18px;padding:0 18px;
+    background:rgba(220,226,219,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);}
+  nav.jump .row{display:flex;gap:6px;overflow-x:auto;padding:9px 0;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  nav.jump .row::-webkit-scrollbar{display:none;}
+  nav.jump a{flex:0 0 auto;font-family:var(--mono);font-size:11.5px;letter-spacing:0.04em;
+    color:var(--muted);background:var(--surface);border:1px solid var(--line);
+    padding:6px 11px;border-radius:2px;text-decoration:none;}
+  nav.jump a.now{color:#fff;background:var(--kelp);border-color:var(--kelp);}
+
+  /* ===== 섹션 ===== */
+  .sec{padding:44px 0 12px;border-bottom:1px solid var(--line);scroll-margin-top:56px;}
+  .sec:last-of-type{border-bottom:0;}
+  .step-no{display:flex;align-items:center;gap:11px;margin-bottom:14px;}
+  .step-no .num{font-family:var(--mono);font-size:12px;font-weight:600;color:#fff;
+    background:var(--kelp);width:28px;height:28px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-no .lbl{font-family:var(--mono);font-size:11px;letter-spacing:0.13em;
+    text-transform:uppercase;color:var(--muted);}
+  .step-no .day{margin-left:auto;font-family:var(--mono);font-size:11px;
+    letter-spacing:0.1em;color:var(--kelp);background:var(--kelp-wash);
+    border:1px solid var(--kelp-line);padding:3px 9px;border-radius:2px;}
+  .sec h2{font-size:clamp(22px,3.4vw,29px);font-weight:600;letter-spacing:-0.03em;
+    line-height:1.34;margin:0 0 14px;max-width:30ch;}
+  .sec h3{font-size:17.5px;font-weight:600;letter-spacing:-0.02em;margin:30px 0 10px;}
+  .sec > p{max-width:70ch;color:var(--ink2);margin:0 0 16px;}
+  .sec strong,.sec b{font-weight:600;color:var(--ink);}
+  .sec code{font-family:var(--mono);font-size:0.86em;background:var(--surface2);
+    border:1px solid var(--hair);padding:1px 5px;border-radius:2px;}
+
+  .plain{background:var(--surface2);border-left:3px solid var(--kelp);
+    padding:14px 17px;margin:0 0 20px;border-radius:0 2px 2px 0;max-width:74ch;}
+  .plain p{margin:0;font-size:14.5px;color:var(--ink2);line-height:1.72;}
+  .plain p + p{margin-top:10px;}
+  .plain b{color:var(--kelp);font-weight:600;}
+
+  .fig{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:20px 16px 16px;margin:20px 0 12px;}
+  .fig-t{font-family:var(--mono);font-size:11px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--kelp);margin:0 0 16px;
+    padding-bottom:9px;border-bottom:1px solid var(--hair);}
+  .fig svg{display:block;width:100%;height:auto;}
+  .fig.wide{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .fig.wide svg{min-width:640px;}
+  .fig-c{font-size:13px;color:var(--muted);margin:14px 0 0;font-weight:300;
+    line-height:1.65;padding-top:12px;border-top:1px solid var(--hair);}
+  .fig-c b{color:var(--ink);font-weight:600;}
+
+  .sb{fill:#fff;stroke:#C3CCC1;stroke-width:1.5;}
+  .sb-k{fill:#E3EBF4;stroke:#2A5480;stroke-width:2;}
+  .sb-b{fill:#F3DFE2;stroke:#D9A8B0;stroke-width:1.5;}
+  .sb-a{fill:#F5EAD0;stroke:#DCC79B;stroke-width:1.5;}
+  .sb-g{fill:#EFF3EC;stroke:#C3CCC1;stroke-width:1.5;}
+  .sb-d{fill:#fff;stroke:#2A5480;stroke-width:1.6;stroke-dasharray:5 4;}
+  .st{font-family:var(--sans);font-size:13.5px;font-weight:600;fill:#131C18;
+    text-anchor:middle;letter-spacing:-0.3px;}
+  .st-s{font-family:var(--sans);font-size:11.5px;font-weight:400;fill:#5F6E66;text-anchor:middle;}
+  .st-k{fill:#2A5480;} .st-b{fill:#8C2F3E;} .st-a{fill:#8F6209;}
+  .sm{font-family:var(--mono);font-size:12px;fill:#131C18;text-anchor:middle;font-weight:500;}
+  .sm-s{font-family:var(--mono);font-size:10.5px;fill:#5F6E66;text-anchor:middle;}
+  .st-m{font-family:var(--mono);font-size:11px;fill:#8A968F;text-anchor:middle;letter-spacing:0.5px;}
+  .sl{stroke:#8A968F;stroke-width:1.6;fill:none;}
+  .sl-k{stroke:#2A5480;stroke-width:2;fill:none;}
+  .sl-a{stroke:#8F6209;stroke-width:1.8;fill:none;}
+  .sl-d{stroke:#8A968F;stroke-width:1.4;fill:none;stroke-dasharray:4 4;}
+  .sa{fill:#8A968F;} .sa-k{fill:#2A5480;} .sa-a{fill:#8F6209;}
+  .dot-k{fill:#2A5480;} .dot-a{fill:#C99A2E;} .dot-b{fill:#8C2F3E;}
+
+  /* ===== 수식 ===== */
+  .frac{display:inline-flex;flex-direction:column;vertical-align:-0.45em;text-align:center;
+    line-height:1.18;font-size:0.94em;margin:0 .12em;}
+  .frac span:first-child{border-bottom:1.3px solid currentColor;padding:0 .3em;}
+  .frac span:last-child{padding:0 .3em;}
+  .rd{position:relative;}
+  .rd::after{content:"\2022";position:absolute;top:-0.72em;left:50%;transform:translateX(-50%);
+    font-size:0.5em;line-height:1;}
+  .eq{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:13px 15px;margin:14px 0;font-size:17px;text-align:center;color:var(--ink);}
+  .eq .step{display:block;font-size:12.5px;color:var(--muted);font-family:var(--mono);margin-top:6px;}
+  .eq + .eq{margin-top:-6px;}
+  .why{font-size:13.5px;color:var(--muted);margin:-6px 0 14px;padding-left:14px;
+    border-left:2px solid var(--hair);}
+
+  /* ===== 표 ===== */
+  .tw{overflow-x:auto;margin:20px 0 8px;border:1px solid var(--line);
+    border-radius:3px;background:var(--surface);}
+  table{border-collapse:collapse;width:100%;font-size:13.8px;}
+  .tw.wide table{min-width:560px;}
+  thead th{background:var(--ink);color:#E8EFE7;text-align:left;font-family:var(--mono);
+    font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
+    padding:11px 13px;}
+  tbody td{padding:11px 13px;border-top:1px solid var(--hair);vertical-align:top;
+    color:var(--ink2);line-height:1.62;}
+  tbody tr:nth-child(even) td{background:var(--surface2);}
+  td.hd{font-weight:600;color:var(--ink);}
+  td.mn{font-family:var(--mono);font-size:12.5px;}
+  td.ok{color:var(--kelp);font-weight:600;}
+  td.no{color:var(--berry);font-weight:600;}
+  td.wa{color:var(--amber);font-weight:600;}
+  td.fill{font-family:var(--mono);color:var(--faint);}
+
+  .note{background:var(--amber-wash);border:1px solid var(--amber-line);
+    border-radius:3px;padding:17px 19px;margin:20px 0 8px;}
+  .note p{margin:0;font-size:14px;color:#5C440C;line-height:1.72;}
+  .note p + p{margin-top:9px;}
+  .note b{font-weight:600;}
+  .note .lb{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--amber);margin-bottom:6px;}
+  .alert{background:var(--berry-wash);border:1px solid var(--berry-line);
+    border-radius:3px;padding:17px 19px;margin:20px 0 8px;}
+  .alert p{margin:0;font-size:14px;color:#6B2430;line-height:1.72;}
+  .alert p + p{margin-top:9px;}
+  .alert b{font-weight:600;}
+  .alert .lb{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--berry);margin-bottom:6px;}
+
+  /* ===== 카드 묶음 ===== */
+  .cards{display:grid;gap:12px;margin:18px 0 8px;}
+  @media(min-width:680px){.cards.two{grid-template-columns:repeat(2,1fr);}}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:15px 17px;}
+  .card .ct{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;
+    color:var(--kelp);display:block;margin-bottom:7px;}
+  .card h4{margin:0 0 6px;font-size:15.5px;font-weight:600;letter-spacing:-0.02em;}
+  .card p{margin:0;font-size:14px;color:var(--ink2);line-height:1.68;}
+
+  /* ===== 요일 할 일 ===== */
+  .todo{list-style:none;margin:20px 0 8px;padding:0;background:var(--surface);
+    border:1px solid var(--line);border-radius:3px;overflow:hidden;}
+  .todo li + li{border-top:1px solid var(--hair);}
+  .todo label{display:grid;grid-template-columns:22px 1fr;gap:13px;align-items:start;
+    padding:15px 16px;cursor:pointer;font-size:14.5px;line-height:1.65;color:var(--ink2);min-height:54px;}
+  .todo input{appearance:none;-webkit-appearance:none;width:21px;height:21px;margin:1px 0 0;
+    border:1.5px solid var(--line);border-radius:2px;background:#fff;
+    display:grid;place-content:center;cursor:pointer;}
+  .todo input::after{content:"✓";font-size:13px;font-weight:700;color:#fff;transform:scale(0);}
+  .todo input:checked{background:var(--kelp);border-color:var(--kelp);}
+  .todo input:checked::after{transform:scale(1);}
+  .todo input:focus-visible{outline:2px solid var(--kelp);outline-offset:2px;}
+  .todo input:checked ~ .tt{color:var(--faint);text-decoration:line-through;}
+  .todo .tt b{color:var(--ink);font-weight:600;}
+
+  /* ===== 문제 ===== */
+  .q{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:15px 17px;margin:12px 0;}
+  .q .qn{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--kelp);
+    letter-spacing:0.12em;}
+  .q > p{margin:6px 0 0;font-size:15.5px;color:var(--ink);line-height:1.7;}
+  .q details{margin-top:12px;border-top:1px solid var(--hair);padding-top:10px;}
+  .q summary{cursor:pointer;list-style:none;font-family:var(--mono);font-size:12px;
+    font-weight:600;color:var(--kelp);letter-spacing:0.06em;padding:3px 0;}
+  .q summary::-webkit-details-marker{display:none;}
+  .q summary::before{content:"+ ";}
+  .q details[open] summary::before{content:"− ";}
+  .q .ans{margin-top:9px;background:var(--kelp-wash);border-radius:2px;padding:12px 14px;
+    font-size:14px;color:var(--ink2);line-height:1.7;}
+  .q .ans b{color:var(--kelp);font-weight:600;}
+
+  /* ===== 설명 대본 ===== */
+  .script{background:var(--surface);border:1px solid var(--kelp-line);border-radius:3px;
+    padding:16px 18px;margin:18px 0 8px;}
+  .script .row{display:grid;grid-template-columns:70px 1fr;gap:12px;font-size:14.5px;
+    color:var(--ink2);line-height:1.7;}
+  .script .row + .row{margin-top:11px;padding-top:11px;border-top:1px solid var(--hair);}
+  .script .s{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;color:var(--kelp);
+    font-weight:600;padding-top:4px;}
+
+  .badge{display:inline-block;font-family:var(--mono);font-size:12.5px;font-weight:600;
+    color:var(--amber);background:var(--amber-wash);border:1px solid var(--amber-line);
+    border-radius:2px;padding:7px 14px;margin-top:14px;letter-spacing:0.04em;}
+
+  /* ===== 주차 목록 (허브) ===== */
+  .wlist{display:flex;flex-direction:column;gap:10px;margin:18px 0 8px;}
+  a.wk{display:grid;grid-template-columns:1fr auto;grid-template-areas:"n p" "t p" "d d";
+    gap:2px 14px;background:var(--surface);border:1px solid var(--line);
+    border-left:3px solid var(--kelp);border-radius:3px;padding:15px 17px;
+    text-decoration:none;color:var(--ink);}
+  a.wk .n{grid-area:n;font-family:var(--mono);font-size:11px;font-weight:600;
+    letter-spacing:0.12em;color:var(--kelp);}
+  a.wk .t{grid-area:t;font-size:17px;font-weight:600;letter-spacing:-0.02em;}
+  a.wk .d{grid-area:d;font-size:13.5px;color:var(--muted);margin-top:5px;line-height:1.6;font-weight:300;}
+  a.wk .p{grid-area:p;align-self:center;font-family:var(--mono);font-size:11px;color:var(--muted);
+    background:var(--surface2);border:1px solid var(--hair);border-radius:2px;padding:4px 9px;white-space:nowrap;}
+  a.wk .p.done{color:#fff;background:var(--kelp);border-color:var(--kelp);}
+  a.wk .p.ing{color:var(--amber);background:var(--amber-wash);border-color:var(--amber-line);}
+  .wk.soon{border-left-color:var(--line);opacity:.62;pointer-events:none;}
+  .wk.soon .n,.wk.soon .t{color:var(--muted);}
+
+  /* ===== 진행 막대 ===== */
+  .bar{height:7px;background:var(--hair);border-radius:99px;overflow:hidden;margin-top:12px;
+    border:1px solid var(--line);}
+  .bar i{display:block;height:100%;background:var(--kelp);width:0;transition:width .3s;}
+
+  /* ===== 페이지 이동 ===== */
+  .pager{display:flex;gap:9px;margin:26px 0 0;}
+  .pager a{flex:1;text-align:center;font-size:13.5px;font-weight:600;text-decoration:none;
+    color:var(--ink2);background:var(--surface);border:1px solid var(--line);
+    border-radius:3px;padding:14px 8px;}
+  .pager a.main{background:var(--kelp);border-color:var(--kelp);color:#fff;}
+  footer{padding:26px 0 10px;font-family:var(--mono);font-size:11.5px;color:var(--faint);
+    letter-spacing:0.03em;line-height:1.8;}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="cover">
+  <p class="kicker">WEEK 07 · 2구간 방정식과 함수 · 하루 20분 × 4일</p>
+  <h1>일차함수와 그래프</h1>
+  <p class="lede">
+    중2에서 가장 중요한 단원입니다. 여기서 <b>식이 그림이 됩니다.</b>
+    <code>y = ax + b</code> 라는 식 하나에서 <b>기울기</b>와 <b>절편</b> 두 가지만 읽으면
+    그래프를 그릴 수 있습니다. 고등학교까지 계속 쓰입니다.
+  </p>
+  <div class="metaline">
+    <span>사다리 <b>7번째 칸</b></span>
+    <span>아래 칸 <b>중1 · 좌표평면과 정비례</b></span>
+    <span>문제 <b>13개</b></span>
+    <span>진행 <b id="wdone">0 / 4</b></span>
+  </div>
+
+  <div class="summary">
+    <h2>이번 주에 남길 것</h2>
+    <p class="sd"><code>y = ax + b</code> 에서 a와 b가 각각 무엇을 뜻하는지, 이것 하나입니다.</p>
+    <div class="kpis">
+      <div class="kpi"><span class="kl">a</span><span class="kv">기울기</span>
+        <span class="kn">오른쪽으로 1 갈 때 위로 얼마나 가나</span></div>
+      <div class="kpi"><span class="kl">b</span><span class="kv">y절편</span>
+        <span class="kn">y축과 만나는 점 · 출발점</span></div>
+      <div class="kpi"><span class="kl">그리는 법</span><span class="kv">점 2개</span>
+        <span class="kn">절편에서 시작해 기울기만큼 이동</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="jump"><div class="row">
+  <a href="#map">이번 주 칸</a>
+  <a href="#mon">월 · 열기</a>
+  <a href="#tue">화 · 채우기</a>
+  <a href="#thu">목 · 오답으로</a>
+  <a href="#fri">금 · 보스전</a>
+  <a href="#next">다음 주</a>
+</div></nav>
+
+<section class="sec" id="map">
+  <div class="step-no"><span class="num">1</span><span class="lbl">이번 주 칸</span></div>
+  <h2>식에서 그림을 읽습니다</h2>
+
+  <div class="fig">
+    <p class="fig-t">도식 1 · 12주 사다리에서 이번 주의 자리</p>
+    <svg viewBox="0 0 420 196" role="img" aria-label="12주 개념 사다리에서 이번 주의 자리"><rect x="10" y="162" width="133" height="18" rx="2" fill="#EFF3EC"/><text class="st-m" x="76" y="175" style="font-size:9px">1구간 · 수와 식</text><rect x="146" y="162" width="133" height="18" rx="2" fill="#EFF3EC"/><text class="st-m" x="212" y="175" style="font-size:9px">2구간 · 방정식과 함수</text><rect x="282" y="162" width="133" height="18" rx="2" fill="#EFF3EC"/><text class="st-m" x="348" y="175" style="font-size:9px">3구간 · 도형과 확률</text><rect x="10" y="132" width="31" height="26" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="26" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">01</text><rect x="44" y="124" width="31" height="34" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="60" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">02</text><rect x="78" y="116" width="31" height="42" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="94" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">03</text><rect x="112" y="108" width="31" height="50" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="128" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">04</text><rect x="146" y="100" width="31" height="58" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="162" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">05</text><rect x="180" y="92" width="31" height="66" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="196" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">06</text><rect x="214" y="84" width="31" height="74" rx="2" fill="#2A5480" stroke="#2A5480" stroke-width="1.2"/><text x="230" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#fff">07</text><text x="230" y="18" text-anchor="middle" font-family="IBM Plex Sans KR,sans-serif" font-size="13" font-weight="700" fill="#2A5480">일차함수와 그래프</text><text x="230" y="34" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" fill="#5F6E66">식이 그림이 된다</text><path d="M230 40 L230 80" stroke="#2A5480" stroke-width="1.2" stroke-dasharray="3 3"/><rect x="248" y="76" width="31" height="82" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="264" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">08</text><rect x="282" y="68" width="31" height="90" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="298" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">09</text><rect x="316" y="60" width="31" height="98" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="332" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">10</text><rect x="350" y="52" width="31" height="106" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="366" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">11</text><rect x="384" y="44" width="31" height="114" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="400" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">12</text><text class="st-m" x="10" y="192" style="font-size:9.5px;text-anchor:start">아래 칸부터</text><text class="st-m" x="410" y="192" style="font-size:9.5px;text-anchor:end">밟고 올라갑니다</text></svg>
+  </div>
+
+  <div class="fig">
+    <p class="fig-t">도식 2 · y = 2x + 1 의 그래프</p>
+    <svg viewBox="0 0 420 250" role="img" aria-label="y = 2x + 1 의 그래프와 기울기 y절편">
+      <line class="sl" x1="30" y1="200" x2="390" y2="200"/>
+      <line class="sl" x1="120" y1="20" x2="120" y2="230"/>
+      <text class="st-m" x="382" y="216">x</text>
+      <text class="st-m" x="106" y="30">y</text>
+      <g stroke="#DDE4DB" stroke-width="1">
+        <line x1="180" y1="20" x2="180" y2="230"/><line x1="240" y1="20" x2="240" y2="230"/><line x1="300" y1="20" x2="300" y2="230"/>
+        <line x1="30" y1="140" x2="390" y2="140"/><line x1="30" y1="80" x2="390" y2="80"/>
+      </g>
+      <text class="st-m" x="180" y="216">1</text><text class="st-m" x="240" y="216">2</text><text class="st-m" x="300" y="216">3</text>
+      <text class="st-m" x="106" y="145">1</text><text class="st-m" x="106" y="85">3</text>
+      <line class="sl-k" x1="90" y1="230" x2="330" y2="14" stroke-width="2.4"/>
+      <circle class="dot-k" cx="120" cy="170" r="5"/>
+      <text class="sm st-k" x="86" y="168">(0, 1)</text>
+      <circle class="dot-k" cx="180" cy="110" r="5"/>
+      <path d="M120 170 L180 170" stroke="#8F6209" stroke-width="1.6" stroke-dasharray="4 3"/>
+      <path d="M180 170 L180 110" stroke="#8F6209" stroke-width="1.6" stroke-dasharray="4 3"/>
+      <text class="st-m st-a" x="150" y="186">오른쪽 1</text>
+      <text class="st-m st-a" x="215" y="142">위로 2</text>
+      <text class="st st-k" x="300" y="60">y = 2x + 1</text>
+      <text class="st-m" x="210" y="244">y절편 1에서 출발 · 기울기 2만큼 올라갑니다</text>
+    </svg>
+    <p class="fig-c">그래프를 그리는 방법은 언제나 같습니다 — <b>y절편에 점을 찍고, 기울기만큼 이동해 점을 하나 더 찍고, 두 점을 잇습니다.</b></p>
+  </div>
+</section>
+
+<section class="sec" id="mon">
+  <div class="step-no"><span class="num">2</span><span class="lbl">개념</span><span class="day">MON · 열기</span></div>
+  <h2>기울기는 “변화의 비율”입니다</h2>
+
+  <p><b>기울기 = (y의 증가량) ÷ (x의 증가량)</b>입니다.
+  <b>“오른쪽으로 1 갈 때 위로 얼마나 가는가”</b>라고 읽으면 쉽습니다.</p>
+
+  <div class="tw wide"><table>
+    <thead><tr><th>기울기 a</th><th>그래프 모양</th><th>생활 속 예</th></tr></thead>
+    <tbody>
+      <tr><td class="mn ok">a &gt; 0</td><td>오른쪽 위로 올라감</td><td>시간이 갈수록 늘어나는 저금</td></tr>
+      <tr><td class="mn no">a &lt; 0</td><td>오른쪽 아래로 내려감</td><td>시간이 갈수록 줄어드는 배터리</td></tr>
+      <tr><td class="mn">a가 클수록</td><td>더 가파름</td><td>더 빨리 늘거나 줄어듦</td></tr>
+      <tr><td class="mn">b (y절편)</td><td>y축과 만나는 높이</td><td><b>시작할 때 이미 있던 양</b></td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="plain">
+    <p><b>생활로 읽어 보기</b> — 통장에 1만 원이 있고 매주 2만 원씩 저금하면
+    <code>y = 2x + 1</code> (단위: 만 원)입니다.
+    <b>b = 1</b>은 <b>시작 금액</b>, <b>a = 2</b>는 <b>매주 늘어나는 속도</b>입니다.
+    식이 갑자기 이해되는 순간입니다.</p>
+  </div>
+
+  <div class="alert"><span class="lb">중1과 이어지는 부분</span>
+    <p>중1에서 배운 <b>정비례 y = ax</b>는 <b>b = 0</b>인 경우, 즉 <b>원점을 지나는 일차함수</b>입니다.
+    일차함수는 그 그래프를 <b>위아래로 b만큼 평행이동</b>한 것입니다.
+    새로운 것을 배우는 게 아니라 <b>한 칸 올라간 것</b>입니다.</p>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w7m1"><span class="tt"><b>월요일</b> — 위를 읽고 질문 3개를 적습니다. 모눈종이에 <code>y = 2x + 1</code>을 <b>직접 그려</b> 봅니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="tue">
+  <div class="step-no"><span class="num">3</span><span class="lbl">예제 3개</span><span class="day">TUE · 채우기</span></div>
+  <h2>절차대로 따라 풀어 봅니다</h2>
+
+  <div class="q"><span class="qn">예제 1 · 그래프 그리기</span>
+    <p><code>y = −3x + 4</code> 의 그래프를 그려 봅시다.</p>
+    <details><summary>풀이 보기</summary><div class="ans">
+      <b>① y절편에 점을 찍습니다.</b> b = 4 → 점 (0, 4)<br>
+      <b>② 기울기만큼 이동합니다.</b> a = −3 → 오른쪽 1, <b>아래로 3</b> → 점 (1, 1)<br>
+      <b>③ 두 점을 직선으로 잇습니다.</b>
+      <span class="step">기울기가 음수면 <b>내려가는</b> 직선입니다.</span>
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">예제 2 · 두 점에서 식 구하기</span>
+    <p>두 점 (1, 3), (3, 7)을 지나는 일차함수의 식을 구해 봅시다.</p>
+    <details><summary>풀이 보기</summary><div class="ans">
+      <b>① 기울기부터.</b> a = <span class="frac"><span>7 − 3</span><span>3 − 1</span></span> = <span class="frac"><span>4</span><span>2</span></span> = 2<br>
+      <b>② y = 2x + b 에 한 점을 넣습니다.</b> 3 = 2(1) + b → b = 1<br>
+      <b>③ 답 · y = 2x + 1</b><br>
+      <span class="step">확인: 다른 점 (3,7)도 넣어 봅니다. 2(3) + 1 = 7 ✔</span>
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">예제 3 · x절편</span>
+    <p><code>y = 2x − 6</code> 의 x절편과 y절편을 구해 봅시다.</p>
+    <details><summary>풀이 보기</summary><div class="ans">
+      <b>① y절편은 x = 0일 때</b> → y = −6 → 점 (0, −6)<br>
+      <b>② x절편은 y = 0일 때</b> → 0 = 2x − 6 → x = 3 → 점 (3, 0)<br>
+      <span class="step">헷갈리면 이렇게 외웁니다 — <b>x절편은 y를 0으로, y절편은 x를 0으로.</b>
+      이름과 반대라서 자주 틀립니다.</span>
+    </div></details>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w7m2"><span class="tt"><b>화요일</b> — 예제 3개를 직접 풀고, 모눈종이에 그래프 두 개를 그립니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="thu">
+  <div class="step-no"><span class="num">4</span><span class="lbl">오답 노트</span><span class="day">THU · 오답으로</span></div>
+  <h2>오늘은 일부러 틀려 보는 날</h2>
+
+  <h3>이 단원에서 자주 걸리는 함정</h3>
+  <div class="cards two">
+    <div class="card"><span class="ct">함정 1</span><h4>x절편과 y절편을 바꿈</h4>
+      <p><b>x절편은 y = 0</b>일 때, <b>y절편은 x = 0</b>일 때입니다. 이름과 반대라 가장 많이 틀립니다.</p></div>
+    <div class="card"><span class="ct">함정 2</span><h4>기울기를 거꾸로</h4>
+      <p>기울기는 <b>y의 증가량 ÷ x의 증가량</b>입니다. 뒤집어 계산하면 완전히 다른 직선이 됩니다.</p></div>
+    <div class="card"><span class="ct">함정 3</span><h4>음수 기울기에서 방향</h4>
+      <p>a = −3이면 오른쪽 1에 <b>아래로 3</b>입니다. 위로 3 가면 반대 방향 직선이 됩니다.</p></div>
+    <div class="card"><span class="ct">함정 4</span><h4>y = 3 같은 식</h4>
+      <p><code>y = 3</code>은 기울기 0인 <b>가로선</b>, <code>x = 3</code>은 <b>세로선</b>입니다.
+      (x = 3은 일차함수가 아닙니다 — 8주차에서 다룹니다.)</p></div>
+  </div>
+
+  <h3>연습 5문제</h3>
+  <div class="q"><span class="qn">연습 1</span><p><code>y = 4x − 2</code> 의 기울기와 y절편은?</p>
+    <details><summary>답 보기</summary><div class="ans"><b>기울기 4, y절편 −2</b></div></details></div>
+  <div class="q"><span class="qn">연습 2</span><p>두 점 (0, 5), (2, 9)를 지나는 직선의 기울기는?</p>
+    <details><summary>답 보기</summary><div class="ans"><b>2</b> — (9 − 5) ÷ (2 − 0) = 2</div></details></div>
+  <div class="q"><span class="qn">연습 3</span><p><code>y = −x + 3</code> 의 x절편은?</p>
+    <details><summary>답 보기</summary><div class="ans"><b>3</b> — y = 0을 넣으면 0 = −x + 3 → x = 3</div></details></div>
+  <div class="q"><span class="qn">연습 4</span><p>기울기가 −2이고 점 (1, 4)를 지나는 직선의 식은?</p>
+    <details><summary>답 보기</summary><div class="ans"><b>y = −2x + 6</b> — 4 = −2(1) + b → b = 6</div></details></div>
+  <div class="q"><span class="qn">연습 5</span><p><code>y = 3x + 1</code> 위에 있는 점은? <span class="mn">① (1, 3)  ② (2, 7)  ③ (0, 3)</span></p>
+    <details><summary>답 보기</summary><div class="ans"><b>② (2, 7)</b> — 3(2) + 1 = 7 ✔ <b>그래프 위의 점 = 식에 넣으면 성립하는 점</b>입니다. 이것이 8주차의 열쇠입니다.</div></details></div>
+
+  <div class="tw"><table>
+    <thead><tr><th>오답 노트</th><th>내가 적어 보기</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">틀린 문제 번호</td><td class="fill">______</td></tr>
+      <tr><td class="hd">어디서 틀렸나 (절편? 기울기? 부호?)</td><td class="fill">______</td></tr>
+      <tr><td class="hd">다음에 쓸 한 줄 규칙</td><td class="fill">______</td></tr>
+    </tbody>
+  </table></div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w7m3"><span class="tt"><b>목요일</b> — 연습 5문제를 풀고 <b>틀린 것만</b> 오답 노트에 세 줄로 옮깁니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="fri">
+  <div class="step-no"><span class="num">5</span><span class="lbl">보스전</span><span class="day">FRI · 설명</span></div>
+  <h2>문제 5개와 3분 설명</h2>
+
+  <div class="q"><span class="qn">Q1</span><p>두 점 (−1, 1), (2, 7)을 지나는 일차함수의 식은?</p>
+    <details><summary>해설 보기</summary><div class="ans"><b>y = 2x + 3</b> — 기울기 = (7−1)÷(2−(−1)) = 6÷3 = 2, 점을 넣으면 1 = 2(−1) + b → b = 3</div></details></div>
+  <div class="q"><span class="qn">Q2</span><p><code>y = −<span class="frac"><span>1</span><span>2</span></span>x + 4</code> 의 x절편은?</p>
+    <details><summary>해설 보기</summary><div class="ans"><b>8</b> — 0 = −½x + 4 → ½x = 4 → x = 8</div></details></div>
+  <div class="q"><span class="qn">Q3</span><p>기울기가 같고 y절편이 다른 두 직선은 어떤 관계일까요?</p>
+    <details><summary>해설 보기</summary><div class="ans"><b>서로 평행합니다.</b> 기울어진 정도가 같으니 만나지 않습니다.
+    <span class="step">5주차에서 “해가 없는 연립방정식”이 바로 이 경우입니다. 8주차에서 이어집니다.</span></div></details></div>
+  <div class="q"><span class="qn">Q4</span><p>물통에 물이 200 L 있고 매분 5 L씩 빠져나갑니다. x분 후 물의 양 y를 식으로 쓰고, 40분 후의 양을 구해 봅시다.</p>
+    <details><summary>해설 보기</summary><div class="ans"><b>y = −5x + 200 · 40분 후 0 L</b> —
+    처음 양 200이 y절편, 매분 줄어드는 5가 기울기(음수)입니다. −5(40) + 200 = 0</div></details></div>
+  <div class="q"><span class="qn">Q5</span><p>일차함수 <code>y = ax + b</code> 의 그래프가 <b>오른쪽 아래로</b> 향하고 <b>y축의 음수 부분</b>과 만난다면, a와 b의 부호는?</p>
+    <details><summary>해설 보기</summary><div class="ans"><b>a &lt; 0, b &lt; 0</b> — 내려가는 직선이면 기울기가 음수, y축의 아래쪽에서 만나면 y절편이 음수입니다.
+    <span class="step">그래프 모양만 보고 부호를 읽는 문제는 시험 단골입니다.</span></div></details></div>
+
+  <h3>아빠에게 3분 설명하기</h3>
+  <div class="script">
+    <div class="row"><span class="s">배운 것</span><span>y = ax + b 에서 a는 기울기, b는 시작점이라는 것.</span></div>
+    <div class="row"><span class="s">예를 들면</span><span>통장에 1만 원 있고 매주 2만 원씩 넣으면 y = 2x + 1이야. 그래프가 그 저금이야.</span></div>
+    <div class="row"><span class="s">내가 틀린 곳</span><span>x절편이랑 y절편을 바꿔 썼어. x절편은 y를 0으로 놓는 거야.</span></div>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w7m4"><span class="tt"><b>금요일</b> — 문제 5개를 풀고, 그래프를 그려 가며 3분 설명합니다.</span></label></li>
+  </ul>
+
+  <p><span class="badge">획득 · 사다리 7칸</span></p>
+</section>
+
+<section class="sec" id="next">
+  <div class="step-no"><span class="num">6</span><span class="lbl">다음 주</span></div>
+  <h2>일차함수와 일차방정식</h2>
+  <p>8주차에서 <b>두 단원이 하나로 붙습니다.</b> 5주차의 연립방정식과 7주차의 그래프가
+  사실은 <b>같은 것을 다르게 본 것</b>이라는 사실을 확인합니다. 2구간의 마지막 주입니다.</p>
+  <div class="pager">
+    <a href="week06.html">← 6주차</a>
+    <a href="index.html">전체 사다리</a>
+    <a class="main" href="week08.html">8주차 →</a>
+  </div>
+</section>
+
+<footer>수학 사다리 12주 · WEEK 07 일차함수와 그래프 · 하루 20분 × 4일</footer>
+</div>
+<script>
+  (function(){
+    var KEY="math_quest_progress";
+    function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){return{}}}
+    function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+    var boxes=[].slice.call(document.querySelectorAll(".todo input[type=checkbox]"));
+    var st=load();
+    boxes.forEach(function(b){
+      if(st[b.dataset.q])b.checked=true;
+      b.addEventListener("change",function(){
+        var s=load();
+        if(b.checked)s[b.dataset.q]=1;else delete s[b.dataset.q];
+        save(s);paint();
+      });
+    });
+    function paint(){
+      var el=document.getElementById("wdone");
+      if(el){var n=boxes.filter(function(b){return b.checked}).length;
+        el.textContent=n+" / "+boxes.length;}
+      var hub=document.querySelector("[data-hub]");
+      if(hub){
+        var s=load(),total=0;
+        for(var w=1;w<=12;w++){
+          var n2=0;
+          for(var m=1;m<=4;m++) if(s["w"+w+"m"+m]) n2++;
+          total+=n2;
+          var p=document.querySelector('.p[data-p="'+w+'"]');
+          if(p&&!p.dataset.soon){p.textContent=n2===4?"완료":n2+" / 4";
+            p.className="p"+(n2===4?" done":(n2>0?" ing":""));}
+        }
+        var d=document.getElementById("allDone"),bar=document.getElementById("allBar");
+        if(d)d.textContent=total+" / 12";
+        if(bar)bar.style.width=(total/12*100)+"%";
+      }
+    }
+    paint();
+    var links=[].slice.call(document.querySelectorAll("nav.jump a[href^='#']"));
+    if(links.length){
+      var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1))});
+      var onScroll=function(){
+        var y=window.scrollY+130,idx=0;
+        secs.forEach(function(s,i){if(s&&s.offsetTop<=y)idx=i;});
+        links.forEach(function(a,i){a.classList.toggle("now",i===idx);});
+      };
+      window.addEventListener("scroll",onScroll,{passive:true});onScroll();
+    }
+  })();
+</script>
+</body>
+</html>

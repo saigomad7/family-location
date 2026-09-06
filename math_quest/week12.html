@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#DCE2DB">
+<title>12주차 · 경우의 수와 확률</title>
+<meta name="description" content="더할 때와 곱할 때. 그리고 12주 마무리 강의.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#131C18; --ink2:#2C3A33; --muted:#5F6E66; --faint:#8A968F;
+    --mist:#DCE2DB; --surface:#F8FAF6; --surface2:#EFF3EC;
+    --line:#C3CCC1; --hair:#DDE4DB;
+    --kelp:#2A5480; --kelp-wash:#E3EBF4; --kelp-line:#A3BBD5;
+    --amber:#8F6209; --amber-wash:#F5EAD0; --amber-line:#DCC79B;
+    --berry:#8C2F3E; --berry-wash:#F3DFE2; --berry-line:#D9A8B0;
+    --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+    --mono:"IBM Plex Mono","SFMono-Regular",Consolas,"D2Coding",monospace;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{margin:0;background:var(--mist);color:var(--ink);font-family:var(--sans);
+    font-size:16px;line-height:1.75;letter-spacing:-0.01em;
+    padding:0 18px calc(70px + env(safe-area-inset-bottom));
+    word-break:keep-all;overflow-wrap:anywhere;}
+  .wrap{max-width:1040px;margin:0 auto;}
+
+  /* ===== 표지 ===== */
+  .cover{padding:44px 0 30px;border-bottom:2px solid var(--ink);}
+  .cover .kicker{font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:0.2em;text-transform:uppercase;color:var(--kelp);margin:0 0 16px;}
+  .cover h1{font-size:clamp(27px,6vw,44px);font-weight:700;line-height:1.24;
+    letter-spacing:-0.035em;margin:0 0 16px;max-width:21ch;}
+  .cover .lede{font-size:clamp(15.5px,2vw,18px);font-weight:300;color:var(--ink2);
+    max-width:62ch;margin:0 0 24px;line-height:1.72;}
+  .cover .lede b{font-weight:600;color:var(--ink);}
+  .metaline{display:flex;flex-wrap:wrap;gap:6px 22px;font-family:var(--mono);
+    font-size:11.5px;color:var(--muted);letter-spacing:0.03em;}
+  .metaline b{color:var(--ink);font-weight:500;}
+
+  .summary{background:var(--ink);border-radius:3px;padding:26px 22px 24px;margin:28px 0 0;}
+  .summary h2{color:#F6FAF5;font-size:18px;font-weight:600;margin:0 0 6px;letter-spacing:-0.02em;}
+  .summary .sd{color:#93A399;font-size:13.5px;font-weight:300;margin:0 0 22px;line-height:1.65;}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:18px;}
+  .kpi .kl{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:#7E8F84;display:block;margin-bottom:5px;}
+  .kpi .kv{font-size:clamp(21px,3.2vw,28px);font-weight:700;color:#9DC6EE;
+    letter-spacing:-0.03em;display:block;line-height:1.1;}
+  .kpi .kn{font-size:12px;color:#B9C6BC;display:block;margin-top:6px;
+    font-weight:300;line-height:1.5;}
+
+  /* ===== 이동 바 ===== */
+  nav.jump{position:sticky;top:0;z-index:40;margin:0 -18px;padding:0 18px;
+    background:rgba(220,226,219,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);}
+  nav.jump .row{display:flex;gap:6px;overflow-x:auto;padding:9px 0;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  nav.jump .row::-webkit-scrollbar{display:none;}
+  nav.jump a{flex:0 0 auto;font-family:var(--mono);font-size:11.5px;letter-spacing:0.04em;
+    color:var(--muted);background:var(--surface);border:1px solid var(--line);
+    padding:6px 11px;border-radius:2px;text-decoration:none;}
+  nav.jump a.now{color:#fff;background:var(--kelp);border-color:var(--kelp);}
+
+  /* ===== 섹션 ===== */
+  .sec{padding:44px 0 12px;border-bottom:1px solid var(--line);scroll-margin-top:56px;}
+  .sec:last-of-type{border-bottom:0;}
+  .step-no{display:flex;align-items:center;gap:11px;margin-bottom:14px;}
+  .step-no .num{font-family:var(--mono);font-size:12px;font-weight:600;color:#fff;
+    background:var(--kelp);width:28px;height:28px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-no .lbl{font-family:var(--mono);font-size:11px;letter-spacing:0.13em;
+    text-transform:uppercase;color:var(--muted);}
+  .step-no .day{margin-left:auto;font-family:var(--mono);font-size:11px;
+    letter-spacing:0.1em;color:var(--kelp);background:var(--kelp-wash);
+    border:1px solid var(--kelp-line);padding:3px 9px;border-radius:2px;}
+  .sec h2{font-size:clamp(22px,3.4vw,29px);font-weight:600;letter-spacing:-0.03em;
+    line-height:1.34;margin:0 0 14px;max-width:30ch;}
+  .sec h3{font-size:17.5px;font-weight:600;letter-spacing:-0.02em;margin:30px 0 10px;}
+  .sec > p{max-width:70ch;color:var(--ink2);margin:0 0 16px;}
+  .sec strong,.sec b{font-weight:600;color:var(--ink);}
+  .sec code{font-family:var(--mono);font-size:0.86em;background:var(--surface2);
+    border:1px solid var(--hair);padding:1px 5px;border-radius:2px;}
+
+  .plain{background:var(--surface2);border-left:3px solid var(--kelp);
+    padding:14px 17px;margin:0 0 20px;border-radius:0 2px 2px 0;max-width:74ch;}
+  .plain p{margin:0;font-size:14.5px;color:var(--ink2);line-height:1.72;}
+  .plain p + p{margin-top:10px;}
+  .plain b{color:var(--kelp);font-weight:600;}
+
+  .fig{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:20px 16px 16px;margin:20px 0 12px;}
+  .fig-t{font-family:var(--mono);font-size:11px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--kelp);margin:0 0 16px;
+    padding-bottom:9px;border-bottom:1px solid var(--hair);}
+  .fig svg{display:block;width:100%;height:auto;}
+  .fig.wide{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .fig.wide svg{min-width:640px;}
+  .fig-c{font-size:13px;color:var(--muted);margin:14px 0 0;font-weight:300;
+    line-height:1.65;padding-top:12px;border-top:1px solid var(--hair);}
+  .fig-c b{color:var(--ink);font-weight:600;}
+
+  .sb{fill:#fff;stroke:#C3CCC1;stroke-width:1.5;}
+  .sb-k{fill:#E3EBF4;stroke:#2A5480;stroke-width:2;}
+  .sb-b{fill:#F3DFE2;stroke:#D9A8B0;stroke-width:1.5;}
+  .sb-a{fill:#F5EAD0;stroke:#DCC79B;stroke-width:1.5;}
+  .sb-g{fill:#EFF3EC;stroke:#C3CCC1;stroke-width:1.5;}
+  .sb-d{fill:#fff;stroke:#2A5480;stroke-width:1.6;stroke-dasharray:5 4;}
+  .st{font-family:var(--sans);font-size:13.5px;font-weight:600;fill:#131C18;
+    text-anchor:middle;letter-spacing:-0.3px;}
+  .st-s{font-family:var(--sans);font-size:11.5px;font-weight:400;fill:#5F6E66;text-anchor:middle;}
+  .st-k{fill:#2A5480;} .st-b{fill:#8C2F3E;} .st-a{fill:#8F6209;}
+  .sm{font-family:var(--mono);font-size:12px;fill:#131C18;text-anchor:middle;font-weight:500;}
+  .sm-s{font-family:var(--mono);font-size:10.5px;fill:#5F6E66;text-anchor:middle;}
+  .st-m{font-family:var(--mono);font-size:11px;fill:#8A968F;text-anchor:middle;letter-spacing:0.5px;}
+  .sl{stroke:#8A968F;stroke-width:1.6;fill:none;}
+  .sl-k{stroke:#2A5480;stroke-width:2;fill:none;}
+  .sl-a{stroke:#8F6209;stroke-width:1.8;fill:none;}
+  .sl-d{stroke:#8A968F;stroke-width:1.4;fill:none;stroke-dasharray:4 4;}
+  .sa{fill:#8A968F;} .sa-k{fill:#2A5480;} .sa-a{fill:#8F6209;}
+  .dot-k{fill:#2A5480;} .dot-a{fill:#C99A2E;} .dot-b{fill:#8C2F3E;}
+
+  /* ===== 수식 ===== */
+  .frac{display:inline-flex;flex-direction:column;vertical-align:-0.45em;text-align:center;
+    line-height:1.18;font-size:0.94em;margin:0 .12em;}
+  .frac span:first-child{border-bottom:1.3px solid currentColor;padding:0 .3em;}
+  .frac span:last-child{padding:0 .3em;}
+  .rd{position:relative;}
+  .rd::after{content:"\2022";position:absolute;top:-0.72em;left:50%;transform:translateX(-50%);
+    font-size:0.5em;line-height:1;}
+  .eq{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:13px 15px;margin:14px 0;font-size:17px;text-align:center;color:var(--ink);}
+  .eq .step{display:block;font-size:12.5px;color:var(--muted);font-family:var(--mono);margin-top:6px;}
+  .eq + .eq{margin-top:-6px;}
+  .why{font-size:13.5px;color:var(--muted);margin:-6px 0 14px;padding-left:14px;
+    border-left:2px solid var(--hair);}
+
+  /* ===== 표 ===== */
+  .tw{overflow-x:auto;margin:20px 0 8px;border:1px solid var(--line);
+    border-radius:3px;background:var(--surface);}
+  table{border-collapse:collapse;width:100%;font-size:13.8px;}
+  .tw.wide table{min-width:560px;}
+  thead th{background:var(--ink);color:#E8EFE7;text-align:left;font-family:var(--mono);
+    font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
+    padding:11px 13px;}
+  tbody td{padding:11px 13px;border-top:1px solid var(--hair);vertical-align:top;
+    color:var(--ink2);line-height:1.62;}
+  tbody tr:nth-child(even) td{background:var(--surface2);}
+  td.hd{font-weight:600;color:var(--ink);}
+  td.mn{font-family:var(--mono);font-size:12.5px;}
+  td.ok{color:var(--kelp);font-weight:600;}
+  td.no{color:var(--berry);font-weight:600;}
+  td.wa{color:var(--amber);font-weight:600;}
+  td.fill{font-family:var(--mono);color:var(--faint);}
+
+  .note{background:var(--amber-wash);border:1px solid var(--amber-line);
+    border-radius:3px;padding:17px 19px;margin:20px 0 8px;}
+  .note p{margin:0;font-size:14px;color:#5C440C;line-height:1.72;}
+  .note p + p{margin-top:9px;}
+  .note b{font-weight:600;}
+  .note .lb{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--amber);margin-bottom:6px;}
+  .alert{background:var(--berry-wash);border:1px solid var(--berry-line);
+    border-radius:3px;padding:17px 19px;margin:20px 0 8px;}
+  .alert p{margin:0;font-size:14px;color:#6B2430;line-height:1.72;}
+  .alert p + p{margin-top:9px;}
+  .alert b{font-weight:600;}
+  .alert .lb{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--berry);margin-bottom:6px;}
+
+  /* ===== 카드 묶음 ===== */
+  .cards{display:grid;gap:12px;margin:18px 0 8px;}
+  @media(min-width:680px){.cards.two{grid-template-columns:repeat(2,1fr);}}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:15px 17px;}
+  .card .ct{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;
+    color:var(--kelp);display:block;margin-bottom:7px;}
+  .card h4{margin:0 0 6px;font-size:15.5px;font-weight:600;letter-spacing:-0.02em;}
+  .card p{margin:0;font-size:14px;color:var(--ink2);line-height:1.68;}
+
+  /* ===== 요일 할 일 ===== */
+  .todo{list-style:none;margin:20px 0 8px;padding:0;background:var(--surface);
+    border:1px solid var(--line);border-radius:3px;overflow:hidden;}
+  .todo li + li{border-top:1px solid var(--hair);}
+  .todo label{display:grid;grid-template-columns:22px 1fr;gap:13px;align-items:start;
+    padding:15px 16px;cursor:pointer;font-size:14.5px;line-height:1.65;color:var(--ink2);min-height:54px;}
+  .todo input{appearance:none;-webkit-appearance:none;width:21px;height:21px;margin:1px 0 0;
+    border:1.5px solid var(--line);border-radius:2px;background:#fff;
+    display:grid;place-content:center;cursor:pointer;}
+  .todo input::after{content:"✓";font-size:13px;font-weight:700;color:#fff;transform:scale(0);}
+  .todo input:checked{background:var(--kelp);border-color:var(--kelp);}
+  .todo input:checked::after{transform:scale(1);}
+  .todo input:focus-visible{outline:2px solid var(--kelp);outline-offset:2px;}
+  .todo input:checked ~ .tt{color:var(--faint);text-decoration:line-through;}
+  .todo .tt b{color:var(--ink);font-weight:600;}
+
+  /* ===== 문제 ===== */
+  .q{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:15px 17px;margin:12px 0;}
+  .q .qn{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--kelp);
+    letter-spacing:0.12em;}
+  .q > p{margin:6px 0 0;font-size:15.5px;color:var(--ink);line-height:1.7;}
+  .q details{margin-top:12px;border-top:1px solid var(--hair);padding-top:10px;}
+  .q summary{cursor:pointer;list-style:none;font-family:var(--mono);font-size:12px;
+    font-weight:600;color:var(--kelp);letter-spacing:0.06em;padding:3px 0;}
+  .q summary::-webkit-details-marker{display:none;}
+  .q summary::before{content:"+ ";}
+  .q details[open] summary::before{content:"− ";}
+  .q .ans{margin-top:9px;background:var(--kelp-wash);border-radius:2px;padding:12px 14px;
+    font-size:14px;color:var(--ink2);line-height:1.7;}
+  .q .ans b{color:var(--kelp);font-weight:600;}
+
+  /* ===== 설명 대본 ===== */
+  .script{background:var(--surface);border:1px solid var(--kelp-line);border-radius:3px;
+    padding:16px 18px;margin:18px 0 8px;}
+  .script .row{display:grid;grid-template-columns:70px 1fr;gap:12px;font-size:14.5px;
+    color:var(--ink2);line-height:1.7;}
+  .script .row + .row{margin-top:11px;padding-top:11px;border-top:1px solid var(--hair);}
+  .script .s{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;color:var(--kelp);
+    font-weight:600;padding-top:4px;}
+
+  .badge{display:inline-block;font-family:var(--mono);font-size:12.5px;font-weight:600;
+    color:var(--amber);background:var(--amber-wash);border:1px solid var(--amber-line);
+    border-radius:2px;padding:7px 14px;margin-top:14px;letter-spacing:0.04em;}
+
+  /* ===== 주차 목록 (허브) ===== */
+  .wlist{display:flex;flex-direction:column;gap:10px;margin:18px 0 8px;}
+  a.wk{display:grid;grid-template-columns:1fr auto;grid-template-areas:"n p" "t p" "d d";
+    gap:2px 14px;background:var(--surface);border:1px solid var(--line);
+    border-left:3px solid var(--kelp);border-radius:3px;padding:15px 17px;
+    text-decoration:none;color:var(--ink);}
+  a.wk .n{grid-area:n;font-family:var(--mono);font-size:11px;font-weight:600;
+    letter-spacing:0.12em;color:var(--kelp);}
+  a.wk .t{grid-area:t;font-size:17px;font-weight:600;letter-spacing:-0.02em;}
+  a.wk .d{grid-area:d;font-size:13.5px;color:var(--muted);margin-top:5px;line-height:1.6;font-weight:300;}
+  a.wk .p{grid-area:p;align-self:center;font-family:var(--mono);font-size:11px;color:var(--muted);
+    background:var(--surface2);border:1px solid var(--hair);border-radius:2px;padding:4px 9px;white-space:nowrap;}
+  a.wk .p.done{color:#fff;background:var(--kelp);border-color:var(--kelp);}
+  a.wk .p.ing{color:var(--amber);background:var(--amber-wash);border-color:var(--amber-line);}
+  .wk.soon{border-left-color:var(--line);opacity:.62;pointer-events:none;}
+  .wk.soon .n,.wk.soon .t{color:var(--muted);}
+
+  /* ===== 진행 막대 ===== */
+  .bar{height:7px;background:var(--hair);border-radius:99px;overflow:hidden;margin-top:12px;
+    border:1px solid var(--line);}
+  .bar i{display:block;height:100%;background:var(--kelp);width:0;transition:width .3s;}
+
+  /* ===== 페이지 이동 ===== */
+  .pager{display:flex;gap:9px;margin:26px 0 0;}
+  .pager a{flex:1;text-align:center;font-size:13.5px;font-weight:600;text-decoration:none;
+    color:var(--ink2);background:var(--surface);border:1px solid var(--line);
+    border-radius:3px;padding:14px 8px;}
+  .pager a.main{background:var(--kelp);border-color:var(--kelp);color:#fff;}
+  footer{padding:26px 0 10px;font-family:var(--mono);font-size:11.5px;color:var(--faint);
+    letter-spacing:0.03em;line-height:1.8;}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="cover">
+  <p class="kicker">WEEK 12 · 3구간 도형과 확률 · 최종 보스전</p>
+  <h1>경우의 수와 확률</h1>
+  <p class="lede">
+    마지막 주입니다. 이번 단원의 규칙은 <b>두 개뿐</b>입니다 — <b>더할 때</b>와 <b>곱할 때</b>.
+    그리고 금요일에는 딸이 <b>가르치는 쪽</b>에 서서 12주 사다리를 처음부터 끝까지 설명합니다.
+  </p>
+  <div class="metaline">
+    <span>사다리 <b>12번째 칸</b></span>
+    <span>아래 칸 <b>곱셈과 나눗셈의 뜻</b></span>
+    <span>마무리 <b>15분 미니 강의</b></span>
+    <span>진행 <b id="wdone">0 / 4</b></span>
+  </div>
+
+  <div class="summary">
+    <h2>마지막 주에 남길 것</h2>
+    <p class="sd">규칙 두 개와, 확률의 뜻 한 줄입니다.</p>
+    <div class="kpis">
+      <div class="kpi"><span class="kl">또는</span><span class="kv">더하기</span>
+        <span class="kn">동시에 일어나지 않는 두 경우 → 합</span></div>
+      <div class="kpi"><span class="kl">그리고</span><span class="kv">곱하기</span>
+        <span class="kn">연달아 일어나는 두 경우 → 곱</span></div>
+      <div class="kpi"><span class="kl">확률</span><span class="kv">부분/전체</span>
+        <span class="kn">(원하는 경우) ÷ (모든 경우)</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="jump"><div class="row">
+  <a href="#map">이번 주 칸</a>
+  <a href="#mon">월 · 열기</a>
+  <a href="#tue">화 · 채우기</a>
+  <a href="#thu">목 · 오답으로</a>
+  <a href="#fri">금 · 최종 보스전</a>
+  <a href="#next">12주 뒤</a>
+</div></nav>
+
+<section class="sec" id="map">
+  <div class="step-no"><span class="num">1</span><span class="lbl">이번 주 칸</span></div>
+  <h2>사다리의 마지막 칸</h2>
+
+  <div class="fig">
+    <p class="fig-t">도식 1 · 12주 사다리에서 이번 주의 자리</p>
+    <svg viewBox="0 0 420 196" role="img" aria-label="12주 개념 사다리에서 이번 주의 자리"><rect x="10" y="162" width="133" height="18" rx="2" fill="#EFF3EC"/><text class="st-m" x="76" y="175" style="font-size:9px">1구간 · 수와 식</text><rect x="146" y="162" width="133" height="18" rx="2" fill="#EFF3EC"/><text class="st-m" x="212" y="175" style="font-size:9px">2구간 · 방정식과 함수</text><rect x="282" y="162" width="133" height="18" rx="2" fill="#EFF3EC"/><text class="st-m" x="348" y="175" style="font-size:9px">3구간 · 도형과 확률</text><rect x="10" y="132" width="31" height="26" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="26" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">01</text><rect x="44" y="124" width="31" height="34" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="60" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">02</text><rect x="78" y="116" width="31" height="42" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="94" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">03</text><rect x="112" y="108" width="31" height="50" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="128" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">04</text><rect x="146" y="100" width="31" height="58" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="162" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">05</text><rect x="180" y="92" width="31" height="66" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="196" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">06</text><rect x="214" y="84" width="31" height="74" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="230" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">07</text><rect x="248" y="76" width="31" height="82" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="264" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">08</text><rect x="282" y="68" width="31" height="90" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="298" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">09</text><rect x="316" y="60" width="31" height="98" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="332" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">10</text><rect x="350" y="52" width="31" height="106" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="366" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">11</text><rect x="384" y="44" width="31" height="114" rx="2" fill="#2A5480" stroke="#2A5480" stroke-width="1.2"/><text x="400" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#fff">12</text><text x="410" y="18" text-anchor="end" font-family="IBM Plex Sans KR,sans-serif" font-size="13" font-weight="700" fill="#2A5480">경우의 수와 확률</text><text x="410" y="34" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="10" fill="#5F6E66">세는 법</text><path d="M400 40 L400 40" stroke="#2A5480" stroke-width="1.2" stroke-dasharray="3 3"/><text class="st-m" x="10" y="192" style="font-size:9.5px;text-anchor:start">아래 칸부터</text><text class="st-m" x="410" y="192" style="font-size:9.5px;text-anchor:end">밟고 올라갑니다</text></svg>
+  </div>
+
+  <div class="fig">
+    <p class="fig-t">도식 2 · 더할 때와 곱할 때</p>
+    <svg viewBox="0 0 420 210" role="img" aria-label="합의 법칙과 곱의 법칙 비교">
+      <rect class="sb-k" x="8" y="12" width="196" height="88" rx="3"/>
+      <text class="st st-k" x="106" y="34">“또는” → 더하기</text>
+      <text class="st-s" x="106" y="56">버스 3대 <tspan font-weight="700">또는</tspan> 지하철 2대</text>
+      <text class="st-s" x="106" y="76">둘 중 하나만 타면 됨</text>
+      <text class="st st-k" x="106" y="94">3 + 2 = 5가지</text>
+
+      <rect class="sb-a" x="216" y="12" width="196" height="88" rx="3"/>
+      <text class="st st-a" x="314" y="34">“그리고” → 곱하기</text>
+      <text class="st-s" x="314" y="56">윗옷 3벌 <tspan font-weight="700">그리고</tspan> 바지 2벌</text>
+      <text class="st-s" x="314" y="76">둘 다 입어야 함</text>
+      <text class="st st-a" x="314" y="94">3 × 2 = 6가지</text>
+
+      <rect class="sb-g" x="8" y="112" width="404" height="86" rx="3"/>
+      <text class="st" x="210" y="136">확률 = <tspan class="st-k" font-weight="700">원하는 경우의 수 ÷ 모든 경우의 수</tspan></text>
+      <text class="st-s" x="210" y="160">주사위에서 짝수가 나올 확률 = 3 ÷ 6 = ½</text>
+      <text class="st-m" x="210" y="182">확률은 언제나 0 이상 1 이하입니다</text>
+    </svg>
+    <p class="fig-c">문제에 <b>“또는”</b>이 있으면 더하고, <b>“그리고”</b>가 있으면 곱합니다. 이 구별이 이 단원의 전부입니다.</p>
+  </div>
+</section>
+
+<section class="sec" id="mon">
+  <div class="step-no"><span class="num">2</span><span class="lbl">개념</span><span class="day">MON · 열기</span></div>
+  <h2>세는 법 두 가지</h2>
+
+  <div class="tw wide"><table>
+    <thead><tr><th>상황</th><th>규칙</th><th>예</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">동시에 일어나지 않는다 (또는)</td><td class="ok">더한다</td><td>주사위에서 2 또는 5가 나오는 경우 → 1 + 1 = 2가지</td></tr>
+      <tr><td class="hd">연달아 일어난다 (그리고)</td><td class="ok">곱한다</td><td>동전 던지고 주사위 굴리기 → 2 × 6 = 12가지</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="plain">
+    <p><b>확률의 뜻</b> — <b>확률 = 원하는 경우의 수 ÷ 모든 경우의 수</b>입니다.
+    주사위에서 짝수가 나올 확률은 짝수가 3가지(2,4,6), 전체가 6가지이므로
+    <span class="frac"><span>3</span><span>6</span></span> = <span class="frac"><span>1</span><span>2</span></span> 입니다.</p>
+  </div>
+
+  <div class="tw"><table>
+    <thead><tr><th>성질</th><th>뜻</th></tr></thead>
+    <tbody>
+      <tr><td class="mn ok">0 ≤ p ≤ 1</td><td>확률은 0보다 작거나 1보다 클 수 없습니다</td></tr>
+      <tr><td class="mn ok">p = 0</td><td>절대 일어나지 않음 (주사위에서 7이 나올 확률)</td></tr>
+      <tr><td class="mn ok">p = 1</td><td>반드시 일어남 (주사위에서 6 이하가 나올 확률)</td></tr>
+      <tr><td class="mn ok">1 − p</td><td>일어나지 <b>않을</b> 확률</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="alert"><span class="lb">가장 많이 하는 실수</span>
+    <p>“또는”과 “그리고”를 <b>말로 구별하지 않고 감으로</b> 푸는 것입니다.
+    문제를 읽을 때 <b>연결어에 동그라미</b>를 치는 습관을 들이면 실수가 크게 줄어듭니다.</p>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w12m1"><span class="tt"><b>월요일</b> — 위를 읽고 질문 3개를 적습니다. 오늘 하루에서 <b>“또는”과 “그리고”</b>의 예를 하나씩 찾아봅니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="tue">
+  <div class="step-no"><span class="num">3</span><span class="lbl">예제 3개</span><span class="day">TUE · 채우기</span></div>
+  <h2>절차대로 따라 풀어 봅니다</h2>
+
+  <div class="q"><span class="qn">예제 1 · 곱의 법칙</span>
+    <p>윗옷 4벌과 바지 3벌이 있습니다. 옷을 한 벌씩 골라 입는 방법은 몇 가지일까요?</p>
+    <details><summary>풀이 보기</summary><div class="ans">
+      <b>①</b> 윗옷을 고르고 <b>그리고</b> 바지를 고릅니다 → 곱합니다<br>
+      <b>②</b> 4 × 3 = <b>12가지</b>
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">예제 2 · 합의 법칙</span>
+    <p>주사위 한 개를 던질 때, <b>2 이하 또는 5 이상</b>의 눈이 나오는 경우의 수는?</p>
+    <details><summary>풀이 보기</summary><div class="ans">
+      <b>①</b> 2 이하 → 1, 2 (2가지) / 5 이상 → 5, 6 (2가지)<br>
+      <b>②</b> 동시에 일어날 수 없으므로 더합니다 → <b>4가지</b>
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">예제 3 · 확률</span>
+    <p>동전 두 개를 던질 때 <b>둘 다 앞면</b>이 나올 확률은?</p>
+    <details><summary>풀이 보기</summary><div class="ans">
+      <b>① 모든 경우.</b> (앞,앞) (앞,뒤) (뒤,앞) (뒤,뒤) → 2 × 2 = <b>4가지</b><br>
+      <b>② 원하는 경우.</b> (앞,앞) 하나 → 1가지<br>
+      <b>③ 확률 =</b> <span class="frac"><span>1</span><span>4</span></span>
+      <span class="step">(앞,뒤)와 (뒤,앞)은 <b>다른 경우</b>입니다. 이것을 하나로 세면 틀립니다.</span>
+    </div></details>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w12m2"><span class="tt"><b>화요일</b> — 예제 3개를 직접 풀고, 두 규칙과 확률의 뜻을 노트 한 장에 정리합니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="thu">
+  <div class="step-no"><span class="num">4</span><span class="lbl">오답 노트</span><span class="day">THU · 오답으로</span></div>
+  <h2>마지막 오답 노트</h2>
+
+  <h3>이 단원에서 자주 걸리는 함정</h3>
+  <div class="cards two">
+    <div class="card"><span class="ct">함정 1</span><h4>더하기와 곱하기 혼동</h4>
+      <p><b>“또는”은 더하기, “그리고”는 곱하기.</b> 연결어에 동그라미를 치고 시작합니다.</p></div>
+    <div class="card"><span class="ct">함정 2</span><h4>순서를 무시</h4>
+      <p>(앞,뒤)와 (뒤,앞)은 <b>다른 경우</b>입니다. 사람이 다르거나 순서가 있으면 따로 셉니다.</p></div>
+    <div class="card"><span class="ct">함정 3</span><h4>중복을 두 번 셈</h4>
+      <p>“3의 배수 또는 4의 배수”처럼 <b>겹치는 경우</b>가 있으면 겹친 것을 빼야 합니다.</p></div>
+    <div class="card"><span class="ct">함정 4</span><h4>확률이 1보다 큼</h4>
+      <p>답이 1보다 크게 나오면 <b>반드시 계산이 틀린 것</b>입니다. 좋은 자기 점검 도구입니다.</p></div>
+  </div>
+
+  <h3>연습 5문제</h3>
+  <div class="q"><span class="qn">연습 1</span><p>주사위 한 개를 던질 때 3의 배수가 나올 확률은?</p>
+    <details><summary>답 보기</summary><div class="ans"><b>1/3</b> — 3, 6 두 가지 ÷ 6</div></details></div>
+  <div class="q"><span class="qn">연습 2</span><p>동전 하나와 주사위 하나를 던질 때 모든 경우의 수는?</p>
+    <details><summary>답 보기</summary><div class="ans"><b>12가지</b> — 2 × 6</div></details></div>
+  <div class="q"><span class="qn">연습 3</span><p>1부터 10까지 카드에서 한 장을 뽑을 때 소수가 나올 확률은?</p>
+    <details><summary>답 보기</summary><div class="ans"><b>2/5</b> — 소수는 2, 3, 5, 7 네 개 → 4/10 = 2/5</div></details></div>
+  <div class="q"><span class="qn">연습 4</span><p>비가 올 확률이 0.3일 때 비가 오지 않을 확률은?</p>
+    <details><summary>답 보기</summary><div class="ans"><b>0.7</b> — 1 − 0.3</div></details></div>
+  <div class="q"><span class="qn">연습 5</span><p>A, B, C 세 사람을 한 줄로 세우는 방법은 몇 가지?</p>
+    <details><summary>답 보기</summary><div class="ans"><b>6가지</b> — 첫 자리 3명 중 1명, 둘째 자리 남은 2명 중 1명, 마지막은 1명 → 3 × 2 × 1 = 6</div></details></div>
+
+  <div class="tw"><table>
+    <thead><tr><th>오답 노트</th><th>내가 적어 보기</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">틀린 문제 번호</td><td class="fill">______</td></tr>
+      <tr><td class="hd">어디서 틀렸나 (또는/그리고? 중복? 순서?)</td><td class="fill">______</td></tr>
+      <tr><td class="hd">다음에 쓸 한 줄 규칙</td><td class="fill">______</td></tr>
+    </tbody>
+  </table></div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w12m3"><span class="tt"><b>목요일</b> — 연습 5문제를 풀고, <b>12주치 오답 노트를 처음부터 넘겨</b> 봅니다. 반복해서 틀린 유형이 보일 것입니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="fri">
+  <div class="step-no"><span class="num">5</span><span class="lbl">최종 보스전</span><span class="day">FRI · 강의</span></div>
+  <h2>이번에는 딸이 가르칩니다</h2>
+
+  <p>마지막 금요일에는 문제를 풀지 않습니다. <b>12주 중 가장 자신 있는 칸 하나</b>를 골라
+  가족 앞에서 <b>15분 미니 강의</b>를 합니다. <b>사다리 그림을 보여 주며</b> 설명하면 됩니다.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>시간</th><th>할 것</th></tr></thead>
+    <tbody>
+      <tr><td class="mn ok">0~2분</td><td>문제 하나를 칠판(종이)에 적고 “이거 풀어 보실래요?”로 시작합니다</td></tr>
+      <tr><td class="mn ok">2~8분</td><td>그 개념이 <b>무엇을 밟고 서 있는지</b>(아래 칸)부터 설명합니다</td></tr>
+      <tr><td class="mn ok">8~12분</td><td><b>자주 틀리는 함정</b>을 알려 줍니다. 오답 노트에서 고른 것이면 가장 좋습니다</td></tr>
+      <tr><td class="mn ok">12~15분</td><td>가족의 질문을 받습니다. 모르는 것은 “그건 아직 몰라”라고 해도 됩니다</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>12주 전체 다시 보기 — 한 줄씩</h3>
+  <div class="tw wide"><table>
+    <thead><tr><th>칸</th><th>한 줄로</th></tr></thead>
+    <tbody>
+      <tr><td class="mn ok">01</td><td>분모에 2와 5만 있으면 딱 떨어지는 소수가 된다</td></tr>
+      <tr><td class="mn ok">02</td><td>지수는 몇 번 곱했는지 세는 것 — 곱하면 더하고 괄호면 곱한다</td></tr>
+      <tr><td class="mn ok">03</td><td>문자와 지수가 같은 것끼리만 더하고, 괄호 앞 −는 안의 부호를 모두 바꾼다</td></tr>
+      <tr><td class="mn ok">04</td><td>부등식은 <b>음수로 곱하거나 나눌 때만</b> 방향이 바뀐다</td></tr>
+      <tr><td class="mn ok">05</td><td>미지수가 둘이면 하나로 줄여서 푼다</td></tr>
+      <tr><td class="mn ok">06</td><td>문장제는 조건 두 개를 식 두 개로 바꾸면 끝난다</td></tr>
+      <tr><td class="mn ok">07</td><td>y = ax + b 에서 a는 기울기, b는 시작점이다</td></tr>
+      <tr><td class="mn ok">08</td><td>두 직선이 만나는 점이 곧 연립방정식의 해다</td></tr>
+      <tr><td class="mn ok">09</td><td>도형은 조건이 있으면 성질이 따라 나온다 — 근거를 대며 쓴다</td></tr>
+      <tr><td class="mn ok">10</td><td>닮음비가 m:n이면 길이는 m:n, 넓이는 m²:n²</td></tr>
+      <tr><td class="mn ok">11</td><td>직각삼각형에서 a² + b² = c² (c는 빗변)</td></tr>
+      <tr><td class="mn ok">12</td><td>“또는”은 더하고 “그리고”는 곱한다 · 확률은 부분 ÷ 전체</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="note"><span class="lb">아빠가 할 일</span>
+    <p>1주차에 녹음해 둔 3분 설명을 <b>지금 다시 틀어 줍니다.</b>
+    그리고 오늘 강의와 나란히 들어 봅니다. <b>12주 전에는 무엇을 몰랐고 지금은 무엇을 설명할 수 있는지</b>,
+    그 차이가 이 프로그램의 결과입니다.</p>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w12m4"><span class="tt"><b>금요일</b> — 15분 미니 강의를 하고, 사다리 열두 칸을 처음부터 끝까지 이어서 설명합니다.</span></label></li>
+  </ul>
+
+  <p><span class="badge">획득 · 사다리 12칸 완성 · 완주</span></p>
+</section>
+
+<section class="sec" id="next">
+  <div class="step-no"><span class="num">6</span><span class="lbl">12주 뒤</span></div>
+  <h2>남는 것</h2>
+  <div class="cards two">
+    <div class="card"><span class="ct">기록</span><h4>오답 노트 한 권</h4><p>틀린 문제만 모은 12주치. 시험 전에 이것만 보면 됩니다.</p></div>
+    <div class="card"><span class="ct">자료</span><h4>절차 노트 12장</h4><p>단원마다 한 장. 공식이 아니라 <b>푸는 순서</b>가 적혀 있습니다.</p></div>
+    <div class="card"><span class="ct">증거</span><h4>설명 녹음 12개</h4><p>1주차와 12주차를 나란히 들으면 성장이 귀로 들립니다.</p></div>
+    <div class="card"><span class="ct">가장 큰 것</span><h4>“틀려도 괜찮다”</h4><p>수학에서 가장 큰 자산입니다. 목요일이 12번 있었던 이유입니다.</p></div>
+  </div>
+  <div class="pager">
+    <a href="week11.html">← 11주차</a>
+    <a class="main" href="index.html">전체 사다리로</a>
+  </div>
+</section>
+
+<footer>수학 사다리 12주 · WEEK 12 경우의 수와 확률 · 수고했습니다</footer>
+</div>
+<script>
+  (function(){
+    var KEY="math_quest_progress";
+    function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){return{}}}
+    function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+    var boxes=[].slice.call(document.querySelectorAll(".todo input[type=checkbox]"));
+    var st=load();
+    boxes.forEach(function(b){
+      if(st[b.dataset.q])b.checked=true;
+      b.addEventListener("change",function(){
+        var s=load();
+        if(b.checked)s[b.dataset.q]=1;else delete s[b.dataset.q];
+        save(s);paint();
+      });
+    });
+    function paint(){
+      var el=document.getElementById("wdone");
+      if(el){var n=boxes.filter(function(b){return b.checked}).length;
+        el.textContent=n+" / "+boxes.length;}
+      var hub=document.querySelector("[data-hub]");
+      if(hub){
+        var s=load(),total=0;
+        for(var w=1;w<=12;w++){
+          var n2=0;
+          for(var m=1;m<=4;m++) if(s["w"+w+"m"+m]) n2++;
+          total+=n2;
+          var p=document.querySelector('.p[data-p="'+w+'"]');
+          if(p&&!p.dataset.soon){p.textContent=n2===4?"완료":n2+" / 4";
+            p.className="p"+(n2===4?" done":(n2>0?" ing":""));}
+        }
+        var d=document.getElementById("allDone"),bar=document.getElementById("allBar");
+        if(d)d.textContent=total+" / 12";
+        if(bar)bar.style.width=(total/12*100)+"%";
+      }
+    }
+    paint();
+    var links=[].slice.call(document.querySelectorAll("nav.jump a[href^='#']"));
+    if(links.length){
+      var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1))});
+      var onScroll=function(){
+        var y=window.scrollY+130,idx=0;
+        secs.forEach(function(s,i){if(s&&s.offsetTop<=y)idx=i;});
+        links.forEach(function(a,i){a.classList.toggle("now",i===idx);});
+      };
+      window.addEventListener("scroll",onScroll,{passive:true});onScroll();
+    }
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#DCE2DB">
+<title>2주차 · 지수법칙</title>
+<meta name="description" content="외우는 공식이 아니라 같은 수를 몇 번 곱했는지 세는 것.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#131C18; --ink2:#2C3A33; --muted:#5F6E66; --faint:#8A968F;
+    --mist:#DCE2DB; --surface:#F8FAF6; --surface2:#EFF3EC;
+    --line:#C3CCC1; --hair:#DDE4DB;
+    --kelp:#2A5480; --kelp-wash:#E3EBF4; --kelp-line:#A3BBD5;
+    --amber:#8F6209; --amber-wash:#F5EAD0; --amber-line:#DCC79B;
+    --berry:#8C2F3E; --berry-wash:#F3DFE2; --berry-line:#D9A8B0;
+    --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+    --mono:"IBM Plex Mono","SFMono-Regular",Consolas,"D2Coding",monospace;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{margin:0;background:var(--mist);color:var(--ink);font-family:var(--sans);
+    font-size:16px;line-height:1.75;letter-spacing:-0.01em;
+    padding:0 18px calc(70px + env(safe-area-inset-bottom));
+    word-break:keep-all;overflow-wrap:anywhere;}
+  .wrap{max-width:1040px;margin:0 auto;}
+
+  /* ===== 표지 ===== */
+  .cover{padding:44px 0 30px;border-bottom:2px solid var(--ink);}
+  .cover .kicker{font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:0.2em;text-transform:uppercase;color:var(--kelp);margin:0 0 16px;}
+  .cover h1{font-size:clamp(27px,6vw,44px);font-weight:700;line-height:1.24;
+    letter-spacing:-0.035em;margin:0 0 16px;max-width:21ch;}
+  .cover .lede{font-size:clamp(15.5px,2vw,18px);font-weight:300;color:var(--ink2);
+    max-width:62ch;margin:0 0 24px;line-height:1.72;}
+  .cover .lede b{font-weight:600;color:var(--ink);}
+  .metaline{display:flex;flex-wrap:wrap;gap:6px 22px;font-family:var(--mono);
+    font-size:11.5px;color:var(--muted);letter-spacing:0.03em;}
+  .metaline b{color:var(--ink);font-weight:500;}
+
+  .summary{background:var(--ink);border-radius:3px;padding:26px 22px 24px;margin:28px 0 0;}
+  .summary h2{color:#F6FAF5;font-size:18px;font-weight:600;margin:0 0 6px;letter-spacing:-0.02em;}
+  .summary .sd{color:#93A399;font-size:13.5px;font-weight:300;margin:0 0 22px;line-height:1.65;}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:18px;}
+  .kpi .kl{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:#7E8F84;display:block;margin-bottom:5px;}
+  .kpi .kv{font-size:clamp(21px,3.2vw,28px);font-weight:700;color:#9DC6EE;
+    letter-spacing:-0.03em;display:block;line-height:1.1;}
+  .kpi .kn{font-size:12px;color:#B9C6BC;display:block;margin-top:6px;
+    font-weight:300;line-height:1.5;}
+
+  /* ===== 이동 바 ===== */
+  nav.jump{position:sticky;top:0;z-index:40;margin:0 -18px;padding:0 18px;
+    background:rgba(220,226,219,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);}
+  nav.jump .row{display:flex;gap:6px;overflow-x:auto;padding:9px 0;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  nav.jump .row::-webkit-scrollbar{display:none;}
+  nav.jump a{flex:0 0 auto;font-family:var(--mono);font-size:11.5px;letter-spacing:0.04em;
+    color:var(--muted);background:var(--surface);border:1px solid var(--line);
+    padding:6px 11px;border-radius:2px;text-decoration:none;}
+  nav.jump a.now{color:#fff;background:var(--kelp);border-color:var(--kelp);}
+
+  /* ===== 섹션 ===== */
+  .sec{padding:44px 0 12px;border-bottom:1px solid var(--line);scroll-margin-top:56px;}
+  .sec:last-of-type{border-bottom:0;}
+  .step-no{display:flex;align-items:center;gap:11px;margin-bottom:14px;}
+  .step-no .num{font-family:var(--mono);font-size:12px;font-weight:600;color:#fff;
+    background:var(--kelp);width:28px;height:28px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-no .lbl{font-family:var(--mono);font-size:11px;letter-spacing:0.13em;
+    text-transform:uppercase;color:var(--muted);}
+  .step-no .day{margin-left:auto;font-family:var(--mono);font-size:11px;
+    letter-spacing:0.1em;color:var(--kelp);background:var(--kelp-wash);
+    border:1px solid var(--kelp-line);padding:3px 9px;border-radius:2px;}
+  .sec h2{font-size:clamp(22px,3.4vw,29px);font-weight:600;letter-spacing:-0.03em;
+    line-height:1.34;margin:0 0 14px;max-width:30ch;}
+  .sec h3{font-size:17.5px;font-weight:600;letter-spacing:-0.02em;margin:30px 0 10px;}
+  .sec > p{max-width:70ch;color:var(--ink2);margin:0 0 16px;}
+  .sec strong,.sec b{font-weight:600;color:var(--ink);}
+  .sec code{font-family:var(--mono);font-size:0.86em;background:var(--surface2);
+    border:1px solid var(--hair);padding:1px 5px;border-radius:2px;}
+
+  .plain{background:var(--surface2);border-left:3px solid var(--kelp);
+    padding:14px 17px;margin:0 0 20px;border-radius:0 2px 2px 0;max-width:74ch;}
+  .plain p{margin:0;font-size:14.5px;color:var(--ink2);line-height:1.72;}
+  .plain p + p{margin-top:10px;}
+  .plain b{color:var(--kelp);font-weight:600;}
+
+  .fig{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:20px 16px 16px;margin:20px 0 12px;}
+  .fig-t{font-family:var(--mono);font-size:11px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--kelp);margin:0 0 16px;
+    padding-bottom:9px;border-bottom:1px solid var(--hair);}
+  .fig svg{display:block;width:100%;height:auto;}
+  .fig.wide{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .fig.wide svg{min-width:640px;}
+  .fig-c{font-size:13px;color:var(--muted);margin:14px 0 0;font-weight:300;
+    line-height:1.65;padding-top:12px;border-top:1px solid var(--hair);}
+  .fig-c b{color:var(--ink);font-weight:600;}
+
+  .sb{fill:#fff;stroke:#C3CCC1;stroke-width:1.5;}
+  .sb-k{fill:#E3EBF4;stroke:#2A5480;stroke-width:2;}
+  .sb-b{fill:#F3DFE2;stroke:#D9A8B0;stroke-width:1.5;}
+  .sb-a{fill:#F5EAD0;stroke:#DCC79B;stroke-width:1.5;}
+  .sb-g{fill:#EFF3EC;stroke:#C3CCC1;stroke-width:1.5;}
+  .sb-d{fill:#fff;stroke:#2A5480;stroke-width:1.6;stroke-dasharray:5 4;}
+  .st{font-family:var(--sans);font-size:13.5px;font-weight:600;fill:#131C18;
+    text-anchor:middle;letter-spacing:-0.3px;}
+  .st-s{font-family:var(--sans);font-size:11.5px;font-weight:400;fill:#5F6E66;text-anchor:middle;}
+  .st-k{fill:#2A5480;} .st-b{fill:#8C2F3E;} .st-a{fill:#8F6209;}
+  .sm{font-family:var(--mono);font-size:12px;fill:#131C18;text-anchor:middle;font-weight:500;}
+  .sm-s{font-family:var(--mono);font-size:10.5px;fill:#5F6E66;text-anchor:middle;}
+  .st-m{font-family:var(--mono);font-size:11px;fill:#8A968F;text-anchor:middle;letter-spacing:0.5px;}
+  .sl{stroke:#8A968F;stroke-width:1.6;fill:none;}
+  .sl-k{stroke:#2A5480;stroke-width:2;fill:none;}
+  .sl-a{stroke:#8F6209;stroke-width:1.8;fill:none;}
+  .sl-d{stroke:#8A968F;stroke-width:1.4;fill:none;stroke-dasharray:4 4;}
+  .sa{fill:#8A968F;} .sa-k{fill:#2A5480;} .sa-a{fill:#8F6209;}
+  .dot-k{fill:#2A5480;} .dot-a{fill:#C99A2E;} .dot-b{fill:#8C2F3E;}
+
+  /* ===== 수식 ===== */
+  .frac{display:inline-flex;flex-direction:column;vertical-align:-0.45em;text-align:center;
+    line-height:1.18;font-size:0.94em;margin:0 .12em;}
+  .frac span:first-child{border-bottom:1.3px solid currentColor;padding:0 .3em;}
+  .frac span:last-child{padding:0 .3em;}
+  .rd{position:relative;}
+  .rd::after{content:"\2022";position:absolute;top:-0.72em;left:50%;transform:translateX(-50%);
+    font-size:0.5em;line-height:1;}
+  .eq{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:13px 15px;margin:14px 0;font-size:17px;text-align:center;color:var(--ink);}
+  .eq .step{display:block;font-size:12.5px;color:var(--muted);font-family:var(--mono);margin-top:6px;}
+  .eq + .eq{margin-top:-6px;}
+  .why{font-size:13.5px;color:var(--muted);margin:-6px 0 14px;padding-left:14px;
+    border-left:2px solid var(--hair);}
+
+  /* ===== 표 ===== */
+  .tw{overflow-x:auto;margin:20px 0 8px;border:1px solid var(--line);
+    border-radius:3px;background:var(--surface);}
+  table{border-collapse:collapse;width:100%;font-size:13.8px;}
+  .tw.wide table{min-width:560px;}
+  thead th{background:var(--ink);color:#E8EFE7;text-align:left;font-family:var(--mono);
+    font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
+    padding:11px 13px;}
+  tbody td{padding:11px 13px;border-top:1px solid var(--hair);vertical-align:top;
+    color:var(--ink2);line-height:1.62;}
+  tbody tr:nth-child(even) td{background:var(--surface2);}
+  td.hd{font-weight:600;color:var(--ink);}
+  td.mn{font-family:var(--mono);font-size:12.5px;}
+  td.ok{color:var(--kelp);font-weight:600;}
+  td.no{color:var(--berry);font-weight:600;}
+  td.wa{color:var(--amber);font-weight:600;}
+  td.fill{font-family:var(--mono);color:var(--faint);}
+
+  .note{background:var(--amber-wash);border:1px solid var(--amber-line);
+    border-radius:3px;padding:17px 19px;margin:20px 0 8px;}
+  .note p{margin:0;font-size:14px;color:#5C440C;line-height:1.72;}
+  .note p + p{margin-top:9px;}
+  .note b{font-weight:600;}
+  .note .lb{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--amber);margin-bottom:6px;}
+  .alert{background:var(--berry-wash);border:1px solid var(--berry-line);
+    border-radius:3px;padding:17px 19px;margin:20px 0 8px;}
+  .alert p{margin:0;font-size:14px;color:#6B2430;line-height:1.72;}
+  .alert p + p{margin-top:9px;}
+  .alert b{font-weight:600;}
+  .alert .lb{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--berry);margin-bottom:6px;}
+
+  /* ===== 카드 묶음 ===== */
+  .cards{display:grid;gap:12px;margin:18px 0 8px;}
+  @media(min-width:680px){.cards.two{grid-template-columns:repeat(2,1fr);}}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:15px 17px;}
+  .card .ct{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;
+    color:var(--kelp);display:block;margin-bottom:7px;}
+  .card h4{margin:0 0 6px;font-size:15.5px;font-weight:600;letter-spacing:-0.02em;}
+  .card p{margin:0;font-size:14px;color:var(--ink2);line-height:1.68;}
+
+  /* ===== 요일 할 일 ===== */
+  .todo{list-style:none;margin:20px 0 8px;padding:0;background:var(--surface);
+    border:1px solid var(--line);border-radius:3px;overflow:hidden;}
+  .todo li + li{border-top:1px solid var(--hair);}
+  .todo label{display:grid;grid-template-columns:22px 1fr;gap:13px;align-items:start;
+    padding:15px 16px;cursor:pointer;font-size:14.5px;line-height:1.65;color:var(--ink2);min-height:54px;}
+  .todo input{appearance:none;-webkit-appearance:none;width:21px;height:21px;margin:1px 0 0;
+    border:1.5px solid var(--line);border-radius:2px;background:#fff;
+    display:grid;place-content:center;cursor:pointer;}
+  .todo input::after{content:"✓";font-size:13px;font-weight:700;color:#fff;transform:scale(0);}
+  .todo input:checked{background:var(--kelp);border-color:var(--kelp);}
+  .todo input:checked::after{transform:scale(1);}
+  .todo input:focus-visible{outline:2px solid var(--kelp);outline-offset:2px;}
+  .todo input:checked ~ .tt{color:var(--faint);text-decoration:line-through;}
+  .todo .tt b{color:var(--ink);font-weight:600;}
+
+  /* ===== 문제 ===== */
+  .q{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:15px 17px;margin:12px 0;}
+  .q .qn{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--kelp);
+    letter-spacing:0.12em;}
+  .q > p{margin:6px 0 0;font-size:15.5px;color:var(--ink);line-height:1.7;}
+  .q details{margin-top:12px;border-top:1px solid var(--hair);padding-top:10px;}
+  .q summary{cursor:pointer;list-style:none;font-family:var(--mono);font-size:12px;
+    font-weight:600;color:var(--kelp);letter-spacing:0.06em;padding:3px 0;}
+  .q summary::-webkit-details-marker{display:none;}
+  .q summary::before{content:"+ ";}
+  .q details[open] summary::before{content:"− ";}
+  .q .ans{margin-top:9px;background:var(--kelp-wash);border-radius:2px;padding:12px 14px;
+    font-size:14px;color:var(--ink2);line-height:1.7;}
+  .q .ans b{color:var(--kelp);font-weight:600;}
+
+  /* ===== 설명 대본 ===== */
+  .script{background:var(--surface);border:1px solid var(--kelp-line);border-radius:3px;
+    padding:16px 18px;margin:18px 0 8px;}
+  .script .row{display:grid;grid-template-columns:70px 1fr;gap:12px;font-size:14.5px;
+    color:var(--ink2);line-height:1.7;}
+  .script .row + .row{margin-top:11px;padding-top:11px;border-top:1px solid var(--hair);}
+  .script .s{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;color:var(--kelp);
+    font-weight:600;padding-top:4px;}
+
+  .badge{display:inline-block;font-family:var(--mono);font-size:12.5px;font-weight:600;
+    color:var(--amber);background:var(--amber-wash);border:1px solid var(--amber-line);
+    border-radius:2px;padding:7px 14px;margin-top:14px;letter-spacing:0.04em;}
+
+  /* ===== 주차 목록 (허브) ===== */
+  .wlist{display:flex;flex-direction:column;gap:10px;margin:18px 0 8px;}
+  a.wk{display:grid;grid-template-columns:1fr auto;grid-template-areas:"n p" "t p" "d d";
+    gap:2px 14px;background:var(--surface);border:1px solid var(--line);
+    border-left:3px solid var(--kelp);border-radius:3px;padding:15px 17px;
+    text-decoration:none;color:var(--ink);}
+  a.wk .n{grid-area:n;font-family:var(--mono);font-size:11px;font-weight:600;
+    letter-spacing:0.12em;color:var(--kelp);}
+  a.wk .t{grid-area:t;font-size:17px;font-weight:600;letter-spacing:-0.02em;}
+  a.wk .d{grid-area:d;font-size:13.5px;color:var(--muted);margin-top:5px;line-height:1.6;font-weight:300;}
+  a.wk .p{grid-area:p;align-self:center;font-family:var(--mono);font-size:11px;color:var(--muted);
+    background:var(--surface2);border:1px solid var(--hair);border-radius:2px;padding:4px 9px;white-space:nowrap;}
+  a.wk .p.done{color:#fff;background:var(--kelp);border-color:var(--kelp);}
+  a.wk .p.ing{color:var(--amber);background:var(--amber-wash);border-color:var(--amber-line);}
+  .wk.soon{border-left-color:var(--line);opacity:.62;pointer-events:none;}
+  .wk.soon .n,.wk.soon .t{color:var(--muted);}
+
+  /* ===== 진행 막대 ===== */
+  .bar{height:7px;background:var(--hair);border-radius:99px;overflow:hidden;margin-top:12px;
+    border:1px solid var(--line);}
+  .bar i{display:block;height:100%;background:var(--kelp);width:0;transition:width .3s;}
+
+  /* ===== 페이지 이동 ===== */
+  .pager{display:flex;gap:9px;margin:26px 0 0;}
+  .pager a{flex:1;text-align:center;font-size:13.5px;font-weight:600;text-decoration:none;
+    color:var(--ink2);background:var(--surface);border:1px solid var(--line);
+    border-radius:3px;padding:14px 8px;}
+  .pager a.main{background:var(--kelp);border-color:var(--kelp);color:#fff;}
+  footer{padding:26px 0 10px;font-family:var(--mono);font-size:11.5px;color:var(--faint);
+    letter-spacing:0.03em;line-height:1.8;}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="cover">
+  <p class="kicker">WEEK 02 · 1구간 수와 식 · 하루 20분 × 4일</p>
+  <h1>지수법칙</h1>
+  <p class="lede">
+    공식 네 개를 외우는 단원처럼 보이지만, 사실은 <b>“같은 수를 몇 번 곱했는지 세는 것”</b> 하나뿐입니다.
+    이번 주에는 공식을 외우지 않고 <b>풀어 써서 세는 방법</b>을 익힙니다.
+  </p>
+  <div class="metaline">
+    <span>사다리 <b>2번째 칸</b></span>
+    <span>아래 칸 <b>중1 · 거듭제곱과 문자식</b></span>
+    <span>문제 <b>13개</b></span>
+    <span>진행 <b id="wdone">0 / 4</b></span>
+  </div>
+
+  <div class="summary">
+    <h2>이번 주에 남길 것</h2>
+    <p class="sd">막히면 언제나 <b>풀어 쓰기</b>로 돌아갑니다. 그러면 공식이 다시 만들어집니다.</p>
+    <div class="kpis">
+      <div class="kpi"><span class="kl">규칙 1</span><span class="kv">곱은 +</span>
+        <span class="kn">a<sup>m</sup> × a<sup>n</sup> = a<sup>m+n</sup></span></div>
+      <div class="kpi"><span class="kl">규칙 2</span><span class="kv">괄호는 ×</span>
+        <span class="kn">(a<sup>m</sup>)<sup>n</sup> = a<sup>mn</sup></span></div>
+      <div class="kpi"><span class="kl">규칙 3</span><span class="kv">나눗셈은 −</span>
+        <span class="kn">a<sup>m</sup> ÷ a<sup>n</sup> = a<sup>m−n</sup></span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="jump"><div class="row">
+  <a href="#map">이번 주 칸</a>
+  <a href="#mon">월 · 열기</a>
+  <a href="#tue">화 · 채우기</a>
+  <a href="#thu">목 · 오답으로</a>
+  <a href="#fri">금 · 보스전</a>
+  <a href="#next">다음 주</a>
+</div></nav>
+
+<section class="sec" id="map">
+  <div class="step-no"><span class="num">1</span><span class="lbl">이번 주 칸</span></div>
+  <h2>세면 공식이 나옵니다</h2>
+
+  <div class="fig">
+    <p class="fig-t">도식 1 · 12주 사다리에서 이번 주의 자리</p>
+    <svg viewBox="0 0 420 196" role="img" aria-label="12주 개념 사다리에서 이번 주의 자리"><rect x="10" y="162" width="133" height="18" rx="2" fill="#EFF3EC"/><text class="st-m" x="76" y="175" style="font-size:9px">1구간 · 수와 식</text><rect x="146" y="162" width="133" height="18" rx="2" fill="#EFF3EC"/><text class="st-m" x="212" y="175" style="font-size:9px">2구간 · 방정식과 함수</text><rect x="282" y="162" width="133" height="18" rx="2" fill="#EFF3EC"/><text class="st-m" x="348" y="175" style="font-size:9px">3구간 · 도형과 확률</text><rect x="10" y="132" width="31" height="26" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="26" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">01</text><rect x="44" y="124" width="31" height="34" rx="2" fill="#2A5480" stroke="#2A5480" stroke-width="1.2"/><text x="60" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#fff">02</text><text x="10" y="18" text-anchor="start" font-family="IBM Plex Sans KR,sans-serif" font-size="13" font-weight="700" fill="#2A5480">지수법칙</text><text x="10" y="34" text-anchor="start" font-family="IBM Plex Mono,monospace" font-size="10" fill="#5F6E66">같은 수의 곱</text><path d="M60 40 L60 120" stroke="#2A5480" stroke-width="1.2" stroke-dasharray="3 3"/><rect x="78" y="116" width="31" height="42" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="94" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">03</text><rect x="112" y="108" width="31" height="50" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="128" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">04</text><rect x="146" y="100" width="31" height="58" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="162" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">05</text><rect x="180" y="92" width="31" height="66" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="196" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">06</text><rect x="214" y="84" width="31" height="74" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="230" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">07</text><rect x="248" y="76" width="31" height="82" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="264" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">08</text><rect x="282" y="68" width="31" height="90" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="298" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">09</text><rect x="316" y="60" width="31" height="98" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="332" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">10</text><rect x="350" y="52" width="31" height="106" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="366" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">11</text><rect x="384" y="44" width="31" height="114" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="400" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">12</text><text class="st-m" x="10" y="192" style="font-size:9.5px;text-anchor:start">아래 칸부터</text><text class="st-m" x="410" y="192" style="font-size:9.5px;text-anchor:end">밟고 올라갑니다</text></svg>
+  </div>
+
+  <div class="fig">
+    <p class="fig-t">도식 2 · 외우지 말고 풀어 쓰기</p>
+    <svg viewBox="0 0 420 190" role="img" aria-label="지수법칙을 풀어 써서 확인하는 방법">
+      <rect class="sb" x="8" y="12" width="404" height="52" rx="3"/>
+      <text class="st" x="210" y="34">a³ × a² = (a·a·a) × (a·a)</text>
+      <text class="st st-k" x="210" y="54">= a·a·a·a·a = a⁵ → 3 + 2</text>
+      <rect class="sb" x="8" y="72" width="404" height="52" rx="3"/>
+      <text class="st" x="210" y="94">(a³)² = (a·a·a) × (a·a·a)</text>
+      <text class="st st-k" x="210" y="114">= a⁶ → 3 × 2</text>
+      <rect class="sb" x="8" y="132" width="404" height="52" rx="3"/>
+      <text class="st" x="210" y="154">a⁵ ÷ a² = (a·a·a·a·a) ÷ (a·a)</text>
+      <text class="st st-k" x="210" y="174">= a³ → 5 − 2</text>
+    </svg>
+    <p class="fig-c">시험에서 공식이 헷갈리면 <b>a를 세 번, 두 번 써 보면</b> 답이 나옵니다. 이것이 이 단원의 안전장치입니다.</p>
+  </div>
+</section>
+
+<section class="sec" id="mon">
+  <div class="step-no"><span class="num">2</span><span class="lbl">개념</span><span class="day">MON · 열기</span></div>
+  <h2>지수는 “몇 번 곱했나”입니다</h2>
+
+  <p><code>a<sup>3</sup></code>은 <b>a를 세 번 곱했다</b>는 뜻입니다. 그것뿐입니다.
+  그래서 규칙들은 외울 것이 아니라 <b>세면 나오는 것</b>입니다.</p>
+
+  <div class="tw wide"><table>
+    <thead><tr><th>규칙</th><th>왜 그런가</th><th>예</th></tr></thead>
+    <tbody>
+      <tr><td class="mn ok">a<sup>m</sup> × a<sup>n</sup> = a<sup>m+n</sup></td>
+        <td>m번 곱한 것에 n번 더 곱하니 <b>합쳐서 m+n번</b></td><td class="mn">2³ × 2⁴ = 2⁷</td></tr>
+      <tr><td class="mn ok">(a<sup>m</sup>)<sup>n</sup> = a<sup>mn</sup></td>
+        <td>m번 곱한 덩어리를 <b>n묶음</b> 만드니 m×n번</td><td class="mn">(x²)³ = x⁶</td></tr>
+      <tr><td class="mn ok">a<sup>m</sup> ÷ a<sup>n</sup> = a<sup>m−n</sup></td>
+        <td>위아래에서 같은 a끼리 <b>지워지니</b> m−n번</td><td class="mn">a⁷ ÷ a³ = a⁴</td></tr>
+      <tr><td class="mn ok">(ab)<sup>n</sup> = a<sup>n</sup>b<sup>n</sup></td>
+        <td>괄호 안 <b>모든 것</b>이 n번 곱해짐</td><td class="mn">(2x)³ = 8x³</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="alert"><span class="lb">가장 많이 하는 실수</span>
+    <p><b>덧셈에는 지수법칙이 없습니다.</b> <code>a³ + a²</code>는 <code>a⁵</code>가 <b>아닙니다.</b>
+    풀어 써 보면 (a·a·a) + (a·a)이므로 더 이상 합칠 수 없습니다.
+    <b>지수법칙은 곱셈·나눗셈에서만</b> 씁니다.</p>
+  </div>
+
+  <div class="plain">
+    <p><b>지수가 0이면?</b> <code>a⁵ ÷ a⁵</code>는 같은 것을 같은 것으로 나눈 것이니 <b>1</b>입니다.
+    규칙대로 하면 a<sup>5−5</sup> = a⁰ 이므로, <b>a⁰ = 1</b>로 약속합니다 (a ≠ 0).
+    외우는 것이 아니라 <b>나눗셈에서 자연스럽게 나오는 결과</b>입니다.</p>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w2m1"><span class="tt"><b>월요일</b> — 위를 읽고 질문 3개를 적습니다. a³ × a²와 (a³)²를 <b>직접 풀어 써</b> 봅니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="tue">
+  <div class="step-no"><span class="num">3</span><span class="lbl">예제 3개</span><span class="day">TUE · 채우기</span></div>
+  <h2>절차대로 따라 풀어 봅니다</h2>
+
+  <div class="q"><span class="qn">예제 1</span>
+    <p><code>2³ × 2⁴ ÷ 2⁵</code> 를 계산해 봅시다.</p>
+    <details><summary>풀이 보기</summary><div class="ans">
+      <b>① 곱셈부터.</b> 2³ × 2⁴ = 2<sup>3+4</sup> = 2⁷<br>
+      <b>② 나눗셈.</b> 2⁷ ÷ 2⁵ = 2<sup>7−5</sup> = 2²<br>
+      <b>③ 답 · 2² = 4</b>
+      <span class="step">밑(2)이 같을 때만 지수끼리 계산할 수 있습니다.</span>
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">예제 2</span>
+    <p><code>(2x³)²</code> 를 계산해 봅시다.</p>
+    <details><summary>풀이 보기</summary><div class="ans">
+      <b>① 괄호 안 모든 것에 지수가 걸립니다.</b> (2x³)² = 2² × (x³)²<br>
+      <b>② 각각 계산.</b> 2² = 4, (x³)² = x<sup>3×2</sup> = x⁶<br>
+      <b>③ 답 · 4x⁶</b>
+      <span class="step">숫자 2를 그냥 두고 2x⁶으로 쓰는 것이 가장 흔한 실수입니다.</span>
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">예제 3</span>
+    <p><code>a⁶ ÷ a² ÷ a³</code> 를 계산해 봅시다.</p>
+    <details><summary>풀이 보기</summary><div class="ans">
+      <b>① 앞에서부터 차례로.</b> a⁶ ÷ a² = a⁴<br>
+      <b>② 이어서.</b> a⁴ ÷ a³ = a¹ = <b>a</b><br>
+      <span class="step">한 번에 6 − 2 − 3 = 1로 계산해도 됩니다. 다만 <b>순서를 지켜야</b> 합니다.
+      a⁶ ÷ (a² ÷ a³)와는 다른 식입니다.</span>
+    </div></details>
+  </div>
+
+  <div class="plain">
+    <p><b>노트 한 장</b>에는 규칙 네 개를 적되, <b>각 규칙 옆에 풀어 쓴 확인</b>을 함께 적습니다.
+    예: a³ × a² = (aaa)(aa) = a⁵. 이렇게 적어 두면 시험장에서 헷갈릴 때 스스로 복원할 수 있습니다.</p>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w2m2"><span class="tt"><b>화요일</b> — 예제 3개를 직접 풀고, 규칙 네 개를 <b>풀어 쓴 확인과 함께</b> 노트에 정리합니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="thu">
+  <div class="step-no"><span class="num">4</span><span class="lbl">오답 노트</span><span class="day">THU · 오답으로</span></div>
+  <h2>오늘은 일부러 틀려 보는 날</h2>
+
+  <h3>이 단원에서 자주 걸리는 함정</h3>
+  <div class="cards two">
+    <div class="card"><span class="ct">함정 1</span><h4>덧셈에 지수법칙</h4>
+      <p><code>a³ + a³</code>은 a⁶이 <b>아니라</b> <b>2a³</b>입니다. 같은 것이 두 개 있으니 2배입니다. 풀어 써 보면 바로 보입니다.</p></div>
+    <div class="card"><span class="ct">함정 2</span><h4>괄호 밖 숫자를 빠뜨림</h4>
+      <p><code>(3a²)³</code>은 3a⁶이 <b>아니라</b> <b>27a⁶</b>입니다. 3에도 지수가 걸립니다.</p></div>
+    <div class="card"><span class="ct">함정 3</span><h4>밑이 다른데 합침</h4>
+      <p><code>2³ × 3²</code>는 6⁵도 6⁶도 <b>아닙니다.</b> 밑이 다르면 지수끼리 계산할 수 없습니다. (= 8 × 9 = 72)</p></div>
+    <div class="card"><span class="ct">함정 4</span><h4>부호를 놓침</h4>
+      <p><code>(−a)²= a²</code>이지만 <code>−a² </code>는 <b>다릅니다.</b> 괄호가 있으면 부호까지 제곱됩니다.</p></div>
+  </div>
+
+  <h3>연습 5문제</h3>
+  <div class="q"><span class="qn">연습 1</span><p><code>x² × x⁵</code></p>
+    <details><summary>답 보기</summary><div class="ans"><b>x⁷</b> — 2 + 5</div></details></div>
+  <div class="q"><span class="qn">연습 2</span><p><code>(y⁴)³</code></p>
+    <details><summary>답 보기</summary><div class="ans"><b>y¹²</b> — 4 × 3</div></details></div>
+  <div class="q"><span class="qn">연습 3</span><p><code>(−2a³)²</code></p>
+    <details><summary>답 보기</summary><div class="ans"><b>4a⁶</b> — (−2)² = 4, (a³)² = a⁶. 부호까지 제곱되어 <b>양수</b>가 됩니다.</div></details></div>
+  <div class="q"><span class="qn">연습 4</span><p><code>a⁸ ÷ a⁸</code></p>
+    <details><summary>답 보기</summary><div class="ans"><b>1</b> — 같은 것을 같은 것으로 나누었으니 1입니다. (a⁰ = 1)</div></details></div>
+  <div class="q"><span class="qn">연습 5</span><p><code>x³ + x³ + x³</code></p>
+    <details><summary>답 보기</summary><div class="ans"><b>3x³</b> — 덧셈이므로 지수는 그대로이고 <b>개수</b>가 3이 됩니다. x⁹가 아닙니다.</div></details></div>
+
+  <div class="tw"><table>
+    <thead><tr><th>오답 노트</th><th>내가 적어 보기</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">틀린 문제 번호</td><td class="fill">______</td></tr>
+      <tr><td class="hd">어디서 틀렸나 (덧셈? 괄호? 부호?)</td><td class="fill">______</td></tr>
+      <tr><td class="hd">다음에 쓸 한 줄 규칙</td><td class="fill">______</td></tr>
+    </tbody>
+  </table></div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w2m3"><span class="tt"><b>목요일</b> — 연습 5문제를 풀고 <b>틀린 것만</b> 오답 노트에 세 줄로 옮깁니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="fri">
+  <div class="step-no"><span class="num">5</span><span class="lbl">보스전</span><span class="day">FRI · 설명</span></div>
+  <h2>문제 5개와 3분 설명</h2>
+
+  <div class="q"><span class="qn">Q1</span><p><code>3² × 3⁴ ÷ 3³</code></p>
+    <details><summary>해설 보기</summary><div class="ans"><b>3³ = 27</b> — 지수만 보면 2 + 4 − 3 = 3</div></details></div>
+  <div class="q"><span class="qn">Q2</span><p><code>(2x²y)³</code></p>
+    <details><summary>해설 보기</summary><div class="ans"><b>8x⁶y³</b> — 2³ = 8, (x²)³ = x⁶, y³. <b>괄호 안 모든 것</b>에 3제곱이 걸립니다.</div></details></div>
+  <div class="q"><span class="qn">Q3</span><p><code>a⁴ × a<sup>n</sup> = a⁹</code> 일 때 n은?</p>
+    <details><summary>해설 보기</summary><div class="ans"><b>n = 5</b> — 4 + n = 9 이므로 n = 5입니다. 지수만 떼어 방정식으로 만드는 문제입니다.</div></details></div>
+  <div class="q"><span class="qn">Q4</span><p>다음 중 <b>틀린</b> 것은? <span class="mn">① x²·x³ = x⁵  ② (x²)³ = x⁵  ③ x⁵÷x² = x³  ④ (2x)² = 4x²</span></p>
+    <details><summary>해설 보기</summary><div class="ans"><b>②</b> — (x²)³은 x<sup>2×3</sup> = <b>x⁶</b>입니다.
+    곱셈은 지수를 더하고, <b>괄호는 곱한다</b>는 차이를 묻는 문제입니다.</div></details></div>
+  <div class="q"><span class="qn">Q5</span><p><code>2⁵ + 2⁵</code> 를 2의 거듭제곱으로 나타내면?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>2⁶</b> — 같은 것이 두 개이므로 2 × 2⁵ = 2¹ × 2⁵ = 2⁶입니다.
+      <span class="step">덧셈이라고 무조건 지수법칙이 안 되는 것은 아니고, <b>같은 항끼리 묶으면</b> 곱셈으로 바뀝니다. 이 단원 최고난도 유형입니다.</span>
+    </div></details></div>
+
+  <h3>아빠에게 3분 설명하기</h3>
+  <div class="script">
+    <div class="row"><span class="s">배운 것</span><span>지수는 몇 번 곱했는지 세는 거라서, 곱하면 더하고 괄호면 곱한다는 것.</span></div>
+    <div class="row"><span class="s">왜</span><span>a³×a²를 풀어 쓰면 a가 다섯 개니까 a⁵이야. 외운 게 아니라 세어 본 거야.</span></div>
+    <div class="row"><span class="s">내가 틀린 곳</span><span>(3a²)³에서 3을 그냥 뒀어. 3도 세제곱해서 27이야.</span></div>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w2m4"><span class="tt"><b>금요일</b> — 문제 5개를 풀고, <b>왜 그렇게 푸는지</b> 3분 설명합니다.</span></label></li>
+  </ul>
+
+  <p><span class="badge">획득 · 사다리 2칸</span></p>
+</section>
+
+<section class="sec" id="next">
+  <div class="step-no"><span class="num">6</span><span class="lbl">다음 주</span></div>
+  <h2>다항식의 계산</h2>
+  <p>3주차는 <b>문자끼리 정리하는 법</b>입니다. 이번 주에 배운 지수법칙을 그대로 씁니다.
+  고비는 <b>괄호를 푸는 순간</b>, 특히 <b>괄호 앞에 마이너스가 있을 때</b>입니다.</p>
+  <div class="pager">
+    <a href="week01.html">← 1주차</a>
+    <a href="index.html">전체 사다리</a>
+    <a class="main" href="week03.html">3주차 →</a>
+  </div>
+</section>
+
+<footer>수학 사다리 12주 · WEEK 02 지수법칙 · 하루 20분 × 4일</footer>
+</div>
+<script>
+  (function(){
+    var KEY="math_quest_progress";
+    function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){return{}}}
+    function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+    var boxes=[].slice.call(document.querySelectorAll(".todo input[type=checkbox]"));
+    var st=load();
+    boxes.forEach(function(b){
+      if(st[b.dataset.q])b.checked=true;
+      b.addEventListener("change",function(){
+        var s=load();
+        if(b.checked)s[b.dataset.q]=1;else delete s[b.dataset.q];
+        save(s);paint();
+      });
+    });
+    function paint(){
+      var el=document.getElementById("wdone");
+      if(el){var n=boxes.filter(function(b){return b.checked}).length;
+        el.textContent=n+" / "+boxes.length;}
+      var hub=document.querySelector("[data-hub]");
+      if(hub){
+        var s=load(),total=0;
+        for(var w=1;w<=12;w++){
+          var n2=0;
+          for(var m=1;m<=4;m++) if(s["w"+w+"m"+m]) n2++;
+          total+=n2;
+          var p=document.querySelector('.p[data-p="'+w+'"]');
+          if(p&&!p.dataset.soon){p.textContent=n2===4?"완료":n2+" / 4";
+            p.className="p"+(n2===4?" done":(n2>0?" ing":""));}
+        }
+        var d=document.getElementById("allDone"),bar=document.getElementById("allBar");
+        if(d)d.textContent=total+" / 12";
+        if(bar)bar.style.width=(total/12*100)+"%";
+      }
+    }
+    paint();
+    var links=[].slice.call(document.querySelectorAll("nav.jump a[href^='#']"));
+    if(links.length){
+      var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1))});
+      var onScroll=function(){
+        var y=window.scrollY+130,idx=0;
+        secs.forEach(function(s,i){if(s&&s.offsetTop<=y)idx=i;});
+        links.forEach(function(a,i){a.classList.toggle("now",i===idx);});
+      };
+      window.addEventListener("scroll",onScroll,{passive:true});onScroll();
+    }
+  })();
+</script>
+</body>
+</html>

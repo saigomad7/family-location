@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#DCE2DB">
-<title>역사 항해 12주</title>
-<meta name="description" content="한국사 전체 흐름을 하루 20분씩 12주 동안 연표 한 장으로 잇는 주차별 학습 문서.">
+<title>수학 사다리 12주</title>
+<meta name="description" content="중2 수학 전 범위를 하루 20분씩 12주 동안 개념 사다리로 밟아 오르는 주차별 학습 문서.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@
     --ink:#131C18; --ink2:#2C3A33; --muted:#5F6E66; --faint:#8A968F;
     --mist:#DCE2DB; --surface:#F8FAF6; --surface2:#EFF3EC;
     --line:#C3CCC1; --hair:#DDE4DB;
-    --kelp:#8C2F3E; --kelp-wash:#F6E4E7; --kelp-line:#D9A8B0;
+    --kelp:#2A5480; --kelp-wash:#E3EBF4; --kelp-line:#A3BBD5;
     --amber:#8F6209; --amber-wash:#F5EAD0; --amber-line:#DCC79B;
     --berry:#8C2F3E; --berry-wash:#F3DFE2; --berry-line:#D9A8B0;
     --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
@@ -47,7 +47,7 @@
   .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:18px;}
   .kpi .kl{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
     text-transform:uppercase;color:#7E8F84;display:block;margin-bottom:5px;}
-  .kpi .kv{font-size:clamp(21px,3.2vw,28px);font-weight:700;color:#F0AEB8;
+  .kpi .kv{font-size:clamp(21px,3.2vw,28px);font-weight:700;color:#9DC6EE;
     letter-spacing:-0.03em;display:block;line-height:1.1;}
   .kpi .kn{font-size:12px;color:#B9C6BC;display:block;margin-top:6px;
     font-weight:300;line-height:1.5;}
@@ -102,24 +102,39 @@
   .fig-c b{color:var(--ink);font-weight:600;}
 
   .sb{fill:#fff;stroke:#C3CCC1;stroke-width:1.5;}
-  .sb-k{fill:#F6E4E7;stroke:#8C2F3E;stroke-width:2;}
+  .sb-k{fill:#E3EBF4;stroke:#2A5480;stroke-width:2;}
   .sb-b{fill:#F3DFE2;stroke:#D9A8B0;stroke-width:1.5;}
   .sb-a{fill:#F5EAD0;stroke:#DCC79B;stroke-width:1.5;}
   .sb-g{fill:#EFF3EC;stroke:#C3CCC1;stroke-width:1.5;}
-  .sb-d{fill:#fff;stroke:#8C2F3E;stroke-width:1.6;stroke-dasharray:5 4;}
+  .sb-d{fill:#fff;stroke:#2A5480;stroke-width:1.6;stroke-dasharray:5 4;}
   .st{font-family:var(--sans);font-size:13.5px;font-weight:600;fill:#131C18;
     text-anchor:middle;letter-spacing:-0.3px;}
   .st-s{font-family:var(--sans);font-size:11.5px;font-weight:400;fill:#5F6E66;text-anchor:middle;}
-  .st-k{fill:#8C2F3E;} .st-b{fill:#8C2F3E;} .st-a{fill:#8F6209;}
+  .st-k{fill:#2A5480;} .st-b{fill:#8C2F3E;} .st-a{fill:#8F6209;}
   .sm{font-family:var(--mono);font-size:12px;fill:#131C18;text-anchor:middle;font-weight:500;}
   .sm-s{font-family:var(--mono);font-size:10.5px;fill:#5F6E66;text-anchor:middle;}
   .st-m{font-family:var(--mono);font-size:11px;fill:#8A968F;text-anchor:middle;letter-spacing:0.5px;}
   .sl{stroke:#8A968F;stroke-width:1.6;fill:none;}
-  .sl-k{stroke:#8C2F3E;stroke-width:2;fill:none;}
+  .sl-k{stroke:#2A5480;stroke-width:2;fill:none;}
   .sl-a{stroke:#8F6209;stroke-width:1.8;fill:none;}
   .sl-d{stroke:#8A968F;stroke-width:1.4;fill:none;stroke-dasharray:4 4;}
-  .sa{fill:#8A968F;} .sa-k{fill:#8C2F3E;} .sa-a{fill:#8F6209;}
-  .dot-k{fill:#8C2F3E;} .dot-a{fill:#C99A2E;} .dot-b{fill:#8C2F3E;}
+  .sa{fill:#8A968F;} .sa-k{fill:#2A5480;} .sa-a{fill:#8F6209;}
+  .dot-k{fill:#2A5480;} .dot-a{fill:#C99A2E;} .dot-b{fill:#8C2F3E;}
+
+  /* ===== 수식 ===== */
+  .frac{display:inline-flex;flex-direction:column;vertical-align:-0.45em;text-align:center;
+    line-height:1.18;font-size:0.94em;margin:0 .12em;}
+  .frac span:first-child{border-bottom:1.3px solid currentColor;padding:0 .3em;}
+  .frac span:last-child{padding:0 .3em;}
+  .rd{position:relative;}
+  .rd::after{content:"\2022";position:absolute;top:-0.72em;left:50%;transform:translateX(-50%);
+    font-size:0.5em;line-height:1;}
+  .eq{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:13px 15px;margin:14px 0;font-size:17px;text-align:center;color:var(--ink);}
+  .eq .step{display:block;font-size:12.5px;color:var(--muted);font-family:var(--mono);margin-top:6px;}
+  .eq + .eq{margin-top:-6px;}
+  .why{font-size:13.5px;color:var(--muted);margin:-6px 0 14px;padding-left:14px;
+    border-left:2px solid var(--hair);}
 
   /* ===== 표 ===== */
   .tw{overflow-x:auto;margin:20px 0 8px;border:1px solid var(--line);
@@ -245,17 +260,17 @@
 <div class="wrap">
 <div data-hub></div>
 <header class="cover">
-  <p class="kicker">중2 역사 · 주차별 학습 문서 · 하루 20분</p>
-  <h1>역사 항해 12주</h1>
+  <p class="kicker">중2 수학 · 주차별 학습 문서 · 하루 20분</p>
+  <h1>수학 사다리 12주</h1>
   <p class="lede">
-    역사는 사건을 못 외워서 어려운 것이 아니라, <b>사건이 놓일 자리가 아직 없어서</b> 어렵습니다.
-    그래서 이 문서는 사건을 더 넣지 않습니다. 매주 <b>연표에 한 칸을 세우고, 그 칸에 사건 세 개만 올립니다.</b>
-    12주 뒤에는 선사부터 오늘까지가 한 장에 이어집니다.
+    수학이 어려운 것은 머리 때문이 아니라 <b>지금 밟고 서야 할 아래 칸이 비어 있어서</b>입니다.
+    그래서 이 문서는 진도를 앞서 나가지 않습니다. 매주 <b>아래 칸을 확인하고 그 위에 한 칸만</b> 올립니다.
+    그리고 <b>목요일은 일부러 틀려 보는 날</b>입니다.
   </p>
   <div class="metaline">
     <span>전체 <b>12주 · 3개월</b></span>
     <span>하루 <b>20분 · 주 4일</b></span>
-    <span>한 주 <b>사건 3개</b></span>
+    <span>주당 <b>문제 13개</b></span>
     <span>진행 <b id="allDone">0 / 12</b></span>
   </div>
 
@@ -264,13 +279,13 @@
     <p class="sd">한 문서가 일주일치입니다. 월·화·목·금 네 칸만 하면 그 주는 끝납니다.</p>
     <div class="kpis">
       <div class="kpi"><span class="kl">한 주</span><span class="kv">4칸</span>
-        <span class="kn">월 열기 · 화 채우기 · 목 사료로 · 금 보스전</span></div>
-      <div class="kpi"><span class="kl">하루</span><span class="kv">20분</span>
-        <span class="kn">시간이 되면 덜 채워졌어도 덮습니다</span></div>
-      <div class="kpi"><span class="kl">쌓이는 것</span><span class="kv">연표</span>
-        <span class="kn">매주 한 칸 · 12주 뒤 한 장</span></div>
-      <div class="kpi"><span class="kl">통과 기준</span><span class="kv">설명</span>
-        <span class="kn">“왜 그렇게 됐는지” 아빠에게 3분 설명</span></div>
+        <span class="kn">월 열기 · 화 채우기 · 목 오답으로 · 금 보스전</span></div>
+      <div class="kpi"><span class="kl">하루</span><span class="kv">3~5문제</span>
+        <span class="kn">예제 3 · 연습 5 · 보스전 5</span></div>
+      <div class="kpi"><span class="kl">쌓이는 것</span><span class="kv">오답 노트</span>
+        <span class="kn">틀린 문제만 · 시험 전에 이것만 봅니다</span></div>
+      <div class="kpi"><span class="kl">통과 기준</span><span class="kv">이유</span>
+        <span class="kn">답이 아니라 “왜 그렇게 푸는지” 설명</span></div>
     </div>
     <div class="bar"><i id="allBar"></i></div>
   </div>
@@ -278,96 +293,91 @@
 
 <nav class="jump"><div class="row">
   <a href="#how">쓰는 법</a>
-  <a href="#leg1">1구간 · 고대</a>
-  <a href="#leg2">2구간 · 고려와 조선</a>
-  <a href="#leg3">3구간 · 근현대</a>
+  <a href="#leg1">1구간 · 수와 식</a>
+  <a href="#leg2">2구간 · 방정식과 함수</a>
+  <a href="#leg3">3구간 · 도형과 확률</a>
 </div></nav>
 
 <section class="sec" id="how">
   <div class="step-no"><span class="num">1</span><span class="lbl">읽는 법</span></div>
-  <h2>연표 열두 칸을 한 주에 하나씩</h2>
+  <h2>아래 칸을 밟고 한 칸씩</h2>
 
   <div class="fig">
-    <p class="fig-t">도식 1 · 12주 = 연표 열두 칸</p>
-    <svg viewBox="0 0 420 156" role="img" aria-label="12주 연표에서 이번 주의 위치"><rect x="10" y="60" width="133" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="76" y="54" style="font-size:9.5px">1구간 · 고대</text><rect x="146" y="60" width="133" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="212" y="54" style="font-size:9.5px">2구간 · 고려와 조선</text><rect x="282" y="60" width="133" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="348" y="54" style="font-size:9.5px">3구간 · 근현대</text><rect x="10" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="26" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">01</text><rect x="44" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="60" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">02</text><rect x="78" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="94" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">03</text><rect x="112" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="128" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">04</text><rect x="146" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="162" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">05</text><rect x="180" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="196" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">06</text><rect x="214" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="230" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">07</text><rect x="248" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="264" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">08</text><rect x="282" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="298" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">09</text><rect x="316" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="332" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">10</text><rect x="350" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="366" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">11</text><rect x="384" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="400" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">12</text><text class="st-m" x="10" y="146" style="font-size:9.5px;text-anchor:start">선사</text><text class="st-m" x="410" y="146" style="font-size:9.5px;text-anchor:end">오늘</text><line x1="34" y1="142" x2="386" y2="142" stroke="#C3CCC1" stroke-width="1"/><polygon points="386,138 396,142 386,146" fill="#8A968F"/></svg>
-    <p class="fig-c">시간 길이가 아니라 <b>배우는 분량</b>으로 나눴습니다. 앞쪽 한 칸은 수천 년, 뒤쪽 한 칸은 수십 년입니다.</p>
-  </div>
-
-  <div class="plain">
-    <p><b>먼저 알아둘 것</b> — 모든 주차 문서는 <b>똑같은 순서</b>로 되어 있습니다.
-    월요일에 흐름을 읽고, 화요일에 연표 한 칸을 세우고, 목요일에 그 시대의 진짜 자료를 하나 보고, 금요일에 설명합니다.</p>
-    <p>수요일과 주말은 비워 둡니다. <b>쉬는 것도 계획에 들어 있습니다.</b></p>
+    <p class="fig-t">도식 1 · 12주 개념 사다리</p>
+    <svg viewBox="0 0 420 196" role="img" aria-label="12주 개념 사다리에서 이번 주의 자리"><rect x="10" y="162" width="133" height="18" rx="2" fill="#EFF3EC"/><text class="st-m" x="76" y="175" style="font-size:9px">1구간 · 수와 식</text><rect x="146" y="162" width="133" height="18" rx="2" fill="#EFF3EC"/><text class="st-m" x="212" y="175" style="font-size:9px">2구간 · 방정식과 함수</text><rect x="282" y="162" width="133" height="18" rx="2" fill="#EFF3EC"/><text class="st-m" x="348" y="175" style="font-size:9px">3구간 · 도형과 확률</text><rect x="10" y="132" width="31" height="26" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="26" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">01</text><rect x="44" y="124" width="31" height="34" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="60" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">02</text><rect x="78" y="116" width="31" height="42" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="94" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">03</text><rect x="112" y="108" width="31" height="50" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="128" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">04</text><rect x="146" y="100" width="31" height="58" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="162" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">05</text><rect x="180" y="92" width="31" height="66" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="196" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">06</text><rect x="214" y="84" width="31" height="74" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="230" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">07</text><rect x="248" y="76" width="31" height="82" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="264" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">08</text><rect x="282" y="68" width="31" height="90" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="298" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">09</text><rect x="316" y="60" width="31" height="98" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="332" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">10</text><rect x="350" y="52" width="31" height="106" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="366" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">11</text><rect x="384" y="44" width="31" height="114" rx="2" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="400" y="150" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">12</text><text class="st-m" x="10" y="192" style="font-size:9.5px;text-anchor:start">아래 칸부터</text><text class="st-m" x="410" y="192" style="font-size:9.5px;text-anchor:end">밟고 올라갑니다</text></svg>
+    <p class="fig-c">칸이 뒤로 갈수록 높아지는 것은 어려워진다는 뜻이 아니라 <b>딛고 있는 것이 많아진다</b>는 뜻입니다.</p>
   </div>
 
   <div class="tw wide"><table>
     <thead><tr><th>요일</th><th>하는 일</th><th>시간</th></tr></thead>
     <tbody>
-      <tr><td class="hd">월 · 열기</td><td>이번 주 시대의 흐름을 읽고 <b>궁금한 질문 3개</b>를 적습니다.</td><td class="mn">20분</td></tr>
-      <tr><td class="hd">화 · 채우기</td><td><b>연표에 한 칸</b>을 세우고 사건 3개를 원인 → 결과로 적습니다.</td><td class="mn">20분</td></tr>
-      <tr><td class="hd">목 · 사료로</td><td>그 시대가 남긴 <b>진짜 자료</b>를 하나 봅니다. 사료 · 유물 · 지도.</td><td class="mn">20~30분</td></tr>
-      <tr><td class="hd">금 · 보스전</td><td>문제 5개 + <b>아빠에게 3분 설명</b>. 설명이 되면 통과입니다.</td><td class="mn">20분</td></tr>
+      <tr><td class="hd">월 · 열기</td><td>개념을 <b>그림과 비유</b>로 이해합니다. 공식은 아직 외우지 않습니다.</td><td class="mn">20분</td></tr>
+      <tr><td class="hd">화 · 채우기</td><td><b>예제 3개</b>를 단계대로 따라 풀고, 노트 한 장에 절차를 정리합니다.</td><td class="mn">20분</td></tr>
+      <tr><td class="hd">목 · 오답으로</td><td><b>자주 틀리는 함정</b>을 보고 연습 5문제. 틀린 것을 오답 노트에 옮깁니다.</td><td class="mn">20~30분</td></tr>
+      <tr><td class="hd">금 · 보스전</td><td>문제 5개 + <b>아빠에게 3분 설명</b>. 답이 아니라 이유를 말하면 통과입니다.</td><td class="mn">20분</td></tr>
     </tbody>
   </table></div>
 
-  <div class="note"><span class="lb">연표부터 준비합니다</span>
-    <p>A4 두 장을 가로로 이어 붙이고 <b>열두 칸</b>을 그어 벽에 붙입니다.
-    매주 화요일에 한 칸씩 채워집니다. 이 종이가 12주 프로그램의 결과물이자, 시험 기간에 다시 볼 유일한 자료입니다.
-    운영 방법은 <a href="plan.html">추진 계획 문서</a>에 있습니다.</p>
+  <div class="note"><span class="lb">목요일이 이 문서의 핵심입니다</span>
+    <p><b>틀리는 것이 그날의 목적</b>입니다. 다 맞았다면 문제가 너무 쉬웠던 것이니 오히려 아쉬운 날입니다.
+    오답 노트에는 세 줄만 적습니다 — ① 문제 ② <b>내가 어디서 틀렸는지</b> ③ 다음에 쓸 한 줄 규칙.</p>
+  </div>
+
+  <div class="plain">
+    <p><b>막히면 내려갑니다.</b> 3분 넘게 막히면 더 밀지 않고, 그 개념이 <b>밟고 선 아래 칸</b>의 주차 문서로 돌아갑니다.
+    각 주차 표지에 “밟고 서는 아래 칸”이 적혀 있습니다. 운영 방법은 <a href="plan.html">추진 계획 문서</a>에 있습니다.</p>
   </div>
 </section>
 
 <section class="sec" id="leg1">
-  <div class="step-no"><span class="num">2</span><span class="lbl">1구간 · 고대</span><span class="day">WEEK 01–04</span></div>
-  <h2>나라가 처음 생기던 때</h2>
-  <p>사람이 모여 살기 시작하고, 계급이 생기고, 나라가 만들어지는 과정입니다.
-  <b>“왜 나라가 필요해졌을까”</b>가 이 구간 전체를 관통하는 질문입니다.</p>
+  <div class="step-no"><span class="num">2</span><span class="lbl">1구간 · 수와 식</span><span class="day">WEEK 01–04</span></div>
+  <h2>계산의 바닥을 다집니다</h2>
+  <p>중2 수학의 나머지 전부가 이 네 칸 위에 올라갑니다. 여기서 급하게 넘어가면 함수와 도형에서 반드시 되돌아오게 됩니다.</p>
 
   <div class="wlist" data-camp="c1">
-    <a class="wk" href="week01.html"><span class="n">WEEK 01</span><span class="t">선사와 고조선</span>
-      <span class="d">농사가 시작되자 계급이 생기고, 계급이 생기자 나라가 생겼습니다</span><span class="p" data-p="1">0 / 4</span></a>
-    <a class="wk" href="week02.html"><span class="n">WEEK 02</span><span class="t">삼국의 성장</span>
-      <span class="d">백제 → 고구려 → 신라, 전성기가 온 순서에는 이유가 있습니다</span><span class="p" data-p="2">0 / 4</span></a>
-    <a class="wk" href="week03.html"><span class="n">WEEK 03</span><span class="t">통일신라와 발해</span>
-      <span class="d">당을 끌어들여 통일하고, 다시 당과 싸워 내보낸 이야기</span><span class="p" data-p="3">0 / 4</span></a>
-    <a class="wk" href="week04.html"><span class="n">WEEK 04</span><span class="t">고려의 성립</span>
-      <span class="d">호족의 나라에서 왕의 나라로 · 서희의 담판과 강감찬</span><span class="p" data-p="4">0 / 4</span></a>
+    <a class="wk" href="week01.html"><span class="n">WEEK 01</span><span class="t">유리수와 순환소수</span>
+      <span class="d">분수와 소수는 같은 수의 두 얼굴입니다</span><span class="p" data-p="1">0 / 4</span></a>
+    <a class="wk" href="week02.html"><span class="n">WEEK 02</span><span class="t">지수법칙</span>
+      <span class="d">외우는 공식이 아니라 “같은 수를 몇 번 곱했나” 세는 것</span><span class="p" data-p="2">0 / 4</span></a>
+    <a class="wk" href="week03.html"><span class="n">WEEK 03</span><span class="t">다항식의 계산</span>
+      <span class="d">문자끼리 정리하는 법 · 괄호를 푸는 순간이 고비</span><span class="p" data-p="3">0 / 4</span></a>
+    <a class="wk" href="week04.html"><span class="n">WEEK 04</span><span class="t">일차부등식</span>
+      <span class="d">등호가 부등호로 바뀌면 규칙 하나가 추가됩니다</span><span class="p" data-p="4">0 / 4</span></a>
   </div>
 </section>
 
 <section class="sec" id="leg2">
-  <div class="step-no"><span class="num">3</span><span class="lbl">2구간 · 고려와 조선</span><span class="day">WEEK 05–08</span></div>
-  <h2>제도가 나라를 움직이던 때</h2>
-  <p>왕 한 사람이 아니라 <b>제도와 신하 집단</b>이 나라를 움직입니다.
-  과거제 · 훈민정음 · 대동법처럼, 오늘날까지 이어지는 장치들이 이 구간에서 만들어집니다.</p>
+  <div class="step-no"><span class="num">3</span><span class="lbl">2구간 · 방정식과 함수</span><span class="day">WEEK 05–08</span></div>
+  <h2>식이 그림이 됩니다</h2>
+  <p>중2에서 가장 많이 막히는 구간입니다. 하지만 <b>연립방정식과 일차함수는 같은 것을 다르게 본 것</b>이라는 사실을 알면
+  두 단원이 하나로 붙습니다. 8주차에서 그 연결이 완성됩니다.</p>
 
   <div class="wlist" data-camp="c2">
-    <a class="wk" href="week05.html"><span class="n">WEEK 05</span><span class="t">고려 후기</span>
-      <span class="d">무신정변부터 몽골 항쟁, 원 간섭기와 공민왕까지</span><span class="p" data-p="5">0 / 4</span></a>
-    <a class="wk" href="week06.html"><span class="n">WEEK 06</span><span class="t">조선의 건국</span>
-      <span class="d">새 나라의 설계도, 그리고 세종이 만든 글자</span><span class="p" data-p="6">0 / 4</span></a>
-    <a class="wk" href="week07.html"><span class="n">WEEK 07</span><span class="t">사림과 두 전쟁</span>
-      <span class="d">붕당이 생긴 이유, 임진왜란과 병자호란</span><span class="p" data-p="7">0 / 4</span></a>
-    <a class="wk" href="week08.html"><span class="n">WEEK 08</span><span class="t">조선 후기</span>
-      <span class="d">세금 제도가 바뀌자 신분제가 흔들리기 시작합니다</span><span class="p" data-p="8">0 / 4</span></a>
+    <a class="wk" href="week05.html"><span class="n">WEEK 05</span><span class="t">연립일차방정식</span>
+      <span class="d">미지수가 둘일 때 · 가감법과 대입법</span><span class="p" data-p="5">0 / 4</span></a>
+    <a class="wk" href="week06.html"><span class="n">WEEK 06</span><span class="t">연립방정식의 활용</span>
+      <span class="d">문장을 식으로 바꾸는 네 단계</span><span class="p" data-p="6">0 / 4</span></a>
+    <a class="wk" href="week07.html"><span class="n">WEEK 07</span><span class="t">일차함수와 그래프</span>
+      <span class="d">기울기와 절편 · 식만 보고 그래프를 그립니다</span><span class="p" data-p="7">0 / 4</span></a>
+    <a class="wk" href="week08.html"><span class="n">WEEK 08</span><span class="t">일차함수와 일차방정식</span>
+      <span class="d">두 직선의 교점 = 연립방정식의 해</span><span class="p" data-p="8">0 / 4</span></a>
   </div>
 </section>
 
 <section class="sec" id="leg3">
-  <div class="step-no"><span class="num">4</span><span class="lbl">3구간 · 근현대</span><span class="day">WEEK 09–12</span></div>
-  <h2>오늘과 이어지는 때</h2>
-  <p>시험에 가장 많이 나오고, 가장 헷갈리는 구간입니다. 사건이 촘촘하기 때문입니다.
-  그래서 여기서는 <b>사건 사이의 간격</b>과 <b>인과</b>를 특히 꼼꼼히 잡습니다.
-  할머니·할아버지 세대의 기억과 만나는 구간이기도 합니다.</p>
+  <div class="step-no"><span class="num">4</span><span class="lbl">3구간 · 도형과 확률</span><span class="day">WEEK 09–12</span></div>
+  <h2>그림에서 이유를 찾습니다</h2>
+  <p>도형은 계산이 아니라 <b>근거를 대는 연습</b>입니다. “왜 그렇게 말할 수 있는지”를 한 줄로 쓰는 것이 이 구간의 목표입니다.</p>
 
   <div class="wlist" data-camp="c3">
-    <a class="wk" href="week09.html"><span class="n">WEEK 09</span><span class="t">개항과 근대화</span>
-      <span class="d">강화도 조약 · 갑신정변 · 동학농민운동과 갑오개혁</span><span class="p" data-p="9">0 / 4</span></a>
-    <a class="wk" href="week10.html"><span class="n">WEEK 10</span><span class="t">일제 강점기</span>
-      <span class="d">국권 피탈 · 3·1 운동과 임시정부 · 무장 독립 투쟁</span><span class="p" data-p="10">0 / 4</span></a>
-    <a class="wk" href="week11.html"><span class="n">WEEK 11</span><span class="t">광복과 전쟁</span>
-      <span class="d">광복과 분단 · 정부 수립 · 6·25 전쟁</span><span class="p" data-p="11">0 / 4</span></a>
-    <a class="wk" href="week12.html"><span class="n">WEEK 12</span><span class="t">산업화와 민주화</span>
-      <span class="d">4·19 · 5·18 · 6월 민주항쟁 그리고 오늘 + 마무리 강의</span><span class="p" data-p="12">0 / 4</span></a>
+    <a class="wk" href="week09.html"><span class="n">WEEK 09</span><span class="t">삼각형과 사각형의 성질</span>
+      <span class="d">이등변삼각형과 평행사변형 · 근거를 대는 연습</span><span class="p" data-p="9">0 / 4</span></a>
+    <a class="wk" href="week10.html"><span class="n">WEEK 10</span><span class="t">도형의 닮음</span>
+      <span class="d">모양은 같고 크기만 다를 때 · 닮음비</span><span class="p" data-p="10">0 / 4</span></a>
+    <a class="wk" href="week11.html"><span class="n">WEEK 11</span><span class="t">피타고라스 정리</span>
+      <span class="d">직각삼각형 하나로 거리를 재는 법</span><span class="p" data-p="11">0 / 4</span></a>
+    <a class="wk" href="week12.html"><span class="n">WEEK 12</span><span class="t">경우의 수와 확률</span>
+      <span class="d">더할 때와 곱할 때 · 12주 마무리 강의</span><span class="p" data-p="12">0 / 4</span></a>
   </div>
 
   <div class="pager">
@@ -377,13 +387,13 @@
 </section>
 
 <footer>
-  역사 항해 12주 · 중2 한국사 주차별 학습 문서 · 진행 기록은 이 기기에만 저장됩니다<br>
+  수학 사다리 12주 · 중2 수학 주차별 학습 문서 · 진행 기록은 이 기기에만 저장됩니다<br>
   교과 단원의 이름과 순서는 교과서 출판사와 학교 진도에 따라 다를 수 있습니다
 </footer>
 </div>
 <script>
   (function(){
-    var KEY="history_quest_progress";
+    var KEY="math_quest_progress";
     function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){return{}}}
     function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
     var boxes=[].slice.call(document.querySelectorAll(".todo input[type=checkbox]"));
