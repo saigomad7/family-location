@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#DCE2DB">
+<title>역사 항해 추진 계획</title>
+<meta name="description" content="중2 딸과 아빠가 12주 동안 한국사 전체 흐름을 연표 한 장으로 잇는 추진 계획.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#131C18; --ink2:#2C3A33; --muted:#5F6E66; --faint:#8A968F;
+    --mist:#DCE2DB; --surface:#F8FAF6; --surface2:#EFF3EC;
+    --line:#C3CCC1; --hair:#DDE4DB;
+    --kelp:#8C2F3E; --kelp-wash:#F6E4E7; --kelp-line:#D9A8B0;
+    --amber:#8F6209; --amber-wash:#F5EAD0; --amber-line:#DCC79B;
+    --berry:#8C2F3E; --berry-wash:#F3DFE2; --berry-line:#D9A8B0;
+    --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+    --mono:"IBM Plex Mono","SFMono-Regular",Consolas,"D2Coding",monospace;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{margin:0;background:var(--mist);color:var(--ink);font-family:var(--sans);
+    font-size:16px;line-height:1.75;letter-spacing:-0.01em;
+    padding:0 18px calc(70px + env(safe-area-inset-bottom));
+    word-break:keep-all;overflow-wrap:anywhere;}
+  .wrap{max-width:1040px;margin:0 auto;}
+
+  /* ===== 표지 ===== */
+  .cover{padding:44px 0 30px;border-bottom:2px solid var(--ink);}
+  .cover .kicker{font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:0.2em;text-transform:uppercase;color:var(--kelp);margin:0 0 16px;}
+  .cover h1{font-size:clamp(27px,6vw,44px);font-weight:700;line-height:1.24;
+    letter-spacing:-0.035em;margin:0 0 16px;max-width:21ch;}
+  .cover .lede{font-size:clamp(15.5px,2vw,18px);font-weight:300;color:var(--ink2);
+    max-width:62ch;margin:0 0 24px;line-height:1.72;}
+  .cover .lede b{font-weight:600;color:var(--ink);}
+  .metaline{display:flex;flex-wrap:wrap;gap:6px 22px;font-family:var(--mono);
+    font-size:11.5px;color:var(--muted);letter-spacing:0.03em;}
+  .metaline b{color:var(--ink);font-weight:500;}
+
+  .summary{background:var(--ink);border-radius:3px;padding:26px 22px 24px;margin:28px 0 0;}
+  .summary h2{color:#F6FAF5;font-size:18px;font-weight:600;margin:0 0 6px;letter-spacing:-0.02em;}
+  .summary .sd{color:#93A399;font-size:13.5px;font-weight:300;margin:0 0 22px;line-height:1.65;}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:18px;}
+  .kpi .kl{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:#7E8F84;display:block;margin-bottom:5px;}
+  .kpi .kv{font-size:clamp(21px,3.2vw,28px);font-weight:700;color:#F0AEB8;
+    letter-spacing:-0.03em;display:block;line-height:1.1;}
+  .kpi .kn{font-size:12px;color:#B9C6BC;display:block;margin-top:6px;
+    font-weight:300;line-height:1.5;}
+
+  /* ===== 이동 바 ===== */
+  nav.jump{position:sticky;top:0;z-index:40;margin:0 -18px;padding:0 18px;
+    background:rgba(220,226,219,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);}
+  nav.jump .row{display:flex;gap:6px;overflow-x:auto;padding:9px 0;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  nav.jump .row::-webkit-scrollbar{display:none;}
+  nav.jump a{flex:0 0 auto;font-family:var(--mono);font-size:11.5px;letter-spacing:0.04em;
+    color:var(--muted);background:var(--surface);border:1px solid var(--line);
+    padding:6px 11px;border-radius:2px;text-decoration:none;}
+  nav.jump a.now{color:#fff;background:var(--kelp);border-color:var(--kelp);}
+
+  /* ===== 섹션 ===== */
+  .sec{padding:44px 0 12px;border-bottom:1px solid var(--line);scroll-margin-top:56px;}
+  .sec:last-of-type{border-bottom:0;}
+  .step-no{display:flex;align-items:center;gap:11px;margin-bottom:14px;}
+  .step-no .num{font-family:var(--mono);font-size:12px;font-weight:600;color:#fff;
+    background:var(--kelp);width:28px;height:28px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-no .lbl{font-family:var(--mono);font-size:11px;letter-spacing:0.13em;
+    text-transform:uppercase;color:var(--muted);}
+  .step-no .day{margin-left:auto;font-family:var(--mono);font-size:11px;
+    letter-spacing:0.1em;color:var(--kelp);background:var(--kelp-wash);
+    border:1px solid var(--kelp-line);padding:3px 9px;border-radius:2px;}
+  .sec h2{font-size:clamp(22px,3.4vw,29px);font-weight:600;letter-spacing:-0.03em;
+    line-height:1.34;margin:0 0 14px;max-width:30ch;}
+  .sec h3{font-size:17.5px;font-weight:600;letter-spacing:-0.02em;margin:30px 0 10px;}
+  .sec > p{max-width:70ch;color:var(--ink2);margin:0 0 16px;}
+  .sec strong,.sec b{font-weight:600;color:var(--ink);}
+  .sec code{font-family:var(--mono);font-size:0.86em;background:var(--surface2);
+    border:1px solid var(--hair);padding:1px 5px;border-radius:2px;}
+
+  .plain{background:var(--surface2);border-left:3px solid var(--kelp);
+    padding:14px 17px;margin:0 0 20px;border-radius:0 2px 2px 0;max-width:74ch;}
+  .plain p{margin:0;font-size:14.5px;color:var(--ink2);line-height:1.72;}
+  .plain p + p{margin-top:10px;}
+  .plain b{color:var(--kelp);font-weight:600;}
+
+  .fig{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:20px 16px 16px;margin:20px 0 12px;}
+  .fig-t{font-family:var(--mono);font-size:11px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--kelp);margin:0 0 16px;
+    padding-bottom:9px;border-bottom:1px solid var(--hair);}
+  .fig svg{display:block;width:100%;height:auto;}
+  .fig.wide{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .fig.wide svg{min-width:640px;}
+  .fig-c{font-size:13px;color:var(--muted);margin:14px 0 0;font-weight:300;
+    line-height:1.65;padding-top:12px;border-top:1px solid var(--hair);}
+  .fig-c b{color:var(--ink);font-weight:600;}
+
+  .sb{fill:#fff;stroke:#C3CCC1;stroke-width:1.5;}
+  .sb-k{fill:#F6E4E7;stroke:#8C2F3E;stroke-width:2;}
+  .sb-b{fill:#F3DFE2;stroke:#D9A8B0;stroke-width:1.5;}
+  .sb-a{fill:#F5EAD0;stroke:#DCC79B;stroke-width:1.5;}
+  .sb-g{fill:#EFF3EC;stroke:#C3CCC1;stroke-width:1.5;}
+  .sb-d{fill:#fff;stroke:#8C2F3E;stroke-width:1.6;stroke-dasharray:5 4;}
+  .st{font-family:var(--sans);font-size:13.5px;font-weight:600;fill:#131C18;
+    text-anchor:middle;letter-spacing:-0.3px;}
+  .st-s{font-family:var(--sans);font-size:11.5px;font-weight:400;fill:#5F6E66;text-anchor:middle;}
+  .st-k{fill:#8C2F3E;} .st-b{fill:#8C2F3E;} .st-a{fill:#8F6209;}
+  .sm{font-family:var(--mono);font-size:12px;fill:#131C18;text-anchor:middle;font-weight:500;}
+  .sm-s{font-family:var(--mono);font-size:10.5px;fill:#5F6E66;text-anchor:middle;}
+  .st-m{font-family:var(--mono);font-size:11px;fill:#8A968F;text-anchor:middle;letter-spacing:0.5px;}
+  .sl{stroke:#8A968F;stroke-width:1.6;fill:none;}
+  .sl-k{stroke:#8C2F3E;stroke-width:2;fill:none;}
+  .sl-a{stroke:#8F6209;stroke-width:1.8;fill:none;}
+  .sl-d{stroke:#8A968F;stroke-width:1.4;fill:none;stroke-dasharray:4 4;}
+  .sa{fill:#8A968F;} .sa-k{fill:#8C2F3E;} .sa-a{fill:#8F6209;}
+  .dot-k{fill:#8C2F3E;} .dot-a{fill:#C99A2E;} .dot-b{fill:#8C2F3E;}
+
+  /* ===== 표 ===== */
+  .tw{overflow-x:auto;margin:20px 0 8px;border:1px solid var(--line);
+    border-radius:3px;background:var(--surface);}
+  table{border-collapse:collapse;width:100%;font-size:13.8px;}
+  .tw.wide table{min-width:560px;}
+  thead th{background:var(--ink);color:#E8EFE7;text-align:left;font-family:var(--mono);
+    font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
+    padding:11px 13px;}
+  tbody td{padding:11px 13px;border-top:1px solid var(--hair);vertical-align:top;
+    color:var(--ink2);line-height:1.62;}
+  tbody tr:nth-child(even) td{background:var(--surface2);}
+  td.hd{font-weight:600;color:var(--ink);}
+  td.mn{font-family:var(--mono);font-size:12.5px;}
+  td.ok{color:var(--kelp);font-weight:600;}
+  td.no{color:var(--berry);font-weight:600;}
+  td.wa{color:var(--amber);font-weight:600;}
+  td.fill{font-family:var(--mono);color:var(--faint);}
+
+  .note{background:var(--amber-wash);border:1px solid var(--amber-line);
+    border-radius:3px;padding:17px 19px;margin:20px 0 8px;}
+  .note p{margin:0;font-size:14px;color:#5C440C;line-height:1.72;}
+  .note p + p{margin-top:9px;}
+  .note b{font-weight:600;}
+  .note .lb{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--amber);margin-bottom:6px;}
+  .alert{background:var(--berry-wash);border:1px solid var(--berry-line);
+    border-radius:3px;padding:17px 19px;margin:20px 0 8px;}
+  .alert p{margin:0;font-size:14px;color:#6B2430;line-height:1.72;}
+  .alert p + p{margin-top:9px;}
+  .alert b{font-weight:600;}
+  .alert .lb{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--berry);margin-bottom:6px;}
+
+  /* ===== 카드 묶음 ===== */
+  .cards{display:grid;gap:12px;margin:18px 0 8px;}
+  @media(min-width:680px){.cards.two{grid-template-columns:repeat(2,1fr);}}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:15px 17px;}
+  .card .ct{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;
+    color:var(--kelp);display:block;margin-bottom:7px;}
+  .card h4{margin:0 0 6px;font-size:15.5px;font-weight:600;letter-spacing:-0.02em;}
+  .card p{margin:0;font-size:14px;color:var(--ink2);line-height:1.68;}
+
+  /* ===== 요일 할 일 ===== */
+  .todo{list-style:none;margin:20px 0 8px;padding:0;background:var(--surface);
+    border:1px solid var(--line);border-radius:3px;overflow:hidden;}
+  .todo li + li{border-top:1px solid var(--hair);}
+  .todo label{display:grid;grid-template-columns:22px 1fr;gap:13px;align-items:start;
+    padding:15px 16px;cursor:pointer;font-size:14.5px;line-height:1.65;color:var(--ink2);min-height:54px;}
+  .todo input{appearance:none;-webkit-appearance:none;width:21px;height:21px;margin:1px 0 0;
+    border:1.5px solid var(--line);border-radius:2px;background:#fff;
+    display:grid;place-content:center;cursor:pointer;}
+  .todo input::after{content:"✓";font-size:13px;font-weight:700;color:#fff;transform:scale(0);}
+  .todo input:checked{background:var(--kelp);border-color:var(--kelp);}
+  .todo input:checked::after{transform:scale(1);}
+  .todo input:focus-visible{outline:2px solid var(--kelp);outline-offset:2px;}
+  .todo input:checked ~ .tt{color:var(--faint);text-decoration:line-through;}
+  .todo .tt b{color:var(--ink);font-weight:600;}
+
+  /* ===== 문제 ===== */
+  .q{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:15px 17px;margin:12px 0;}
+  .q .qn{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--kelp);
+    letter-spacing:0.12em;}
+  .q > p{margin:6px 0 0;font-size:15.5px;color:var(--ink);line-height:1.7;}
+  .q details{margin-top:12px;border-top:1px solid var(--hair);padding-top:10px;}
+  .q summary{cursor:pointer;list-style:none;font-family:var(--mono);font-size:12px;
+    font-weight:600;color:var(--kelp);letter-spacing:0.06em;padding:3px 0;}
+  .q summary::-webkit-details-marker{display:none;}
+  .q summary::before{content:"+ ";}
+  .q details[open] summary::before{content:"− ";}
+  .q .ans{margin-top:9px;background:var(--kelp-wash);border-radius:2px;padding:12px 14px;
+    font-size:14px;color:var(--ink2);line-height:1.7;}
+  .q .ans b{color:var(--kelp);font-weight:600;}
+
+  /* ===== 설명 대본 ===== */
+  .script{background:var(--surface);border:1px solid var(--kelp-line);border-radius:3px;
+    padding:16px 18px;margin:18px 0 8px;}
+  .script .row{display:grid;grid-template-columns:70px 1fr;gap:12px;font-size:14.5px;
+    color:var(--ink2);line-height:1.7;}
+  .script .row + .row{margin-top:11px;padding-top:11px;border-top:1px solid var(--hair);}
+  .script .s{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;color:var(--kelp);
+    font-weight:600;padding-top:4px;}
+
+  .badge{display:inline-block;font-family:var(--mono);font-size:12.5px;font-weight:600;
+    color:var(--amber);background:var(--amber-wash);border:1px solid var(--amber-line);
+    border-radius:2px;padding:7px 14px;margin-top:14px;letter-spacing:0.04em;}
+
+  /* ===== 주차 목록 (허브) ===== */
+  .wlist{display:flex;flex-direction:column;gap:10px;margin:18px 0 8px;}
+  a.wk{display:grid;grid-template-columns:1fr auto;grid-template-areas:"n p" "t p" "d d";
+    gap:2px 14px;background:var(--surface);border:1px solid var(--line);
+    border-left:3px solid var(--kelp);border-radius:3px;padding:15px 17px;
+    text-decoration:none;color:var(--ink);}
+  a.wk .n{grid-area:n;font-family:var(--mono);font-size:11px;font-weight:600;
+    letter-spacing:0.12em;color:var(--kelp);}
+  a.wk .t{grid-area:t;font-size:17px;font-weight:600;letter-spacing:-0.02em;}
+  a.wk .d{grid-area:d;font-size:13.5px;color:var(--muted);margin-top:5px;line-height:1.6;font-weight:300;}
+  a.wk .p{grid-area:p;align-self:center;font-family:var(--mono);font-size:11px;color:var(--muted);
+    background:var(--surface2);border:1px solid var(--hair);border-radius:2px;padding:4px 9px;white-space:nowrap;}
+  a.wk .p.done{color:#fff;background:var(--kelp);border-color:var(--kelp);}
+  a.wk .p.ing{color:var(--amber);background:var(--amber-wash);border-color:var(--amber-line);}
+  .wk.soon{border-left-color:var(--line);opacity:.62;pointer-events:none;}
+  .wk.soon .n,.wk.soon .t{color:var(--muted);}
+
+  /* ===== 진행 막대 ===== */
+  .bar{height:7px;background:var(--hair);border-radius:99px;overflow:hidden;margin-top:12px;
+    border:1px solid var(--line);}
+  .bar i{display:block;height:100%;background:var(--kelp);width:0;transition:width .3s;}
+
+  /* ===== 페이지 이동 ===== */
+  .pager{display:flex;gap:9px;margin:26px 0 0;}
+  .pager a{flex:1;text-align:center;font-size:13.5px;font-weight:600;text-decoration:none;
+    color:var(--ink2);background:var(--surface);border:1px solid var(--line);
+    border-radius:3px;padding:14px 8px;}
+  .pager a.main{background:var(--kelp);border-color:var(--kelp);color:#fff;}
+  footer{padding:26px 0 10px;font-family:var(--mono);font-size:11.5px;color:var(--faint);
+    letter-spacing:0.03em;line-height:1.8;}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="cover">
+  <p class="kicker">중2 역사 · 12주 추진 계획 · 아빠용 문서</p>
+  <h1>역사 항해 지도</h1>
+  <p class="lede">
+    역사는 머리로 외우는 과목이 아니라 <b>순서를 잡으면 저절로 붙는 과목</b>입니다.
+    지금 어렵다면 사건을 못 외워서가 아니라, <b>사건들이 놓일 자리(연표)가 아직 머릿속에 없어서</b>입니다.
+    그래서 이 계획은 사건을 더 넣지 않습니다. <b>매주 연표에 한 칸을 세우고, 그 칸에 사건 세 개만 올립니다.</b>
+  </p>
+  <div class="metaline">
+    <span>기간 <b>12주 · 3개월</b></span>
+    <span>하루 <b>20분 · 주 4일</b></span>
+    <span>한 주 <b>시대 1개 · 사건 3개</b></span>
+    <span>결과물 <b>연표 한 장</b></span>
+  </div>
+
+  <div class="summary">
+    <h2>계획 요약</h2>
+    <p class="sd">과학 프로그램과 같은 리듬으로 돕니다. 다른 점은 매주 <b>연표에 한 칸이 쌓인다</b>는 것입니다.</p>
+    <div class="kpis">
+      <div class="kpi"><span class="kl">한 주</span><span class="kv">4칸</span>
+        <span class="kn">월 열기 · 화 채우기 · 목 사료로 · 금 보스전</span></div>
+      <div class="kpi"><span class="kl">주당 분량</span><span class="kv">사건 3개</span>
+        <span class="kn">더 넣지 않는 것이 이 계획의 핵심</span></div>
+      <div class="kpi"><span class="kl">누적</span><span class="kv">연표 12칸</span>
+        <span class="kn">12주 뒤 선사부터 오늘까지 한 장</span></div>
+      <div class="kpi"><span class="kl">통과 기준</span><span class="kv">설명</span>
+        <span class="kn">점수가 아니라 “왜 그렇게 됐는지” 3분 설명</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="jump"><div class="row">
+  <a href="#why">설계 근거</a>
+  <a href="#rhythm">한 주의 리듬</a>
+  <a href="#map">12주 항해</a>
+  <a href="#dad">아빠 역할</a>
+  <a href="#check">확인 방법</a>
+  <a href="#ops">준비물 · 변수</a>
+</div></nav>
+
+<section class="sec" id="why">
+  <div class="step-no"><span class="num">1</span><span class="lbl">설계 근거</span></div>
+  <h2>역사가 어려운 이유는 세 가지입니다</h2>
+  <p>딸이 힘들어하는 지점은 과학과 다릅니다. 계획의 모든 규칙은 아래 세 가지에서 나왔습니다.</p>
+
+  <div class="tw wide"><table>
+    <thead><tr><th>문제</th><th>실제로 벌어지는 일</th><th>이 계획의 규칙</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">① 양이 많다</td>
+        <td>한 단원에 사건·인물·제도가 수십 개씩 나옵니다. 다 외우려다 아무것도 남지 않습니다.</td>
+        <td class="ok">한 주에 <b>시대 하나, 사건 세 개</b>만. 나머지는 그 셋에 붙여 설명합니다.</td></tr>
+      <tr><td class="hd">② 순서가 뒤섞인다</td>
+        <td>고려와 조선이, 갑신정변과 갑오개혁이 뒤바뀝니다. 사건은 아는데 자리를 모릅니다.</td>
+        <td class="ok">매주 <b>연표에 한 칸</b>을 세우고, 새 사건을 그 칸에만 붙입니다.</td></tr>
+      <tr><td class="hd">③ 왜인지 모른다</td>
+        <td>이유 없이 외운 것은 시험이 끝나면 사라집니다.</td>
+        <td class="ok">모든 사건을 <b>원인 → 사건 → 결과</b> 세 칸으로 적습니다.</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="plain">
+    <p><b>과학과 다른 점 하나</b> — 과학은 개념이 이해되면 끝이지만, 역사는 <b>자리</b>가 있어야 이해가 남습니다.
+    그래서 이 프로그램의 결과물은 문제집이 아니라 <b>연표 한 장</b>입니다.
+    12주 뒤 그 한 장이 시험 기간에 다시 볼 유일한 자료가 됩니다.</p>
+  </div>
+</section>
+
+<section class="sec" id="rhythm">
+  <div class="step-no"><span class="num">2</span><span class="lbl">한 주의 리듬</span></div>
+  <h2>매주 같은 순서로 돕니다</h2>
+  <p>요일이 정해져 있으면 “오늘 뭘 하지”를 고민하지 않아도 되고, 딸도 끝이 보입니다.
+  과학 프로그램과 요일 구조가 같아서 두 과목을 같은 주에 돌려도 헷갈리지 않습니다.</p>
+
+  <div class="tw wide"><table>
+    <thead><tr><th>요일</th><th>이름</th><th>하는 일</th><th>시간</th></tr></thead>
+    <tbody>
+      <tr><td class="mn ok">MON</td><td class="hd">열기</td>
+        <td>이번 주 시대의 흐름을 읽고 <b>궁금한 질문 3개</b>를 적습니다. 답은 아직 찾지 않습니다.</td><td class="mn">20분</td></tr>
+      <tr><td class="mn ok">TUE</td><td class="hd">채우기</td>
+        <td><b>연표에 한 칸</b>을 세우고 사건 3개를 원인 → 결과로 적습니다. 인물 카드 2장을 만듭니다.</td><td class="mn">20분</td></tr>
+      <tr><td class="mn ok">THU</td><td class="hd">사료로</td>
+        <td>그 시대의 <b>진짜 자료</b>를 하나 봅니다. 사료 한 토막, 유물 사진, 지도 그리기, 박물관 온라인 탐방.</td><td class="mn">20~30분</td></tr>
+      <tr><td class="mn ok">FRI</td><td class="hd">보스전</td>
+        <td>문제 5개(순서 배열 · 인과 · 사료 해석) + <b>아빠에게 3분 설명</b>. 설명이 되면 그 주는 통과입니다.</td><td class="mn">20분</td></tr>
+      <tr><td class="mn">SAT · SUN</td><td class="hd">쉼</td>
+        <td>밀린 것이 있으면 <b>하나만</b> 합니다. 없으면 하지 않습니다.</td><td class="mn">0~20분</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="note"><span class="lb">목요일이 과학과 다릅니다</span>
+    <p>과학의 목요일은 ‘손으로’(실험)였지만, 역사의 목요일은 <b>‘사료로’</b>입니다.
+    교과서가 정리해 준 문장 대신 <b>그때 사람이 남긴 것</b>을 직접 봅니다.
+    3·1 독립선언서 한 문단, 훈민정음 서문, 난중일기 하루치, 김홍도의 그림 한 장 —
+    이런 것 하나가 그 주의 사건 세 개를 통째로 붙잡아 줍니다.</p>
+  </div>
+</section>
+
+<section class="sec" id="map">
+  <div class="step-no"><span class="num">3</span><span class="lbl">12주 항해</span></div>
+  <h2>연표 열두 칸</h2>
+  <p>12주를 <b>연표의 열두 칸</b>으로 나눴습니다. 한 주에 한 칸씩 세우면 12주 뒤에 아래 연표가 완성됩니다.
+  주차 문서마다 이 그림이 맨 앞에 나오고, <b>이번 주 칸이 표시</b>됩니다.</p>
+
+  <div class="fig">
+    <p class="fig-t">도식 1 · 12주 = 연표 열두 칸</p>
+    <svg viewBox="0 0 420 156" role="img" aria-label="12주 연표에서 이번 주의 위치"><rect x="10" y="60" width="133" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="76" y="54" style="font-size:9.5px">1구간 · 고대</text><rect x="146" y="60" width="133" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="212" y="54" style="font-size:9.5px">2구간 · 고려와 조선</text><rect x="282" y="60" width="133" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="348" y="54" style="font-size:9.5px">3구간 · 근현대</text><rect x="10" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="26" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">01</text><rect x="44" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="60" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">02</text><rect x="78" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="94" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">03</text><rect x="112" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="128" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">04</text><rect x="146" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="162" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">05</text><rect x="180" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="196" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">06</text><rect x="214" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="230" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">07</text><rect x="248" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="264" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">08</text><rect x="282" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="298" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">09</text><rect x="316" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="332" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">10</text><rect x="350" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="366" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">11</text><rect x="384" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="400" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">12</text><text class="st-m" x="10" y="146" text-anchor="start" style="font-size:9.5px">선사</text><text class="st-m" x="410" y="146" text-anchor="end" style="font-size:9.5px">오늘</text><line x1="34" y1="142" x2="386" y2="142" stroke="#C3CCC1" stroke-width="1"/><polygon points="386,138 396,142 386,146" fill="#8A968F"/></svg>
+    <p class="fig-c">시간 길이가 아니라 <b>배우는 분량</b>으로 나눴습니다.
+    그래서 앞쪽 한 칸은 수천 년, 뒤쪽 한 칸은 수십 년입니다. 근현대가 시험에 더 많이 나오기 때문입니다.</p>
+  </div>
+
+  <div class="tw wide"><table>
+    <thead><tr><th>구간</th><th>주차</th><th>시대</th><th>이 주의 사건 세 개</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">1구간<br>고대</td><td class="mn">01</td><td class="hd">선사와 고조선</td><td>농경의 시작 · 계급의 발생 · 고조선의 건국과 8조법</td></tr>
+      <tr><td></td><td class="mn">02</td><td class="hd">삼국의 성장</td><td>백제 4세기 · 고구려 5세기 · 신라 6세기 전성기</td></tr>
+      <tr><td></td><td class="mn">03</td><td class="hd">통일신라와 발해</td><td>나당 동맹과 통일 · 나당 전쟁 · 발해 건국</td></tr>
+      <tr><td></td><td class="mn">04</td><td class="hd">고려의 성립</td><td>후삼국 통일 · 광종과 성종의 개혁 · 서희와 강감찬</td></tr>
+      <tr><td class="hd">2구간<br>고려와<br>조선</td><td class="mn">05</td><td class="hd">고려 후기</td><td>무신정변 · 몽골 항쟁과 삼별초 · 원 간섭과 공민왕</td></tr>
+      <tr><td></td><td class="mn">06</td><td class="hd">조선의 건국</td><td>조선 건국과 한양 · 태종의 왕권 · 세종과 훈민정음</td></tr>
+      <tr><td></td><td class="mn">07</td><td class="hd">사림과 두 전쟁</td><td>사림과 붕당 · 임진왜란 · 병자호란</td></tr>
+      <tr><td></td><td class="mn">08</td><td class="hd">조선 후기</td><td>대동법 · 영조와 정조의 탕평 · 실학과 신분제 동요</td></tr>
+      <tr><td class="hd">3구간<br>근현대</td><td class="mn">09</td><td class="hd">개항과 근대화</td><td>강화도 조약 · 갑신정변 · 동학농민운동과 갑오개혁</td></tr>
+      <tr><td></td><td class="mn">10</td><td class="hd">일제 강점기</td><td>국권 피탈 · 3·1 운동과 임시정부 · 무장 독립 투쟁</td></tr>
+      <tr><td></td><td class="mn">11</td><td class="hd">광복과 전쟁</td><td>광복과 분단 · 정부 수립 · 6·25 전쟁</td></tr>
+      <tr><td></td><td class="mn">12</td><td class="hd">산업화와 민주화</td><td>4·19 · 5·18 · 6월 민주항쟁 + 12주 마무리 강의</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="note"><span class="lb">학교 진도와 다를 때</span>
+    <p>학교에서 세계사(역사①)를 먼저 배우는 경우가 많습니다. 그래도 <b>이 순서를 바꾸지 않는 편</b>이 낫습니다.
+    한국사 흐름이 자리를 잡으면 세계사는 그 위에 얹으면 되기 때문입니다.
+    다만 시험 범위가 세계사라면 그 주의 <b>‘사료로’와 ‘보스전’만 시험 범위로 바꿔</b> 쓰면 됩니다.</p>
+  </div>
+</section>
+
+<section class="sec" id="dad">
+  <div class="step-no"><span class="num">4</span><span class="lbl">아빠 역할</span></div>
+  <h2>아빠는 선생님이 아니라 관객입니다</h2>
+
+  <div class="cards two">
+    <div class="card"><span class="ct">이것만 합니다</span><h4>20분 타이머를 지킵니다</h4>
+      <p>잘 되고 있어도 20분에 끊습니다. “더 하자”는 다음 주의 힘을 미리 쓰는 것입니다.</p></div>
+    <div class="card"><span class="ct">이것만 합니다</span><h4>모르는 척 물어봅니다</h4>
+      <p>“아빠는 왜 그렇게 됐는지 모르겠는데 설명해 줄래?” 설명하는 사람이 가장 많이 배웁니다.</p></div>
+    <div class="card"><span class="ct">이것만 합니다</span><h4>연표를 벽에 붙입니다</h4>
+      <p>매주 한 칸씩 채워지는 것이 눈에 보여야 합니다. 냉장고나 방문에 붙여 둡니다.</p></div>
+    <div class="card"><span class="ct">이것만 합니다</span><h4>금요일 설명을 녹음합니다</h4>
+      <p>12주 뒤 1주차 녹음과 나란히 들려주는 것이 이 프로그램의 마지막 장면입니다.</p></div>
+  </div>
+
+  <div class="alert"><span class="lb">하지 않습니다</span>
+    <p>① <b>“이것도 몰라?”</b> — 이 한 문장이 3개월을 되돌립니다.<br>
+    ② <b>연도 암기 시험</b> — 연도는 순서를 잡기 위한 도구일 뿐입니다. 순서를 알면 연도는 따라옵니다.<br>
+    ③ <b>정답인 평가를 강요하기</b> — 근현대사에는 어른들도 의견이 갈리는 대목이 있습니다.
+    아빠의 결론을 먼저 말하지 말고, <b>“사료에는 이렇게 적혀 있는데 너는 어떻게 생각해?”</b>로 묻습니다.
+    역사 과목이 기르려는 힘이 정확히 그것입니다.<br>
+    ④ <b>분량 늘리기</b> — 잘 따라오면 늘리고 싶어집니다. 늘리지 않습니다.</p>
+  </div>
+
+  <div class="plain">
+    <p><b>아빠만 할 수 있는 활동</b> — 10주차(일제 강점기)와 11주차(광복과 전쟁)에는
+    <b>할머니·할아버지 인터뷰</b>가 들어 있습니다. 교과서의 연도가 <b>우리 집 이야기</b>가 되는 순간이고,
+    이 프로그램에서 가장 오래 남는 시간이 될 가능성이 높습니다. 미리 통화 약속을 잡아 두시면 좋습니다.</p>
+  </div>
+</section>
+
+<section class="sec" id="check">
+  <div class="step-no"><span class="num">5</span><span class="lbl">확인 방법</span></div>
+  <h2>채점 대신 네 단계로 봅니다</h2>
+  <p>매주 금요일, 이번 주 시대가 몇 단계까지 왔는지만 표시합니다. <b>3단계면 통과</b>이고 4단계는 보너스입니다.</p>
+
+  <div class="tw wide"><table>
+    <thead><tr><th>단계</th><th>상태</th><th>이렇게 들립니다</th></tr></thead>
+    <tbody>
+      <tr><td class="mn ok">01</td><td class="hd">들어봤다</td><td>“광종… 고려 사람이었나?”</td></tr>
+      <tr><td class="mn ok">02</td><td class="hd">사건을 말한다</td><td>“광종이 과거제를 실시했어요.” (교과서 문장 그대로)</td></tr>
+      <tr><td class="mn ok">03</td><td class="hd">순서와 이유를 말한다</td><td>“호족의 힘이 너무 세니까, 시험으로 뽑은 신하를 쓰려고 과거제를 만든 거예요.” — <b>통과</b></td></tr>
+      <tr><td class="mn ok">04</td><td class="hd">오늘과 연결한다</td><td>“지금 공무원 시험이랑 비슷해요. 그때도 집안 대신 실력으로 뽑으려던 거죠.”</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="sec" id="ops">
+  <div class="step-no"><span class="num">6</span><span class="lbl">준비물 · 변수</span></div>
+  <h2>준비물은 세 가지면 충분합니다</h2>
+
+  <div class="cards two">
+    <div class="card"><span class="ct">필수</span><h4>연표 종이 한 장</h4>
+      <p>A3 또는 A4 두 장을 이어 붙입니다. 가로로 열두 칸을 미리 그어 두고 매주 한 칸씩 채웁니다.</p></div>
+    <div class="card"><span class="ct">필수</span><h4>노트와 색펜</h4>
+      <p>인물 카드와 원인 → 결과 표를 적습니다. 시대마다 색을 정해 두면 나중에 찾기 쉽습니다.</p></div>
+    <div class="card"><span class="ct">있으면 좋음</span><h4>한반도 백지도</h4>
+      <p>‘사료로’ 시간에 여러 번 씁니다. 인터넷에서 “한반도 백지도”로 검색해 여러 장 인쇄해 둡니다.</p></div>
+    <div class="card"><span class="ct">무료</span><h4>국립중앙박물관 온라인</h4>
+      <p>유물 사진을 크게 볼 수 있습니다. 목요일 활동의 절반은 이걸로 해결됩니다.</p></div>
+  </div>
+
+  <h3>이런 일이 생기면</h3>
+  <div class="tw wide"><table>
+    <thead><tr><th>상황</th><th>이렇게 합니다</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">시험 기간이 겹친다</td><td>그 주는 <b>시험 범위 복습</b>으로 바꾸고 전체를 한 주 뒤로 밉니다.</td></tr>
+      <tr><td class="hd">한 주를 통째로 못 했다</td><td>따라잡지 않습니다. 그 주는 없던 것으로 하고 다음 주부터 다시 시작합니다. <b>연표 칸은 비워 두었다가 나중에 채웁니다.</b></td></tr>
+      <tr><td class="hd">근현대사가 어렵다</td><td>9~12주차는 사건이 촘촘합니다. 이 구간만 <b>한 주를 두 주로 늘려</b>도 좋습니다. 앞 구간에서 벌어 둔 시간을 여기 씁니다.</td></tr>
+      <tr><td class="hd">너무 쉬워한다</td><td>분량을 늘리지 말고 목요일 사료를 <b>딸이 직접 찾아오게</b> 합니다. 난이도는 위로, 시간은 그대로.</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="plain">
+    <p><b>12주 뒤에 남는 것</b> — 연표 한 장, 인물 카드 24장, 사료 기록 12개, 3분 설명 녹음 12개.
+    그리고 “역사는 외우는 게 아니라 이어지는 이야기”라는 감각. 마지막 것이 가장 오래 남습니다.</p>
+  </div>
+
+  <div class="pager">
+    <a class="main" href="index.html">주차별 문서로 →</a>
+  </div>
+</section>
+
+<footer>역사 항해 12주 · 추진 계획 · 중2 딸과 아빠 · 교과 단원의 이름과 순서는 교과서와 학교 진도에 따라 다를 수 있습니다</footer>
+</div>
+<script>
+  (function(){
+    var KEY="history_quest_progress";
+    function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){return{}}}
+    function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+    var boxes=[].slice.call(document.querySelectorAll(".todo input[type=checkbox]"));
+    var st=load();
+    boxes.forEach(function(b){
+      if(st[b.dataset.q])b.checked=true;
+      b.addEventListener("change",function(){
+        var s=load();
+        if(b.checked)s[b.dataset.q]=1;else delete s[b.dataset.q];
+        save(s);paint();
+      });
+    });
+    function paint(){
+      var el=document.getElementById("wdone");
+      if(el){var n=boxes.filter(function(b){return b.checked}).length;
+        el.textContent=n+" / "+boxes.length;}
+      var hub=document.querySelector("[data-hub]");
+      if(hub){
+        var s=load(),total=0;
+        for(var w=1;w<=12;w++){
+          var n2=0;
+          for(var m=1;m<=4;m++) if(s["w"+w+"m"+m]) n2++;
+          total+=n2;
+          var p=document.querySelector('.p[data-p="'+w+'"]');
+          if(p&&!p.dataset.soon){p.textContent=n2===4?"완료":n2+" / 4";
+            p.className="p"+(n2===4?" done":(n2>0?" ing":""));}
+        }
+        var d=document.getElementById("allDone"),bar=document.getElementById("allBar");
+        if(d)d.textContent=total+" / 12";
+        if(bar)bar.style.width=(total/12*100)+"%";
+      }
+    }
+    paint();
+    var links=[].slice.call(document.querySelectorAll("nav.jump a[href^='#']"));
+    if(links.length){
+      var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1))});
+      var onScroll=function(){
+        var y=window.scrollY+130,idx=0;
+        secs.forEach(function(s,i){if(s&&s.offsetTop<=y)idx=i;});
+        links.forEach(function(a,i){a.classList.toggle("now",i===idx);});
+      };
+      window.addEventListener("scroll",onScroll,{passive:true});onScroll();
+    }
+  })();
+</script>
+</body>
+</html>

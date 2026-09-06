@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#DCE2DB">
-<title>10주차 · 에너지 배달 경로</title>
-<meta name="description" content="소화·순환·호흡·배설을 따로 외우지 않고 한 줄로 꿰는 법.">
+<title>2주차 · 삼국의 성장</title>
+<meta name="description" content="백제 → 고구려 → 신라. 전성기가 온 순서에는 이유가 있습니다 — 한강.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@
     --ink:#131C18; --ink2:#2C3A33; --muted:#5F6E66; --faint:#8A968F;
     --mist:#DCE2DB; --surface:#F8FAF6; --surface2:#EFF3EC;
     --line:#C3CCC1; --hair:#DDE4DB;
-    --kelp:#1F6249; --kelp-wash:#DEEDE4; --kelp-line:#8FBBA3;
+    --kelp:#8C2F3E; --kelp-wash:#F6E4E7; --kelp-line:#D9A8B0;
     --amber:#8F6209; --amber-wash:#F5EAD0; --amber-line:#DCC79B;
     --berry:#8C2F3E; --berry-wash:#F3DFE2; --berry-line:#D9A8B0;
     --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
@@ -47,7 +47,7 @@
   .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:18px;}
   .kpi .kl{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
     text-transform:uppercase;color:#7E8F84;display:block;margin-bottom:5px;}
-  .kpi .kv{font-size:clamp(21px,3.2vw,28px);font-weight:700;color:#8FD3B4;
+  .kpi .kv{font-size:clamp(21px,3.2vw,28px);font-weight:700;color:#F0AEB8;
     letter-spacing:-0.03em;display:block;line-height:1.1;}
   .kpi .kn{font-size:12px;color:#B9C6BC;display:block;margin-top:6px;
     font-weight:300;line-height:1.5;}
@@ -102,24 +102,24 @@
   .fig-c b{color:var(--ink);font-weight:600;}
 
   .sb{fill:#fff;stroke:#C3CCC1;stroke-width:1.5;}
-  .sb-k{fill:#DEEDE4;stroke:#1F6249;stroke-width:2;}
+  .sb-k{fill:#F6E4E7;stroke:#8C2F3E;stroke-width:2;}
   .sb-b{fill:#F3DFE2;stroke:#D9A8B0;stroke-width:1.5;}
   .sb-a{fill:#F5EAD0;stroke:#DCC79B;stroke-width:1.5;}
   .sb-g{fill:#EFF3EC;stroke:#C3CCC1;stroke-width:1.5;}
-  .sb-d{fill:#fff;stroke:#1F6249;stroke-width:1.6;stroke-dasharray:5 4;}
+  .sb-d{fill:#fff;stroke:#8C2F3E;stroke-width:1.6;stroke-dasharray:5 4;}
   .st{font-family:var(--sans);font-size:13.5px;font-weight:600;fill:#131C18;
     text-anchor:middle;letter-spacing:-0.3px;}
   .st-s{font-family:var(--sans);font-size:11.5px;font-weight:400;fill:#5F6E66;text-anchor:middle;}
-  .st-k{fill:#1F6249;} .st-b{fill:#8C2F3E;} .st-a{fill:#8F6209;}
+  .st-k{fill:#8C2F3E;} .st-b{fill:#8C2F3E;} .st-a{fill:#8F6209;}
   .sm{font-family:var(--mono);font-size:12px;fill:#131C18;text-anchor:middle;font-weight:500;}
   .sm-s{font-family:var(--mono);font-size:10.5px;fill:#5F6E66;text-anchor:middle;}
   .st-m{font-family:var(--mono);font-size:11px;fill:#8A968F;text-anchor:middle;letter-spacing:0.5px;}
   .sl{stroke:#8A968F;stroke-width:1.6;fill:none;}
-  .sl-k{stroke:#1F6249;stroke-width:2;fill:none;}
+  .sl-k{stroke:#8C2F3E;stroke-width:2;fill:none;}
   .sl-a{stroke:#8F6209;stroke-width:1.8;fill:none;}
   .sl-d{stroke:#8A968F;stroke-width:1.4;fill:none;stroke-dasharray:4 4;}
-  .sa{fill:#8A968F;} .sa-k{fill:#1F6249;} .sa-a{fill:#8F6209;}
-  .dot-k{fill:#1F6249;} .dot-a{fill:#C99A2E;} .dot-b{fill:#8C2F3E;}
+  .sa{fill:#8A968F;} .sa-k{fill:#8C2F3E;} .sa-a{fill:#8F6209;}
+  .dot-k{fill:#8C2F3E;} .dot-a{fill:#C99A2E;} .dot-b{fill:#8C2F3E;}
 
   /* ===== 표 ===== */
   .tw{overflow-x:auto;margin:20px 0 8px;border:1px solid var(--line);
@@ -244,177 +244,175 @@
 <body>
 <div class="wrap">
 <header class="cover">
-  <p class="kicker">WEEK 10 · 캠프 3 생명과 지구 · 하루 20분 × 4일</p>
-  <h1>에너지 배달 경로</h1>
+  <p class="kicker">WEEK 02 · 1구간 고대 · 하루 20분 × 4일</p>
+  <h1>삼국의 성장</h1>
   <p class="lede">
-    소화·순환·호흡·배설은 <b>따로 배우는 네 단원이 아닙니다.</b>
-    포도당과 산소를 세포까지 배달하고 쓰레기를 치우는 <b>하나의 배달 시스템</b>입니다.
-    한 줄로 꿰면 외울 것이 절반으로 줄어듭니다.
+    삼국의 전성기는 <b>백제(4세기) → 고구려(5세기) → 신라(6세기)</b> 순서로 옵니다.
+    이 순서만 외우면 반은 잊습니다. 이번 주에는 <b>왜 그 순서였는지</b>를 잡습니다. 열쇠는 <b>한강</b> 하나입니다.
   </p>
   <div class="metaline">
-    <span>9주차 연결 <b>포도당</b></span>
-    <span>개념 <b>소화 · 순환 · 호흡 · 배설</b></span>
-    <span>실험 <b>심박수 측정</b></span>
+    <span>연표 <b>2번째 칸</b></span>
+    <span>사건 <b>3개</b></span>
+    <span>사료 <b>광개토대왕릉비 · 순수비</b></span>
     <span>진행 <b id="wdone">0 / 4</b></span>
   </div>
 
   <div class="summary">
     <h2>이번 주에 남길 것</h2>
-    <p class="sd">네 기관계를 각각 외우는 대신, 목적지가 하나라는 것부터 잡습니다.</p>
+    <p class="sd">세 나라의 전성기는 따로 있는 사건이 아니라 <b>한강을 차지한 순서</b>입니다.</p>
     <div class="kpis">
-      <div class="kpi"><span class="kl">목적</span><span class="kv">에너지</span>
-        <span class="kn">포도당 + 산소 → 이산화탄소 + 물 + 에너지</span></div>
-      <div class="kpi"><span class="kl">목적지</span><span class="kv">세포</span>
-        <span class="kn">온몸의 세포 하나하나까지 배달한다</span></div>
-      <div class="kpi"><span class="kl">구별</span><span class="kv">호흡</span>
-        <span class="kn">숨쉬기는 동작 · 호흡은 세포가 하는 일</span></div>
+      <div class="kpi"><span class="kl">4세기</span><span class="kv">백제</span>
+        <span class="kn">근초고왕 · 한강 유역에서 먼저 성장</span></div>
+      <div class="kpi"><span class="kl">5세기</span><span class="kv">고구려</span>
+        <span class="kn">광개토대왕과 장수왕 · 남쪽으로 내려옴</span></div>
+      <div class="kpi"><span class="kl">6세기</span><span class="kv">신라</span>
+        <span class="kn">진흥왕 · 마지막에 한강을 차지</span></div>
     </div>
   </div>
 </header>
 
 <nav class="jump"><div class="row">
-  <a href="#map">이번 주 지도</a>
+  <a href="#map">이번 주 칸</a>
   <a href="#mon">월 · 열기</a>
   <a href="#tue">화 · 채우기</a>
-  <a href="#thu">목 · 손으로</a>
+  <a href="#thu">목 · 사료로</a>
   <a href="#fri">금 · 보스전</a>
   <a href="#next">다음 주</a>
 </div></nav>
 
 <section class="sec" id="map">
-  <div class="step-no"><span class="num">1</span><span class="lbl">이번 주 지도</span></div>
-  <h2>배달 시스템 한 줄</h2>
+  <div class="step-no"><span class="num">1</span><span class="lbl">이번 주 칸</span></div>
+  <h2>한강을 가진 나라가 강해집니다</h2>
 
-  <div class="fig wide">
-    <p class="fig-t">도식 1 · 밥 한 숟갈이 세포에 닿기까지</p>
-    <svg viewBox="0 0 900 230" role="img" aria-label="소화 순환 호흡 배설로 이어지는 에너지 배달 경로">
-      <text class="st-s" x="450" y="34">목적지는 하나 — 온몸의 세포</text>
-      <rect class="sb-k" x="16" y="66" width="188" height="80" rx="3"/>
-      <text class="st st-k" x="110" y="100">소화</text>
-      <text class="st-s" x="110" y="124">밥 → 포도당</text>
-      <line class="sl-k" x1="210" y1="106" x2="234" y2="106"/>
-      <polygon class="sa-k" points="234,100 250,106 234,112"/>
+  <div class="fig">
+    <p class="fig-t">도식 1 · 12주 연표에서 이번 주의 자리</p>
+    <svg viewBox="0 0 420 156" role="img" aria-label="12주 연표에서 이번 주의 위치"><rect x="10" y="60" width="133" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="76" y="54" style="font-size:9.5px">1구간 · 고대</text><rect x="146" y="60" width="133" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="212" y="54" style="font-size:9.5px">2구간 · 고려와 조선</text><rect x="282" y="60" width="133" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="348" y="54" style="font-size:9.5px">3구간 · 근현대</text><rect x="10" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="26" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">01</text><rect x="44" y="70" width="31" height="26" rx="3" fill="#8C2F3E" stroke="#8C2F3E" stroke-width="1.2"/><text x="60" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#fff">02</text><text x="10" y="36" text-anchor="start" font-family="IBM Plex Sans KR,sans-serif" font-size="13" font-weight="700" fill="#8C2F3E">삼국</text><text x="10" y="120" text-anchor="start" font-family="IBM Plex Mono,monospace" font-size="10.5" fill="#8C2F3E">기원전 57 ~ 668</text><path d="M60 40 L60 66" stroke="#8C2F3E" stroke-width="1.4"/><rect x="78" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="94" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">03</text><rect x="112" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="128" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">04</text><rect x="146" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="162" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">05</text><rect x="180" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="196" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">06</text><rect x="214" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="230" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">07</text><rect x="248" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="264" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">08</text><rect x="282" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="298" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">09</text><rect x="316" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="332" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">10</text><rect x="350" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="366" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">11</text><rect x="384" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="400" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">12</text><text class="st-m" x="10" y="146" text-anchor="start" style="font-size:9.5px">선사</text><text class="st-m" x="410" y="146" text-anchor="end" style="font-size:9.5px">오늘</text><line x1="34" y1="142" x2="386" y2="142" stroke="#C3CCC1" stroke-width="1"/><polygon points="386,138 396,142 386,146" fill="#8A968F"/></svg>
+  </div>
 
-      <rect class="sb-b" x="256" y="66" width="188" height="80" rx="3"/>
-      <text class="st st-b" x="350" y="100">순환</text>
-      <text class="st-s" x="350" y="124">피가 실어 나른다</text>
-      <line class="sl-k" x1="450" y1="106" x2="474" y2="106"/>
-      <polygon class="sa-k" points="474,100 490,106 474,112"/>
-
-      <rect class="sb" x="496" y="66" width="188" height="80" rx="3"/>
-      <text class="st" x="590" y="100">호흡</text>
-      <text class="st-s" x="590" y="124">산소로 태워 에너지</text>
-      <line class="sl-k" x1="690" y1="106" x2="714" y2="106"/>
-      <polygon class="sa-k" points="714,100 730,106 714,112"/>
-
-      <rect class="sb-a" x="736" y="66" width="150" height="80" rx="3"/>
-      <text class="st st-a" x="811" y="100">배설</text>
-      <text class="st-s" x="811" y="124">찌꺼기 배출</text>
-
-      <text class="st-m" x="450" y="184">양분을 잘게 → 실어 나르고 → 산소로 태워 에너지 → 쓰레기 배출</text>
-      <text class="st-m" x="450" y="210">네 기관계 중 하나만 멈춰도 배달이 끊깁니다</text>
+  <div class="fig">
+    <p class="fig-t">도식 2 · 전성기가 옮겨 간 순서</p>
+    <svg viewBox="0 0 420 230" role="img" aria-label="4세기 백제, 5세기 고구려, 6세기 신라로 전성기가 옮겨 가는 순서">
+      <rect class="sb-k" x="8" y="14" width="404" height="46" rx="3"/>
+      <text class="st st-k" x="210" y="36">4세기 · 백제 — 근초고왕</text>
+      <text class="st-s" x="210" y="53">한강 유역에서 먼저 자람 · 남쪽으로 넓히고 중국·왜와 교류</text>
+      <line class="sl-k" x1="210" y1="60" x2="210" y2="72"/><polygon class="sa-k" points="204,72 210,82 216,72"/>
+      <rect class="sb-k" x="8" y="84" width="404" height="46" rx="3"/>
+      <text class="st st-k" x="210" y="106">5세기 · 고구려 — 광개토대왕 · 장수왕</text>
+      <text class="st-s" x="210" y="123">북쪽으로 크게 넓힌 뒤 평양으로 옮기고 한강까지 내려옴</text>
+      <line class="sl-k" x1="210" y1="130" x2="210" y2="142"/><polygon class="sa-k" points="204,142 210,152 216,142"/>
+      <rect class="sb-k" x="8" y="154" width="404" height="46" rx="3"/>
+      <text class="st st-k" x="210" y="176">6세기 · 신라 — 진흥왕</text>
+      <text class="st-s" x="210" y="193">가장 늦게 자랐지만 마지막에 한강을 차지</text>
+      <text class="st-m" x="210" y="220">세 번 다 무대는 같습니다 — 한강</text>
     </svg>
-    <p class="fig-c">9주차의 <b>광합성이 저금</b>이라면, 이번 주 세포호흡은 <b>인출</b>입니다. 방향이 정확히 반대입니다.</p>
+    <p class="fig-c">그래서 시험 문제도 “전성기 순서”보다 <b>“한강을 누가 언제 가졌나”</b>를 묻습니다.</p>
   </div>
 </section>
 
 <section class="sec" id="mon">
-  <div class="step-no"><span class="num">2</span><span class="lbl">개념 하나</span><span class="day">MON · 열기</span></div>
-  <h2>왜 먹고, 왜 숨 쉬는가</h2>
-
-  <p>밥을 먹는 이유와 숨을 쉬는 이유는 <b>같은 하나의 목적</b> 때문입니다. 세포에서 <b>에너지를 만들기 위해서</b>입니다.</p>
+  <div class="step-no"><span class="num">2</span><span class="lbl">흐름 읽기</span><span class="day">MON · 열기</span></div>
+  <h2>왜 모두 한강을 원했을까</h2>
 
   <div class="plain">
-    <p><b>세포호흡 — 9주차와 정확히 반대</b><br>
-    포도당 + 산소 → 이산화탄소 + 물 + <b>에너지</b><br>
-    그래서 밥(포도당)도 필요하고 산소도 필요합니다.</p>
+    <p><b>한강을 가지면 세 가지가 따라옵니다.</b> ① 넓고 기름진 <b>농사 땅</b> ② 배로 오가는 <b>교통로</b>
+    ③ 서해를 건너 <b>중국과 곧바로 통하는 길</b>. 고대에 이 셋을 가진 나라는 강해질 수밖에 없었습니다.</p>
   </div>
 
-  <p>이 반응은 <b>온몸의 세포 하나하나</b>에서 일어납니다. 그러니 포도당과 산소를 <b>모든 세포까지 배달</b>해야 하고,
-  생긴 이산화탄소와 찌꺼기를 <b>도로 실어 내야</b> 합니다. 그 배달을 맡은 것이 네 기관계입니다.</p>
-
-  <div class="tw"><table>
-    <thead><tr><th>기관계</th><th>맡은 일</th><th>기억할 한 마디</th></tr></thead>
-    <tbody>
-      <tr><td class="hd">소화계</td><td>음식을 흡수할 수 있게 잘게 분해</td><td class="ok">포장 뜯기</td></tr>
-      <tr><td class="hd">순환계</td><td>양분과 산소를 온몸으로 운반</td><td class="ok">배달 트럭</td></tr>
-      <tr><td class="hd">호흡계</td><td>산소를 들이고 이산화탄소를 내보냄</td><td class="ok">연료 공급</td></tr>
-      <tr><td class="hd">배설계</td><td>몸에서 생긴 노폐물을 걸러 내보냄</td><td class="ok">쓰레기 처리</td></tr>
-    </tbody>
-  </table></div>
-
-  <ul class="todo">
-    <li><label><input type="checkbox" data-q="w10m1"><span class="tt"><b>월요일</b> — 세포호흡 식을 적고, 네 기관계 표를 읽으며 질문 3개를 만듭니다.</span></label></li>
-  </ul>
-</section>
-
-<section class="sec" id="tue">
-  <div class="step-no"><span class="num">3</span><span class="lbl">개념 둘</span><span class="day">TUE · 채우기</span></div>
-  <h2>밥 한 숟갈의 여행</h2>
-
-  <p>밥 한 숟갈이 팔 근육에 닿기까지를 순서대로 따라가 봅니다. 이 한 줄이 이번 주 전부입니다.</p>
+  <h3>세 나라의 특징 한 줄씩</h3>
   <div class="tw wide"><table>
-    <thead><tr><th>단계</th><th>어디서</th><th>무슨 일이</th></tr></thead>
+    <thead><tr><th>나라</th><th>위치</th><th>강점</th><th>약점</th></tr></thead>
     <tbody>
-      <tr><td class="mn ok">①</td><td class="hd">입</td><td>침 속 소화 효소가 <b>녹말을 당으로</b> 분해하기 시작합니다</td></tr>
-      <tr><td class="mn ok">②</td><td class="hd">위</td><td>위액이 단백질을 분해하고 음식을 죽처럼 만듭니다</td></tr>
-      <tr><td class="mn ok">③</td><td class="hd">작은창자</td><td>최종 분해 후 <b>융털</b>로 흡수 — 포도당이 여기서 피로 들어갑니다</td></tr>
-      <tr><td class="mn ok">④</td><td class="hd">심장 · 혈관</td><td>피가 포도당과 산소를 <b>온몸 세포로</b> 배달합니다</td></tr>
-      <tr><td class="mn ok">⑤</td><td class="hd">세포</td><td>포도당 + 산소 → 에너지 (+ 이산화탄소 · 물)</td></tr>
-      <tr><td class="mn ok">⑥</td><td class="hd">폐 · 콩팥</td><td>이산화탄소는 폐로, 오줌 성분은 콩팥으로 내보냅니다</td></tr>
+      <tr><td class="hd">고구려</td><td>북쪽 (만주와 한반도 북부)</td><td>넓은 땅 · 강한 군사력 · 중국과 맞섬</td><td>산이 많아 농사 땅이 부족</td></tr>
+      <tr><td class="hd">백제</td><td>서남쪽 (한강 하류 → 뒤에 남쪽으로)</td><td>기름진 평야 · 바닷길로 중국·왜와 교류</td><td>고구려의 남하에 취약</td></tr>
+      <tr><td class="hd">신라</td><td>동남쪽 (경주)</td><td>산으로 둘러싸여 방어에 유리</td><td>중국과 먼 거리 · <b>발전이 가장 늦음</b></td></tr>
     </tbody>
   </table></div>
 
   <div class="alert"><span class="lb">여기서 헷갈립니다</span>
-    <p><b>호흡은 숨쉬기가 아닙니다.</b> 숨쉬기(들숨·날숨)는 공기를 주고받는 <b>동작</b>이고,
-    진짜 ‘호흡’은 세포 안에서 포도당을 태워 <b>에너지를 만드는 일</b>입니다. 시험에서 이 둘을 구별해 묻습니다.</p>
-  </div>
-
-  <div class="plain">
-    <p><b>왜 뛰면 숨이 차고 심장이 빨라질까</b> — 근육이 에너지를 많이 쓰니 <b>산소가 더 필요하고 이산화탄소가 더 생깁니다.</b>
-    그래서 호흡이 빨라져 산소를 더 들이고, 심장이 빨리 뛰어 배달 속도를 올립니다. 네 기관계가 함께 반응하는 것입니다.</p>
+    <p>신라가 <b>가장 늦게 성장했는데 결국 통일</b>합니다. 모순처럼 보이지만 이유가 있습니다.
+    늦게 자란 만큼 <b>중국(당)과 손잡는 선택</b>을 할 수 있었고, 6세기에 한강을 차지해 <b>중국으로 가는 길</b>을 확보했기 때문입니다.
+    3주차에서 이어집니다.</p>
   </div>
 
   <ul class="todo">
-    <li><label><input type="checkbox" data-q="w10m2"><span class="tt"><b>화요일</b> — 밥 한 숟갈의 여행 6단계를 <b>그림 한 장</b>으로 그립니다. 화살표로 이어 그리면 됩니다.</span></label></li>
+    <li><label><input type="checkbox" data-q="w2m1"><span class="tt"><b>월요일</b> — 위를 읽고 질문 3개를 적습니다. 지도에서 한강의 위치를 눈으로 확인합니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="tue">
+  <div class="step-no"><span class="num">3</span><span class="lbl">연표 세우기</span><span class="day">TUE · 채우기</span></div>
+  <h2>연표 두 번째 칸</h2>
+
+  <div class="tw wide"><table>
+    <thead><tr><th>사건</th><th>원인 (왜)</th><th>결과 (그래서)</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">백제 전성기<br><span class="mn">4세기 · 근초고왕</span></td>
+        <td>한강 유역의 넓은 평야와 바닷길을 먼저 차지했습니다</td>
+        <td>남쪽으로 영토를 넓히고 중국 남조·왜와 교류 · 고구려를 공격해 평양성까지 진출</td></tr>
+      <tr><td class="hd">고구려 전성기<br><span class="mn">5세기 · 광개토대왕 · 장수왕</span></td>
+        <td>북쪽으로 크게 넓힌 뒤, 남쪽의 기름진 땅이 필요했습니다</td>
+        <td>427년 <b>평양 천도</b> · 한강 유역 차지 · 백제와 신라를 압박</td></tr>
+      <tr><td class="hd">신라 전성기<br><span class="mn">6세기 · 진흥왕</span></td>
+        <td>백제와 손잡고 고구려를 몰아낸 뒤, 한강을 <b>혼자</b> 차지했습니다</td>
+        <td>중국과 직접 통하는 길 확보 · 대가야 정복 · 정복한 곳에 <b>순수비</b>를 세움</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="note"><span class="lb">이 대목이 중요합니다</span>
+    <p>진흥왕은 백제와 <b>함께</b> 고구려를 몰아냈지만, 한강은 <b>신라가 독차지</b>했습니다.
+    배신당한 백제는 이후 신라와 원수가 되고, 백제 성왕은 신라와 싸우다 전사합니다.
+    <b>이 원한이 100년 뒤 백제 멸망(660년)으로 이어집니다.</b> 3주차와 곧바로 연결되는 대목입니다.</p>
+  </div>
+
+  <div class="cards two">
+    <div class="card"><span class="ct">인물</span><h4>광개토대왕</h4>
+      <p>고구려의 영토를 크게 넓힌 왕. 우리 역사에서 <b>연호</b>(‘영락’)를 쓴 기록이 남아 있습니다.
+      연호를 쓴다는 것은 <b>중국과 대등하다는 선언</b>입니다.</p></div>
+    <div class="card"><span class="ct">인물</span><h4>진흥왕</h4>
+      <p>한강 유역을 차지하고 영토를 크게 넓힌 신라 왕. 정복한 지역을 직접 돌아보며
+      <b>순수비</b>를 세웠습니다. 비석이 곧 “여기까지 우리 땅”이라는 표시였습니다.</p></div>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w2m2"><span class="tt"><b>화요일</b> — 연표 두 번째 칸을 세우고 위 표를 옮겨 적습니다. 인물 카드 2장을 만듭니다.</span></label></li>
   </ul>
 </section>
 
 <section class="sec" id="thu">
-  <div class="step-no"><span class="num">4</span><span class="lbl">실험</span><span class="day">THU · 손으로</span></div>
-  <h2>내 몸으로 데이터를 만듭니다</h2>
+  <div class="step-no"><span class="num">4</span><span class="lbl">사료</span><span class="day">THU · 사료로</span></div>
+  <h2>돌에 새긴 기록을 봅니다</h2>
+
+  <p>이 시대의 사료는 <b>돌</b>입니다. 종이가 흔하지 않던 때라 중요한 것은 비석에 새겼습니다.
+  비석은 그 자체로 <b>“누가 여기를 다스렸는가”</b>를 알려 줍니다.</p>
 
   <div class="cards two">
-    <div class="card"><span class="ct">실험 1</span><h4>심박수와 회복</h4>
-      <p>손목이나 목에 손가락을 대고 <b>15초 세어 4를 곱합니다</b>(1분 심박수).
-      ① 가만히 앉아서 ② 제자리 뛰기 30초 직후 ③ 1분 뒤 ④ 2분 뒤를 각각 잽니다.</p></div>
-    <div class="card"><span class="ct">실험 2</span><h4>침으로 녹말 분해</h4>
-      <p>밥 한 숟갈을 <b>아무 반찬 없이 30번 이상</b> 천천히 씹습니다. 점점 <b>단맛</b>이 납니다.
-      침 속 효소가 녹말을 당으로 바꾼 것입니다.</p></div>
-    <div class="card"><span class="ct">실험 3</span><h4>날숨 속 이산화탄소</h4>
-      <p>4주차에서 만든 앙금 실험을 다시 씁니다. 석회수에 <b>빨대로 숨을 불면</b> 뿌옇게 됩니다.
-      내 세포가 만든 이산화탄소가 눈에 보이는 순간입니다.</p></div>
-    <div class="card"><span class="ct">실험 4</span><h4>폐활량 비교</h4>
-      <p>한 번 크게 들이쉬고 풍선을 <b>한 번에</b> 붑니다. 풍선 둘레를 줄자로 재고 가족끼리 비교합니다.</p></div>
+    <div class="card"><span class="ct">사료 1</span><h4>광개토대왕릉비</h4>
+      <p>장수왕이 아버지의 업적을 기록해 세운 <b>6.4 m 크기의 거대한 비석</b>입니다.
+      고구려의 건국 이야기와 광개토대왕의 정복 활동이 새겨져 있습니다.
+      지금은 <b>중국 지린성 지안</b>에 있습니다. 이 위치 자체가 고구려의 옛 영역을 말해 줍니다.</p></div>
+    <div class="card"><span class="ct">사료 2</span><h4>진흥왕 순수비</h4>
+      <p>진흥왕이 새로 차지한 땅을 직접 돌아보며 세운 비석입니다.
+      <b>북한산 순수비</b>는 한강 유역이 신라 땅이 되었음을 보여 줍니다.
+      실물은 국립중앙박물관에 있습니다.</p></div>
+    <div class="card"><span class="ct">사료 3</span><h4>칠지도</h4>
+      <p>백제가 만들어 왜에 보낸 것으로 여겨지는 <b>가지가 일곱 개 달린 칼</b>입니다.
+      백제와 왜가 교류했다는 증거로 자주 나옵니다.</p></div>
+    <div class="card"><span class="ct">활동</span><h4>지도 3장 그리기</h4>
+      <p>백지도 3장에 <b>4세기 백제 · 5세기 고구려 · 6세기 신라</b>의 영역을 색칠합니다.
+      세 장을 나란히 놓으면 <b>한강이 세 번 주인을 바꾸는 것</b>이 한눈에 보입니다.</p></div>
   </div>
 
   <div class="tw"><table>
-    <thead><tr><th>측정</th><th>값</th></tr></thead>
+    <thead><tr><th>기록</th><th>내가 적어 보기</th></tr></thead>
     <tbody>
-      <tr><td class="hd">안정 심박수</td><td class="fill">______ 회/분</td></tr>
-      <tr><td class="hd">운동 직후</td><td class="fill">______ 회/분</td></tr>
-      <tr><td class="hd">1분 뒤 / 2분 뒤</td><td class="fill">______ / ______ 회/분</td></tr>
-      <tr><td class="hd">풍선 둘레 (나 / 아빠)</td><td class="fill">______ / ______ cm</td></tr>
+      <tr><td class="hd">광개토대왕릉비가 지금 어느 나라에 있나</td><td class="fill">______</td></tr>
+      <tr><td class="hd">그 사실에서 알 수 있는 것</td><td class="fill">______</td></tr>
+      <tr><td class="hd">지도 3장에서 한강의 주인</td><td class="fill">4세기 ______ → 5세기 ______ → 6세기 ______</td></tr>
     </tbody>
   </table></div>
 
-  <div class="plain">
-    <p><b>데이터에서 읽을 것</b> — 운동 직후 심박수가 오르는 것보다 <b>몇 분 만에 원래대로 돌아오는지</b>가 더 중요한 정보입니다.
-    빨리 회복될수록 배달 시스템이 튼튼하다는 뜻입니다.</p>
-  </div>
-
   <ul class="todo">
-    <li><label><input type="checkbox" data-q="w10m3"><span class="tt"><b>목요일</b> — 심박수 실험을 하고 표를 채웁니다. 침 실험도 해 보고 몇 번째 씹을 때 단맛이 났는지 적습니다.</span></label></li>
+    <li><label><input type="checkbox" data-q="w2m3"><span class="tt"><b>목요일</b> — 비석 사진 두 개를 찾아보고, 백지도 3장에 세기별 영역을 색칠합니다.</span></label></li>
   </ul>
 </section>
 
@@ -423,70 +421,76 @@
   <h2>문제 5개와 3분 설명</h2>
 
   <div class="q"><span class="qn">Q1</span>
-    <p>세포에서 일어나는 호흡을 식으로 쓰면 어떻게 될까요?</p>
-    <details><summary>해설 보기</summary><div class="ans"><b>포도당 + 산소 → 이산화탄소 + 물 + 에너지</b>입니다. 광합성과 방향이 정확히 반대입니다.</div></details>
+    <p>삼국의 전성기를 순서대로 놓아 봅시다. ㉠ 신라 진흥왕 ㉡ 고구려 장수왕 ㉢ 백제 근초고왕</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>㉢ 백제(4세기) → ㉡ 고구려(5세기) → ㉠ 신라(6세기)</b>입니다.
+      “백-고-신, 4-5-6”으로 외우되, 이유는 <b>한강의 주인이 바뀐 순서</b>라는 것을 기억합니다.
+    </div></details>
   </div>
 
   <div class="q"><span class="qn">Q2</span>
-    <p>밥을 오래 씹으면 단맛이 나는 이유는 무엇일까요?</p>
+    <p>세 나라가 모두 한강 유역을 차지하려 한 이유를 두 가지 이상 말해 봅시다.</p>
     <details><summary>해설 보기</summary><div class="ans">
-      <b>침 속 소화 효소가 녹말을 당으로 분해했기 때문입니다.</b> 소화의 첫 단계가 입에서 이미 시작됩니다.
+      <b>① 넓고 기름진 농사 땅이라 사람과 식량이 모입니다 ② 강을 따라 물자를 옮기는 교통의 중심입니다
+      ③ 서해를 건너 중국과 직접 통할 수 있습니다.</b> 고대 국가의 힘은 이 세 가지에서 나왔습니다.
     </div></details>
   </div>
 
   <div class="q"><span class="qn">Q3</span>
-    <p>작은창자 안쪽이 주름지고 융털로 덮여 있는 이유는 무엇일까요?</p>
+    <p>장수왕이 수도를 국내성에서 <b>평양</b>으로 옮긴 이유는 무엇일까요?</p>
     <details><summary>해설 보기</summary><div class="ans">
-      <b>표면적을 넓혀 양분을 더 많이, 더 빨리 흡수하기 위해서입니다.</b> 같은 길이라도 접어 놓으면 닿는 면이 훨씬 넓어집니다.
+      <b>남쪽의 기름진 땅으로 나아가기 위해서입니다.</b> 평양으로 내려오면서 고구려는 백제와 신라를 강하게 압박했고,
+      실제로 한강 유역까지 차지했습니다. 천도는 단순한 이사가 아니라 <b>방향을 바꾸는 선언</b>이었습니다.
     </div></details>
   </div>
 
   <div class="q"><span class="qn">Q4</span>
-    <p>뛰고 나면 숨이 차고 심장이 빨리 뛰는 이유를 배달 시스템으로 설명해 봅시다.</p>
+    <p>진흥왕이 세운 순수비는 무엇을 알려 줄까요?</p>
     <details><summary>해설 보기</summary><div class="ans">
-      <b>근육이 에너지를 많이 써서 산소가 더 필요하고 이산화탄소가 많이 생기기 때문입니다.</b>
-      호흡이 빨라져 산소를 더 들이고, 심장이 빨리 뛰어 배달 속도를 높입니다.
+      <b>그 비석이 서 있는 곳까지 신라의 영토였다는 것</b>입니다.
+      북한산 순수비는 한강 유역이 신라 땅이 되었음을 보여 줍니다. 비석의 위치가 곧 지도인 셈입니다.
     </div></details>
   </div>
 
   <div class="q"><span class="qn">Q5</span>
-    <p>‘숨쉬기’와 ‘호흡’은 어떻게 다를까요?</p>
+    <p>신라와 백제는 함께 고구려를 몰아냈는데, 그 뒤 왜 원수가 되었을까요?</p>
     <details><summary>해설 보기</summary><div class="ans">
-      <b>숨쉬기는 공기를 들이고 내보내는 동작이고, 호흡은 세포에서 포도당을 산소로 태워 에너지를 얻는 일입니다.</b>
-      숨쉬기는 호흡에 필요한 산소를 공급하는 과정일 뿐입니다.
+      <b>한강 유역을 신라가 혼자 차지했기 때문입니다.</b> 배신당한 백제는 신라를 공격했고 성왕이 전사했습니다.
+      이 원한은 100년 뒤 <b>신라가 당과 손잡고 백제를 멸망시키는 일(660년)</b>로 이어집니다.
     </div></details>
   </div>
 
   <h3>아빠에게 3분 설명하기</h3>
   <div class="script">
-    <div class="row"><span class="s">배운 것</span><span>소화·순환·호흡·배설이 세포까지 에너지를 배달하는 한 시스템이라는 것.</span></div>
-    <div class="row"><span class="s">예를 들면</span><span>밥을 30번 씹었더니 단맛이 났어. 침이 벌써 녹말을 당으로 바꾼 거야.</span></div>
-    <div class="row"><span class="s">헷갈리는 것</span><span>숨쉬기랑 호흡은 달라. 진짜 호흡은 세포 안에서 일어나.</span></div>
+    <div class="row"><span class="s">배운 것</span><span>삼국의 전성기 순서는 곧 한강의 주인이 바뀐 순서라는 것.</span></div>
+    <div class="row"><span class="s">사료</span><span>광개토대왕릉비는 지금 중국에 있어. 그만큼 고구려 땅이 북쪽으로 넓었다는 뜻이야.</span></div>
+    <div class="row"><span class="s">이어지는 것</span><span>신라가 한강을 독차지하면서 백제랑 원수가 됐고, 그게 나중에 백제 멸망으로 이어져.</span></div>
   </div>
 
   <ul class="todo">
-    <li><label><input type="checkbox" data-q="w10m4"><span class="tt"><b>금요일</b> — 문제 5개와 “밥 한 숟갈의 여행”을 순서대로 3분 설명합니다.</span></label></li>
+    <li><label><input type="checkbox" data-q="w2m4"><span class="tt"><b>금요일</b> — 문제 5개와 3분 설명. 지도 3장을 펼쳐 놓고 설명하면 가장 좋습니다.</span></label></li>
   </ul>
 
-  <p><span class="badge">획득 · 에너지 배달부</span></p>
+  <p><span class="badge">획득 · 연표 2칸</span></p>
 </section>
 
 <section class="sec" id="next">
   <div class="step-no"><span class="num">6</span><span class="lbl">다음 주</span></div>
-  <h2>지구와 달의 운동</h2>
-  <p>몸에서 하늘로 나갑니다. 달 모양이 바뀌는 이유를 공 하나 들고 <b>손으로 보여줄 수 있게</b> 됩니다.</p>
+  <h2>통일신라와 발해</h2>
+  <p>가장 늦게 자란 신라가 결국 통일합니다. 그런데 <b>중국(당)을 끌어들여</b> 통일했습니다.
+  다음 주의 질문은 <b>“그 당을 어떻게 다시 내보냈을까”</b>입니다.</p>
   <div class="pager">
-    <a href="week09.html">← 9주차</a>
+    <a href="week01.html">← 1주차</a>
     <a href="index.html">전체 지도</a>
-    <a class="main" href="week11.html">11주차 →</a>
+    <a class="main" href="week03.html">3주차 →</a>
   </div>
 </section>
 
-<footer>과학 등반 12주 · WEEK 10 에너지 배달 경로 · 하루 20분 × 4일</footer>
+<footer>역사 항해 12주 · WEEK 02 삼국의 성장 · 하루 20분 × 4일</footer>
 </div>
 <script>
   (function(){
-    var KEY="science_quest_progress";
+    var KEY="history_quest_progress";
     function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){return{}}}
     function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
     var boxes=[].slice.call(document.querySelectorAll(".todo input[type=checkbox]"));

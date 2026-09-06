@@ -95,6 +95,8 @@
     text-transform:uppercase;color:var(--kelp);margin:0 0 16px;
     padding-bottom:9px;border-bottom:1px solid var(--hair);}
   .fig svg{display:block;width:100%;height:auto;}
+  .fig.wide{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .fig.wide svg{min-width:640px;}
   .fig-c{font-size:13px;color:var(--muted);margin:14px 0 0;font-weight:300;
     line-height:1.65;padding-top:12px;border-top:1px solid var(--hair);}
   .fig-c b{color:var(--ink);font-weight:600;}
@@ -284,7 +286,7 @@
   <p>같은 물질이면 크기가 달라도 밀도는 같습니다. 질량과 부피가 <b>같은 비율로</b> 변하기 때문입니다.
   그래서 밀도는 그 물질의 <b>번호표</b>가 됩니다.</p>
 
-  <div class="fig">
+  <div class="fig wide">
     <p class="fig-t">도식 1 · 밀도는 크기와 무관합니다</p>
     <svg viewBox="0 0 900 250" role="img" aria-label="같은 물질의 크기가 달라도 밀도가 같다는 것과 밀도 차이로 층이 생기는 것">
       <text class="st-s" x="220" y="30">같은 물질 · 다른 크기</text>

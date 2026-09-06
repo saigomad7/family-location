@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#DCE2DB">
-<title>1주차 · 입자의 눈</title>
-<meta name="description" content="물질은 입자로 되어 있고 그 사이에는 빈 공간이 있습니다. 중2 과학의 출발점.">
+<title>1주차 · 선사와 고조선</title>
+<meta name="description" content="농사가 시작되자 계급이 생기고, 계급이 생기자 나라가 생겼습니다.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@
     --ink:#131C18; --ink2:#2C3A33; --muted:#5F6E66; --faint:#8A968F;
     --mist:#DCE2DB; --surface:#F8FAF6; --surface2:#EFF3EC;
     --line:#C3CCC1; --hair:#DDE4DB;
-    --kelp:#1F6249; --kelp-wash:#DEEDE4; --kelp-line:#8FBBA3;
+    --kelp:#8C2F3E; --kelp-wash:#F6E4E7; --kelp-line:#D9A8B0;
     --amber:#8F6209; --amber-wash:#F5EAD0; --amber-line:#DCC79B;
     --berry:#8C2F3E; --berry-wash:#F3DFE2; --berry-line:#D9A8B0;
     --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
@@ -47,7 +47,7 @@
   .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:18px;}
   .kpi .kl{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
     text-transform:uppercase;color:#7E8F84;display:block;margin-bottom:5px;}
-  .kpi .kv{font-size:clamp(21px,3.2vw,28px);font-weight:700;color:#8FD3B4;
+  .kpi .kv{font-size:clamp(21px,3.2vw,28px);font-weight:700;color:#F0AEB8;
     letter-spacing:-0.03em;display:block;line-height:1.1;}
   .kpi .kn{font-size:12px;color:#B9C6BC;display:block;margin-top:6px;
     font-weight:300;line-height:1.5;}
@@ -102,24 +102,24 @@
   .fig-c b{color:var(--ink);font-weight:600;}
 
   .sb{fill:#fff;stroke:#C3CCC1;stroke-width:1.5;}
-  .sb-k{fill:#DEEDE4;stroke:#1F6249;stroke-width:2;}
+  .sb-k{fill:#F6E4E7;stroke:#8C2F3E;stroke-width:2;}
   .sb-b{fill:#F3DFE2;stroke:#D9A8B0;stroke-width:1.5;}
   .sb-a{fill:#F5EAD0;stroke:#DCC79B;stroke-width:1.5;}
   .sb-g{fill:#EFF3EC;stroke:#C3CCC1;stroke-width:1.5;}
-  .sb-d{fill:#fff;stroke:#1F6249;stroke-width:1.6;stroke-dasharray:5 4;}
+  .sb-d{fill:#fff;stroke:#8C2F3E;stroke-width:1.6;stroke-dasharray:5 4;}
   .st{font-family:var(--sans);font-size:13.5px;font-weight:600;fill:#131C18;
     text-anchor:middle;letter-spacing:-0.3px;}
   .st-s{font-family:var(--sans);font-size:11.5px;font-weight:400;fill:#5F6E66;text-anchor:middle;}
-  .st-k{fill:#1F6249;} .st-b{fill:#8C2F3E;} .st-a{fill:#8F6209;}
+  .st-k{fill:#8C2F3E;} .st-b{fill:#8C2F3E;} .st-a{fill:#8F6209;}
   .sm{font-family:var(--mono);font-size:12px;fill:#131C18;text-anchor:middle;font-weight:500;}
   .sm-s{font-family:var(--mono);font-size:10.5px;fill:#5F6E66;text-anchor:middle;}
   .st-m{font-family:var(--mono);font-size:11px;fill:#8A968F;text-anchor:middle;letter-spacing:0.5px;}
   .sl{stroke:#8A968F;stroke-width:1.6;fill:none;}
-  .sl-k{stroke:#1F6249;stroke-width:2;fill:none;}
+  .sl-k{stroke:#8C2F3E;stroke-width:2;fill:none;}
   .sl-a{stroke:#8F6209;stroke-width:1.8;fill:none;}
   .sl-d{stroke:#8A968F;stroke-width:1.4;fill:none;stroke-dasharray:4 4;}
-  .sa{fill:#8A968F;} .sa-k{fill:#1F6249;} .sa-a{fill:#8F6209;}
-  .dot-k{fill:#1F6249;} .dot-a{fill:#C99A2E;} .dot-b{fill:#8C2F3E;}
+  .sa{fill:#8A968F;} .sa-k{fill:#8C2F3E;} .sa-a{fill:#8F6209;}
+  .dot-k{fill:#8C2F3E;} .dot-a{fill:#C99A2E;} .dot-b{fill:#8C2F3E;}
 
   /* ===== 표 ===== */
   .tw{overflow-x:auto;margin:20px 0 8px;border:1px solid var(--line);
@@ -244,218 +244,188 @@
 <body>
 <div class="wrap">
 <header class="cover">
-  <p class="kicker">WEEK 01 · 캠프 1 물질 · 하루 20분 × 4일</p>
-  <h1>입자의 눈</h1>
+  <p class="kicker">WEEK 01 · 1구간 고대 · 하루 20분 × 4일</p>
+  <h1>선사와 고조선</h1>
   <p class="lede">
-    중2 과학이 갑자기 어려워지는 진짜 이유는 <b>눈에 보이지 않는 알갱이를 머릿속에 그려야 하기 때문</b>입니다.
-    이번 주에는 그 눈을 만듭니다. 여기서 만든 그림 하나로 앞으로 12주를 버팁니다.
+    역사의 첫 장은 “언제 무엇이 있었나”가 아니라 <b>“왜 나라가 생겼나”</b>입니다.
+    답은 의외로 단순합니다. <b>농사를 짓기 시작했기 때문</b>입니다. 이번 주에는 그 연결고리 하나를 잡습니다.
   </p>
   <div class="metaline">
-    <span>중1 연결 <b>물질의 상태 변화</b></span>
-    <span>개념 <b>입자 · 빈 공간</b></span>
-    <span>실험 <b>물 + 알코올 부피</b></span>
+    <span>연표 <b>1번째 칸</b></span>
+    <span>사건 <b>3개</b></span>
+    <span>사료 <b>고조선 8조법</b></span>
     <span>진행 <b id="wdone">0 / 4</b></span>
   </div>
 
   <div class="summary">
     <h2>이번 주에 남길 것</h2>
-    <p class="sd">금요일에 아래 세 가지를 아빠에게 설명할 수 있으면 이번 주는 끝난 것입니다.</p>
+    <p class="sd">사건 세 개가 한 줄로 이어집니다. 금요일에 이 한 줄을 설명하면 통과입니다.</p>
     <div class="kpis">
-      <div class="kpi"><span class="kl">문장 1</span><span class="kv">입자</span>
-        <span class="kn">물질은 눈에 보이지 않는 알갱이로 되어 있다</span></div>
-      <div class="kpi"><span class="kl">문장 2</span><span class="kv">빈 공간</span>
-        <span class="kn">그 알갱이들 사이에는 빈 공간이 있다</span></div>
-      <div class="kpi"><span class="kl">문장 3</span><span class="kv">그대로</span>
-        <span class="kn">상태가 변해도 알갱이 자체는 변하지 않는다</span></div>
+      <div class="kpi"><span class="kl">사건 1</span><span class="kv">농경</span>
+        <span class="kn">신석기 · 떠돌지 않고 한곳에 머물게 되었다</span></div>
+      <div class="kpi"><span class="kl">사건 2</span><span class="kv">계급</span>
+        <span class="kn">청동기 · 남는 것이 생기자 가진 자와 못 가진 자가 갈렸다</span></div>
+      <div class="kpi"><span class="kl">사건 3</span><span class="kv">고조선</span>
+        <span class="kn">지배자가 다스릴 규칙(8조법)을 만들었다 — 나라의 시작</span></div>
     </div>
   </div>
 </header>
 
 <nav class="jump"><div class="row">
-  <a href="#map">이번 주 지도</a>
+  <a href="#map">이번 주 칸</a>
   <a href="#mon">월 · 열기</a>
   <a href="#tue">화 · 채우기</a>
-  <a href="#thu">목 · 손으로</a>
+  <a href="#thu">목 · 사료로</a>
   <a href="#fri">금 · 보스전</a>
   <a href="#next">다음 주</a>
 </div></nav>
 
 <section class="sec" id="map">
-  <div class="step-no"><span class="num">1</span><span class="lbl">이번 주 지도</span></div>
-  <h2>이번 주에 만들 그림 한 장</h2>
-  <p>물질을 덩어리가 아니라 <b>알갱이의 모임</b>으로 보는 것. 이번 주의 전부는 아래 그림 하나입니다.
-  상태가 달라져도 알갱이의 종류와 개수는 어디서도 변하지 않습니다. 변하는 것은 <b>거리와 속도</b>뿐입니다.</p>
+  <div class="step-no"><span class="num">1</span><span class="lbl">이번 주 칸</span></div>
+  <h2>연표의 첫 칸을 세웁니다</h2>
 
-  <div class="fig wide">
-    <p class="fig-t">도식 1 · 고체 · 액체 · 기체의 입자 배열</p>
-    <svg viewBox="0 0 900 260" role="img" aria-label="고체 액체 기체의 입자 배열과 운동 비교">
-      <rect class="sb" x="8" y="14" width="280" height="176" rx="3"/>
-      <text class="st" x="148" y="42">고체</text>
-      <g class="dot-k">
-        <circle cx="76" cy="76" r="10"/><circle cx="112" cy="76" r="10"/><circle cx="148" cy="76" r="10"/><circle cx="184" cy="76" r="10"/><circle cx="220" cy="76" r="10"/>
-        <circle cx="76" cy="112" r="10"/><circle cx="112" cy="112" r="10"/><circle cx="148" cy="112" r="10"/><circle cx="184" cy="112" r="10"/><circle cx="220" cy="112" r="10"/>
-        <circle cx="76" cy="148" r="10"/><circle cx="112" cy="148" r="10"/><circle cx="148" cy="148" r="10"/><circle cx="184" cy="148" r="10"/><circle cx="220" cy="148" r="10"/>
-      </g>
-      <text class="st-s" x="148" y="180">규칙적으로 빽빽 · 제자리에서 진동</text>
+  <div class="fig">
+    <p class="fig-t">도식 1 · 12주 연표에서 이번 주의 자리</p>
+    <svg viewBox="0 0 420 156" role="img" aria-label="12주 연표에서 이번 주의 위치"><rect x="10" y="60" width="133" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="76" y="54" style="font-size:9.5px">1구간 · 고대</text><rect x="146" y="60" width="133" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="212" y="54" style="font-size:9.5px">2구간 · 고려와 조선</text><rect x="282" y="60" width="133" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="348" y="54" style="font-size:9.5px">3구간 · 근현대</text><rect x="10" y="70" width="31" height="26" rx="3" fill="#8C2F3E" stroke="#8C2F3E" stroke-width="1.2"/><text x="26" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#fff">01</text><text x="10" y="36" text-anchor="start" font-family="IBM Plex Sans KR,sans-serif" font-size="13" font-weight="700" fill="#8C2F3E">선사 · 고조선</text><text x="10" y="120" text-anchor="start" font-family="IBM Plex Mono,monospace" font-size="10.5" fill="#8C2F3E">~ 기원전 108</text><path d="M26 40 L26 66" stroke="#8C2F3E" stroke-width="1.4"/><rect x="44" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="60" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">02</text><rect x="78" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="94" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">03</text><rect x="112" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="128" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">04</text><rect x="146" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="162" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">05</text><rect x="180" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="196" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">06</text><rect x="214" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="230" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">07</text><rect x="248" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="264" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">08</text><rect x="282" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="298" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">09</text><rect x="316" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="332" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">10</text><rect x="350" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="366" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">11</text><rect x="384" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="400" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">12</text><text class="st-m" x="10" y="146" text-anchor="start" style="font-size:9.5px">선사</text><text class="st-m" x="410" y="146" text-anchor="end" style="font-size:9.5px">오늘</text><line x1="34" y1="142" x2="386" y2="142" stroke="#C3CCC1" stroke-width="1"/><polygon points="386,138 396,142 386,146" fill="#8A968F"/></svg>
+    <p class="fig-c">첫 칸은 <b>수십만 년</b>을 담고 있습니다. 뒤로 갈수록 한 칸이 짧아집니다. 시간이 아니라 <b>배울 분량</b>으로 나눴기 때문입니다.</p>
+  </div>
 
-      <rect class="sb" x="304" y="14" width="280" height="176" rx="3"/>
-      <text class="st" x="444" y="42">액체</text>
-      <g class="dot-k">
-        <circle cx="360" cy="82" r="10"/><circle cx="398" cy="94" r="10"/><circle cx="440" cy="78" r="10"/><circle cx="482" cy="92" r="10"/><circle cx="522" cy="80" r="10"/>
-        <circle cx="374" cy="122" r="10"/><circle cx="416" cy="132" r="10"/><circle cx="460" cy="120" r="10"/><circle cx="504" cy="130" r="10"/>
-        <circle cx="392" cy="160" r="10"/><circle cx="440" cy="158" r="10"/><circle cx="486" cy="164" r="10"/>
-      </g>
-      <text class="st-s" x="444" y="180">가깝지만 불규칙 · 서로 미끄러짐</text>
-
-      <rect class="sb" x="600" y="14" width="292" height="176" rx="3"/>
-      <text class="st" x="746" y="42">기체</text>
-      <g class="dot-k">
-        <circle cx="648" cy="74" r="10"/><circle cx="762" cy="66" r="10"/><circle cx="856" cy="96" r="10"/>
-        <circle cx="690" cy="128" r="10"/><circle cx="800" cy="140" r="10"/><circle cx="634" cy="164" r="10"/>
-        <circle cx="736" cy="104" r="10"/><circle cx="866" cy="158" r="10"/>
-      </g>
-      <text class="st-s" x="746" y="180">멀리 흩어져 · 사방으로 빠르게</text>
-
-      <line class="sl-a" x1="60" y1="222" x2="840" y2="222"/>
-      <polygon class="sa-a" points="840,217 852,222 840,227"/>
-      <polygon class="sa-a" points="60,217 48,222 60,227"/>
-      <text class="st-m st-a" x="450" y="246">열을 얻으면 입자가 빨라지고 사이가 멀어집니다 · 열을 잃으면 반대입니다</text>
+  <div class="fig">
+    <p class="fig-t">도식 2 · 농사에서 나라까지, 한 줄</p>
+    <svg viewBox="0 0 420 210" role="img" aria-label="농경의 시작에서 계급 발생을 거쳐 국가가 만들어지는 인과 흐름">
+      <rect class="sb" x="8" y="14" width="404" height="40" rx="3"/>
+      <text class="st" x="210" y="39">① 농사를 짓기 시작합니다 (신석기)</text>
+      <line class="sl-k" x1="210" y1="54" x2="210" y2="68"/><polygon class="sa-k" points="204,68 210,78 216,68"/>
+      <rect class="sb" x="8" y="80" width="404" height="40" rx="3"/>
+      <text class="st" x="210" y="105">② 한곳에 머물고, 먹고 남는 것이 생깁니다</text>
+      <line class="sl-k" x1="210" y1="120" x2="210" y2="134"/><polygon class="sa-k" points="204,134 210,144 216,134"/>
+      <rect class="sb-a" x="8" y="146" width="404" height="40" rx="3"/>
+      <text class="st st-a" x="210" y="171">③ 남는 것을 가진 사람과 못 가진 사람이 갈립니다</text>
+      <text class="st-m" x="210" y="202">→ 지배자가 생기고, 규칙이 필요해집니다 = 나라</text>
     </svg>
-    <p class="fig-c">세 그림에서 <b>알갱이의 개수와 종류는 똑같습니다.</b> 달라진 것은 배열과 속도뿐입니다.
-    이 한 가지를 붙잡고 있으면 이번 학기 물질 단원 대부분이 설명됩니다.</p>
+    <p class="fig-c">이번 주 사건 세 개는 따로 외우는 것이 아니라 <b>이 화살표 한 줄</b>입니다.</p>
   </div>
 </section>
 
 <section class="sec" id="mon">
-  <div class="step-no"><span class="num">2</span><span class="lbl">개념 하나</span><span class="day">MON · 열기</span></div>
-  <h2>물질은 알갱이로 되어 있습니다</h2>
+  <div class="step-no"><span class="num">2</span><span class="lbl">흐름 읽기</span><span class="day">MON · 열기</span></div>
+  <h2>도구가 바뀌면 삶이 바뀝니다</h2>
 
   <div class="plain">
-    <p><b>오늘 할 일은 읽고 질문 3개를 적는 것뿐입니다.</b> 외우려 하지 않아도 됩니다.
-    답을 찾는 것은 이번 주 남은 사흘의 일입니다.</p>
+    <p><b>오늘 할 일은 읽고 질문 3개를 적는 것뿐입니다.</b> 외우려 하지 않아도 됩니다.</p>
   </div>
 
-  <h3>물을 계속 반으로 쪼개면</h3>
-  <p>물 한 컵을 반으로 나누고, 또 반으로 나눕니다. 계속하면 언젠가 <b>더 나누면 물이 아니게 되는 크기</b>가 나옵니다.
-  그 알갱이를 <b>입자</b>라고 부릅니다. 물, 공기, 쇠, 우리 몸까지 세상의 모든 물질이 이 알갱이의 모임입니다.</p>
-  <p>중요한 것은 눈에 보이지 않는다는 사실이 아니라 <b>알갱이 사이에 빈 공간이 있다</b>는 사실입니다.
-  중2에서 헷갈리는 문제의 상당수가 이 빈 공간을 잊어서 생깁니다.</p>
-
-  <h3>빈 공간이 있다는 증거</h3>
-  <div class="tw"><table>
-    <thead><tr><th>증거</th><th>무슨 일이</th><th>왜 그런가</th></tr></thead>
+  <div class="tw wide"><table>
+    <thead><tr><th>시대</th><th>도구</th><th>사는 방식</th><th>남긴 것</th></tr></thead>
     <tbody>
-      <tr><td class="hd">냄새가 퍼진다</td><td>향수를 뿌리면 방 반대편에서도 냄새가 난다</td>
-        <td>향수 입자가 <b>공기 입자 사이의 빈 공간</b>으로 끼어들며 이동합니다. 이것을 <b>확산</b>이라고 합니다.</td></tr>
-      <tr><td class="hd">공기는 눌린다</td><td>주사기 입구를 막고 밀면 공기는 눌리는데 물은 거의 안 눌린다</td>
-        <td>기체는 입자 사이 빈 공간이 크고, 액체는 아주 작기 때문입니다.</td></tr>
-      <tr><td class="hd">섞으면 부피가 준다</td><td>물 50 mL와 알코올 50 mL를 섞으면 100 mL보다 적다</td>
-        <td>크기가 다른 입자가 <b>서로의 빈 공간에 끼어 들어가기</b> 때문입니다. 목요일에 직접 확인합니다.</td></tr>
+      <tr><td class="hd">구석기</td><td>뗀석기 (돌을 깨서)</td><td>사냥과 채집 · <b>떠돌아다님</b> · 동굴과 막집</td><td>주먹도끼</td></tr>
+      <tr><td class="hd">신석기</td><td>간석기 (돌을 갈아서)</td><td><b>농사 시작</b> · 강가에 정착 · 움집</td><td>빗살무늬 토기 · 가락바퀴</td></tr>
+      <tr><td class="hd">청동기</td><td>청동기 (구리 + 주석)</td><td>벼농사 · <b>계급 발생</b> · 마을 사이 전쟁</td><td>비파형 동검 · 고인돌 · 민무늬 토기</td></tr>
     </tbody>
   </table></div>
 
-  <div class="alert"><span class="lb">자주 하는 착각</span>
-    <p>입자는 <b>아주 작은 물방울이 아닙니다.</b> 우리 눈에 보이는 가장 작은 물방울조차 이미 입자 수억 개의 모임입니다.
-    입자는 그보다 훨씬 아래 단계라고 생각해야 합니다.</p>
+  <div class="alert"><span class="lb">가장 많이 하는 착각</span>
+    <p>청동기 시대에 <b>모든 도구가 청동으로 바뀐 것이 아닙니다.</b>
+    청동은 귀하고 다루기 어려워서 <b>무기와 제사 도구</b>에만 썼습니다. 농사 도구는 여전히 돌이었습니다.
+    바로 그래서 청동기를 가진 사람이 <b>지배자</b>가 된 것입니다.</p>
   </div>
 
-  <div class="plain">
-    <p><b>한 줄 정리</b> — 물질은 <b>입자</b>로 되어 있고, 입자 사이에는 <b>빈 공간</b>이 있습니다.</p>
-  </div>
+  <h3>왜 고인돌이 중요할까</h3>
+  <p>고인돌 하나를 옮기려면 수십에서 수백 명이 필요합니다.
+  즉 <b>“저 사람이 시키면 수백 명이 움직였다”</b>는 뜻이고, 그것이 바로 <b>계급이 있었다는 증거</b>입니다.
+  무덤 크기가 곧 권력의 크기였습니다.</p>
 
   <ul class="todo">
-    <li><label><input type="checkbox" data-q="w1m1"><span class="tt"><b>월요일</b> — 위를 읽고 <b>궁금한 질문 3개</b>를 노트에 적습니다. 답은 찾지 않습니다. 질문만 적습니다.</span></label></li>
+    <li><label><input type="checkbox" data-q="w1m1"><span class="tt"><b>월요일</b> — 위 표를 읽고 <b>궁금한 질문 3개</b>를 적습니다. 답은 찾지 않습니다.</span></label></li>
   </ul>
 </section>
 
 <section class="sec" id="tue">
-  <div class="step-no"><span class="num">3</span><span class="lbl">개념 둘</span><span class="day">TUE · 채우기</span></div>
-  <h2>상태가 달라도 알갱이는 그대로입니다</h2>
+  <div class="step-no"><span class="num">3</span><span class="lbl">연표 세우기</span><span class="day">TUE · 채우기</span></div>
+  <h2>고조선 — 우리 역사 최초의 나라</h2>
 
-  <p>고체·액체·기체는 <b>서로 다른 물질이 아닙니다.</b> 같은 입자가 얼마나 붙어 있고 얼마나 빠르게 움직이는지의 차이일 뿐입니다.
-  얼음·물·수증기는 전부 같은 물 입자입니다.</p>
+  <p>청동기 문화를 바탕으로 등장한 <b>우리 역사 최초의 나라</b>가 고조선입니다.
+  단군왕검이 세웠다고 전해지며(기원전 2333년으로 전함), 뒤에 <b>위만</b>이 왕이 된 시기를 거쳐
+  <b>기원전 108년 중국 한나라의 공격</b>으로 무너졌습니다.</p>
 
-  <div class="tw"><table>
-    <thead><tr><th>상태</th><th>입자 배열</th><th>입자 운동</th><th>모양 · 부피</th></tr></thead>
-    <tbody>
-      <tr><td class="hd">고체</td><td>규칙적으로 빽빽하게</td><td>제자리에서 진동</td><td>모양 일정 · 부피 일정</td></tr>
-      <tr><td class="hd">액체</td><td>가깝지만 불규칙</td><td>서로 미끄러지며 이동</td><td>모양 변함 · 부피 일정</td></tr>
-      <tr><td class="hd">기체</td><td>멀리 흩어져 불규칙</td><td>사방으로 빠르게 날아다님</td><td>모양 변함 · 부피 변함</td></tr>
-    </tbody>
-  </table></div>
-
-  <div class="alert"><span class="lb">여기서 가장 많이 틀립니다</span>
-    <p>“물이 끓어 수증기가 되면 물 입자가 <b>사라진다</b>” — 아닙니다. 입자는 하나도 사라지지 않습니다.
-    <b>멀리 흩어져서 눈에 보이지 않을 뿐</b>입니다. 그래서 뚜껑을 덮어 두면 다시 물방울로 모입니다.</p>
-    <p>같은 이유로 상태가 변해도 <b>질량은 변하지 않습니다.</b> 알갱이의 개수가 그대로이기 때문입니다.
-    변하는 것은 <b>부피</b>입니다. 사이가 멀어지면 같은 개수라도 자리를 더 많이 차지합니다.</p>
+  <div class="plain">
+    <p><b>‘단군왕검’이라는 이름 하나에 다 들어 있습니다</b> — <b>단군</b>은 제사장, <b>왕검</b>은 정치 지도자를 뜻합니다.
+    <b>제사와 정치를 한 사람이 함께 맡았다</b>는 뜻이고, 이런 사회를 <b>제정일치</b> 사회라고 합니다.</p>
   </div>
 
-  <h3>노트 한 장 양식</h3>
-  <p>A5 노트 한 장에 네 칸만 그립니다. 글보다 <b>동그라미 그림</b>이 먼저입니다.</p>
-  <div class="tw"><table>
-    <thead><tr><th>칸</th><th>여기에 쓸 것</th></tr></thead>
+  <h3>연표 첫 칸에 이렇게 적습니다</h3>
+  <div class="tw wide"><table>
+    <thead><tr><th>사건</th><th>원인 (왜)</th><th>결과 (그래서)</th></tr></thead>
     <tbody>
-      <tr><td class="hd">① 그림</td><td>고체·액체·기체의 입자 배열을 동그라미로 <b>기억해서</b> 그리기 (베끼지 않기)</td></tr>
-      <tr><td class="hd">② 한 줄</td><td>“물질은 입자로 되어 있고 그 사이에 빈 공간이 있다”</td></tr>
-      <tr><td class="hd">③ 내 예시</td><td>생활에서 찾은 확산의 예 하나 (라면 냄새, 방향제, 물에 푼 물감 등)</td></tr>
-      <tr><td class="hd">④ 질문</td><td>월요일에 적은 질문 3개 중 답이 생긴 것에 표시</td></tr>
+      <tr><td class="hd">농경의 시작<br><span class="mn">신석기</span></td>
+        <td>사냥감을 따라다니는 삶은 불안정했습니다</td>
+        <td>한곳에 정착 · 마을이 생김 · 토기로 저장</td></tr>
+      <tr><td class="hd">계급의 발생<br><span class="mn">청동기</span></td>
+        <td>농사로 <b>먹고 남는 것</b>이 생겼습니다</td>
+        <td>가진 자와 못 가진 자가 갈림 · 지배자 등장 · 고인돌</td></tr>
+      <tr><td class="hd">고조선 건국<br><span class="mn">기원전 108년 멸망</span></td>
+        <td>지배자에게 <b>다스릴 규칙</b>이 필요했습니다</td>
+        <td>8조법 · 우리 역사 최초의 국가</td></tr>
     </tbody>
   </table></div>
 
+  <h3>인물 카드 2장</h3>
+  <div class="cards two">
+    <div class="card"><span class="ct">인물</span><h4>단군왕검</h4>
+      <p>고조선을 세웠다고 전해지는 인물. 이름 자체가 <b>제사장 + 정치 지도자</b>를 뜻해, 그 시대의 통치 방식을 알려 줍니다.</p></div>
+    <div class="card"><span class="ct">인물</span><h4>위만</h4>
+      <p>중국에서 무리를 이끌고 넘어와 고조선의 왕이 된 인물. 이 무렵 고조선은 <b>철기 문화</b>를 받아들이며 세력을 키웠습니다.</p></div>
+  </div>
+
   <ul class="todo">
-    <li><label><input type="checkbox" data-q="w1m2"><span class="tt"><b>화요일</b> — 노트 한 장을 위 양식대로 채웁니다. 20분이 지나면 덜 채워졌어도 덮습니다.</span></label></li>
+    <li><label><input type="checkbox" data-q="w1m2"><span class="tt"><b>화요일</b> — 연표 첫 칸을 세우고 위 표를 옮겨 적습니다. 인물 카드 2장을 만듭니다.</span></label></li>
   </ul>
 </section>
 
 <section class="sec" id="thu">
-  <div class="step-no"><span class="num">4</span><span class="lbl">실험</span><span class="day">THU · 손으로</span></div>
-  <h2>빈 공간을 눈으로 확인합니다</h2>
+  <div class="step-no"><span class="num">4</span><span class="lbl">사료</span><span class="day">THU · 사료로</span></div>
+  <h2>2천 년 전 법 조항 세 줄을 읽습니다</h2>
 
-  <div class="note"><span class="lb">안전</span>
-    <p>소독용 알코올은 <b>불 근처에서 절대 사용하지 않습니다.</b> 창문을 열고 하고, 끝나면 손을 씻습니다. 마시지 않습니다.</p>
+  <p>고조선에는 8개 조항의 법이 있었다고 전해지는데, 지금 남아 있는 것은 <b>세 조항</b>뿐입니다.
+  중국 역사책 <b>《한서》 지리지</b>에 적혀 전해집니다. 짧지만, 이 세 줄로 그 사회를 상당히 알 수 있습니다.</p>
+
+  <div class="fig">
+    <p class="fig-t">사료 · 고조선 8조법 (전하는 세 조항)</p>
+    <svg viewBox="0 0 420 190" role="img" aria-label="고조선 8조법 세 조항">
+      <rect class="sb-g" x="8" y="10" width="404" height="52" rx="3"/>
+      <text class="st" x="210" y="34">① 사람을 죽인 자는 즉시 죽인다</text>
+      <text class="st-s" x="210" y="52">→ 생명을 중히 여김 · 강한 형벌</text>
+      <rect class="sb-g" x="8" y="70" width="404" height="52" rx="3"/>
+      <text class="st" x="210" y="94">② 남을 다치게 한 자는 곡식으로 갚는다</text>
+      <text class="st-s" x="210" y="112">→ 농사 사회 · 곡식이 곧 재산</text>
+      <rect class="sb-g" x="8" y="130" width="404" height="52" rx="3"/>
+      <text class="st" x="210" y="154">③ 도둑질한 자는 그 집의 노비로 삼는다</text>
+      <text class="st-s" x="210" y="172">→ 사유 재산 · 신분(노비)이 있었다</text>
+    </svg>
+    <p class="fig-c">역사에서 <b>사료를 읽는다</b>는 것은 이렇게 하는 것입니다. 적힌 것을 외우는 게 아니라, <b>적힌 것에서 그 사회를 읽어내는 것</b>입니다.</p>
   </div>
 
   <div class="tw"><table>
-    <thead><tr><th>준비물</th><th>없으면 이걸로</th></tr></thead>
+    <thead><tr><th>이 조항에서 읽어낸 것</th><th>내가 적어 보기</th></tr></thead>
     <tbody>
-      <tr><td class="hd">눈금 있는 계량컵 2개</td><td>같은 컵 2개에 유성펜으로 눈금 표시</td></tr>
-      <tr><td class="hd">물 50 mL</td><td>—</td></tr>
-      <tr><td class="hd">소독용 알코올 50 mL</td><td>액체형 손소독제 (젤 제외)</td></tr>
-      <tr><td class="hd">투명하고 좁은 병</td><td>500 mL 생수병 — 좁을수록 차이가 잘 보입니다</td></tr>
+      <tr><td class="hd">①번 조항으로 알 수 있는 것</td><td class="fill">______</td></tr>
+      <tr><td class="hd">②번 조항으로 알 수 있는 것</td><td class="fill">______</td></tr>
+      <tr><td class="hd">③번 조항으로 알 수 있는 것</td><td class="fill">______</td></tr>
     </tbody>
   </table></div>
 
-  <h3>순서</h3>
+  <h3>유물 찾아보기</h3>
   <div class="cards two">
-    <div class="card"><span class="ct">01</span><h4>예상을 먼저 적습니다</h4>
-      <p>섞으면 몇 mL가 될지 <b>보기 전에</b> 적습니다. 예상을 적지 않으면 결과를 봐도 놀라지 않고, 놀라지 않으면 기억에 남지 않습니다.</p></div>
-    <div class="card"><span class="ct">02</span><h4>따로 정확히 잽니다</h4>
-      <p>물 50 mL, 알코올 50 mL를 각각 정확히 잽니다.</p></div>
-    <div class="card"><span class="ct">03</span><h4>섞고 눈금을 다시 읽습니다</h4>
-      <p>좁은 병에 둘 다 붓고 눈금을 읽습니다. 줄어든 양이 <b>입자 사이의 빈 공간</b>입니다.</p></div>
-    <div class="card"><span class="ct">04</span><h4>확산도 함께 잽니다</h4>
-      <p>방 한쪽에서 향수를 한 번 뿌리고, 반대쪽에서 냄새가 날 때까지 <b>초를 잽니다</b>.</p></div>
-  </div>
-
-  <div class="tw"><table>
-    <thead><tr><th>기록</th><th>내가 적은 값</th></tr></thead>
-    <tbody>
-      <tr><td class="hd">예상 부피</td><td class="fill">______ mL</td></tr>
-      <tr><td class="hd">실제 부피</td><td class="fill">______ mL</td></tr>
-      <tr><td class="hd">줄어든 양</td><td class="fill">______ mL</td></tr>
-      <tr><td class="hd">냄새가 퍼지는 데 걸린 시간</td><td class="fill">______ 초</td></tr>
-    </tbody>
-  </table></div>
-
-  <div class="plain">
-    <p><b>왜 이런 결과가 나오나</b> — 물 입자와 알코올 입자는 크기가 다릅니다.
-    작은 입자가 큰 입자 사이의 <b>빈 공간에 들어가 앉기</b> 때문에 전체 부피가 둘을 더한 것보다 작아집니다.
-    쌀과 좁쌀을 섞으면 부피가 줄어드는 것과 같은 이치입니다.</p>
+    <div class="card"><span class="ct">활동 1</span><h4>박물관에서 유물 보기</h4>
+      <p><b>국립중앙박물관 누리집</b>에서 “빗살무늬 토기”, “비파형 동검”을 검색해 사진을 크게 봅니다.
+      토기 아래가 <b>뾰족한 이유</b>를 찾아보면 재미있습니다. (강가 모래에 꽂아 세웠습니다)</p></div>
+    <div class="card"><span class="ct">활동 2</span><h4>백지도에 표시하기</h4>
+      <p>한반도 백지도에 <b>고인돌과 비파형 동검이 나온 지역</b>을 표시해 봅니다.
+      그 범위가 고조선의 문화가 미친 범위로 여겨집니다. 지도로 보면 “나라”가 실감 납니다.</p></div>
   </div>
 
   <ul class="todo">
-    <li><label><input type="checkbox" data-q="w1m3"><span class="tt"><b>목요일</b> — 실험하고 위 표를 채웁니다. 사진 한 장을 남깁니다. 예상과 달라도 성공입니다.</span></label></li>
+    <li><label><input type="checkbox" data-q="w1m3"><span class="tt"><b>목요일</b> — 8조법 세 줄에서 읽어낸 것을 표에 적고, 유물 사진 두 개를 찾아 봅니다.</span></label></li>
   </ul>
 </section>
 
@@ -465,76 +435,77 @@
   <p>먼저 답을 생각한 뒤에 해설을 엽니다. 틀려도 감점은 없습니다. <b>틀린 문제가 다음 주의 출발점</b>이 됩니다.</p>
 
   <div class="q"><span class="qn">Q1</span>
-    <p>컵에 물을 가득 채운 뒤 설탕을 한 숟가락 녹였는데 물이 넘치지 않았습니다. 왜 그럴까요?</p>
+    <p>다음을 시대 순서대로 놓아 봅시다. ㉠ 고인돌 ㉡ 주먹도끼 ㉢ 빗살무늬 토기</p>
     <details><summary>해설 보기</summary><div class="ans">
-      <b>물 입자 사이의 빈 공간에 설탕 입자가 들어갔기 때문입니다.</b>
-      설탕이 사라진 것이 아니라 입자로 흩어져 빈자리에 끼어 들어간 것입니다. 그래서 물맛은 달아집니다.
+      <b>㉡ 주먹도끼(구석기) → ㉢ 빗살무늬 토기(신석기) → ㉠ 고인돌(청동기)</b>입니다.
+      도구가 “깨서 → 갈아서 → 금속으로” 바뀐 순서로 기억하면 됩니다.
     </div></details>
   </div>
 
   <div class="q"><span class="qn">Q2</span>
-    <p>향수를 뿌리면 방 전체로 냄새가 퍼집니다. 이 현상의 이름과 그렇게 되는 이유를 말해 봅시다.</p>
+    <p>농사가 시작된 것이 왜 그렇게 큰 사건일까요?</p>
     <details><summary>해설 보기</summary><div class="ans">
-      <b>확산입니다.</b> 향수 입자가 스스로 움직이면서 공기 입자 사이의 빈 공간으로 퍼져 나가기 때문입니다.
-      온도가 높을수록 입자가 빨라져서 더 빨리 퍼집니다.
+      <b>떠돌지 않고 한곳에 정착하게 되었고, 먹고 남는 것이 생겼기 때문입니다.</b>
+      남는 것이 생기자 그것을 더 가진 사람과 못 가진 사람이 갈렸고, 그 차이가 <b>계급</b>이 되었습니다.
+      계급이 생기자 다스릴 사람과 규칙, 곧 <b>나라</b>가 필요해졌습니다.
     </div></details>
   </div>
 
   <div class="q"><span class="qn">Q3</span>
-    <p>주사기 입구를 손가락으로 막고 밀 때, 공기는 잘 눌리는데 물은 거의 눌리지 않습니다. 입자로 설명해 봅시다.</p>
+    <p>“도둑질한 자는 그 집의 노비로 삼는다”는 조항으로 알 수 있는 것 두 가지는 무엇일까요?</p>
     <details><summary>해설 보기</summary><div class="ans">
-      <b>기체는 입자 사이 거리가 멀어 눌릴 공간이 있고, 액체는 입자가 이미 가까이 붙어 있어 눌릴 공간이 거의 없기 때문입니다.</b>
-      입자 자체가 찌그러지는 것이 아니라 <b>사이 거리</b>가 줄어드는 것입니다.
+      <b>① 개인의 재산(사유 재산)이 있었다 ② 노비라는 신분이 있었다</b>는 것입니다.
+      훔칠 재산이 없다면 이런 법도 필요 없고, 노비로 삼는다는 말은 신분이 나뉘어 있었다는 뜻입니다.
     </div></details>
   </div>
 
   <div class="q"><span class="qn">Q4</span>
-    <p>얼음이 녹아 물이 될 때 물 입자 자체는 어떻게 될까요? ① 작아진다 ② 개수가 줄어든다 ③ 변하지 않는다</p>
+    <p>청동기 시대에도 농사 도구는 대부분 돌이었습니다. 왜 그랬을까요?</p>
     <details><summary>해설 보기</summary><div class="ans">
-      <b>③ 변하지 않습니다.</b> 입자의 종류·크기·개수는 그대로이고, 달라지는 것은 <b>배열과 운동</b>뿐입니다.
-      그래서 얼음이 녹아도 질량은 같습니다. 이 문장이 이번 주에서 가장 중요합니다.
+      <b>청동은 귀하고 다루기 어려워 무기와 제사 도구에만 썼기 때문입니다.</b>
+      그래서 청동기를 가진 사람이 곧 지배자였습니다. 농사 도구까지 금속이 되는 것은 <b>철기</b> 시대부터입니다.
     </div></details>
   </div>
 
   <div class="q"><span class="qn">Q5</span>
-    <p>빨래가 마르면 물은 어디로 갔을까요? “사라졌다”가 아닌 말로 설명해 봅시다.</p>
+    <p>‘단군왕검’이라는 이름에서 그 시대 사회의 어떤 특징을 알 수 있을까요?</p>
     <details><summary>해설 보기</summary><div class="ans">
-      <b>물 입자가 공기 중으로 흩어져 날아갔습니다(증발).</b> 없어진 것이 아니라 눈에 보이지 않을 만큼 멀리 퍼진 것입니다.
-      이 물 입자들은 나중에 다시 모여 구름이 되고 비가 됩니다.
+      <b>제사장(단군)과 정치 지도자(왕검)를 한 사람이 겸했다는 것</b>, 즉 <b>제정일치</b> 사회였다는 것입니다.
+      하늘에 제사를 지내는 권한이 곧 다스리는 권한이었습니다.
     </div></details>
   </div>
 
   <h3>아빠에게 3분 설명하기</h3>
-  <p>아래 틀대로 말하면 됩니다. 외워서 말하지 말고 <b>노트의 그림을 보여 주면서</b> 말합니다.</p>
+  <p>노트의 연표 첫 칸을 보여 주면서 말합니다. 외워서 말하지 않아도 됩니다.</p>
   <div class="script">
-    <div class="row"><span class="s">배운 것</span><span>모든 물질이 눈에 보이지 않는 입자로 되어 있고, 그 사이에 빈 공간이 있다는 것.</span></div>
-    <div class="row"><span class="s">예를 들면</span><span>물이랑 알코올을 50 mL씩 섞었더니 100 mL가 안 됐어. 빈 공간에 끼어 들어가서.</span></div>
-    <div class="row"><span class="s">헷갈리는 것</span><span>물이 마르면 입자가 사라진 것 같지만, 흩어졌을 뿐이고 개수는 그대로야.</span></div>
+    <div class="row"><span class="s">배운 것</span><span>농사가 시작되니까 정착하게 되고, 남는 게 생기니까 계급이 생기고, 그래서 나라가 만들어졌다는 것.</span></div>
+    <div class="row"><span class="s">사료</span><span>고조선 8조법 세 줄을 봤는데, 도둑을 노비로 삼는다는 걸 보면 그때 이미 재산이랑 신분이 있었어.</span></div>
+    <div class="row"><span class="s">헷갈리는 것</span><span>청동기 때도 농기구는 돌이었어. 청동은 귀해서 무기랑 제사용으로만 썼거든.</span></div>
   </div>
 
   <ul class="todo">
     <li><label><input type="checkbox" data-q="w1m4"><span class="tt"><b>금요일</b> — 문제 5개를 풀고 아빠에게 3분 설명합니다. 설명이 되면 이번 주 통과입니다.</span></label></li>
   </ul>
 
-  <p><span class="badge">획득 · 입자의 눈</span></p>
+  <p><span class="badge">획득 · 연표 1칸</span></p>
 </section>
 
 <section class="sec" id="next">
   <div class="step-no"><span class="num">6</span><span class="lbl">다음 주</span></div>
-  <h2>원소와 불꽃</h2>
-  <p>이번 주에 “물질은 입자로 되어 있다”를 알았습니다. 2주차의 질문은 하나입니다.
-  <b>그 입자는 몇 종류나 있을까요.</b> 소금을 불에 대면 왜 노란색이 나오는지도 그때 알게 됩니다.</p>
+  <h2>삼국의 성장</h2>
+  <p>고조선이 무너진 자리에 여러 나라가 생기고, 그중 셋이 크게 자랍니다.
+  다음 주의 질문은 <b>“왜 전성기가 백제 → 고구려 → 신라 순서로 왔을까”</b>입니다. 답은 <b>한강</b>에 있습니다.</p>
   <div class="pager">
     <a href="index.html">전체 지도</a>
     <a class="main" href="week02.html">2주차 →</a>
   </div>
 </section>
 
-<footer>과학 등반 12주 · WEEK 01 입자의 눈 · 하루 20분 × 4일</footer>
+<footer>역사 항해 12주 · WEEK 01 선사와 고조선 · 하루 20분 × 4일</footer>
 </div>
 <script>
   (function(){
-    var KEY="science_quest_progress";
+    var KEY="history_quest_progress";
     function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){return{}}}
     function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
     var boxes=[].slice.call(document.querySelectorAll(".todo input[type=checkbox]"));

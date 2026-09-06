@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#DCE2DB">
+<title>9주차 · 개항과 근대화</title>
+<meta name="description" content="강화도 조약, 갑신정변, 동학농민운동과 갑오개혁.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#131C18; --ink2:#2C3A33; --muted:#5F6E66; --faint:#8A968F;
+    --mist:#DCE2DB; --surface:#F8FAF6; --surface2:#EFF3EC;
+    --line:#C3CCC1; --hair:#DDE4DB;
+    --kelp:#8C2F3E; --kelp-wash:#F6E4E7; --kelp-line:#D9A8B0;
+    --amber:#8F6209; --amber-wash:#F5EAD0; --amber-line:#DCC79B;
+    --berry:#8C2F3E; --berry-wash:#F3DFE2; --berry-line:#D9A8B0;
+    --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+    --mono:"IBM Plex Mono","SFMono-Regular",Consolas,"D2Coding",monospace;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{margin:0;background:var(--mist);color:var(--ink);font-family:var(--sans);
+    font-size:16px;line-height:1.75;letter-spacing:-0.01em;
+    padding:0 18px calc(70px + env(safe-area-inset-bottom));
+    word-break:keep-all;overflow-wrap:anywhere;}
+  .wrap{max-width:1040px;margin:0 auto;}
+
+  /* ===== 표지 ===== */
+  .cover{padding:44px 0 30px;border-bottom:2px solid var(--ink);}
+  .cover .kicker{font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:0.2em;text-transform:uppercase;color:var(--kelp);margin:0 0 16px;}
+  .cover h1{font-size:clamp(27px,6vw,44px);font-weight:700;line-height:1.24;
+    letter-spacing:-0.035em;margin:0 0 16px;max-width:21ch;}
+  .cover .lede{font-size:clamp(15.5px,2vw,18px);font-weight:300;color:var(--ink2);
+    max-width:62ch;margin:0 0 24px;line-height:1.72;}
+  .cover .lede b{font-weight:600;color:var(--ink);}
+  .metaline{display:flex;flex-wrap:wrap;gap:6px 22px;font-family:var(--mono);
+    font-size:11.5px;color:var(--muted);letter-spacing:0.03em;}
+  .metaline b{color:var(--ink);font-weight:500;}
+
+  .summary{background:var(--ink);border-radius:3px;padding:26px 22px 24px;margin:28px 0 0;}
+  .summary h2{color:#F6FAF5;font-size:18px;font-weight:600;margin:0 0 6px;letter-spacing:-0.02em;}
+  .summary .sd{color:#93A399;font-size:13.5px;font-weight:300;margin:0 0 22px;line-height:1.65;}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:18px;}
+  .kpi .kl{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:#7E8F84;display:block;margin-bottom:5px;}
+  .kpi .kv{font-size:clamp(21px,3.2vw,28px);font-weight:700;color:#F0AEB8;
+    letter-spacing:-0.03em;display:block;line-height:1.1;}
+  .kpi .kn{font-size:12px;color:#B9C6BC;display:block;margin-top:6px;
+    font-weight:300;line-height:1.5;}
+
+  /* ===== 이동 바 ===== */
+  nav.jump{position:sticky;top:0;z-index:40;margin:0 -18px;padding:0 18px;
+    background:rgba(220,226,219,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);}
+  nav.jump .row{display:flex;gap:6px;overflow-x:auto;padding:9px 0;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  nav.jump .row::-webkit-scrollbar{display:none;}
+  nav.jump a{flex:0 0 auto;font-family:var(--mono);font-size:11.5px;letter-spacing:0.04em;
+    color:var(--muted);background:var(--surface);border:1px solid var(--line);
+    padding:6px 11px;border-radius:2px;text-decoration:none;}
+  nav.jump a.now{color:#fff;background:var(--kelp);border-color:var(--kelp);}
+
+  /* ===== 섹션 ===== */
+  .sec{padding:44px 0 12px;border-bottom:1px solid var(--line);scroll-margin-top:56px;}
+  .sec:last-of-type{border-bottom:0;}
+  .step-no{display:flex;align-items:center;gap:11px;margin-bottom:14px;}
+  .step-no .num{font-family:var(--mono);font-size:12px;font-weight:600;color:#fff;
+    background:var(--kelp);width:28px;height:28px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-no .lbl{font-family:var(--mono);font-size:11px;letter-spacing:0.13em;
+    text-transform:uppercase;color:var(--muted);}
+  .step-no .day{margin-left:auto;font-family:var(--mono);font-size:11px;
+    letter-spacing:0.1em;color:var(--kelp);background:var(--kelp-wash);
+    border:1px solid var(--kelp-line);padding:3px 9px;border-radius:2px;}
+  .sec h2{font-size:clamp(22px,3.4vw,29px);font-weight:600;letter-spacing:-0.03em;
+    line-height:1.34;margin:0 0 14px;max-width:30ch;}
+  .sec h3{font-size:17.5px;font-weight:600;letter-spacing:-0.02em;margin:30px 0 10px;}
+  .sec > p{max-width:70ch;color:var(--ink2);margin:0 0 16px;}
+  .sec strong,.sec b{font-weight:600;color:var(--ink);}
+  .sec code{font-family:var(--mono);font-size:0.86em;background:var(--surface2);
+    border:1px solid var(--hair);padding:1px 5px;border-radius:2px;}
+
+  .plain{background:var(--surface2);border-left:3px solid var(--kelp);
+    padding:14px 17px;margin:0 0 20px;border-radius:0 2px 2px 0;max-width:74ch;}
+  .plain p{margin:0;font-size:14.5px;color:var(--ink2);line-height:1.72;}
+  .plain p + p{margin-top:10px;}
+  .plain b{color:var(--kelp);font-weight:600;}
+
+  .fig{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:20px 16px 16px;margin:20px 0 12px;}
+  .fig-t{font-family:var(--mono);font-size:11px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--kelp);margin:0 0 16px;
+    padding-bottom:9px;border-bottom:1px solid var(--hair);}
+  .fig svg{display:block;width:100%;height:auto;}
+  .fig.wide{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .fig.wide svg{min-width:640px;}
+  .fig-c{font-size:13px;color:var(--muted);margin:14px 0 0;font-weight:300;
+    line-height:1.65;padding-top:12px;border-top:1px solid var(--hair);}
+  .fig-c b{color:var(--ink);font-weight:600;}
+
+  .sb{fill:#fff;stroke:#C3CCC1;stroke-width:1.5;}
+  .sb-k{fill:#F6E4E7;stroke:#8C2F3E;stroke-width:2;}
+  .sb-b{fill:#F3DFE2;stroke:#D9A8B0;stroke-width:1.5;}
+  .sb-a{fill:#F5EAD0;stroke:#DCC79B;stroke-width:1.5;}
+  .sb-g{fill:#EFF3EC;stroke:#C3CCC1;stroke-width:1.5;}
+  .sb-d{fill:#fff;stroke:#8C2F3E;stroke-width:1.6;stroke-dasharray:5 4;}
+  .st{font-family:var(--sans);font-size:13.5px;font-weight:600;fill:#131C18;
+    text-anchor:middle;letter-spacing:-0.3px;}
+  .st-s{font-family:var(--sans);font-size:11.5px;font-weight:400;fill:#5F6E66;text-anchor:middle;}
+  .st-k{fill:#8C2F3E;} .st-b{fill:#8C2F3E;} .st-a{fill:#8F6209;}
+  .sm{font-family:var(--mono);font-size:12px;fill:#131C18;text-anchor:middle;font-weight:500;}
+  .sm-s{font-family:var(--mono);font-size:10.5px;fill:#5F6E66;text-anchor:middle;}
+  .st-m{font-family:var(--mono);font-size:11px;fill:#8A968F;text-anchor:middle;letter-spacing:0.5px;}
+  .sl{stroke:#8A968F;stroke-width:1.6;fill:none;}
+  .sl-k{stroke:#8C2F3E;stroke-width:2;fill:none;}
+  .sl-a{stroke:#8F6209;stroke-width:1.8;fill:none;}
+  .sl-d{stroke:#8A968F;stroke-width:1.4;fill:none;stroke-dasharray:4 4;}
+  .sa{fill:#8A968F;} .sa-k{fill:#8C2F3E;} .sa-a{fill:#8F6209;}
+  .dot-k{fill:#8C2F3E;} .dot-a{fill:#C99A2E;} .dot-b{fill:#8C2F3E;}
+
+  /* ===== 표 ===== */
+  .tw{overflow-x:auto;margin:20px 0 8px;border:1px solid var(--line);
+    border-radius:3px;background:var(--surface);}
+  table{border-collapse:collapse;width:100%;font-size:13.8px;}
+  .tw.wide table{min-width:560px;}
+  thead th{background:var(--ink);color:#E8EFE7;text-align:left;font-family:var(--mono);
+    font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
+    padding:11px 13px;}
+  tbody td{padding:11px 13px;border-top:1px solid var(--hair);vertical-align:top;
+    color:var(--ink2);line-height:1.62;}
+  tbody tr:nth-child(even) td{background:var(--surface2);}
+  td.hd{font-weight:600;color:var(--ink);}
+  td.mn{font-family:var(--mono);font-size:12.5px;}
+  td.ok{color:var(--kelp);font-weight:600;}
+  td.no{color:var(--berry);font-weight:600;}
+  td.wa{color:var(--amber);font-weight:600;}
+  td.fill{font-family:var(--mono);color:var(--faint);}
+
+  .note{background:var(--amber-wash);border:1px solid var(--amber-line);
+    border-radius:3px;padding:17px 19px;margin:20px 0 8px;}
+  .note p{margin:0;font-size:14px;color:#5C440C;line-height:1.72;}
+  .note p + p{margin-top:9px;}
+  .note b{font-weight:600;}
+  .note .lb{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--amber);margin-bottom:6px;}
+  .alert{background:var(--berry-wash);border:1px solid var(--berry-line);
+    border-radius:3px;padding:17px 19px;margin:20px 0 8px;}
+  .alert p{margin:0;font-size:14px;color:#6B2430;line-height:1.72;}
+  .alert p + p{margin-top:9px;}
+  .alert b{font-weight:600;}
+  .alert .lb{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--berry);margin-bottom:6px;}
+
+  /* ===== 카드 묶음 ===== */
+  .cards{display:grid;gap:12px;margin:18px 0 8px;}
+  @media(min-width:680px){.cards.two{grid-template-columns:repeat(2,1fr);}}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:15px 17px;}
+  .card .ct{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;
+    color:var(--kelp);display:block;margin-bottom:7px;}
+  .card h4{margin:0 0 6px;font-size:15.5px;font-weight:600;letter-spacing:-0.02em;}
+  .card p{margin:0;font-size:14px;color:var(--ink2);line-height:1.68;}
+
+  /* ===== 요일 할 일 ===== */
+  .todo{list-style:none;margin:20px 0 8px;padding:0;background:var(--surface);
+    border:1px solid var(--line);border-radius:3px;overflow:hidden;}
+  .todo li + li{border-top:1px solid var(--hair);}
+  .todo label{display:grid;grid-template-columns:22px 1fr;gap:13px;align-items:start;
+    padding:15px 16px;cursor:pointer;font-size:14.5px;line-height:1.65;color:var(--ink2);min-height:54px;}
+  .todo input{appearance:none;-webkit-appearance:none;width:21px;height:21px;margin:1px 0 0;
+    border:1.5px solid var(--line);border-radius:2px;background:#fff;
+    display:grid;place-content:center;cursor:pointer;}
+  .todo input::after{content:"✓";font-size:13px;font-weight:700;color:#fff;transform:scale(0);}
+  .todo input:checked{background:var(--kelp);border-color:var(--kelp);}
+  .todo input:checked::after{transform:scale(1);}
+  .todo input:focus-visible{outline:2px solid var(--kelp);outline-offset:2px;}
+  .todo input:checked ~ .tt{color:var(--faint);text-decoration:line-through;}
+  .todo .tt b{color:var(--ink);font-weight:600;}
+
+  /* ===== 문제 ===== */
+  .q{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:15px 17px;margin:12px 0;}
+  .q .qn{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--kelp);
+    letter-spacing:0.12em;}
+  .q > p{margin:6px 0 0;font-size:15.5px;color:var(--ink);line-height:1.7;}
+  .q details{margin-top:12px;border-top:1px solid var(--hair);padding-top:10px;}
+  .q summary{cursor:pointer;list-style:none;font-family:var(--mono);font-size:12px;
+    font-weight:600;color:var(--kelp);letter-spacing:0.06em;padding:3px 0;}
+  .q summary::-webkit-details-marker{display:none;}
+  .q summary::before{content:"+ ";}
+  .q details[open] summary::before{content:"− ";}
+  .q .ans{margin-top:9px;background:var(--kelp-wash);border-radius:2px;padding:12px 14px;
+    font-size:14px;color:var(--ink2);line-height:1.7;}
+  .q .ans b{color:var(--kelp);font-weight:600;}
+
+  /* ===== 설명 대본 ===== */
+  .script{background:var(--surface);border:1px solid var(--kelp-line);border-radius:3px;
+    padding:16px 18px;margin:18px 0 8px;}
+  .script .row{display:grid;grid-template-columns:70px 1fr;gap:12px;font-size:14.5px;
+    color:var(--ink2);line-height:1.7;}
+  .script .row + .row{margin-top:11px;padding-top:11px;border-top:1px solid var(--hair);}
+  .script .s{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;color:var(--kelp);
+    font-weight:600;padding-top:4px;}
+
+  .badge{display:inline-block;font-family:var(--mono);font-size:12.5px;font-weight:600;
+    color:var(--amber);background:var(--amber-wash);border:1px solid var(--amber-line);
+    border-radius:2px;padding:7px 14px;margin-top:14px;letter-spacing:0.04em;}
+
+  /* ===== 주차 목록 (허브) ===== */
+  .wlist{display:flex;flex-direction:column;gap:10px;margin:18px 0 8px;}
+  a.wk{display:grid;grid-template-columns:1fr auto;grid-template-areas:"n p" "t p" "d d";
+    gap:2px 14px;background:var(--surface);border:1px solid var(--line);
+    border-left:3px solid var(--kelp);border-radius:3px;padding:15px 17px;
+    text-decoration:none;color:var(--ink);}
+  a.wk .n{grid-area:n;font-family:var(--mono);font-size:11px;font-weight:600;
+    letter-spacing:0.12em;color:var(--kelp);}
+  a.wk .t{grid-area:t;font-size:17px;font-weight:600;letter-spacing:-0.02em;}
+  a.wk .d{grid-area:d;font-size:13.5px;color:var(--muted);margin-top:5px;line-height:1.6;font-weight:300;}
+  a.wk .p{grid-area:p;align-self:center;font-family:var(--mono);font-size:11px;color:var(--muted);
+    background:var(--surface2);border:1px solid var(--hair);border-radius:2px;padding:4px 9px;white-space:nowrap;}
+  a.wk .p.done{color:#fff;background:var(--kelp);border-color:var(--kelp);}
+  a.wk .p.ing{color:var(--amber);background:var(--amber-wash);border-color:var(--amber-line);}
+  .wk.soon{border-left-color:var(--line);opacity:.62;pointer-events:none;}
+  .wk.soon .n,.wk.soon .t{color:var(--muted);}
+
+  /* ===== 진행 막대 ===== */
+  .bar{height:7px;background:var(--hair);border-radius:99px;overflow:hidden;margin-top:12px;
+    border:1px solid var(--line);}
+  .bar i{display:block;height:100%;background:var(--kelp);width:0;transition:width .3s;}
+
+  /* ===== 페이지 이동 ===== */
+  .pager{display:flex;gap:9px;margin:26px 0 0;}
+  .pager a{flex:1;text-align:center;font-size:13.5px;font-weight:600;text-decoration:none;
+    color:var(--ink2);background:var(--surface);border:1px solid var(--line);
+    border-radius:3px;padding:14px 8px;}
+  .pager a.main{background:var(--kelp);border-color:var(--kelp);color:#fff;}
+  footer{padding:26px 0 10px;font-family:var(--mono);font-size:11.5px;color:var(--faint);
+    letter-spacing:0.03em;line-height:1.8;}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="cover">
+  <p class="kicker">WEEK 09 · 3구간 근현대 · 하루 20분 × 4일</p>
+  <h1>개항과 근대화</h1>
+  <p class="lede">
+    3구간이 시작됩니다. 여기서부터는 <b>사건이 촘촘</b>합니다. 그래서 더더욱 <b>순서와 이유</b>가 중요합니다.
+    밖에서는 문을 열라는 요구가 밀려오고, 안에서는 <b>어떻게 바꿀 것인가</b>를 두고 사람들이 갈라집니다.
+  </p>
+  <div class="metaline">
+    <span>연표 <b>9번째 칸</b></span>
+    <span>사건 <b>3개</b></span>
+    <span>사료 <b>두 개의 개혁안</b></span>
+    <span>진행 <b id="wdone">0 / 4</b></span>
+  </div>
+
+  <div class="summary">
+    <h2>이번 주에 남길 것</h2>
+    <p class="sd">‘위에서 바꾸려 한 시도’와 ‘아래에서 바꾸려 한 시도’를 구별하는 것이 이번 주의 핵심입니다.</p>
+    <div class="kpis">
+      <div class="kpi"><span class="kl">1876</span><span class="kv">개항</span>
+        <span class="kn">강화도 조약 · 최초의 근대적 조약이자 불평등 조약</span></div>
+      <div class="kpi"><span class="kl">1884</span><span class="kv">위에서</span>
+        <span class="kn">갑신정변 · 급진 개화파의 3일 천하</span></div>
+      <div class="kpi"><span class="kl">1894</span><span class="kv">아래에서</span>
+        <span class="kn">동학농민운동 · 그리고 갑오개혁</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="jump"><div class="row">
+  <a href="#map">이번 주 칸</a>
+  <a href="#mon">월 · 열기</a>
+  <a href="#tue">화 · 채우기</a>
+  <a href="#thu">목 · 사료로</a>
+  <a href="#fri">금 · 보스전</a>
+  <a href="#next">다음 주</a>
+</div></nav>
+
+<section class="sec" id="map">
+  <div class="step-no"><span class="num">1</span><span class="lbl">이번 주 칸</span></div>
+  <h2>18년 사이에 벌어진 일들</h2>
+
+  <div class="fig">
+    <p class="fig-t">도식 1 · 12주 연표에서 이번 주의 자리</p>
+    <svg viewBox="0 0 420 156" role="img" aria-label="12주 연표에서 이번 주의 위치"><rect x="10" y="60" width="133" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="76" y="54" style="font-size:9.5px">1구간 · 고대</text><rect x="146" y="60" width="133" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="212" y="54" style="font-size:9.5px">2구간 · 고려와 조선</text><rect x="282" y="60" width="133" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="348" y="54" style="font-size:9.5px">3구간 · 근현대</text><rect x="10" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="26" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">01</text><rect x="44" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="60" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">02</text><rect x="78" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="94" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">03</text><rect x="112" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="128" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">04</text><rect x="146" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="162" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">05</text><rect x="180" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="196" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">06</text><rect x="214" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="230" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">07</text><rect x="248" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="264" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">08</text><rect x="282" y="70" width="31" height="26" rx="3" fill="#8C2F3E" stroke="#8C2F3E" stroke-width="1.2"/><text x="298" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#fff">09</text><text x="298" y="36" text-anchor="middle" font-family="IBM Plex Sans KR,sans-serif" font-size="13" font-weight="700" fill="#8C2F3E">개항과 근대</text><text x="298" y="120" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10.5" fill="#8C2F3E">1876 ~ 1910</text><path d="M298 40 L298 66" stroke="#8C2F3E" stroke-width="1.4"/><rect x="316" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="332" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">10</text><rect x="350" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="366" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">11</text><rect x="384" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="400" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">12</text><text class="st-m" x="10" y="146" text-anchor="start" style="font-size:9.5px">선사</text><text class="st-m" x="410" y="146" text-anchor="end" style="font-size:9.5px">오늘</text><line x1="34" y1="142" x2="386" y2="142" stroke="#C3CCC1" stroke-width="1"/><polygon points="386,138 396,142 386,146" fill="#8A968F"/></svg>
+  </div>
+
+  <div class="fig">
+    <p class="fig-t">도식 2 · 개항에서 갑오개혁까지</p>
+    <svg viewBox="0 0 420 250" role="img" aria-label="강화도 조약부터 갑오개혁까지의 흐름">
+      <rect class="sb-a" x="8" y="12" width="404" height="44" rx="3"/>
+      <text class="st st-a" x="210" y="32">1876 · 강화도 조약 — 문이 열립니다</text>
+      <text class="st-s" x="210" y="48">일본의 무력시위(운요호 사건) 뒤 맺은 불평등 조약</text>
+      <line class="sl-k" x1="210" y1="56" x2="210" y2="66"/><polygon class="sa-k" points="204,66 210,74 216,66"/>
+      <rect class="sb" x="8" y="76" width="404" height="44" rx="3"/>
+      <text class="st" x="210" y="96">개화 정책 · 그리고 반발</text>
+      <text class="st-s" x="210" y="112">1882 임오군란 — 차별받던 구식 군인들의 봉기</text>
+      <line class="sl-k" x1="210" y1="120" x2="210" y2="130"/><polygon class="sa-k" points="204,130 210,138 216,130"/>
+      <rect class="sb-k" x="8" y="140" width="196" height="44" rx="3"/>
+      <text class="st st-k" x="106" y="160">1884 · 갑신정변</text>
+      <text class="st-s" x="106" y="176">위에서 · 3일 만에 실패</text>
+      <rect class="sb-k" x="216" y="140" width="196" height="44" rx="3"/>
+      <text class="st st-k" x="314" y="160">1894 · 동학농민운동</text>
+      <text class="st-s" x="314" y="176">아래에서 · 농민들이 봉기</text>
+      <line class="sl-k" x1="210" y1="184" x2="210" y2="196"/><polygon class="sa-k" points="204,196 210,204 216,196"/>
+      <rect class="sb-a" x="8" y="206" width="404" height="38" rx="3"/>
+      <text class="st st-a" x="210" y="228">1894 · 갑오개혁 — 신분제가 법으로 폐지됩니다</text>
+    </svg>
+    <p class="fig-c">같은 해(1894)에 <b>아래에서의 봉기</b>와 <b>위에서의 개혁</b>이 함께 일어납니다. 두 흐름은 서로 무관하지 않습니다.</p>
+  </div>
+</section>
+
+<section class="sec" id="mon">
+  <div class="step-no"><span class="num">2</span><span class="lbl">흐름 읽기</span><span class="day">MON · 열기</span></div>
+  <h2>왜 “불평등” 조약이라고 할까</h2>
+
+  <p>1876년 강화도 조약은 우리나라가 맺은 <b>최초의 근대적 조약</b>입니다.
+  동시에 <b>불평등 조약</b>이라고 부르는데, 그 이유가 조항 안에 있습니다.</p>
+
+  <div class="tw wide"><table>
+    <thead><tr><th>조항</th><th>내용</th><th>왜 불평등한가</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">해안 측량권</td><td>일본이 조선의 해안을 마음대로 측량할 수 있다</td><td>군사적으로 중요한 정보를 내주는 것 · 상대는 그럴 수 없음</td></tr>
+      <tr><td class="hd">영사 재판권<br><span class="mn">치외 법권</span></td><td>일본인이 조선에서 죄를 지어도 <b>일본 관리가 재판</b>한다</td><td>우리 땅에서 우리 법이 적용되지 않음</td></tr>
+      <tr><td class="hd">항구 개방</td><td>부산 · 원산 · 인천을 연다</td><td>일본의 경제적 진출 통로가 됨</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="plain">
+    <p><b>조약의 이름이 아니라 조항을 봅니다.</b> “평등하다/불평등하다”는 느낌이 아니라
+    <b>한쪽만 갖는 권리가 있는가</b>로 판단합니다. 이것이 근현대사를 읽는 첫 번째 기술입니다.</p>
+  </div>
+
+  <h3>그다음 18년, 방향을 두고 갈라집니다</h3>
+  <p>문을 연 뒤 조선은 <b>어떻게 바꿀 것인가</b>를 두고 크게 갈립니다.
+  빠르게 서양식으로 바꾸자는 쪽(급진 개화파), 천천히 우리 것을 지키며 바꾸자는 쪽(온건 개화파),
+  아예 열지 말자는 쪽(위정척사) 등이 부딪쳤습니다.
+  <b>1884년 갑신정변</b>은 급진 개화파가 정권을 잡으려다 <b>3일 만에</b> 실패한 사건입니다.</p>
+
+  <div class="alert"><span class="lb">갑신정변이 실패한 이유</span>
+    <p>① <b>일본의 힘에 기댔습니다</b> — 일본이 약속을 지키지 않자 곧바로 무너졌습니다.<br>
+    ② <b>백성의 지지가 없었습니다</b> — 위에서 소수가 일으킨 정변이라 아래로부터의 힘이 없었습니다.<br>
+    이 두 가지는 10년 뒤 <b>동학농민운동</b>과 정확히 반대되는 지점입니다.</p>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w9m1"><span class="tt"><b>월요일</b> — 위를 읽고 질문 3개를 적습니다. 불평등 조항 세 가지를 노트에 옮겨 적습니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="tue">
+  <div class="step-no"><span class="num">3</span><span class="lbl">연표 세우기</span><span class="day">TUE · 채우기</span></div>
+  <h2>연표 아홉 번째 칸</h2>
+
+  <div class="tw wide"><table>
+    <thead><tr><th>사건</th><th>원인 (왜)</th><th>결과 (그래서)</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">강화도 조약<br><span class="mn">1876</span></td>
+        <td>일본이 운요호 사건을 구실로 무력시위를 하며 개항을 요구했습니다</td>
+        <td>부산·원산·인천 개항 · 해안 측량권과 영사 재판권을 내줌 · 근대 문물이 들어오기 시작</td></tr>
+      <tr><td class="hd">갑신정변<br><span class="mn">1884</span></td>
+        <td>개화의 속도를 두고 갈라졌고, 급진 개화파가 정권을 잡으려 했습니다</td>
+        <td>신분제 폐지 등을 담은 개혁안을 냈으나 <b>3일 만에 실패</b> · 일본 의존과 민중의 지지 부족이 원인</td></tr>
+      <tr><td class="hd">동학농민운동과 갑오개혁<br><span class="mn">1894</span></td>
+        <td>탐관오리의 수탈과 외세의 침탈에 농민들이 들고일어났습니다</td>
+        <td>농민군이 <b>폐정개혁</b>을 요구 · 청과 일본이 개입하며 청일 전쟁 · 이 와중에 <b>갑오개혁</b>으로 신분제·과거제 폐지</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="cards two">
+    <div class="card"><span class="ct">인물</span><h4>전봉준</h4>
+      <p>동학농민운동을 이끈 인물. 키가 작아 ‘녹두 장군’으로 불렸습니다.
+      <b>탐관오리 처벌과 신분 차별 폐지</b>를 요구했고, 일본군이 들어오자 다시 봉기했다가 체포되었습니다.</p></div>
+    <div class="card"><span class="ct">사건</span><h4>갑오개혁의 무게</h4>
+      <p>수백 년 이어진 <b>신분제와 과거제가 법으로 폐지</b>됩니다.
+      다만 일본의 영향 아래 진행된 면이 있어 <b>한계</b>도 함께 지적됩니다.
+      성과와 한계를 <b>같이</b> 말하는 것이 이 시기를 다루는 방법입니다.</p></div>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w9m2"><span class="tt"><b>화요일</b> — 연표 아홉 번째 칸을 세우고 1876 · 1884 · 1894 세 연도를 적습니다. 인물 카드 2장을 만듭니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="thu">
+  <div class="step-no"><span class="num">4</span><span class="lbl">사료</span><span class="day">THU · 사료로</span></div>
+  <h2>두 개의 개혁안을 나란히 놓습니다</h2>
+
+  <p>갑신정변의 <b>14개조 정강</b>과 동학농민군의 <b>폐정개혁안</b>은
+  <b>위</b>에서 나온 개혁안과 <b>아래</b>에서 나온 개혁안입니다. 그런데 겹치는 대목이 있습니다.</p>
+
+  <div class="fig">
+    <p class="fig-t">사료 · 두 개혁안 비교 (뜻을 풀어 쓴 것)</p>
+    <svg viewBox="0 0 420 220" role="img" aria-label="갑신정변 정강과 동학 폐정개혁안 비교">
+      <rect class="sb-k" x="8" y="10" width="196" height="150" rx="3"/>
+      <text class="st st-k" x="106" y="32">갑신정변 · 위에서</text>
+      <text class="st-s" x="106" y="58">문벌을 없애고</text>
+      <text class="st-s" x="106" y="78">능력에 따라 관리를 뽑자</text>
+      <text class="st-s" x="106" y="104">세금 제도를 고쳐</text>
+      <text class="st-s" x="106" y="124">백성의 부담을 덜자</text>
+      <text class="st-s" x="106" y="150">청에 대한 조공을 그만두자</text>
+
+      <rect class="sb-a" x="216" y="10" width="196" height="150" rx="3"/>
+      <text class="st st-a" x="314" y="32">동학 · 아래에서</text>
+      <text class="st-s" x="314" y="58">탐관오리를 벌하자</text>
+      <text class="st-s" x="314" y="78">노비 문서를 불태우자</text>
+      <text class="st-s" x="314" y="104">신분에 따른 차별을</text>
+      <text class="st-s" x="314" y="124">없애자</text>
+      <text class="st-s" x="314" y="150">일본과 통하는 자를 벌하자</text>
+
+      <rect class="sb-g" x="8" y="170" width="404" height="42" rx="3"/>
+      <text class="st" x="210" y="192">공통점 · <tspan class="st-k" font-weight="700">신분 차별을 없애자</tspan></text>
+      <text class="st-s" x="210" y="208">다른 자리에서 나왔지만 같은 곳을 가리켰습니다</text>
+    </svg>
+    <p class="fig-c">사료를 <b>나란히 놓고 비교</b>하는 것이 역사 공부의 핵심 기술입니다.
+    공통점은 그 시대가 <b>정말로 원했던 것</b>을 알려 줍니다.</p>
+  </div>
+
+  <div class="cards two">
+    <div class="card"><span class="ct">활동 1</span><h4>공통점 찾기</h4>
+      <p>두 개혁안에서 <b>공통으로 나오는 요구</b>를 하나 골라 적고,
+      왜 위와 아래가 같은 것을 원했는지 한 줄로 씁니다.</p></div>
+    <div class="card"><span class="ct">활동 2</span><h4>개항장 지도</h4>
+      <p>백지도에 <b>부산 · 원산 · 인천</b>을 표시합니다. 세 항구의 위치를 보면
+      <b>일본에서 가까운 순서</b>와 <b>수도로 가는 길목</b>이라는 점이 보입니다.</p></div>
+  </div>
+
+  <div class="tw"><table>
+    <thead><tr><th>기록</th><th>내가 적어 보기</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">두 개혁안의 공통 요구</td><td class="fill">______</td></tr>
+      <tr><td class="hd">가장 큰 차이</td><td class="fill">______</td></tr>
+      <tr><td class="hd">인천이 개항된 이유(위치로 설명)</td><td class="fill">______</td></tr>
+    </tbody>
+  </table></div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w9m3"><span class="tt"><b>목요일</b> — 두 개혁안을 비교해 표를 채우고, 개항장 세 곳을 지도에 표시합니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="fri">
+  <div class="step-no"><span class="num">5</span><span class="lbl">보스전</span><span class="day">FRI · 설명</span></div>
+  <h2>문제 5개와 3분 설명</h2>
+
+  <div class="q"><span class="qn">Q1</span>
+    <p>강화도 조약을 불평등 조약이라고 하는 이유를 두 가지 말해 봅시다.</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>① 일본이 조선의 해안을 마음대로 측량할 수 있게 했습니다
+      ② 일본인이 조선에서 죄를 지어도 일본 관리가 재판하도록 했습니다(영사 재판권).</b>
+      한쪽만 갖는 권리가 있으면 불평등 조약입니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q2</span>
+    <p>갑신정변이 3일 만에 실패한 이유를 두 가지 말해 봅시다.</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>① 일본의 군사력에 기댔는데 일본이 약속을 지키지 않았습니다
+      ② 백성의 지지를 얻지 못한 소수의 정변이었습니다.</b>
+      개혁의 방향과 별개로 <b>방법</b>에 문제가 있었던 사례입니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q3</span>
+    <p>동학농민군이 요구한 것 두 가지를 말해 봅시다.</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>탐관오리 처벌과 신분 차별 폐지</b>가 대표적입니다. 노비 문서를 없애자는 요구도 있었고,
+      일본의 침탈에 반대하는 요구도 있었습니다. <b>아래로부터의 개혁 요구</b>였다는 점이 핵심입니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q4</span>
+    <p>1894년 갑오개혁으로 사라진 제도를 두 가지 말해 봅시다.</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>신분제와 과거제</b>입니다. 수백 년 이어진 제도가 법으로 폐지되었습니다.
+      다만 일본의 영향 아래 진행된 면이 있어 한계도 함께 지적됩니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q5</span>
+    <p>순서대로 놓아 봅시다. ㉠ 갑오개혁 ㉡ 강화도 조약 ㉢ 갑신정변 ㉣ 임오군란</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>㉡ 강화도 조약(1876) → ㉣ 임오군란(1882) → ㉢ 갑신정변(1884) → ㉠ 갑오개혁(1894)</b>입니다.
+      <b>76 · 82 · 84 · 94</b> 네 숫자만 순서대로 잡아 두면 이 단원 문제의 절반이 풀립니다.
+    </div></details>
+  </div>
+
+  <h3>아빠에게 3분 설명하기</h3>
+  <div class="script">
+    <div class="row"><span class="s">배운 것</span><span>문을 연 뒤에 어떻게 바꿀지를 두고 위에서도, 아래에서도 시도가 있었다는 것.</span></div>
+    <div class="row"><span class="s">사료</span><span>갑신정변 정강이랑 동학 요구를 나란히 봤는데, 둘 다 신분 차별을 없애자고 했어.</span></div>
+    <div class="row"><span class="s">헷갈리는 것</span><span>갑신정변은 1884년, 갑오개혁은 1894년이야. 10년 차이야.</span></div>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w9m4"><span class="tt"><b>금요일</b> — 문제 5개와 3분 설명. 네 연도(76·82·84·94)를 손가락으로 짚으며 말해 봅니다.</span></label></li>
+  </ul>
+
+  <p><span class="badge">획득 · 연표 9칸</span></p>
+</section>
+
+<section class="sec" id="next">
+  <div class="step-no"><span class="num">6</span><span class="lbl">다음 주</span></div>
+  <h2>일제 강점기</h2>
+  <p>결국 나라의 주권을 빼앗깁니다. 그러나 그 35년은 <b>빼앗긴 채로 가만히 있던 시간이 아니었습니다.</b>
+  다음 주에는 <b>3·1 운동과 임시정부</b>, 그리고 무장 독립 투쟁을 봅니다.
+  할머니·할아버지께 여쭤볼 것이 생기는 주이기도 합니다.</p>
+  <div class="pager">
+    <a href="week08.html">← 8주차</a>
+    <a href="index.html">전체 지도</a>
+    <a class="main" href="week10.html">10주차 →</a>
+  </div>
+</section>
+
+<footer>역사 항해 12주 · WEEK 09 개항과 근대화 · 하루 20분 × 4일</footer>
+</div>
+<script>
+  (function(){
+    var KEY="history_quest_progress";
+    function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){return{}}}
+    function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+    var boxes=[].slice.call(document.querySelectorAll(".todo input[type=checkbox]"));
+    var st=load();
+    boxes.forEach(function(b){
+      if(st[b.dataset.q])b.checked=true;
+      b.addEventListener("change",function(){
+        var s=load();
+        if(b.checked)s[b.dataset.q]=1;else delete s[b.dataset.q];
+        save(s);paint();
+      });
+    });
+    function paint(){
+      var el=document.getElementById("wdone");
+      if(el){var n=boxes.filter(function(b){return b.checked}).length;
+        el.textContent=n+" / "+boxes.length;}
+      var hub=document.querySelector("[data-hub]");
+      if(hub){
+        var s=load(),total=0;
+        for(var w=1;w<=12;w++){
+          var n2=0;
+          for(var m=1;m<=4;m++) if(s["w"+w+"m"+m]) n2++;
+          total+=n2;
+          var p=document.querySelector('.p[data-p="'+w+'"]');
+          if(p&&!p.dataset.soon){p.textContent=n2===4?"완료":n2+" / 4";
+            p.className="p"+(n2===4?" done":(n2>0?" ing":""));}
+        }
+        var d=document.getElementById("allDone"),bar=document.getElementById("allBar");
+        if(d)d.textContent=total+" / 12";
+        if(bar)bar.style.width=(total/12*100)+"%";
+      }
+    }
+    paint();
+    var links=[].slice.call(document.querySelectorAll("nav.jump a[href^='#']"));
+    if(links.length){
+      var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1))});
+      var onScroll=function(){
+        var y=window.scrollY+130,idx=0;
+        secs.forEach(function(s,i){if(s&&s.offsetTop<=y)idx=i;});
+        links.forEach(function(a,i){a.classList.toggle("now",i===idx);});
+      };
+      window.addEventListener("scroll",onScroll,{passive:true});onScroll();
+    }
+  })();
+</script>
+</body>
+</html>

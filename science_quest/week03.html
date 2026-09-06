@@ -95,6 +95,8 @@
     text-transform:uppercase;color:var(--kelp);margin:0 0 16px;
     padding-bottom:9px;border-bottom:1px solid var(--hair);}
   .fig svg{display:block;width:100%;height:auto;}
+  .fig.wide{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .fig.wide svg{min-width:640px;}
   .fig-c{font-size:13px;color:var(--muted);margin:14px 0 0;font-weight:300;
     line-height:1.65;padding-top:12px;border-top:1px solid var(--hair);}
   .fig-c b{color:var(--ink);font-weight:600;}
@@ -284,7 +286,7 @@
   <p>원자는 <b>블록 한 조각</b>이고, 분자는 <b>조각을 붙여 만든 하나의 물건</b>입니다.
   조각 하나만으로는 그 물건이 되지 않는다는 점이 이번 주의 핵심입니다.</p>
 
-  <div class="fig">
+  <div class="fig wide">
     <p class="fig-t">도식 1 · 원자의 구조와 물 분자</p>
     <svg viewBox="0 0 900 280" role="img" aria-label="원자핵과 전자로 이루어진 원자와, 원자 세 개가 붙은 물 분자">
       <rect class="sb" x="10" y="16" width="420" height="230" rx="3"/>

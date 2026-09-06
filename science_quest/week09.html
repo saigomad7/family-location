@@ -95,6 +95,8 @@
     text-transform:uppercase;color:var(--kelp);margin:0 0 16px;
     padding-bottom:9px;border-bottom:1px solid var(--hair);}
   .fig svg{display:block;width:100%;height:auto;}
+  .fig.wide{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .fig.wide svg{min-width:640px;}
   .fig-c{font-size:13px;color:var(--muted);margin:14px 0 0;font-weight:300;
     line-height:1.65;padding-top:12px;border-top:1px solid var(--hair);}
   .fig-c b{color:var(--ink);font-weight:600;}
@@ -282,7 +284,7 @@
   <div class="step-no"><span class="num">1</span><span class="lbl">이번 주 지도</span></div>
   <h2>재료 셋이 들어가고 둘이 나옵니다</h2>
 
-  <div class="fig">
+  <div class="fig wide">
     <p class="fig-t">도식 1 · 광합성의 재료와 결과</p>
     <svg viewBox="0 0 900 260" role="img" aria-label="이산화탄소와 물과 빛이 엽록체로 들어가 포도당과 산소가 나오는 과정">
       <rect class="sb" x="16" y="40" width="180" height="56" rx="3"/>

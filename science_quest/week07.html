@@ -95,6 +95,8 @@
     text-transform:uppercase;color:var(--kelp);margin:0 0 16px;
     padding-bottom:9px;border-bottom:1px solid var(--hair);}
   .fig svg{display:block;width:100%;height:auto;}
+  .fig.wide{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .fig.wide svg{min-width:640px;}
   .fig-c{font-size:13px;color:var(--muted);margin:14px 0 0;font-weight:300;
     line-height:1.65;padding-top:12px;border-top:1px solid var(--hair);}
   .fig-c b{color:var(--ink);font-weight:600;}
@@ -284,7 +286,7 @@
   <p>직선 전선이면 전선을 감싸는 <b>동심원 모양</b>으로 자기장이 생기고,
   전선을 코일로 감으면 자기장이 겹쳐져 <b>막대자석과 같은 모양</b>이 됩니다.</p>
 
-  <div class="fig">
+  <div class="fig wide">
     <p class="fig-t">도식 1 · 직선 전선의 자기장과 코일 전자석</p>
     <svg viewBox="0 0 900 260" role="img" aria-label="직선 전선 주위의 동심원 자기장과 못에 코일을 감은 전자석">
       <text class="st-s" x="210" y="30">직선 전선 — 동심원 자기장</text>

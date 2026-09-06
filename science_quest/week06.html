@@ -95,6 +95,8 @@
     text-transform:uppercase;color:var(--kelp);margin:0 0 16px;
     padding-bottom:9px;border-bottom:1px solid var(--hair);}
   .fig svg{display:block;width:100%;height:auto;}
+  .fig.wide{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .fig.wide svg{min-width:640px;}
   .fig-c{font-size:13px;color:var(--muted);margin:14px 0 0;font-weight:300;
     line-height:1.65;padding-top:12px;border-top:1px solid var(--hair);}
   .fig-c b{color:var(--ink);font-weight:600;}
@@ -284,7 +286,7 @@
   <p>물탱크가 높을수록(전압이 클수록) 물이 많이 흐르고, 관이 좁을수록(저항이 클수록) 적게 흐릅니다.
   이 두 문장을 식으로 적은 것이 <b>V = I × R</b>입니다.</p>
 
-  <div class="fig">
+  <div class="fig wide">
     <p class="fig-t">도식 1 · 물의 흐름으로 본 회로</p>
     <svg viewBox="0 0 900 280" role="img" aria-label="물탱크 높이는 전압, 흐르는 물의 양은 전류, 좁은 관은 저항에 대응한다는 도식">
       <rect class="sb-k" x="20" y="30" width="170" height="110" rx="3"/>

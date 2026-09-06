@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#DCE2DB">
-<title>11주차 · 지구와 달의 운동</title>
-<meta name="description" content="달 모양이 바뀌는 이유를 공 하나로 보여줄 수 있게 됩니다. 자전·공전·위상.">
+<title>11주차 · 광복과 전쟁</title>
+<meta name="description" content="광복과 분단, 대한민국 정부 수립, 그리고 6·25 전쟁.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@
     --ink:#131C18; --ink2:#2C3A33; --muted:#5F6E66; --faint:#8A968F;
     --mist:#DCE2DB; --surface:#F8FAF6; --surface2:#EFF3EC;
     --line:#C3CCC1; --hair:#DDE4DB;
-    --kelp:#1F6249; --kelp-wash:#DEEDE4; --kelp-line:#8FBBA3;
+    --kelp:#8C2F3E; --kelp-wash:#F6E4E7; --kelp-line:#D9A8B0;
     --amber:#8F6209; --amber-wash:#F5EAD0; --amber-line:#DCC79B;
     --berry:#8C2F3E; --berry-wash:#F3DFE2; --berry-line:#D9A8B0;
     --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
@@ -47,7 +47,7 @@
   .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:18px;}
   .kpi .kl{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
     text-transform:uppercase;color:#7E8F84;display:block;margin-bottom:5px;}
-  .kpi .kv{font-size:clamp(21px,3.2vw,28px);font-weight:700;color:#8FD3B4;
+  .kpi .kv{font-size:clamp(21px,3.2vw,28px);font-weight:700;color:#F0AEB8;
     letter-spacing:-0.03em;display:block;line-height:1.1;}
   .kpi .kn{font-size:12px;color:#B9C6BC;display:block;margin-top:6px;
     font-weight:300;line-height:1.5;}
@@ -102,24 +102,24 @@
   .fig-c b{color:var(--ink);font-weight:600;}
 
   .sb{fill:#fff;stroke:#C3CCC1;stroke-width:1.5;}
-  .sb-k{fill:#DEEDE4;stroke:#1F6249;stroke-width:2;}
+  .sb-k{fill:#F6E4E7;stroke:#8C2F3E;stroke-width:2;}
   .sb-b{fill:#F3DFE2;stroke:#D9A8B0;stroke-width:1.5;}
   .sb-a{fill:#F5EAD0;stroke:#DCC79B;stroke-width:1.5;}
   .sb-g{fill:#EFF3EC;stroke:#C3CCC1;stroke-width:1.5;}
-  .sb-d{fill:#fff;stroke:#1F6249;stroke-width:1.6;stroke-dasharray:5 4;}
+  .sb-d{fill:#fff;stroke:#8C2F3E;stroke-width:1.6;stroke-dasharray:5 4;}
   .st{font-family:var(--sans);font-size:13.5px;font-weight:600;fill:#131C18;
     text-anchor:middle;letter-spacing:-0.3px;}
   .st-s{font-family:var(--sans);font-size:11.5px;font-weight:400;fill:#5F6E66;text-anchor:middle;}
-  .st-k{fill:#1F6249;} .st-b{fill:#8C2F3E;} .st-a{fill:#8F6209;}
+  .st-k{fill:#8C2F3E;} .st-b{fill:#8C2F3E;} .st-a{fill:#8F6209;}
   .sm{font-family:var(--mono);font-size:12px;fill:#131C18;text-anchor:middle;font-weight:500;}
   .sm-s{font-family:var(--mono);font-size:10.5px;fill:#5F6E66;text-anchor:middle;}
   .st-m{font-family:var(--mono);font-size:11px;fill:#8A968F;text-anchor:middle;letter-spacing:0.5px;}
   .sl{stroke:#8A968F;stroke-width:1.6;fill:none;}
-  .sl-k{stroke:#1F6249;stroke-width:2;fill:none;}
+  .sl-k{stroke:#8C2F3E;stroke-width:2;fill:none;}
   .sl-a{stroke:#8F6209;stroke-width:1.8;fill:none;}
   .sl-d{stroke:#8A968F;stroke-width:1.4;fill:none;stroke-dasharray:4 4;}
-  .sa{fill:#8A968F;} .sa-k{fill:#1F6249;} .sa-a{fill:#8F6209;}
-  .dot-k{fill:#1F6249;} .dot-a{fill:#C99A2E;} .dot-b{fill:#8C2F3E;}
+  .sa{fill:#8A968F;} .sa-k{fill:#8C2F3E;} .sa-a{fill:#8F6209;}
+  .dot-k{fill:#8C2F3E;} .dot-a{fill:#C99A2E;} .dot-b{fill:#8C2F3E;}
 
   /* ===== 표 ===== */
   .tw{overflow-x:auto;margin:20px 0 8px;border:1px solid var(--line);
@@ -244,181 +244,186 @@
 <body>
 <div class="wrap">
 <header class="cover">
-  <p class="kicker">WEEK 11 · 캠프 3 생명과 지구 · 하루 20분 × 4일</p>
-  <h1>지구와 달의 운동</h1>
+  <p class="kicker">WEEK 11 · 3구간 근현대 · 하루 20분 × 4일</p>
+  <h1>광복과 전쟁</h1>
   <p class="lede">
-    이 단원은 외우는 단원이 아니라 <b>돌려 보는 단원</b>입니다.
-    달은 스스로 빛나지 않고 햇빛을 반사할 뿐인데, <b>보는 각도</b>가 달라지니 모양이 달라 보입니다. 그것이 전부입니다.
+    1945년 8월 15일, 광복이 옵니다. 그런데 기쁨과 함께 <b>분단</b>이 시작됩니다.
+    이번 주의 질문은 두 개입니다. <b>왜 하필 38선이었을까</b>, 그리고 <b>전쟁은 무엇을 남겼을까.</b>
   </p>
   <div class="metaline">
-    <span>중1 연결 <b>빛의 반사</b></span>
-    <span>개념 <b>자전 · 공전 · 위상</b></span>
-    <span>실험 <b>달 관찰 일지</b></span>
+    <span>연표 <b>11번째 칸</b></span>
+    <span>사건 <b>3개</b></span>
+    <span>사료 <b>가족의 기억</b></span>
     <span>진행 <b id="wdone">0 / 4</b></span>
   </div>
 
   <div class="summary">
     <h2>이번 주에 남길 것</h2>
-    <p class="sd">달의 밝은 면은 언제나 절반입니다. 달라지는 것은 우리가 보는 각도뿐입니다.</p>
+    <p class="sd">8년 사이에 광복 · 분단 · 정부 수립 · 전쟁이 모두 일어납니다.</p>
     <div class="kpis">
-      <div class="kpi"><span class="kl">문장 1</span><span class="kv">자전</span>
-        <span class="kn">하루 한 바퀴 · 낮과 밤이 생긴다</span></div>
-      <div class="kpi"><span class="kl">문장 2</span><span class="kv">공전</span>
-        <span class="kn">일 년 한 바퀴 · 계절이 생긴다</span></div>
-      <div class="kpi"><span class="kl">문장 3</span><span class="kv">각도</span>
-        <span class="kn">달의 모양은 보는 각도의 문제다</span></div>
+      <div class="kpi"><span class="kl">1945</span><span class="kv">광복</span>
+        <span class="kn">그리고 38선을 경계로 미·소가 나누어 주둔</span></div>
+      <div class="kpi"><span class="kl">1948</span><span class="kv">정부 수립</span>
+        <span class="kn">5·10 총선거 · 8월 15일 대한민국 정부 수립</span></div>
+      <div class="kpi"><span class="kl">1950~53</span><span class="kv">6·25</span>
+        <span class="kn">북한의 남침으로 시작 · 3년 만에 정전</span></div>
     </div>
   </div>
 </header>
 
 <nav class="jump"><div class="row">
-  <a href="#map">이번 주 지도</a>
+  <a href="#map">이번 주 칸</a>
   <a href="#mon">월 · 열기</a>
   <a href="#tue">화 · 채우기</a>
-  <a href="#thu">목 · 손으로</a>
+  <a href="#thu">목 · 사료로</a>
   <a href="#fri">금 · 보스전</a>
   <a href="#next">다음 주</a>
 </div></nav>
 
 <section class="sec" id="map">
-  <div class="step-no"><span class="num">1</span><span class="lbl">이번 주 지도</span></div>
-  <h2>달의 절반은 언제나 밝습니다</h2>
-  <p>달은 약 한 달에 걸쳐 지구를 한 바퀴 돕니다. 그동안 태양·지구·달의 <b>위치 관계</b>가 달라지고,
-  지구에서 보이는 밝은 부분의 모양이 한 번 순환합니다.</p>
+  <div class="step-no"><span class="num">1</span><span class="lbl">이번 주 칸</span></div>
+  <h2>8년 사이에 벌어진 일</h2>
 
-  <div class="fig wide">
-    <p class="fig-t">도식 1 · 위치에 따른 달의 모양</p>
-    <svg viewBox="0 0 900 300" role="img" aria-label="태양 지구 달의 위치에 따른 달의 위상 변화">
-      <text class="st-s st-a" x="70" y="30">햇빛 →</text>
-      <g stroke="#8F6209" stroke-width="2">
-        <line x1="16" y1="60" x2="150" y2="60"/><line x1="16" y1="150" x2="150" y2="150"/><line x1="16" y1="240" x2="150" y2="240"/>
-      </g>
-      <circle cx="450" cy="150" r="122" fill="none" stroke="#C3CCC1" stroke-width="1.4" stroke-dasharray="5 6"/>
-      <circle class="sb-k" cx="450" cy="150" r="40"/>
-      <text class="st st-k" x="450" y="156">지구</text>
+  <div class="fig">
+    <p class="fig-t">도식 1 · 12주 연표에서 이번 주의 자리</p>
+    <svg viewBox="0 0 420 156" role="img" aria-label="12주 연표에서 이번 주의 위치"><rect x="10" y="60" width="133" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="76" y="54" style="font-size:9.5px">1구간 · 고대</text><rect x="146" y="60" width="133" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="212" y="54" style="font-size:9.5px">2구간 · 고려와 조선</text><rect x="282" y="60" width="133" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="348" y="54" style="font-size:9.5px">3구간 · 근현대</text><rect x="10" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="26" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">01</text><rect x="44" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="60" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">02</text><rect x="78" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="94" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">03</text><rect x="112" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="128" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">04</text><rect x="146" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="162" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">05</text><rect x="180" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="196" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">06</text><rect x="214" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="230" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">07</text><rect x="248" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="264" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">08</text><rect x="282" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="298" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">09</text><rect x="316" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="332" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">10</text><rect x="350" y="70" width="31" height="26" rx="3" fill="#8C2F3E" stroke="#8C2F3E" stroke-width="1.2"/><text x="366" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#fff">11</text><text x="410" y="36" text-anchor="end" font-family="IBM Plex Sans KR,sans-serif" font-size="13" font-weight="700" fill="#8C2F3E">광복과 전쟁</text><text x="410" y="120" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="10.5" fill="#8C2F3E">1945 ~ 1953</text><path d="M366 40 L366 66" stroke="#8C2F3E" stroke-width="1.4"/><rect x="384" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="400" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">12</text><text class="st-m" x="10" y="146" text-anchor="start" style="font-size:9.5px">선사</text><text class="st-m" x="410" y="146" text-anchor="end" style="font-size:9.5px">오늘</text><line x1="34" y1="142" x2="386" y2="142" stroke="#C3CCC1" stroke-width="1"/><polygon points="386,138 396,142 386,146" fill="#8A968F"/></svg>
+  </div>
 
-      <circle class="sb" cx="328" cy="150" r="22"/>
-      <path d="M328 128 A22 22 0 0 0 328 172 Z" fill="#131C18"/>
-      <text class="st-s" x="300" y="196">삭 · 보이지 않음</text>
-
-      <circle class="sb" cx="450" cy="28" r="22"/>
-      <path d="M450 6 A22 22 0 0 0 450 50 Z" fill="#131C18"/>
-      <text class="st-s" x="536" y="26">상현달</text>
-
-      <circle cx="572" cy="150" r="22" fill="#131C18" stroke="#C3CCC1" stroke-width="1.5"/>
-      <text class="st-s" x="620" y="196">보름달</text>
-
-      <circle class="sb" cx="450" cy="272" r="22"/>
-      <path d="M450 250 A22 22 0 0 0 450 294 Z" fill="#131C18"/>
-      <text class="st-s" x="536" y="286">하현달</text>
-
-      <text class="st-m" x="770" y="126">달의 밝은 쪽은</text>
-      <text class="st-m" x="770" y="148">언제나 절반입니다</text>
-      <text class="st-m st-k" x="770" y="176">보이는 각도만</text>
-      <text class="st-m st-k" x="770" y="198">달라집니다</text>
+  <div class="fig">
+    <p class="fig-t">도식 2 · 광복에서 정전까지</p>
+    <svg viewBox="0 0 420 240" role="img" aria-label="광복 분단 정부수립 전쟁 정전의 흐름">
+      <rect class="sb-k" x="8" y="12" width="404" height="42" rx="3"/>
+      <text class="st st-k" x="210" y="32">1945 · 광복</text>
+      <text class="st-s" x="210" y="48">일본의 항복 · 그러나 곧 38선을 경계로 미·소가 나누어 주둔</text>
+      <line class="sl-k" x1="210" y1="54" x2="210" y2="64"/><polygon class="sa-k" points="204,64 210,72 216,64"/>
+      <rect class="sb" x="8" y="74" width="404" height="42" rx="3"/>
+      <text class="st" x="210" y="94">1945 ~ 48 · 어떻게 나라를 세울 것인가</text>
+      <text class="st-s" x="210" y="110">신탁 통치 논쟁 · 좌우 대립 · 통일 정부를 위한 노력</text>
+      <line class="sl-k" x1="210" y1="116" x2="210" y2="126"/><polygon class="sa-k" points="204,126 210,134 216,126"/>
+      <rect class="sb" x="8" y="136" width="404" height="42" rx="3"/>
+      <text class="st" x="210" y="156">1948 · 대한민국 정부 수립</text>
+      <text class="st-s" x="210" y="172">5·10 총선거 → 제헌 국회 → 8월 15일 정부 수립 · 북에도 별도 정권</text>
+      <line class="sl-k" x1="210" y1="178" x2="210" y2="188"/><polygon class="sa-k" points="204,188 210,196 216,188"/>
+      <rect class="sb-b" x="8" y="198" width="404" height="38" rx="3"/>
+      <text class="st st-b" x="210" y="220">1950 ~ 53 · 6·25 전쟁 → 정전 · 분단의 고착</text>
     </svg>
-    <p class="fig-c"><b>보름달은 태양의 반대편</b>에 있을 때입니다. 그래서 해가 지면 뜨고 밤새 볼 수 있습니다.
-    <b>삭</b>은 태양과 같은 방향이라 낮에 떠 있어 보이지 않습니다.</p>
+    <p class="fig-c">이 여덟 해가 <b>오늘 우리가 사는 조건</b>을 만들었습니다. 남북 분단도, 지금의 휴전선도 여기서 시작됩니다.</p>
   </div>
 </section>
 
 <section class="sec" id="mon">
-  <div class="step-no"><span class="num">2</span><span class="lbl">개념 하나</span><span class="day">MON · 열기</span></div>
-  <h2>자전과 공전, 두 개의 회전</h2>
+  <div class="step-no"><span class="num">2</span><span class="lbl">흐름 읽기</span><span class="day">MON · 열기</span></div>
+  <h2>왜 38선이었을까</h2>
 
-  <p>지구는 두 가지 회전을 동시에 합니다. 헷갈리지 않게 <b>무엇을 중심으로 도는지</b>로 구별합니다.</p>
-  <div class="tw"><table>
-    <thead><tr><th></th><th>자전</th><th>공전</th></tr></thead>
-    <tbody>
-      <tr><td class="hd">무엇</td><td>제자리에서 팽이처럼 돈다</td><td>태양 둘레를 돈다</td></tr>
-      <tr><td class="hd">주기</td><td class="mn">하루 (약 24시간)</td><td class="mn">일 년 (약 365일)</td></tr>
-      <tr><td class="hd">생기는 일</td><td>낮과 밤 · 해가 뜨고 짐</td><td>계절 변화 · 별자리가 바뀜</td></tr>
-    </tbody>
-  </table></div>
+  <p>광복은 <b>우리의 독립운동</b>과 <b>일본의 패전</b>이 함께 만든 결과였습니다.
+  그런데 일본군의 무장을 해제한다는 명분으로 <b>북쪽은 소련이, 남쪽은 미국이</b> 들어옵니다.
+  그 경계로 그어진 것이 <b>38선</b>이었습니다.</p>
 
-  <div class="alert"><span class="lb">가장 많이 하는 착각</span>
-    <p>“여름은 지구가 태양에 <b>가까워서</b> 덥다” — <b>아닙니다.</b>
-    지구 <b>자전축이 기울어져</b> 있어서 여름에는 햇빛이 더 <b>수직에 가깝게</b> 들어오고 낮이 길어지기 때문입니다.
-    실제로 지구는 1월쯤 태양에 가장 가깝습니다.</p>
+  <div class="plain">
+    <p><b>38선은 처음에 “임시 경계”였습니다.</b> 우리 뜻으로 그은 선이 아니라,
+    강대국이 편의상 정한 선이었습니다. 그런데 이 임시 선이 <b>냉전</b>이라는 세계적 대립과 겹치면서
+    좀처럼 지워지지 않게 됩니다.</p>
   </div>
 
-  <p>달도 지구 둘레를 돕니다. 한 바퀴에 약 <b>한 달</b>이 걸리고, 그동안 달의 모양이 한 번 순환합니다.
-  ‘한 달’이라는 말 자체가 달의 주기에서 나왔습니다.</p>
+  <h3>어떻게 나라를 세울 것인가</h3>
+  <p>광복 뒤 3년은 <b>격렬한 논쟁의 시간</b>이었습니다. 신탁 통치 문제로 의견이 갈렸고,
+  <b>통일 정부를 세우려는 노력</b>도 있었지만 끝내 합의에 이르지 못했습니다.
+  결국 1948년 5월 10일 남쪽에서 총선거가 치러지고, 제헌 국회가 헌법을 만들어
+  <b>8월 15일 대한민국 정부가 수립</b>됩니다. 북쪽에도 별도의 정권이 세워집니다.</p>
+
+  <div class="note"><span class="lb">이 대목을 다루는 방법</span>
+    <p>이 시기는 지금도 <b>평가가 갈리는 대목</b>이 있습니다. 그래서 이 문서는
+    <b>“무슨 일이 언제 있었는지”</b>를 먼저 정확히 잡고, 평가는 <b>스스로 생각해 보게</b> 합니다.
+    아빠도 결론을 먼저 말하기보다 <b>“너는 어떻게 생각해?”</b>로 물어 주세요.
+    역사 과목이 기르려는 힘이 바로 그것입니다.</p>
+  </div>
 
   <ul class="todo">
-    <li><label><input type="checkbox" data-q="w11m1"><span class="tt"><b>월요일</b> — 자전·공전 표를 읽고 질문 3개를 적습니다. 오늘 밤 달을 한 번 보고 모양을 그립니다.</span></label></li>
+    <li><label><input type="checkbox" data-q="w11m1"><span class="tt"><b>월요일</b> — 위를 읽고 질문 3개를 적습니다. “38선이 왜 그어졌는지”를 한 줄로 답해 봅니다.</span></label></li>
   </ul>
 </section>
 
 <section class="sec" id="tue">
-  <div class="step-no"><span class="num">3</span><span class="lbl">개념 둘</span><span class="day">TUE · 채우기</span></div>
-  <h2>달의 모양이 바뀌는 이유</h2>
-
-  <p>중1에서 배운 것 하나가 열쇠입니다. <b>달은 스스로 빛나지 않습니다.</b> 햇빛을 반사할 뿐입니다.
-  그래서 달에서 빛을 받는 쪽은 <b>언제나 정확히 절반</b>입니다. 달라지는 것은 달이 아니라 <b>우리가 보는 각도</b>입니다.</p>
+  <div class="step-no"><span class="num">3</span><span class="lbl">연표 세우기</span><span class="day">TUE · 채우기</span></div>
+  <h2>연표 열한 번째 칸</h2>
 
   <div class="tw wide"><table>
-    <thead><tr><th>이름</th><th>위치</th><th>보이는 모양</th><th>보이는 때</th></tr></thead>
+    <thead><tr><th>사건</th><th>원인 (왜)</th><th>결과 (그래서)</th></tr></thead>
     <tbody>
-      <tr><td class="hd">삭 (그믐)</td><td>달이 태양 쪽에 있음</td><td>거의 보이지 않음</td><td>낮에 함께 떠서 보이지 않습니다</td></tr>
-      <tr><td class="hd">상현달</td><td>지구 기준 90°</td><td>오른쪽 반달</td><td>초저녁 남쪽 하늘</td></tr>
-      <tr><td class="hd">보름달</td><td>태양 반대편</td><td>완전히 둥금</td><td>해 질 때 떠서 밤새 보입니다</td></tr>
-      <tr><td class="hd">하현달</td><td>반대쪽 90°</td><td>왼쪽 반달</td><td>새벽에 보입니다</td></tr>
+      <tr><td class="hd">광복과 분단의 시작<br><span class="mn">1945</span></td>
+        <td>일본이 패망했고, 일본군 무장 해제를 명분으로 미·소가 들어왔습니다</td>
+        <td>38선을 경계로 남북에 서로 다른 군정 · 좌우 대립이 커짐</td></tr>
+      <tr><td class="hd">대한민국 정부 수립<br><span class="mn">1948</span></td>
+        <td>통일 정부 수립을 위한 협의가 끝내 합의에 이르지 못했습니다</td>
+        <td>5·10 총선거 → 제헌 국회 → <b>8월 15일 정부 수립</b> · 북에도 별도 정권 · 분단 고착</td></tr>
+      <tr><td class="hd">6·25 전쟁<br><span class="mn">1950 ~ 1953</span></td>
+        <td>1950년 6월 25일 <b>북한의 남침</b>으로 전쟁이 시작되었습니다</td>
+        <td>낙동강까지 밀림 → 인천 상륙 작전으로 반격 → 중국군 개입 → 밀고 밀리다 <b>1953년 정전</b> ·
+        수백만 명의 사상자와 이산가족 · 국토의 황폐화</td></tr>
     </tbody>
   </table></div>
 
-  <div class="plain">
-    <p><b>기억법</b> — 위치를 알면 시간이 따라 나옵니다. 보름달은 태양 반대편이라 해가 지면 뜨고,
-    삭은 태양과 같은 방향이라 낮에 떠서 보이지 않습니다.</p>
+  <div class="cards two">
+    <div class="card"><span class="ct">개념</span><h4>정전과 종전</h4>
+      <p>1953년에 맺어진 것은 <b>정전(휴전) 협정</b>입니다. 전쟁을 <b>멈춘 것</b>이지 <b>끝낸 것</b>이 아닙니다.
+      지금의 <b>휴전선</b>과 비무장지대(DMZ)가 그때 생겼습니다.
+      뉴스에 나오는 남북 문제의 출발점이 여기입니다.</p></div>
+    <div class="card"><span class="ct">개념</span><h4>이산가족</h4>
+      <p>전쟁으로 가족이 남과 북으로 흩어져 만나지 못하게 된 사람들입니다.
+      1983년 방송된 <b>이산가족 찾기</b>는 138일 동안 이어졌고,
+      그 기록물은 <b>유네스코 세계기록유산</b>으로 등재되었습니다.</p></div>
   </div>
 
-  <h3>노트 한 장 양식</h3>
-  <div class="tw"><table>
-    <thead><tr><th>칸</th><th>여기에 쓸 것</th></tr></thead>
-    <tbody>
-      <tr><td class="hd">① 그림</td><td>가운데 지구, 둘레에 달 4개(삭·상현·보름·하현), 왼쪽에서 오는 햇빛 화살표</td></tr>
-      <tr><td class="hd">② 한 줄</td><td>달은 스스로 빛나지 않는다 — 보는 각도가 달라질 뿐이다</td></tr>
-      <tr><td class="hd">③ 표</td><td>위 네 가지 위상 표를 옮겨 쓰기</td></tr>
-      <tr><td class="hd">④ 착각</td><td>계절이 생기는 진짜 이유 (거리가 아니라 자전축 기울기)</td></tr>
-    </tbody>
-  </table></div>
-
   <ul class="todo">
-    <li><label><input type="checkbox" data-q="w11m2"><span class="tt"><b>화요일</b> — 노트 한 장을 채웁니다. ①번 그림을 보지 않고 다시 그릴 수 있으면 끝난 것입니다.</span></label></li>
+    <li><label><input type="checkbox" data-q="w11m2"><span class="tt"><b>화요일</b> — 연표 열한 번째 칸을 세우고 1945 · 1948 · 1950 · 1953 네 연도를 적습니다. 전쟁의 전개를 화살표로 그립니다.</span></label></li>
   </ul>
 </section>
 
 <section class="sec" id="thu">
-  <div class="step-no"><span class="num">4</span><span class="lbl">실험</span><span class="day">THU · 손으로</span></div>
-  <h2>내 머리를 지구로 삼습니다</h2>
+  <div class="step-no"><span class="num">4</span><span class="lbl">사료</span><span class="day">THU · 사료로</span></div>
+  <h2>이번 주의 사료는 <b>가족의 기억</b>입니다</h2>
+
+  <p>이 시기는 <b>아직 살아 계신 분들의 기억 속에 있는 역사</b>입니다.
+  교과서 밖에 남아 있는 사료를 직접 만나는 흔치 않은 기회입니다.</p>
+
+  <div class="fig">
+    <p class="fig-t">활동 · 인터뷰 질문 세 개</p>
+    <svg viewBox="0 0 420 200" role="img" aria-label="가족 인터뷰 질문 세 가지">
+      <rect class="sb-g" x="8" y="10" width="404" height="52" rx="3"/>
+      <text class="st" x="210" y="34">① “그때 우리 집은 어디에 살았어요?”</text>
+      <text class="st-s" x="210" y="52">→ 전쟁 중 피란을 갔는지, 어디로 갔는지</text>
+      <rect class="sb-g" x="8" y="70" width="404" height="52" rx="3"/>
+      <text class="st" x="210" y="94">② “그 시절에 제일 기억나는 장면이 뭐예요?”</text>
+      <text class="st-s" x="210" y="112">→ 사건이 아니라 <tspan font-weight="700">장면</tspan>을 물으면 이야기가 나옵니다</text>
+      <rect class="sb-g" x="8" y="130" width="404" height="52" rx="3"/>
+      <text class="st" x="210" y="154">③ “그때 사람들은 뭘 제일 걱정했어요?”</text>
+      <text class="st-s" x="210" y="172">→ 교과서에 없는 <tspan font-weight="700">그 시대의 마음</tspan></text>
+    </svg>
+    <p class="fig-c">들은 이야기를 <b>날짜 · 말한 사람 · 내용</b> 세 줄로 적으면 그 자체로 사료가 됩니다.
+    가능하다면 <b>녹음</b>해 두면 더 좋습니다.</p>
+  </div>
 
   <div class="cards two">
-    <div class="card"><span class="ct">실험 1</span><h4>방에서 달 만들기</h4>
-      <p>어두운 방에서 <b>스탠드를 태양</b>, <b>내 머리를 지구</b>, <b>손에 든 공을 달</b>로 삼습니다.
-      공을 눈높이로 들고 제자리에서 천천히 한 바퀴 돌며 공의 밝은 부분을 봅니다.
-      초승달 → 상현달 → 보름달 → 하현달이 손 안에서 그대로 만들어집니다.</p></div>
-    <div class="card"><span class="ct">실험 2</span><h4>7일 달 관찰</h4>
-      <p>오늘부터 <b>매일 같은 시각</b>에 달을 보고 모양을 그리거나 사진을 찍습니다. 흐리면 “흐림”이라 적습니다.
-      7일이면 모양이 <b>한쪽으로 계속 변해 가는 것</b>이 보입니다.</p></div>
-    <div class="card"><span class="ct">실험 3</span><h4>축척 태양계</h4>
-      <p>태양을 <b>지름 20 cm 농구공</b>으로 놓으면 지구는 <b>2 mm 좁쌀</b>만 하고 약 <b>22 m</b> 떨어져 있습니다.
-      복도나 운동장에서 실제로 걸어서 재 봅니다.</p></div>
-    <div class="card"><span class="ct">기록</span><h4>관찰 일지 양식</h4>
-      <p>날짜 · 시각 · 모양 그림 · 하늘에서의 위치(동/남/서) 네 칸만 적습니다. 수행평가 자료로 그대로 쓸 수 있습니다.</p></div>
+    <div class="card"><span class="ct">활동 대안</span><h4>사진으로 보는 전쟁</h4>
+      <p>가족 인터뷰가 어려우면 <b>‘6·25 전쟁 사진’</b>을 검색해 봅니다.
+      피란 행렬, 다리 위의 사람들, 학교가 된 천막 교실 사진을 보고
+      <b>사진 한 장에서 알 수 있는 것</b>을 세 가지 적습니다.</p></div>
+    <div class="card"><span class="ct">활동 대안</span><h4>우리 동네의 흔적</h4>
+      <p>우리 동네에 <b>전쟁이나 그 시기와 관련된 장소·기념비</b>가 있는지 찾아봅니다.
+      역사가 <b>먼 곳의 이야기가 아니라는 것</b>을 확인하는 활동입니다.</p></div>
   </div>
 
   <div class="tw"><table>
-    <thead><tr><th>날짜</th><th>시각</th><th>모양</th><th>위치</th></tr></thead>
+    <thead><tr><th>기록</th><th>내가 적어 보기</th></tr></thead>
     <tbody>
-      <tr><td class="hd">1일째</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td></tr>
-      <tr><td class="hd">3일째</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td></tr>
-      <tr><td class="hd">5일째</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td></tr>
-      <tr><td class="hd">7일째</td><td class="fill">______</td><td class="fill">______</td><td class="fill">______</td></tr>
+      <tr><td class="hd">인터뷰한 분 · 날짜</td><td class="fill">______</td></tr>
+      <tr><td class="hd">가장 기억에 남는 이야기</td><td class="fill">______</td></tr>
+      <tr><td class="hd">교과서에는 없던 내용</td><td class="fill">______</td></tr>
     </tbody>
   </table></div>
 
   <ul class="todo">
-    <li><label><input type="checkbox" data-q="w11m3"><span class="tt"><b>목요일</b> — 공으로 위상을 재현해 보고, 달 관찰 일지를 시작합니다(오늘이 1일째).</span></label></li>
+    <li><label><input type="checkbox" data-q="w11m3"><span class="tt"><b>목요일</b> — 가족 인터뷰를 하고 세 줄로 기록합니다. 어려우면 사진 활동으로 대신합니다.</span></label></li>
   </ul>
 </section>
 
@@ -427,63 +432,64 @@
   <h2>문제 5개와 3분 설명</h2>
 
   <div class="q"><span class="qn">Q1</span>
-    <p>달의 모양이 날마다 달라 보이는 이유는 무엇일까요?</p>
+    <p>38선은 왜, 누가 그었을까요?</p>
     <details><summary>해설 보기</summary><div class="ans">
-      <b>달이 지구 둘레를 돌면서 태양·지구·달의 위치 관계가 바뀌어, 지구에서 보이는 밝은 부분의 각도가 달라지기 때문입니다.</b>
-      달 자체가 커지거나 작아지는 것이 아닙니다.
+      <b>일본군의 무장 해제를 명분으로 미국과 소련이 남북을 나누어 맡기로 하면서 그은 임시 경계선입니다.</b>
+      우리 뜻으로 그은 선이 아니었고, 냉전과 겹치며 <b>분단으로 굳어졌습니다.</b>
     </div></details>
   </div>
 
   <div class="q"><span class="qn">Q2</span>
-    <p>보름달일 때 태양·지구·달은 어떤 순서로 놓여 있을까요?</p>
+    <p>대한민국 정부가 수립되기까지의 과정을 순서대로 말해 봅시다.</p>
     <details><summary>해설 보기</summary><div class="ans">
-      <b>태양 – 지구 – 달 순서입니다.</b> 달이 태양 반대편에 있어 밝은 면 전체가 보이고, 해 질 무렵 떠서 밤새 볼 수 있습니다.
+      <b>5·10 총선거(1948) → 제헌 국회 구성 → 헌법 제정 → 1948년 8월 15일 대한민국 정부 수립</b>입니다.
+      비슷한 시기에 북쪽에도 별도의 정권이 세워졌습니다.
     </div></details>
   </div>
 
   <div class="q"><span class="qn">Q3</span>
-    <p>계절이 생기는 이유는 지구와 태양 사이의 거리 때문일까요?</p>
+    <p>6·25 전쟁의 전개를 네 단계로 말해 봅시다.</p>
     <details><summary>해설 보기</summary><div class="ans">
-      <b>아닙니다. 지구 자전축이 기울어진 채로 공전하기 때문입니다.</b>
-      기울기 때문에 계절마다 햇빛이 들어오는 각도와 낮의 길이가 달라집니다.
+      <b>① 1950년 6월 25일 북한의 남침 → ② 낙동강 부근까지 밀림 → ③ 인천 상륙 작전으로 반격,
+      압록강 부근까지 진격 → ④ 중국군 개입으로 다시 밀린 뒤 밀고 밀리다 1953년 정전</b>입니다.
     </div></details>
   </div>
 
   <div class="q"><span class="qn">Q4</span>
-    <p>낮과 밤이 생기는 것은 지구의 자전 때문일까요, 공전 때문일까요?</p>
+    <p>1953년에 맺은 것은 종전 협정일까요, 정전 협정일까요? 그 차이는 무엇일까요?</p>
     <details><summary>해설 보기</summary><div class="ans">
-      <b>자전입니다.</b> 하루에 한 바퀴 돌면서 햇빛을 받는 쪽이 낮, 반대쪽이 밤이 됩니다.
-      공전(1년)은 계절과 별자리 변화를 만듭니다.
+      <b>정전(휴전) 협정입니다.</b> 전쟁을 <b>멈춘 것</b>이지 <b>끝낸 것이 아닙니다.</b>
+      그래서 지금도 휴전선과 비무장지대가 있고, 남북 문제가 이어지고 있습니다.
     </div></details>
   </div>
 
   <div class="q"><span class="qn">Q5</span>
-    <p>달의 뒷면을 지구에서 볼 수 없는 이유는 무엇일까요?</p>
+    <p>전쟁이 남긴 것을 두 가지 말해 봅시다.</p>
     <details><summary>해설 보기</summary><div class="ans">
-      <b>달의 자전 주기와 공전 주기가 같기 때문입니다.</b> 돌면서 같은 속도로 방향도 바뀌어 늘 같은 면이 지구를 향합니다.
-      공을 들고 사람 둘레를 돌 때 공의 같은 면이 계속 그 사람을 향하게 하는 것과 같습니다.
+      <b>① 수백만 명의 사상자와 이산가족 ② 국토와 산업 시설의 파괴</b>가 대표적입니다.
+      또한 남북의 <b>분단이 굳어지고 서로에 대한 적대감</b>이 깊어졌습니다.
     </div></details>
   </div>
 
   <h3>아빠에게 3분 설명하기</h3>
   <div class="script">
-    <div class="row"><span class="s">배운 것</span><span>달은 스스로 빛나지 않고, 보는 각도가 달라져서 모양이 바뀌어 보인다는 것.</span></div>
-    <div class="row"><span class="s">예를 들면</span><span>공을 들고 한 바퀴 돌아 볼게. (직접 보여주기) 여기가 보름달, 여기가 상현달이야.</span></div>
-    <div class="row"><span class="s">헷갈리는 것</span><span>여름이 더운 건 태양이 가까워서가 아니라 자전축이 기울어져서야.</span></div>
+    <div class="row"><span class="s">배운 것</span><span>광복과 함께 38선이 그어졌고, 3년 뒤 정부가 세워졌고, 2년 뒤 전쟁이 났다는 것.</span></div>
+    <div class="row"><span class="s">사료</span><span>할머니께 그때 이야기를 여쭤봤어. (들은 이야기 한 가지)</span></div>
+    <div class="row"><span class="s">헷갈리는 것</span><span>1953년에 한 건 종전이 아니라 정전이야. 전쟁을 멈춘 거지 끝낸 게 아니야.</span></div>
   </div>
 
   <ul class="todo">
-    <li><label><input type="checkbox" data-q="w11m4"><span class="tt"><b>금요일</b> — 문제 5개와 공을 들고 3분 설명. 달 관찰 일지는 계속 이어 갑니다.</span></label></li>
+    <li><label><input type="checkbox" data-q="w11m4"><span class="tt"><b>금요일</b> — 문제 5개와 3분 설명. 인터뷰한 이야기를 함께 전합니다.</span></label></li>
   </ul>
 
-  <p><span class="badge">획득 · 달 기록관</span></p>
+  <p><span class="badge">획득 · 연표 11칸</span></p>
 </section>
 
 <section class="sec" id="next">
   <div class="step-no"><span class="num">6</span><span class="lbl">다음 주</span></div>
-  <h2>열의 이동, 그리고 정상</h2>
-  <p>드디어 마지막 주입니다. 1주차의 입자 그림이 마지막으로 한 번 더 쓰이고,
-  <b>12주 동안 배운 것 중 하나를 골라 가족 앞에서 15분 강의</b>를 합니다.</p>
+  <h2>산업화와 민주화</h2>
+  <p>마지막 주입니다. 폐허에서 시작해 오늘에 이르는 길, 그리고 그 과정에서
+  <b>사람들이 무엇을 지켜 냈는지</b>를 봅니다. 그리고 <b>12주 전체를 한 장의 연표로</b> 마무리합니다.</p>
   <div class="pager">
     <a href="week10.html">← 10주차</a>
     <a href="index.html">전체 지도</a>
@@ -491,11 +497,11 @@
   </div>
 </section>
 
-<footer>과학 등반 12주 · WEEK 11 지구와 달의 운동 · 하루 20분 × 4일</footer>
+<footer>역사 항해 12주 · WEEK 11 광복과 전쟁 · 하루 20분 × 4일</footer>
 </div>
 <script>
   (function(){
-    var KEY="science_quest_progress";
+    var KEY="history_quest_progress";
     function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){return{}}}
     function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
     var boxes=[].slice.call(document.querySelectorAll(".todo input[type=checkbox]"));

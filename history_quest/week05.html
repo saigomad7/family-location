@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#DCE2DB">
-<title>5주차 · 정전기와 전하</title>
-<meta name="description" content="문고리에서 따끔한 이유. 마찰로 전자가 옮겨 가며 생기는 전하를 배웁니다.">
+<title>5주차 · 고려 후기</title>
+<meta name="description" content="무신정변부터 몽골 항쟁, 원 간섭기와 공민왕의 개혁까지.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@
     --ink:#131C18; --ink2:#2C3A33; --muted:#5F6E66; --faint:#8A968F;
     --mist:#DCE2DB; --surface:#F8FAF6; --surface2:#EFF3EC;
     --line:#C3CCC1; --hair:#DDE4DB;
-    --kelp:#1F6249; --kelp-wash:#DEEDE4; --kelp-line:#8FBBA3;
+    --kelp:#8C2F3E; --kelp-wash:#F6E4E7; --kelp-line:#D9A8B0;
     --amber:#8F6209; --amber-wash:#F5EAD0; --amber-line:#DCC79B;
     --berry:#8C2F3E; --berry-wash:#F3DFE2; --berry-line:#D9A8B0;
     --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
@@ -47,7 +47,7 @@
   .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:18px;}
   .kpi .kl{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
     text-transform:uppercase;color:#7E8F84;display:block;margin-bottom:5px;}
-  .kpi .kv{font-size:clamp(21px,3.2vw,28px);font-weight:700;color:#8FD3B4;
+  .kpi .kv{font-size:clamp(21px,3.2vw,28px);font-weight:700;color:#F0AEB8;
     letter-spacing:-0.03em;display:block;line-height:1.1;}
   .kpi .kn{font-size:12px;color:#B9C6BC;display:block;margin-top:6px;
     font-weight:300;line-height:1.5;}
@@ -102,24 +102,24 @@
   .fig-c b{color:var(--ink);font-weight:600;}
 
   .sb{fill:#fff;stroke:#C3CCC1;stroke-width:1.5;}
-  .sb-k{fill:#DEEDE4;stroke:#1F6249;stroke-width:2;}
+  .sb-k{fill:#F6E4E7;stroke:#8C2F3E;stroke-width:2;}
   .sb-b{fill:#F3DFE2;stroke:#D9A8B0;stroke-width:1.5;}
   .sb-a{fill:#F5EAD0;stroke:#DCC79B;stroke-width:1.5;}
   .sb-g{fill:#EFF3EC;stroke:#C3CCC1;stroke-width:1.5;}
-  .sb-d{fill:#fff;stroke:#1F6249;stroke-width:1.6;stroke-dasharray:5 4;}
+  .sb-d{fill:#fff;stroke:#8C2F3E;stroke-width:1.6;stroke-dasharray:5 4;}
   .st{font-family:var(--sans);font-size:13.5px;font-weight:600;fill:#131C18;
     text-anchor:middle;letter-spacing:-0.3px;}
   .st-s{font-family:var(--sans);font-size:11.5px;font-weight:400;fill:#5F6E66;text-anchor:middle;}
-  .st-k{fill:#1F6249;} .st-b{fill:#8C2F3E;} .st-a{fill:#8F6209;}
+  .st-k{fill:#8C2F3E;} .st-b{fill:#8C2F3E;} .st-a{fill:#8F6209;}
   .sm{font-family:var(--mono);font-size:12px;fill:#131C18;text-anchor:middle;font-weight:500;}
   .sm-s{font-family:var(--mono);font-size:10.5px;fill:#5F6E66;text-anchor:middle;}
   .st-m{font-family:var(--mono);font-size:11px;fill:#8A968F;text-anchor:middle;letter-spacing:0.5px;}
   .sl{stroke:#8A968F;stroke-width:1.6;fill:none;}
-  .sl-k{stroke:#1F6249;stroke-width:2;fill:none;}
+  .sl-k{stroke:#8C2F3E;stroke-width:2;fill:none;}
   .sl-a{stroke:#8F6209;stroke-width:1.8;fill:none;}
   .sl-d{stroke:#8A968F;stroke-width:1.4;fill:none;stroke-dasharray:4 4;}
-  .sa{fill:#8A968F;} .sa-k{fill:#1F6249;} .sa-a{fill:#8F6209;}
-  .dot-k{fill:#1F6249;} .dot-a{fill:#C99A2E;} .dot-b{fill:#8C2F3E;}
+  .sa{fill:#8A968F;} .sa-k{fill:#8C2F3E;} .sa-a{fill:#8F6209;}
+  .dot-k{fill:#8C2F3E;} .dot-a{fill:#C99A2E;} .dot-b{fill:#8C2F3E;}
 
   /* ===== 표 ===== */
   .tw{overflow-x:auto;margin:20px 0 8px;border:1px solid var(--line);
@@ -244,175 +244,181 @@
 <body>
 <div class="wrap">
 <header class="cover">
-  <p class="kicker">WEEK 05 · 캠프 2 전기와 성질 · 하루 20분 × 4일</p>
-  <h1>정전기와 전하</h1>
+  <p class="kicker">WEEK 05 · 2구간 고려와 조선 · 하루 20분 × 4일</p>
+  <h1>고려 후기</h1>
   <p class="lede">
-    캠프 1의 주인공이었던 <b>전자</b>가 그대로 캠프 2의 주인공이 됩니다.
-    전자가 <b>한 번 옮겨 가면</b> 정전기, 전자가 <b>계속 흐르면</b> 전류입니다. 이번 주는 앞쪽 이야기입니다.
+    잘 굴러가던 고려가 흔들립니다. 먼저 <b>안에서</b> 군인들이 반란을 일으키고,
+    그다음 <b>밖에서</b> 세계 최강 몽골이 쳐들어옵니다. 이번 주는 <b>흔들린 순서</b>를 잡습니다.
   </p>
   <div class="metaline">
-    <span>4주차 연결 <b>전자와 전기</b></span>
-    <span>개념 <b>마찰전기 · 전하</b></span>
-    <span>실험 <b>풍선 3종</b></span>
+    <span>연표 <b>5번째 칸</b></span>
+    <span>사건 <b>3개</b></span>
+    <span>사료 <b>팔만대장경</b></span>
     <span>진행 <b id="wdone">0 / 4</b></span>
   </div>
 
   <div class="summary">
     <h2>이번 주에 남길 것</h2>
-    <p class="sd">규칙은 한 줄입니다. 이번 주 실험 세 개가 전부 이 한 줄로 설명됩니다.</p>
+    <p class="sd">안에서 흔들리고 → 밖에서 밀려오고 → 다시 일어서려 한 순서입니다.</p>
     <div class="kpis">
-      <div class="kpi"><span class="kl">문장 1</span><span class="kv">이동</span>
-        <span class="kn">문지르면 전자가 한쪽으로 옮겨 간다</span></div>
-      <div class="kpi"><span class="kl">문장 2</span><span class="kv">+ 와 −</span>
-        <span class="kn">잃은 쪽이 +, 얻은 쪽이 −</span></div>
-      <div class="kpi"><span class="kl">문장 3</span><span class="kv">밀고 당김</span>
-        <span class="kn">같은 전하는 밀고, 다른 전하는 당긴다</span></div>
+      <div class="kpi"><span class="kl">1170</span><span class="kv">무신정변</span>
+        <span class="kn">차별받던 무신들이 정권을 잡음</span></div>
+      <div class="kpi"><span class="kl">1231~</span><span class="kv">몽골</span>
+        <span class="kn">강화도로 옮겨 40년 가까이 항쟁</span></div>
+      <div class="kpi"><span class="kl">공민왕</span><span class="kv">개혁</span>
+        <span class="kn">원의 간섭에서 벗어나려 한 시도</span></div>
     </div>
   </div>
 </header>
 
 <nav class="jump"><div class="row">
-  <a href="#map">이번 주 지도</a>
+  <a href="#map">이번 주 칸</a>
   <a href="#mon">월 · 열기</a>
   <a href="#tue">화 · 채우기</a>
-  <a href="#thu">목 · 손으로</a>
+  <a href="#thu">목 · 사료로</a>
   <a href="#fri">금 · 보스전</a>
   <a href="#next">다음 주</a>
 </div></nav>
 
 <section class="sec" id="map">
-  <div class="step-no"><span class="num">1</span><span class="lbl">이번 주 지도</span></div>
-  <h2>문지르면 전자가 넘어갑니다</h2>
-  <p>없던 전기가 새로 생기는 것이 아닙니다. 원래 있던 전자가 <b>자리를 옮길 뿐</b>입니다.
-  그래서 한쪽이 −가 되면 반대쪽은 반드시 +가 됩니다.</p>
+  <div class="step-no"><span class="num">1</span><span class="lbl">이번 주 칸</span></div>
+  <h2>안에서 한 번, 밖에서 한 번</h2>
 
-  <div class="fig wide">
-    <p class="fig-t">도식 1 · 마찰로 생기는 전하</p>
-    <svg viewBox="0 0 900 250" role="img" aria-label="문지르기 전과 후에 머리카락과 풍선이 띠는 전하 변화">
-      <text class="st-s" x="180" y="34">문지르기 전 — 둘 다 중성</text>
-      <ellipse class="sb" cx="100" cy="112" rx="66" ry="52"/>
-      <text class="st" x="100" y="110">머리카락</text>
-      <text class="st-m" x="100" y="134">중성</text>
-      <ellipse class="sb" cx="262" cy="112" rx="60" ry="52"/>
-      <text class="st" x="262" y="110">풍선</text>
-      <text class="st-m" x="262" y="134">중성</text>
-      <text class="st-m" x="180" y="192">+ 와 − 의 개수가 같습니다</text>
+  <div class="fig">
+    <p class="fig-t">도식 1 · 12주 연표에서 이번 주의 자리</p>
+    <svg viewBox="0 0 420 156" role="img" aria-label="12주 연표에서 이번 주의 위치"><rect x="10" y="60" width="133" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="76" y="54" style="font-size:9.5px">1구간 · 고대</text><rect x="146" y="60" width="133" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="212" y="54" style="font-size:9.5px">2구간 · 고려와 조선</text><rect x="282" y="60" width="133" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="348" y="54" style="font-size:9.5px">3구간 · 근현대</text><rect x="10" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="26" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">01</text><rect x="44" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="60" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">02</text><rect x="78" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="94" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">03</text><rect x="112" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="128" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">04</text><rect x="146" y="70" width="31" height="26" rx="3" fill="#8C2F3E" stroke="#8C2F3E" stroke-width="1.2"/><text x="162" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#fff">05</text><text x="162" y="36" text-anchor="middle" font-family="IBM Plex Sans KR,sans-serif" font-size="13" font-weight="700" fill="#8C2F3E">고려 후기</text><text x="162" y="120" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10.5" fill="#8C2F3E">1170 ~ 1392</text><path d="M162 40 L162 66" stroke="#8C2F3E" stroke-width="1.4"/><rect x="180" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="196" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">06</text><rect x="214" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="230" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">07</text><rect x="248" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="264" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">08</text><rect x="282" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="298" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">09</text><rect x="316" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="332" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">10</text><rect x="350" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="366" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">11</text><rect x="384" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="400" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">12</text><text class="st-m" x="10" y="146" text-anchor="start" style="font-size:9.5px">선사</text><text class="st-m" x="410" y="146" text-anchor="end" style="font-size:9.5px">오늘</text><line x1="34" y1="142" x2="386" y2="142" stroke="#C3CCC1" stroke-width="1"/><polygon points="386,138 396,142 386,146" fill="#8A968F"/></svg>
+  </div>
 
-      <line class="sl-k" x1="340" y1="112" x2="404" y2="112"/>
-      <polygon class="sa-k" points="404,106 420,112 404,118"/>
-      <text class="st-m st-k" x="380" y="98">문지름</text>
-
-      <text class="st-s" x="672" y="34">문지른 뒤 — 전자가 풍선으로 이동</text>
-      <ellipse class="sb-b" cx="560" cy="112" rx="66" ry="52"/>
-      <text class="st st-b" x="560" y="106">머리카락</text>
-      <text class="st st-b" x="560" y="134">+</text>
-      <ellipse class="sb-k" cx="790" cy="112" rx="60" ry="52"/>
-      <text class="st st-k" x="790" y="106">풍선</text>
-      <text class="st st-k" x="790" y="134">−</text>
-      <path class="sl-a" d="M626 74 Q676 42 728 74"/>
-      <polygon class="sa-a" points="728,68 742,78 725,80"/>
-      <text class="st-m st-a" x="676" y="36">전자 이동</text>
-      <text class="st-m" x="672" y="192">잃은 쪽 + · 얻은 쪽 −</text>
-
-      <text class="st-m" x="450" y="234">전자만 움직입니다 · 전체 전기의 양은 변하지 않습니다</text>
+  <div class="fig">
+    <p class="fig-t">도식 2 · 고려가 흔들린 순서</p>
+    <svg viewBox="0 0 420 236" role="img" aria-label="무신정변 몽골 침입 원 간섭기 공민왕 개혁의 순서">
+      <rect class="sb-a" x="8" y="12" width="404" height="44" rx="3"/>
+      <text class="st st-a" x="210" y="32">1170 · 무신정변 — 안에서 흔들림</text>
+      <text class="st-s" x="210" y="48">문신만 대우받는 차별에 무신들이 반발</text>
+      <line class="sl-k" x1="210" y1="56" x2="210" y2="66"/><polygon class="sa-k" points="204,66 210,74 216,66"/>
+      <rect class="sb-a" x="8" y="76" width="404" height="44" rx="3"/>
+      <text class="st st-a" x="210" y="96">1231~ · 몽골 침입 — 밖에서 밀려옴</text>
+      <text class="st-s" x="210" y="112">수도를 강화도로 옮기고 40년 가까이 버팀</text>
+      <line class="sl-k" x1="210" y1="120" x2="210" y2="130"/><polygon class="sa-k" points="204,130 210,138 216,130"/>
+      <rect class="sb" x="8" y="140" width="404" height="44" rx="3"/>
+      <text class="st" x="210" y="160">원 간섭기 — 자주성을 잃음</text>
+      <text class="st-s" x="210" y="176">왕실의 호칭이 낮아지고 공물과 인력을 바침</text>
+      <line class="sl-k" x1="210" y1="184" x2="210" y2="194"/><polygon class="sa-k" points="204,194 210,202 216,194"/>
+      <rect class="sb-k" x="8" y="204" width="404" height="28" rx="3"/>
+      <text class="st st-k" x="210" y="223">공민왕 — 다시 일어서려는 개혁</text>
     </svg>
-    <p class="fig-c">4주차의 이온과 원리가 같습니다. 다른 점은 하나입니다 — 이온은 <b>물속에서 입자 하나 단위</b>로,
-    마찰전기는 <b>물체 전체</b>가 전자를 얻거나 잃은 것입니다.</p>
+    <p class="fig-c">사건을 따로 외우지 말고 <b>흔들림 → 침입 → 간섭 → 개혁</b> 네 단어의 순서로 기억합니다.</p>
   </div>
 </section>
 
 <section class="sec" id="mon">
-  <div class="step-no"><span class="num">2</span><span class="lbl">개념 하나</span><span class="day">MON · 열기</span></div>
-  <h2>왜 겨울에만 따끔할까</h2>
+  <div class="step-no"><span class="num">2</span><span class="lbl">흐름 읽기</span><span class="day">MON · 열기</span></div>
+  <h2>군인들은 왜 화가 났을까</h2>
 
-  <p>서로 다른 두 물체를 문지르면 <b>한쪽에서 다른 쪽으로 전자가 옮겨 갑니다.</b>
-  전자를 잃은 쪽은 <b>+ 전하</b>를, 얻은 쪽은 <b>− 전하</b>를 띱니다. 이렇게 생긴 전기가 <b>마찰전기</b>입니다.</p>
+  <p>고려는 <b>문신</b>(글을 하는 신하)을 우대하고 <b>무신</b>(무예를 하는 신하)을 낮게 보았습니다.
+  전쟁에서 공을 세워도 높은 자리는 문신이 차지했고, 무신은 무시당했습니다.
+  쌓인 불만이 터진 것이 <b>1170년 무신정변</b>입니다.</p>
 
   <div class="plain">
-    <p><b>규칙 한 줄</b> — 같은 전하끼리는 <b>밀어내고</b>, 다른 전하끼리는 <b>끌어당깁니다.</b>
-    이 한 줄로 이번 주 실험이 전부 설명됩니다.</p>
+    <p><b>무신정권 100년</b> — 이후 무신들이 나라의 실권을 잡습니다. 왕은 있지만 힘은 무신에게 있었고,
+    나중에는 <b>최씨 집안</b>이 4대에 걸쳐 권력을 이어갔습니다.
+    한편 지배층이 바뀌며 세금이 무거워지자 <b>백성들의 봉기</b>도 여러 곳에서 일어났습니다.</p>
   </div>
 
-  <h3>겨울에 정전기가 심한 이유</h3>
-  <p>공기가 습하면 옮겨 간 전자가 <b>공기 중 물기를 타고 조금씩 빠져나갑니다.</b> 그래서 여름에는 전기가 쌓이지 않습니다.
-  겨울은 건조해서 빠져나갈 길이 없으니 몸에 계속 쌓이고, 금속 문고리에 닿는 순간 한꺼번에 이동하면서 따끔합니다.</p>
+  <h3>그리고 몽골이 옵니다</h3>
+  <p>당시 몽골은 유라시아를 휩쓴 <b>세계 최강</b>이었습니다. 1231년부터 여러 차례 쳐들어왔고,
+  고려는 수도를 <b>강화도</b>로 옮겨 저항했습니다. 몽골군은 바다에서의 싸움에 약했기 때문입니다.</p>
 
-  <div class="cards two">
-    <div class="card"><span class="ct">생활</span><h4>스웨터를 벗을 때 파직</h4>
-      <p>옷과 몸이 문질러지며 전자가 옮겨 간 뒤, 떨어질 때 되돌아가면서 소리와 빛이 납니다.</p></div>
-    <div class="card"><span class="ct">자연</span><h4>번개</h4>
-      <p>구름 속 얼음 알갱이들이 부딪치며 전하가 갈라지고, 쌓인 전하가 한꺼번에 이동하는 것이 번개입니다. 정전기의 초대형 판입니다.</p></div>
+  <div class="alert"><span class="lb">함께 기억할 것</span>
+    <p>강화도에서 버티는 동안 <b>육지의 백성들은 그대로 몽골군의 피해</b>를 입었습니다.
+    이 시기에 황룡사 9층 목탑을 비롯한 많은 문화재가 불탔습니다.
+    “40년을 버텼다”는 문장 뒤에 <b>버틴 사람과 당한 사람이 달랐다</b>는 사실도 함께 봅니다.</p>
   </div>
 
   <ul class="todo">
-    <li><label><input type="checkbox" data-q="w5m1"><span class="tt"><b>월요일</b> — 위를 읽고 질문 3개를 적습니다. 오늘 하루 정전기를 느낀 순간을 하나 기록합니다.</span></label></li>
+    <li><label><input type="checkbox" data-q="w5m1"><span class="tt"><b>월요일</b> — 위를 읽고 질문 3개를 적습니다. “왜 하필 강화도였을까”를 생각해 봅니다.</span></label></li>
   </ul>
 </section>
 
 <section class="sec" id="tue">
-  <div class="step-no"><span class="num">3</span><span class="lbl">개념 둘</span><span class="day">TUE · 채우기</span></div>
-  <h2>풍선은 왜 아무것도 하지 않은 벽에 붙을까</h2>
+  <div class="step-no"><span class="num">3</span><span class="lbl">연표 세우기</span><span class="day">TUE · 채우기</span></div>
+  <h2>연표 다섯 번째 칸</h2>
 
-  <p>벽은 문지르지도 않았으니 전기를 띠지 않았습니다. 그런데 왜 − 전하를 띤 풍선이 붙을까요.</p>
-  <p>답은 <b>벽 속 전자가 밀려나기 때문</b>입니다. −를 띤 풍선을 가까이 대면 벽 표면의 전자들이 같은 −끼리 밀려
-  <b>안쪽으로 물러납니다.</b> 그러면 벽 표면은 상대적으로 +가 되고, 풍선(−)과 서로 끌어당깁니다.
-  <b>물체 전체는 여전히 중성인데 표면에서만 전하가 갈라진 것</b>입니다.</p>
-
-  <div class="plain">
-    <p><b>이 원리로 설명되는 것</b> — ① 문지른 풍선이 벽이나 천장에 붙습니다
-    ② 가는 물줄기가 풍선 쪽으로 휩니다 ③ 문지른 자가 종잇조각을 들어 올립니다.
-    셋 다 <b>상대는 중성인데도 끌려온다</b>는 공통점이 있습니다.</p>
-  </div>
-
-  <h3>노트 한 장 양식</h3>
-  <div class="tw"><table>
-    <thead><tr><th>칸</th><th>여기에 쓸 것</th></tr></thead>
+  <div class="tw wide"><table>
+    <thead><tr><th>사건</th><th>원인 (왜)</th><th>결과 (그래서)</th></tr></thead>
     <tbody>
-      <tr><td class="hd">① 그림</td><td>머리카락 → 풍선으로 전자가 이동하는 화살표 그림</td></tr>
-      <tr><td class="hd">② 규칙</td><td>같은 전하는 밀고, 다른 전하는 당긴다</td></tr>
-      <tr><td class="hd">③ 이유</td><td>중성인 벽에 붙는 이유 (표면 전자가 밀려나 +가 된다) — <b>자기 말로</b></td></tr>
-      <tr><td class="hd">④ 내 예시</td><td>오늘 겪은 정전기 하나</td></tr>
+      <tr><td class="hd">무신정변<br><span class="mn">1170</span></td>
+        <td>문신만 우대하고 무신을 차별했습니다</td>
+        <td>무신들이 권력을 잡음 · 최씨 정권이 이어짐 · 백성 봉기도 잦아짐</td></tr>
+      <tr><td class="hd">몽골 항쟁<br><span class="mn">1231 ~</span></td>
+        <td>몽골이 세력을 넓히며 고려에 복속을 요구했습니다</td>
+        <td>강화도 천도 · 40년 가까운 항쟁 · <b>삼별초</b>는 끝까지 저항 · 국토가 크게 파괴됨</td></tr>
+      <tr><td class="hd">원 간섭과 공민왕의 개혁<br><span class="mn">14세기</span></td>
+        <td>전쟁이 끝난 뒤 원(몽골)이 고려의 정치에 간섭했습니다</td>
+        <td>왕실 호칭이 낮아지고 공물을 바침 → <b>공민왕</b>이 반원 개혁을 시도했으나 끝내 완성하지 못함</td></tr>
     </tbody>
   </table></div>
 
+  <div class="cards two">
+    <div class="card"><span class="ct">집단</span><h4>삼별초</h4>
+      <p>본래 최씨 정권의 특수 부대였으나, 고려가 몽골과 강화하자 <b>강화도 → 진도 → 제주도</b>로 옮겨 가며
+      끝까지 저항했습니다. 항쟁의 상징으로 자주 나옵니다.</p></div>
+    <div class="card"><span class="ct">인물</span><h4>공민왕</h4>
+      <p>원의 간섭에서 벗어나려 한 왕. 몽골식 풍습을 금하고, 빼앗긴 영토를 되찾으려 했으며,
+      권문세족의 힘을 누르려 했습니다. 개혁은 <b>끝내 완성되지 못했지만</b>, 이때 성장한 신진 사대부가
+      <b>다음 주 조선 건국</b>의 주역이 됩니다.</p></div>
+  </div>
+
   <ul class="todo">
-    <li><label><input type="checkbox" data-q="w5m2"><span class="tt"><b>화요일</b> — 노트 한 장을 채웁니다. 특히 ③번을 자기 말로 씁니다.</span></label></li>
+    <li><label><input type="checkbox" data-q="w5m2"><span class="tt"><b>화요일</b> — 연표 다섯 번째 칸을 세우고 “흔들림 → 침입 → 간섭 → 개혁”을 적습니다. 인물 카드 2장을 만듭니다.</span></label></li>
   </ul>
 </section>
 
 <section class="sec" id="thu">
-  <div class="step-no"><span class="num">4</span><span class="lbl">실험</span><span class="day">THU · 손으로</span></div>
-  <h2>풍선 실험 세 가지</h2>
+  <div class="step-no"><span class="num">4</span><span class="lbl">사료</span><span class="day">THU · 사료로</span></div>
+  <h2>8만 장의 나무판을 봅니다</h2>
 
-  <p>준비물은 고무풍선 1~2개, 수도꼭지, 종잇조각, 그리고 머리카락입니다.
-  습한 날에는 잘 안 되니 <b>건조한 날 실내</b>에서 합니다.</p>
+  <p>몽골과 싸우던 시기에 고려는 <b>팔만대장경</b>을 만들었습니다.
+  8만 장이 넘는 나무판에 불경을 새긴 것으로, <b>부처의 힘으로 몽골을 물리치려는</b> 뜻이 담겨 있었습니다.
+  지금도 <b>합천 해인사</b>에 보관되어 있고, 유네스코 세계기록유산입니다.</p>
+
+  <div class="fig">
+    <p class="fig-t">사료 · 팔만대장경이 알려 주는 세 가지</p>
+    <svg viewBox="0 0 420 200" role="img" aria-label="팔만대장경으로 알 수 있는 세 가지">
+      <rect class="sb-g" x="8" y="10" width="404" height="52" rx="3"/>
+      <text class="st" x="210" y="34">전쟁 중에 16년에 걸쳐 만들었습니다</text>
+      <text class="st-s" x="210" y="52">→ 그만큼 절박했고, 그만큼 조직력이 있었다</text>
+      <rect class="sb-g" x="8" y="70" width="404" height="52" rx="3"/>
+      <text class="st" x="210" y="94">8만여 장에 오탈자가 거의 없습니다</text>
+      <text class="st-s" x="210" y="112">→ 고려의 인쇄·기록 문화 수준</text>
+      <rect class="sb-g" x="8" y="130" width="404" height="52" rx="3"/>
+      <text class="st" x="210" y="154">800년이 지나도록 썩지 않았습니다</text>
+      <text class="st-s" x="210" y="172">→ 나무 처리 기술과 보관 건물(장경판전)의 과학</text>
+    </svg>
+    <p class="fig-c">고려의 인쇄 기술은 여기서 그치지 않습니다. <b>《직지심체요절》</b>은
+    현재 남아 있는 <b>금속활자 인쇄본 중 세계에서 가장 오래된 것</b>으로 인정받고 있습니다.</p>
+  </div>
 
   <div class="cards two">
-    <div class="card"><span class="ct">실험 1</span><h4>머리카락 세우기</h4>
-      <p>풍선을 머리카락에 20번 문지른 뒤 천천히 듭니다. 머리카락이 따라 올라옵니다.
-      머리카락은 +, 풍선은 −라서 서로 당기고, 머리카락끼리는 같은 +라서 서로 밀려 흩어집니다.</p></div>
-    <div class="card"><span class="ct">실험 2</span><h4>벽에 붙이기</h4>
-      <p>문지른 풍선을 벽에 대고 손을 뗍니다. 몇 초에서 몇 분까지 붙어 있습니다.
-      시간이 지나면 전하가 빠져나가 떨어집니다.</p></div>
-    <div class="card"><span class="ct">실험 3</span><h4>물줄기 휘게 하기</h4>
-      <p>수도꼭지를 <b>실처럼 가늘게</b> 틀고 문지른 풍선을 3 cm 옆에 가까이 댑니다. 물줄기가 풍선 쪽으로 휩니다.
-      물 분자가 전기적으로 한쪽에 치우쳐 있어 방향을 맞추고 끌려옵니다.</p></div>
-    <div class="card"><span class="ct">기록</span><h4>조건을 바꿔 봅니다</h4>
-      <p>문지르는 횟수를 5번 · 20번 · 40번으로 바꿔 가며 <b>붙어 있는 시간</b>을 잽니다.
-      숫자가 생기면 관찰이 <b>탐구</b>가 됩니다.</p></div>
+    <div class="card"><span class="ct">활동 1</span><h4>지도에 항쟁 경로</h4>
+      <p>백지도에 <b>개경 → 강화도 → (삼별초) 진도 → 제주도</b>를 화살표로 그립니다.
+      점점 남쪽으로 밀려간 것이 한눈에 보입니다.</p></div>
+    <div class="card"><span class="ct">활동 2</span><h4>유물 사진 보기</h4>
+      <p>“팔만대장경판”과 “해인사 장경판전”을 검색해 사진을 봅니다.
+      <b>건물 창문의 크기가 위아래로 다른 이유</b>를 찾아보면 재미있습니다. (바람이 돌게 해 습기를 막습니다)</p></div>
   </div>
 
   <div class="tw"><table>
-    <thead><tr><th>문지른 횟수</th><th>벽에 붙어 있던 시간</th></tr></thead>
+    <thead><tr><th>기록</th><th>내가 적어 보기</th></tr></thead>
     <tbody>
-      <tr><td class="hd">5번</td><td class="fill">______ 초</td></tr>
-      <tr><td class="hd">20번</td><td class="fill">______ 초</td></tr>
-      <tr><td class="hd">40번</td><td class="fill">______ 초</td></tr>
+      <tr><td class="hd">팔만대장경을 만든 이유</td><td class="fill">______</td></tr>
+      <tr><td class="hd">그것으로 알 수 있는 고려의 힘</td><td class="fill">______</td></tr>
+      <tr><td class="hd">삼별초가 옮겨 간 순서</td><td class="fill">강화도 → ______ → ______</td></tr>
     </tbody>
   </table></div>
 
   <ul class="todo">
-    <li><label><input type="checkbox" data-q="w5m3"><span class="tt"><b>목요일</b> — 실험 3종을 하고 표를 채웁니다. 물줄기가 휘는 장면은 영상으로 찍습니다.</span></label></li>
+    <li><label><input type="checkbox" data-q="w5m3"><span class="tt"><b>목요일</b> — 팔만대장경 사진을 보고 표를 채웁니다. 지도에 항쟁 경로를 그립니다.</span></label></li>
   </ul>
 </section>
 
@@ -421,63 +427,66 @@
   <h2>문제 5개와 3분 설명</h2>
 
   <div class="q"><span class="qn">Q1</span>
-    <p>풍선을 머리카락에 문질렀더니 풍선이 − 전하를 띠었습니다. 머리카락은 어떻게 되었을까요?</p>
+    <p>무신정변이 일어난 근본 원인은 무엇일까요?</p>
     <details><summary>해설 보기</summary><div class="ans">
-      <b>+ 전하를 띱니다.</b> 머리카락에서 풍선으로 전자가 옮겨 갔기 때문입니다.
-      없던 전기가 생긴 것이 아니라 <b>자리만 옮긴 것</b>입니다.
+      <b>문신을 우대하고 무신을 차별하는 구조가 오래 이어졌기 때문입니다.</b>
+      전쟁에서 공을 세워도 높은 자리는 문신이 차지했고, 그 불만이 쌓여 1170년에 터졌습니다.
     </div></details>
   </div>
 
   <div class="q"><span class="qn">Q2</span>
-    <p>문지른 풍선을 아무 처리도 하지 않은 벽에 붙이면 붙습니다. 벽은 전기를 띠지 않았는데 왜 그럴까요?</p>
+    <p>고려가 몽골과 싸우면서 수도를 강화도로 옮긴 이유는 무엇일까요?</p>
     <details><summary>해설 보기</summary><div class="ans">
-      <b>풍선의 − 전하가 벽 표면의 전자를 안쪽으로 밀어내서 벽 표면이 상대적으로 +가 되기 때문입니다.</b>
-      벽 전체는 여전히 중성이지만 표면에서 전하가 갈라져 서로 끌어당깁니다.
+      <b>몽골군이 바다에서의 싸움에 약했기 때문입니다.</b>
+      섬으로 들어가면 오래 버틸 수 있다고 판단한 것입니다. 다만 그동안 <b>육지의 백성은 그대로 피해</b>를 입었습니다.
     </div></details>
   </div>
 
   <div class="q"><span class="qn">Q3</span>
-    <p>여름보다 겨울에 정전기가 심한 이유는 무엇일까요?</p>
+    <p>팔만대장경을 만든 목적과, 그것으로 알 수 있는 것을 말해 봅시다.</p>
     <details><summary>해설 보기</summary><div class="ans">
-      <b>공기가 건조해서 몸에 쌓인 전하가 빠져나가지 못하기 때문입니다.</b>
-      습한 날에는 공기 중 물기를 통해 전하가 조금씩 흘러나가 쌓이지 않습니다.
+      <b>목적 —</b> 부처의 힘으로 몽골의 침입을 물리치기 위해서입니다.<br>
+      <b>알 수 있는 것 —</b> 전쟁 중에도 16년에 걸쳐 8만여 장을 만들 만한
+      <b>조직력과 인쇄·기록 문화의 수준</b>이 있었다는 것입니다.
     </div></details>
   </div>
 
   <div class="q"><span class="qn">Q4</span>
-    <p>같은 방법으로 문지른 풍선 두 개를 실에 매달아 가까이 하면 어떻게 될까요?</p>
+    <p>삼별초는 왜 계속 저항했고, 어디로 옮겨 갔을까요?</p>
     <details><summary>해설 보기</summary><div class="ans">
-      <b>서로 밀어냅니다.</b> 둘 다 − 전하를 띠고 있기 때문입니다. 같은 전하는 밀고 다른 전하는 당깁니다.
+      <b>고려 정부가 몽골과 강화하자 이를 받아들이지 않고 저항했습니다.</b>
+      <b>강화도 → 진도 → 제주도</b>로 근거지를 옮겨 가며 싸웠습니다.
     </div></details>
   </div>
 
   <div class="q"><span class="qn">Q5</span>
-    <p>정전기와 4주차의 이온은 어떤 점이 같고 무엇이 다를까요?</p>
+    <p>공민왕의 개혁은 실패했다고 평가되기도 합니다. 그런데도 중요한 이유는 무엇일까요?</p>
     <details><summary>해설 보기</summary><div class="ans">
-      <b>같은 점 —</b> 둘 다 전자가 옮겨 가서 전기를 띠게 된 것입니다.<br>
-      <b>다른 점 —</b> 이온은 <b>원자 하나</b> 단위로 물속에서 일어나고, 마찰전기는 <b>물체 전체</b>가 전자를 얻거나 잃은 것입니다.
+      <b>이때 성장한 신진 사대부가 다음 시대(조선 건국)의 주역이 되기 때문입니다.</b>
+      개혁 자체는 완성되지 못했지만, <b>다음 시대를 준비한 사람들</b>이 이 시기에 자랐습니다.
+      역사에서 “실패한 개혁”이 다음 변화의 씨앗이 되는 일은 자주 일어납니다.
     </div></details>
   </div>
 
   <h3>아빠에게 3분 설명하기</h3>
   <div class="script">
-    <div class="row"><span class="s">배운 것</span><span>문지르면 전자가 한쪽으로 옮겨 가서 한쪽은 +, 한쪽은 −가 된다는 것.</span></div>
-    <div class="row"><span class="s">예를 들면</span><span>풍선을 문질러서 벽에 붙였어. 벽은 중성인데도 표면 전자가 밀려나서 붙어.</span></div>
-    <div class="row"><span class="s">헷갈리는 것</span><span>전기가 새로 생기는 게 아니야. 원래 있던 전자가 자리를 옮긴 것뿐이야.</span></div>
+    <div class="row"><span class="s">배운 것</span><span>고려가 안에서 무신정변으로 흔들리고, 밖에서 몽골에 밀렸다는 것.</span></div>
+    <div class="row"><span class="s">사료</span><span>전쟁 중에 팔만대장경을 만들었어. 16년 걸렸는데 오탈자가 거의 없대.</span></div>
+    <div class="row"><span class="s">이어지는 것</span><span>공민왕 때 자란 신진 사대부가 다음에 조선을 세워.</span></div>
   </div>
 
   <ul class="todo">
-    <li><label><input type="checkbox" data-q="w5m4"><span class="tt"><b>금요일</b> — 문제 5개와 3분 설명. 풍선을 들고 설명하면 더 쉽습니다.</span></label></li>
+    <li><label><input type="checkbox" data-q="w5m4"><span class="tt"><b>금요일</b> — 문제 5개와 3분 설명. 연표 다섯 칸을 이어서 말해 봅니다.</span></label></li>
   </ul>
 
-  <p><span class="badge">획득 · 전하 감지기</span></p>
+  <p><span class="badge">획득 · 연표 5칸</span></p>
 </section>
 
 <section class="sec" id="next">
   <div class="step-no"><span class="num">6</span><span class="lbl">다음 주</span></div>
-  <h2>전류 · 전압 · 저항</h2>
-  <p>이번 주에는 전자가 <b>한 번 옮겨 갔습니다.</b> 다음 주에는 전자가 <b>계속 흐릅니다.</b>
-  <code>V = I × R</code>이라는 식이 나오지만, 공식보다 <b>물탱크 그림</b>을 먼저 그립니다.</p>
+  <h2>조선의 건국</h2>
+  <p>고려 말의 혼란 속에서 <b>새 나라를 만들자</b>는 사람들이 나타납니다.
+  다음 주의 질문은 <b>“새 나라는 무엇을 다르게 하려 했을까”</b>입니다. 그리고 <b>세종이 만든 글자</b> 이야기가 나옵니다.</p>
   <div class="pager">
     <a href="week04.html">← 4주차</a>
     <a href="index.html">전체 지도</a>
@@ -485,11 +494,11 @@
   </div>
 </section>
 
-<footer>과학 등반 12주 · WEEK 05 정전기와 전하 · 하루 20분 × 4일</footer>
+<footer>역사 항해 12주 · WEEK 05 고려 후기 · 하루 20분 × 4일</footer>
 </div>
 <script>
   (function(){
-    var KEY="science_quest_progress";
+    var KEY="history_quest_progress";
     function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){return{}}}
     function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
     var boxes=[].slice.call(document.querySelectorAll(".todo input[type=checkbox]"));

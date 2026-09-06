@@ -95,6 +95,8 @@
     text-transform:uppercase;color:var(--kelp);margin:0 0 16px;
     padding-bottom:9px;border-bottom:1px solid var(--hair);}
   .fig svg{display:block;width:100%;height:auto;}
+  .fig.wide{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .fig.wide svg{min-width:640px;}
   .fig-c{font-size:13px;color:var(--muted);margin:14px 0 0;font-weight:300;
     line-height:1.65;padding-top:12px;border-top:1px solid var(--hair);}
   .fig-c b{color:var(--ink);font-weight:600;}
@@ -284,7 +286,7 @@
   <p>움직이는 것은 <b>전자뿐</b>입니다. 원자핵은 제자리에 있습니다.
   전자를 잃으면 +가 남아 <b>양이온</b>, 전자를 얻으면 −가 많아져 <b>음이온</b>이 됩니다.</p>
 
-  <div class="fig">
+  <div class="fig wide">
     <p class="fig-t">도식 1 · 양이온과 음이온이 만들어지는 과정</p>
     <svg viewBox="0 0 900 230" role="img" aria-label="나트륨 원자가 전자를 잃어 양이온이 되고 염소 원자가 전자를 얻어 음이온이 되는 과정">
       <circle class="sb" cx="86" cy="104" r="52"/>

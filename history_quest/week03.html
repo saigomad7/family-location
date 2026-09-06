@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#DCE2DB">
+<title>3주차 · 통일신라와 발해</title>
+<meta name="description" content="당을 끌어들여 통일하고, 다시 당과 싸워 내보낸 이야기. 그리고 발해.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#131C18; --ink2:#2C3A33; --muted:#5F6E66; --faint:#8A968F;
+    --mist:#DCE2DB; --surface:#F8FAF6; --surface2:#EFF3EC;
+    --line:#C3CCC1; --hair:#DDE4DB;
+    --kelp:#8C2F3E; --kelp-wash:#F6E4E7; --kelp-line:#D9A8B0;
+    --amber:#8F6209; --amber-wash:#F5EAD0; --amber-line:#DCC79B;
+    --berry:#8C2F3E; --berry-wash:#F3DFE2; --berry-line:#D9A8B0;
+    --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+    --mono:"IBM Plex Mono","SFMono-Regular",Consolas,"D2Coding",monospace;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{margin:0;background:var(--mist);color:var(--ink);font-family:var(--sans);
+    font-size:16px;line-height:1.75;letter-spacing:-0.01em;
+    padding:0 18px calc(70px + env(safe-area-inset-bottom));
+    word-break:keep-all;overflow-wrap:anywhere;}
+  .wrap{max-width:1040px;margin:0 auto;}
+
+  /* ===== 표지 ===== */
+  .cover{padding:44px 0 30px;border-bottom:2px solid var(--ink);}
+  .cover .kicker{font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:0.2em;text-transform:uppercase;color:var(--kelp);margin:0 0 16px;}
+  .cover h1{font-size:clamp(27px,6vw,44px);font-weight:700;line-height:1.24;
+    letter-spacing:-0.035em;margin:0 0 16px;max-width:21ch;}
+  .cover .lede{font-size:clamp(15.5px,2vw,18px);font-weight:300;color:var(--ink2);
+    max-width:62ch;margin:0 0 24px;line-height:1.72;}
+  .cover .lede b{font-weight:600;color:var(--ink);}
+  .metaline{display:flex;flex-wrap:wrap;gap:6px 22px;font-family:var(--mono);
+    font-size:11.5px;color:var(--muted);letter-spacing:0.03em;}
+  .metaline b{color:var(--ink);font-weight:500;}
+
+  .summary{background:var(--ink);border-radius:3px;padding:26px 22px 24px;margin:28px 0 0;}
+  .summary h2{color:#F6FAF5;font-size:18px;font-weight:600;margin:0 0 6px;letter-spacing:-0.02em;}
+  .summary .sd{color:#93A399;font-size:13.5px;font-weight:300;margin:0 0 22px;line-height:1.65;}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:18px;}
+  .kpi .kl{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:#7E8F84;display:block;margin-bottom:5px;}
+  .kpi .kv{font-size:clamp(21px,3.2vw,28px);font-weight:700;color:#F0AEB8;
+    letter-spacing:-0.03em;display:block;line-height:1.1;}
+  .kpi .kn{font-size:12px;color:#B9C6BC;display:block;margin-top:6px;
+    font-weight:300;line-height:1.5;}
+
+  /* ===== 이동 바 ===== */
+  nav.jump{position:sticky;top:0;z-index:40;margin:0 -18px;padding:0 18px;
+    background:rgba(220,226,219,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);}
+  nav.jump .row{display:flex;gap:6px;overflow-x:auto;padding:9px 0;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  nav.jump .row::-webkit-scrollbar{display:none;}
+  nav.jump a{flex:0 0 auto;font-family:var(--mono);font-size:11.5px;letter-spacing:0.04em;
+    color:var(--muted);background:var(--surface);border:1px solid var(--line);
+    padding:6px 11px;border-radius:2px;text-decoration:none;}
+  nav.jump a.now{color:#fff;background:var(--kelp);border-color:var(--kelp);}
+
+  /* ===== 섹션 ===== */
+  .sec{padding:44px 0 12px;border-bottom:1px solid var(--line);scroll-margin-top:56px;}
+  .sec:last-of-type{border-bottom:0;}
+  .step-no{display:flex;align-items:center;gap:11px;margin-bottom:14px;}
+  .step-no .num{font-family:var(--mono);font-size:12px;font-weight:600;color:#fff;
+    background:var(--kelp);width:28px;height:28px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-no .lbl{font-family:var(--mono);font-size:11px;letter-spacing:0.13em;
+    text-transform:uppercase;color:var(--muted);}
+  .step-no .day{margin-left:auto;font-family:var(--mono);font-size:11px;
+    letter-spacing:0.1em;color:var(--kelp);background:var(--kelp-wash);
+    border:1px solid var(--kelp-line);padding:3px 9px;border-radius:2px;}
+  .sec h2{font-size:clamp(22px,3.4vw,29px);font-weight:600;letter-spacing:-0.03em;
+    line-height:1.34;margin:0 0 14px;max-width:30ch;}
+  .sec h3{font-size:17.5px;font-weight:600;letter-spacing:-0.02em;margin:30px 0 10px;}
+  .sec > p{max-width:70ch;color:var(--ink2);margin:0 0 16px;}
+  .sec strong,.sec b{font-weight:600;color:var(--ink);}
+  .sec code{font-family:var(--mono);font-size:0.86em;background:var(--surface2);
+    border:1px solid var(--hair);padding:1px 5px;border-radius:2px;}
+
+  .plain{background:var(--surface2);border-left:3px solid var(--kelp);
+    padding:14px 17px;margin:0 0 20px;border-radius:0 2px 2px 0;max-width:74ch;}
+  .plain p{margin:0;font-size:14.5px;color:var(--ink2);line-height:1.72;}
+  .plain p + p{margin-top:10px;}
+  .plain b{color:var(--kelp);font-weight:600;}
+
+  .fig{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:20px 16px 16px;margin:20px 0 12px;}
+  .fig-t{font-family:var(--mono);font-size:11px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--kelp);margin:0 0 16px;
+    padding-bottom:9px;border-bottom:1px solid var(--hair);}
+  .fig svg{display:block;width:100%;height:auto;}
+  .fig.wide{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .fig.wide svg{min-width:640px;}
+  .fig-c{font-size:13px;color:var(--muted);margin:14px 0 0;font-weight:300;
+    line-height:1.65;padding-top:12px;border-top:1px solid var(--hair);}
+  .fig-c b{color:var(--ink);font-weight:600;}
+
+  .sb{fill:#fff;stroke:#C3CCC1;stroke-width:1.5;}
+  .sb-k{fill:#F6E4E7;stroke:#8C2F3E;stroke-width:2;}
+  .sb-b{fill:#F3DFE2;stroke:#D9A8B0;stroke-width:1.5;}
+  .sb-a{fill:#F5EAD0;stroke:#DCC79B;stroke-width:1.5;}
+  .sb-g{fill:#EFF3EC;stroke:#C3CCC1;stroke-width:1.5;}
+  .sb-d{fill:#fff;stroke:#8C2F3E;stroke-width:1.6;stroke-dasharray:5 4;}
+  .st{font-family:var(--sans);font-size:13.5px;font-weight:600;fill:#131C18;
+    text-anchor:middle;letter-spacing:-0.3px;}
+  .st-s{font-family:var(--sans);font-size:11.5px;font-weight:400;fill:#5F6E66;text-anchor:middle;}
+  .st-k{fill:#8C2F3E;} .st-b{fill:#8C2F3E;} .st-a{fill:#8F6209;}
+  .sm{font-family:var(--mono);font-size:12px;fill:#131C18;text-anchor:middle;font-weight:500;}
+  .sm-s{font-family:var(--mono);font-size:10.5px;fill:#5F6E66;text-anchor:middle;}
+  .st-m{font-family:var(--mono);font-size:11px;fill:#8A968F;text-anchor:middle;letter-spacing:0.5px;}
+  .sl{stroke:#8A968F;stroke-width:1.6;fill:none;}
+  .sl-k{stroke:#8C2F3E;stroke-width:2;fill:none;}
+  .sl-a{stroke:#8F6209;stroke-width:1.8;fill:none;}
+  .sl-d{stroke:#8A968F;stroke-width:1.4;fill:none;stroke-dasharray:4 4;}
+  .sa{fill:#8A968F;} .sa-k{fill:#8C2F3E;} .sa-a{fill:#8F6209;}
+  .dot-k{fill:#8C2F3E;} .dot-a{fill:#C99A2E;} .dot-b{fill:#8C2F3E;}
+
+  /* ===== 표 ===== */
+  .tw{overflow-x:auto;margin:20px 0 8px;border:1px solid var(--line);
+    border-radius:3px;background:var(--surface);}
+  table{border-collapse:collapse;width:100%;font-size:13.8px;}
+  .tw.wide table{min-width:560px;}
+  thead th{background:var(--ink);color:#E8EFE7;text-align:left;font-family:var(--mono);
+    font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
+    padding:11px 13px;}
+  tbody td{padding:11px 13px;border-top:1px solid var(--hair);vertical-align:top;
+    color:var(--ink2);line-height:1.62;}
+  tbody tr:nth-child(even) td{background:var(--surface2);}
+  td.hd{font-weight:600;color:var(--ink);}
+  td.mn{font-family:var(--mono);font-size:12.5px;}
+  td.ok{color:var(--kelp);font-weight:600;}
+  td.no{color:var(--berry);font-weight:600;}
+  td.wa{color:var(--amber);font-weight:600;}
+  td.fill{font-family:var(--mono);color:var(--faint);}
+
+  .note{background:var(--amber-wash);border:1px solid var(--amber-line);
+    border-radius:3px;padding:17px 19px;margin:20px 0 8px;}
+  .note p{margin:0;font-size:14px;color:#5C440C;line-height:1.72;}
+  .note p + p{margin-top:9px;}
+  .note b{font-weight:600;}
+  .note .lb{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--amber);margin-bottom:6px;}
+  .alert{background:var(--berry-wash);border:1px solid var(--berry-line);
+    border-radius:3px;padding:17px 19px;margin:20px 0 8px;}
+  .alert p{margin:0;font-size:14px;color:#6B2430;line-height:1.72;}
+  .alert p + p{margin-top:9px;}
+  .alert b{font-weight:600;}
+  .alert .lb{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--berry);margin-bottom:6px;}
+
+  /* ===== 카드 묶음 ===== */
+  .cards{display:grid;gap:12px;margin:18px 0 8px;}
+  @media(min-width:680px){.cards.two{grid-template-columns:repeat(2,1fr);}}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:15px 17px;}
+  .card .ct{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;
+    color:var(--kelp);display:block;margin-bottom:7px;}
+  .card h4{margin:0 0 6px;font-size:15.5px;font-weight:600;letter-spacing:-0.02em;}
+  .card p{margin:0;font-size:14px;color:var(--ink2);line-height:1.68;}
+
+  /* ===== 요일 할 일 ===== */
+  .todo{list-style:none;margin:20px 0 8px;padding:0;background:var(--surface);
+    border:1px solid var(--line);border-radius:3px;overflow:hidden;}
+  .todo li + li{border-top:1px solid var(--hair);}
+  .todo label{display:grid;grid-template-columns:22px 1fr;gap:13px;align-items:start;
+    padding:15px 16px;cursor:pointer;font-size:14.5px;line-height:1.65;color:var(--ink2);min-height:54px;}
+  .todo input{appearance:none;-webkit-appearance:none;width:21px;height:21px;margin:1px 0 0;
+    border:1.5px solid var(--line);border-radius:2px;background:#fff;
+    display:grid;place-content:center;cursor:pointer;}
+  .todo input::after{content:"✓";font-size:13px;font-weight:700;color:#fff;transform:scale(0);}
+  .todo input:checked{background:var(--kelp);border-color:var(--kelp);}
+  .todo input:checked::after{transform:scale(1);}
+  .todo input:focus-visible{outline:2px solid var(--kelp);outline-offset:2px;}
+  .todo input:checked ~ .tt{color:var(--faint);text-decoration:line-through;}
+  .todo .tt b{color:var(--ink);font-weight:600;}
+
+  /* ===== 문제 ===== */
+  .q{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:15px 17px;margin:12px 0;}
+  .q .qn{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--kelp);
+    letter-spacing:0.12em;}
+  .q > p{margin:6px 0 0;font-size:15.5px;color:var(--ink);line-height:1.7;}
+  .q details{margin-top:12px;border-top:1px solid var(--hair);padding-top:10px;}
+  .q summary{cursor:pointer;list-style:none;font-family:var(--mono);font-size:12px;
+    font-weight:600;color:var(--kelp);letter-spacing:0.06em;padding:3px 0;}
+  .q summary::-webkit-details-marker{display:none;}
+  .q summary::before{content:"+ ";}
+  .q details[open] summary::before{content:"− ";}
+  .q .ans{margin-top:9px;background:var(--kelp-wash);border-radius:2px;padding:12px 14px;
+    font-size:14px;color:var(--ink2);line-height:1.7;}
+  .q .ans b{color:var(--kelp);font-weight:600;}
+
+  /* ===== 설명 대본 ===== */
+  .script{background:var(--surface);border:1px solid var(--kelp-line);border-radius:3px;
+    padding:16px 18px;margin:18px 0 8px;}
+  .script .row{display:grid;grid-template-columns:70px 1fr;gap:12px;font-size:14.5px;
+    color:var(--ink2);line-height:1.7;}
+  .script .row + .row{margin-top:11px;padding-top:11px;border-top:1px solid var(--hair);}
+  .script .s{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;color:var(--kelp);
+    font-weight:600;padding-top:4px;}
+
+  .badge{display:inline-block;font-family:var(--mono);font-size:12.5px;font-weight:600;
+    color:var(--amber);background:var(--amber-wash);border:1px solid var(--amber-line);
+    border-radius:2px;padding:7px 14px;margin-top:14px;letter-spacing:0.04em;}
+
+  /* ===== 주차 목록 (허브) ===== */
+  .wlist{display:flex;flex-direction:column;gap:10px;margin:18px 0 8px;}
+  a.wk{display:grid;grid-template-columns:1fr auto;grid-template-areas:"n p" "t p" "d d";
+    gap:2px 14px;background:var(--surface);border:1px solid var(--line);
+    border-left:3px solid var(--kelp);border-radius:3px;padding:15px 17px;
+    text-decoration:none;color:var(--ink);}
+  a.wk .n{grid-area:n;font-family:var(--mono);font-size:11px;font-weight:600;
+    letter-spacing:0.12em;color:var(--kelp);}
+  a.wk .t{grid-area:t;font-size:17px;font-weight:600;letter-spacing:-0.02em;}
+  a.wk .d{grid-area:d;font-size:13.5px;color:var(--muted);margin-top:5px;line-height:1.6;font-weight:300;}
+  a.wk .p{grid-area:p;align-self:center;font-family:var(--mono);font-size:11px;color:var(--muted);
+    background:var(--surface2);border:1px solid var(--hair);border-radius:2px;padding:4px 9px;white-space:nowrap;}
+  a.wk .p.done{color:#fff;background:var(--kelp);border-color:var(--kelp);}
+  a.wk .p.ing{color:var(--amber);background:var(--amber-wash);border-color:var(--amber-line);}
+  .wk.soon{border-left-color:var(--line);opacity:.62;pointer-events:none;}
+  .wk.soon .n,.wk.soon .t{color:var(--muted);}
+
+  /* ===== 진행 막대 ===== */
+  .bar{height:7px;background:var(--hair);border-radius:99px;overflow:hidden;margin-top:12px;
+    border:1px solid var(--line);}
+  .bar i{display:block;height:100%;background:var(--kelp);width:0;transition:width .3s;}
+
+  /* ===== 페이지 이동 ===== */
+  .pager{display:flex;gap:9px;margin:26px 0 0;}
+  .pager a{flex:1;text-align:center;font-size:13.5px;font-weight:600;text-decoration:none;
+    color:var(--ink2);background:var(--surface);border:1px solid var(--line);
+    border-radius:3px;padding:14px 8px;}
+  .pager a.main{background:var(--kelp);border-color:var(--kelp);color:#fff;}
+  footer{padding:26px 0 10px;font-family:var(--mono);font-size:11.5px;color:var(--faint);
+    letter-spacing:0.03em;line-height:1.8;}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="cover">
+  <p class="kicker">WEEK 03 · 1구간 고대 · 하루 20분 × 4일</p>
+  <h1>통일신라와 발해</h1>
+  <p class="lede">
+    가장 늦게 자란 신라가 통일합니다. 그런데 <b>당나라를 끌어들여</b> 통일했습니다.
+    이번 주의 질문은 하나입니다. <b>그 당을 어떻게 다시 내보냈을까.</b>
+    그리고 고구려 땅에서는 무슨 일이 있었을까요.
+  </p>
+  <div class="metaline">
+    <span>연표 <b>3번째 칸</b></span>
+    <span>사건 <b>3개</b></span>
+    <span>사료 <b>발해가 일본에 보낸 국서</b></span>
+    <span>진행 <b id="wdone">0 / 4</b></span>
+  </div>
+
+  <div class="summary">
+    <h2>이번 주에 남길 것</h2>
+    <p class="sd">연도 네 개만 순서대로 잡으면 이 단원은 끝납니다.</p>
+    <div class="kpis">
+      <div class="kpi"><span class="kl">660 · 668</span><span class="kv">멸망</span>
+        <span class="kn">백제 · 고구려 순서로 무너짐</span></div>
+      <div class="kpi"><span class="kl">676</span><span class="kv">통일</span>
+        <span class="kn">당을 몰아내고 나서야 진짜 통일</span></div>
+      <div class="kpi"><span class="kl">698</span><span class="kv">발해</span>
+        <span class="kn">고구려 유민이 세운 나라 · 남북국 시대</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="jump"><div class="row">
+  <a href="#map">이번 주 칸</a>
+  <a href="#mon">월 · 열기</a>
+  <a href="#tue">화 · 채우기</a>
+  <a href="#thu">목 · 사료로</a>
+  <a href="#fri">금 · 보스전</a>
+  <a href="#next">다음 주</a>
+</div></nav>
+
+<section class="sec" id="map">
+  <div class="step-no"><span class="num">1</span><span class="lbl">이번 주 칸</span></div>
+  <h2>통일까지 16년, 네 단계</h2>
+
+  <div class="fig">
+    <p class="fig-t">도식 1 · 12주 연표에서 이번 주의 자리</p>
+    <svg viewBox="0 0 420 156" role="img" aria-label="12주 연표에서 이번 주의 위치"><rect x="10" y="60" width="133" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="76" y="54" style="font-size:9.5px">1구간 · 고대</text><rect x="146" y="60" width="133" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="212" y="54" style="font-size:9.5px">2구간 · 고려와 조선</text><rect x="282" y="60" width="133" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="348" y="54" style="font-size:9.5px">3구간 · 근현대</text><rect x="10" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="26" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">01</text><rect x="44" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="60" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">02</text><rect x="78" y="70" width="31" height="26" rx="3" fill="#8C2F3E" stroke="#8C2F3E" stroke-width="1.2"/><text x="94" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#fff">03</text><text x="10" y="36" text-anchor="start" font-family="IBM Plex Sans KR,sans-serif" font-size="13" font-weight="700" fill="#8C2F3E">남북국</text><text x="10" y="120" text-anchor="start" font-family="IBM Plex Mono,monospace" font-size="10.5" fill="#8C2F3E">676 ~ 926</text><path d="M94 40 L94 66" stroke="#8C2F3E" stroke-width="1.4"/><rect x="112" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="128" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">04</text><rect x="146" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="162" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">05</text><rect x="180" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="196" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">06</text><rect x="214" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="230" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">07</text><rect x="248" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="264" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">08</text><rect x="282" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="298" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">09</text><rect x="316" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="332" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">10</text><rect x="350" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="366" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">11</text><rect x="384" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="400" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">12</text><text class="st-m" x="10" y="146" text-anchor="start" style="font-size:9.5px">선사</text><text class="st-m" x="410" y="146" text-anchor="end" style="font-size:9.5px">오늘</text><line x1="34" y1="142" x2="386" y2="142" stroke="#C3CCC1" stroke-width="1"/><polygon points="386,138 396,142 386,146" fill="#8A968F"/></svg>
+  </div>
+
+  <div class="fig">
+    <p class="fig-t">도식 2 · 나당 동맹에서 통일까지</p>
+    <svg viewBox="0 0 420 250" role="img" aria-label="나당 동맹부터 백제 고구려 멸망 나당 전쟁 통일까지의 순서">
+      <rect class="sb" x="8" y="12" width="404" height="40" rx="3"/>
+      <text class="st" x="210" y="30">648 · 신라와 당이 손을 잡습니다 (나당 동맹)</text>
+      <text class="st-s" x="210" y="46">신라는 백제가 급했고, 당은 고구려가 목표였습니다</text>
+      <line class="sl-k" x1="210" y1="52" x2="210" y2="62"/><polygon class="sa-k" points="204,62 210,70 216,62"/>
+      <rect class="sb-k" x="8" y="72" width="196" height="40" rx="3"/>
+      <text class="st st-k" x="106" y="90">660 · 백제 멸망</text>
+      <text class="st-s" x="106" y="106">황산벌 · 계백</text>
+      <rect class="sb-k" x="216" y="72" width="196" height="40" rx="3"/>
+      <text class="st st-k" x="314" y="90">668 · 고구려 멸망</text>
+      <text class="st-s" x="314" y="106">오랜 전쟁으로 지침</text>
+      <line class="sl-k" x1="210" y1="112" x2="210" y2="124"/><polygon class="sa-k" points="204,124 210,132 216,124"/>
+      <rect class="sb-a" x="8" y="134" width="404" height="46" rx="3"/>
+      <text class="st st-a" x="210" y="155">당이 한반도 전체를 차지하려 합니다</text>
+      <text class="st-s" x="210" y="172">→ 신라가 당과 전쟁 · 매소성 · 기벌포</text>
+      <line class="sl-k" x1="210" y1="180" x2="210" y2="192"/><polygon class="sa-k" points="204,192 210,200 216,192"/>
+      <rect class="sb-k" x="8" y="202" width="404" height="40" rx="3"/>
+      <text class="st st-k" x="210" y="222">676 · 당을 몰아내고 삼국 통일</text>
+      <text class="st-s" x="210" y="238">그리고 698년, 고구려 땅에 발해가 세워집니다</text>
+    </svg>
+    <p class="fig-c">시험에서 자주 묻는 것은 <b>“왜 통일 연도가 668이 아니라 676인가”</b>입니다. 답은 이 도식 아래 두 칸에 있습니다.</p>
+  </div>
+</section>
+
+<section class="sec" id="mon">
+  <div class="step-no"><span class="num">2</span><span class="lbl">흐름 읽기</span><span class="day">MON · 열기</span></div>
+  <h2>손을 잡은 이유와 등을 돌린 이유</h2>
+
+  <p>신라는 백제의 공격에 시달리고 있었고, 당은 고구려를 여러 번 공격했지만 실패했습니다.
+  <b>서로에게 필요한 것이 달랐기 때문에</b> 손을 잡을 수 있었습니다. 신라는 백제를, 당은 고구려를 원했습니다.</p>
+
+  <div class="alert"><span class="lb">그런데 여기서 문제가 생깁니다</span>
+    <p>고구려까지 무너지자 당은 약속을 어기고 <b>한반도 전체를 차지하려</b> 했습니다.
+    그래서 신라는 어제의 동맹과 싸우게 됩니다. <b>매소성</b>과 <b>기벌포</b>에서 당군을 물리치고
+    <b>676년</b>에야 삼국 통일이 완성됩니다.</p>
+  </div>
+
+  <div class="plain">
+    <p><b>통일의 의의와 한계</b> — 오랜 전쟁을 끝내고 <b>하나의 나라와 문화</b>를 이루었다는 점,
+    그리고 <b>외세를 스스로 몰아냈다</b>는 점이 의의입니다.
+    반면 <b>외세를 끌어들였다</b>는 점과 <b>고구려의 넓은 북쪽 땅을 잃었다</b>는 점이 한계로 지적됩니다.
+    시험에서는 이 두 가지를 함께 묻습니다.</p>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w3m1"><span class="tt"><b>월요일</b> — 위를 읽고 질문 3개를 적습니다. “왜 676년인가”를 스스로 답해 봅니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="tue">
+  <div class="step-no"><span class="num">3</span><span class="lbl">연표 세우기</span><span class="day">TUE · 채우기</span></div>
+  <h2>연표 세 번째 칸</h2>
+
+  <div class="tw wide"><table>
+    <thead><tr><th>사건</th><th>원인 (왜)</th><th>결과 (그래서)</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">나당 동맹과 백제·고구려 멸망<br><span class="mn">660 · 668</span></td>
+        <td>신라는 백제의 공격이 급했고, 당은 고구려를 이기지 못했습니다</td>
+        <td>백제(660) → 고구려(668) 순서로 멸망 · 당이 한반도에 군대를 남김</td></tr>
+      <tr><td class="hd">나당 전쟁과 통일<br><span class="mn">676</span></td>
+        <td>당이 약속을 어기고 한반도 전체를 지배하려 했습니다</td>
+        <td>매소성·기벌포에서 당을 물리치고 <b>삼국 통일 완성</b></td></tr>
+      <tr><td class="hd">발해 건국<br><span class="mn">698 · 대조영</span></td>
+        <td>고구려가 멸망했지만 그 사람들이 사라진 것은 아니었습니다</td>
+        <td>고구려 유민과 말갈인이 세운 나라 · 뒤에 <b>해동성국</b>이라 불림 · <b>남북국 시대</b></td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="cards two">
+    <div class="card"><span class="ct">인물</span><h4>김유신 · 문무왕</h4>
+      <p>김유신은 백제·고구려 정벌을 이끈 장군, 문무왕은 <b>나당 전쟁을 끝내고 통일을 완성한 왕</b>입니다.
+      문무왕은 죽어서도 바다의 용이 되어 나라를 지키겠다며 <b>바다에 묻혔다</b>고 전합니다(대왕암).</p></div>
+    <div class="card"><span class="ct">인물</span><h4>대조영</h4>
+      <p>고구려가 멸망한 뒤 유민들을 이끌고 동쪽으로 이동해 <b>발해</b>를 세운 인물입니다.
+      발해는 <b>고구려를 계승한 나라</b>임을 스스로 밝혔습니다.</p></div>
+  </div>
+
+  <div class="note"><span class="lb">‘남북국 시대’라는 말</span>
+    <p>남쪽의 통일신라와 북쪽의 발해가 함께 있던 시기를 <b>남북국 시대</b>라고 부릅니다.
+    이 말을 쓰는 이유는 <b>발해도 우리 역사</b>라는 뜻을 담기 위해서입니다.
+    발해를 빼고 “통일신라 시대”라고만 하면 고구려 땅의 역사가 사라져 버리기 때문입니다.</p>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w3m2"><span class="tt"><b>화요일</b> — 연표 세 번째 칸을 세우고 연도 네 개(660 · 668 · 676 · 698)를 적습니다. 인물 카드 2장을 만듭니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="thu">
+  <div class="step-no"><span class="num">4</span><span class="lbl">사료</span><span class="day">THU · 사료로</span></div>
+  <h2>발해가 스스로 남긴 한 줄</h2>
+
+  <p>“발해가 고구려를 이었다”는 것을 어떻게 알 수 있을까요. 가장 강력한 증거는 <b>발해가 직접 쓴 문서</b>입니다.
+  발해 왕이 일본에 보낸 국서에는 스스로를 <b>‘고려(고구려) 국왕’</b>이라 적은 대목이 전합니다.</p>
+
+  <div class="fig">
+    <p class="fig-t">사료 · 발해가 고구려를 계승했다는 증거</p>
+    <svg viewBox="0 0 420 200" role="img" aria-label="발해가 고구려를 계승했다는 세 가지 증거">
+      <rect class="sb-g" x="8" y="10" width="404" height="52" rx="3"/>
+      <text class="st" x="210" y="34">① 일본에 보낸 국서에 스스로 ‘고려 국왕’</text>
+      <text class="st-s" x="210" y="52">→ 스스로 고구려를 잇는다고 밝힘</text>
+      <rect class="sb-g" x="8" y="70" width="404" height="52" rx="3"/>
+      <text class="st" x="210" y="94">② 굴식 돌방무덤 · 온돌 · 기와 무늬</text>
+      <text class="st-s" x="210" y="112">→ 고구려와 같은 방식의 유물과 유적</text>
+      <rect class="sb-g" x="8" y="130" width="404" height="52" rx="3"/>
+      <text class="st" x="210" y="154">③ 지배층에 고구려 사람이 많았음</text>
+      <text class="st-s" x="210" y="172">→ 나라를 이끈 사람들이 이어짐</text>
+    </svg>
+    <p class="fig-c">역사는 “그렇다고 배웠다”가 아니라 <b>“이런 증거가 있다”</b>로 말합니다. 이번 주는 그 연습입니다.</p>
+  </div>
+
+  <div class="cards two">
+    <div class="card"><span class="ct">활동 1</span><h4>지도에 두 나라 그리기</h4>
+      <p>백지도에 <b>남쪽 통일신라와 북쪽 발해</b>를 색을 달리해 그립니다.
+      2주차에 그린 고구려 지도와 겹쳐 보면 <b>발해가 어디에 섰는지</b> 바로 보입니다.</p></div>
+    <div class="card"><span class="ct">활동 2</span><h4>유물 찾아보기</h4>
+      <p>국립중앙박물관 누리집에서 <b>‘발해 이불병좌상’</b> 또는 <b>‘발해 기와’</b>를 검색해 봅니다.
+      고구려 유물 사진과 나란히 놓고 <b>닮은 점</b>을 하나 찾아 적습니다.</p></div>
+  </div>
+
+  <div class="tw"><table>
+    <thead><tr><th>기록</th><th>내가 적어 보기</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">발해가 고구려를 이었다는 증거 중 가장 강한 것</td><td class="fill">______</td></tr>
+      <tr><td class="hd">그렇게 생각한 이유</td><td class="fill">______</td></tr>
+    </tbody>
+  </table></div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w3m3"><span class="tt"><b>목요일</b> — 지도에 남북국을 그리고, 발해 유물 사진 하나를 찾아 고구려 유물과 비교합니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="fri">
+  <div class="step-no"><span class="num">5</span><span class="lbl">보스전</span><span class="day">FRI · 설명</span></div>
+  <h2>문제 5개와 3분 설명</h2>
+
+  <div class="q"><span class="qn">Q1</span>
+    <p>순서대로 놓아 봅시다. ㉠ 고구려 멸망 ㉡ 나당 동맹 ㉢ 삼국 통일 완성 ㉣ 백제 멸망</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>㉡ 나당 동맹(648) → ㉣ 백제 멸망(660) → ㉠ 고구려 멸망(668) → ㉢ 통일 완성(676)</b>입니다.
+      백제가 먼저 무너졌다는 순서를 특히 자주 묻습니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q2</span>
+    <p>삼국 통일 연도를 고구려가 멸망한 668년이 아니라 <b>676년</b>으로 보는 이유는 무엇일까요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>668년 이후에도 당이 한반도를 지배하려 했고, 신라가 나당 전쟁에서 당을 몰아낸 것이 676년이기 때문입니다.</b>
+      외세를 내보내고 나서야 통일이 완성된 것입니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q3</span>
+    <p>신라와 당은 왜 손을 잡았고, 왜 등을 돌렸을까요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>손을 잡은 이유 —</b> 신라는 백제의 공격이 급했고, 당은 고구려를 혼자서는 이기지 못했습니다.<br>
+      <b>등을 돌린 이유 —</b> 고구려가 무너지자 당이 약속을 어기고 한반도 전체를 차지하려 했기 때문입니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q4</span>
+    <p>발해가 고구려를 계승했다는 증거를 두 가지 말해 봅시다.</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>① 일본에 보낸 국서에서 스스로 ‘고려(고구려) 국왕’이라 밝혔습니다
+      ② 굴식 돌방무덤·온돌·기와 무늬 등 고구려와 같은 문화가 나타납니다.</b>
+      지배층에 고구려 사람이 많았다는 점도 근거로 듭니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q5</span>
+    <p>삼국 통일의 의의와 한계를 각각 한 가지씩 말해 봅시다.</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>의의 —</b> 오랜 전쟁을 끝내고 하나의 나라와 문화를 이루었으며, 당의 지배 시도를 스스로 물리쳤습니다.<br>
+      <b>한계 —</b> 통일 과정에서 외세(당)를 끌어들였고, 고구려의 넓은 북쪽 영토를 잃었습니다.
+    </div></details>
+  </div>
+
+  <h3>아빠에게 3분 설명하기</h3>
+  <div class="script">
+    <div class="row"><span class="s">배운 것</span><span>신라가 당이랑 손잡고 통일했는데, 나중엔 그 당을 다시 몰아내야 했다는 것.</span></div>
+    <div class="row"><span class="s">사료</span><span>발해가 일본에 보낸 편지에 스스로를 고구려 왕이라고 썼대. 그래서 발해도 우리 역사야.</span></div>
+    <div class="row"><span class="s">헷갈리는 것</span><span>통일 연도는 668이 아니라 676이야. 당을 내보낸 게 그때거든.</span></div>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w3m4"><span class="tt"><b>금요일</b> — 문제 5개와 3분 설명. 연표의 세 칸을 이어서 말해 봅니다.</span></label></li>
+  </ul>
+
+  <p><span class="badge">획득 · 연표 3칸</span></p>
+</section>
+
+<section class="sec" id="next">
+  <div class="step-no"><span class="num">6</span><span class="lbl">다음 주</span></div>
+  <h2>고려의 성립</h2>
+  <p>신라가 힘을 잃자 지방의 강한 세력(호족)들이 일어섭니다. 그중 한 사람이 왕건입니다.
+  다음 주의 질문은 <b>“호족의 힘으로 세운 나라를, 어떻게 왕의 나라로 바꿨을까”</b>입니다.</p>
+  <div class="pager">
+    <a href="week02.html">← 2주차</a>
+    <a href="index.html">전체 지도</a>
+    <a class="main" href="week04.html">4주차 →</a>
+  </div>
+</section>
+
+<footer>역사 항해 12주 · WEEK 03 통일신라와 발해 · 하루 20분 × 4일</footer>
+</div>
+<script>
+  (function(){
+    var KEY="history_quest_progress";
+    function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){return{}}}
+    function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+    var boxes=[].slice.call(document.querySelectorAll(".todo input[type=checkbox]"));
+    var st=load();
+    boxes.forEach(function(b){
+      if(st[b.dataset.q])b.checked=true;
+      b.addEventListener("change",function(){
+        var s=load();
+        if(b.checked)s[b.dataset.q]=1;else delete s[b.dataset.q];
+        save(s);paint();
+      });
+    });
+    function paint(){
+      var el=document.getElementById("wdone");
+      if(el){var n=boxes.filter(function(b){return b.checked}).length;
+        el.textContent=n+" / "+boxes.length;}
+      var hub=document.querySelector("[data-hub]");
+      if(hub){
+        var s=load(),total=0;
+        for(var w=1;w<=12;w++){
+          var n2=0;
+          for(var m=1;m<=4;m++) if(s["w"+w+"m"+m]) n2++;
+          total+=n2;
+          var p=document.querySelector('.p[data-p="'+w+'"]');
+          if(p&&!p.dataset.soon){p.textContent=n2===4?"완료":n2+" / 4";
+            p.className="p"+(n2===4?" done":(n2>0?" ing":""));}
+        }
+        var d=document.getElementById("allDone"),bar=document.getElementById("allBar");
+        if(d)d.textContent=total+" / 12";
+        if(bar)bar.style.width=(total/12*100)+"%";
+      }
+    }
+    paint();
+    var links=[].slice.call(document.querySelectorAll("nav.jump a[href^='#']"));
+    if(links.length){
+      var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1))});
+      var onScroll=function(){
+        var y=window.scrollY+130,idx=0;
+        secs.forEach(function(s,i){if(s&&s.offsetTop<=y)idx=i;});
+        links.forEach(function(a,i){a.classList.toggle("now",i===idx);});
+      };
+      window.addEventListener("scroll",onScroll,{passive:true});onScroll();
+    }
+  })();
+</script>
+</body>
+</html>

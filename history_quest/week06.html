@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#DCE2DB">
-<title>10주차 · 에너지 배달 경로</title>
-<meta name="description" content="소화·순환·호흡·배설을 따로 외우지 않고 한 줄로 꿰는 법.">
+<title>6주차 · 조선의 건국</title>
+<meta name="description" content="새 나라의 설계도, 그리고 세종이 만든 글자.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@
     --ink:#131C18; --ink2:#2C3A33; --muted:#5F6E66; --faint:#8A968F;
     --mist:#DCE2DB; --surface:#F8FAF6; --surface2:#EFF3EC;
     --line:#C3CCC1; --hair:#DDE4DB;
-    --kelp:#1F6249; --kelp-wash:#DEEDE4; --kelp-line:#8FBBA3;
+    --kelp:#8C2F3E; --kelp-wash:#F6E4E7; --kelp-line:#D9A8B0;
     --amber:#8F6209; --amber-wash:#F5EAD0; --amber-line:#DCC79B;
     --berry:#8C2F3E; --berry-wash:#F3DFE2; --berry-line:#D9A8B0;
     --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
@@ -47,7 +47,7 @@
   .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:18px;}
   .kpi .kl{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
     text-transform:uppercase;color:#7E8F84;display:block;margin-bottom:5px;}
-  .kpi .kv{font-size:clamp(21px,3.2vw,28px);font-weight:700;color:#8FD3B4;
+  .kpi .kv{font-size:clamp(21px,3.2vw,28px);font-weight:700;color:#F0AEB8;
     letter-spacing:-0.03em;display:block;line-height:1.1;}
   .kpi .kn{font-size:12px;color:#B9C6BC;display:block;margin-top:6px;
     font-weight:300;line-height:1.5;}
@@ -102,24 +102,24 @@
   .fig-c b{color:var(--ink);font-weight:600;}
 
   .sb{fill:#fff;stroke:#C3CCC1;stroke-width:1.5;}
-  .sb-k{fill:#DEEDE4;stroke:#1F6249;stroke-width:2;}
+  .sb-k{fill:#F6E4E7;stroke:#8C2F3E;stroke-width:2;}
   .sb-b{fill:#F3DFE2;stroke:#D9A8B0;stroke-width:1.5;}
   .sb-a{fill:#F5EAD0;stroke:#DCC79B;stroke-width:1.5;}
   .sb-g{fill:#EFF3EC;stroke:#C3CCC1;stroke-width:1.5;}
-  .sb-d{fill:#fff;stroke:#1F6249;stroke-width:1.6;stroke-dasharray:5 4;}
+  .sb-d{fill:#fff;stroke:#8C2F3E;stroke-width:1.6;stroke-dasharray:5 4;}
   .st{font-family:var(--sans);font-size:13.5px;font-weight:600;fill:#131C18;
     text-anchor:middle;letter-spacing:-0.3px;}
   .st-s{font-family:var(--sans);font-size:11.5px;font-weight:400;fill:#5F6E66;text-anchor:middle;}
-  .st-k{fill:#1F6249;} .st-b{fill:#8C2F3E;} .st-a{fill:#8F6209;}
+  .st-k{fill:#8C2F3E;} .st-b{fill:#8C2F3E;} .st-a{fill:#8F6209;}
   .sm{font-family:var(--mono);font-size:12px;fill:#131C18;text-anchor:middle;font-weight:500;}
   .sm-s{font-family:var(--mono);font-size:10.5px;fill:#5F6E66;text-anchor:middle;}
   .st-m{font-family:var(--mono);font-size:11px;fill:#8A968F;text-anchor:middle;letter-spacing:0.5px;}
   .sl{stroke:#8A968F;stroke-width:1.6;fill:none;}
-  .sl-k{stroke:#1F6249;stroke-width:2;fill:none;}
+  .sl-k{stroke:#8C2F3E;stroke-width:2;fill:none;}
   .sl-a{stroke:#8F6209;stroke-width:1.8;fill:none;}
   .sl-d{stroke:#8A968F;stroke-width:1.4;fill:none;stroke-dasharray:4 4;}
-  .sa{fill:#8A968F;} .sa-k{fill:#1F6249;} .sa-a{fill:#8F6209;}
-  .dot-k{fill:#1F6249;} .dot-a{fill:#C99A2E;} .dot-b{fill:#8C2F3E;}
+  .sa{fill:#8A968F;} .sa-k{fill:#8C2F3E;} .sa-a{fill:#8F6209;}
+  .dot-k{fill:#8C2F3E;} .dot-a{fill:#C99A2E;} .dot-b{fill:#8C2F3E;}
 
   /* ===== 표 ===== */
   .tw{overflow-x:auto;margin:20px 0 8px;border:1px solid var(--line);
@@ -244,177 +244,184 @@
 <body>
 <div class="wrap">
 <header class="cover">
-  <p class="kicker">WEEK 10 · 캠프 3 생명과 지구 · 하루 20분 × 4일</p>
-  <h1>에너지 배달 경로</h1>
+  <p class="kicker">WEEK 06 · 2구간 고려와 조선 · 하루 20분 × 4일</p>
+  <h1>조선의 건국</h1>
   <p class="lede">
-    소화·순환·호흡·배설은 <b>따로 배우는 네 단원이 아닙니다.</b>
-    포도당과 산소를 세포까지 배달하고 쓰레기를 치우는 <b>하나의 배달 시스템</b>입니다.
-    한 줄로 꿰면 외울 것이 절반으로 줄어듭니다.
+    나라를 새로 세운다는 것은 <b>무엇을 다르게 하겠다</b>는 선언입니다.
+    조선은 불교의 나라 고려와 달리 <b>유교</b>를 바탕으로 삼았습니다.
+    그 방향이 <b>수도의 이름과 건물 배치, 그리고 글자</b>에까지 그대로 나타납니다.
   </p>
   <div class="metaline">
-    <span>9주차 연결 <b>포도당</b></span>
-    <span>개념 <b>소화 · 순환 · 호흡 · 배설</b></span>
-    <span>실험 <b>심박수 측정</b></span>
+    <span>연표 <b>6번째 칸</b></span>
+    <span>사건 <b>3개</b></span>
+    <span>사료 <b>훈민정음 서문</b></span>
     <span>진행 <b id="wdone">0 / 4</b></span>
   </div>
 
   <div class="summary">
     <h2>이번 주에 남길 것</h2>
-    <p class="sd">네 기관계를 각각 외우는 대신, 목적지가 하나라는 것부터 잡습니다.</p>
+    <p class="sd">건국 → 왕권 정비 → 문화의 꽃, 세 단계로 봅니다.</p>
     <div class="kpis">
-      <div class="kpi"><span class="kl">목적</span><span class="kv">에너지</span>
-        <span class="kn">포도당 + 산소 → 이산화탄소 + 물 + 에너지</span></div>
-      <div class="kpi"><span class="kl">목적지</span><span class="kv">세포</span>
-        <span class="kn">온몸의 세포 하나하나까지 배달한다</span></div>
-      <div class="kpi"><span class="kl">구별</span><span class="kv">호흡</span>
-        <span class="kn">숨쉬기는 동작 · 호흡은 세포가 하는 일</span></div>
+      <div class="kpi"><span class="kl">1392</span><span class="kv">건국</span>
+        <span class="kn">이성계와 신진 사대부 · 한양 천도</span></div>
+      <div class="kpi"><span class="kl">태종</span><span class="kv">왕권</span>
+        <span class="kn">호패법 · 사병 혁파로 기틀을 다짐</span></div>
+      <div class="kpi"><span class="kl">세종</span><span class="kv">훈민정음</span>
+        <span class="kn">1443 창제 · 1446 반포</span></div>
     </div>
   </div>
 </header>
 
 <nav class="jump"><div class="row">
-  <a href="#map">이번 주 지도</a>
+  <a href="#map">이번 주 칸</a>
   <a href="#mon">월 · 열기</a>
   <a href="#tue">화 · 채우기</a>
-  <a href="#thu">목 · 손으로</a>
+  <a href="#thu">목 · 사료로</a>
   <a href="#fri">금 · 보스전</a>
   <a href="#next">다음 주</a>
 </div></nav>
 
 <section class="sec" id="map">
-  <div class="step-no"><span class="num">1</span><span class="lbl">이번 주 지도</span></div>
-  <h2>배달 시스템 한 줄</h2>
+  <div class="step-no"><span class="num">1</span><span class="lbl">이번 주 칸</span></div>
+  <h2>새 나라의 설계도</h2>
 
-  <div class="fig wide">
-    <p class="fig-t">도식 1 · 밥 한 숟갈이 세포에 닿기까지</p>
-    <svg viewBox="0 0 900 230" role="img" aria-label="소화 순환 호흡 배설로 이어지는 에너지 배달 경로">
-      <text class="st-s" x="450" y="34">목적지는 하나 — 온몸의 세포</text>
-      <rect class="sb-k" x="16" y="66" width="188" height="80" rx="3"/>
-      <text class="st st-k" x="110" y="100">소화</text>
-      <text class="st-s" x="110" y="124">밥 → 포도당</text>
-      <line class="sl-k" x1="210" y1="106" x2="234" y2="106"/>
-      <polygon class="sa-k" points="234,100 250,106 234,112"/>
+  <div class="fig">
+    <p class="fig-t">도식 1 · 12주 연표에서 이번 주의 자리</p>
+    <svg viewBox="0 0 420 156" role="img" aria-label="12주 연표에서 이번 주의 위치"><rect x="10" y="60" width="133" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="76" y="54" style="font-size:9.5px">1구간 · 고대</text><rect x="146" y="60" width="133" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="212" y="54" style="font-size:9.5px">2구간 · 고려와 조선</text><rect x="282" y="60" width="133" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="348" y="54" style="font-size:9.5px">3구간 · 근현대</text><rect x="10" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="26" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">01</text><rect x="44" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="60" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">02</text><rect x="78" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="94" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">03</text><rect x="112" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="128" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">04</text><rect x="146" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="162" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">05</text><rect x="180" y="70" width="31" height="26" rx="3" fill="#8C2F3E" stroke="#8C2F3E" stroke-width="1.2"/><text x="196" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#fff">06</text><text x="196" y="36" text-anchor="middle" font-family="IBM Plex Sans KR,sans-serif" font-size="13" font-weight="700" fill="#8C2F3E">조선 건국</text><text x="196" y="120" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10.5" fill="#8C2F3E">1392 ~ 1494</text><path d="M196 40 L196 66" stroke="#8C2F3E" stroke-width="1.4"/><rect x="214" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="230" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">07</text><rect x="248" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="264" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">08</text><rect x="282" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="298" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">09</text><rect x="316" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="332" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">10</text><rect x="350" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="366" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">11</text><rect x="384" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="400" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">12</text><text class="st-m" x="10" y="146" text-anchor="start" style="font-size:9.5px">선사</text><text class="st-m" x="410" y="146" text-anchor="end" style="font-size:9.5px">오늘</text><line x1="34" y1="142" x2="386" y2="142" stroke="#C3CCC1" stroke-width="1"/><polygon points="386,138 396,142 386,146" fill="#8A968F"/></svg>
+  </div>
 
-      <rect class="sb-b" x="256" y="66" width="188" height="80" rx="3"/>
-      <text class="st st-b" x="350" y="100">순환</text>
-      <text class="st-s" x="350" y="124">피가 실어 나른다</text>
-      <line class="sl-k" x1="450" y1="106" x2="474" y2="106"/>
-      <polygon class="sa-k" points="474,100 490,106 474,112"/>
+  <div class="fig">
+    <p class="fig-t">도식 2 · 고려와 조선, 무엇이 달라졌나</p>
+    <svg viewBox="0 0 420 200" role="img" aria-label="고려와 조선의 통치 이념과 신분 구조 비교">
+      <rect class="sb" x="8" y="12" width="196" height="170" rx="3"/>
+      <text class="st" x="106" y="36">고려</text>
+      <text class="st-s" x="106" y="66">중심 사상 · 불교</text>
+      <text class="st-s" x="106" y="90">지배층 · 문벌 · 권문세족</text>
+      <text class="st-s" x="106" y="114">관리 선발 · 과거 + 음서</text>
+      <text class="st-s" x="106" y="138">수도 · 개경</text>
+      <text class="st-s" x="106" y="162">대외 · 송 · 거란 · 몽골</text>
 
-      <rect class="sb" x="496" y="66" width="188" height="80" rx="3"/>
-      <text class="st" x="590" y="100">호흡</text>
-      <text class="st-s" x="590" y="124">산소로 태워 에너지</text>
-      <line class="sl-k" x1="690" y1="106" x2="714" y2="106"/>
-      <polygon class="sa-k" points="714,100 730,106 714,112"/>
-
-      <rect class="sb-a" x="736" y="66" width="150" height="80" rx="3"/>
-      <text class="st st-a" x="811" y="100">배설</text>
-      <text class="st-s" x="811" y="124">찌꺼기 배출</text>
-
-      <text class="st-m" x="450" y="184">양분을 잘게 → 실어 나르고 → 산소로 태워 에너지 → 쓰레기 배출</text>
-      <text class="st-m" x="450" y="210">네 기관계 중 하나만 멈춰도 배달이 끊깁니다</text>
+      <rect class="sb-k" x="216" y="12" width="196" height="170" rx="3"/>
+      <text class="st st-k" x="314" y="36">조선</text>
+      <text class="st-s" x="314" y="66">중심 사상 · <tspan font-weight="700">유교</tspan></text>
+      <text class="st-s" x="314" y="90">지배층 · <tspan font-weight="700">사대부(양반)</tspan></text>
+      <text class="st-s" x="314" y="114">관리 선발 · <tspan font-weight="700">과거 중심</tspan></text>
+      <text class="st-s" x="314" y="138">수도 · <tspan font-weight="700">한양</tspan></text>
+      <text class="st-s" x="314" y="162">대외 · 명과 사대 · 왜와 교린</text>
     </svg>
-    <p class="fig-c">9주차의 <b>광합성이 저금</b>이라면, 이번 주 세포호흡은 <b>인출</b>입니다. 방향이 정확히 반대입니다.</p>
+    <p class="fig-c">나라가 바뀌었다는 것은 <b>무엇을 옳다고 여기는지</b>가 바뀌었다는 뜻입니다. 조선의 답은 <b>유교</b>였습니다.</p>
   </div>
 </section>
 
 <section class="sec" id="mon">
-  <div class="step-no"><span class="num">2</span><span class="lbl">개념 하나</span><span class="day">MON · 열기</span></div>
-  <h2>왜 먹고, 왜 숨 쉬는가</h2>
+  <div class="step-no"><span class="num">2</span><span class="lbl">흐름 읽기</span><span class="day">MON · 열기</span></div>
+  <h2>장군과 학자가 손을 잡습니다</h2>
 
-  <p>밥을 먹는 이유와 숨을 쉬는 이유는 <b>같은 하나의 목적</b> 때문입니다. 세포에서 <b>에너지를 만들기 위해서</b>입니다.</p>
+  <p>고려 말, 왜구와 홍건적을 물리치며 이름을 얻은 장군 <b>이성계</b>와,
+  공민왕 때 성장한 <b>신진 사대부</b>가 손을 잡습니다.
+  <b>힘(군사)</b>과 <b>명분(사상)</b>이 만난 것입니다. 1392년, 조선이 세워집니다.</p>
 
   <div class="plain">
-    <p><b>세포호흡 — 9주차와 정확히 반대</b><br>
-    포도당 + 산소 → 이산화탄소 + 물 + <b>에너지</b><br>
-    그래서 밥(포도당)도 필요하고 산소도 필요합니다.</p>
+    <p><b>한양을 수도로 삼은 이유</b> — 한반도의 <b>가운데</b>에 있어 전국을 다스리기 좋고,
+    <b>한강</b>이 있어 물자를 옮기기 편하며, 산으로 둘러싸여 <b>지키기</b>에도 유리했습니다.
+    2주차에서 “한강을 가진 나라가 강해진다”고 했던 이유가 여기서 다시 나옵니다.</p>
   </div>
 
-  <p>이 반응은 <b>온몸의 세포 하나하나</b>에서 일어납니다. 그러니 포도당과 산소를 <b>모든 세포까지 배달</b>해야 하고,
-  생긴 이산화탄소와 찌꺼기를 <b>도로 실어 내야</b> 합니다. 그 배달을 맡은 것이 네 기관계입니다.</p>
+  <h3>궁궐 이름에 담긴 뜻</h3>
+  <p>조선의 중심 궁궐은 <b>경복궁</b>입니다. ‘큰 복을 누리라’는 뜻입니다.
+  정문은 <b>광화문</b>, 중심 건물은 <b>근정전</b>(부지런히 정치하라는 뜻)입니다.
+  건물 이름 하나하나가 <b>유교의 가르침</b>을 담고 있습니다.
+  도성의 사대문 이름에도 유교의 다섯 덕목(인·의·예·지)이 들어 있습니다.</p>
 
-  <div class="tw"><table>
-    <thead><tr><th>기관계</th><th>맡은 일</th><th>기억할 한 마디</th></tr></thead>
-    <tbody>
-      <tr><td class="hd">소화계</td><td>음식을 흡수할 수 있게 잘게 분해</td><td class="ok">포장 뜯기</td></tr>
-      <tr><td class="hd">순환계</td><td>양분과 산소를 온몸으로 운반</td><td class="ok">배달 트럭</td></tr>
-      <tr><td class="hd">호흡계</td><td>산소를 들이고 이산화탄소를 내보냄</td><td class="ok">연료 공급</td></tr>
-      <tr><td class="hd">배설계</td><td>몸에서 생긴 노폐물을 걸러 내보냄</td><td class="ok">쓰레기 처리</td></tr>
-    </tbody>
-  </table></div>
+  <div class="alert"><span class="lb">여기서 헷갈립니다</span>
+    <p>“조선은 불교를 없앴다”는 말은 정확하지 않습니다.
+    <b>나라를 다스리는 원리를 유교로 삼은 것</b>이지, 백성들의 불교 신앙이 사라진 것은 아닙니다.
+    왕실에서도 불교 행사가 이어졌습니다. <b>제도는 유교, 생활에는 불교</b>가 함께 있었습니다.</p>
+  </div>
 
   <ul class="todo">
-    <li><label><input type="checkbox" data-q="w10m1"><span class="tt"><b>월요일</b> — 세포호흡 식을 적고, 네 기관계 표를 읽으며 질문 3개를 만듭니다.</span></label></li>
+    <li><label><input type="checkbox" data-q="w6m1"><span class="tt"><b>월요일</b> — 위를 읽고 질문 3개를 적습니다. 경복궁 건물 이름 하나의 뜻을 찾아봅니다.</span></label></li>
   </ul>
 </section>
 
 <section class="sec" id="tue">
-  <div class="step-no"><span class="num">3</span><span class="lbl">개념 둘</span><span class="day">TUE · 채우기</span></div>
-  <h2>밥 한 숟갈의 여행</h2>
+  <div class="step-no"><span class="num">3</span><span class="lbl">연표 세우기</span><span class="day">TUE · 채우기</span></div>
+  <h2>연표 여섯 번째 칸</h2>
 
-  <p>밥 한 숟갈이 팔 근육에 닿기까지를 순서대로 따라가 봅니다. 이 한 줄이 이번 주 전부입니다.</p>
   <div class="tw wide"><table>
-    <thead><tr><th>단계</th><th>어디서</th><th>무슨 일이</th></tr></thead>
+    <thead><tr><th>사건</th><th>원인 (왜)</th><th>결과 (그래서)</th></tr></thead>
     <tbody>
-      <tr><td class="mn ok">①</td><td class="hd">입</td><td>침 속 소화 효소가 <b>녹말을 당으로</b> 분해하기 시작합니다</td></tr>
-      <tr><td class="mn ok">②</td><td class="hd">위</td><td>위액이 단백질을 분해하고 음식을 죽처럼 만듭니다</td></tr>
-      <tr><td class="mn ok">③</td><td class="hd">작은창자</td><td>최종 분해 후 <b>융털</b>로 흡수 — 포도당이 여기서 피로 들어갑니다</td></tr>
-      <tr><td class="mn ok">④</td><td class="hd">심장 · 혈관</td><td>피가 포도당과 산소를 <b>온몸 세포로</b> 배달합니다</td></tr>
-      <tr><td class="mn ok">⑤</td><td class="hd">세포</td><td>포도당 + 산소 → 에너지 (+ 이산화탄소 · 물)</td></tr>
-      <tr><td class="mn ok">⑥</td><td class="hd">폐 · 콩팥</td><td>이산화탄소는 폐로, 오줌 성분은 콩팥으로 내보냅니다</td></tr>
+      <tr><td class="hd">조선 건국과 한양 천도<br><span class="mn">1392</span></td>
+        <td>고려 말의 혼란 속에 새 나라를 세우자는 세력이 커졌습니다</td>
+        <td>이성계 + 신진 사대부 · 유교를 통치 이념으로 · 한양을 수도로</td></tr>
+      <tr><td class="hd">태종의 왕권 강화<br><span class="mn">15세기 초</span></td>
+        <td>건국 초에는 공신들의 힘이 셌습니다</td>
+        <td><b>사병을 없애고</b> 군사권을 왕에게 · <b>호패법</b>으로 인구를 파악 · 세금과 군역의 기초를 마련</td></tr>
+      <tr><td class="hd">세종의 문화 정치<br><span class="mn">1443 창제 · 1446 반포</span></td>
+        <td>백성이 글을 몰라 억울한 일을 당했습니다</td>
+        <td><b>훈민정음</b> 창제 · 측우기와 앙부일구 · 4군 6진으로 북방 개척 · 《농사직설》</td></tr>
     </tbody>
   </table></div>
 
-  <div class="alert"><span class="lb">여기서 헷갈립니다</span>
-    <p><b>호흡은 숨쉬기가 아닙니다.</b> 숨쉬기(들숨·날숨)는 공기를 주고받는 <b>동작</b>이고,
-    진짜 ‘호흡’은 세포 안에서 포도당을 태워 <b>에너지를 만드는 일</b>입니다. 시험에서 이 둘을 구별해 묻습니다.</p>
-  </div>
-
-  <div class="plain">
-    <p><b>왜 뛰면 숨이 차고 심장이 빨라질까</b> — 근육이 에너지를 많이 쓰니 <b>산소가 더 필요하고 이산화탄소가 더 생깁니다.</b>
-    그래서 호흡이 빨라져 산소를 더 들이고, 심장이 빨리 뛰어 배달 속도를 올립니다. 네 기관계가 함께 반응하는 것입니다.</p>
+  <div class="cards two">
+    <div class="card"><span class="ct">인물</span><h4>정도전</h4>
+      <p>조선의 <b>설계자</b>로 불리는 학자. 유교 이념에 따라 나라의 제도와 한양의 구조를 짰습니다.
+      <b>재상(신하)이 중심이 되는 정치</b>를 꿈꿨으나, 왕권을 강조한 이방원(태종)과 대립하다 죽습니다.</p></div>
+    <div class="card"><span class="ct">인물</span><h4>세종</h4>
+      <p>훈민정음을 만들고 과학·농업·국방까지 크게 넓힌 왕.
+      집현전에서 학자들을 길렀고, 장영실 같은 <b>신분이 낮은 인재</b>도 등용했습니다.</p></div>
   </div>
 
   <ul class="todo">
-    <li><label><input type="checkbox" data-q="w10m2"><span class="tt"><b>화요일</b> — 밥 한 숟갈의 여행 6단계를 <b>그림 한 장</b>으로 그립니다. 화살표로 이어 그리면 됩니다.</span></label></li>
+    <li><label><input type="checkbox" data-q="w6m2"><span class="tt"><b>화요일</b> — 연표 여섯 번째 칸을 세우고 표를 옮겨 적습니다. 인물 카드 2장을 만듭니다.</span></label></li>
   </ul>
 </section>
 
 <section class="sec" id="thu">
-  <div class="step-no"><span class="num">4</span><span class="lbl">실험</span><span class="day">THU · 손으로</span></div>
-  <h2>내 몸으로 데이터를 만듭니다</h2>
+  <div class="step-no"><span class="num">4</span><span class="lbl">사료</span><span class="day">THU · 사료로</span></div>
+  <h2>훈민정음 서문 — 왜 만들었는지가 적혀 있습니다</h2>
+
+  <p>세상의 문자 중 <b>누가, 언제, 왜 만들었는지가 기록으로 남아 있는 문자</b>는 매우 드뭅니다.
+  한글은 그것이 <b>서문에 직접 적혀</b> 있습니다.</p>
+
+  <div class="fig">
+    <p class="fig-t">사료 · 훈민정음 서문 (현대어로 풀어 쓴 것)</p>
+    <svg viewBox="0 0 420 200" role="img" aria-label="훈민정음 서문의 세 부분">
+      <rect class="sb-g" x="8" y="10" width="404" height="52" rx="3"/>
+      <text class="st" x="210" y="34">“우리나라 말이 중국과 달라</text>
+      <text class="st-s" x="210" y="52">→ 문제 인식 · 한자로는 우리말을 적기 어렵다</text>
+      <rect class="sb-g" x="8" y="70" width="404" height="52" rx="3"/>
+      <text class="st" x="210" y="94">어리석은 백성이 말하고자 해도 뜻을 펴지 못하니</text>
+      <text class="st-s" x="210" y="112">→ 누구를 위한 것인가 · 글 모르는 백성</text>
+      <rect class="sb-k" x="8" y="130" width="404" height="52" rx="3"/>
+      <text class="st st-k" x="210" y="154">내가 이를 딱하게 여겨 새로 스물여덟 자를 만드노니”</text>
+      <text class="st-s" x="210" y="172">→ 목적 · 누구나 쉽게 익혀 날마다 쓰게 하려고</text>
+    </svg>
+    <p class="fig-c">시험에서는 <b>“훈민정음 창제의 목적”</b>을 묻습니다. 답은 서문 안에 그대로 있습니다 —
+    <b>백성이 자기 뜻을 글로 펴게 하기 위해서</b>입니다.</p>
+  </div>
 
   <div class="cards two">
-    <div class="card"><span class="ct">실험 1</span><h4>심박수와 회복</h4>
-      <p>손목이나 목에 손가락을 대고 <b>15초 세어 4를 곱합니다</b>(1분 심박수).
-      ① 가만히 앉아서 ② 제자리 뛰기 30초 직후 ③ 1분 뒤 ④ 2분 뒤를 각각 잽니다.</p></div>
-    <div class="card"><span class="ct">실험 2</span><h4>침으로 녹말 분해</h4>
-      <p>밥 한 숟갈을 <b>아무 반찬 없이 30번 이상</b> 천천히 씹습니다. 점점 <b>단맛</b>이 납니다.
-      침 속 효소가 녹말을 당으로 바꾼 것입니다.</p></div>
-    <div class="card"><span class="ct">실험 3</span><h4>날숨 속 이산화탄소</h4>
-      <p>4주차에서 만든 앙금 실험을 다시 씁니다. 석회수에 <b>빨대로 숨을 불면</b> 뿌옇게 됩니다.
-      내 세포가 만든 이산화탄소가 눈에 보이는 순간입니다.</p></div>
-    <div class="card"><span class="ct">실험 4</span><h4>폐활량 비교</h4>
-      <p>한 번 크게 들이쉬고 풍선을 <b>한 번에</b> 붑니다. 풍선 둘레를 줄자로 재고 가족끼리 비교합니다.</p></div>
+    <div class="card"><span class="ct">활동 1</span><h4>반대 의견도 읽어 보기</h4>
+      <p>당시 최만리 등 일부 신하는 <b>“한자를 두고 새 글자를 만드는 것은 옳지 않다”</b>며 반대했습니다.
+      반대 이유를 한 줄로 정리해 보고, <b>왜 그렇게 생각했을지</b> 그 시대 입장에서 적어 봅니다.
+      역사 공부에서 가장 중요한 연습입니다.</p></div>
+    <div class="card"><span class="ct">활동 2</span><h4>경복궁 온라인 답사</h4>
+      <p>‘경복궁 근정전’을 검색해 사진을 봅니다. 건물 이름의 뜻(부지런히 정치하라)을 알고 보면
+      <b>건축이 곧 메시지</b>라는 것이 보입니다. 갈 수 있다면 직접 다녀오면 가장 좋습니다.</p></div>
   </div>
 
   <div class="tw"><table>
-    <thead><tr><th>측정</th><th>값</th></tr></thead>
+    <thead><tr><th>기록</th><th>내가 적어 보기</th></tr></thead>
     <tbody>
-      <tr><td class="hd">안정 심박수</td><td class="fill">______ 회/분</td></tr>
-      <tr><td class="hd">운동 직후</td><td class="fill">______ 회/분</td></tr>
-      <tr><td class="hd">1분 뒤 / 2분 뒤</td><td class="fill">______ / ______ 회/분</td></tr>
-      <tr><td class="hd">풍선 둘레 (나 / 아빠)</td><td class="fill">______ / ______ cm</td></tr>
+      <tr><td class="hd">훈민정음을 만든 목적 (내 말로)</td><td class="fill">______</td></tr>
+      <tr><td class="hd">반대한 사람들의 이유</td><td class="fill">______</td></tr>
+      <tr><td class="hd">나라면 어느 편이었을까 · 왜</td><td class="fill">______</td></tr>
     </tbody>
   </table></div>
 
-  <div class="plain">
-    <p><b>데이터에서 읽을 것</b> — 운동 직후 심박수가 오르는 것보다 <b>몇 분 만에 원래대로 돌아오는지</b>가 더 중요한 정보입니다.
-    빨리 회복될수록 배달 시스템이 튼튼하다는 뜻입니다.</p>
-  </div>
-
   <ul class="todo">
-    <li><label><input type="checkbox" data-q="w10m3"><span class="tt"><b>목요일</b> — 심박수 실험을 하고 표를 채웁니다. 침 실험도 해 보고 몇 번째 씹을 때 단맛이 났는지 적습니다.</span></label></li>
+    <li><label><input type="checkbox" data-q="w6m3"><span class="tt"><b>목요일</b> — 훈민정음 서문을 읽고 표를 채웁니다. 찬성과 반대를 모두 적어 봅니다.</span></label></li>
   </ul>
 </section>
 
@@ -423,70 +430,76 @@
   <h2>문제 5개와 3분 설명</h2>
 
   <div class="q"><span class="qn">Q1</span>
-    <p>세포에서 일어나는 호흡을 식으로 쓰면 어떻게 될까요?</p>
-    <details><summary>해설 보기</summary><div class="ans"><b>포도당 + 산소 → 이산화탄소 + 물 + 에너지</b>입니다. 광합성과 방향이 정확히 반대입니다.</div></details>
+    <p>조선이 고려와 가장 크게 다른 점을 한 가지 말해 봅시다.</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>나라를 다스리는 중심 사상이 불교에서 유교로 바뀐 것</b>입니다.
+      그에 따라 지배층도 문벌·권문세족에서 <b>사대부(양반)</b>로 바뀌었습니다.
+    </div></details>
   </div>
 
   <div class="q"><span class="qn">Q2</span>
-    <p>밥을 오래 씹으면 단맛이 나는 이유는 무엇일까요?</p>
+    <p>태종이 사병을 없앤 이유는 무엇일까요?</p>
     <details><summary>해설 보기</summary><div class="ans">
-      <b>침 속 소화 효소가 녹말을 당으로 분해했기 때문입니다.</b> 소화의 첫 단계가 입에서 이미 시작됩니다.
+      <b>공신들이 개인 군대를 가지고 있으면 왕권이 위협받기 때문입니다.</b>
+      군사권을 나라(왕)에게 모으는 것은 건국 초 왕권 강화의 핵심이었습니다. 4주차 광종의 노비안검법과 목적이 같습니다.
     </div></details>
   </div>
 
   <div class="q"><span class="qn">Q3</span>
-    <p>작은창자 안쪽이 주름지고 융털로 덮여 있는 이유는 무엇일까요?</p>
+    <p>훈민정음을 만든 목적을 서문에 근거해 말해 봅시다.</p>
     <details><summary>해설 보기</summary><div class="ans">
-      <b>표면적을 넓혀 양분을 더 많이, 더 빨리 흡수하기 위해서입니다.</b> 같은 길이라도 접어 놓으면 닿는 면이 훨씬 넓어집니다.
+      <b>우리말이 중국과 달라 한자로는 뜻을 펴기 어려웠기 때문에, 백성이 쉽게 익혀 자기 뜻을 글로 표현하게 하려고</b> 만들었습니다.
+      서문에 그 이유가 직접 적혀 있다는 점이 특별합니다.
     </div></details>
   </div>
 
   <div class="q"><span class="qn">Q4</span>
-    <p>뛰고 나면 숨이 차고 심장이 빨리 뛰는 이유를 배달 시스템으로 설명해 봅시다.</p>
+    <p>세종 때의 업적을 분야별로 하나씩 말해 봅시다. (문자 · 과학 · 국방)</p>
     <details><summary>해설 보기</summary><div class="ans">
-      <b>근육이 에너지를 많이 써서 산소가 더 필요하고 이산화탄소가 많이 생기기 때문입니다.</b>
-      호흡이 빨라져 산소를 더 들이고, 심장이 빨리 뛰어 배달 속도를 높입니다.
+      <b>문자 —</b> 훈민정음 창제 · <b>과학 —</b> 측우기, 앙부일구(해시계), 《농사직설》 편찬 ·
+      <b>국방 —</b> 4군 6진 개척으로 북쪽 국경을 정리했습니다.
     </div></details>
   </div>
 
   <div class="q"><span class="qn">Q5</span>
-    <p>‘숨쉬기’와 ‘호흡’은 어떻게 다를까요?</p>
+    <p>한양을 수도로 정한 이유를 두 가지 말해 봅시다.</p>
     <details><summary>해설 보기</summary><div class="ans">
-      <b>숨쉬기는 공기를 들이고 내보내는 동작이고, 호흡은 세포에서 포도당을 산소로 태워 에너지를 얻는 일입니다.</b>
-      숨쉬기는 호흡에 필요한 산소를 공급하는 과정일 뿐입니다.
+      <b>① 한반도의 중앙에 있어 전국을 다스리기 좋습니다 ② 한강이 있어 물자를 옮기기 편합니다.</b>
+      산으로 둘러싸여 방어에 유리하다는 점도 이유로 듭니다.
     </div></details>
   </div>
 
   <h3>아빠에게 3분 설명하기</h3>
   <div class="script">
-    <div class="row"><span class="s">배운 것</span><span>소화·순환·호흡·배설이 세포까지 에너지를 배달하는 한 시스템이라는 것.</span></div>
-    <div class="row"><span class="s">예를 들면</span><span>밥을 30번 씹었더니 단맛이 났어. 침이 벌써 녹말을 당으로 바꾼 거야.</span></div>
-    <div class="row"><span class="s">헷갈리는 것</span><span>숨쉬기랑 호흡은 달라. 진짜 호흡은 세포 안에서 일어나.</span></div>
+    <div class="row"><span class="s">배운 것</span><span>조선은 유교를 바탕으로 세운 나라이고, 그게 궁궐 이름부터 제도까지 다 나타난다는 것.</span></div>
+    <div class="row"><span class="s">사료</span><span>훈민정음 서문에 왜 만들었는지가 적혀 있어. 백성이 뜻을 못 펴는 게 딱해서래.</span></div>
+    <div class="row"><span class="s">헷갈리는 것</span><span>불교를 없앤 게 아니라, 나라 다스리는 원리를 유교로 삼은 거야.</span></div>
   </div>
 
   <ul class="todo">
-    <li><label><input type="checkbox" data-q="w10m4"><span class="tt"><b>금요일</b> — 문제 5개와 “밥 한 숟갈의 여행”을 순서대로 3분 설명합니다.</span></label></li>
+    <li><label><input type="checkbox" data-q="w6m4"><span class="tt"><b>금요일</b> — 문제 5개와 3분 설명. 연표 여섯 칸을 이어서 말해 봅니다.</span></label></li>
   </ul>
 
-  <p><span class="badge">획득 · 에너지 배달부</span></p>
+  <p><span class="badge">획득 · 연표 6칸</span></p>
 </section>
 
 <section class="sec" id="next">
   <div class="step-no"><span class="num">6</span><span class="lbl">다음 주</span></div>
-  <h2>지구와 달의 운동</h2>
-  <p>몸에서 하늘로 나갑니다. 달 모양이 바뀌는 이유를 공 하나 들고 <b>손으로 보여줄 수 있게</b> 됩니다.</p>
+  <h2>사림과 두 전쟁</h2>
+  <p>나라가 안정되자 이번에는 <b>신하들끼리</b> 갈라집니다. 그리고 <b>두 번의 큰 전쟁</b>이 조선을 덮칩니다.
+  임진왜란과 병자호란입니다.</p>
   <div class="pager">
-    <a href="week09.html">← 9주차</a>
+    <a href="week05.html">← 5주차</a>
     <a href="index.html">전체 지도</a>
-    <a class="main" href="week11.html">11주차 →</a>
+    <a class="main" href="week07.html">7주차 →</a>
   </div>
 </section>
 
-<footer>과학 등반 12주 · WEEK 10 에너지 배달 경로 · 하루 20분 × 4일</footer>
+<footer>역사 항해 12주 · WEEK 06 조선의 건국 · 하루 20분 × 4일</footer>
 </div>
 <script>
   (function(){
-    var KEY="science_quest_progress";
+    var KEY="history_quest_progress";
     function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){return{}}}
     function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
     var boxes=[].slice.call(document.querySelectorAll(".todo input[type=checkbox]"));
