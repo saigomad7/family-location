@@ -84,6 +84,7 @@ GitHub 저장소 → **Settings → Pages → Branch: main, / (root)** 선택 �
 | `family_study/` | **우리 가족 공부** 앱 (공부 시간 기록·응원) — [설명 보기](family_study/README.md) |
 | `science_quest/` | **과학 등반 12주** 중2 과학 주차별 학습 문서 — [설명 보기](science_quest/README.md) |
 | `history_quest/` | **역사 항해 12주** 중2 한국사 주차별 학습 문서 — [설명 보기](history_quest/README.md) |
+| `answers.html` | 아빠 | **정답과 해설 360제** — 세 과목 문제집의 답안지 |
 | `math_quest/` | **수학 사다리 12주** 중2 수학 주차별 학습 문서 — [설명 보기](math_quest/README.md) |
 
 ## 같이 쓰는 앱
@@ -104,3 +105,6 @@ GitHub 저장소 → **Settings → Pages → Branch: main, / (root)** 선택 �
   - 수학: `https://saigomad7.github.io/family-location/math_quest/quiz.html`
 
   선택지를 누르면 바로 채점되고 해설이 열립니다. 점수는 폰 안에만 저장됩니다.
+
+- 🗝️ **정답과 해설 360제** (답안지, 부모용): `https://saigomad7.github.io/family-location/answers.html`
+  세 과목 360문제의 정답을 한 문서에 모았습니다. 문제집의 선택지 번호와 그대로 맞습니다.
