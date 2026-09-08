@@ -86,6 +86,7 @@ GitHub 저장소 → **Settings → Pages → Branch: main, / (root)** 선택 �
 | `history_quest/` | **역사 항해 12주** 중2 한국사 주차별 학습 문서 — [설명 보기](history_quest/README.md) |
 | `answers.html` | 아빠 | **정답과 해설 360제** — 세 과목 문제집의 답안지 |
 | `math_quest/` | **수학 사다리 12주** 중2 수학 주차별 학습 문서 — [설명 보기](math_quest/README.md) |
+| `world_quest/` | **세계사 항해 12주** 중2 역사①(세계사) 주차별 학습 문서 — [설명 보기](world_quest/README.md) |
 
 ## 같이 쓰는 앱
 
@@ -98,6 +99,10 @@ GitHub 저장소 → **Settings → Pages → Branch: main, / (root)** 선택 �
   한국사 전체 흐름을 연표 한 장으로 잇는 주차별 학습 문서입니다. 과학과 같은 리듬으로 진행합니다.
 - 📐 **수학 사다리 12주**: `https://saigomad7.github.io/family-location/math_quest/`
   중2 수학 전 범위를 개념 사다리로 밟아 오릅니다. 목요일은 일부러 틀려 보는 날입니다.
+
+- 🌏 **세계사 항해 12주**: `https://saigomad7.github.io/family-location/world_quest/`
+  중학교 「역사 ①」(세계사)의 여섯 대단원을 12주로 나눴습니다. 목요일은 사건을 지도 위에 놓는 날입니다.
+  학교에 따라 중2가 「역사 ①」(세계사)일 수도, 「역사 ②」(한국사)일 수도 있어 **두 과정을 모두 준비**했습니다.
 
 - ✏️ **주차별 문제집 120제** (세 과목 각각 한 문서, 12주 × 10문제 · 객관식 7 · 단답형 3)
   - 과학: `https://saigomad7.github.io/family-location/science_quest/quiz.html`

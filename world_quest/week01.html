@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#DCE2DB">
+<title>1주차 · 문명이 시작된 자리</title>
+<meta name="description" content="세계사의 첫 질문은 누가 먼저였나가 아니라, 왜 하필 큰 강가였나입니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#131C18; --ink2:#2C3A33; --muted:#5F6E66; --faint:#8A968F;
+    --mist:#DCE2DB; --surface:#F8FAF6; --surface2:#EFF3EC;
+    --line:#C3CCC1; --hair:#DDE4DB;
+    --kelp:#8A5A22; --kelp-wash:#F3E7D2; --kelp-line:#D6BE94;
+    --amber:#8F6209; --amber-wash:#F5EAD0; --amber-line:#DCC79B;
+    --berry:#8C2F3E; --berry-wash:#F3DFE2; --berry-line:#D9A8B0;
+    --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+    --mono:"IBM Plex Mono","SFMono-Regular",Consolas,"D2Coding",monospace;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{margin:0;background:var(--mist);color:var(--ink);font-family:var(--sans);
+    font-size:16px;line-height:1.75;letter-spacing:-0.01em;
+    padding:0 18px calc(70px + env(safe-area-inset-bottom));
+    word-break:keep-all;overflow-wrap:anywhere;}
+  .wrap{max-width:1040px;margin:0 auto;}
+
+  /* ===== 표지 ===== */
+  .cover{padding:44px 0 30px;border-bottom:2px solid var(--ink);}
+  .cover .kicker{font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:0.2em;text-transform:uppercase;color:var(--kelp);margin:0 0 16px;}
+  .cover h1{font-size:clamp(27px,6vw,44px);font-weight:700;line-height:1.24;
+    letter-spacing:-0.035em;margin:0 0 16px;max-width:21ch;}
+  .cover .lede{font-size:clamp(15.5px,2vw,18px);font-weight:300;color:var(--ink2);
+    max-width:62ch;margin:0 0 24px;line-height:1.72;}
+  .cover .lede b{font-weight:600;color:var(--ink);}
+  .metaline{display:flex;flex-wrap:wrap;gap:6px 22px;font-family:var(--mono);
+    font-size:11.5px;color:var(--muted);letter-spacing:0.03em;}
+  .metaline b{color:var(--ink);font-weight:500;}
+
+  .summary{background:var(--ink);border-radius:3px;padding:26px 22px 24px;margin:28px 0 0;}
+  .summary h2{color:#F6FAF5;font-size:18px;font-weight:600;margin:0 0 6px;letter-spacing:-0.02em;}
+  .summary .sd{color:#93A399;font-size:13.5px;font-weight:300;margin:0 0 22px;line-height:1.65;}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:18px;}
+  .kpi .kl{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:#7E8F84;display:block;margin-bottom:5px;}
+  .kpi .kv{font-size:clamp(21px,3.2vw,28px);font-weight:700;color:#E8C48A;
+    letter-spacing:-0.03em;display:block;line-height:1.1;}
+  .kpi .kn{font-size:12px;color:#B9C6BC;display:block;margin-top:6px;
+    font-weight:300;line-height:1.5;}
+
+  /* ===== 이동 바 ===== */
+  nav.jump{position:sticky;top:0;z-index:40;margin:0 -18px;padding:0 18px;
+    background:rgba(220,226,219,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);}
+  nav.jump .row{display:flex;gap:6px;overflow-x:auto;padding:9px 0;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  nav.jump .row::-webkit-scrollbar{display:none;}
+  nav.jump a{flex:0 0 auto;font-family:var(--mono);font-size:11.5px;letter-spacing:0.04em;
+    color:var(--muted);background:var(--surface);border:1px solid var(--line);
+    padding:6px 11px;border-radius:2px;text-decoration:none;}
+  nav.jump a.now{color:#fff;background:var(--kelp);border-color:var(--kelp);}
+
+  /* ===== 섹션 ===== */
+  .sec{padding:44px 0 12px;border-bottom:1px solid var(--line);scroll-margin-top:56px;}
+  .sec:last-of-type{border-bottom:0;}
+  .step-no{display:flex;align-items:center;gap:11px;margin-bottom:14px;}
+  .step-no .num{font-family:var(--mono);font-size:12px;font-weight:600;color:#fff;
+    background:var(--kelp);width:28px;height:28px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-no .lbl{font-family:var(--mono);font-size:11px;letter-spacing:0.13em;
+    text-transform:uppercase;color:var(--muted);}
+  .step-no .day{margin-left:auto;font-family:var(--mono);font-size:11px;
+    letter-spacing:0.1em;color:var(--kelp);background:var(--kelp-wash);
+    border:1px solid var(--kelp-line);padding:3px 9px;border-radius:2px;}
+  .sec h2{font-size:clamp(22px,3.4vw,29px);font-weight:600;letter-spacing:-0.03em;
+    line-height:1.34;margin:0 0 14px;max-width:30ch;}
+  .sec h3{font-size:17.5px;font-weight:600;letter-spacing:-0.02em;margin:30px 0 10px;}
+  .sec > p{max-width:70ch;color:var(--ink2);margin:0 0 16px;}
+  .sec strong,.sec b{font-weight:600;color:var(--ink);}
+  .sec code{font-family:var(--mono);font-size:0.86em;background:var(--surface2);
+    border:1px solid var(--hair);padding:1px 5px;border-radius:2px;}
+
+  .plain{background:var(--surface2);border-left:3px solid var(--kelp);
+    padding:14px 17px;margin:0 0 20px;border-radius:0 2px 2px 0;max-width:74ch;}
+  .plain p{margin:0;font-size:14.5px;color:var(--ink2);line-height:1.72;}
+  .plain p + p{margin-top:10px;}
+  .plain b{color:var(--kelp);font-weight:600;}
+
+  .fig{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:20px 16px 16px;margin:20px 0 12px;}
+  .fig-t{font-family:var(--mono);font-size:11px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--kelp);margin:0 0 16px;
+    padding-bottom:9px;border-bottom:1px solid var(--hair);}
+  .fig svg{display:block;width:100%;height:auto;}
+  .fig.wide{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .fig.wide svg{min-width:640px;}
+  .fig-c{font-size:13px;color:var(--muted);margin:14px 0 0;font-weight:300;
+    line-height:1.65;padding-top:12px;border-top:1px solid var(--hair);}
+  .fig-c b{color:var(--ink);font-weight:600;}
+
+  .sb{fill:#fff;stroke:#C3CCC1;stroke-width:1.5;}
+  .sb-k{fill:#F3E7D2;stroke:#8A5A22;stroke-width:2;}
+  .sb-b{fill:#F3DFE2;stroke:#D9A8B0;stroke-width:1.5;}
+  .sb-a{fill:#F5EAD0;stroke:#DCC79B;stroke-width:1.5;}
+  .sb-g{fill:#EFF3EC;stroke:#C3CCC1;stroke-width:1.5;}
+  .sb-d{fill:#fff;stroke:#8A5A22;stroke-width:1.6;stroke-dasharray:5 4;}
+  .st{font-family:var(--sans);font-size:13.5px;font-weight:600;fill:#131C18;
+    text-anchor:middle;letter-spacing:-0.3px;}
+  .st-s{font-family:var(--sans);font-size:11.5px;font-weight:400;fill:#5F6E66;text-anchor:middle;}
+  .st-k{fill:#8A5A22;} .st-b{fill:#8C2F3E;} .st-a{fill:#8F6209;}
+  .sm{font-family:var(--mono);font-size:12px;fill:#131C18;text-anchor:middle;font-weight:500;}
+  .sm-s{font-family:var(--mono);font-size:10.5px;fill:#5F6E66;text-anchor:middle;}
+  .st-m{font-family:var(--mono);font-size:11px;fill:#8A968F;text-anchor:middle;letter-spacing:0.5px;}
+  .sl{stroke:#8A968F;stroke-width:1.6;fill:none;}
+  .sl-k{stroke:#8A5A22;stroke-width:2;fill:none;}
+  .sl-a{stroke:#8F6209;stroke-width:1.8;fill:none;}
+  .sl-d{stroke:#8A968F;stroke-width:1.4;fill:none;stroke-dasharray:4 4;}
+  .sa{fill:#8A968F;} .sa-k{fill:#8A5A22;} .sa-a{fill:#8F6209;}
+  .dot-k{fill:#8A5A22;} .dot-a{fill:#C99A2E;} .dot-b{fill:#8C2F3E;}
+
+  /* ===== 표 ===== */
+  .tw{overflow-x:auto;margin:20px 0 8px;border:1px solid var(--line);
+    border-radius:3px;background:var(--surface);}
+  table{border-collapse:collapse;width:100%;font-size:13.8px;}
+  .tw.wide table{min-width:560px;}
+  thead th{background:var(--ink);color:#E8EFE7;text-align:left;font-family:var(--mono);
+    font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
+    padding:11px 13px;}
+  tbody td{padding:11px 13px;border-top:1px solid var(--hair);vertical-align:top;
+    color:var(--ink2);line-height:1.62;}
+  tbody tr:nth-child(even) td{background:var(--surface2);}
+  td.hd{font-weight:600;color:var(--ink);}
+  td.mn{font-family:var(--mono);font-size:12.5px;}
+  td.ok{color:var(--kelp);font-weight:600;}
+  td.no{color:var(--berry);font-weight:600;}
+  td.wa{color:var(--amber);font-weight:600;}
+  td.fill{font-family:var(--mono);color:var(--faint);}
+
+  .note{background:var(--amber-wash);border:1px solid var(--amber-line);
+    border-radius:3px;padding:17px 19px;margin:20px 0 8px;}
+  .note p{margin:0;font-size:14px;color:#5C440C;line-height:1.72;}
+  .note p + p{margin-top:9px;}
+  .note b{font-weight:600;}
+  .note .lb{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--amber);margin-bottom:6px;}
+  .alert{background:var(--berry-wash);border:1px solid var(--berry-line);
+    border-radius:3px;padding:17px 19px;margin:20px 0 8px;}
+  .alert p{margin:0;font-size:14px;color:#6B2430;line-height:1.72;}
+  .alert p + p{margin-top:9px;}
+  .alert b{font-weight:600;}
+  .alert .lb{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--berry);margin-bottom:6px;}
+
+  /* ===== 카드 묶음 ===== */
+  .cards{display:grid;gap:12px;margin:18px 0 8px;}
+  @media(min-width:680px){.cards.two{grid-template-columns:repeat(2,1fr);}}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:15px 17px;}
+  .card .ct{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;
+    color:var(--kelp);display:block;margin-bottom:7px;}
+  .card h4{margin:0 0 6px;font-size:15.5px;font-weight:600;letter-spacing:-0.02em;}
+  .card p{margin:0;font-size:14px;color:var(--ink2);line-height:1.68;}
+
+  /* ===== 요일 할 일 ===== */
+  .todo{list-style:none;margin:20px 0 8px;padding:0;background:var(--surface);
+    border:1px solid var(--line);border-radius:3px;overflow:hidden;}
+  .todo li + li{border-top:1px solid var(--hair);}
+  .todo label{display:grid;grid-template-columns:22px 1fr;gap:13px;align-items:start;
+    padding:15px 16px;cursor:pointer;font-size:14.5px;line-height:1.65;color:var(--ink2);min-height:54px;}
+  .todo input{appearance:none;-webkit-appearance:none;width:21px;height:21px;margin:1px 0 0;
+    border:1.5px solid var(--line);border-radius:2px;background:#fff;
+    display:grid;place-content:center;cursor:pointer;}
+  .todo input::after{content:"✓";font-size:13px;font-weight:700;color:#fff;transform:scale(0);}
+  .todo input:checked{background:var(--kelp);border-color:var(--kelp);}
+  .todo input:checked::after{transform:scale(1);}
+  .todo input:focus-visible{outline:2px solid var(--kelp);outline-offset:2px;}
+  .todo input:checked ~ .tt{color:var(--faint);text-decoration:line-through;}
+  .todo .tt b{color:var(--ink);font-weight:600;}
+
+  /* ===== 문제 ===== */
+  .q{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:15px 17px;margin:12px 0;}
+  .q .qn{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--kelp);
+    letter-spacing:0.12em;}
+  .q > p{margin:6px 0 0;font-size:15.5px;color:var(--ink);line-height:1.7;}
+  .q details{margin-top:12px;border-top:1px solid var(--hair);padding-top:10px;}
+  .q summary{cursor:pointer;list-style:none;font-family:var(--mono);font-size:12px;
+    font-weight:600;color:var(--kelp);letter-spacing:0.06em;padding:3px 0;}
+  .q summary::-webkit-details-marker{display:none;}
+  .q summary::before{content:"+ ";}
+  .q details[open] summary::before{content:"− ";}
+  .q .ans{margin-top:9px;background:var(--kelp-wash);border-radius:2px;padding:12px 14px;
+    font-size:14px;color:var(--ink2);line-height:1.7;}
+  .q .ans b{color:var(--kelp);font-weight:600;}
+
+  /* ===== 설명 대본 ===== */
+  .script{background:var(--surface);border:1px solid var(--kelp-line);border-radius:3px;
+    padding:16px 18px;margin:18px 0 8px;}
+  .script .row{display:grid;grid-template-columns:70px 1fr;gap:12px;font-size:14.5px;
+    color:var(--ink2);line-height:1.7;}
+  .script .row + .row{margin-top:11px;padding-top:11px;border-top:1px solid var(--hair);}
+  .script .s{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;color:var(--kelp);
+    font-weight:600;padding-top:4px;}
+
+  .badge{display:inline-block;font-family:var(--mono);font-size:12.5px;font-weight:600;
+    color:var(--amber);background:var(--amber-wash);border:1px solid var(--amber-line);
+    border-radius:2px;padding:7px 14px;margin-top:14px;letter-spacing:0.04em;}
+
+  /* ===== 주차 목록 (허브) ===== */
+  .wlist{display:flex;flex-direction:column;gap:10px;margin:18px 0 8px;}
+  a.wk{display:grid;grid-template-columns:1fr auto;grid-template-areas:"n p" "t p" "d d";
+    gap:2px 14px;background:var(--surface);border:1px solid var(--line);
+    border-left:3px solid var(--kelp);border-radius:3px;padding:15px 17px;
+    text-decoration:none;color:var(--ink);}
+  a.wk .n{grid-area:n;font-family:var(--mono);font-size:11px;font-weight:600;
+    letter-spacing:0.12em;color:var(--kelp);}
+  a.wk .t{grid-area:t;font-size:17px;font-weight:600;letter-spacing:-0.02em;}
+  a.wk .d{grid-area:d;font-size:13.5px;color:var(--muted);margin-top:5px;line-height:1.6;font-weight:300;}
+  a.wk .p{grid-area:p;align-self:center;font-family:var(--mono);font-size:11px;color:var(--muted);
+    background:var(--surface2);border:1px solid var(--hair);border-radius:2px;padding:4px 9px;white-space:nowrap;}
+  a.wk .p.done{color:#fff;background:var(--kelp);border-color:var(--kelp);}
+  a.wk .p.ing{color:var(--amber);background:var(--amber-wash);border-color:var(--amber-line);}
+  .wk.soon{border-left-color:var(--line);opacity:.62;pointer-events:none;}
+  .wk.soon .n,.wk.soon .t{color:var(--muted);}
+
+  /* ===== 진행 막대 ===== */
+  .bar{height:7px;background:var(--hair);border-radius:99px;overflow:hidden;margin-top:12px;
+    border:1px solid var(--line);}
+  .bar i{display:block;height:100%;background:var(--kelp);width:0;transition:width .3s;}
+
+  /* ===== 페이지 이동 ===== */
+  .pager{display:flex;gap:9px;margin:26px 0 0;}
+  .pager a{flex:1;text-align:center;font-size:13.5px;font-weight:600;text-decoration:none;
+    color:var(--ink2);background:var(--surface);border:1px solid var(--line);
+    border-radius:3px;padding:14px 8px;}
+  .pager a.main{background:var(--kelp);border-color:var(--kelp);color:#fff;}
+  footer{padding:26px 0 10px;font-family:var(--mono);font-size:11.5px;color:var(--faint);
+    letter-spacing:0.03em;line-height:1.8;}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="cover">
+  <p class="kicker">WEEK 01 · Ⅰ단원 문명의 발생과 고대 세계 · 하루 20분 × 4일</p>
+  <h1>문명이 시작된 자리</h1>
+  <p class="lede">
+    세계사가 어려운 이유는 나라 이름이 많아서가 아니라, <b>그 나라들이 놓일 지도와 시대 띠가 아직 없어서</b>입니다.
+    그래서 이 문서는 매주 <b>시대 띠에 한 칸을 세우고, 그 칸에 사건 세 개만 올립니다.</b>
+    첫 주의 질문은 하나입니다 — <b>문명은 왜 하필 큰 강가에서 시작했을까?</b>
+  </p>
+  <div class="metaline">
+    <span>시대 띠 <b>1번째 칸</b></span>
+    <span>사건 <b>3개</b></span>
+    <span>무대 <b>서아시아 · 아프리카 · 인도 · 동아시아</b></span>
+    <span>진행 <b id="wdone">0 / 4</b></span>
+  </div>
+
+  <div class="summary">
+    <h2>이번 주에 남길 것</h2>
+    <p class="sd">사건 세 개가 한 줄로 이어집니다. 금요일에 이 한 줄을 설명하면 통과입니다.</p>
+    <div class="kpis">
+      <div class="kpi"><span class="kl">사건 1</span><span class="kv">농경</span>
+        <span class="kn">신석기 · 떠돌지 않고 큰 강가에 머물게 되었다</span></div>
+      <div class="kpi"><span class="kl">사건 2</span><span class="kv">도시</span>
+        <span class="kn">남는 곡식이 생기자 계급 · 도시 · 문자가 생겼다</span></div>
+      <div class="kpi"><span class="kl">사건 3</span><span class="kv">문명</span>
+        <span class="kn">네 개의 큰 강에서 거의 같은 일이 따로 일어났다</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="jump"><div class="row">
+  <a href="#map">이번 주 칸</a>
+  <a href="#mon">월 · 열기</a>
+  <a href="#tue">화 · 채우기</a>
+  <a href="#thu">목 · 지도로</a>
+  <a href="#fri">금 · 보스전</a>
+  <a href="#next">다음 주</a>
+</div></nav>
+
+<section class="sec" id="map">
+  <div class="step-no"><span class="num">1</span><span class="lbl">이번 주 칸</span></div>
+  <h2>시대 띠의 첫 칸을 세웁니다</h2>
+
+  <div class="fig">
+    <p class="fig-t">도식 1 · 12주 시대 띠에서 이번 주의 자리</p>
+    <svg viewBox="0 0 420 156" role="img" aria-label="12주 연표에서 이번 주의 위치"><rect x="10" y="60" width="65" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="42" y="54" style="font-size:9.5px">Ⅰ 고대</text><rect x="78" y="60" width="99" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="128" y="54" style="font-size:9.5px">Ⅱ 종교</text><rect x="180" y="60" width="65" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="212" y="54" style="font-size:9.5px">Ⅲ 교류</text><rect x="248" y="60" width="65" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="280" y="54" style="font-size:9.5px">Ⅳ 혁명</text><rect x="316" y="60" width="65" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="348" y="54" style="font-size:9.5px">Ⅴ 대전</text><rect x="384" y="60" width="31" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="400" y="54" style="font-size:9.5px">Ⅵ 현대</text><rect x="10" y="70" width="31" height="26" rx="3" fill="#8A5A22" stroke="#8A5A22" stroke-width="1.2"/><text x="26" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#fff">01</text><text x="10" y="36" text-anchor="start" font-family="IBM Plex Sans KR,sans-serif" font-size="13" font-weight="700" fill="#8A5A22">문명의 시작</text><text x="10" y="120" text-anchor="start" font-family="IBM Plex Mono,monospace" font-size="10.5" fill="#8A5A22">~ 기원전 6세기</text><path d="M26 40 L26 66" stroke="#8A5A22" stroke-width="1.4"/><rect x="44" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="60" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">02</text><rect x="78" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="94" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">03</text><rect x="112" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="128" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">04</text><rect x="146" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="162" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">05</text><rect x="180" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="196" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">06</text><rect x="214" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="230" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">07</text><rect x="248" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="264" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">08</text><rect x="282" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="298" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">09</text><rect x="316" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="332" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">10</text><rect x="350" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="366" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">11</text><rect x="384" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="400" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">12</text><text class="st-m" x="10" y="146" style="font-size:9.5px;text-anchor:start">선사</text><text class="st-m" x="410" y="146" style="font-size:9.5px;text-anchor:end">오늘</text><line x1="34" y1="142" x2="386" y2="142" stroke="#C3CCC1" stroke-width="1"/><polygon points="386,138 396,142 386,146" fill="#8A968F"/></svg>
+    <p class="fig-c">첫 칸은 <b>수만 년</b>을 담고 있고, 마지막 칸은 <b>80년</b>을 담고 있습니다.
+    시간이 아니라 <b>배울 분량</b>으로 나눴기 때문입니다. 이 띠가 12주 뒤 한 장이 됩니다.</p>
+  </div>
+
+  <div class="fig">
+    <p class="fig-t">도식 2 · 큰 강에서 문명까지, 한 줄</p>
+    <svg viewBox="0 0 420 250" role="img" aria-label="큰 강에서 농사, 잉여, 도시와 문자로 이어지는 인과 흐름">
+      <rect class="sb" x="8" y="12" width="404" height="38" rx="3"/>
+      <text class="st" x="210" y="36">① 큰 강 옆은 땅이 기름지고 물이 있습니다</text>
+      <line class="sl-k" x1="210" y1="50" x2="210" y2="62"/><polygon class="sa-k" points="204,62 210,72 216,62"/>
+      <rect class="sb" x="8" y="74" width="404" height="38" rx="3"/>
+      <text class="st" x="210" y="98">② 농사가 잘되어 <tspan font-weight="600">먹고 남는 곡식</tspan>이 생깁니다</text>
+      <line class="sl-k" x1="210" y1="112" x2="210" y2="124"/><polygon class="sa-k" points="204,124 210,134 216,124"/>
+      <rect class="sb" x="8" y="136" width="404" height="38" rx="3"/>
+      <text class="st" x="210" y="160">③ 농사를 짓지 않아도 되는 사람이 생깁니다</text>
+      <line class="sl-k" x1="210" y1="174" x2="210" y2="186"/><polygon class="sa-k" points="204,186 210,196 216,186"/>
+      <rect class="sb-a" x="8" y="198" width="404" height="38" rx="3"/>
+      <text class="st st-a" x="210" y="222">④ 지배자 · 신전 · 문자 · 도시 = 문명</text>
+      <text class="st-m" x="210" y="245">네 강에서 이 순서가 거의 똑같이 반복됩니다</text>
+    </svg>
+    <p class="fig-c">③번이 핵심입니다. 남는 곡식 덕분에 <b>왕·신관·군인·장인처럼 농사 아닌 일을 하는 사람</b>이 생겼고,
+    그 사람들이 남긴 것이 문명입니다.</p>
+  </div>
+</section>
+
+<section class="sec" id="mon">
+  <div class="step-no"><span class="num">2</span><span class="lbl">흐름 읽기</span><span class="day">MON · 열기</span></div>
+  <h2>네 개의 강, 거의 같은 이야기</h2>
+
+  <div class="plain">
+    <p><b>오늘 할 일은 읽고 질문 3개를 적는 것뿐입니다.</b> 외우려 하지 않아도 됩니다.
+    표를 볼 때 <b>강 이름</b>과 <b>남긴 것</b> 두 칸만 눈에 담으면 충분합니다.</p>
+  </div>
+
+  <div class="tw wide"><table>
+    <thead><tr><th>문명</th><th>강</th><th>오늘날</th><th>남긴 것</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">메소포타미아</td><td>티그리스 · 유프라테스</td><td>이라크 부근</td>
+        <td>쐐기 문자 · 지구라트 · <b>함무라비 법전</b></td></tr>
+      <tr><td class="hd">이집트</td><td>나일</td><td>이집트</td>
+        <td>상형 문자 · 피라미드 · <b>사자의 서</b> · 태양력</td></tr>
+      <tr><td class="hd">인더스</td><td>인더스</td><td>파키스탄 · 인도 서북부</td>
+        <td>계획 도시(모헨조다로) · 하수도 · 인장</td></tr>
+      <tr><td class="hd">황허</td><td>황허</td><td>중국</td>
+        <td>갑골문 · 청동기 · <b>은(상)나라</b></td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>문명이라고 부르는 조건</h3>
+  <p>어떤 사회를 문명이라고 부르려면 대체로 <b>도시 · 문자 · 계급 · 국가</b>가 갖춰져야 합니다.
+  그래서 문명의 시작은 곧 <b>글로 기록이 남기 시작한 때</b>이고, 이때부터를 <b>역사 시대</b>라고 합니다.
+  기록이 없는 그 이전은 <b>선사 시대</b>라 부르고, 유물과 유적으로만 짐작합니다.</p>
+
+  <div class="alert"><span class="lb">가장 많이 하는 착각</span>
+    <p><b>“4대 문명”은 세계에 문명이 넷뿐이었다는 뜻이 아닙니다.</b>
+    아메리카의 마야·잉카, 아프리카의 여러 왕국처럼 다른 곳에도 문명이 있었습니다.
+    큰 강가의 네 곳을 <b>비교해 배우기 좋아서 묶어 부르는 것</b>일 뿐입니다.</p>
+  </div>
+
+  <h3>메소포타미아와 이집트가 달랐던 이유</h3>
+  <p>두 곳은 비슷하게 시작했지만 성격이 달랐습니다.
+  메소포타미아는 <b>사방이 트인 평야</b>라 외적이 자주 들어왔고, 그래서 나라가 자주 바뀌고
+  <b>법(함무라비 법전)</b>으로 질서를 세우려 했습니다.
+  이집트는 <b>사막과 바다에 둘러싸여</b> 오래 안정되었고, 그래서 <b>내세(죽은 뒤의 세계)</b>를
+  차분히 준비하는 문화 — 피라미드와 미라 — 가 자랐습니다.
+  <b>지형이 문화를 만든 셈</b>입니다.</p>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w1m1"><span class="tt"><b>월요일</b> — 위 표를 읽고 <b>궁금한 질문 3개</b>를 적습니다. 답은 찾지 않습니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="tue">
+  <div class="step-no"><span class="num">3</span><span class="lbl">시대 띠 세우기</span><span class="day">TUE · 채우기</span></div>
+  <h2>노트 첫 칸에 이렇게 적습니다</h2>
+
+  <p>세계사 노트는 <b>가로로 긴 띠 한 줄</b>로 시작합니다. 왼쪽 끝에 첫 칸을 그리고 아래 표를 옮겨 적습니다.
+  이 띠가 12주 동안 오른쪽으로 자랍니다.</p>
+
+  <div class="tw wide"><table>
+    <thead><tr><th>사건</th><th>원인 (왜)</th><th>결과 (그래서)</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">농경의 시작<br><span class="mn">약 1만 년 전</span></td>
+        <td>사냥과 채집은 먹을 것이 불안정했습니다</td>
+        <td>큰 강가에 정착 · 마을 · 토기로 저장</td></tr>
+      <tr><td class="hd">잉여와 계급<br><span class="mn">청동기</span></td>
+        <td>농사로 <b>먹고 남는 것</b>이 생겼습니다</td>
+        <td>가진 자와 못 가진 자가 갈림 · 신관과 왕 등장</td></tr>
+      <tr><td class="hd">문명의 발생<br><span class="mn">기원전 3500년 무렵부터</span></td>
+        <td>많은 사람을 다스리고 <b>기록</b>할 필요가 생겼습니다</td>
+        <td>도시 · 문자 · 국가 = 역사 시대의 시작</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>사료 카드 2장</h3>
+  <div class="cards two">
+    <div class="card"><span class="ct">사료</span><h4>함무라비 법전</h4>
+      <p>“눈에는 눈, 이에는 이”로 알려진 메소포타미아의 법. 신분에 따라 벌이 달랐다는 점에서
+      <b>계급 사회였음</b>을 보여 줍니다. 돌기둥에 새겨 누구나 보게 했습니다.</p></div>
+    <div class="card"><span class="ct">유물</span><h4>갑골문</h4>
+      <p>중국 은(상)나라에서 거북 배딱지와 소뼈에 새긴 글자. <b>점을 친 결과를 기록</b>한 것으로,
+      한자의 조상이자 중국에서 가장 오래된 문자입니다.</p></div>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w1m2"><span class="tt"><b>화요일</b> — 시대 띠 첫 칸을 그리고 위 표를 옮겨 적습니다. 사료 카드 2장을 만듭니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="thu">
+  <div class="step-no"><span class="num">4</span><span class="lbl">지도</span><span class="day">THU · 지도로</span></div>
+  <h2>사건을 지도 위에 놓습니다</h2>
+
+  <p>세계사에서 가장 자주 무너지는 지점은 <b>“그게 어디서 일어난 일인지 모르겠다”</b>입니다.
+  그래서 목요일은 매주 <b>그 주의 무대를 지도에서 찾는 날</b>입니다. 외우는 날이 아닙니다.</p>
+
+  <div class="fig">
+    <p class="fig-t">도식 3 · 이번 주의 무대</p>
+    <svg viewBox="0 0 420 118" role="img" aria-label="이번 주 무대가 되는 지역"><rect x="10" y="12" width="130" height="46" rx="3" fill="#8A5A22" stroke="#8A5A22" stroke-width="1.2"/><text x="75" y="34" text-anchor="middle" font-family="IBM Plex Sans KR,sans-serif" font-size="13" font-weight="600" fill="#fff">동아시아</text><text x="75" y="49" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" fill="#EBD9BC">이번 주 무대</text><rect x="146" y="12" width="130" height="46" rx="3" fill="#8A5A22" stroke="#8A5A22" stroke-width="1.2"/><text x="211" y="34" text-anchor="middle" font-family="IBM Plex Sans KR,sans-serif" font-size="13" font-weight="600" fill="#fff">인도</text><text x="211" y="49" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" fill="#EBD9BC">이번 주 무대</text><rect x="282" y="12" width="130" height="46" rx="3" fill="#8A5A22" stroke="#8A5A22" stroke-width="1.2"/><text x="347" y="34" text-anchor="middle" font-family="IBM Plex Sans KR,sans-serif" font-size="13" font-weight="600" fill="#fff">서아시아</text><text x="347" y="49" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" fill="#EBD9BC">이번 주 무대</text><rect x="10" y="66" width="130" height="46" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="75" y="88" text-anchor="middle" font-family="IBM Plex Sans KR,sans-serif" font-size="13" font-weight="400" fill="#8A968F">유럽</text><text x="75" y="103" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" fill="#B4BEB6">—</text><rect x="146" y="66" width="130" height="46" rx="3" fill="#8A5A22" stroke="#8A5A22" stroke-width="1.2"/><text x="211" y="88" text-anchor="middle" font-family="IBM Plex Sans KR,sans-serif" font-size="13" font-weight="600" fill="#fff">아프리카</text><text x="211" y="103" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" fill="#EBD9BC">이번 주 무대</text><rect x="282" y="66" width="130" height="46" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="347" y="88" text-anchor="middle" font-family="IBM Plex Sans KR,sans-serif" font-size="13" font-weight="400" fill="#8A968F">아메리카</text><text x="347" y="103" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" fill="#B4BEB6">—</text></svg>
+    <p class="fig-c">첫 주는 무대가 넷입니다. 네 곳이 <b>서로 연락하지 않고도 비슷한 길을 갔다</b>는 것이 이번 주의 놀라운 점입니다.</p>
+  </div>
+
+  <div class="tw"><table>
+    <thead><tr><th>지도에서 찾을 것</th><th>내가 적어 보기</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">티그리스강과 유프라테스강 — 오늘날 어느 나라</td><td class="fill">______</td></tr>
+      <tr><td class="hd">나일강 — 강이 흐르는 방향(남 → 북)</td><td class="fill">______</td></tr>
+      <tr><td class="hd">인더스강 — 오늘날 어느 나라</td><td class="fill">______</td></tr>
+      <tr><td class="hd">황허 — 중국의 북쪽인가 남쪽인가</td><td class="fill">______</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>찾아보기 활동</h3>
+  <div class="cards two">
+    <div class="card"><span class="ct">활동 1</span><h4>지도 앱에서 강 따라가기</h4>
+      <p>지도 앱에서 <b>나일강</b>을 검색해 강을 따라 손가락으로 훑어 봅니다.
+      강 양옆만 초록색이고 나머지는 사막이라는 것이 <b>위성 사진에서 바로 보입니다</b>.
+      “이집트는 나일강의 선물”이라는 말이 무슨 뜻인지 그림으로 이해됩니다.</p></div>
+    <div class="card"><span class="ct">활동 2</span><h4>내 이름 쐐기 문자로</h4>
+      <p>‘쐐기 문자 변환’을 검색해 자기 이름을 쐐기 문자로 만들어 봅니다.
+      <b>점토판에 갈대를 눌러 썼기 때문에</b> 획이 쐐기 모양이 되었다는 것을 알면
+      문자의 모양이 곧 <b>도구의 흔적</b>이라는 것이 보입니다.</p></div>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w1m3"><span class="tt"><b>목요일</b> — 네 강을 지도에서 찾아 표를 채우고, 활동 하나를 해 봅니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="fri">
+  <div class="step-no"><span class="num">5</span><span class="lbl">보스전</span><span class="day">FRI · 설명</span></div>
+  <h2>문제 5개와 3분 설명</h2>
+  <p>먼저 답을 생각한 뒤에 해설을 엽니다. 틀려도 감점은 없습니다. <b>틀린 문제가 다음 주의 출발점</b>이 됩니다.</p>
+
+  <div class="q"><span class="qn">Q1</span>
+    <p>문명이 큰 강 옆에서 시작한 까닭을 한 줄로 말해 봅시다.</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>물이 있고 땅이 기름져 농사가 잘되었고, 그래서 먹고 남는 곡식이 생겼기 때문입니다.</b>
+      남는 곡식이 있어야 농사를 짓지 않는 사람(왕·신관·군인·장인)이 살 수 있고, 그 사람들이 도시와 문자를 만들었습니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q2</span>
+    <p>선사 시대와 역사 시대를 가르는 기준은 무엇일까요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>문자로 된 기록이 있느냐입니다.</b> 기록이 남은 때부터를 역사 시대라고 합니다.
+      그 전은 유물과 유적으로만 알 수 있어 선사 시대라고 부릅니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q3</span>
+    <p>메소포타미아에는 함무라비 법전이, 이집트에는 피라미드가 남았습니다. 왜 성격이 달랐을까요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>지형이 달랐기 때문입니다.</b> 메소포타미아는 사방이 트인 평야라 외적이 잦고 나라가 자주 바뀌어
+      <b>질서를 세우는 법</b>이 중요했습니다. 이집트는 사막과 바다에 둘러싸여 오래 안정되었기 때문에
+      <b>죽은 뒤의 세계를 준비하는 문화</b>가 자랐습니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q4</span>
+    <p>“4대 문명”이라는 말을 쓸 때 조심해야 할 점은 무엇일까요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>세계의 문명이 넷뿐이었다는 뜻이 아니라는 점입니다.</b>
+      아메리카의 마야·잉카를 비롯해 다른 곳에도 문명이 있었습니다.
+      큰 강가의 네 곳은 비교해 배우기 좋아 함께 묶어 부르는 것입니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q5</span>
+    <p>중국 은(상)나라의 갑골문은 무엇을 적은 글자였을까요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>점을 친 결과를 기록한 글자입니다.</b> 거북 배딱지와 소뼈에 새겼고, 한자의 조상이 되었습니다.
+      나라의 큰일을 점으로 정했다는 것에서 <b>제사와 정치가 붙어 있던 사회</b>임도 알 수 있습니다.
+    </div></details>
+  </div>
+
+  <h3>아빠에게 3분 설명하기</h3>
+  <p>노트의 시대 띠 첫 칸을 보여 주면서 말합니다. 외워서 말하지 않아도 됩니다.</p>
+  <div class="script">
+    <div class="row"><span class="s">배운 것</span><span>큰 강가라서 농사가 잘됐고, 남는 곡식이 생기니까 농사 안 하는 사람이 생기고, 그 사람들이 도시랑 문자를 만든 게 문명이야.</span></div>
+    <div class="row"><span class="s">지도</span><span>티그리스·유프라테스는 이라크, 나일은 이집트, 인더스는 파키스탄, 황허는 중국 북쪽에 있어.</span></div>
+    <div class="row"><span class="s">헷갈리는 것</span><span>4대 문명이 세계 문명 전부는 아니야. 비교하기 좋아서 넷을 묶은 거래.</span></div>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w1m4"><span class="tt"><b>금요일</b> — 문제 5개를 풀고 아빠에게 3분 설명합니다. 설명이 되면 이번 주 통과입니다.</span></label></li>
+  </ul>
+
+  <p><span class="badge">획득 · 시대 띠 1칸</span></p>
+</section>
+
+<section class="sec" id="next">
+  <div class="step-no"><span class="num">6</span><span class="lbl">다음 주</span></div>
+  <h2>고대 제국의 등장</h2>
+  <p>도시가 커지자 도시들끼리 싸우고, 이긴 쪽이 넓은 땅을 다스리게 됩니다. 그것이 <b>제국</b>입니다.
+  다음 주의 질문은 <b>“말도 종교도 다른 사람들을 어떻게 한 나라로 묶었을까”</b>입니다.</p>
+  <div class="pager">
+    <a href="index.html">전체 지도</a>
+    <a class="main" href="week02.html">2주차 →</a>
+  </div>
+</section>
+
+<footer>세계사 항해 12주 · WEEK 01 문명이 시작된 자리 · 하루 20분 × 4일</footer>
+</div>
+<script>
+  (function(){
+    var KEY="world_quest_progress";
+    function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){return{}}}
+    function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+    var boxes=[].slice.call(document.querySelectorAll(".todo input[type=checkbox]"));
+    var st=load();
+    boxes.forEach(function(b){
+      if(st[b.dataset.q])b.checked=true;
+      b.addEventListener("change",function(){
+        var s=load();
+        if(b.checked)s[b.dataset.q]=1;else delete s[b.dataset.q];
+        save(s);paint();
+      });
+    });
+    function paint(){
+      var el=document.getElementById("wdone");
+      if(el){var n=boxes.filter(function(b){return b.checked}).length;
+        el.textContent=n+" / "+boxes.length;}
+      var hub=document.querySelector("[data-hub]");
+      if(hub){
+        var s=load(),total=0;
+        for(var w=1;w<=12;w++){
+          var n2=0;
+          for(var m=1;m<=4;m++) if(s["w"+w+"m"+m]) n2++;
+          total+=n2;
+          var p=document.querySelector('.p[data-p="'+w+'"]');
+          if(p&&!p.dataset.soon){p.textContent=n2===4?"완료":n2+" / 4";
+            p.className="p"+(n2===4?" done":(n2>0?" ing":""));}
+        }
+        var d=document.getElementById("allDone"),bar=document.getElementById("allBar");
+        if(d)d.textContent=total+" / 12";
+        if(bar)bar.style.width=(total/12*100)+"%";
+      }
+    }
+    paint();
+    var links=[].slice.call(document.querySelectorAll("nav.jump a[href^='#']"));
+    if(links.length){
+      var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1))});
+      var onScroll=function(){
+        var y=window.scrollY+130,idx=0;
+        secs.forEach(function(s,i){if(s&&s.offsetTop<=y)idx=i;});
+        links.forEach(function(a,i){a.classList.toggle("now",i===idx);});
+      };
+      window.addEventListener("scroll",onScroll,{passive:true});onScroll();
+    }
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#DCE2DB">
+<title>세계사 항해 추진 계획</title>
+<meta name="description" content="중2 딸과 아빠가 12주 동안 역사① 세계사 전 범위를 시대 띠 한 장으로 잇는 추진 계획.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#131C18; --ink2:#2C3A33; --muted:#5F6E66; --faint:#8A968F;
+    --mist:#DCE2DB; --surface:#F8FAF6; --surface2:#EFF3EC;
+    --line:#C3CCC1; --hair:#DDE4DB;
+    --kelp:#8A5A22; --kelp-wash:#F3E7D2; --kelp-line:#D6BE94;
+    --amber:#8F6209; --amber-wash:#F5EAD0; --amber-line:#DCC79B;
+    --berry:#8C2F3E; --berry-wash:#F3DFE2; --berry-line:#D9A8B0;
+    --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+    --mono:"IBM Plex Mono","SFMono-Regular",Consolas,"D2Coding",monospace;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{margin:0;background:var(--mist);color:var(--ink);font-family:var(--sans);
+    font-size:16px;line-height:1.75;letter-spacing:-0.01em;
+    padding:0 18px calc(70px + env(safe-area-inset-bottom));
+    word-break:keep-all;overflow-wrap:anywhere;}
+  .wrap{max-width:1040px;margin:0 auto;}
+
+  /* ===== 표지 ===== */
+  .cover{padding:44px 0 30px;border-bottom:2px solid var(--ink);}
+  .cover .kicker{font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:0.2em;text-transform:uppercase;color:var(--kelp);margin:0 0 16px;}
+  .cover h1{font-size:clamp(27px,6vw,44px);font-weight:700;line-height:1.24;
+    letter-spacing:-0.035em;margin:0 0 16px;max-width:21ch;}
+  .cover .lede{font-size:clamp(15.5px,2vw,18px);font-weight:300;color:var(--ink2);
+    max-width:62ch;margin:0 0 24px;line-height:1.72;}
+  .cover .lede b{font-weight:600;color:var(--ink);}
+  .metaline{display:flex;flex-wrap:wrap;gap:6px 22px;font-family:var(--mono);
+    font-size:11.5px;color:var(--muted);letter-spacing:0.03em;}
+  .metaline b{color:var(--ink);font-weight:500;}
+
+  .summary{background:var(--ink);border-radius:3px;padding:26px 22px 24px;margin:28px 0 0;}
+  .summary h2{color:#F6FAF5;font-size:18px;font-weight:600;margin:0 0 6px;letter-spacing:-0.02em;}
+  .summary .sd{color:#93A399;font-size:13.5px;font-weight:300;margin:0 0 22px;line-height:1.65;}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:18px;}
+  .kpi .kl{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:#7E8F84;display:block;margin-bottom:5px;}
+  .kpi .kv{font-size:clamp(21px,3.2vw,28px);font-weight:700;color:#E8C48A;
+    letter-spacing:-0.03em;display:block;line-height:1.1;}
+  .kpi .kn{font-size:12px;color:#B9C6BC;display:block;margin-top:6px;
+    font-weight:300;line-height:1.5;}
+
+  /* ===== 이동 바 ===== */
+  nav.jump{position:sticky;top:0;z-index:40;margin:0 -18px;padding:0 18px;
+    background:rgba(220,226,219,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);}
+  nav.jump .row{display:flex;gap:6px;overflow-x:auto;padding:9px 0;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  nav.jump .row::-webkit-scrollbar{display:none;}
+  nav.jump a{flex:0 0 auto;font-family:var(--mono);font-size:11.5px;letter-spacing:0.04em;
+    color:var(--muted);background:var(--surface);border:1px solid var(--line);
+    padding:6px 11px;border-radius:2px;text-decoration:none;}
+  nav.jump a.now{color:#fff;background:var(--kelp);border-color:var(--kelp);}
+
+  /* ===== 섹션 ===== */
+  .sec{padding:44px 0 12px;border-bottom:1px solid var(--line);scroll-margin-top:56px;}
+  .sec:last-of-type{border-bottom:0;}
+  .step-no{display:flex;align-items:center;gap:11px;margin-bottom:14px;}
+  .step-no .num{font-family:var(--mono);font-size:12px;font-weight:600;color:#fff;
+    background:var(--kelp);width:28px;height:28px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-no .lbl{font-family:var(--mono);font-size:11px;letter-spacing:0.13em;
+    text-transform:uppercase;color:var(--muted);}
+  .step-no .day{margin-left:auto;font-family:var(--mono);font-size:11px;
+    letter-spacing:0.1em;color:var(--kelp);background:var(--kelp-wash);
+    border:1px solid var(--kelp-line);padding:3px 9px;border-radius:2px;}
+  .sec h2{font-size:clamp(22px,3.4vw,29px);font-weight:600;letter-spacing:-0.03em;
+    line-height:1.34;margin:0 0 14px;max-width:30ch;}
+  .sec h3{font-size:17.5px;font-weight:600;letter-spacing:-0.02em;margin:30px 0 10px;}
+  .sec > p{max-width:70ch;color:var(--ink2);margin:0 0 16px;}
+  .sec strong,.sec b{font-weight:600;color:var(--ink);}
+  .sec code{font-family:var(--mono);font-size:0.86em;background:var(--surface2);
+    border:1px solid var(--hair);padding:1px 5px;border-radius:2px;}
+
+  .plain{background:var(--surface2);border-left:3px solid var(--kelp);
+    padding:14px 17px;margin:0 0 20px;border-radius:0 2px 2px 0;max-width:74ch;}
+  .plain p{margin:0;font-size:14.5px;color:var(--ink2);line-height:1.72;}
+  .plain p + p{margin-top:10px;}
+  .plain b{color:var(--kelp);font-weight:600;}
+
+  .fig{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:20px 16px 16px;margin:20px 0 12px;}
+  .fig-t{font-family:var(--mono);font-size:11px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--kelp);margin:0 0 16px;
+    padding-bottom:9px;border-bottom:1px solid var(--hair);}
+  .fig svg{display:block;width:100%;height:auto;}
+  .fig.wide{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .fig.wide svg{min-width:640px;}
+  .fig-c{font-size:13px;color:var(--muted);margin:14px 0 0;font-weight:300;
+    line-height:1.65;padding-top:12px;border-top:1px solid var(--hair);}
+  .fig-c b{color:var(--ink);font-weight:600;}
+
+  .sb{fill:#fff;stroke:#C3CCC1;stroke-width:1.5;}
+  .sb-k{fill:#F3E7D2;stroke:#8A5A22;stroke-width:2;}
+  .sb-b{fill:#F3DFE2;stroke:#D9A8B0;stroke-width:1.5;}
+  .sb-a{fill:#F5EAD0;stroke:#DCC79B;stroke-width:1.5;}
+  .sb-g{fill:#EFF3EC;stroke:#C3CCC1;stroke-width:1.5;}
+  .sb-d{fill:#fff;stroke:#8A5A22;stroke-width:1.6;stroke-dasharray:5 4;}
+  .st{font-family:var(--sans);font-size:13.5px;font-weight:600;fill:#131C18;
+    text-anchor:middle;letter-spacing:-0.3px;}
+  .st-s{font-family:var(--sans);font-size:11.5px;font-weight:400;fill:#5F6E66;text-anchor:middle;}
+  .st-k{fill:#8A5A22;} .st-b{fill:#8C2F3E;} .st-a{fill:#8F6209;}
+  .sm{font-family:var(--mono);font-size:12px;fill:#131C18;text-anchor:middle;font-weight:500;}
+  .sm-s{font-family:var(--mono);font-size:10.5px;fill:#5F6E66;text-anchor:middle;}
+  .st-m{font-family:var(--mono);font-size:11px;fill:#8A968F;text-anchor:middle;letter-spacing:0.5px;}
+  .sl{stroke:#8A968F;stroke-width:1.6;fill:none;}
+  .sl-k{stroke:#8A5A22;stroke-width:2;fill:none;}
+  .sl-a{stroke:#8F6209;stroke-width:1.8;fill:none;}
+  .sl-d{stroke:#8A968F;stroke-width:1.4;fill:none;stroke-dasharray:4 4;}
+  .sa{fill:#8A968F;} .sa-k{fill:#8A5A22;} .sa-a{fill:#8F6209;}
+  .dot-k{fill:#8A5A22;} .dot-a{fill:#C99A2E;} .dot-b{fill:#8C2F3E;}
+
+  /* ===== 표 ===== */
+  .tw{overflow-x:auto;margin:20px 0 8px;border:1px solid var(--line);
+    border-radius:3px;background:var(--surface);}
+  table{border-collapse:collapse;width:100%;font-size:13.8px;}
+  .tw.wide table{min-width:560px;}
+  thead th{background:var(--ink);color:#E8EFE7;text-align:left;font-family:var(--mono);
+    font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
+    padding:11px 13px;}
+  tbody td{padding:11px 13px;border-top:1px solid var(--hair);vertical-align:top;
+    color:var(--ink2);line-height:1.62;}
+  tbody tr:nth-child(even) td{background:var(--surface2);}
+  td.hd{font-weight:600;color:var(--ink);}
+  td.mn{font-family:var(--mono);font-size:12.5px;}
+  td.ok{color:var(--kelp);font-weight:600;}
+  td.no{color:var(--berry);font-weight:600;}
+  td.wa{color:var(--amber);font-weight:600;}
+  td.fill{font-family:var(--mono);color:var(--faint);}
+
+  .note{background:var(--amber-wash);border:1px solid var(--amber-line);
+    border-radius:3px;padding:17px 19px;margin:20px 0 8px;}
+  .note p{margin:0;font-size:14px;color:#5C440C;line-height:1.72;}
+  .note p + p{margin-top:9px;}
+  .note b{font-weight:600;}
+  .note .lb{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--amber);margin-bottom:6px;}
+  .alert{background:var(--berry-wash);border:1px solid var(--berry-line);
+    border-radius:3px;padding:17px 19px;margin:20px 0 8px;}
+  .alert p{margin:0;font-size:14px;color:#6B2430;line-height:1.72;}
+  .alert p + p{margin-top:9px;}
+  .alert b{font-weight:600;}
+  .alert .lb{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--berry);margin-bottom:6px;}
+
+  /* ===== 카드 묶음 ===== */
+  .cards{display:grid;gap:12px;margin:18px 0 8px;}
+  @media(min-width:680px){.cards.two{grid-template-columns:repeat(2,1fr);}}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:15px 17px;}
+  .card .ct{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;
+    color:var(--kelp);display:block;margin-bottom:7px;}
+  .card h4{margin:0 0 6px;font-size:15.5px;font-weight:600;letter-spacing:-0.02em;}
+  .card p{margin:0;font-size:14px;color:var(--ink2);line-height:1.68;}
+
+  /* ===== 요일 할 일 ===== */
+  .todo{list-style:none;margin:20px 0 8px;padding:0;background:var(--surface);
+    border:1px solid var(--line);border-radius:3px;overflow:hidden;}
+  .todo li + li{border-top:1px solid var(--hair);}
+  .todo label{display:grid;grid-template-columns:22px 1fr;gap:13px;align-items:start;
+    padding:15px 16px;cursor:pointer;font-size:14.5px;line-height:1.65;color:var(--ink2);min-height:54px;}
+  .todo input{appearance:none;-webkit-appearance:none;width:21px;height:21px;margin:1px 0 0;
+    border:1.5px solid var(--line);border-radius:2px;background:#fff;
+    display:grid;place-content:center;cursor:pointer;}
+  .todo input::after{content:"✓";font-size:13px;font-weight:700;color:#fff;transform:scale(0);}
+  .todo input:checked{background:var(--kelp);border-color:var(--kelp);}
+  .todo input:checked::after{transform:scale(1);}
+  .todo input:focus-visible{outline:2px solid var(--kelp);outline-offset:2px;}
+  .todo input:checked ~ .tt{color:var(--faint);text-decoration:line-through;}
+  .todo .tt b{color:var(--ink);font-weight:600;}
+
+  /* ===== 문제 ===== */
+  .q{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:15px 17px;margin:12px 0;}
+  .q .qn{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--kelp);
+    letter-spacing:0.12em;}
+  .q > p{margin:6px 0 0;font-size:15.5px;color:var(--ink);line-height:1.7;}
+  .q details{margin-top:12px;border-top:1px solid var(--hair);padding-top:10px;}
+  .q summary{cursor:pointer;list-style:none;font-family:var(--mono);font-size:12px;
+    font-weight:600;color:var(--kelp);letter-spacing:0.06em;padding:3px 0;}
+  .q summary::-webkit-details-marker{display:none;}
+  .q summary::before{content:"+ ";}
+  .q details[open] summary::before{content:"− ";}
+  .q .ans{margin-top:9px;background:var(--kelp-wash);border-radius:2px;padding:12px 14px;
+    font-size:14px;color:var(--ink2);line-height:1.7;}
+  .q .ans b{color:var(--kelp);font-weight:600;}
+
+  /* ===== 설명 대본 ===== */
+  .script{background:var(--surface);border:1px solid var(--kelp-line);border-radius:3px;
+    padding:16px 18px;margin:18px 0 8px;}
+  .script .row{display:grid;grid-template-columns:70px 1fr;gap:12px;font-size:14.5px;
+    color:var(--ink2);line-height:1.7;}
+  .script .row + .row{margin-top:11px;padding-top:11px;border-top:1px solid var(--hair);}
+  .script .s{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;color:var(--kelp);
+    font-weight:600;padding-top:4px;}
+
+  .badge{display:inline-block;font-family:var(--mono);font-size:12.5px;font-weight:600;
+    color:var(--amber);background:var(--amber-wash);border:1px solid var(--amber-line);
+    border-radius:2px;padding:7px 14px;margin-top:14px;letter-spacing:0.04em;}
+
+  /* ===== 주차 목록 (허브) ===== */
+  .wlist{display:flex;flex-direction:column;gap:10px;margin:18px 0 8px;}
+  a.wk{display:grid;grid-template-columns:1fr auto;grid-template-areas:"n p" "t p" "d d";
+    gap:2px 14px;background:var(--surface);border:1px solid var(--line);
+    border-left:3px solid var(--kelp);border-radius:3px;padding:15px 17px;
+    text-decoration:none;color:var(--ink);}
+  a.wk .n{grid-area:n;font-family:var(--mono);font-size:11px;font-weight:600;
+    letter-spacing:0.12em;color:var(--kelp);}
+  a.wk .t{grid-area:t;font-size:17px;font-weight:600;letter-spacing:-0.02em;}
+  a.wk .d{grid-area:d;font-size:13.5px;color:var(--muted);margin-top:5px;line-height:1.6;font-weight:300;}
+  a.wk .p{grid-area:p;align-self:center;font-family:var(--mono);font-size:11px;color:var(--muted);
+    background:var(--surface2);border:1px solid var(--hair);border-radius:2px;padding:4px 9px;white-space:nowrap;}
+  a.wk .p.done{color:#fff;background:var(--kelp);border-color:var(--kelp);}
+  a.wk .p.ing{color:var(--amber);background:var(--amber-wash);border-color:var(--amber-line);}
+  .wk.soon{border-left-color:var(--line);opacity:.62;pointer-events:none;}
+  .wk.soon .n,.wk.soon .t{color:var(--muted);}
+
+  /* ===== 진행 막대 ===== */
+  .bar{height:7px;background:var(--hair);border-radius:99px;overflow:hidden;margin-top:12px;
+    border:1px solid var(--line);}
+  .bar i{display:block;height:100%;background:var(--kelp);width:0;transition:width .3s;}
+
+  /* ===== 페이지 이동 ===== */
+  .pager{display:flex;gap:9px;margin:26px 0 0;}
+  .pager a{flex:1;text-align:center;font-size:13.5px;font-weight:600;text-decoration:none;
+    color:var(--ink2);background:var(--surface);border:1px solid var(--line);
+    border-radius:3px;padding:14px 8px;}
+  .pager a.main{background:var(--kelp);border-color:var(--kelp);color:#fff;}
+  footer{padding:26px 0 10px;font-family:var(--mono);font-size:11.5px;color:var(--faint);
+    letter-spacing:0.03em;line-height:1.8;}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="cover">
+  <p class="kicker">중2 역사 ①(세계사) · 12주 추진 계획 · 아빠용 문서</p>
+  <h1>세계사 항해 지도</h1>
+  <p class="lede">
+    세계사는 한국사보다 어렵게 느껴집니다. 이유는 분명합니다 —
+    <b>무대가 하나가 아니라 여섯</b>이고, <b>등장인물의 이름이 낯설기</b> 때문입니다.
+    그래서 이 계획은 사건을 더 넣지 않습니다.
+    <b>매주 시대 띠에 한 칸을 세우고, 그 칸에 사건 세 개만 올리고, 그 사건을 지도 위에 놓습니다.</b>
+  </p>
+  <div class="metaline">
+    <span>기간 <b>12주 · 3개월</b></span>
+    <span>하루 <b>20분 · 주 4일</b></span>
+    <span>한 주 <b>시대 1칸 · 사건 3개</b></span>
+    <span>결과물 <b>시대 띠 한 장</b></span>
+  </div>
+
+  <div class="summary">
+    <h2>계획 요약</h2>
+    <p class="sd">과학·수학·한국사 프로그램과 같은 리듬입니다. 다른 점은 목요일이 <b>“지도로”</b>라는 것입니다.</p>
+    <div class="kpis">
+      <div class="kpi"><span class="kl">교과 기준</span><span class="kv">역사 ①</span>
+        <span class="kn">중학교 세계사 여섯 대단원을 12주로</span></div>
+      <div class="kpi"><span class="kl">하루</span><span class="kv">20분</span>
+        <span class="kn">월 · 화 · 목 · 금 네 번만</span></div>
+      <div class="kpi"><span class="kl">쌓이는 것</span><span class="kv">12칸</span>
+        <span class="kn">매주 한 칸씩 자라는 시대 띠</span></div>
+      <div class="kpi"><span class="kl">통과 기준</span><span class="kv">3분 설명</span>
+        <span class="kn">시험 점수가 아니라 설명할 수 있는가</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="jump"><div class="row">
+  <a href="#why">왜 이렇게 짰나</a>
+  <a href="#unit">교과서와 맞추기</a>
+  <a href="#week">주차 배치</a>
+  <a href="#dad">아빠 역할</a>
+  <a href="#risk">변수 대응</a>
+</div></nav>
+
+<section class="sec" id="why">
+  <div class="step-no"><span class="num">1</span><span class="lbl">설계 근거</span></div>
+  <h2>세계사가 어려운 진짜 이유</h2>
+
+  <div class="fig">
+    <p class="fig-t">도식 1 · 12주 = 시대 띠 열두 칸</p>
+    <svg viewBox="0 0 420 156" role="img" aria-label="12주 연표에서 이번 주의 위치"><rect x="10" y="60" width="65" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="42" y="54" style="font-size:9.5px">Ⅰ 고대</text><rect x="78" y="60" width="99" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="128" y="54" style="font-size:9.5px">Ⅱ 종교</text><rect x="180" y="60" width="65" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="212" y="54" style="font-size:9.5px">Ⅲ 교류</text><rect x="248" y="60" width="65" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="280" y="54" style="font-size:9.5px">Ⅳ 혁명</text><rect x="316" y="60" width="65" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="348" y="54" style="font-size:9.5px">Ⅴ 대전</text><rect x="384" y="60" width="31" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="400" y="54" style="font-size:9.5px">Ⅵ 현대</text><rect x="10" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="26" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">01</text><rect x="44" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="60" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">02</text><rect x="78" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="94" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">03</text><rect x="112" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="128" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">04</text><rect x="146" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="162" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">05</text><rect x="180" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="196" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">06</text><rect x="214" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="230" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">07</text><rect x="248" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="264" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">08</text><rect x="282" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="298" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">09</text><rect x="316" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="332" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">10</text><rect x="350" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="366" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">11</text><rect x="384" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="400" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">12</text><text class="st-m" x="10" y="146" style="font-size:9.5px;text-anchor:start">선사</text><text class="st-m" x="410" y="146" style="font-size:9.5px;text-anchor:end">오늘</text><line x1="34" y1="142" x2="386" y2="142" stroke="#C3CCC1" stroke-width="1"/><polygon points="386,138 396,142 386,146" fill="#8A968F"/></svg>
+    <p class="fig-c">시간 길이가 아니라 <b>배우는 분량</b>으로 나눴습니다. 앞쪽 한 칸은 수천 년, 뒤쪽 한 칸은 수십 년입니다.</p>
+  </div>
+
+  <div class="tw wide"><table>
+    <thead><tr><th>흔한 어려움</th><th>진짜 원인</th><th>이 프로그램의 대응</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">“이름이 너무 많아요”</td>
+        <td>사건이 놓일 <b>시간 축</b>이 없어 낱개로 들어옵니다</td>
+        <td>매주 <b>한 칸에 사건 3개만</b> · 12주에 36개면 충분합니다</td></tr>
+      <tr><td class="hd">“어디 얘긴지 모르겠어요”</td>
+        <td>무대가 <b>여섯 곳</b>인데 지도가 머릿속에 없습니다</td>
+        <td>목요일마다 <b>지도 위에 사건 놓기</b> · 지역 격자로 무대 표시</td></tr>
+      <tr><td class="hd">“왜 그랬는지 모르겠어요”</td>
+        <td>사건을 <b>결과만</b> 외우고 원인은 건너뜁니다</td>
+        <td>모든 표가 <b>사건 · 원인 · 결과</b> 세 칸 구조</td></tr>
+      <tr><td class="hd">“한국사랑 따로 놀아요”</td>
+        <td>같은 시간을 배우면서 <b>연결을 안 지어 줍니다</b></td>
+        <td>주차마다 <b>같은 칸의 한국사</b>를 짚어 줍니다</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="note">
+    <h3>핵심 설계 하나</h3>
+    <p>이 프로그램에서 <b>앞 칸은 다음 칸의 원인</b>이 되도록 배치했습니다.
+    예를 들어 6주차(몽골 · 화약과 나침반) → 7주차(신항로) → 8주차(산업 혁명) → 9주차(제국주의) →
+    10·11주차(두 차례 세계 대전)가 <b>하나의 고리</b>로 이어집니다.
+    그래서 한 주를 건너뛰면 다음 주가 갑자기 어려워집니다. <b>순서대로 하는 것이 중요합니다.</b></p>
+  </div>
+</section>
+
+<section class="sec" id="unit">
+  <div class="step-no"><span class="num">2</span><span class="lbl">교과 대응</span></div>
+  <h2>교과서 여섯 대단원을 12주로</h2>
+
+  <div class="tw wide"><table>
+    <thead><tr><th>교과서 대단원</th><th>해당 주차</th><th>이 프로그램의 초점</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">Ⅰ 문명의 발생과 고대 세계</td><td>1 ~ 2주</td>
+        <td>강 → 잉여 → 도시·문자 · 제국이 사람을 묶는 세 방법</td></tr>
+      <tr><td class="hd">Ⅱ 세계 종교의 확산과 지역 문화</td><td>3 ~ 5주</td>
+        <td>종교가 국경을 넘는 세 조건 · 동아시아 네 도구 · 지중해 두 문화권</td></tr>
+      <tr><td class="hd">Ⅲ 지역 세계의 교류와 변화</td><td>6 ~ 7주</td>
+        <td>몽골의 연결 · 바닷길과 그 대가(삼각 무역)</td></tr>
+      <tr><td class="hd">Ⅳ 제국주의와 국민 국가 건설</td><td>8 ~ 9주</td>
+        <td>두 혁명이 바꾼 것 · 제국주의의 고리와 각국의 대응</td></tr>
+      <tr><td class="hd">Ⅴ 세계 대전과 사회 변동</td><td>10 ~ 11주</td>
+        <td>총력전이 사회를 바꾼 방식 · 경제 위기가 전쟁이 되는 고리</td></tr>
+      <tr><td class="hd">Ⅵ 현대 세계의 전개와 과제</td><td>12주</td>
+        <td>냉전과 우리의 분단 · 12칸 이어 말하기(최종 보스전)</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="alert"><span class="lb">학교 진도와 다를 때</span>
+    <p>교과서 출판사에 따라 <b>단원 이름과 순서가 조금씩 다릅니다.</b>
+    또 학교에 따라 중2에 <b>「역사 ②」(한국사)</b>를 먼저 배우기도 합니다.
+    딸의 교과서 표지에 <b>①인지 ②인지</b> 확인해 보시고,
+    ②라면 같은 방식으로 만든 <b>「역사 항해 12주」(한국사)</b> 문서를 쓰시면 됩니다.
+    둘 다 배우는 학교라면 두 문서를 <b>같은 시대 띠 위에 나란히</b> 놓으면 가장 효과가 좋습니다.</p>
+  </div>
+</section>
+
+<section class="sec" id="week">
+  <div class="step-no"><span class="num">3</span><span class="lbl">주차 배치</span></div>
+  <h2>12주 전체 흐름</h2>
+
+  <div class="tw wide"><table>
+    <thead><tr><th>주차</th><th>제목</th><th>그 주의 질문</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">01</td><td>문명이 시작된 자리</td><td>문명은 왜 하필 큰 강가에서 시작했을까</td></tr>
+      <tr><td class="hd">02</td><td>고대 제국</td><td>말도 신도 다른 사람들을 어떻게 한 나라로 묶었을까</td></tr>
+      <tr><td class="hd">03</td><td>인도와 두 종교</td><td>종교는 왜, 어떻게 국경을 넘었을까</td></tr>
+      <tr><td class="hd">04</td><td>동아시아 문화권</td><td>문화권이란 무엇을 함께 쓰는 사이인가</td></tr>
+      <tr><td class="hd">05</td><td>이슬람과 유럽</td><td>이웃한 두 문화권은 무엇을 주고받았을까</td></tr>
+      <tr><td class="hd">06</td><td>몽골 제국</td><td>세계는 언제 처음 하나로 이어졌을까</td></tr>
+      <tr><td class="hd">07</td><td>세 제국과 신항로</td><td>바닷길이 열리자 누가 이득을 보고 누가 잃었을까</td></tr>
+      <tr><td class="hd">08</td><td>시민 혁명과 산업 혁명</td><td>무엇이 왕을 끌어내렸을까</td></tr>
+      <tr><td class="hd">09</td><td>제국주의와 저항</td><td>왜 당했고, 어떻게 맞섰을까</td></tr>
+      <tr><td class="hd">10</td><td>제1차 세계 대전</td><td>전쟁이 사회를 어떻게 바꿨을까</td></tr>
+      <tr><td class="hd">11</td><td>대공황과 제2차 세계 대전</td><td>경제 위기가 어떻게 전쟁이 되었을까</td></tr>
+      <tr><td class="hd">12</td><td>냉전과 오늘</td><td>12칸을 한 줄로 이으면 무슨 이야기인가</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="note">
+    <h3>한국사와 겹치는 칸</h3>
+    <p>세계사 <b>6주차(몽골)</b>는 한국사의 고려 후기, <b>7주차(신항로)</b>는 조선 전기와 임진왜란,
+    <b>9주차(제국주의)</b>는 개항과 국권 침탈, <b>10주차(1차 대전)</b>는 3·1 운동,
+    <b>11~12주차</b>는 광복과 분단에 해당합니다.
+    이 다섯 자리에서 <b>“그때 우리나라에서는?”</b>이라고 한 번씩 물어봐 주시면
+    두 과목이 하나로 붙습니다.</p>
+  </div>
+</section>
+
+<section class="sec" id="dad">
+  <div class="step-no"><span class="num">4</span><span class="lbl">아빠 역할</span></div>
+  <h2>일주일에 딱 두 번만 하시면 됩니다</h2>
+
+  <div class="tw wide"><table>
+    <thead><tr><th>언제</th><th>무엇을</th><th>하지 말아야 할 것</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">화요일 밤<br><span class="mn">30초</span></td>
+        <td>“이번 주 칸 세웠어?” 한 마디. 노트를 <b>보기만</b> 합니다</td>
+        <td>글씨나 분량을 지적하지 않기</td></tr>
+      <tr><td class="hd">금요일 밤<br><span class="mn">3분</span></td>
+        <td>설명을 <b>끝까지 듣고</b> “그래서 그다음엔?” 한 번만 묻기</td>
+        <td>중간에 고쳐 주기 · 더 아는 척하기</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="script">
+    <div class="row"><span class="s">좋은 반응</span><span>“그게 그래서 그렇게 된 거구나. 몰랐네.”</span></div>
+    <div class="row"><span class="s">좋은 질문</span><span>“그때 우리나라는 뭐 하고 있었어?”</span></div>
+    <div class="row"><span class="s">피할 말</span><span>“이것도 몰라?” · “시험에 나와?”</span></div>
+  </div>
+
+  <div class="note">
+    <h3>3분 설명이 통과 기준인 이유</h3>
+    <p>설명은 <b>이해하지 못하면 할 수 없는 일</b>입니다.
+    외운 것은 말이 끊기고, 이해한 것은 자기 말로 나옵니다.
+    그래서 이 프로그램의 통과 기준은 문제 점수가 아니라 <b>3분 동안 스스로 말할 수 있는가</b>입니다.</p>
+  </div>
+</section>
+
+<section class="sec" id="risk">
+  <div class="step-no"><span class="num">5</span><span class="lbl">변수 대응</span></div>
+  <h2>이럴 때는 이렇게</h2>
+
+  <div class="tw wide"><table>
+    <thead><tr><th>상황</th><th>대응</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">한 주를 통째로 빠뜨렸다</td>
+        <td>따라잡지 말고 <b>그 주는 건너뛰고 이번 주부터</b>. 다만 빠뜨린 칸은 띠에 <b>빈칸으로 남겨</b> 두고 방학에 채웁니다</td></tr>
+      <tr><td class="hd">시험 기간과 겹쳤다</td>
+        <td>그 주는 <b>금요일 보스전만</b> 합니다. 문제 5개가 그대로 복습이 됩니다</td></tr>
+      <tr><td class="hd">학교 진도가 다른 단원이다</td>
+        <td>주차 <b>순서를 바꿔서</b> 진행하세요. 각 주차 문서는 독립적으로 읽힙니다</td></tr>
+      <tr><td class="hd">너무 어려워한다</td>
+        <td>그 주의 <b>표 하나와 문제 5개만</b> 하고 넘어갑니다. 완성도보다 <b>12주를 완주하는 것</b>이 목표입니다</td></tr>
+      <tr><td class="hd">재미있어한다</td>
+        <td>목요일 <b>찾아보기 활동</b>을 주말로 넘겨 길게 해 봅니다. 박물관·다큐멘터리로 확장하기 좋습니다</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="alert"><span class="lb">이 프로그램이 하지 않는 것</span>
+    <p>이 문서는 <b>내신 대비 문제집이 아닙니다.</b>
+    연도와 인명을 촘촘히 외우게 하지 않고, 대신 <b>사건이 놓일 자리</b>를 만들어 줍니다.
+    자리가 생기면 교과서와 문제집이 훨씬 빨리 붙습니다.
+    <b>순서는 이 문서 먼저, 문제집은 그다음</b>입니다.</p>
+  </div>
+
+  <div class="pager">
+    <a href="index.html">전체 지도</a>
+    <a class="main" href="week01.html">1주차 시작 →</a>
+  </div>
+</section>
+
+<footer>
+  세계사 항해 12주 · 추진 계획 (아빠용) · 중2 역사 ①(세계사) 기준<br>
+  교과 단원의 이름과 순서는 교과서 출판사와 학교 진도에 따라 다를 수 있습니다
+</footer>
+</div>
+<script>
+  (function(){
+    var KEY="world_quest_progress";
+    function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){return{}}}
+    function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+    var boxes=[].slice.call(document.querySelectorAll(".todo input[type=checkbox]"));
+    var st=load();
+    boxes.forEach(function(b){
+      if(st[b.dataset.q])b.checked=true;
+      b.addEventListener("change",function(){
+        var s=load();
+        if(b.checked)s[b.dataset.q]=1;else delete s[b.dataset.q];
+        save(s);paint();
+      });
+    });
+    function paint(){
+      var el=document.getElementById("wdone");
+      if(el){var n=boxes.filter(function(b){return b.checked}).length;
+        el.textContent=n+" / "+boxes.length;}
+      var hub=document.querySelector("[data-hub]");
+      if(hub){
+        var s=load(),total=0;
+        for(var w=1;w<=12;w++){
+          var n2=0;
+          for(var m=1;m<=4;m++) if(s["w"+w+"m"+m]) n2++;
+          total+=n2;
+          var p=document.querySelector('.p[data-p="'+w+'"]');
+          if(p&&!p.dataset.soon){p.textContent=n2===4?"완료":n2+" / 4";
+            p.className="p"+(n2===4?" done":(n2>0?" ing":""));}
+        }
+        var d=document.getElementById("allDone"),bar=document.getElementById("allBar");
+        if(d)d.textContent=total+" / 12";
+        if(bar)bar.style.width=(total/12*100)+"%";
+      }
+    }
+    paint();
+    var links=[].slice.call(document.querySelectorAll("nav.jump a[href^='#']"));
+    if(links.length){
+      var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1))});
+      var onScroll=function(){
+        var y=window.scrollY+130,idx=0;
+        secs.forEach(function(s,i){if(s&&s.offsetTop<=y)idx=i;});
+        links.forEach(function(a,i){a.classList.toggle("now",i===idx);});
+      };
+      window.addEventListener("scroll",onScroll,{passive:true});onScroll();
+    }
+  })();
+</script>
+</body>
+</html>

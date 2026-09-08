@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#DCE2DB">
+<title>4주차 · 동아시아 문화권</title>
+<meta name="description" content="이웃한 나라들이 같은 네 가지를 나눠 쓰기 시작하면 문화권이 됩니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#131C18; --ink2:#2C3A33; --muted:#5F6E66; --faint:#8A968F;
+    --mist:#DCE2DB; --surface:#F8FAF6; --surface2:#EFF3EC;
+    --line:#C3CCC1; --hair:#DDE4DB;
+    --kelp:#8A5A22; --kelp-wash:#F3E7D2; --kelp-line:#D6BE94;
+    --amber:#8F6209; --amber-wash:#F5EAD0; --amber-line:#DCC79B;
+    --berry:#8C2F3E; --berry-wash:#F3DFE2; --berry-line:#D9A8B0;
+    --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+    --mono:"IBM Plex Mono","SFMono-Regular",Consolas,"D2Coding",monospace;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{margin:0;background:var(--mist);color:var(--ink);font-family:var(--sans);
+    font-size:16px;line-height:1.75;letter-spacing:-0.01em;
+    padding:0 18px calc(70px + env(safe-area-inset-bottom));
+    word-break:keep-all;overflow-wrap:anywhere;}
+  .wrap{max-width:1040px;margin:0 auto;}
+
+  /* ===== 표지 ===== */
+  .cover{padding:44px 0 30px;border-bottom:2px solid var(--ink);}
+  .cover .kicker{font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:0.2em;text-transform:uppercase;color:var(--kelp);margin:0 0 16px;}
+  .cover h1{font-size:clamp(27px,6vw,44px);font-weight:700;line-height:1.24;
+    letter-spacing:-0.035em;margin:0 0 16px;max-width:21ch;}
+  .cover .lede{font-size:clamp(15.5px,2vw,18px);font-weight:300;color:var(--ink2);
+    max-width:62ch;margin:0 0 24px;line-height:1.72;}
+  .cover .lede b{font-weight:600;color:var(--ink);}
+  .metaline{display:flex;flex-wrap:wrap;gap:6px 22px;font-family:var(--mono);
+    font-size:11.5px;color:var(--muted);letter-spacing:0.03em;}
+  .metaline b{color:var(--ink);font-weight:500;}
+
+  .summary{background:var(--ink);border-radius:3px;padding:26px 22px 24px;margin:28px 0 0;}
+  .summary h2{color:#F6FAF5;font-size:18px;font-weight:600;margin:0 0 6px;letter-spacing:-0.02em;}
+  .summary .sd{color:#93A399;font-size:13.5px;font-weight:300;margin:0 0 22px;line-height:1.65;}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:18px;}
+  .kpi .kl{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:#7E8F84;display:block;margin-bottom:5px;}
+  .kpi .kv{font-size:clamp(21px,3.2vw,28px);font-weight:700;color:#E8C48A;
+    letter-spacing:-0.03em;display:block;line-height:1.1;}
+  .kpi .kn{font-size:12px;color:#B9C6BC;display:block;margin-top:6px;
+    font-weight:300;line-height:1.5;}
+
+  /* ===== 이동 바 ===== */
+  nav.jump{position:sticky;top:0;z-index:40;margin:0 -18px;padding:0 18px;
+    background:rgba(220,226,219,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);}
+  nav.jump .row{display:flex;gap:6px;overflow-x:auto;padding:9px 0;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  nav.jump .row::-webkit-scrollbar{display:none;}
+  nav.jump a{flex:0 0 auto;font-family:var(--mono);font-size:11.5px;letter-spacing:0.04em;
+    color:var(--muted);background:var(--surface);border:1px solid var(--line);
+    padding:6px 11px;border-radius:2px;text-decoration:none;}
+  nav.jump a.now{color:#fff;background:var(--kelp);border-color:var(--kelp);}
+
+  /* ===== 섹션 ===== */
+  .sec{padding:44px 0 12px;border-bottom:1px solid var(--line);scroll-margin-top:56px;}
+  .sec:last-of-type{border-bottom:0;}
+  .step-no{display:flex;align-items:center;gap:11px;margin-bottom:14px;}
+  .step-no .num{font-family:var(--mono);font-size:12px;font-weight:600;color:#fff;
+    background:var(--kelp);width:28px;height:28px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-no .lbl{font-family:var(--mono);font-size:11px;letter-spacing:0.13em;
+    text-transform:uppercase;color:var(--muted);}
+  .step-no .day{margin-left:auto;font-family:var(--mono);font-size:11px;
+    letter-spacing:0.1em;color:var(--kelp);background:var(--kelp-wash);
+    border:1px solid var(--kelp-line);padding:3px 9px;border-radius:2px;}
+  .sec h2{font-size:clamp(22px,3.4vw,29px);font-weight:600;letter-spacing:-0.03em;
+    line-height:1.34;margin:0 0 14px;max-width:30ch;}
+  .sec h3{font-size:17.5px;font-weight:600;letter-spacing:-0.02em;margin:30px 0 10px;}
+  .sec > p{max-width:70ch;color:var(--ink2);margin:0 0 16px;}
+  .sec strong,.sec b{font-weight:600;color:var(--ink);}
+  .sec code{font-family:var(--mono);font-size:0.86em;background:var(--surface2);
+    border:1px solid var(--hair);padding:1px 5px;border-radius:2px;}
+
+  .plain{background:var(--surface2);border-left:3px solid var(--kelp);
+    padding:14px 17px;margin:0 0 20px;border-radius:0 2px 2px 0;max-width:74ch;}
+  .plain p{margin:0;font-size:14.5px;color:var(--ink2);line-height:1.72;}
+  .plain p + p{margin-top:10px;}
+  .plain b{color:var(--kelp);font-weight:600;}
+
+  .fig{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:20px 16px 16px;margin:20px 0 12px;}
+  .fig-t{font-family:var(--mono);font-size:11px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--kelp);margin:0 0 16px;
+    padding-bottom:9px;border-bottom:1px solid var(--hair);}
+  .fig svg{display:block;width:100%;height:auto;}
+  .fig.wide{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .fig.wide svg{min-width:640px;}
+  .fig-c{font-size:13px;color:var(--muted);margin:14px 0 0;font-weight:300;
+    line-height:1.65;padding-top:12px;border-top:1px solid var(--hair);}
+  .fig-c b{color:var(--ink);font-weight:600;}
+
+  .sb{fill:#fff;stroke:#C3CCC1;stroke-width:1.5;}
+  .sb-k{fill:#F3E7D2;stroke:#8A5A22;stroke-width:2;}
+  .sb-b{fill:#F3DFE2;stroke:#D9A8B0;stroke-width:1.5;}
+  .sb-a{fill:#F5EAD0;stroke:#DCC79B;stroke-width:1.5;}
+  .sb-g{fill:#EFF3EC;stroke:#C3CCC1;stroke-width:1.5;}
+  .sb-d{fill:#fff;stroke:#8A5A22;stroke-width:1.6;stroke-dasharray:5 4;}
+  .st{font-family:var(--sans);font-size:13.5px;font-weight:600;fill:#131C18;
+    text-anchor:middle;letter-spacing:-0.3px;}
+  .st-s{font-family:var(--sans);font-size:11.5px;font-weight:400;fill:#5F6E66;text-anchor:middle;}
+  .st-k{fill:#8A5A22;} .st-b{fill:#8C2F3E;} .st-a{fill:#8F6209;}
+  .sm{font-family:var(--mono);font-size:12px;fill:#131C18;text-anchor:middle;font-weight:500;}
+  .sm-s{font-family:var(--mono);font-size:10.5px;fill:#5F6E66;text-anchor:middle;}
+  .st-m{font-family:var(--mono);font-size:11px;fill:#8A968F;text-anchor:middle;letter-spacing:0.5px;}
+  .sl{stroke:#8A968F;stroke-width:1.6;fill:none;}
+  .sl-k{stroke:#8A5A22;stroke-width:2;fill:none;}
+  .sl-a{stroke:#8F6209;stroke-width:1.8;fill:none;}
+  .sl-d{stroke:#8A968F;stroke-width:1.4;fill:none;stroke-dasharray:4 4;}
+  .sa{fill:#8A968F;} .sa-k{fill:#8A5A22;} .sa-a{fill:#8F6209;}
+  .dot-k{fill:#8A5A22;} .dot-a{fill:#C99A2E;} .dot-b{fill:#8C2F3E;}
+
+  /* ===== 표 ===== */
+  .tw{overflow-x:auto;margin:20px 0 8px;border:1px solid var(--line);
+    border-radius:3px;background:var(--surface);}
+  table{border-collapse:collapse;width:100%;font-size:13.8px;}
+  .tw.wide table{min-width:560px;}
+  thead th{background:var(--ink);color:#E8EFE7;text-align:left;font-family:var(--mono);
+    font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
+    padding:11px 13px;}
+  tbody td{padding:11px 13px;border-top:1px solid var(--hair);vertical-align:top;
+    color:var(--ink2);line-height:1.62;}
+  tbody tr:nth-child(even) td{background:var(--surface2);}
+  td.hd{font-weight:600;color:var(--ink);}
+  td.mn{font-family:var(--mono);font-size:12.5px;}
+  td.ok{color:var(--kelp);font-weight:600;}
+  td.no{color:var(--berry);font-weight:600;}
+  td.wa{color:var(--amber);font-weight:600;}
+  td.fill{font-family:var(--mono);color:var(--faint);}
+
+  .note{background:var(--amber-wash);border:1px solid var(--amber-line);
+    border-radius:3px;padding:17px 19px;margin:20px 0 8px;}
+  .note p{margin:0;font-size:14px;color:#5C440C;line-height:1.72;}
+  .note p + p{margin-top:9px;}
+  .note b{font-weight:600;}
+  .note .lb{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--amber);margin-bottom:6px;}
+  .alert{background:var(--berry-wash);border:1px solid var(--berry-line);
+    border-radius:3px;padding:17px 19px;margin:20px 0 8px;}
+  .alert p{margin:0;font-size:14px;color:#6B2430;line-height:1.72;}
+  .alert p + p{margin-top:9px;}
+  .alert b{font-weight:600;}
+  .alert .lb{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--berry);margin-bottom:6px;}
+
+  /* ===== 카드 묶음 ===== */
+  .cards{display:grid;gap:12px;margin:18px 0 8px;}
+  @media(min-width:680px){.cards.two{grid-template-columns:repeat(2,1fr);}}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:15px 17px;}
+  .card .ct{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;
+    color:var(--kelp);display:block;margin-bottom:7px;}
+  .card h4{margin:0 0 6px;font-size:15.5px;font-weight:600;letter-spacing:-0.02em;}
+  .card p{margin:0;font-size:14px;color:var(--ink2);line-height:1.68;}
+
+  /* ===== 요일 할 일 ===== */
+  .todo{list-style:none;margin:20px 0 8px;padding:0;background:var(--surface);
+    border:1px solid var(--line);border-radius:3px;overflow:hidden;}
+  .todo li + li{border-top:1px solid var(--hair);}
+  .todo label{display:grid;grid-template-columns:22px 1fr;gap:13px;align-items:start;
+    padding:15px 16px;cursor:pointer;font-size:14.5px;line-height:1.65;color:var(--ink2);min-height:54px;}
+  .todo input{appearance:none;-webkit-appearance:none;width:21px;height:21px;margin:1px 0 0;
+    border:1.5px solid var(--line);border-radius:2px;background:#fff;
+    display:grid;place-content:center;cursor:pointer;}
+  .todo input::after{content:"✓";font-size:13px;font-weight:700;color:#fff;transform:scale(0);}
+  .todo input:checked{background:var(--kelp);border-color:var(--kelp);}
+  .todo input:checked::after{transform:scale(1);}
+  .todo input:focus-visible{outline:2px solid var(--kelp);outline-offset:2px;}
+  .todo input:checked ~ .tt{color:var(--faint);text-decoration:line-through;}
+  .todo .tt b{color:var(--ink);font-weight:600;}
+
+  /* ===== 문제 ===== */
+  .q{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:15px 17px;margin:12px 0;}
+  .q .qn{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--kelp);
+    letter-spacing:0.12em;}
+  .q > p{margin:6px 0 0;font-size:15.5px;color:var(--ink);line-height:1.7;}
+  .q details{margin-top:12px;border-top:1px solid var(--hair);padding-top:10px;}
+  .q summary{cursor:pointer;list-style:none;font-family:var(--mono);font-size:12px;
+    font-weight:600;color:var(--kelp);letter-spacing:0.06em;padding:3px 0;}
+  .q summary::-webkit-details-marker{display:none;}
+  .q summary::before{content:"+ ";}
+  .q details[open] summary::before{content:"− ";}
+  .q .ans{margin-top:9px;background:var(--kelp-wash);border-radius:2px;padding:12px 14px;
+    font-size:14px;color:var(--ink2);line-height:1.7;}
+  .q .ans b{color:var(--kelp);font-weight:600;}
+
+  /* ===== 설명 대본 ===== */
+  .script{background:var(--surface);border:1px solid var(--kelp-line);border-radius:3px;
+    padding:16px 18px;margin:18px 0 8px;}
+  .script .row{display:grid;grid-template-columns:70px 1fr;gap:12px;font-size:14.5px;
+    color:var(--ink2);line-height:1.7;}
+  .script .row + .row{margin-top:11px;padding-top:11px;border-top:1px solid var(--hair);}
+  .script .s{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;color:var(--kelp);
+    font-weight:600;padding-top:4px;}
+
+  .badge{display:inline-block;font-family:var(--mono);font-size:12.5px;font-weight:600;
+    color:var(--amber);background:var(--amber-wash);border:1px solid var(--amber-line);
+    border-radius:2px;padding:7px 14px;margin-top:14px;letter-spacing:0.04em;}
+
+  /* ===== 주차 목록 (허브) ===== */
+  .wlist{display:flex;flex-direction:column;gap:10px;margin:18px 0 8px;}
+  a.wk{display:grid;grid-template-columns:1fr auto;grid-template-areas:"n p" "t p" "d d";
+    gap:2px 14px;background:var(--surface);border:1px solid var(--line);
+    border-left:3px solid var(--kelp);border-radius:3px;padding:15px 17px;
+    text-decoration:none;color:var(--ink);}
+  a.wk .n{grid-area:n;font-family:var(--mono);font-size:11px;font-weight:600;
+    letter-spacing:0.12em;color:var(--kelp);}
+  a.wk .t{grid-area:t;font-size:17px;font-weight:600;letter-spacing:-0.02em;}
+  a.wk .d{grid-area:d;font-size:13.5px;color:var(--muted);margin-top:5px;line-height:1.6;font-weight:300;}
+  a.wk .p{grid-area:p;align-self:center;font-family:var(--mono);font-size:11px;color:var(--muted);
+    background:var(--surface2);border:1px solid var(--hair);border-radius:2px;padding:4px 9px;white-space:nowrap;}
+  a.wk .p.done{color:#fff;background:var(--kelp);border-color:var(--kelp);}
+  a.wk .p.ing{color:var(--amber);background:var(--amber-wash);border-color:var(--amber-line);}
+  .wk.soon{border-left-color:var(--line);opacity:.62;pointer-events:none;}
+  .wk.soon .n,.wk.soon .t{color:var(--muted);}
+
+  /* ===== 진행 막대 ===== */
+  .bar{height:7px;background:var(--hair);border-radius:99px;overflow:hidden;margin-top:12px;
+    border:1px solid var(--line);}
+  .bar i{display:block;height:100%;background:var(--kelp);width:0;transition:width .3s;}
+
+  /* ===== 페이지 이동 ===== */
+  .pager{display:flex;gap:9px;margin:26px 0 0;}
+  .pager a{flex:1;text-align:center;font-size:13.5px;font-weight:600;text-decoration:none;
+    color:var(--ink2);background:var(--surface);border:1px solid var(--line);
+    border-radius:3px;padding:14px 8px;}
+  .pager a.main{background:var(--kelp);border-color:var(--kelp);color:#fff;}
+  footer{padding:26px 0 10px;font-family:var(--mono);font-size:11.5px;color:var(--faint);
+    letter-spacing:0.03em;line-height:1.8;}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="cover">
+  <p class="kicker">WEEK 04 · Ⅱ단원 세계 종교의 확산과 지역 문화 · 하루 20분 × 4일</p>
+  <h1>동아시아 문화권</h1>
+  <p class="lede">
+    “문화권”은 어려운 말 같지만 뜻은 단순합니다. <b>이웃한 나라들이 같은 도구를 나눠 쓰는 사이</b>입니다.
+    동아시아에서 함께 쓴 도구는 넷입니다 — <b>한자 · 유교 · 불교 · 율령</b>.
+    이번 주의 질문은 <b>“왜 이 넷을 함께 쓰게 되었을까”</b>입니다.
+  </p>
+  <div class="metaline">
+    <span>시대 띠 <b>4번째 칸</b></span>
+    <span>사건 <b>3개</b></span>
+    <span>무대 <b>동아시아</b></span>
+    <span>진행 <b id="wdone">0 / 4</b></span>
+  </div>
+
+  <div class="summary">
+    <h2>이번 주에 남길 것</h2>
+    <p class="sd">네 글자만 남기면 이번 주는 성공입니다 — 한자 · 유교 · 불교 · 율령.</p>
+    <div class="kpis">
+      <div class="kpi"><span class="kl">사건 1</span><span class="kv">수 · 당</span>
+        <span class="kn">분열된 중국이 다시 하나가 되고 크게 열렸다</span></div>
+      <div class="kpi"><span class="kl">사건 2</span><span class="kv">네 도구</span>
+        <span class="kn">한자 · 유교 · 불교 · 율령을 이웃 나라가 받아들였다</span></div>
+      <div class="kpi"><span class="kl">사건 3</span><span class="kv">각자의 방식</span>
+        <span class="kn">받아들이되 자기 것으로 바꿔 썼다</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="jump"><div class="row">
+  <a href="#map">이번 주 칸</a>
+  <a href="#mon">월 · 열기</a>
+  <a href="#tue">화 · 채우기</a>
+  <a href="#thu">목 · 지도로</a>
+  <a href="#fri">금 · 보스전</a>
+  <a href="#next">다음 주</a>
+</div></nav>
+
+<section class="sec" id="map">
+  <div class="step-no"><span class="num">1</span><span class="lbl">이번 주 칸</span></div>
+  <h2>네 번째 칸 — 동아시아가 한 묶음이 되는 때</h2>
+
+  <div class="fig">
+    <p class="fig-t">도식 1 · 12주 시대 띠에서 이번 주의 자리</p>
+    <svg viewBox="0 0 420 156" role="img" aria-label="12주 연표에서 이번 주의 위치"><rect x="10" y="60" width="65" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="42" y="54" style="font-size:9.5px">Ⅰ 고대</text><rect x="78" y="60" width="99" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="128" y="54" style="font-size:9.5px">Ⅱ 종교</text><rect x="180" y="60" width="65" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="212" y="54" style="font-size:9.5px">Ⅲ 교류</text><rect x="248" y="60" width="65" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="280" y="54" style="font-size:9.5px">Ⅳ 혁명</text><rect x="316" y="60" width="65" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="348" y="54" style="font-size:9.5px">Ⅴ 대전</text><rect x="384" y="60" width="31" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="400" y="54" style="font-size:9.5px">Ⅵ 현대</text><rect x="10" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="26" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">01</text><rect x="44" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="60" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">02</text><rect x="78" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="94" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">03</text><rect x="112" y="70" width="31" height="26" rx="3" fill="#8A5A22" stroke="#8A5A22" stroke-width="1.2"/><text x="128" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#fff">04</text><text x="128" y="36" text-anchor="middle" font-family="IBM Plex Sans KR,sans-serif" font-size="13" font-weight="700" fill="#8A5A22">동아시아 문화권</text><text x="128" y="120" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10.5" fill="#8A5A22">6 ~ 10세기</text><path d="M128 40 L128 66" stroke="#8A5A22" stroke-width="1.4"/><rect x="146" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="162" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">05</text><rect x="180" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="196" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">06</text><rect x="214" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="230" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">07</text><rect x="248" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="264" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">08</text><rect x="282" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="298" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">09</text><rect x="316" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="332" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">10</text><rect x="350" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="366" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">11</text><rect x="384" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="400" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">12</text><text class="st-m" x="10" y="146" style="font-size:9.5px;text-anchor:start">선사</text><text class="st-m" x="410" y="146" style="font-size:9.5px;text-anchor:end">오늘</text><line x1="34" y1="142" x2="386" y2="142" stroke="#C3CCC1" stroke-width="1"/><polygon points="386,138 396,142 386,146" fill="#8A968F"/></svg>
+    <p class="fig-c">대략 <b>6세기부터 10세기</b>. 우리 역사로는 <b>삼국 후기와 남북국</b>이 이 칸에 함께 들어갑니다.</p>
+  </div>
+
+  <div class="fig">
+    <p class="fig-t">도식 2 · 동아시아가 함께 쓴 네 가지 도구</p>
+    <svg viewBox="0 0 420 200" role="img" aria-label="한자, 유교, 불교, 율령이라는 네 가지 공통 요소">
+      <rect class="sb-k" x="8" y="14" width="196" height="72" rx="3"/>
+      <text class="st st-k" x="106" y="42">한자</text>
+      <text class="st-s" x="106" y="62">기록하고 소통하는 <tspan font-weight="600">공용 문자</tspan></text>
+      <rect class="sb-k" x="216" y="14" width="196" height="72" rx="3"/>
+      <text class="st st-k" x="314" y="42">유교</text>
+      <text class="st-s" x="314" y="62">관리를 기르고 <tspan font-weight="600">질서를 세우는 학문</tspan></text>
+      <rect class="sb-k" x="8" y="96" width="196" height="72" rx="3"/>
+      <text class="st st-k" x="106" y="124">불교</text>
+      <text class="st-s" x="106" y="144">왕권을 뒷받침하고 <tspan font-weight="600">마음을 모음</tspan></text>
+      <rect class="sb-k" x="216" y="96" width="196" height="72" rx="3"/>
+      <text class="st st-k" x="314" y="124">율령</text>
+      <text class="st-s" x="314" y="144">나라를 굴리는 <tspan font-weight="600">법과 제도의 틀</tspan></text>
+      <text class="st-m" x="210" y="192">넷 다 “넓은 나라를 다스리는 데 필요한 도구”였습니다</text>
+    </svg>
+    <p class="fig-c">이웃 나라들이 이 넷을 받아들인 이유는 <b>따라 하고 싶어서가 아니라, 필요해서</b>였습니다.
+    나라를 세우려면 문자·학문·믿음·법이 필요했기 때문입니다.</p>
+  </div>
+</section>
+
+<section class="sec" id="mon">
+  <div class="step-no"><span class="num">2</span><span class="lbl">흐름 읽기</span><span class="day">MON · 열기</span></div>
+  <h2>수와 당 — 다시 하나가 된 중국</h2>
+
+  <div class="plain">
+    <p><b>오늘은 읽고 질문 3개만 적습니다.</b> 왕조 이름은 <b>수 → 당</b> 두 개면 충분합니다.</p>
+  </div>
+
+  <div class="tw wide"><table>
+    <thead><tr><th>왕조</th><th>한 일</th><th>결과</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">수</td>
+        <td>오랜 분열을 끝내고 통일 · <b>대운하</b>를 팠고 고구려를 여러 차례 침입</td>
+        <td>무리한 공사와 전쟁으로 <b>짧게 끝남</b></td></tr>
+      <tr><td class="hd">당</td>
+        <td>율령을 정비하고 <b>과거로 관리를 뽑음</b> · 외국인에게 문을 활짝 엶</td>
+        <td>수도 <b>장안</b>이 국제도시가 됨 · 동아시아 문화의 중심</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>장안 — 세계가 모인 도시</h3>
+  <p>당의 수도 장안에는 <b>페르시아 상인, 이슬람 상인, 일본 유학생, 신라 유학생</b>이 함께 살았습니다.
+  종교도 불교뿐 아니라 이슬람교·조로아스터교까지 들어와 있었습니다.
+  2주차의 <b>비단길</b>이 끝나는 곳이 바로 여기입니다.
+  당이 강했던 힘은 군대만이 아니라 <b>남을 받아들이는 개방성</b>에 있었습니다.</p>
+
+  <div class="alert"><span class="lb">가장 많이 하는 착각</span>
+    <p><b>주변 나라들이 중국 것을 그대로 베낀 것이 아닙니다.</b>
+    신라는 <b>골품제</b>라는 자기 신분 제도를 유지한 채 율령을 받아들였고,
+    일본은 한자를 변형해 <b>가나</b>라는 자기 문자를 만들었습니다.
+    문화는 옮겨 갈 때 <b>반드시 그 땅에 맞게 바뀝니다</b>.</p>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w4m1"><span class="tt"><b>월요일</b> — 표를 읽고 <b>궁금한 질문 3개</b>를 적습니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="tue">
+  <div class="step-no"><span class="num">3</span><span class="lbl">시대 띠 세우기</span><span class="day">TUE · 채우기</span></div>
+  <h2>네 번째 칸에 이렇게 적습니다</h2>
+
+  <div class="tw wide"><table>
+    <thead><tr><th>사건</th><th>원인 (왜)</th><th>결과 (그래서)</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">수의 통일과 당의 성립<br><span class="mn">6 ~ 7세기</span></td>
+        <td>오랜 분열로 백성이 지치고 통합의 요구가 컸습니다</td>
+        <td>율령 정비 · 과거제 · 장안이 국제도시로</td></tr>
+      <tr><td class="hd">네 도구의 확산<br><span class="mn">한자 · 유교 · 불교 · 율령</span></td>
+        <td>주변 나라들도 <b>나라의 틀</b>을 갖출 필요가 있었습니다</td>
+        <td>동아시아가 하나의 문화권으로 묶임</td></tr>
+      <tr><td class="hd">각자의 변형<br><span class="mn">신라 · 발해 · 일본</span></td>
+        <td>각 나라의 사정과 전통이 달랐습니다</td>
+        <td>신라 골품제 유지 · 일본 가나 문자 · 발해의 독자 연호</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>카드 2장</h3>
+  <div class="cards two">
+    <div class="card"><span class="ct">제도</span><h4>과거제</h4>
+      <p>시험으로 관리를 뽑는 제도. 가문이 아니라 <b>공부한 실력</b>으로 관리가 될 길이 열렸습니다.
+      우리 역사에서는 <b>고려 광종</b>이 처음 실시합니다.</p></div>
+    <div class="card"><span class="ct">도시</span><h4>장안</h4>
+      <p>당의 수도이자 당시 세계 최대 도시 중 하나. 바둑판처럼 반듯하게 계획된 도시였고,
+      <b>신라의 서라벌과 일본의 헤이조쿄</b>가 이 도시를 본떠 지어졌습니다.</p></div>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w4m2"><span class="tt"><b>화요일</b> — 네 번째 칸을 세우고 표를 옮겨 적습니다. 카드 2장을 만듭니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="thu">
+  <div class="step-no"><span class="num">4</span><span class="lbl">지도</span><span class="day">THU · 지도로</span></div>
+  <h2>같은 문화를 나눠 쓴 이웃들</h2>
+
+  <div class="fig">
+    <p class="fig-t">도식 3 · 이번 주의 무대</p>
+    <svg viewBox="0 0 420 118" role="img" aria-label="이번 주 무대가 되는 지역"><rect x="10" y="12" width="130" height="46" rx="3" fill="#8A5A22" stroke="#8A5A22" stroke-width="1.2"/><text x="75" y="34" text-anchor="middle" font-family="IBM Plex Sans KR,sans-serif" font-size="13" font-weight="600" fill="#fff">동아시아</text><text x="75" y="49" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" fill="#EBD9BC">이번 주 무대</text><rect x="146" y="12" width="130" height="46" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="211" y="34" text-anchor="middle" font-family="IBM Plex Sans KR,sans-serif" font-size="13" font-weight="400" fill="#8A968F">인도</text><text x="211" y="49" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" fill="#B4BEB6">—</text><rect x="282" y="12" width="130" height="46" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="347" y="34" text-anchor="middle" font-family="IBM Plex Sans KR,sans-serif" font-size="13" font-weight="400" fill="#8A968F">서아시아</text><text x="347" y="49" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" fill="#B4BEB6">—</text><rect x="10" y="66" width="130" height="46" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="75" y="88" text-anchor="middle" font-family="IBM Plex Sans KR,sans-serif" font-size="13" font-weight="400" fill="#8A968F">유럽</text><text x="75" y="103" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" fill="#B4BEB6">—</text><rect x="146" y="66" width="130" height="46" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="211" y="88" text-anchor="middle" font-family="IBM Plex Sans KR,sans-serif" font-size="13" font-weight="400" fill="#8A968F">아프리카</text><text x="211" y="103" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" fill="#B4BEB6">—</text><rect x="282" y="66" width="130" height="46" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="347" y="88" text-anchor="middle" font-family="IBM Plex Sans KR,sans-serif" font-size="13" font-weight="400" fill="#8A968F">아메리카</text><text x="347" y="103" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" fill="#B4BEB6">—</text></svg>
+    <p class="fig-c">이번 주는 무대가 하나입니다. 대신 그 안에서 <b>중국 · 한국 · 일본 · 베트남</b>이 어떻게 이어졌는지를 봅니다.</p>
+  </div>
+
+  <div class="tw"><table>
+    <thead><tr><th>지도에서 찾을 것</th><th>내가 적어 보기</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">장안(오늘날 시안) — 중국의 어느 쪽</td><td class="fill">______</td></tr>
+      <tr><td class="hd">대운하가 이은 두 강 이름</td><td class="fill">______</td></tr>
+      <tr><td class="hd">발해가 있던 지역 — 오늘날 어디쯤</td><td class="fill">______</td></tr>
+      <tr><td class="hd">한자를 쓴 나라 네 곳을 지도에 표시</td><td class="fill">______</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>찾아보기 활동</h3>
+  <div class="cards two">
+    <div class="card"><span class="ct">활동 1</span><h4>장안과 서라벌 지도 겹쳐 보기</h4>
+      <p>‘장안성 배치도’와 ‘경주 왕경 배치’를 검색해 비교합니다.
+      <b>바둑판 모양</b>이 닮았다는 것이 눈에 보입니다. 도시 설계도 문화의 일부입니다.</p></div>
+    <div class="card"><span class="ct">활동 2</span><h4>가나가 한자에서 나온 흔적</h4>
+      <p>일본 히라가나 ‘あ’가 한자 ‘安’에서 왔다는 것을 검색해 봅니다.
+      한자를 <b>그대로 쓰지 않고 자기 소리에 맞게 바꾼</b> 예입니다.</p></div>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w4m3"><span class="tt"><b>목요일</b> — 표를 채우고 활동 하나를 해 봅니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="fri">
+  <div class="step-no"><span class="num">5</span><span class="lbl">보스전</span><span class="day">FRI · 설명</span></div>
+  <h2>문제 5개와 3분 설명</h2>
+
+  <div class="q"><span class="qn">Q1</span>
+    <p>동아시아 문화권이 함께 나눠 쓴 네 가지는 무엇인가요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>한자 · 유교 · 불교 · 율령</b>입니다. 각각 문자, 학문(질서), 종교, 법과 제도를 맡았습니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q2</span>
+    <p>주변 나라들이 이 넷을 받아들인 까닭은 무엇일까요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>나라의 틀을 갖추는 데 필요했기 때문입니다.</b>
+      기록할 문자, 관리를 기를 학문, 백성의 마음을 모을 종교, 나라를 굴릴 법이 모두 필요했습니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q3</span>
+    <p>당의 수도 장안이 특별했던 점은 무엇인가요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>여러 나라 사람과 여러 종교가 함께 있던 국제도시였다는 점</b>입니다.
+      비단길의 끝이자 동아시아 문화의 중심이었고, 신라와 일본이 도시 배치를 본떴습니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q4</span>
+    <p>“주변 나라들이 중국 문화를 그대로 베꼈다”는 말이 왜 틀린가요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>각 나라가 자기 사정에 맞게 바꿔 받아들였기 때문입니다.</b>
+      신라는 골품제를 그대로 두었고, 일본은 한자를 변형해 가나를 만들었습니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q5</span>
+    <p>과거제가 사회에 가져온 변화는 무엇일까요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>가문이 아니라 시험 실력으로 관리가 될 길이 열렸다는 것</b>입니다.
+      왕은 자기가 직접 인재를 고를 수 있게 되어 <b>왕권이 강해지는 효과</b>도 있었습니다.
+    </div></details>
+  </div>
+
+  <h3>아빠에게 3분 설명하기</h3>
+  <div class="script">
+    <div class="row"><span class="s">배운 것</span><span>동아시아 나라들이 한자·유교·불교·율령 네 개를 같이 썼는데, 베낀 게 아니라 나라 만들려면 필요해서였어.</span></div>
+    <div class="row"><span class="s">지도</span><span>당나라 장안이 비단길 끝이라 외국 사람이 엄청 많았대. 신라 서라벌도 그 도시 따라 만들었어.</span></div>
+    <div class="row"><span class="s">헷갈리는 것</span><span>받아들이면서 다 자기식으로 바꿨어. 일본은 한자로 가나를 만들었잖아.</span></div>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w4m4"><span class="tt"><b>금요일</b> — 문제 5개를 풀고 아빠에게 3분 설명합니다.</span></label></li>
+  </ul>
+
+  <p><span class="badge">획득 · 시대 띠 4칸</span></p>
+</section>
+
+<section class="sec" id="next">
+  <div class="step-no"><span class="num">6</span><span class="lbl">다음 주</span></div>
+  <h2>이슬람과 유럽</h2>
+  <p>같은 시기, 지중해 건너편에서는 <b>또 다른 두 종교 문화권</b>이 자라고 있었습니다.
+  다음 주의 질문은 <b>“이웃한 두 문화권은 왜 싸우고 또 무엇을 주고받았을까”</b>입니다.</p>
+  <div class="pager">
+    <a href="week03.html">← 3주차</a>
+    <a class="main" href="week05.html">5주차 →</a>
+  </div>
+</section>
+
+<footer>세계사 항해 12주 · WEEK 04 동아시아 문화권 · 하루 20분 × 4일</footer>
+</div>
+<script>
+  (function(){
+    var KEY="world_quest_progress";
+    function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){return{}}}
+    function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+    var boxes=[].slice.call(document.querySelectorAll(".todo input[type=checkbox]"));
+    var st=load();
+    boxes.forEach(function(b){
+      if(st[b.dataset.q])b.checked=true;
+      b.addEventListener("change",function(){
+        var s=load();
+        if(b.checked)s[b.dataset.q]=1;else delete s[b.dataset.q];
+        save(s);paint();
+      });
+    });
+    function paint(){
+      var el=document.getElementById("wdone");
+      if(el){var n=boxes.filter(function(b){return b.checked}).length;
+        el.textContent=n+" / "+boxes.length;}
+      var hub=document.querySelector("[data-hub]");
+      if(hub){
+        var s=load(),total=0;
+        for(var w=1;w<=12;w++){
+          var n2=0;
+          for(var m=1;m<=4;m++) if(s["w"+w+"m"+m]) n2++;
+          total+=n2;
+          var p=document.querySelector('.p[data-p="'+w+'"]');
+          if(p&&!p.dataset.soon){p.textContent=n2===4?"완료":n2+" / 4";
+            p.className="p"+(n2===4?" done":(n2>0?" ing":""));}
+        }
+        var d=document.getElementById("allDone"),bar=document.getElementById("allBar");
+        if(d)d.textContent=total+" / 12";
+        if(bar)bar.style.width=(total/12*100)+"%";
+      }
+    }
+    paint();
+    var links=[].slice.call(document.querySelectorAll("nav.jump a[href^='#']"));
+    if(links.length){
+      var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1))});
+      var onScroll=function(){
+        var y=window.scrollY+130,idx=0;
+        secs.forEach(function(s,i){if(s&&s.offsetTop<=y)idx=i;});
+        links.forEach(function(a,i){a.classList.toggle("now",i===idx);});
+      };
+      window.addEventListener("scroll",onScroll,{passive:true});onScroll();
+    }
+  })();
+</script>
+</body>
+</html>

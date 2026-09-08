@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#DCE2DB">
+<title>10주차 · 제1차 세계 대전</title>
+<meta name="description" content="전쟁이 세계 전체를 끌어들이자, 전쟁이 끝난 뒤 사회가 달라졌습니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#131C18; --ink2:#2C3A33; --muted:#5F6E66; --faint:#8A968F;
+    --mist:#DCE2DB; --surface:#F8FAF6; --surface2:#EFF3EC;
+    --line:#C3CCC1; --hair:#DDE4DB;
+    --kelp:#8A5A22; --kelp-wash:#F3E7D2; --kelp-line:#D6BE94;
+    --amber:#8F6209; --amber-wash:#F5EAD0; --amber-line:#DCC79B;
+    --berry:#8C2F3E; --berry-wash:#F3DFE2; --berry-line:#D9A8B0;
+    --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+    --mono:"IBM Plex Mono","SFMono-Regular",Consolas,"D2Coding",monospace;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{margin:0;background:var(--mist);color:var(--ink);font-family:var(--sans);
+    font-size:16px;line-height:1.75;letter-spacing:-0.01em;
+    padding:0 18px calc(70px + env(safe-area-inset-bottom));
+    word-break:keep-all;overflow-wrap:anywhere;}
+  .wrap{max-width:1040px;margin:0 auto;}
+
+  /* ===== 표지 ===== */
+  .cover{padding:44px 0 30px;border-bottom:2px solid var(--ink);}
+  .cover .kicker{font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:0.2em;text-transform:uppercase;color:var(--kelp);margin:0 0 16px;}
+  .cover h1{font-size:clamp(27px,6vw,44px);font-weight:700;line-height:1.24;
+    letter-spacing:-0.035em;margin:0 0 16px;max-width:21ch;}
+  .cover .lede{font-size:clamp(15.5px,2vw,18px);font-weight:300;color:var(--ink2);
+    max-width:62ch;margin:0 0 24px;line-height:1.72;}
+  .cover .lede b{font-weight:600;color:var(--ink);}
+  .metaline{display:flex;flex-wrap:wrap;gap:6px 22px;font-family:var(--mono);
+    font-size:11.5px;color:var(--muted);letter-spacing:0.03em;}
+  .metaline b{color:var(--ink);font-weight:500;}
+
+  .summary{background:var(--ink);border-radius:3px;padding:26px 22px 24px;margin:28px 0 0;}
+  .summary h2{color:#F6FAF5;font-size:18px;font-weight:600;margin:0 0 6px;letter-spacing:-0.02em;}
+  .summary .sd{color:#93A399;font-size:13.5px;font-weight:300;margin:0 0 22px;line-height:1.65;}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:18px;}
+  .kpi .kl{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:#7E8F84;display:block;margin-bottom:5px;}
+  .kpi .kv{font-size:clamp(21px,3.2vw,28px);font-weight:700;color:#E8C48A;
+    letter-spacing:-0.03em;display:block;line-height:1.1;}
+  .kpi .kn{font-size:12px;color:#B9C6BC;display:block;margin-top:6px;
+    font-weight:300;line-height:1.5;}
+
+  /* ===== 이동 바 ===== */
+  nav.jump{position:sticky;top:0;z-index:40;margin:0 -18px;padding:0 18px;
+    background:rgba(220,226,219,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);}
+  nav.jump .row{display:flex;gap:6px;overflow-x:auto;padding:9px 0;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  nav.jump .row::-webkit-scrollbar{display:none;}
+  nav.jump a{flex:0 0 auto;font-family:var(--mono);font-size:11.5px;letter-spacing:0.04em;
+    color:var(--muted);background:var(--surface);border:1px solid var(--line);
+    padding:6px 11px;border-radius:2px;text-decoration:none;}
+  nav.jump a.now{color:#fff;background:var(--kelp);border-color:var(--kelp);}
+
+  /* ===== 섹션 ===== */
+  .sec{padding:44px 0 12px;border-bottom:1px solid var(--line);scroll-margin-top:56px;}
+  .sec:last-of-type{border-bottom:0;}
+  .step-no{display:flex;align-items:center;gap:11px;margin-bottom:14px;}
+  .step-no .num{font-family:var(--mono);font-size:12px;font-weight:600;color:#fff;
+    background:var(--kelp);width:28px;height:28px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-no .lbl{font-family:var(--mono);font-size:11px;letter-spacing:0.13em;
+    text-transform:uppercase;color:var(--muted);}
+  .step-no .day{margin-left:auto;font-family:var(--mono);font-size:11px;
+    letter-spacing:0.1em;color:var(--kelp);background:var(--kelp-wash);
+    border:1px solid var(--kelp-line);padding:3px 9px;border-radius:2px;}
+  .sec h2{font-size:clamp(22px,3.4vw,29px);font-weight:600;letter-spacing:-0.03em;
+    line-height:1.34;margin:0 0 14px;max-width:30ch;}
+  .sec h3{font-size:17.5px;font-weight:600;letter-spacing:-0.02em;margin:30px 0 10px;}
+  .sec > p{max-width:70ch;color:var(--ink2);margin:0 0 16px;}
+  .sec strong,.sec b{font-weight:600;color:var(--ink);}
+  .sec code{font-family:var(--mono);font-size:0.86em;background:var(--surface2);
+    border:1px solid var(--hair);padding:1px 5px;border-radius:2px;}
+
+  .plain{background:var(--surface2);border-left:3px solid var(--kelp);
+    padding:14px 17px;margin:0 0 20px;border-radius:0 2px 2px 0;max-width:74ch;}
+  .plain p{margin:0;font-size:14.5px;color:var(--ink2);line-height:1.72;}
+  .plain p + p{margin-top:10px;}
+  .plain b{color:var(--kelp);font-weight:600;}
+
+  .fig{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:20px 16px 16px;margin:20px 0 12px;}
+  .fig-t{font-family:var(--mono);font-size:11px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--kelp);margin:0 0 16px;
+    padding-bottom:9px;border-bottom:1px solid var(--hair);}
+  .fig svg{display:block;width:100%;height:auto;}
+  .fig.wide{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .fig.wide svg{min-width:640px;}
+  .fig-c{font-size:13px;color:var(--muted);margin:14px 0 0;font-weight:300;
+    line-height:1.65;padding-top:12px;border-top:1px solid var(--hair);}
+  .fig-c b{color:var(--ink);font-weight:600;}
+
+  .sb{fill:#fff;stroke:#C3CCC1;stroke-width:1.5;}
+  .sb-k{fill:#F3E7D2;stroke:#8A5A22;stroke-width:2;}
+  .sb-b{fill:#F3DFE2;stroke:#D9A8B0;stroke-width:1.5;}
+  .sb-a{fill:#F5EAD0;stroke:#DCC79B;stroke-width:1.5;}
+  .sb-g{fill:#EFF3EC;stroke:#C3CCC1;stroke-width:1.5;}
+  .sb-d{fill:#fff;stroke:#8A5A22;stroke-width:1.6;stroke-dasharray:5 4;}
+  .st{font-family:var(--sans);font-size:13.5px;font-weight:600;fill:#131C18;
+    text-anchor:middle;letter-spacing:-0.3px;}
+  .st-s{font-family:var(--sans);font-size:11.5px;font-weight:400;fill:#5F6E66;text-anchor:middle;}
+  .st-k{fill:#8A5A22;} .st-b{fill:#8C2F3E;} .st-a{fill:#8F6209;}
+  .sm{font-family:var(--mono);font-size:12px;fill:#131C18;text-anchor:middle;font-weight:500;}
+  .sm-s{font-family:var(--mono);font-size:10.5px;fill:#5F6E66;text-anchor:middle;}
+  .st-m{font-family:var(--mono);font-size:11px;fill:#8A968F;text-anchor:middle;letter-spacing:0.5px;}
+  .sl{stroke:#8A968F;stroke-width:1.6;fill:none;}
+  .sl-k{stroke:#8A5A22;stroke-width:2;fill:none;}
+  .sl-a{stroke:#8F6209;stroke-width:1.8;fill:none;}
+  .sl-d{stroke:#8A968F;stroke-width:1.4;fill:none;stroke-dasharray:4 4;}
+  .sa{fill:#8A968F;} .sa-k{fill:#8A5A22;} .sa-a{fill:#8F6209;}
+  .dot-k{fill:#8A5A22;} .dot-a{fill:#C99A2E;} .dot-b{fill:#8C2F3E;}
+
+  /* ===== 표 ===== */
+  .tw{overflow-x:auto;margin:20px 0 8px;border:1px solid var(--line);
+    border-radius:3px;background:var(--surface);}
+  table{border-collapse:collapse;width:100%;font-size:13.8px;}
+  .tw.wide table{min-width:560px;}
+  thead th{background:var(--ink);color:#E8EFE7;text-align:left;font-family:var(--mono);
+    font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
+    padding:11px 13px;}
+  tbody td{padding:11px 13px;border-top:1px solid var(--hair);vertical-align:top;
+    color:var(--ink2);line-height:1.62;}
+  tbody tr:nth-child(even) td{background:var(--surface2);}
+  td.hd{font-weight:600;color:var(--ink);}
+  td.mn{font-family:var(--mono);font-size:12.5px;}
+  td.ok{color:var(--kelp);font-weight:600;}
+  td.no{color:var(--berry);font-weight:600;}
+  td.wa{color:var(--amber);font-weight:600;}
+  td.fill{font-family:var(--mono);color:var(--faint);}
+
+  .note{background:var(--amber-wash);border:1px solid var(--amber-line);
+    border-radius:3px;padding:17px 19px;margin:20px 0 8px;}
+  .note p{margin:0;font-size:14px;color:#5C440C;line-height:1.72;}
+  .note p + p{margin-top:9px;}
+  .note b{font-weight:600;}
+  .note .lb{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--amber);margin-bottom:6px;}
+  .alert{background:var(--berry-wash);border:1px solid var(--berry-line);
+    border-radius:3px;padding:17px 19px;margin:20px 0 8px;}
+  .alert p{margin:0;font-size:14px;color:#6B2430;line-height:1.72;}
+  .alert p + p{margin-top:9px;}
+  .alert b{font-weight:600;}
+  .alert .lb{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--berry);margin-bottom:6px;}
+
+  /* ===== 카드 묶음 ===== */
+  .cards{display:grid;gap:12px;margin:18px 0 8px;}
+  @media(min-width:680px){.cards.two{grid-template-columns:repeat(2,1fr);}}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:15px 17px;}
+  .card .ct{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;
+    color:var(--kelp);display:block;margin-bottom:7px;}
+  .card h4{margin:0 0 6px;font-size:15.5px;font-weight:600;letter-spacing:-0.02em;}
+  .card p{margin:0;font-size:14px;color:var(--ink2);line-height:1.68;}
+
+  /* ===== 요일 할 일 ===== */
+  .todo{list-style:none;margin:20px 0 8px;padding:0;background:var(--surface);
+    border:1px solid var(--line);border-radius:3px;overflow:hidden;}
+  .todo li + li{border-top:1px solid var(--hair);}
+  .todo label{display:grid;grid-template-columns:22px 1fr;gap:13px;align-items:start;
+    padding:15px 16px;cursor:pointer;font-size:14.5px;line-height:1.65;color:var(--ink2);min-height:54px;}
+  .todo input{appearance:none;-webkit-appearance:none;width:21px;height:21px;margin:1px 0 0;
+    border:1.5px solid var(--line);border-radius:2px;background:#fff;
+    display:grid;place-content:center;cursor:pointer;}
+  .todo input::after{content:"✓";font-size:13px;font-weight:700;color:#fff;transform:scale(0);}
+  .todo input:checked{background:var(--kelp);border-color:var(--kelp);}
+  .todo input:checked::after{transform:scale(1);}
+  .todo input:focus-visible{outline:2px solid var(--kelp);outline-offset:2px;}
+  .todo input:checked ~ .tt{color:var(--faint);text-decoration:line-through;}
+  .todo .tt b{color:var(--ink);font-weight:600;}
+
+  /* ===== 문제 ===== */
+  .q{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:15px 17px;margin:12px 0;}
+  .q .qn{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--kelp);
+    letter-spacing:0.12em;}
+  .q > p{margin:6px 0 0;font-size:15.5px;color:var(--ink);line-height:1.7;}
+  .q details{margin-top:12px;border-top:1px solid var(--hair);padding-top:10px;}
+  .q summary{cursor:pointer;list-style:none;font-family:var(--mono);font-size:12px;
+    font-weight:600;color:var(--kelp);letter-spacing:0.06em;padding:3px 0;}
+  .q summary::-webkit-details-marker{display:none;}
+  .q summary::before{content:"+ ";}
+  .q details[open] summary::before{content:"− ";}
+  .q .ans{margin-top:9px;background:var(--kelp-wash);border-radius:2px;padding:12px 14px;
+    font-size:14px;color:var(--ink2);line-height:1.7;}
+  .q .ans b{color:var(--kelp);font-weight:600;}
+
+  /* ===== 설명 대본 ===== */
+  .script{background:var(--surface);border:1px solid var(--kelp-line);border-radius:3px;
+    padding:16px 18px;margin:18px 0 8px;}
+  .script .row{display:grid;grid-template-columns:70px 1fr;gap:12px;font-size:14.5px;
+    color:var(--ink2);line-height:1.7;}
+  .script .row + .row{margin-top:11px;padding-top:11px;border-top:1px solid var(--hair);}
+  .script .s{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;color:var(--kelp);
+    font-weight:600;padding-top:4px;}
+
+  .badge{display:inline-block;font-family:var(--mono);font-size:12.5px;font-weight:600;
+    color:var(--amber);background:var(--amber-wash);border:1px solid var(--amber-line);
+    border-radius:2px;padding:7px 14px;margin-top:14px;letter-spacing:0.04em;}
+
+  /* ===== 주차 목록 (허브) ===== */
+  .wlist{display:flex;flex-direction:column;gap:10px;margin:18px 0 8px;}
+  a.wk{display:grid;grid-template-columns:1fr auto;grid-template-areas:"n p" "t p" "d d";
+    gap:2px 14px;background:var(--surface);border:1px solid var(--line);
+    border-left:3px solid var(--kelp);border-radius:3px;padding:15px 17px;
+    text-decoration:none;color:var(--ink);}
+  a.wk .n{grid-area:n;font-family:var(--mono);font-size:11px;font-weight:600;
+    letter-spacing:0.12em;color:var(--kelp);}
+  a.wk .t{grid-area:t;font-size:17px;font-weight:600;letter-spacing:-0.02em;}
+  a.wk .d{grid-area:d;font-size:13.5px;color:var(--muted);margin-top:5px;line-height:1.6;font-weight:300;}
+  a.wk .p{grid-area:p;align-self:center;font-family:var(--mono);font-size:11px;color:var(--muted);
+    background:var(--surface2);border:1px solid var(--hair);border-radius:2px;padding:4px 9px;white-space:nowrap;}
+  a.wk .p.done{color:#fff;background:var(--kelp);border-color:var(--kelp);}
+  a.wk .p.ing{color:var(--amber);background:var(--amber-wash);border-color:var(--amber-line);}
+  .wk.soon{border-left-color:var(--line);opacity:.62;pointer-events:none;}
+  .wk.soon .n,.wk.soon .t{color:var(--muted);}
+
+  /* ===== 진행 막대 ===== */
+  .bar{height:7px;background:var(--hair);border-radius:99px;overflow:hidden;margin-top:12px;
+    border:1px solid var(--line);}
+  .bar i{display:block;height:100%;background:var(--kelp);width:0;transition:width .3s;}
+
+  /* ===== 페이지 이동 ===== */
+  .pager{display:flex;gap:9px;margin:26px 0 0;}
+  .pager a{flex:1;text-align:center;font-size:13.5px;font-weight:600;text-decoration:none;
+    color:var(--ink2);background:var(--surface);border:1px solid var(--line);
+    border-radius:3px;padding:14px 8px;}
+  .pager a.main{background:var(--kelp);border-color:var(--kelp);color:#fff;}
+  footer{padding:26px 0 10px;font-family:var(--mono);font-size:11.5px;color:var(--faint);
+    letter-spacing:0.03em;line-height:1.8;}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="cover">
+  <p class="kicker">WEEK 10 · Ⅴ단원 세계 대전과 사회 변동 · 하루 20분 × 4일</p>
+  <h1>제1차 세계 대전</h1>
+  <p class="lede">
+    전쟁은 늘 있었습니다. 그런데 이 전쟁은 달랐습니다.
+    <b>온 나라의 사람과 공장과 돈이 통째로 동원</b>되었기 때문입니다. 그런 전쟁을 <b>총력전</b>이라고 합니다.
+    이번 주의 질문은 <b>“전쟁이 사회를 어떻게 바꿨을까”</b>입니다.
+  </p>
+  <div class="metaline">
+    <span>시대 띠 <b>10번째 칸</b></span>
+    <span>사건 <b>3개</b></span>
+    <span>무대 <b>유럽 · 서아시아 · 동아시아</b></span>
+    <span>진행 <b id="wdone">0 / 4</b></span>
+  </div>
+
+  <div class="summary">
+    <h2>이번 주에 남길 것</h2>
+    <p class="sd">전투가 아니라 <b>전쟁이 남긴 변화</b>를 적습니다.</p>
+    <div class="kpis">
+      <div class="kpi"><span class="kl">사건 1</span><span class="kv">총력전</span>
+        <span class="kn">국민 전체가 전쟁에 동원되었다</span></div>
+      <div class="kpi"><span class="kl">사건 2</span><span class="kv">러시아 혁명</span>
+        <span class="kn">전쟁 중에 세계 최초의 사회주의 정권이 섰다</span></div>
+      <div class="kpi"><span class="kl">사건 3</span><span class="kv">민족 자결</span>
+        <span class="kn">그 말이 식민지에 희망과 실망을 함께 주었다</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="jump"><div class="row">
+  <a href="#map">이번 주 칸</a>
+  <a href="#mon">월 · 열기</a>
+  <a href="#tue">화 · 채우기</a>
+  <a href="#thu">목 · 지도로</a>
+  <a href="#fri">금 · 보스전</a>
+  <a href="#next">다음 주</a>
+</div></nav>
+
+<section class="sec" id="map">
+  <div class="step-no"><span class="num">1</span><span class="lbl">이번 주 칸</span></div>
+  <h2>열 번째 칸 — 세계가 처음 함께 싸운 전쟁</h2>
+
+  <div class="fig">
+    <p class="fig-t">도식 1 · 12주 시대 띠에서 이번 주의 자리</p>
+    <svg viewBox="0 0 420 156" role="img" aria-label="12주 연표에서 이번 주의 위치"><rect x="10" y="60" width="65" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="42" y="54" style="font-size:9.5px">Ⅰ 고대</text><rect x="78" y="60" width="99" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="128" y="54" style="font-size:9.5px">Ⅱ 종교</text><rect x="180" y="60" width="65" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="212" y="54" style="font-size:9.5px">Ⅲ 교류</text><rect x="248" y="60" width="65" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="280" y="54" style="font-size:9.5px">Ⅳ 혁명</text><rect x="316" y="60" width="65" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="348" y="54" style="font-size:9.5px">Ⅴ 대전</text><rect x="384" y="60" width="31" height="46" rx="3" fill="#EFF3EC" stroke="none"/><text class="st-m" x="400" y="54" style="font-size:9.5px">Ⅵ 현대</text><rect x="10" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="26" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">01</text><rect x="44" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="60" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">02</text><rect x="78" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="94" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">03</text><rect x="112" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="128" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">04</text><rect x="146" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="162" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">05</text><rect x="180" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="196" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">06</text><rect x="214" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="230" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">07</text><rect x="248" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="264" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">08</text><rect x="282" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="298" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">09</text><rect x="316" y="70" width="31" height="26" rx="3" fill="#8A5A22" stroke="#8A5A22" stroke-width="1.2"/><text x="332" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="700" fill="#fff">10</text><text x="410" y="36" text-anchor="end" font-family="IBM Plex Sans KR,sans-serif" font-size="13" font-weight="700" fill="#8A5A22">제1차 세계 대전</text><text x="410" y="120" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="10.5" fill="#8A5A22">1914 ~ 1920년대</text><path d="M332 40 L332 66" stroke="#8A5A22" stroke-width="1.4"/><rect x="350" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="366" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">11</text><rect x="384" y="70" width="31" height="26" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="400" y="87" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="500" fill="#5F6E66">12</text><text class="st-m" x="10" y="146" style="font-size:9.5px;text-anchor:start">선사</text><text class="st-m" x="410" y="146" style="font-size:9.5px;text-anchor:end">오늘</text><line x1="34" y1="142" x2="386" y2="142" stroke="#C3CCC1" stroke-width="1"/><polygon points="386,138 396,142 386,146" fill="#8A968F"/></svg>
+    <p class="fig-c"><b>1914년부터 1920년대</b>. 우리 역사의 <b>3·1 운동(1919)</b>이 바로 이 칸 안에 들어갑니다.</p>
+  </div>
+
+  <div class="fig">
+    <p class="fig-t">도식 2 · 전쟁이 남긴 네 가지 변화</p>
+    <svg viewBox="0 0 420 208" role="img" aria-label="총력전이 남긴 사회 변화 네 가지">
+      <rect class="sb-k" x="8" y="14" width="196" height="76" rx="3"/>
+      <text class="st st-k" x="106" y="40">여성의 사회 진출</text>
+      <text class="st-s" x="106" y="60">남자들이 전선에 가자</text>
+      <text class="st-s" x="106" y="78">공장·병원을 여성이 맡음 → 참정권</text>
+      <rect class="sb-k" x="216" y="14" width="196" height="76" rx="3"/>
+      <text class="st st-k" x="314" y="40">제국의 해체</text>
+      <text class="st-s" x="314" y="60">독일·오스트리아·오스만</text>
+      <text class="st-s" x="314" y="78">제국이 무너지고 새 나라들이 생김</text>
+      <rect class="sb-k" x="8" y="100" width="196" height="76" rx="3"/>
+      <text class="st st-k" x="106" y="126">러시아 혁명</text>
+      <text class="st-s" x="106" y="146">전쟁의 고통 속에서</text>
+      <text class="st-s" x="106" y="164">최초의 사회주의 정권 등장</text>
+      <rect class="sb-k" x="216" y="100" width="196" height="76" rx="3"/>
+      <text class="st st-k" x="314" y="126">국제기구</text>
+      <text class="st-s" x="314" y="146">다시는 이런 전쟁 없도록</text>
+      <text class="st-s" x="314" y="164">국제 연맹 창설 (그러나 한계)</text>
+      <text class="st-m" x="210" y="200">전쟁은 이겼는지가 아니라 <tspan font-weight="600">무엇을 바꿨는지</tspan>로 기억합니다</text>
+    </svg>
+    <p class="fig-c">이 네 가지가 <b>11주차의 배경</b>이 됩니다. 특히 <b>제국의 해체</b>와 <b>불만스러운 강화 조약</b>이 다음 전쟁의 씨앗이 됩니다.</p>
+  </div>
+</section>
+
+<section class="sec" id="mon">
+  <div class="step-no"><span class="num">2</span><span class="lbl">흐름 읽기</span><span class="day">MON · 열기</span></div>
+  <h2>왜 이렇게 커졌을까</h2>
+
+  <div class="plain">
+    <p><b>오늘은 읽고 질문 3개만 적습니다.</b> 전투 이름은 하나도 외우지 않습니다.</p>
+  </div>
+
+  <p>사건의 방아쇠는 <b>사라예보에서 오스트리아 황태자가 암살된 일</b>이었습니다.
+  그러나 총알 한 발이 세계 대전을 만든 것은 아닙니다.
+  이미 유럽은 <b>삼국 동맹과 삼국 협상</b>으로 두 편이 나뉘어 있었고,
+  9주차에서 본 <b>식민지 경쟁</b>으로 서로 감정이 쌓여 있었습니다.
+  <b>편이 갈린 상태에서는 작은 불씨가 전체를 태웁니다.</b></p>
+
+  <div class="tw wide"><table>
+    <thead><tr><th>이 전쟁의 특징</th><th>내용</th><th>결과</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">총력전</td><td>군인만이 아니라 <b>공장·자원·국민 전체</b>가 동원됨</td>
+        <td>여성이 일터로 나오고, 국가의 힘이 커짐</td></tr>
+      <tr><td class="hd">참호전</td><td>땅을 파고 마주 본 채 <b>몇 년을 버팀</b></td>
+        <td>엄청난 인명 피해에 비해 전선은 거의 움직이지 않음</td></tr>
+      <tr><td class="hd">신무기</td><td>기관총 · 독가스 · 탱크 · 비행기</td>
+        <td>전쟁의 잔혹함이 이전과 비교할 수 없이 커짐</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="alert"><span class="lb">가장 많이 하는 착각</span>
+    <p><b>“암살 사건 때문에 전쟁이 났다”는 설명은 절반만 맞습니다.</b>
+    암살은 <b>계기</b>일 뿐이고, 진짜 원인은 <b>제국주의 경쟁과 동맹 체제</b>였습니다.
+    역사에서는 <b>계기(방아쇠)와 원인(쌓인 것)</b>을 구분해야 합니다.</p>
+  </div>
+
+  <h3>3·1 운동과 이어지는 자리</h3>
+  <p>전쟁이 끝날 무렵 미국 대통령 윌슨이 <b>민족 자결주의</b>를 내놓았습니다.
+  “각 민족은 스스로 운명을 정한다”는 이 말은 식민지 사람들에게 큰 희망을 주었고,
+  우리나라의 <b>3·1 운동(1919)</b>도 이 흐름 속에서 일어났습니다.
+  그러나 이 원칙은 사실상 <b>패전국의 식민지에만</b> 적용되었고,
+  승전국인 일본의 식민지였던 조선에는 적용되지 않았습니다.</p>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w10m1"><span class="tt"><b>월요일</b> — 표를 읽고 <b>궁금한 질문 3개</b>를 적습니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="tue">
+  <div class="step-no"><span class="num">3</span><span class="lbl">시대 띠 세우기</span><span class="day">TUE · 채우기</span></div>
+  <h2>열 번째 칸에 이렇게 적습니다</h2>
+
+  <div class="tw wide"><table>
+    <thead><tr><th>사건</th><th>원인 (왜)</th><th>결과 (그래서)</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">제1차 세계 대전<br><span class="mn">1914 ~ 1918</span></td>
+        <td>제국주의 경쟁과 동맹 체제 · 계기는 사라예보 사건</td>
+        <td>총력전과 참호전 · 막대한 인명 피해 · 제국들의 해체</td></tr>
+      <tr><td class="hd">러시아 혁명<br><span class="mn">1917</span></td>
+        <td>전쟁의 고통과 굶주림, 차르 체제에 대한 분노</td>
+        <td>세계 최초의 사회주의 정권 · 뒤에 소련 성립</td></tr>
+      <tr><td class="hd">전후 처리<br><span class="mn">1919 ~</span></td>
+        <td>다시는 이런 전쟁이 없게 하자는 요구가 컸습니다</td>
+        <td>베르사유 조약 · 국제 연맹 · <b>독일에 가혹한 배상</b>이 불씨로 남음</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>카드 2장</h3>
+  <div class="cards two">
+    <div class="card"><span class="ct">개념</span><h4>총력전</h4>
+      <p>국민과 산업 전체를 전쟁에 쏟아붓는 방식.
+      <b>전선과 후방의 구분이 사라졌고</b>, 그래서 전쟁이 끝난 뒤 사회 자체가 달라졌습니다.</p></div>
+    <div class="card"><span class="ct">기구</span><h4>국제 연맹</h4>
+      <p>전쟁을 막기 위해 만든 최초의 국제기구.
+      그러나 <b>미국이 참여하지 않았고 군사력이 없어</b> 힘을 쓰지 못했습니다.
+      이 실패의 교훈으로 뒤에 <b>국제 연합(UN)</b>이 만들어집니다.</p></div>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w10m2"><span class="tt"><b>화요일</b> — 열 번째 칸을 세우고 표를 옮겨 적습니다. 카드 2장을 만듭니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="thu">
+  <div class="step-no"><span class="num">4</span><span class="lbl">지도</span><span class="day">THU · 지도로</span></div>
+  <h2>전쟁 전과 후, 지도가 달라집니다</h2>
+
+  <div class="fig">
+    <p class="fig-t">도식 3 · 이번 주의 무대</p>
+    <svg viewBox="0 0 420 118" role="img" aria-label="이번 주 무대가 되는 지역"><rect x="10" y="12" width="130" height="46" rx="3" fill="#8A5A22" stroke="#8A5A22" stroke-width="1.2"/><text x="75" y="34" text-anchor="middle" font-family="IBM Plex Sans KR,sans-serif" font-size="13" font-weight="600" fill="#fff">동아시아</text><text x="75" y="49" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" fill="#EBD9BC">이번 주 무대</text><rect x="146" y="12" width="130" height="46" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="211" y="34" text-anchor="middle" font-family="IBM Plex Sans KR,sans-serif" font-size="13" font-weight="400" fill="#8A968F">인도</text><text x="211" y="49" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" fill="#B4BEB6">—</text><rect x="282" y="12" width="130" height="46" rx="3" fill="#8A5A22" stroke="#8A5A22" stroke-width="1.2"/><text x="347" y="34" text-anchor="middle" font-family="IBM Plex Sans KR,sans-serif" font-size="13" font-weight="600" fill="#fff">서아시아</text><text x="347" y="49" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" fill="#EBD9BC">이번 주 무대</text><rect x="10" y="66" width="130" height="46" rx="3" fill="#8A5A22" stroke="#8A5A22" stroke-width="1.2"/><text x="75" y="88" text-anchor="middle" font-family="IBM Plex Sans KR,sans-serif" font-size="13" font-weight="600" fill="#fff">유럽</text><text x="75" y="103" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" fill="#EBD9BC">이번 주 무대</text><rect x="146" y="66" width="130" height="46" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="211" y="88" text-anchor="middle" font-family="IBM Plex Sans KR,sans-serif" font-size="13" font-weight="400" fill="#8A968F">아프리카</text><text x="211" y="103" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" fill="#B4BEB6">—</text><rect x="282" y="66" width="130" height="46" rx="3" fill="#fff" stroke="#C3CCC1" stroke-width="1.2"/><text x="347" y="88" text-anchor="middle" font-family="IBM Plex Sans KR,sans-serif" font-size="13" font-weight="400" fill="#8A968F">아메리카</text><text x="347" y="103" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" fill="#B4BEB6">—</text></svg>
+    <p class="fig-c">유럽에서 시작했지만 <b>식민지와 동맹을 타고</b> 세계로 번졌습니다. 그래서 “세계” 대전입니다.</p>
+  </div>
+
+  <div class="tw"><table>
+    <thead><tr><th>지도에서 찾을 것</th><th>내가 적어 보기</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">사라예보 — 오늘날 어느 나라</td><td class="fill">______</td></tr>
+      <tr><td class="hd">전쟁 뒤 새로 생긴 나라 두 곳</td><td class="fill">______</td></tr>
+      <tr><td class="hd">오스만 제국이 있던 자리 — 지금은 어떤 나라들</td><td class="fill">______</td></tr>
+      <tr><td class="hd">1919년 우리나라에서 일어난 일</td><td class="fill">______</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>찾아보기 활동</h3>
+  <div class="cards two">
+    <div class="card"><span class="ct">활동 1</span><h4>1914년 지도와 1920년 지도 비교</h4>
+      <p>‘1914년 유럽 지도’와 ‘1920년 유럽 지도’를 나란히 놓고 봅니다.
+      <b>제국 셋이 사라지고 나라 여럿이 새로 생긴 것</b>이 한눈에 보입니다.</p></div>
+    <div class="card"><span class="ct">활동 2</span><h4>참호 사진 보기</h4>
+      <p>‘제1차 세계 대전 참호’를 검색해 봅니다.
+      몇 년 동안 그 안에서 버텼다는 사실을 알면, <b>“전선이 거의 안 움직였다”</b>는 말의 무게가 달라집니다.</p></div>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w10m3"><span class="tt"><b>목요일</b> — 표를 채우고 전쟁 전후 지도를 비교해 봅니다.</span></label></li>
+  </ul>
+</section>
+
+<section class="sec" id="fri">
+  <div class="step-no"><span class="num">5</span><span class="lbl">보스전</span><span class="day">FRI · 설명</span></div>
+  <h2>문제 5개와 3분 설명</h2>
+
+  <div class="q"><span class="qn">Q1</span>
+    <p>제1차 세계 대전의 계기와 원인을 구분해서 말해 봅시다.</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>계기는 사라예보 암살 사건, 원인은 제국주의 경쟁과 동맹 체제</b>입니다.
+      편이 이미 갈려 있었기 때문에 작은 사건이 전체 전쟁으로 번졌습니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q2</span>
+    <p>‘총력전’이란 무엇이며, 그것이 사회를 어떻게 바꿨나요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>군인만이 아니라 공장·자원·국민 전체가 전쟁에 동원되는 방식</b>입니다.
+      남자들이 전선에 가면서 여성이 공장과 병원에서 일하게 되었고, 이는 전쟁 후
+      <b>여성 참정권 확대</b>로 이어졌습니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q3</span>
+    <p>러시아 혁명이 전쟁 중에 일어난 까닭은 무엇일까요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>전쟁으로 인한 굶주림과 희생이 극심했기 때문입니다.</b>
+      “빵과 평화”를 요구하는 목소리가 차르 체제를 무너뜨렸고, 세계 최초의 사회주의 정권이 들어섰습니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q4</span>
+    <p>민족 자결주의가 식민지 사람들에게 희망과 실망을 함께 준 까닭은 무엇인가요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>사실상 패전국의 식민지에만 적용되었기 때문입니다.</b>
+      승전국인 일본의 식민지였던 조선에는 적용되지 않았습니다.
+      그럼에도 이 흐름은 <b>3·1 운동</b>을 비롯한 민족 운동에 큰 자극이 되었습니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q5</span>
+    <p>국제 연맹이 전쟁을 막지 못한 까닭 두 가지는 무엇인가요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>미국이 참여하지 않았고, 결정을 강제할 군사력이 없었기 때문입니다.</b>
+      이 실패를 교훈 삼아 제2차 세계 대전 뒤 <b>국제 연합(UN)</b>이 만들어집니다.
+    </div></details>
+  </div>
+
+  <h3>아빠에게 3분 설명하기</h3>
+  <div class="script">
+    <div class="row"><span class="s">배운 것</span><span>암살은 계기고, 진짜 원인은 제국주의 경쟁이랑 동맹이 갈려 있었던 거야.</span></div>
+    <div class="row"><span class="s">사회</span><span>총력전이라 여자들이 공장에서 일하게 됐고, 그게 나중에 참정권으로 이어졌대.</span></div>
+    <div class="row"><span class="s">우리 역사</span><span>민족 자결주의 때문에 3·1 운동이 일어났는데, 그 원칙이 우리한테는 적용 안 됐어.</span></div>
+  </div>
+
+  <ul class="todo">
+    <li><label><input type="checkbox" data-q="w10m4"><span class="tt"><b>금요일</b> — 문제 5개를 풀고 아빠에게 3분 설명합니다.</span></label></li>
+  </ul>
+
+  <p><span class="badge">획득 · 시대 띠 10칸</span></p>
+</section>
+
+<section class="sec" id="next">
+  <div class="step-no"><span class="num">6</span><span class="lbl">다음 주</span></div>
+  <h2>대공황과 제2차 세계 대전</h2>
+  <p>전쟁이 끝난 지 20년 만에 더 큰 전쟁이 옵니다.
+  다음 주의 질문은 <b>“경제 위기가 어떻게 전쟁이 되었을까”</b>입니다.</p>
+  <div class="pager">
+    <a href="week09.html">← 9주차</a>
+    <a class="main" href="week11.html">11주차 →</a>
+  </div>
+</section>
+
+<footer>세계사 항해 12주 · WEEK 10 제1차 세계 대전 · 하루 20분 × 4일</footer>
+</div>
+<script>
+  (function(){
+    var KEY="world_quest_progress";
+    function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){return{}}}
+    function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+    var boxes=[].slice.call(document.querySelectorAll(".todo input[type=checkbox]"));
+    var st=load();
+    boxes.forEach(function(b){
+      if(st[b.dataset.q])b.checked=true;
+      b.addEventListener("change",function(){
+        var s=load();
+        if(b.checked)s[b.dataset.q]=1;else delete s[b.dataset.q];
+        save(s);paint();
+      });
+    });
+    function paint(){
+      var el=document.getElementById("wdone");
+      if(el){var n=boxes.filter(function(b){return b.checked}).length;
+        el.textContent=n+" / "+boxes.length;}
+      var hub=document.querySelector("[data-hub]");
+      if(hub){
+        var s=load(),total=0;
+        for(var w=1;w<=12;w++){
+          var n2=0;
+          for(var m=1;m<=4;m++) if(s["w"+w+"m"+m]) n2++;
+          total+=n2;
+          var p=document.querySelector('.p[data-p="'+w+'"]');
+          if(p&&!p.dataset.soon){p.textContent=n2===4?"완료":n2+" / 4";
+            p.className="p"+(n2===4?" done":(n2>0?" ing":""));}
+        }
+        var d=document.getElementById("allDone"),bar=document.getElementById("allBar");
+        if(d)d.textContent=total+" / 12";
+        if(bar)bar.style.width=(total/12*100)+"%";
+      }
+    }
+    paint();
+    var links=[].slice.call(document.querySelectorAll("nav.jump a[href^='#']"));
+    if(links.length){
+      var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1))});
+      var onScroll=function(){
+        var y=window.scrollY+130,idx=0;
+        secs.forEach(function(s,i){if(s&&s.offsetTop<=y)idx=i;});
+        links.forEach(function(a,i){a.classList.toggle("now",i===idx);});
+      };
+      window.addEventListener("scroll",onScroll,{passive:true});onScroll();
+    }
+  })();
+</script>
+</body>
+</html>
