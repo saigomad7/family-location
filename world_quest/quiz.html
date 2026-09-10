@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#DCE2DB">
+<title>세계사 문제집 120제</title>
+<meta name="description" content="세계사 항해 12주 과정에 맞춘 120문제. 주차별 10문제씩 풀고 바로 채점합니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#131C18; --ink2:#2C3A33; --muted:#5F6E66; --faint:#8A968F;
+    --mist:#DCE2DB; --surface:#F8FAF6; --surface2:#EFF3EC;
+    --line:#C3CCC1; --hair:#DDE4DB;
+    --key:#8A5A22; --wash:#F3E7D2; --kline:#D6BE94;
+    --good:#1F6249; --bad:#8C2F3E; --good-bg:#DEEDE4; --bad-bg:#F6E4E7;
+    --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+    --mono:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--mist);color:var(--ink);font-family:var(--sans);
+    font-size:16px;line-height:1.72;letter-spacing:-0.01em;
+    padding:0 18px calc(80px + env(safe-area-inset-bottom));
+    word-break:keep-all;overflow-wrap:anywhere;}
+  .wrap{max-width:760px;margin:0 auto}
+  p{margin:0 0 12px}
+  b,strong{font-weight:600;color:var(--ink)}
+
+  .cover{padding:40px 0 26px;border-bottom:2px solid var(--ink)}
+  .kicker{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--key);margin:0 0 14px}
+  h1{font-size:clamp(26px,6vw,40px);font-weight:700;line-height:1.26;letter-spacing:-.035em;margin:0 0 14px}
+  .lede{font-size:15.5px;font-weight:300;color:var(--ink2);margin:0 0 20px;max-width:62ch}
+  .lede b{font-weight:600;color:var(--ink)}
+  .metaline{display:flex;flex-wrap:wrap;gap:6px 20px;font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+  .metaline b{color:var(--ink);font-weight:500}
+
+  .summary{background:var(--ink);border-radius:3px;padding:22px 20px;margin:24px 0 0}
+  .summary h2{color:#F6FAF5;font-size:17px;font-weight:600;margin:0 0 5px}
+  .summary .sd{color:#93A399;font-size:13px;font-weight:300;margin:0 0 18px;line-height:1.6}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:16px}
+  .kpi .kl{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+    color:#7E8F84;display:block;margin-bottom:4px}
+  .kpi .kv{font-size:clamp(20px,3vw,26px);font-weight:700;color:#E8C48A;letter-spacing:-.03em;display:block;line-height:1.1}
+  .kpi .kn{font-size:11.5px;color:#B9C6BC;display:block;margin-top:5px;font-weight:300;line-height:1.5}
+  .bar{height:7px;background:#26332C;border-radius:99px;overflow:hidden;margin-top:16px}
+  .bar i{display:block;height:100%;width:0;background:#E8C48A;transition:width .3s}
+
+  nav.jump{position:sticky;top:0;z-index:40;margin:0 -18px;padding:0 18px;
+    background:rgba(220,226,219,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+  nav.jump .row{display:flex;gap:5px;overflow-x:auto;padding:9px 0;scrollbar-width:none}
+  nav.jump .row::-webkit-scrollbar{display:none}
+  nav.jump a{flex:0 0 auto;font-family:var(--mono);font-size:11.5px;color:var(--muted);
+    background:var(--surface);border:1px solid var(--line);padding:6px 10px;border-radius:2px;text-decoration:none}
+  nav.jump a.now{color:#fff;background:var(--key);border-color:var(--key)}
+
+  section.wk{padding:38px 0 10px;border-bottom:1px solid var(--line);scroll-margin-top:56px}
+  .wkhead{display:flex;align-items:center;gap:11px;margin-bottom:12px}
+  .wkhead .num{font-family:var(--mono);font-size:12px;font-weight:600;color:#fff;background:var(--key);
+    width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .wkhead .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+  .wkhead .sc{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--key);
+    background:var(--wash);border:1px solid var(--kline);padding:3px 9px;border-radius:2px}
+  section.wk h2{font-size:clamp(21px,3.2vw,26px);font-weight:600;letter-spacing:-.03em;margin:0 0 6px;line-height:1.35}
+  section.wk .sub{font-size:13.5px;color:var(--muted);margin:0 0 18px}
+
+  .qbox{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:16px 17px;margin:12px 0}
+  .qbox .qn{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--key);letter-spacing:.1em}
+  .qbox .qt{margin:7px 0 0;font-size:16px;line-height:1.68}
+  .qbox code{font-family:var(--mono);font-size:.9em;background:var(--surface2);border:1px solid var(--hair);
+    padding:1px 5px;border-radius:2px}
+  .opts{display:flex;flex-direction:column;gap:7px;margin-top:13px}
+  .opt{display:grid;grid-template-columns:24px 1fr;gap:10px;align-items:start;width:100%;text-align:left;
+    background:#fff;border:1px solid var(--line);border-radius:3px;padding:11px 13px;font:inherit;
+    font-size:15px;color:var(--ink2);cursor:pointer;min-height:46px}
+  .opt .n{font-family:var(--mono);font-size:12.5px;color:var(--muted);padding-top:2px}
+  .opt:active{background:var(--surface2)}
+  .opt.ok{background:var(--good-bg);border-color:var(--good);color:var(--good);font-weight:600}
+  .opt.ok .n{color:var(--good)}
+  .opt.no{background:var(--bad-bg);border-color:var(--bad);color:var(--bad)}
+  .opt.no .n{color:var(--bad)}
+  .opt[disabled]{cursor:default}
+  .sa{display:flex;gap:8px;margin-top:13px;flex-wrap:wrap}
+  .sa input{flex:1 1 180px;min-width:0;padding:11px 13px;border:1px solid var(--line);border-radius:3px;
+    background:#fff;font:inherit;font-size:15px;color:var(--ink)}
+  .sa input:focus{outline:2px solid var(--kline);outline-offset:-1px}
+  .sa button{flex:0 0 auto;padding:11px 18px;border:0;border-radius:3px;background:var(--key);color:#fff;
+    font:inherit;font-size:14.5px;font-weight:600;cursor:pointer}
+  .sa input.ok{border-color:var(--good);background:var(--good-bg);color:var(--good);font-weight:600}
+  .sa input.no{border-color:var(--bad);background:var(--bad-bg);color:var(--bad)}
+  .exp{margin-top:12px;padding-top:11px;border-top:1px solid var(--hair);font-size:14.5px;color:var(--ink2);
+    line-height:1.7;display:none}
+  .exp.show{display:block}
+  .exp b{color:var(--key)}
+  .exp .ans{font-family:var(--mono);font-size:13px;color:var(--key);display:block;margin-bottom:5px}
+
+  .wkfoot{display:flex;align-items:center;gap:10px;margin:16px 0 0;padding:12px 14px;
+    background:var(--surface2);border-radius:3px;font-size:14px;color:var(--muted)}
+  .wkfoot b{font-family:var(--mono);color:var(--key)}
+  .reset{margin-left:auto;background:none;border:0;color:var(--faint);font:inherit;font-size:12.5px;
+    text-decoration:underline;cursor:pointer;padding:0}
+  footer{padding:26px 0 10px;font-family:var(--mono);font-size:11.5px;color:var(--faint);line-height:1.8}
+  footer a{color:var(--key)}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="cover">
+  <p class="kicker">중2 역사① 세계사 · 12주 × 10문제 · 객관식 7 · 단답형 3</p>
+  <h1>세계사 문제집 120제</h1>
+  <p class="lede"><b>세계사 항해 12주</b>에서 배운 내용을 주차마다 10문제로 확인합니다. 객관식 7문제, 단답형 3문제. 그 주 공부를 끝낸 금요일에 풀면 딱 좋습니다.</p>
+  <div class="metaline">
+    <span>주차 <b>12주</b></span><span>문항 <b>120문제</b></span>
+    <span>구성 <b>객관식 7 · 단답형 3</b></span><span>학습 문서 <b><a href="index.html" style="color:inherit">세계사 항해 12주</a></b></span>
+  </div>
+  <div class="summary">
+    <h2>푸는 법</h2>
+    <p class="sd">선택지를 누르면 바로 채점되고 해설이 열립니다. 단답형은 답을 쓰고 확인을 누릅니다. 기록은 이 기기에 저장됩니다.</p>
+    <div class="kpis">
+      <div class="kpi"><span class="kl">한 주</span><span class="kv">10문제</span><span class="kn">객관식 7 · 단답형 3</span></div>
+      <div class="kpi"><span class="kl">권장</span><span class="kv">금요일</span><span class="kn">그 주 공부를 마친 뒤 풀기</span></div>
+      <div class="kpi"><span class="kl">채점</span><span class="kv">즉시</span><span class="kn">누르면 정답과 해설이 나옵니다</span></div>
+      <div class="kpi"><span class="kl">내 점수</span><span class="kv" id="total">0 / 120</span><span class="kn">이 기기에만 저장됩니다</span></div>
+    </div>
+    <div class="bar"><i id="bar"></i></div>
+  </div>
+</header>
+
+<nav class="jump"><div class="row">
+<a href="#w1">1주</a>
+<a href="#w2">2주</a>
+<a href="#w3">3주</a>
+<a href="#w4">4주</a>
+<a href="#w5">5주</a>
+<a href="#w6">6주</a>
+<a href="#w7">7주</a>
+<a href="#w8">8주</a>
+<a href="#w9">9주</a>
+<a href="#w10">10주</a>
+<a href="#w11">11주</a>
+<a href="#w12">12주</a>
+</div></nav>
+
+<section class="wk" id="w1">
+  <div class="wkhead"><span class="num">01</span><span class="lbl">WEEK 01</span>
+    <span class="sc" data-w="1">0 / 10</span></div>
+  <h2>문명이 시작된 자리</h2>
+  <p class="sub">4대 문명 · 문자 · 계급</p>
+  <div class="qbox" id="w1q1" data-w="1" data-type="mc" data-a="1">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">문명이 큰 강 옆에서 처음 시작된 까닭으로 알맞은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>강이 적을 막아 주었기 때문</span></button><button class="opt" type="button"><span class="n">②</span><span>물이 있고 땅이 기름져 농사가 잘되었기 때문</span></button><button class="opt" type="button"><span class="n">③</span><span>강에서 금이 많이 났기 때문</span></button><button class="opt" type="button"><span class="n">④</span><span>강가에만 사람이 살 수 있었기 때문</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>농사가 잘되어 먹고 남는 곡식이 생겼고, 그 덕분에 농사를 짓지 않는 사람(왕·신관·장인)이 생겨 문명이 만들어졌습니다.</div>
+  </div>
+  <div class="qbox" id="w1q2" data-w="1" data-type="mc" data-a="0">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">메소포타미아 문명이 발달한 두 강은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>티그리스강과 유프라테스강</span></button><button class="opt" type="button"><span class="n">②</span><span>나일강과 인더스강</span></button><button class="opt" type="button"><span class="n">③</span><span>황허와 창장</span></button><button class="opt" type="button"><span class="n">④</span><span>갠지스강과 인더스강</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>오늘날 이라크 부근을 흐르는 티그리스·유프라테스강 유역입니다.</div>
+  </div>
+  <div class="qbox" id="w1q3" data-w="1" data-type="mc" data-a="3">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">나일강 유역에서 발달한 이집트 문명이 남긴 것으로 알맞은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>갑골문과 청동기</span></button><button class="opt" type="button"><span class="n">②</span><span>모헨조다로의 하수도</span></button><button class="opt" type="button"><span class="n">③</span><span>쐐기 문자와 지구라트</span></button><button class="opt" type="button"><span class="n">④</span><span>상형 문자와 피라미드</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>이집트는 상형 문자, 피라미드, 미라, 태양력을 남겼습니다. 쐐기 문자와 지구라트는 메소포타미아입니다.</div>
+  </div>
+  <div class="qbox" id="w1q4" data-w="1" data-type="mc" data-a="1">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">선사 시대와 역사 시대를 나누는 기준은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>금속을 썼는가</span></button><button class="opt" type="button"><span class="n">②</span><span>문자로 된 기록이 있는가</span></button><button class="opt" type="button"><span class="n">③</span><span>도시가 있었는가</span></button><button class="opt" type="button"><span class="n">④</span><span>농사를 지었는가</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>기록이 남은 때부터를 역사 시대라 합니다. 그 전은 유물과 유적으로만 짐작합니다.</div>
+  </div>
+  <div class="qbox" id="w1q5" data-w="1" data-type="mc" data-a="2">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">함무라비 법전에서 알 수 있는 메소포타미아 사회의 모습은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>모든 사람이 평등했다</span></button><button class="opt" type="button"><span class="n">②</span><span>법이 없는 사회였다</span></button><button class="opt" type="button"><span class="n">③</span><span>신분에 따라 벌이 달랐던 계급 사회였다</span></button><button class="opt" type="button"><span class="n">④</span><span>여성이 다스리던 사회였다</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>같은 죄라도 신분에 따라 처벌이 달랐습니다. 계급이 있는 사회였음을 보여 줍니다.</div>
+  </div>
+  <div class="qbox" id="w1q6" data-w="1" data-type="mc" data-a="1">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">인더스 문명의 특징으로 알맞은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>피라미드와 미라</span></button><button class="opt" type="button"><span class="n">②</span><span>모헨조다로 같은 계획 도시와 하수도 시설</span></button><button class="opt" type="button"><span class="n">③</span><span>만리장성</span></button><button class="opt" type="button"><span class="n">④</span><span>쐐기 문자로 쓴 법전</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>바둑판처럼 계획된 도시와 잘 갖춰진 하수도가 인더스 문명의 특징입니다.</div>
+  </div>
+  <div class="qbox" id="w1q7" data-w="1" data-type="mc" data-a="1">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">“4대 문명”이라는 말을 쓸 때 조심해야 할 점은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>네 문명이 서로 전쟁을 했다는 뜻이다</span></button><button class="opt" type="button"><span class="n">②</span><span>세계의 문명이 넷뿐이었다는 뜻은 아니다</span></button><button class="opt" type="button"><span class="n">③</span><span>네 문명이 같은 문자를 썼다는 뜻이다</span></button><button class="opt" type="button"><span class="n">④</span><span>네 문명이 같은 나라였다는 뜻이다</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>아메리카의 마야·잉카 등 다른 곳에도 문명이 있었습니다. 비교해 배우기 좋아 넷을 묶어 부르는 것입니다.</div>
+  </div>
+  <div class="qbox" id="w1q8" data-w="1" data-type="sa" data-a="갑골문|갑골 문자">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">중국 은(상)나라에서 거북 배딱지와 소뼈에 새긴, 한자의 조상이 된 문자는?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 갑골문</span>갑골문입니다. 점을 친 결과를 기록한 글자였습니다.</div>
+  </div>
+  <div class="qbox" id="w1q9" data-w="1" data-type="sa" data-a="피라미드">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">나일강 유역의 문명이 남긴, 왕의 무덤으로 알려진 거대한 건축물은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 피라미드</span>피라미드입니다.</div>
+  </div>
+  <div class="qbox" id="w1q10" data-w="1" data-type="sa" data-a="쐐기 문자|쐐기문자|설형 문자|설형문자">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">메소포타미아에서 점토판에 갈대를 눌러 쓴 문자의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 쐐기 문자</span>쐐기 문자입니다. 쓰는 도구 때문에 획이 쐐기 모양이 되었습니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="1">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w2">
+  <div class="wkhead"><span class="num">02</span><span class="lbl">WEEK 02</span>
+    <span class="sc" data-w="2">0 / 10</span></div>
+  <h2>고대 제국</h2>
+  <p class="sub">페르시아 · 그리스와 로마 · 진과 한</p>
+  <div class="qbox" id="w2q1" data-w="2" data-type="mc" data-a="0">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">페르시아가 여러 민족이 사는 넓은 땅을 오래 다스릴 수 있었던 방법은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>정복한 민족의 종교와 관습을 인정하는 관용 정책</span></button><button class="opt" type="button"><span class="n">②</span><span>모든 민족을 같은 종교로 바꾸는 정책</span></button><button class="opt" type="button"><span class="n">③</span><span>모든 도시를 없애는 정책</span></button><button class="opt" type="button"><span class="n">④</span><span>세금을 걷지 않는 정책</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>억지로 바꾸려 하지 않고 세금만 걷었기 때문에 반발이 적었습니다.</div>
+  </div>
+  <div class="qbox" id="w2q2" data-w="2" data-type="mc" data-a="0">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">로마의 정치 형태가 바뀐 순서로 옳은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>왕정 → 공화정 → 제정</span></button><button class="opt" type="button"><span class="n">②</span><span>공화정 → 왕정 → 제정</span></button><button class="opt" type="button"><span class="n">③</span><span>제정 → 공화정 → 왕정</span></button><button class="opt" type="button"><span class="n">④</span><span>왕정 → 제정 → 공화정</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>영토가 넓어지고 혼란이 커지면서 한 사람에게 힘이 모여 제정이 되었습니다.</div>
+  </div>
+  <div class="qbox" id="w2q3" data-w="2" data-type="mc" data-a="1">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">진시황이 중국을 통일한 뒤 하나로 통일한 것끼리 묶인 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>음식 · 음악 · 그림</span></button><button class="opt" type="button"><span class="n">②</span><span>문자 · 화폐 · 도량형</span></button><button class="opt" type="button"><span class="n">③</span><span>성씨 · 이름 · 족보</span></button><button class="opt" type="button"><span class="n">④</span><span>종교 · 언어 · 옷차림</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>나라마다 글자와 저울이 달라서는 하나의 나라로 굴러갈 수 없었기 때문입니다.</div>
+  </div>
+  <div class="qbox" id="w2q4" data-w="2" data-type="mc" data-a="0">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">아테네 민주 정치에 대한 설명으로 옳은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>시민이 직접 모여 결정했으나 여성·노예·외국인은 제외되었다</span></button><button class="opt" type="button"><span class="n">②</span><span>대표를 뽑아 맡기는 방식이었다</span></button><button class="opt" type="button"><span class="n">③</span><span>오늘날과 똑같이 모든 사람이 참여했다</span></button><button class="opt" type="button"><span class="n">④</span><span>왕이 혼자 결정했다</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>직접 민주 정치였지만 참여할 수 있는 사람이 성인 남성 시민으로 한정되었습니다.</div>
+  </div>
+  <div class="qbox" id="w2q5" data-w="2" data-type="mc" data-a="1">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">헬레니즘 문화란 무엇인가?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>이슬람과 유럽이 섞인 문화</span></button><button class="opt" type="button"><span class="n">②</span><span>알렉산드로스의 정복 이후 그리스 문화와 동방 문화가 섞인 문화</span></button><button class="opt" type="button"><span class="n">③</span><span>중국과 인도가 섞인 문화</span></button><button class="opt" type="button"><span class="n">④</span><span>로마가 만든 법 문화</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>이 문화가 인도까지 닿아 사람 모습을 한 불상(간다라 미술)이 만들어졌습니다.</div>
+  </div>
+  <div class="qbox" id="w2q6" data-w="2" data-type="mc" data-a="1">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">비단길을 통해 오간 것 중 <b>물건이 아닌</b> 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>향신료</span></button><button class="opt" type="button"><span class="n">②</span><span>불교와 종이 만드는 기술</span></button><button class="opt" type="button"><span class="n">③</span><span>비단</span></button><button class="opt" type="button"><span class="n">④</span><span>도자기</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>길이 열리면 물건보다 생각과 기술이 더 멀리 갑니다. 불교가 중국에 온 길도 비단길입니다.</div>
+  </div>
+  <div class="qbox" id="w2q7" data-w="2" data-type="mc" data-a="3">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">그리스가 하나의 큰 통일 국가로 자라지 못한 까닭은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>문자가 없었기 때문</span></button><button class="opt" type="button"><span class="n">②</span><span>바다가 없었기 때문</span></button><button class="opt" type="button"><span class="n">③</span><span>인구가 너무 적었기 때문</span></button><button class="opt" type="button"><span class="n">④</span><span>산이 많고 평야가 좁아 폴리스가 따로 발달했기 때문</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>지형 때문에 수백 개의 작은 도시 국가(폴리스)가 따로 자랐습니다.</div>
+  </div>
+  <div class="qbox" id="w2q8" data-w="2" data-type="sa" data-a="진시황|진시황제|시황제">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">중국을 처음으로 통일하고 스스로 ‘황제’라는 칭호를 쓴 인물은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 진시황</span>진시황입니다.</div>
+  </div>
+  <div class="qbox" id="w2q9" data-w="2" data-type="sa" data-a="비단길|실크로드|비단길(실크로드)">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">한나라 때 열려 중국의 비단이 로마까지 가게 된 동서 교역로의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 비단길</span>비단길(실크로드)입니다.</div>
+  </div>
+  <div class="qbox" id="w2q10" data-w="2" data-type="sa" data-a="알렉산드로스|알렉산더|알렉산드로스 대왕">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">마케도니아의 왕으로 페르시아를 무너뜨리고 인도 부근까지 정복한 인물은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 알렉산드로스</span>알렉산드로스입니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="2">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w3">
+  <div class="wkhead"><span class="num">03</span><span class="lbl">WEEK 03</span>
+    <span class="sc" data-w="3">0 / 10</span></div>
+  <h2>인도와 두 종교</h2>
+  <p class="sub">카스트 · 불교 · 힌두교</p>
+  <div class="qbox" id="w3q1" data-w="3" data-type="mc" data-a="0">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">불교가 처음 등장했을 때 많은 사람의 지지를 얻은 까닭은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>태어난 신분과 관계없이 누구나 깨달을 수 있다고 했기 때문</span></button><button class="opt" type="button"><span class="n">②</span><span>왕이 되게 해 준다고 했기 때문</span></button><button class="opt" type="button"><span class="n">③</span><span>전쟁에서 이기게 해 준다고 했기 때문</span></button><button class="opt" type="button"><span class="n">④</span><span>세금을 없애 주었기 때문</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>카스트로 신분이 고정된 사회에서 이 말은 큰 위로이자 파격이었습니다.</div>
+  </div>
+  <div class="qbox" id="w3q2" data-w="3" data-type="mc" data-a="1">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">불교가 인도 밖으로 퍼지는 데 결정적인 역할을 한 왕은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>알렉산드로스</span></button><button class="opt" type="button"><span class="n">②</span><span>아소카왕</span></button><button class="opt" type="button"><span class="n">③</span><span>함무라비왕</span></button><button class="opt" type="button"><span class="n">④</span><span>진시황</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>마우리아 왕조의 아소카왕이 돌기둥에 가르침을 새기고 다른 나라에 사절을 보냈습니다.</div>
+  </div>
+  <div class="qbox" id="w3q3" data-w="3" data-type="mc" data-a="3">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">힌두교가 인도 안에 널리 자리 잡을 수 있었던 까닭은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>왕이 다른 종교를 모두 금지했기 때문</span></button><button class="opt" type="button"><span class="n">②</span><span>외국에서 들어온 종교였기 때문</span></button><button class="opt" type="button"><span class="n">③</span><span>글을 몰라도 되는 종교였기 때문</span></button><button class="opt" type="button"><span class="n">④</span><span>인도의 여러 신앙과 관습, 카스트를 그대로 인정하며 합쳐졌기 때문</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>생활 방식을 바꾸라고 요구하지 않아 일상 종교로 뿌리내렸습니다.</div>
+  </div>
+  <div class="qbox" id="w3q4" data-w="3" data-type="mc" data-a="3">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">간다라 미술은 어떤 두 문화가 만나 생겼는가?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>이집트와 메소포타미아</span></button><button class="opt" type="button"><span class="n">②</span><span>이슬람과 크리스트교</span></button><button class="opt" type="button"><span class="n">③</span><span>중국의 유교와 인도의 불교</span></button><button class="opt" type="button"><span class="n">④</span><span>인도의 불교와 그리스의 조각 문화</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>알렉산드로스 이후 헬레니즘 문화가 인도 서북부에 들어오면서 사람 모습을 한 불상이 만들어졌습니다.</div>
+  </div>
+  <div class="qbox" id="w3q5" data-w="3" data-type="mc" data-a="1">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">종교가 국경을 넘어 퍼지는 조건으로 보기 <b>어려운</b> 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>기존 질서에 대한 불만이 있을 것</span></button><button class="opt" type="button"><span class="n">②</span><span>그 나라의 인구가 적을 것</span></button><button class="opt" type="button"><span class="n">③</span><span>상인이 다니는 길이 있을 것</span></button><button class="opt" type="button"><span class="n">④</span><span>왕이나 권력이 후원할 것</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>불만·후원·교역로 세 가지가 겹칠 때 종교는 국경을 넘습니다. 인구의 많고 적음과는 관계가 없습니다.</div>
+  </div>
+  <div class="qbox" id="w3q6" data-w="3" data-type="mc" data-a="2">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">인도의 카스트 제도에 대한 설명으로 옳은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>돈을 내면 신분이 올라갔다</span></button><button class="opt" type="button"><span class="n">②</span><span>시험으로 신분을 바꿀 수 있었다</span></button><button class="opt" type="button"><span class="n">③</span><span>태어날 때 신분이 정해지고 바꿀 수 없었다</span></button><button class="opt" type="button"><span class="n">④</span><span>신분이 없는 평등한 제도였다</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>태어나면서 신분이 정해지는 제도였고, 제사를 맡은 브라만이 가장 위에 있었습니다.</div>
+  </div>
+  <div class="qbox" id="w3q7" data-w="3" data-type="mc" data-a="1">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">불교가 중국을 거쳐 우리나라까지 전해진 주요 경로는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>희망봉 항로</span></button><button class="opt" type="button"><span class="n">②</span><span>비단길</span></button><button class="opt" type="button"><span class="n">③</span><span>대운하</span></button><button class="opt" type="button"><span class="n">④</span><span>대서양 항로</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>인도 → 비단길 → 중국 → 한국·일본으로 이어졌습니다.</div>
+  </div>
+  <div class="qbox" id="w3q8" data-w="3" data-type="sa" data-a="카스트|카스트 제도|카스트제도">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">태어날 때부터 신분이 정해지는 인도의 신분 제도를 무엇이라 하는가?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 카스트</span>카스트(제도)입니다.</div>
+  </div>
+  <div class="qbox" id="w3q9" data-w="3" data-type="sa" data-a="석가모니|싯다르타|고타마 싯다르타|부처">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">불교를 창시한 인물의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 석가모니</span>석가모니(고타마 싯다르타)입니다.</div>
+  </div>
+  <div class="qbox" id="w3q10" data-w="3" data-type="sa" data-a="헬레니즘|헬레니즘 문화|헬레니즘문화">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">알렉산드로스의 정복 이후 그리스 문화와 동방 문화가 섞여 생긴 문화의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 헬레니즘</span>헬레니즘 문화입니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="3">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w4">
+  <div class="wkhead"><span class="num">04</span><span class="lbl">WEEK 04</span>
+    <span class="sc" data-w="4">0 / 10</span></div>
+  <h2>동아시아 문화권</h2>
+  <p class="sub">수와 당 · 한자 · 유교 · 불교 · 율령</p>
+  <div class="qbox" id="w4q1" data-w="4" data-type="mc" data-a="2">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">동아시아 문화권이 함께 나눠 쓴 네 가지는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>한자 · 도교 · 이슬람교 · 봉건제</span></button><button class="opt" type="button"><span class="n">②</span><span>한자 · 힌두교 · 카스트 · 율령</span></button><button class="opt" type="button"><span class="n">③</span><span>한자 · 유교 · 불교 · 율령</span></button><button class="opt" type="button"><span class="n">④</span><span>한글 · 유교 · 불교 · 과거제</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>각각 문자, 학문과 질서, 종교, 법과 제도를 맡았습니다.</div>
+  </div>
+  <div class="qbox" id="w4q2" data-w="4" data-type="mc" data-a="1">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">당의 수도로 여러 나라 사람과 종교가 모인 국제도시는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>바그다드</span></button><button class="opt" type="button"><span class="n">②</span><span>장안</span></button><button class="opt" type="button"><span class="n">③</span><span>교토</span></button><button class="opt" type="button"><span class="n">④</span><span>베이징</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>장안입니다. 비단길의 끝이자 동아시아 문화의 중심이었습니다.</div>
+  </div>
+  <div class="qbox" id="w4q3" data-w="4" data-type="mc" data-a="1">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">과거제에 대한 설명으로 옳은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>군인만 뽑는 제도이다</span></button><button class="opt" type="button"><span class="n">②</span><span>시험으로 관리를 뽑는 제도로 왕권 강화에도 도움이 되었다</span></button><button class="opt" type="button"><span class="n">③</span><span>세금을 걷는 제도이다</span></button><button class="opt" type="button"><span class="n">④</span><span>가문에 따라 관리를 정하는 제도이다</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>실력으로 관리가 될 길이 열렸고, 왕이 직접 인재를 고를 수 있게 되었습니다. 우리 역사에서는 고려 광종이 처음 실시했습니다.</div>
+  </div>
+  <div class="qbox" id="w4q4" data-w="4" data-type="mc" data-a="0">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">수나라가 통일 뒤 오래가지 못한 까닭으로 알맞은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>대운하 공사와 고구려 원정 등 무리한 사업 때문</span></button><button class="opt" type="button"><span class="n">②</span><span>불교를 금지했기 때문</span></button><button class="opt" type="button"><span class="n">③</span><span>문자를 만들지 않았기 때문</span></button><button class="opt" type="button"><span class="n">④</span><span>외국과 교류하지 않았기 때문</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>큰 공사와 거듭된 전쟁으로 백성의 부담이 커져 짧게 끝났습니다.</div>
+  </div>
+  <div class="qbox" id="w4q5" data-w="4" data-type="mc" data-a="2">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">일본이 한자를 변형해 만든 자기 문자는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>갑골문</span></button><button class="opt" type="button"><span class="n">②</span><span>쐐기 문자</span></button><button class="opt" type="button"><span class="n">③</span><span>가나</span></button><button class="opt" type="button"><span class="n">④</span><span>한글</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>가나입니다. 히라가나 ‘あ’는 한자 ‘安’에서 왔습니다.</div>
+  </div>
+  <div class="qbox" id="w4q6" data-w="4" data-type="mc" data-a="0">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">신라가 율령을 받아들이면서도 그대로 유지한 자기 신분 제도는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>골품제</span></button><button class="opt" type="button"><span class="n">②</span><span>과거제</span></button><button class="opt" type="button"><span class="n">③</span><span>카스트</span></button><button class="opt" type="button"><span class="n">④</span><span>봉건제</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>골품제입니다. 문화는 옮겨 갈 때 그 땅에 맞게 바뀝니다.</div>
+  </div>
+  <div class="qbox" id="w4q7" data-w="4" data-type="mc" data-a="1">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">“주변 나라들이 중국 문화를 그대로 베꼈다”는 말이 정확하지 않은 까닭은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>중국 문화를 전혀 받아들이지 않았기 때문</span></button><button class="opt" type="button"><span class="n">②</span><span>각 나라가 자기 사정에 맞게 바꿔 받아들였기 때문</span></button><button class="opt" type="button"><span class="n">③</span><span>중국이 문화를 전해 주지 않았기 때문</span></button><button class="opt" type="button"><span class="n">④</span><span>한자를 쓴 나라가 없었기 때문</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>신라는 골품제를 유지했고 일본은 가나를 만들었습니다.</div>
+  </div>
+  <div class="qbox" id="w4q8" data-w="4" data-type="sa" data-a="한자">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">동아시아 여러 나라가 공통으로 사용한 문자는?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 한자</span>한자입니다.</div>
+  </div>
+  <div class="qbox" id="w4q9" data-w="4" data-type="sa" data-a="율령">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">나라를 다스리는 법과 제도의 틀을 뜻하며 동아시아 문화권의 네 요소 중 하나인 것은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 율령</span>율령입니다.</div>
+  </div>
+  <div class="qbox" id="w4q10" data-w="4" data-type="sa" data-a="장안|장안성">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">신라의 서라벌과 일본의 도읍이 본떠 지어졌다고 하는 당의 수도는?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 장안</span>장안입니다. 바둑판처럼 계획된 도시였습니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="4">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w5">
+  <div class="wkhead"><span class="num">05</span><span class="lbl">WEEK 05</span>
+    <span class="sc" data-w="5">0 / 10</span></div>
+  <h2>이슬람과 유럽</h2>
+  <p class="sub">이슬람교 · 봉건제 · 십자군</p>
+  <div class="qbox" id="w5q1" data-w="5" data-type="mc" data-a="0">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">이슬람 세계에서 상업이 특히 발달한 까닭은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>아시아·아프리카·유럽을 잇는 길목에 있었기 때문</span></button><button class="opt" type="button"><span class="n">②</span><span>전쟁을 하지 않았기 때문</span></button><button class="opt" type="button"><span class="n">③</span><span>농사가 잘되는 땅이었기 때문</span></button><button class="opt" type="button"><span class="n">④</span><span>바다가 없었기 때문</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>사막의 대상 무역과 인도양 바닷길을 함께 쥐고 있었습니다.</div>
+  </div>
+  <div class="qbox" id="w5q2" data-w="5" data-type="mc" data-a="0">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">중세 유럽의 봉건제를 바르게 설명한 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>땅을 주는 대신 충성과 군사적 봉사를 약속한 주종 관계</span></button><button class="opt" type="button"><span class="n">②</span><span>시험으로 관리를 뽑는 제도</span></button><button class="opt" type="button"><span class="n">③</span><span>종교를 강제로 바꾸는 제도</span></button><button class="opt" type="button"><span class="n">④</span><span>상인들이 만든 조합</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>왕 → 제후 → 기사로 이어지고, 그 아래에서 농노가 장원의 땅을 갈았습니다.</div>
+  </div>
+  <div class="qbox" id="w5q3" data-w="5" data-type="mc" data-a="0">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">십자군 전쟁의 결과로 알맞은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>목적은 이루지 못했으나 동서 교류가 크게 늘었다</span></button><button class="opt" type="button"><span class="n">②</span><span>성지를 완전히 되찾았다</span></button><button class="opt" type="button"><span class="n">③</span><span>유럽의 교황권이 크게 강해졌다</span></button><button class="opt" type="button"><span class="n">④</span><span>이슬람 세계가 멸망했다</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>지중해 무역이 활발해지고 이슬람의 학문이 유럽에 들어왔으며, 거듭된 실패로 교황의 권위는 오히려 약해졌습니다.</div>
+  </div>
+  <div class="qbox" id="w5q4" data-w="5" data-type="mc" data-a="0">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">‘아라비아 숫자’는 원래 어디에서 만들어진 숫자인가?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>인도</span></button><button class="opt" type="button"><span class="n">②</span><span>아라비아</span></button><button class="opt" type="button"><span class="n">③</span><span>이집트</span></button><button class="opt" type="button"><span class="n">④</span><span>그리스</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>인도에서 만들어진 숫자를 이슬람 상인들이 유럽에 전해 주어 그렇게 불립니다. 0의 개념도 이 길로 갔습니다.</div>
+  </div>
+  <div class="qbox" id="w5q5" data-w="5" data-type="mc" data-a="0">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">이슬람 세계가 고대 그리스의 책을 번역해 보존한 것이 중요한 까닭은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>그 책들이 뒤에 유럽으로 돌아가 르네상스의 바탕이 되었기 때문</span></button><button class="opt" type="button"><span class="n">②</span><span>책을 팔아 돈을 벌었기 때문</span></button><button class="opt" type="button"><span class="n">③</span><span>그리스를 정복하기 위해서였기 때문</span></button><button class="opt" type="button"><span class="n">④</span><span>종교를 바꾸기 위해서였기 때문</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>문화는 한 방향으로만 흐르지 않고 맡아 두었다가 돌려주기도 합니다.</div>
+  </div>
+  <div class="qbox" id="w5q6" data-w="5" data-type="mc" data-a="1">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">중세 유럽에서 학문과 지식을 지키고 이어 간 곳은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>항구</span></button><button class="opt" type="button"><span class="n">②</span><span>수도원</span></button><button class="opt" type="button"><span class="n">③</span><span>성벽</span></button><button class="opt" type="button"><span class="n">④</span><span>시장</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>수도사들이 손으로 책을 옮겨 적으며 지식을 지켰습니다.</div>
+  </div>
+  <div class="qbox" id="w5q7" data-w="5" data-type="mc" data-a="1">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">이슬람교의 가르침 중 사회를 크게 움직인 것으로 알맞은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>전쟁은 금지된다</span></button><button class="opt" type="button"><span class="n">②</span><span>알라 앞에 모두 평등하다</span></button><button class="opt" type="button"><span class="n">③</span><span>상업은 천한 일이다</span></button><button class="opt" type="button"><span class="n">④</span><span>신분은 바꿀 수 없다</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>부족과 신분으로 갈라져 있던 사회에서 평등의 가르침은 큰 힘이 되었습니다.</div>
+  </div>
+  <div class="qbox" id="w5q8" data-w="5" data-type="sa" data-a="무함마드|마호메트">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">7세기 초 아라비아반도에서 이슬람교를 창시한 인물은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 무함마드</span>무함마드입니다.</div>
+  </div>
+  <div class="qbox" id="w5q9" data-w="5" data-type="sa" data-a="봉건제|봉건 제도|봉건제도">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">땅을 주는 대신 충성을 약속하는 관계로 굴러간 중세 유럽의 제도는?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 봉건제</span>봉건제입니다.</div>
+  </div>
+  <div class="qbox" id="w5q10" data-w="5" data-type="sa" data-a="십자군|십자군 전쟁|십자군전쟁|십자군 원정">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">성지 예루살렘 회복을 내걸고 유럽이 벌인 원정의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 십자군</span>십자군(전쟁)입니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="5">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w6">
+  <div class="wkhead"><span class="num">06</span><span class="lbl">WEEK 06</span>
+    <span class="sc" data-w="6">0 / 10</span></div>
+  <h2>몽골 제국</h2>
+  <p class="sub">역참 · 동서 교류 · 흑사병</p>
+  <div class="qbox" id="w6q1" data-w="6" data-type="mc" data-a="0">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">몽골이 넓은 제국을 효율적으로 다스린 방법으로 알맞은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>역참과 통행증으로 사람과 소식이 안전하게 오가게 했다</span></button><button class="opt" type="button"><span class="n">②</span><span>모든 도시를 없애고 초원으로 만들었다</span></button><button class="opt" type="button"><span class="n">③</span><span>무역을 금지했다</span></button><button class="opt" type="button"><span class="n">④</span><span>한 가지 종교만 인정했다</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>길을 따라 말과 숙소를 갖춘 역참을 두고, 통행증을 지닌 사람의 안전을 보장했습니다.</div>
+  </div>
+  <div class="qbox" id="w6q2" data-w="6" data-type="mc" data-a="0">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">몽골 제국 시기에 동쪽에서 서쪽으로 전해진 것끼리 묶인 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>화약 · 나침반 · 인쇄술</span></button><button class="opt" type="button"><span class="n">②</span><span>알파벳 · 유리 · 포도주</span></button><button class="opt" type="button"><span class="n">③</span><span>감자 · 고추 · 옥수수</span></button><button class="opt" type="button"><span class="n">④</span><span>아라비아 숫자 · 천문학 · 의학</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>이 셋은 유럽에서 전쟁 방식, 항해, 지식의 전달을 바꾸어 다음 시대를 여는 열쇠가 됩니다.</div>
+  </div>
+  <div class="qbox" id="w6q3" data-w="6" data-type="mc" data-a="1">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">몽골 제국을 다녀와 《동방견문록》을 남긴 인물은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>이븐 바투타</span></button><button class="opt" type="button"><span class="n">②</span><span>마르코 폴로</span></button><button class="opt" type="button"><span class="n">③</span><span>콜럼버스</span></button><button class="opt" type="button"><span class="n">④</span><span>바스쿠 다 가마</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>베네치아 상인 마르코 폴로입니다. 이 책이 뒤에 신항로 개척의 동기가 되었습니다.</div>
+  </div>
+  <div class="qbox" id="w6q4" data-w="6" data-type="mc" data-a="2">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">흑사병이 유럽까지 빠르게 퍼진 까닭은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>전쟁이 없었기 때문</span></button><button class="opt" type="button"><span class="n">②</span><span>도시가 없었기 때문</span></button><button class="opt" type="button"><span class="n">③</span><span>교역로가 잘 이어져 있었기 때문</span></button><button class="opt" type="button"><span class="n">④</span><span>날씨가 갑자기 더워졌기 때문</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>사람과 물건이 빠르게 오가는 길은 병도 빠르게 옮깁니다. 확산 경로가 교역로와 거의 겹칩니다.</div>
+  </div>
+  <div class="qbox" id="w6q5" data-w="6" data-type="mc" data-a="2">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">몽골 제국에 대한 평가로 가장 알맞은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>교역을 모두 금지했다</span></button><button class="opt" type="button"><span class="n">②</span><span>전쟁을 한 번도 하지 않았다</span></button><button class="opt" type="button"><span class="n">③</span><span>정복은 참혹했지만 그 뒤 유라시아의 교류를 크게 늘렸다</span></button><button class="opt" type="button"><span class="n">④</span><span>오직 파괴만 한 제국이었다</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>같은 사건의 두 얼굴을 함께 봐야 합니다.</div>
+  </div>
+  <div class="qbox" id="w6q6" data-w="6" data-type="mc" data-a="1">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">몽골이 침입했을 때 고려가 한 일로 알맞은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>곧바로 항복하고 나라를 없앴다</span></button><button class="opt" type="button"><span class="n">②</span><span>강화도로 도읍을 옮기고 팔만대장경을 만들며 맞섰다</span></button><button class="opt" type="button"><span class="n">③</span><span>일본과 동맹을 맺었다</span></button><button class="opt" type="button"><span class="n">④</span><span>수도를 평양으로 옮겼다</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>세계사 6주차와 한국사의 고려 후기가 같은 시대 띠 칸에 놓입니다.</div>
+  </div>
+  <div class="qbox" id="w6q7" data-w="6" data-type="mc" data-a="2">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">30년 가까이 아프리카·서아시아·인도·중국을 여행한 모로코 출신 여행가는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>콜럼버스</span></button><button class="opt" type="button"><span class="n">②</span><span>마르코 폴로</span></button><button class="opt" type="button"><span class="n">③</span><span>이븐 바투타</span></button><button class="opt" type="button"><span class="n">④</span><span>정화</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>이븐 바투타입니다. 그가 그렇게 다닐 수 있었다는 것 자체가 세계가 이어져 있었다는 증거입니다.</div>
+  </div>
+  <div class="qbox" id="w6q8" data-w="6" data-type="sa" data-a="칭기즈 칸|칭기스 칸|징기스칸|칭기즈칸">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">흩어진 몽골 부족을 통일하고 제국의 기초를 세운 인물은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 칭기즈 칸</span>칭기즈 칸입니다.</div>
+  </div>
+  <div class="qbox" id="w6q9" data-w="6" data-type="sa" data-a="역참|역참제|역참 제도">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">길을 따라 말과 숙소를 갖춘 정거장을 두어 소식을 빠르게 전한 몽골의 제도는?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 역참</span>역참입니다.</div>
+  </div>
+  <div class="qbox" id="w6q10" data-w="6" data-type="sa" data-a="동방견문록|동방 견문록">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">마르코 폴로가 남긴 책의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 동방견문록</span>《동방견문록》입니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="6">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w7">
+  <div class="wkhead"><span class="num">07</span><span class="lbl">WEEK 07</span>
+    <span class="sc" data-w="7">0 / 10</span></div>
+  <h2>세 제국과 신항로</h2>
+  <p class="sub">명·청 · 오스만 · 무굴 · 대서양 삼각 무역</p>
+  <div class="qbox" id="w7q1" data-w="7" data-type="mc" data-a="1">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">유럽이 새 바닷길을 찾아 나선 까닭으로 보기 <b>어려운</b> 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>오스만이 육지 길목을 쥐고 있었기 때문</span></button><button class="opt" type="button"><span class="n">②</span><span>유럽에 사람이 살 땅이 부족했기 때문</span></button><button class="opt" type="button"><span class="n">③</span><span>향신료 값이 너무 비쌌기 때문</span></button><button class="opt" type="button"><span class="n">④</span><span>나침반과 항해술이 갖춰졌기 때문</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>향신료, 막힌 육로, 항해 기술이 신항로 개척의 배경입니다. 여기에 《동방견문록》이 심은 호기심이 더해졌습니다.</div>
+  </div>
+  <div class="qbox" id="w7q2" data-w="7" data-type="mc" data-a="2">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">대서양 삼각 무역에서 아프리카에서 아메리카로 보내진 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>총과 술</span></button><button class="opt" type="button"><span class="n">②</span><span>설탕과 담배</span></button><button class="opt" type="button"><span class="n">③</span><span>노예가 된 사람들</span></button><button class="opt" type="button"><span class="n">④</span><span>은과 도자기</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>약 1,200만 명이 강제로 대서양을 건넜습니다. 사람이 물건처럼 거래된 무역이었습니다.</div>
+  </div>
+  <div class="qbox" id="w7q3" data-w="7" data-type="mc" data-a="3">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">오스만 제국이 1453년에 함락시켜 수도로 삼은 도시는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>바그다드</span></button><button class="opt" type="button"><span class="n">②</span><span>카이로</span></button><button class="opt" type="button"><span class="n">③</span><span>로마</span></button><button class="opt" type="button"><span class="n">④</span><span>콘스탄티노폴리스(이스탄불)</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>이 일로 유럽은 동방으로 가는 육지 길이 막혔다고 느끼게 되었습니다.</div>
+  </div>
+  <div class="qbox" id="w7q4" data-w="7" data-type="mc" data-a="1">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">인도를 다스리며 타지마할을 남긴 제국은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>명</span></button><button class="opt" type="button"><span class="n">②</span><span>무굴 제국</span></button><button class="opt" type="button"><span class="n">③</span><span>비잔티움 제국</span></button><button class="opt" type="button"><span class="n">④</span><span>오스만 제국</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>무굴 제국입니다. 이슬람 왕조가 힌두교도가 많은 인도를 다스리며 두 문화가 섞였습니다.</div>
+  </div>
+  <div class="qbox" id="w7q5" data-w="7" data-type="mc" data-a="0">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">명의 정화가 콜럼버스보다 앞서 대항해를 했는데도 시대를 바꾸지 못한 까닭은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>명이 이후 항해를 중단했기 때문</span></button><button class="opt" type="button"><span class="n">②</span><span>아프리카에 닿지 못했기 때문</span></button><button class="opt" type="button"><span class="n">③</span><span>배가 작았기 때문</span></button><button class="opt" type="button"><span class="n">④</span><span>나침반이 없었기 때문</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>기술만이 아니라 계속할 이유가 있어야 시대가 바뀝니다. 유럽은 이익을 좇아 항해를 계속했습니다.</div>
+  </div>
+  <div class="qbox" id="w7q6" data-w="7" data-type="mc" data-a="2">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">“콜럼버스가 아메리카를 발견했다”는 표현이 조심스러운 까닭은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>그 땅이 아시아였기 때문</span></button><button class="opt" type="button"><span class="n">②</span><span>다른 유럽인이 먼저 갔기 때문</span></button><button class="opt" type="button"><span class="n">③</span><span>그곳에 이미 수천만 명의 사람과 문명이 살고 있었기 때문</span></button><button class="opt" type="button"><span class="n">④</span><span>콜럼버스가 가지 않았기 때문</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>유럽 입장에서 처음 닿았을 뿐이므로 ‘도달’이나 ‘접촉’이 더 정확합니다.</div>
+  </div>
+  <div class="qbox" id="w7q7" data-w="7" data-type="mc" data-a="1">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">아메리카에서 캔 은이 유럽을 거쳐 중국까지 흘러간 것은 무엇을 뜻하는가?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>유럽이 가난해졌다는 뜻</span></button><button class="opt" type="button"><span class="n">②</span><span>세계가 하나의 경제로 이어지기 시작했다는 뜻</span></button><button class="opt" type="button"><span class="n">③</span><span>은이 쓸모없어졌다는 뜻</span></button><button class="opt" type="button"><span class="n">④</span><span>중국이 아메리카를 지배했다는 뜻</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>한 대륙에서 캔 은이 다른 대륙의 세금 제도를 바꿀 만큼 세계는 이미 연결되어 있었습니다.</div>
+  </div>
+  <div class="qbox" id="w7q8" data-w="7" data-type="sa" data-a="바스쿠 다 가마|바스코 다 가마|바스쿠다가마">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">아프리카 남쪽 끝을 돌아 인도로 가는 바닷길을 연 포르투갈의 항해가는?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 바스쿠 다 가마</span>바스쿠 다 가마입니다.</div>
+  </div>
+  <div class="qbox" id="w7q9" data-w="7" data-type="sa" data-a="타지마할">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">무굴 제국이 남긴 대표적인 건축물의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 타지마할</span>타지마할입니다.</div>
+  </div>
+  <div class="qbox" id="w7q10" data-w="7" data-type="sa" data-a="은">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">아메리카에서 유럽을 거쳐 중국까지 흘러가며 세계를 하나의 경제로 묶은 금속은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 은</span>은입니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="7">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w8">
+  <div class="wkhead"><span class="num">08</span><span class="lbl">WEEK 08</span>
+    <span class="sc" data-w="8">0 / 10</span></div>
+  <h2>시민 혁명과 산업 혁명</h2>
+  <p class="sub">계몽사상 · 세 혁명 · 증기 기관</p>
+  <div class="qbox" id="w8q1" data-w="8" data-type="mc" data-a="2">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">시민 혁명이 바꾼 것을 한 마디로 말하면?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>국경이 바뀌었다</span></button><button class="opt" type="button"><span class="n">②</span><span>물건을 만드는 방법이 바뀌었다</span></button><button class="opt" type="button"><span class="n">③</span><span>나라의 주인이 왕에서 국민으로 바뀌었다</span></button><button class="opt" type="button"><span class="n">④</span><span>종교가 바뀌었다</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>산업 혁명이 ‘만드는 방법’을 바꿨다면, 시민 혁명은 ‘나라의 주인’을 바꿨습니다.</div>
+  </div>
+  <div class="qbox" id="w8q2" data-w="8" data-type="mc" data-a="2">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">영국 명예혁명의 결과로 알맞은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>왕이 없어지고 공화국이 되었다</span></button><button class="opt" type="button"><span class="n">②</span><span>신분제가 완전히 사라졌다</span></button><button class="opt" type="button"><span class="n">③</span><span>권리 장전이 승인되어 왕이 의회의 법 아래 놓였다</span></button><button class="opt" type="button"><span class="n">④</span><span>식민지가 모두 독립했다</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>입헌 군주제의 출발점이 되었습니다.</div>
+  </div>
+  <div class="qbox" id="w8q3" data-w="8" data-type="mc" data-a="0">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">프랑스 혁명의 결과로 알맞은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>인권 선언이 발표되고 신분제가 폐지되었다</span></button><button class="opt" type="button"><span class="n">②</span><span>의회가 없어졌다</span></button><button class="opt" type="button"><span class="n">③</span><span>왕권이 더 강해졌다</span></button><button class="opt" type="button"><span class="n">④</span><span>교회가 나라를 다스리게 되었다</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>“인간은 자유롭고 평등한 존재로 태어난다”는 인권 선언이 이후 여러 나라 헌법의 뿌리가 되었습니다.</div>
+  </div>
+  <div class="qbox" id="w8q4" data-w="8" data-type="mc" data-a="0">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">계몽사상가와 그 주장을 바르게 연결한 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>몽테스키외 — 삼권 분립</span></button><button class="opt" type="button"><span class="n">②</span><span>볼테르 — 노예제 찬성</span></button><button class="opt" type="button"><span class="n">③</span><span>루소 — 신분제 유지</span></button><button class="opt" type="button"><span class="n">④</span><span>로크 — 왕권신수설</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>로크는 천부인권과 저항권, 루소는 국민 주권을 말했습니다.</div>
+  </div>
+  <div class="qbox" id="w8q5" data-w="8" data-type="mc" data-a="0">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">산업 혁명이 영국에서 먼저 시작된 까닭으로 보기 <b>어려운</b> 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>영국에 인구가 가장 적었기 때문</span></button><button class="opt" type="button"><span class="n">②</span><span>자본과 증기 기관 기술이 있었기 때문</span></button><button class="opt" type="button"><span class="n">③</span><span>석탄과 철이 풍부했기 때문</span></button><button class="opt" type="button"><span class="n">④</span><span>식민지에서 원료와 시장을 얻었기 때문</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>오히려 농업 변화로 도시에 일할 사람이 몰린 것이 조건 중 하나였습니다.</div>
+  </div>
+  <div class="qbox" id="w8q6" data-w="8" data-type="mc" data-a="1">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">산업 혁명이 낳은 사회 문제로 알맞은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>도시가 사라진 것</span></button><button class="opt" type="button"><span class="n">②</span><span>긴 노동 시간과 어린이 노동, 도시 빈민 문제</span></button><button class="opt" type="button"><span class="n">③</span><span>공장이 문을 닫은 것</span></button><button class="opt" type="button"><span class="n">④</span><span>농사를 지을 사람이 늘어난 것</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>발전의 이야기이자 동시에 착취의 이야기였습니다. 이 문제의식에서 사회주의 사상도 나옵니다.</div>
+  </div>
+  <div class="qbox" id="w8q7" data-w="8" data-type="mc" data-a="3">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">“인권 선언으로 모두가 평등해졌다”는 말이 정확하지 않은 까닭은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>왕이 다시 돌아왔기 때문</span></button><button class="opt" type="button"><span class="n">②</span><span>신분제가 그대로였기 때문</span></button><button class="opt" type="button"><span class="n">③</span><span>인권 선언이 발표되지 않았기 때문</span></button><button class="opt" type="button"><span class="n">④</span><span>여성에게는 참정권이 없었고 노예제도 남아 있었기 때문</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>권리는 선언으로 완성되지 않고 이후 오랜 시간에 걸쳐 넓혀 온 것입니다.</div>
+  </div>
+  <div class="qbox" id="w8q8" data-w="8" data-type="sa" data-a="증기 기관|증기기관">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">와트가 개량해 공장이 강가를 벗어날 수 있게 만든 기계는?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 증기 기관</span>증기 기관입니다. 덕분에 공장이 사람이 많은 도시로 옮겨 갔습니다.</div>
+  </div>
+  <div class="qbox" id="w8q9" data-w="8" data-type="sa" data-a="루소">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">“주권은 국민에게 있다”고 주장한 계몽사상가는?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 루소</span>루소입니다.</div>
+  </div>
+  <div class="qbox" id="w8q10" data-w="8" data-type="sa" data-a="인권 선언|프랑스 인권 선언|인권선언">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">1789년 프랑스 혁명 때 발표되어 이후 여러 나라 헌법의 뿌리가 된 문서는?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 인권 선언</span>(프랑스) 인권 선언입니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="8">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w9">
+  <div class="wkhead"><span class="num">09</span><span class="lbl">WEEK 09</span>
+    <span class="sc" data-w="9">0 / 10</span></div>
+  <h2>제국주의와 저항</h2>
+  <p class="sub">아편 전쟁 · 세포이 · 메이지 유신</p>
+  <div class="qbox" id="w9q1" data-w="9" data-type="mc" data-a="3">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">제국주의가 나타난 근본 원인은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>전쟁을 좋아했기 때문</span></button><button class="opt" type="button"><span class="n">②</span><span>종교를 전파하기 위해서만</span></button><button class="opt" type="button"><span class="n">③</span><span>인구가 줄었기 때문</span></button><button class="opt" type="button"><span class="n">④</span><span>산업이 커지며 더 많은 원료와 시장이 필요해졌기 때문</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>그 원료와 시장을 힘으로 확보하려 한 것이 제국주의이고, 이것이 세계 대전으로 이어집니다.</div>
+  </div>
+  <div class="qbox" id="w9q2" data-w="9" data-type="mc" data-a="3">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">아편 전쟁이 일어난 배경으로 알맞은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>두 나라가 종교가 달랐기 때문</span></button><button class="opt" type="button"><span class="n">②</span><span>영국이 비단을 팔려 했기 때문</span></button><button class="opt" type="button"><span class="n">③</span><span>청이 영국을 먼저 침략했기 때문</span></button><button class="opt" type="button"><span class="n">④</span><span>영국이 무역 적자를 메우려 아편을 팔았고 청이 이를 막았기 때문</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>결과로 청이 패해 불평등 조약을 맺었고 동아시아의 옛 질서가 무너졌습니다.</div>
+  </div>
+  <div class="qbox" id="w9q3" data-w="9" data-type="mc" data-a="0">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">1857년 세포이의 항쟁이 일어난 나라는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>인도</span></button><button class="opt" type="button"><span class="n">②</span><span>이집트</span></button><button class="opt" type="button"><span class="n">③</span><span>일본</span></button><button class="opt" type="button"><span class="n">④</span><span>중국</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>영국 동인도 회사의 인도인 용병(세포이)들이 일으켰고, 진압된 뒤 영국의 직접 통치가 시작되었습니다.</div>
+  </div>
+  <div class="qbox" id="w9q4" data-w="9" data-type="mc" data-a="3">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">중국의 양무운동과 일본의 메이지 유신의 가장 큰 차이는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>둘 다 실패했다는 점</span></button><button class="opt" type="button"><span class="n">②</span><span>양무운동이 더 빨랐다는 점</span></button><button class="opt" type="button"><span class="n">③</span><span>메이지 유신은 기술만 들여왔다는 점</span></button><button class="opt" type="button"><span class="n">④</span><span>메이지 유신은 제도까지 통째로 바꿨다는 점</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>양무운동은 기술만 들여오려다 한계에 부딪혔습니다.</div>
+  </div>
+  <div class="qbox" id="w9q5" data-w="9" data-type="mc" data-a="2">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">아프리카에 직선으로 그은 국경선이 많은 까닭은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>강과 산맥이 직선이기 때문</span></button><button class="opt" type="button"><span class="n">②</span><span>아프리카가 스스로 정했기 때문</span></button><button class="opt" type="button"><span class="n">③</span><span>유럽 열강이 회의 테이블에서 지도를 보고 나눴기 때문</span></button><button class="opt" type="button"><span class="n">④</span><span>측량 기술이 좋았기 때문</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>민족과 부족의 경계를 무시했기 때문에 독립 이후에도 분쟁의 원인이 되었습니다.</div>
+  </div>
+  <div class="qbox" id="w9q6" data-w="9" data-type="mc" data-a="2">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">신해혁명의 결과로 알맞은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>일본이 중국을 통일했다</span></button><button class="opt" type="button"><span class="n">②</span><span>청이 더 강해졌다</span></button><button class="opt" type="button"><span class="n">③</span><span>청이 무너지고 중화민국이 세워졌다</span></button><button class="opt" type="button"><span class="n">④</span><span>황제가 다시 등장했다</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>기술 → 제도 → 체제로 이어진 중국의 마지막 단계 대응이었습니다.</div>
+  </div>
+  <div class="qbox" id="w9q7" data-w="9" data-type="mc" data-a="0">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">일본의 근대화를 평가할 때 함께 봐야 할 점은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>그 힘이 이웃 나라를 침략하는 데 쓰였다는 점</span></button><button class="opt" type="button"><span class="n">②</span><span>서양과 교류하지 않았다는 점</span></button><button class="opt" type="button"><span class="n">③</span><span>기술을 받아들이지 않았다는 점</span></button><button class="opt" type="button"><span class="n">④</span><span>근대화가 전혀 이루어지지 않았다는 점</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>근대화 자체가 아니라 그 힘을 어디에 썼는가로 평가해야 합니다.</div>
+  </div>
+  <div class="qbox" id="w9q8" data-w="9" data-type="sa" data-a="아편 전쟁|아편전쟁">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">영국이 청에 아편을 팔면서 벌어진 전쟁의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 아편 전쟁</span>아편 전쟁입니다.</div>
+  </div>
+  <div class="qbox" id="w9q9" data-w="9" data-type="sa" data-a="메이지 유신|메이지유신">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">일본이 신분제·교육·군대·헌법까지 바꾼 근대화 개혁의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 메이지 유신</span>메이지 유신입니다.</div>
+  </div>
+  <div class="qbox" id="w9q10" data-w="9" data-type="sa" data-a="강화도 조약|강화도조약|조일수호조규">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">이 시기(1876년) 우리나라가 일본과 맺은 최초의 근대적 조약은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 강화도 조약</span>강화도 조약입니다. 세계사의 제국주의 칸과 한국사의 개항이 같은 시기입니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="9">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w10">
+  <div class="wkhead"><span class="num">10</span><span class="lbl">WEEK 10</span>
+    <span class="sc" data-w="10">0 / 10</span></div>
+  <h2>제1차 세계 대전</h2>
+  <p class="sub">총력전 · 러시아 혁명 · 민족 자결</p>
+  <div class="qbox" id="w10q1" data-w="10" data-type="mc" data-a="0">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">제1차 세계 대전의 <b>계기</b>가 된 사건은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>사라예보에서 오스트리아 황태자가 암살된 일</span></button><button class="opt" type="button"><span class="n">②</span><span>아편 전쟁</span></button><button class="opt" type="button"><span class="n">③</span><span>베를린 장벽 붕괴</span></button><button class="opt" type="button"><span class="n">④</span><span>진주만 공격</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>암살은 계기이고, 진짜 원인은 제국주의 경쟁과 동맹 체제였습니다.</div>
+  </div>
+  <div class="qbox" id="w10q2" data-w="10" data-type="mc" data-a="0">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">‘총력전’이란 무엇인가?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>군인만이 아니라 공장·자원·국민 전체가 전쟁에 동원되는 방식</span></button><button class="opt" type="button"><span class="n">②</span><span>무기를 쓰지 않는 전쟁</span></button><button class="opt" type="button"><span class="n">③</span><span>군인끼리만 싸우는 방식</span></button><button class="opt" type="button"><span class="n">④</span><span>전쟁을 짧게 끝내는 방식</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>전선과 후방의 구분이 사라졌고, 그래서 전쟁이 끝난 뒤 사회 자체가 달라졌습니다.</div>
+  </div>
+  <div class="qbox" id="w10q3" data-w="10" data-type="mc" data-a="3">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">참호전의 특징으로 알맞은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>바다에서만 싸웠다</span></button><button class="opt" type="button"><span class="n">②</span><span>기병이 주로 싸웠다</span></button><button class="opt" type="button"><span class="n">③</span><span>전쟁이 몇 달 만에 끝났다</span></button><button class="opt" type="button"><span class="n">④</span><span>큰 피해에 비해 전선이 거의 움직이지 않았다</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>땅을 파고 마주 본 채 몇 년을 버텼습니다.</div>
+  </div>
+  <div class="qbox" id="w10q4" data-w="10" data-type="mc" data-a="1">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">1917년 러시아 혁명의 결과로 알맞은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>러시아가 식민지가 되었다</span></button><button class="opt" type="button"><span class="n">②</span><span>세계 최초의 사회주의 정권이 들어섰다</span></button><button class="opt" type="button"><span class="n">③</span><span>러시아가 전쟁에서 승리했다</span></button><button class="opt" type="button"><span class="n">④</span><span>왕정이 더 강해졌다</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>전쟁의 굶주림과 희생 속에서 “빵과 평화”를 요구하는 목소리가 차르 체제를 무너뜨렸습니다.</div>
+  </div>
+  <div class="qbox" id="w10q5" data-w="10" data-type="mc" data-a="2">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">민족 자결주의가 식민지 사람들에게 실망을 준 까닭은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>전쟁이 끝나지 않았기 때문</span></button><button class="opt" type="button"><span class="n">②</span><span>아무도 그 말을 하지 않았기 때문</span></button><button class="opt" type="button"><span class="n">③</span><span>사실상 패전국의 식민지에만 적용되었기 때문</span></button><button class="opt" type="button"><span class="n">④</span><span>식민지가 없었기 때문</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>승전국 일본의 식민지였던 조선에는 적용되지 않았습니다. 그럼에도 3·1 운동에 큰 자극이 되었습니다.</div>
+  </div>
+  <div class="qbox" id="w10q6" data-w="10" data-type="mc" data-a="1">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">국제 연맹이 전쟁을 막지 못한 까닭으로 알맞은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>전쟁이 일어나지 않았기 때문</span></button><button class="opt" type="button"><span class="n">②</span><span>미국이 참여하지 않았고 강제할 군사력이 없었기 때문</span></button><button class="opt" type="button"><span class="n">③</span><span>본부가 없었기 때문</span></button><button class="opt" type="button"><span class="n">④</span><span>회원국이 너무 많았기 때문</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>이 실패를 교훈 삼아 제2차 세계 대전 뒤 국제 연합(UN)이 만들어집니다.</div>
+  </div>
+  <div class="qbox" id="w10q7" data-w="10" data-type="mc" data-a="3">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">총력전이 여성의 삶에 가져온 변화로 알맞은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>아무 변화가 없었다</span></button><button class="opt" type="button"><span class="n">②</span><span>집 밖으로 나갈 수 없게 되었다</span></button><button class="opt" type="button"><span class="n">③</span><span>교육을 받을 수 없게 되었다</span></button><button class="opt" type="button"><span class="n">④</span><span>공장과 병원에서 일하게 되었고 이후 참정권 확대로 이어졌다</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>남자들이 전선에 가면서 여성이 사회의 여러 일을 맡게 된 것이 권리 확대의 계기가 되었습니다.</div>
+  </div>
+  <div class="qbox" id="w10q8" data-w="10" data-type="sa" data-a="3·1 운동|3.1운동|삼일운동|3·1운동|삼일 운동">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">1919년, 민족 자결주의의 흐름 속에서 우리나라에서 일어난 만세 운동은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 3·1 운동</span>3·1 운동입니다.</div>
+  </div>
+  <div class="qbox" id="w10q9" data-w="10" data-type="sa" data-a="총력전">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">국민 전체와 산업이 통째로 전쟁에 동원되는 방식을 무엇이라 하는가?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 총력전</span>총력전입니다.</div>
+  </div>
+  <div class="qbox" id="w10q10" data-w="10" data-type="sa" data-a="국제 연맹|국제연맹">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">제1차 세계 대전 뒤 전쟁을 막기 위해 만들어진 최초의 국제기구는?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 국제 연맹</span>국제 연맹입니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="10">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w11">
+  <div class="wkhead"><span class="num">11</span><span class="lbl">WEEK 11</span>
+    <span class="sc" data-w="11">0 / 10</span></div>
+  <h2>대공황과 제2차 세계 대전</h2>
+  <p class="sub">뉴딜 · 전체주의 · 국제 연합</p>
+  <div class="qbox" id="w11q1" data-w="11" data-type="mc" data-a="2">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">대공황이 시작된 해는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>1914년</span></button><button class="opt" type="button"><span class="n">②</span><span>1945년</span></button><button class="opt" type="button"><span class="n">③</span><span>1929년</span></button><button class="opt" type="button"><span class="n">④</span><span>1939년</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>1929년 미국 주식 시장이 무너지며 시작되어 전 세계로 번졌습니다.</div>
+  </div>
+  <div class="qbox" id="w11q2" data-w="11" data-type="mc" data-a="1">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">미국의 뉴딜 정책이 새로웠던 점은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>식민지를 늘린 점</span></button><button class="opt" type="button"><span class="n">②</span><span>정부가 직접 일자리를 만들며 시장에 적극 개입한 점</span></button><button class="opt" type="button"><span class="n">③</span><span>정부가 경제에서 완전히 손을 뗀 점</span></button><button class="opt" type="button"><span class="n">④</span><span>전쟁을 일으킨 점</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>그전까지는 정부가 경제에 끼어들지 않는 것이 원칙이었습니다.</div>
+  </div>
+  <div class="qbox" id="w11q3" data-w="11" data-type="mc" data-a="2">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">전체주의를 바르게 설명한 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>여러 정당이 경쟁하는 제도</span></button><button class="opt" type="button"><span class="n">②</span><span>국민이 직접 정치에 참여하는 제도</span></button><button class="opt" type="button"><span class="n">③</span><span>개인보다 국가나 민족을 절대적으로 앞세우고 반대를 허용하지 않는 사상</span></button><button class="opt" type="button"><span class="n">④</span><span>종교가 정치를 이끄는 제도</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>독일의 나치, 이탈리아의 파시즘, 일본의 군국주의가 여기에 해당합니다.</div>
+  </div>
+  <div class="qbox" id="w11q4" data-w="11" data-type="mc" data-a="1">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">나치가 권력을 잡은 과정에 대한 설명으로 옳은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>외국 군대의 힘으로 세워졌다</span></button><button class="opt" type="button"><span class="n">②</span><span>선거를 통해 제1당이 되었다</span></button><button class="opt" type="button"><span class="n">③</span><span>왕이 임명했다</span></button><button class="opt" type="button"><span class="n">④</span><span>혁명 없이 저절로 생겼다</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>경제가 무너지고 불안이 극심할 때 사람들이 “강하게 밀어붙이는 쪽”을 택한 결과였습니다. 민주주의도 스스로 무너질 수 있다는 교훈입니다.</div>
+  </div>
+  <div class="qbox" id="w11q5" data-w="11" data-type="mc" data-a="3">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">영국과 프랑스가 대공황에 대응한 방식은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>식민지를 모두 독립시킴</span></button><button class="opt" type="button"><span class="n">②</span><span>전쟁을 일으킴</span></button><button class="opt" type="button"><span class="n">③</span><span>시장을 완전히 개방함</span></button><button class="opt" type="button"><span class="n">④</span><span>식민지를 묶어 자기들끼리만 무역하는 블록 경제</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>이 방식은 식민지가 적은 나라들의 불만을 키워 침략의 빌미가 되었습니다.</div>
+  </div>
+  <div class="qbox" id="w11q6" data-w="11" data-type="mc" data-a="3">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">국제 연합(UN)이 국제 연맹과 다른 점으로 알맞은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>군사력을 전혀 쓰지 않는다</span></button><button class="opt" type="button"><span class="n">②</span><span>회원국이 더 적다</span></button><button class="opt" type="button"><span class="n">③</span><span>유럽 나라만 가입할 수 있다</span></button><button class="opt" type="button"><span class="n">④</span><span>강대국이 함께 참여하고 안전 보장 이사회를 두어 실질적 힘을 갖췄다</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>1948년 세계 인권 선언도 국제 연합에서 채택되었습니다.</div>
+  </div>
+  <div class="qbox" id="w11q7" data-w="11" data-type="mc" data-a="1">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">제2차 세계 대전 중 나치 독일이 저지른, 유대인 약 600만 명을 학살한 일을 무엇이라 하는가?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>산업 혁명</span></button><button class="opt" type="button"><span class="n">②</span><span>홀로코스트</span></button><button class="opt" type="button"><span class="n">③</span><span>르네상스</span></button><button class="opt" type="button"><span class="n">④</span><span>십자군</span></button></div>
+    <div class="exp"><span class="ans">정답 ②</span>홀로코스트입니다. 인류가 스스로에게 저지른 최악의 일 중 하나로 기억됩니다.</div>
+  </div>
+  <div class="qbox" id="w11q8" data-w="11" data-type="sa" data-a="대공황|세계 대공황">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">1929년 미국에서 시작되어 전 세계로 번진 경제 위기를 무엇이라 하는가?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 대공황</span>대공황입니다.</div>
+  </div>
+  <div class="qbox" id="w11q9" data-w="11" data-type="sa" data-a="뉴딜|뉴딜 정책|뉴딜정책">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">미국 루스벨트 대통령이 대공황을 이겨 내기 위해 편 정책의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 뉴딜</span>뉴딜 정책입니다.</div>
+  </div>
+  <div class="qbox" id="w11q10" data-w="11" data-type="sa" data-a="국제 연합|국제연합|UN|유엔">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">제2차 세계 대전 뒤 국제 연맹의 실패를 교훈 삼아 만들어진 국제기구는?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 국제 연합</span>국제 연합(UN)입니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="11">0 / 10</b></div>
+</section>
+
+<section class="wk" id="w12">
+  <div class="wkhead"><span class="num">12</span><span class="lbl">WEEK 12</span>
+    <span class="sc" data-w="12">0 / 10</span></div>
+  <h2>냉전과 오늘</h2>
+  <p class="sub">두 진영 · 탈식민 · 탈냉전</p>
+  <div class="qbox" id="w12q1" data-w="12" data-type="mc" data-a="0">
+    <span class="qn">01 · 객관식</span>
+    <p class="qt">냉전을 바르게 설명한 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>미국과 소련이 직접 전쟁을 하지 않으면서 대립한 상태</span></button><button class="opt" type="button"><span class="n">②</span><span>두 나라가 직접 맞붙어 싸운 전쟁</span></button><button class="opt" type="button"><span class="n">③</span><span>전쟁이 완전히 사라진 시기</span></button><button class="opt" type="button"><span class="n">④</span><span>추운 지방에서 벌어진 전쟁</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>두 강대국은 직접 싸우지 않았지만, 그 사이에 낀 나라들에서는 실제 전쟁이 벌어졌습니다.</div>
+  </div>
+  <div class="qbox" id="w12q2" data-w="12" data-type="mc" data-a="2">
+    <span class="qn">02 · 객관식</span>
+    <p class="qt">냉전 시기 두 진영을 바르게 짝지은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>북반구 진영 — 남반구 진영</span></button><button class="opt" type="button"><span class="n">②</span><span>영국 진영 — 프랑스 진영</span></button><button class="opt" type="button"><span class="n">③</span><span>미국 중심의 자본주의 진영 — 소련 중심의 공산주의 진영</span></button><button class="opt" type="button"><span class="n">④</span><span>유럽 진영 — 아시아 진영</span></button></div>
+    <div class="exp"><span class="ans">정답 ③</span>각각 북대서양 조약 기구와 바르샤바 조약 기구로 묶였습니다.</div>
+  </div>
+  <div class="qbox" id="w12q3" data-w="12" data-type="mc" data-a="3">
+    <span class="qn">03 · 객관식</span>
+    <p class="qt">냉전이 실제 전쟁으로 터진 곳으로 알맞은 것은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>일본과 호주</span></button><button class="opt" type="button"><span class="n">②</span><span>영국과 프랑스</span></button><button class="opt" type="button"><span class="n">③</span><span>브라질과 아르헨티나</span></button><button class="opt" type="button"><span class="n">④</span><span>한국과 베트남</span></button></div>
+    <div class="exp"><span class="ans">정답 ④</span>“차가운 전쟁”이라는 이름은 미국과 소련 사이에서만 맞는 말입니다. 한반도에서는 뜨거운 전쟁이었습니다.</div>
+  </div>
+  <div class="qbox" id="w12q4" data-w="12" data-type="mc" data-a="0">
+    <span class="qn">04 · 객관식</span>
+    <p class="qt">동서 냉전의 상징이던 베를린 장벽이 무너진 해는?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>1989년</span></button><button class="opt" type="button"><span class="n">②</span><span>2000년</span></button><button class="opt" type="button"><span class="n">③</span><span>1945년</span></button><button class="opt" type="button"><span class="n">④</span><span>1961년</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>1989년 시민들이 직접 무너뜨렸고, 이어 독일이 통일되고 소련이 해체되었습니다.</div>
+  </div>
+  <div class="qbox" id="w12q5" data-w="12" data-type="mc" data-a="0">
+    <span class="qn">05 · 객관식</span>
+    <p class="qt">제2차 세계 대전 이후 식민지들이 잇따라 독립할 수 있었던 까닭은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>전쟁으로 제국들이 약해졌고 민족 운동이 자라 있었기 때문</span></button><button class="opt" type="button"><span class="n">②</span><span>제국들이 스스로 원했기 때문</span></button><button class="opt" type="button"><span class="n">③</span><span>국경이 사라졌기 때문</span></button><button class="opt" type="button"><span class="n">④</span><span>식민지가 부유해졌기 때문</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>다만 인위적으로 그은 국경 때문에 독립 이후에도 갈등이 남았습니다.</div>
+  </div>
+  <div class="qbox" id="w12q6" data-w="12" data-type="mc" data-a="0">
+    <span class="qn">06 · 객관식</span>
+    <p class="qt">“냉전이 끝나 세계가 평화로워졌다”는 말이 정확하지 않은 까닭은?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>민족·종교 갈등이 드러난 곳이 있고 한반도의 분단은 지금도 이어지기 때문</span></button><button class="opt" type="button"><span class="n">②</span><span>소련이 그대로 있기 때문</span></button><button class="opt" type="button"><span class="n">③</span><span>전쟁이 더 늘었기 때문</span></button><button class="opt" type="button"><span class="n">④</span><span>냉전이 끝나지 않았기 때문</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>세계사의 마지막 칸은 아직 끝나지 않은 칸입니다.</div>
+  </div>
+  <div class="qbox" id="w12q7" data-w="12" data-type="mc" data-a="0">
+    <span class="qn">07 · 객관식</span>
+    <p class="qt">오늘의 기후 위기는 12칸 중 어느 시기에 뿌리를 두고 있는가?</p>
+    <div class="opts"><button class="opt" type="button"><span class="n">①</span><span>산업 혁명</span></button><button class="opt" type="button"><span class="n">②</span><span>몽골 제국</span></button><button class="opt" type="button"><span class="n">③</span><span>신항로 개척</span></button><button class="opt" type="button"><span class="n">④</span><span>고대 제국</span></button></div>
+    <div class="exp"><span class="ans">정답 ①</span>석탄과 석유를 태워 기계를 돌리기 시작한 것이 200년 뒤 지구 전체의 문제가 되었습니다.</div>
+  </div>
+  <div class="qbox" id="w12q8" data-w="12" data-type="sa" data-a="소련|소비에트 연방|소비에트연방">
+    <span class="qn">08 · 단답형</span>
+    <p class="qt">1991년에 해체된, 냉전의 한 축이었던 나라의 이름은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 소련</span>소련입니다.</div>
+  </div>
+  <div class="qbox" id="w12q9" data-w="12" data-type="sa" data-a="베를린 장벽|베를린장벽">
+    <span class="qn">09 · 단답형</span>
+    <p class="qt">1989년에 무너진, 동서 냉전을 상징하던 독일의 벽은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 베를린 장벽</span>베를린 장벽입니다.</div>
+  </div>
+  <div class="qbox" id="w12q10" data-w="12" data-type="sa" data-a="6·25 전쟁|6.25전쟁|육이오 전쟁|한국 전쟁|6·25전쟁|한국전쟁">
+    <span class="qn">10 · 단답형</span>
+    <p class="qt">냉전이 우리나라에서 실제 전쟁으로 터진, 1950년에 시작된 전쟁은?</p>
+    <div class="sa"><input type="text" inputmode="text" autocomplete="off" placeholder="답을 입력하세요"><button type="button">확인</button></div>
+    <div class="exp"><span class="ans">정답 6·25 전쟁</span>6·25 전쟁(한국 전쟁)입니다.</div>
+  </div>
+  <div class="wkfoot">이 주차 점수 <b data-w="12">0 / 10</b></div>
+</section>
+
+<footer>
+  세계사 문제집 120제 · 12주 × 10문제 · 기록은 이 기기에만 저장됩니다<br>
+  <button class="reset" id="resetAll" style="margin:8px 0 0">전체 기록 지우고 처음부터</button><br>
+  학습 문서 · <a href="index.html">세계사 항해 12주</a>
+</footer>
+</div>
+<script>
+(function(){
+  var KEY="world_quiz_v1";
+  function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){return{}}}
+  function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+  var state=load();
+
+  function norm(s){return (s||"").replace(/\s+/g,"").replace(/[.,·’'"]/g,"").toLowerCase();}
+
+  function mark(box,right){
+    box.dataset.done="1";
+    box.querySelector(".exp").classList.add("show");
+    var s=load(); s[box.id]=right?1:0; save(s); paint();
+  }
+
+  document.querySelectorAll(".qbox[data-type=mc]").forEach(function(box){
+    var ans=parseInt(box.dataset.a,10);
+    box.querySelectorAll(".opt").forEach(function(btn,i){
+      btn.addEventListener("click",function(){
+        if(box.dataset.done) return;
+        box.querySelectorAll(".opt").forEach(function(b,j){
+          b.disabled=true;
+          if(j===ans) b.classList.add("ok");
+          else if(j===i) b.classList.add("no");
+        });
+        mark(box, i===ans);
+      });
+    });
+  });
+
+  document.querySelectorAll(".qbox[data-type=sa]").forEach(function(box){
+    var accept=(box.dataset.a||"").split("|").map(norm);
+    var input=box.querySelector("input"), btn=box.querySelector("button");
+    function check(){
+      if(box.dataset.done) return;
+      var right=accept.indexOf(norm(input.value))>=0;
+      input.classList.add(right?"ok":"no");
+      input.readOnly=true; btn.disabled=true;
+      mark(box,right);
+    }
+    btn.addEventListener("click",check);
+    input.addEventListener("keydown",function(e){if(e.key==="Enter")check();});
+  });
+
+  function paint(){
+    var s=load(), total=0;
+    for(var w=1;w<=12;w++){
+      var right=0, done=0;
+      document.querySelectorAll('.qbox[data-w="'+w+'"]').forEach(function(b){
+        if(b.id in s){done++; if(s[b.id]===1) right++;}
+      });
+      total+=right;
+      var el=document.querySelector('.sc[data-w="'+w+'"]');
+      if(el) el.textContent = done? (right+" / "+done+" 맞음") : "0 / 10";
+      var fo=document.querySelector('.wkfoot b[data-w="'+w+'"]');
+      if(fo) fo.textContent = right+" / 10";
+    }
+    var t=document.getElementById("total"); if(t) t.textContent=total+" / 120";
+    var bar=document.getElementById("bar"); if(bar) bar.style.width=(total/120*100)+"%";
+  }
+
+  // 새로고침해도 푼 문제는 유지
+  document.querySelectorAll(".qbox").forEach(function(box){
+    if(!(box.id in state)) return;
+    var right=state[box.id]===1;
+    box.dataset.done="1";
+    box.querySelector(".exp").classList.add("show");
+    if(box.dataset.type==="mc"){
+      var ans=parseInt(box.dataset.a,10);
+      box.querySelectorAll(".opt").forEach(function(b,j){
+        b.disabled=true;
+        if(j===ans) b.classList.add("ok");
+      });
+      if(!right) box.querySelector(".qn").insertAdjacentHTML("beforeend"," · 틀림");
+    }else{
+      var inp=box.querySelector("input"), bt=box.querySelector("button");
+      inp.readOnly=true; bt.disabled=true;
+      inp.classList.add(right?"ok":"no");
+      if(right && !inp.value) inp.value=(box.dataset.a||"").split("|")[0];
+    }
+  });
+  paint();
+
+  var rs=document.getElementById("resetAll");
+  if(rs) rs.addEventListener("click",function(){
+    if(!confirm("푼 기록을 모두 지우고 처음부터 다시 풀까요?")) return;
+    save({}); location.reload();
+  });
+
+  var links=[].slice.call(document.querySelectorAll("nav.jump a[href^='#']"));
+  var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1))});
+  function onScroll(){
+    var y=window.scrollY+120,idx=0;
+    secs.forEach(function(s,i){if(s&&s.offsetTop<=y)idx=i});
+    links.forEach(function(a,i){a.classList.toggle("now",i===idx)});
+  }
+  window.addEventListener("scroll",onScroll,{passive:true});onScroll();
+})();
+</script>
+</body>
+</html>
