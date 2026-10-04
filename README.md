@@ -95,6 +95,7 @@ GitHub 저장소 → **Settings → Pages → Branch: main, / (root)** 선택 �
 
 - 🔬 **과학 등반 12주**: `https://saigomad7.github.io/family-location/science_quest/`
   중2 과학을 하루 20분씩 밟아 가는 주차별 학습 문서입니다. 폰에서 보도록 만들었습니다.
+  - 🫀 **심장과 혈액 순환** (단원 집중 문서, 도식 10장): `.../science_quest/heart.html`
 - 🏛️ **역사 항해 12주**: `https://saigomad7.github.io/family-location/history_quest/`
   한국사 전체 흐름을 연표 한 장으로 잇는 주차별 학습 문서입니다. 과학과 같은 리듬으로 진행합니다.
 - 📐 **수학 사다리 12주**: `https://saigomad7.github.io/family-location/math_quest/`

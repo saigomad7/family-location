@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#DCE2DB">
+<title>심장과 혈액 순환 — 그림으로 끝내기</title>
+<meta name="description" content="중2 과학 동물과 에너지 단원의 순환 부분을 도식 아홉 장으로 정리한 집중 문서.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#131C18; --ink2:#2C3A33; --muted:#5F6E66; --faint:#8A968F;
+    --mist:#DCE2DB; --surface:#F8FAF6; --surface2:#EFF3EC;
+    --line:#C3CCC1; --hair:#DDE4DB;
+    --kelp:#1F6249; --kelp-wash:#DEEDE4; --kelp-line:#8FBBA3;
+    --amber:#8F6209; --amber-wash:#F5EAD0; --amber-line:#DCC79B;
+    --berry:#8C2F3E; --berry-wash:#F3DFE2; --berry-line:#D9A8B0;
+    --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+    --mono:"IBM Plex Mono","SFMono-Regular",Consolas,"D2Coding",monospace;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{margin:0;background:var(--mist);color:var(--ink);font-family:var(--sans);
+    font-size:16px;line-height:1.75;letter-spacing:-0.01em;
+    padding:0 18px calc(70px + env(safe-area-inset-bottom));
+    word-break:keep-all;overflow-wrap:anywhere;}
+  .wrap{max-width:1040px;margin:0 auto;}
+
+  /* ===== 표지 ===== */
+  .cover{padding:44px 0 30px;border-bottom:2px solid var(--ink);}
+  .cover .kicker{font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:0.2em;text-transform:uppercase;color:var(--kelp);margin:0 0 16px;}
+  .cover h1{font-size:clamp(27px,6vw,44px);font-weight:700;line-height:1.24;
+    letter-spacing:-0.035em;margin:0 0 16px;max-width:21ch;}
+  .cover .lede{font-size:clamp(15.5px,2vw,18px);font-weight:300;color:var(--ink2);
+    max-width:62ch;margin:0 0 24px;line-height:1.72;}
+  .cover .lede b{font-weight:600;color:var(--ink);}
+  .metaline{display:flex;flex-wrap:wrap;gap:6px 22px;font-family:var(--mono);
+    font-size:11.5px;color:var(--muted);letter-spacing:0.03em;}
+  .metaline b{color:var(--ink);font-weight:500;}
+
+  .summary{background:var(--ink);border-radius:3px;padding:26px 22px 24px;margin:28px 0 0;}
+  .summary h2{color:#F6FAF5;font-size:18px;font-weight:600;margin:0 0 6px;letter-spacing:-0.02em;}
+  .summary .sd{color:#93A399;font-size:13.5px;font-weight:300;margin:0 0 22px;line-height:1.65;}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:18px;}
+  .kpi .kl{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:#7E8F84;display:block;margin-bottom:5px;}
+  .kpi .kv{font-size:clamp(21px,3.2vw,28px);font-weight:700;color:#8FD3B4;
+    letter-spacing:-0.03em;display:block;line-height:1.1;}
+  .kpi .kn{font-size:12px;color:#B9C6BC;display:block;margin-top:6px;
+    font-weight:300;line-height:1.5;}
+
+  /* ===== 이동 바 ===== */
+  nav.jump{position:sticky;top:0;z-index:40;margin:0 -18px;padding:0 18px;
+    background:rgba(220,226,219,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);}
+  nav.jump .row{display:flex;gap:6px;overflow-x:auto;padding:9px 0;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  nav.jump .row::-webkit-scrollbar{display:none;}
+  nav.jump a{flex:0 0 auto;font-family:var(--mono);font-size:11.5px;letter-spacing:0.04em;
+    color:var(--muted);background:var(--surface);border:1px solid var(--line);
+    padding:6px 11px;border-radius:2px;text-decoration:none;}
+  nav.jump a.now{color:#fff;background:var(--kelp);border-color:var(--kelp);}
+
+  /* ===== 섹션 ===== */
+  .sec{padding:44px 0 12px;border-bottom:1px solid var(--line);scroll-margin-top:56px;}
+  .sec:last-of-type{border-bottom:0;}
+  .step-no{display:flex;align-items:center;gap:11px;margin-bottom:14px;}
+  .step-no .num{font-family:var(--mono);font-size:12px;font-weight:600;color:#fff;
+    background:var(--kelp);width:28px;height:28px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-no .lbl{font-family:var(--mono);font-size:11px;letter-spacing:0.13em;
+    text-transform:uppercase;color:var(--muted);}
+  .step-no .day{margin-left:auto;font-family:var(--mono);font-size:11px;
+    letter-spacing:0.1em;color:var(--kelp);background:var(--kelp-wash);
+    border:1px solid var(--kelp-line);padding:3px 9px;border-radius:2px;}
+  .sec h2{font-size:clamp(22px,3.4vw,29px);font-weight:600;letter-spacing:-0.03em;
+    line-height:1.34;margin:0 0 14px;max-width:30ch;}
+  .sec h3{font-size:17.5px;font-weight:600;letter-spacing:-0.02em;margin:30px 0 10px;}
+  .sec > p{max-width:70ch;color:var(--ink2);margin:0 0 16px;}
+  .sec strong,.sec b{font-weight:600;color:var(--ink);}
+  .sec code{font-family:var(--mono);font-size:0.86em;background:var(--surface2);
+    border:1px solid var(--hair);padding:1px 5px;border-radius:2px;}
+
+  .plain{background:var(--surface2);border-left:3px solid var(--kelp);
+    padding:14px 17px;margin:0 0 20px;border-radius:0 2px 2px 0;max-width:74ch;}
+  .plain p{margin:0;font-size:14.5px;color:var(--ink2);line-height:1.72;}
+  .plain p + p{margin-top:10px;}
+  .plain b{color:var(--kelp);font-weight:600;}
+
+  .fig{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:20px 16px 16px;margin:20px 0 12px;}
+  .fig-t{font-family:var(--mono);font-size:11px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--kelp);margin:0 0 16px;
+    padding-bottom:9px;border-bottom:1px solid var(--hair);}
+  .fig svg{display:block;width:100%;height:auto;}
+  .fig.wide{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .fig.wide svg{min-width:640px;}
+  .fig-c{font-size:13px;color:var(--muted);margin:14px 0 0;font-weight:300;
+    line-height:1.65;padding-top:12px;border-top:1px solid var(--hair);}
+  .fig-c b{color:var(--ink);font-weight:600;}
+
+  .sb{fill:#fff;stroke:#C3CCC1;stroke-width:1.5;}
+  .sb-k{fill:#DEEDE4;stroke:#1F6249;stroke-width:2;}
+  .sb-b{fill:#F3DFE2;stroke:#D9A8B0;stroke-width:1.5;}
+  .sb-a{fill:#F5EAD0;stroke:#DCC79B;stroke-width:1.5;}
+  .sb-g{fill:#EFF3EC;stroke:#C3CCC1;stroke-width:1.5;}
+  .sb-d{fill:#fff;stroke:#1F6249;stroke-width:1.6;stroke-dasharray:5 4;}
+  .st{font-family:var(--sans);font-size:13.5px;font-weight:600;fill:#131C18;
+    text-anchor:middle;letter-spacing:-0.3px;}
+  .st-s{font-family:var(--sans);font-size:11.5px;font-weight:400;fill:#5F6E66;text-anchor:middle;}
+  .st-k{fill:#1F6249;} .st-b{fill:#8C2F3E;} .st-a{fill:#8F6209;}
+  .sm{font-family:var(--mono);font-size:12px;fill:#131C18;text-anchor:middle;font-weight:500;}
+  .sm-s{font-family:var(--mono);font-size:10.5px;fill:#5F6E66;text-anchor:middle;}
+  .st-m{font-family:var(--mono);font-size:11px;fill:#8A968F;text-anchor:middle;letter-spacing:0.5px;}
+  .sl{stroke:#8A968F;stroke-width:1.6;fill:none;}
+  .sl-k{stroke:#1F6249;stroke-width:2;fill:none;}
+  .sl-a{stroke:#8F6209;stroke-width:1.8;fill:none;}
+  .sl-d{stroke:#8A968F;stroke-width:1.4;fill:none;stroke-dasharray:4 4;}
+  .sa{fill:#8A968F;} .sa-k{fill:#1F6249;} .sa-a{fill:#8F6209;}
+  .dot-k{fill:#1F6249;} .dot-a{fill:#C99A2E;} .dot-b{fill:#8C2F3E;}
+
+  /* ===== 표 ===== */
+  .tw{overflow-x:auto;margin:20px 0 8px;border:1px solid var(--line);
+    border-radius:3px;background:var(--surface);}
+  table{border-collapse:collapse;width:100%;font-size:13.8px;}
+  .tw.wide table{min-width:560px;}
+  thead th{background:var(--ink);color:#E8EFE7;text-align:left;font-family:var(--mono);
+    font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
+    padding:11px 13px;}
+  tbody td{padding:11px 13px;border-top:1px solid var(--hair);vertical-align:top;
+    color:var(--ink2);line-height:1.62;}
+  tbody tr:nth-child(even) td{background:var(--surface2);}
+  td.hd{font-weight:600;color:var(--ink);}
+  td.mn{font-family:var(--mono);font-size:12.5px;}
+  td.ok{color:var(--kelp);font-weight:600;}
+  td.no{color:var(--berry);font-weight:600;}
+  td.wa{color:var(--amber);font-weight:600;}
+  td.fill{font-family:var(--mono);color:var(--faint);}
+
+  .note{background:var(--amber-wash);border:1px solid var(--amber-line);
+    border-radius:3px;padding:17px 19px;margin:20px 0 8px;}
+  .note p{margin:0;font-size:14px;color:#5C440C;line-height:1.72;}
+  .note p + p{margin-top:9px;}
+  .note b{font-weight:600;}
+  .note .lb{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--amber);margin-bottom:6px;}
+  .alert{background:var(--berry-wash);border:1px solid var(--berry-line);
+    border-radius:3px;padding:17px 19px;margin:20px 0 8px;}
+  .alert p{margin:0;font-size:14px;color:#6B2430;line-height:1.72;}
+  .alert p + p{margin-top:9px;}
+  .alert b{font-weight:600;}
+  .alert .lb{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--berry);margin-bottom:6px;}
+
+  /* ===== 카드 묶음 ===== */
+  .cards{display:grid;gap:12px;margin:18px 0 8px;}
+  @media(min-width:680px){.cards.two{grid-template-columns:repeat(2,1fr);}}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:15px 17px;}
+  .card .ct{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;
+    color:var(--kelp);display:block;margin-bottom:7px;}
+  .card h4{margin:0 0 6px;font-size:15.5px;font-weight:600;letter-spacing:-0.02em;}
+  .card p{margin:0;font-size:14px;color:var(--ink2);line-height:1.68;}
+
+  /* ===== 요일 할 일 ===== */
+  .todo{list-style:none;margin:20px 0 8px;padding:0;background:var(--surface);
+    border:1px solid var(--line);border-radius:3px;overflow:hidden;}
+  .todo li + li{border-top:1px solid var(--hair);}
+  .todo label{display:grid;grid-template-columns:22px 1fr;gap:13px;align-items:start;
+    padding:15px 16px;cursor:pointer;font-size:14.5px;line-height:1.65;color:var(--ink2);min-height:54px;}
+  .todo input{appearance:none;-webkit-appearance:none;width:21px;height:21px;margin:1px 0 0;
+    border:1.5px solid var(--line);border-radius:2px;background:#fff;
+    display:grid;place-content:center;cursor:pointer;}
+  .todo input::after{content:"✓";font-size:13px;font-weight:700;color:#fff;transform:scale(0);}
+  .todo input:checked{background:var(--kelp);border-color:var(--kelp);}
+  .todo input:checked::after{transform:scale(1);}
+  .todo input:focus-visible{outline:2px solid var(--kelp);outline-offset:2px;}
+  .todo input:checked ~ .tt{color:var(--faint);text-decoration:line-through;}
+  .todo .tt b{color:var(--ink);font-weight:600;}
+
+  /* ===== 문제 ===== */
+  .q{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:15px 17px;margin:12px 0;}
+  .q .qn{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--kelp);
+    letter-spacing:0.12em;}
+  .q > p{margin:6px 0 0;font-size:15.5px;color:var(--ink);line-height:1.7;}
+  .q details{margin-top:12px;border-top:1px solid var(--hair);padding-top:10px;}
+  .q summary{cursor:pointer;list-style:none;font-family:var(--mono);font-size:12px;
+    font-weight:600;color:var(--kelp);letter-spacing:0.06em;padding:3px 0;}
+  .q summary::-webkit-details-marker{display:none;}
+  .q summary::before{content:"+ ";}
+  .q details[open] summary::before{content:"− ";}
+  .q .ans{margin-top:9px;background:var(--kelp-wash);border-radius:2px;padding:12px 14px;
+    font-size:14px;color:var(--ink2);line-height:1.7;}
+  .q .ans b{color:var(--kelp);font-weight:600;}
+
+  /* ===== 설명 대본 ===== */
+  .script{background:var(--surface);border:1px solid var(--kelp-line);border-radius:3px;
+    padding:16px 18px;margin:18px 0 8px;}
+  .script .row{display:grid;grid-template-columns:70px 1fr;gap:12px;font-size:14.5px;
+    color:var(--ink2);line-height:1.7;}
+  .script .row + .row{margin-top:11px;padding-top:11px;border-top:1px solid var(--hair);}
+  .script .s{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;color:var(--kelp);
+    font-weight:600;padding-top:4px;}
+
+  .badge{display:inline-block;font-family:var(--mono);font-size:12.5px;font-weight:600;
+    color:var(--amber);background:var(--amber-wash);border:1px solid var(--amber-line);
+    border-radius:2px;padding:7px 14px;margin-top:14px;letter-spacing:0.04em;}
+
+  /* ===== 주차 목록 (허브) ===== */
+  .wlist{display:flex;flex-direction:column;gap:10px;margin:18px 0 8px;}
+  a.wk{display:grid;grid-template-columns:1fr auto;grid-template-areas:"n p" "t p" "d d";
+    gap:2px 14px;background:var(--surface);border:1px solid var(--line);
+    border-left:3px solid var(--kelp);border-radius:3px;padding:15px 17px;
+    text-decoration:none;color:var(--ink);}
+  a.wk .n{grid-area:n;font-family:var(--mono);font-size:11px;font-weight:600;
+    letter-spacing:0.12em;color:var(--kelp);}
+  a.wk .t{grid-area:t;font-size:17px;font-weight:600;letter-spacing:-0.02em;}
+  a.wk .d{grid-area:d;font-size:13.5px;color:var(--muted);margin-top:5px;line-height:1.6;font-weight:300;}
+  a.wk .p{grid-area:p;align-self:center;font-family:var(--mono);font-size:11px;color:var(--muted);
+    background:var(--surface2);border:1px solid var(--hair);border-radius:2px;padding:4px 9px;white-space:nowrap;}
+  a.wk .p.done{color:#fff;background:var(--kelp);border-color:var(--kelp);}
+  a.wk .p.ing{color:var(--amber);background:var(--amber-wash);border-color:var(--amber-line);}
+  .wk.soon{border-left-color:var(--line);opacity:.62;pointer-events:none;}
+  .wk.soon .n,.wk.soon .t{color:var(--muted);}
+
+  /* ===== 진행 막대 ===== */
+  .bar{height:7px;background:var(--hair);border-radius:99px;overflow:hidden;margin-top:12px;
+    border:1px solid var(--line);}
+  .bar i{display:block;height:100%;background:var(--kelp);width:0;transition:width .3s;}
+
+  /* ===== 페이지 이동 ===== */
+  .pager{display:flex;gap:9px;margin:26px 0 0;}
+  .pager a{flex:1;text-align:center;font-size:13.5px;font-weight:600;text-decoration:none;
+    color:var(--ink2);background:var(--surface);border:1px solid var(--line);
+    border-radius:3px;padding:14px 8px;}
+  .pager a.main{background:var(--kelp);border-color:var(--kelp);color:#fff;}
+  footer{padding:26px 0 10px;font-family:var(--mono);font-size:11.5px;color:var(--faint);
+    letter-spacing:0.03em;line-height:1.8;}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;}}
+
+  /* 단원 집중 문서 전용 */
+  .fillin{background:#fff;border:1px dashed var(--line);border-radius:3px;
+    padding:13px 15px;margin:16px 0;font-size:14.5px;color:var(--muted);}
+  .fillin b{color:var(--ink);}
+  .two-col{display:grid;grid-template-columns:1fr;gap:12px;margin:18px 0;}
+  @media(min-width:620px){.two-col{grid-template-columns:1fr 1fr;}}
+  .mini{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--kelp);
+    border-radius:2px;padding:13px 15px;font-size:14.5px;color:var(--ink2);}
+  .mini h4{margin:0 0 6px;font-size:14.5px;font-weight:600;color:var(--ink);}
+  .mini p{margin:0;}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="cover">
+  <p class="kicker">중2 과학 · 동물과 에너지 · 순환 집중 문서</p>
+  <h1>심장과 혈액 순환</h1>
+  <p class="lede">
+    이 단원은 <b>외울 것이 많아 보이지만 실제로 외울 것은 거의 없습니다.</b>
+    우심방·좌심실·폐동맥·폐정맥은 이름이 어려울 뿐, 전부 <b>그림 한 장에서 따라 나오는 결과</b>입니다.
+    그래서 이 문서는 설명을 먼저 하지 않습니다. <b>그림을 먼저 보고, 그림에서 규칙을 읽어냅니다.</b>
+  </p>
+  <div class="metaline">
+    <span>단원 <b>동물과 에너지 · 순환</b></span>
+    <span>도식 <b>9장</b></span>
+    <span>걸리는 시간 <b>30분</b></span>
+    <span>목표 <b>안 보고 그리기</b></span>
+  </div>
+
+  <div class="summary">
+    <h2>이 문서가 끝나면 할 수 있는 것</h2>
+    <p class="sd">암기가 아니라 <b>빈 종이에 심장을 그리고 화살표로 한 바퀴 설명하기</b>가 목표입니다.</p>
+    <div class="kpis">
+      <div class="kpi"><span class="kl">규칙</span><span class="kv">2개</span>
+        <span class="kn">방으로 들어오고 실에서 나간다 · 오른쪽은 폐 왼쪽은 온몸</span></div>
+      <div class="kpi"><span class="kl">그림</span><span class="kv">9장</span>
+        <span class="kn">세포 · 심장 · 판막 · 혈관 · 혈액 · 두 바퀴</span></div>
+      <div class="kpi"><span class="kl">함정</span><span class="kv">5개</span>
+        <span class="kn">시험에서 꼭 나오는 헷갈리는 자리</span></div>
+      <div class="kpi"><span class="kl">마무리</span><span class="kv">빈 그림</span>
+        <span class="kn">직접 채워 보는 연습 한 장</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="jump"><div class="row">
+  <a href="#why">1 왜 도는가</a>
+  <a href="#heart">2 심장 네 칸</a>
+  <a href="#valve">3 판막</a>
+  <a href="#vessel">4 혈관</a>
+  <a href="#blood">5 혈액</a>
+  <a href="#loop">6 두 바퀴</a>
+  <a href="#trap">7 함정 5개</a>
+  <a href="#draw">8 그려 보기</a>
+</div></nav>
+
+<section class="sec" id="why">
+  <div class="step-no"><span class="num">1</span><span class="lbl">출발점</span></div>
+  <h2>피는 왜 돌아야 하는가</h2>
+
+  <p>순환을 외우기 전에 <b>왜 필요한지</b>부터 봅니다. 답은 간단합니다.
+  몸속 세포 하나하나가 <b>받아야 할 것</b>과 <b>버려야 할 것</b>이 있는데, 세포는 스스로 움직일 수 없기 때문입니다.</p>
+
+  <div class="fig">
+    <p class="fig-t">도식 1 · 세포 한 개가 원하는 것</p>
+    <svg viewBox="0 0 420 170" role="img" aria-label="세포로 들어가는 포도당과 산소, 세포에서 나오는 이산화탄소와 노폐물">
+      <rect class="sb-g" x="8" y="34" width="112" height="34" rx="3"/>
+      <text class="st" x="64" y="56">포도당</text>
+      <rect class="sb-g" x="8" y="78" width="112" height="34" rx="3"/>
+      <text class="st" x="64" y="100">산소</text>
+
+      <rect class="sb-k" x="150" y="34" width="120" height="78" rx="3"/>
+      <text class="st st-k" x="210" y="66">세포</text>
+      <text class="st-s" x="210" y="88">여기서 에너지를</text>
+      <text class="st-s" x="210" y="104">만듭니다</text>
+
+      <rect class="sb-b" x="300" y="34" width="112" height="34" rx="3"/>
+      <text class="st" x="356" y="56">이산화탄소</text>
+      <rect class="sb-b" x="300" y="78" width="112" height="34" rx="3"/>
+      <text class="st" x="356" y="100">물 · 노폐물</text>
+
+      <path class="sl-k" d="M120 51 L142 51"/><polygon class="sa-k" points="142,45 152,51 142,57"/>
+      <path class="sl-k" d="M120 95 L142 95"/><polygon class="sa-k" points="142,89 152,95 142,101"/>
+      <path class="sl" d="M270 51 L292 51"/><polygon class="sa" points="292,45 302,51 292,57"/>
+      <path class="sl" d="M270 95 L292 95"/><polygon class="sa" points="292,89 302,95 292,101"/>
+
+      <text class="st-m" x="210" y="140">세포는 스스로 움직일 수 없습니다</text>
+      <text class="st-m" x="210" y="158">→ 누군가 배달해야 합니다. 그 배달부가 <tspan font-weight="600">혈액</tspan>입니다</text>
+    </svg>
+    <p class="fig-c">순환계는 <b>배달 시스템</b>입니다. 심장은 펌프, 혈관은 도로, 혈액은 트럭입니다.
+    이 비유 하나를 들고 가면 뒤의 내용이 전부 제자리를 찾습니다.</p>
+  </div>
+</section>
+
+<section class="sec" id="heart">
+  <div class="step-no"><span class="num">2</span><span class="lbl">도식의 중심</span></div>
+  <h2>심장의 네 칸 — 규칙 두 개면 끝납니다</h2>
+
+  <div class="fig">
+    <p class="fig-t">도식 2 · 이 단원 전체를 지배하는 규칙 두 개</p>
+    <svg viewBox="0 0 420 110" role="img" aria-label="심방은 받고 심실은 내보낸다, 오른쪽은 폐로 왼쪽은 온몸으로">
+      <rect class="sb-k" x="8" y="8" width="404" height="42" rx="3"/>
+      <text class="st st-k" x="210" y="27">규칙 ① 방(房)으로 들어오고, 실(室)에서 나간다</text>
+      <text class="st-s" x="210" y="44">심방 = 받는 방 · 심실 = 내보내는 방</text>
+      <rect class="sb-k" x="8" y="60" width="404" height="42" rx="3"/>
+      <text class="st st-k" x="210" y="79">규칙 ② 오른쪽은 폐로, 왼쪽은 온몸으로</text>
+      <text class="st-s" x="210" y="96">우심실 → 폐 (가깝다) · 좌심실 → 온몸 (멀다)</text>
+    </svg>
+    <p class="fig-c">이 문서에서 <b>외워야 할 것은 이 두 줄이 전부</b>입니다. 아래 그림은 이 두 줄에서 만들어집니다.</p>
+  </div>
+
+  <div class="fig">
+    <p class="fig-t">도식 3 · 심장 네 칸과 드나드는 네 혈관</p>
+    <svg viewBox="0 0 420 292" role="img" aria-label="우심방 우심실 좌심방 좌심실과 대정맥 폐동맥 폐정맥 대동맥">
+      <text class="st-m" x="106" y="16">그림 왼쪽 = 몸의 오른쪽</text>
+      <text class="st-m" x="318" y="16">그림 오른쪽 = 몸의 왼쪽</text>
+
+      <rect class="sb-g" x="78" y="30" width="264" height="196" rx="6"/>
+      <text class="st-m" x="210" y="48">심장</text>
+
+      <rect class="sb-b" x="92" y="58" width="110" height="52" rx="3"/>
+      <text class="st st-b" x="147" y="80">우심방</text>
+      <text class="st-s" x="147" y="98">받는 방</text>
+
+      <rect class="sb-k" x="218" y="58" width="110" height="52" rx="3"/>
+      <text class="st st-k" x="273" y="80">좌심방</text>
+      <text class="st-s" x="273" y="98">받는 방</text>
+
+      <rect class="sb-b" x="92" y="140" width="110" height="68" rx="3"/>
+      <text class="st st-b" x="147" y="166">우심실</text>
+      <text class="st-s" x="147" y="184">내보내는 방</text>
+
+      <rect x="218" y="140" width="110" height="68" rx="3" fill="#DEEDE4" stroke="#1F6249" stroke-width="6"/>
+      <text class="st st-k" x="273" y="166">좌심실</text>
+      <text class="st-s" x="273" y="184">가장 두껍다</text>
+
+      <line class="sl-d" x1="147" y1="110" x2="147" y2="140"/>
+      <line class="sl-d" x1="273" y1="110" x2="273" y2="140"/>
+      <text class="sm-s" x="147" y="129">판막</text>
+      <text class="sm-s" x="273" y="129">판막</text>
+
+      <path class="sl" d="M16 84 L84 84"/><polygon class="sa" points="84,78 94,84 84,90"/>
+      <text class="st-s" x="46" y="74">대정맥</text>
+      <text class="sm-s" x="46" y="102">온몸에서</text>
+
+      <path class="sl-k" d="M404 84 L336 84"/><polygon class="sa-k" points="336,78 326,84 336,90"/>
+      <text class="st-s" x="374" y="74">폐정맥</text>
+      <text class="sm-s" x="374" y="102">폐에서</text>
+
+      <path class="sl" d="M92 174 L24 174"/><polygon class="sa" points="34,168 24,174 34,180"/>
+      <text class="st-s" x="52" y="164">폐동맥</text>
+      <text class="sm-s" x="52" y="192">폐로</text>
+
+      <path class="sl-k" d="M328 174 L396 174"/><polygon class="sa-k" points="396,168 406,174 396,180"/>
+      <text class="st-s" x="368" y="164">대동맥</text>
+      <text class="sm-s" x="368" y="192">온몸으로</text>
+
+      <rect class="sb-a" x="8" y="242" width="404" height="42" rx="3"/>
+      <text class="st-s" x="210" y="261">온몸 → 우심방 → 우심실 → 폐 → 좌심방 → 좌심실 → 온몸</text>
+      <text class="st-m" x="210" y="277">방 → 실 → 밖 · 이 순서 하나로 한 바퀴가 돕니다</text>
+    </svg>
+    <p class="fig-c">교과서 그림에서 <b>우심방·우심실이 왼쪽에 그려지는</b> 까닭은, 그림이 <b>나를 마주 보고 있는 사람</b>의 심장이기 때문입니다.
+    색은 산소의 많고 적음이 아니라 <b>오른쪽·왼쪽을 구분한 것</b>입니다.</p>
+  </div>
+
+  <div class="plain">
+    <p><b>좌심실 벽이 가장 두꺼운 이유는 외울 필요가 없습니다.</b>
+    우심실은 바로 옆 <b>폐까지만</b> 보내면 되고, 좌심실은 <b>발끝까지</b> 보내야 합니다.
+    더 세게 밀어야 하니 근육이 두꺼운 것입니다 — <b>“멀리 보내는 쪽이 두껍다.”</b></p>
+  </div>
+
+  <div class="fillin">
+    <p><b>여기서 한 번 멈춥니다.</b> 그림을 가리고, 네모 네 개를 그린 뒤 이름을 적어 보세요.
+    위 두 칸은 <b>받는 방</b>, 아래 두 칸은 <b>내보내는 방</b>. 그것만 기억하면 반은 채워집니다.</p>
+  </div>
+</section>
+
+<section class="sec" id="valve">
+  <div class="step-no"><span class="num">3</span><span class="lbl">한 방향</span></div>
+  <h2>판막 — 거꾸로 못 가게 하는 문</h2>
+
+  <p>심장 안에서 피가 <b>한 방향으로만</b> 흐르는 이유는 칸 사이에 <b>판막</b>이 있기 때문입니다.
+  판막은 한쪽으로만 열리는 문이라, 밀면 열리고 되돌아오려 하면 닫힙니다.</p>
+
+  <div class="fig">
+    <p class="fig-t">도식 4 · 판막이 열릴 때와 닫힐 때</p>
+    <svg viewBox="0 0 420 164" role="img" aria-label="판막이 열려 피가 지나가고, 되돌아올 때는 닫히는 모습">
+      <rect class="sb" x="8" y="10" width="194" height="118" rx="3"/>
+      <text class="st st-k" x="105" y="32">피가 지나갈 때</text>
+      <path class="sl-k" d="M105 44 L105 66"/><polygon class="sa-k" points="99,66 105,76 111,66"/>
+      <path class="sl-k" d="M60 84 L86 100"/>
+      <path class="sl-k" d="M150 84 L124 100"/>
+      <text class="st-s" x="105" y="120">문이 열립니다</text>
+
+      <rect class="sb" x="218" y="10" width="194" height="118" rx="3"/>
+      <text class="st st-b" x="315" y="32">되돌아오려 할 때</text>
+      <path class="sl-d" d="M315 76 L315 54"/><polygon class="sa" points="309,54 315,44 321,54"/>
+      <path class="sl-k" d="M270 90 L315 90"/>
+      <path class="sl-k" d="M360 90 L315 90"/>
+      <text class="st-s" x="315" y="120">문이 닫힙니다</text>
+
+      <text class="st-m" x="210" y="152">판막이 없으면 피가 왔다 갔다 하며 배달이 되지 않습니다</text>
+    </svg>
+    <p class="fig-c">판막은 <b>심장 안(심방과 심실 사이, 심실과 동맥 사이)</b>에도 있고, <b>정맥</b>에도 있습니다.
+    정맥에 판막이 있는 이유는 뒤에서 나옵니다.</p>
+  </div>
+</section>
+
+<section class="sec" id="vessel">
+  <div class="step-no"><span class="num">4</span><span class="lbl">도로</span></div>
+  <h2>혈관 세 가지 — 모양이 하는 일을 말해 줍니다</h2>
+
+  <div class="fig">
+    <p class="fig-t">도식 5 · 동맥 · 모세혈관 · 정맥의 굵기와 벽</p>
+    <svg viewBox="0 0 420 206" role="img" aria-label="동맥 모세혈관 정맥의 단면 비교">
+      <circle cx="78" cy="66" r="34" fill="#fff" stroke="#1F6249" stroke-width="13"/>
+      <text class="st st-k" x="78" y="126">동맥</text>
+      <text class="st-s" x="78" y="146">벽이 두껍고</text>
+      <text class="st-s" x="78" y="162">탄력이 있다</text>
+      <text class="sm-s" x="78" y="182">심장 → 밖</text>
+
+      <circle cx="210" cy="66" r="15" fill="#fff" stroke="#8A968F" stroke-width="2"/>
+      <text class="st" x="210" y="126">모세혈관</text>
+      <text class="st-s" x="210" y="146">벽이 한 겹</text>
+      <text class="st-s" x="210" y="162">가장 가늘다</text>
+      <text class="sm-s" x="210" y="182">물질 교환</text>
+
+      <circle cx="342" cy="66" r="32" fill="#fff" stroke="#8C2F3E" stroke-width="5"/>
+      <line class="sl-k" x1="330" y1="56" x2="342" y2="66"/>
+      <line class="sl-k" x1="354" y1="56" x2="342" y2="66"/>
+      <text class="st st-b" x="342" y="126">정맥</text>
+      <text class="st-s" x="342" y="146">벽이 얇고</text>
+      <text class="st-s" x="342" y="162">판막이 있다</text>
+      <text class="sm-s" x="342" y="182">밖 → 심장</text>
+    </svg>
+    <p class="fig-c"><b>동맥은 심장이 세게 밀어낸 피를 받으므로</b> 벽이 두껍고 탄력이 있어야 합니다.
+    <b>정맥은 압력이 약해져서</b> 피가 거꾸로 내려갈 수 있어 판막이 필요합니다.
+    모세혈관은 <b>물질을 주고받는 곳</b>이라 벽이 한 겹으로 얇습니다. <b>모양이 곧 역할입니다.</b></p>
+  </div>
+
+  <div class="fig">
+    <p class="fig-t">도식 6 · 혈압과 혈류 속도는 어떻게 변하나</p>
+    <svg viewBox="0 0 420 196" role="img" aria-label="동맥에서 모세혈관 정맥으로 갈수록 변하는 혈압과 혈류 속도">
+      <line class="sl" x1="44" y1="150" x2="400" y2="150"/>
+      <line class="sl" x1="44" y1="150" x2="44" y2="22"/>
+      <text class="sm-s" x="96" y="168">동맥</text>
+      <text class="sm-s" x="222" y="168">모세혈관</text>
+      <text class="sm-s" x="348" y="168">정맥</text>
+
+      <path class="sl-k" d="M60 44 C130 60, 180 110, 240 124 S340 138, 390 140"/>
+      <text class="st-s st-k" x="110" y="36">혈압</text>
+
+      <path class="sl-a" d="M60 72 C130 92, 190 132, 240 132 S340 108, 390 100"/>
+      <text class="st-s st-a" x="330" y="90">혈류 속도</text>
+
+      <text class="st-m" x="222" y="190">혈압은 계속 낮아지고, 속도는 모세혈관에서 가장 느려집니다</text>
+    </svg>
+    <p class="fig-c">모세혈관에서 속도가 가장 느린 이유는 <b>길이 갈라져 전체 단면적이 가장 넓어지기</b> 때문입니다.
+    넓은 길에서는 천천히 흐릅니다. 그리고 <b>천천히 흘러야 물질을 주고받을 시간</b>이 생깁니다. 이것도 결과이지 암기 항목이 아닙니다.
+    (두 곡선은 단위가 다르므로 서로 높낮이를 비교하는 그림이 아닙니다. <b>각 선의 모양만</b> 보세요.)</p>
+  </div>
+</section>
+
+<section class="sec" id="blood">
+  <div class="step-no"><span class="num">5</span><span class="lbl">트럭</span></div>
+  <h2>혈액 — 네 가지가 각자 다른 일을 합니다</h2>
+
+  <div class="fig">
+    <p class="fig-t">도식 7 · 혈액의 네 가지 성분</p>
+    <svg viewBox="0 0 420 186" role="img" aria-label="적혈구 백혈구 혈소판 혈장의 역할">
+      <rect class="sb-k" x="8" y="10" width="196" height="76" rx="3"/>
+      <text class="st st-k" x="106" y="36">적혈구</text>
+      <text class="st-s" x="106" y="58">산소를 운반한다</text>
+      <text class="sm-s" x="106" y="76">가장 많다 · 붉은색</text>
+
+      <rect class="sb" x="216" y="10" width="196" height="76" rx="3"/>
+      <text class="st" x="314" y="36">백혈구</text>
+      <text class="st-s" x="314" y="58">병원체를 잡아먹는다</text>
+      <text class="sm-s" x="314" y="76">몸을 지킨다</text>
+
+      <rect class="sb" x="8" y="96" width="196" height="76" rx="3"/>
+      <text class="st" x="106" y="122">혈소판</text>
+      <text class="st-s" x="106" y="144">피를 굳게 한다</text>
+      <text class="sm-s" x="106" y="162">상처가 아무는 이유</text>
+
+      <rect class="sb-a" x="216" y="96" width="196" height="76" rx="3"/>
+      <text class="st st-a" x="314" y="122">혈장</text>
+      <text class="st-s" x="314" y="144">양분·노폐물을 녹여 나른다</text>
+      <text class="sm-s" x="314" y="162">액체 부분 · 대부분이 물</text>
+    </svg>
+    <p class="fig-c">앞의 셋(적혈구·백혈구·혈소판)은 <b>세포 성분</b>이고, 혈장은 <b>액체 성분</b>입니다.
+    이름이 곧 역할이라 생각하면 쉽습니다 — <b>적</b>혈구는 붉고, <b>백</b>혈구는 지키고, 혈<b>소</b>판은 작은 조각이라 상처를 막습니다.</p>
+  </div>
+</section>
+
+<section class="sec" id="loop">
+  <div class="step-no"><span class="num">6</span><span class="lbl">완성</span></div>
+  <h2>두 바퀴 — 폐순환과 체순환</h2>
+
+  <p>피는 한 바퀴가 아니라 <b>두 바퀴</b>를 돕니다. 짧은 바퀴는 <b>산소를 실으러</b> 폐에 다녀오는 길이고,
+  긴 바퀴는 그 산소를 <b>온몸에 배달하러</b> 가는 길입니다.</p>
+
+  <div class="fig">
+    <p class="fig-t">도식 8 · 짧은 바퀴와 긴 바퀴</p>
+    <svg viewBox="0 0 420 268" role="img" aria-label="폐순환과 체순환의 두 고리">
+      <rect class="sb-k" x="146" y="8" width="128" height="40" rx="3"/>
+      <text class="st st-k" x="210" y="33">폐</text>
+
+      <rect class="sb-g" x="146" y="100" width="128" height="52" rx="3"/>
+      <text class="st" x="210" y="124">심장</text>
+      <text class="sm-s" x="210" y="142">우심방 · 우심실 · 좌심방 · 좌심실</text>
+
+      <rect class="sb-a" x="146" y="196" width="128" height="40" rx="3"/>
+      <text class="st st-a" x="210" y="221">온몸</text>
+
+      <path class="sl-k" d="M150 108 C96 94, 96 44, 148 32"/><polygon class="sa-k" points="142,26 152,33 142,40"/>
+      <text class="st-s st-k" x="62" y="62">폐동맥</text>
+      <text class="sm-s" x="62" y="80">산소 적음</text>
+
+      <path class="sl-k" d="M272 32 C324 44, 324 94, 270 108"/><polygon class="sa-k" points="276,114 266,107 276,100"/>
+      <text class="st-s st-k" x="360" y="62">폐정맥</text>
+      <text class="sm-s" x="360" y="80">산소 많음</text>
+
+      <path class="sl-a" d="M272 146 C326 160, 326 206, 272 216"/><polygon class="sa-a" points="276,222 266,215 276,208"/>
+      <text class="st-s st-a" x="360" y="172">대동맥</text>
+      <text class="sm-s" x="360" y="190">산소 많음</text>
+
+      <path class="sl-a" d="M148 216 C94 206, 94 160, 148 146"/><polygon class="sa-a" points="142,140 152,147 142,154"/>
+      <text class="st-s st-a" x="62" y="172">대정맥</text>
+      <text class="sm-s" x="62" y="190">산소 적음</text>
+
+      <text class="st-m" x="210" y="260">위쪽 고리 = 폐순환 (짧다) · 아래쪽 고리 = 체순환 (길다)</text>
+    </svg>
+    <p class="fig-c">두 고리가 <b>심장에서 만납니다.</b> 그래서 심장이 네 칸인 것입니다 —
+    고리가 둘이니 <b>받는 곳 둘(심방), 보내는 곳 둘(심실)</b>이 필요합니다. 네 칸은 외울 숫자가 아니라 <b>계산된 결과</b>입니다.</p>
+  </div>
+
+  <div class="fig">
+    <p class="fig-t">도식 9 · 한 바퀴를 순서대로</p>
+    <svg viewBox="0 0 420 268" role="img" aria-label="온몸에서 출발해 심장과 폐를 돌아 다시 온몸으로 가는 여덟 단계">
+      <rect class="sb-g" x="8" y="6" width="404" height="28" rx="3"/>
+      <text class="st-s" x="210" y="25">① 온몸의 세포가 산소를 쓰고 이산화탄소를 내놓습니다</text>
+      <rect class="sb" x="8" y="39" width="404" height="28" rx="3"/>
+      <text class="st-s" x="210" y="58">② 산소가 적어진 피가 대정맥을 타고 우심방으로 들어옵니다</text>
+      <rect class="sb" x="8" y="72" width="404" height="28" rx="3"/>
+      <text class="st-s" x="210" y="91">③ 우심방 → 우심실 (판막을 지나 아래로)</text>
+      <rect class="sb-k" x="8" y="105" width="404" height="28" rx="3"/>
+      <text class="st-s st-k" x="210" y="124">④ 우심실이 폐동맥으로 밀어내 폐로 보냅니다</text>
+      <rect class="sb-k" x="8" y="138" width="404" height="28" rx="3"/>
+      <text class="st-s st-k" x="210" y="157">⑤ 폐에서 이산화탄소를 버리고 산소를 싣습니다</text>
+      <rect class="sb" x="8" y="171" width="404" height="28" rx="3"/>
+      <text class="st-s" x="210" y="190">⑥ 폐정맥을 타고 좌심방으로 돌아옵니다</text>
+      <rect class="sb" x="8" y="204" width="404" height="28" rx="3"/>
+      <text class="st-s" x="210" y="223">⑦ 좌심방 → 좌심실 (판막을 지나 아래로)</text>
+      <rect class="sb-a" x="8" y="237" width="404" height="28" rx="3"/>
+      <text class="st-s st-a" x="210" y="256">⑧ 좌심실이 대동맥으로 온몸에 배달합니다 → 다시 ①</text>
+    </svg>
+    <p class="fig-c">②~③과 ⑥~⑦이 <b>똑같은 모양</b>이라는 점을 보세요. 오른쪽에서 한 번, 왼쪽에서 한 번.
+    <b>같은 동작을 두 번 반복하는 것</b>이 심장이 하는 일의 전부입니다.</p>
+  </div>
+</section>
+
+<section class="sec" id="trap">
+  <div class="step-no"><span class="num">7</span><span class="lbl">함정</span></div>
+  <h2>시험에서 꼭 나오는 자리 다섯</h2>
+
+  <div class="tw wide"><table>
+    <thead><tr><th>흔한 오해</th><th>사실은</th><th>왜</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">동맥엔 깨끗한 피,<br>정맥엔 더러운 피</td>
+        <td><b>폐동맥은 산소가 적고<br>폐정맥은 산소가 많다</b></td>
+        <td>동맥·정맥은 <b>방향</b> 이름 — 나가면 동맥, 들어오면 정맥</td></tr>
+      <tr><td class="hd">심방이 내보낸다</td>
+        <td><b>심방은 받고, 심실이 내보낸다</b></td>
+        <td>방(房)은 받는 방, 실(室)은 내보내는 방</td></tr>
+      <tr><td class="hd">심장이 가장 세게<br>뛰는 곳은 우심실</td>
+        <td><b>좌심실이 가장 두껍고 세다</b></td>
+        <td>온몸(발끝)까지 보내야 하므로</td></tr>
+      <tr><td class="hd">모세혈관은 피가<br>가장 빠르다</td>
+        <td><b>가장 느리다</b></td>
+        <td>갈라져서 전체 단면적이 가장 넓기 때문 · 느려야 물질 교환이 됨</td></tr>
+      <tr><td class="hd">판막은 심장에만 있다</td>
+        <td><b>정맥에도 있다</b></td>
+        <td>정맥은 압력이 약해 피가 거꾸로 내려갈 수 있어서</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="alert"><span class="lb">한 문장으로</span>
+    <p>이 다섯 개는 <b>전부 “왜”를 물으면 저절로 풀립니다.</b>
+    외운 사람은 헷갈리고, <b>이유를 아는 사람은 헷갈릴 수가 없습니다.</b></p>
+  </div>
+</section>
+
+<section class="sec" id="draw">
+  <div class="step-no"><span class="num">8</span><span class="lbl">마무리</span></div>
+  <h2>빈 그림 채우기 — 이게 진짜 시험입니다</h2>
+
+  <p>아래 그림을 보고 <b>종이에 그대로 옮겨 그린 뒤</b> 빈칸을 채워 보세요.
+  막히면 위로 올라가지 말고, 먼저 <b>규칙 두 개</b>를 떠올려 보세요.</p>
+
+  <div class="fig">
+    <p class="fig-t">도식 10 · 직접 채워 보는 심장</p>
+    <svg viewBox="0 0 420 262" role="img" aria-label="이름이 비어 있는 심장 그림">
+      <rect class="sb-g" x="78" y="20" width="264" height="196" rx="6"/>
+      <rect class="sb-d" x="92" y="48" width="110" height="52" rx="3"/>
+      <text class="st-m" x="147" y="80">( 　　　 )</text>
+      <rect class="sb-d" x="218" y="48" width="110" height="52" rx="3"/>
+      <text class="st-m" x="273" y="80">( 　　　 )</text>
+      <rect class="sb-d" x="92" y="130" width="110" height="68" rx="3"/>
+      <text class="st-m" x="147" y="168">( 　　　 )</text>
+      <rect class="sb-d" x="218" y="130" width="110" height="68" rx="3"/>
+      <text class="st-m" x="273" y="168">( 　　　 )</text>
+
+      <path class="sl" d="M16 74 L84 74"/><polygon class="sa" points="84,68 94,74 84,80"/>
+      <text class="st-m" x="46" y="64">(　　)</text>
+      <path class="sl" d="M404 74 L336 74"/><polygon class="sa" points="336,68 326,74 336,80"/>
+      <text class="st-m" x="374" y="64">(　　)</text>
+      <path class="sl" d="M92 164 L24 164"/><polygon class="sa" points="34,158 24,164 34,170"/>
+      <text class="st-m" x="52" y="154">(　　)</text>
+      <path class="sl" d="M328 164 L396 164"/><polygon class="sa" points="396,158 406,164 396,170"/>
+      <text class="st-m" x="368" y="154">(　　)</text>
+
+      <text class="st-m" x="210" y="238">네 칸의 이름과 네 혈관의 이름을 채우고,</text>
+      <text class="st-m" x="210" y="256">화살표를 따라 한 바퀴를 소리 내어 말해 보세요</text>
+    </svg>
+    <p class="fig-c">채운 뒤 <b>도식 3</b>과 맞춰 봅니다. 두 번만 해 보면 안 보고도 그려집니다.</p>
+  </div>
+
+  <h3>확인 문제 6개</h3>
+
+  <div class="q"><span class="qn">Q1</span>
+    <p>심장에서 피가 심방에서 심실 방향으로만 흐르는 까닭은 무엇일까요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>심방과 심실 사이에 판막이 있어 거꾸로 흐르지 못하게 막기 때문입니다.</b>
+      판막은 한쪽으로만 열리는 문이라, 밀면 열리고 되돌아오려 하면 닫힙니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q2</span>
+    <p>좌심실의 벽이 가장 두꺼운 까닭을 말해 봅시다.</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>온몸, 즉 발끝까지 피를 보내야 해서 가장 세게 밀어야 하기 때문입니다.</b>
+      우심실은 바로 옆 폐까지만 보내면 되므로 좌심실보다 얇습니다. <b>멀리 보내는 쪽이 두껍다.</b>
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q3</span>
+    <p>폐동맥과 폐정맥 중 산소가 많은 피가 흐르는 쪽은 어디인가요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>폐정맥입니다.</b> 동맥·정맥은 피의 상태가 아니라 <b>방향</b>으로 정한 이름입니다.
+      폐동맥은 우심실에서 폐로 <b>산소를 실으러 가는</b> 피라 산소가 적고,
+      폐정맥은 폐에서 산소를 싣고 <b>좌심방으로 돌아오는</b> 피라 산소가 많습니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q4</span>
+    <p>모세혈관에서 혈액이 가장 느리게 흐르는 까닭과, 그것이 왜 다행인지 설명해 봅시다.</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>길이 수없이 갈라져 전체 단면적이 가장 넓어지기 때문에 느려집니다.</b>
+      그리고 느려야 산소·양분을 내주고 이산화탄소·노폐물을 받을 <b>시간</b>이 생깁니다.
+      모세혈관은 물질을 주고받는 곳이므로 느린 것이 오히려 알맞습니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q5</span>
+    <p>정맥에 판막이 있는 까닭은 무엇일까요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>정맥은 심장에서 멀어 혈압이 약하기 때문에 피가 거꾸로 내려갈 수 있어서입니다.</b>
+      특히 다리처럼 심장보다 낮은 곳에서는 중력 때문에 더 그렇습니다. 판막이 역류를 막아 줍니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q6</span>
+    <p>심장이 왜 하필 네 칸일까요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>피가 도는 고리가 두 개(폐순환·체순환)이기 때문입니다.</b>
+      고리가 둘이면 <b>받는 곳 둘(심방)</b>과 <b>내보내는 곳 둘(심실)</b>이 필요합니다.
+      네 칸은 외울 숫자가 아니라 두 바퀴에서 나온 결과입니다.
+    </div></details>
+  </div>
+
+  <h3>아빠에게 3분 설명하기</h3>
+  <p>빈 그림에 채운 종이를 보여 주면서 말합니다. 화살표를 손가락으로 따라가며 말하면 됩니다.</p>
+  <div class="script">
+    <div class="row"><span class="s">규칙</span><span>방으로 들어오고 실에서 나가. 오른쪽은 폐로, 왼쪽은 온몸으로.</span></div>
+    <div class="row"><span class="s">한 바퀴</span><span>온몸 → 우심방 → 우심실 → 폐 → 좌심방 → 좌심실 → 온몸. 같은 동작을 두 번 하는 거야.</span></div>
+    <div class="row"><span class="s">왜</span><span>좌심실이 제일 두꺼운 건 발끝까지 보내야 해서고, 모세혈관이 제일 느린 건 길이 넓어져서야.</span></div>
+    <div class="row"><span class="s">함정</span><span>폐동맥에 산소 적은 피가 흘러. 동맥·정맥은 방향 이름이거든.</span></div>
+  </div>
+
+  <div class="pager">
+    <a href="week10.html">← 10주차 에너지 배달 경로</a>
+    <a class="main" href="index.html">전체 지도</a>
+  </div>
+</section>
+
+<footer>심장과 혈액 순환 · 중2 과학 동물과 에너지 단원 집중 문서 · 도식 10장</footer>
+</div>
+<script>
+  (function(){
+    var KEY="science_quest_progress";
+    function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){return{}}}
+    function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+    var boxes=[].slice.call(document.querySelectorAll(".todo input[type=checkbox]"));
+    var st=load();
+    boxes.forEach(function(b){
+      if(st[b.dataset.q])b.checked=true;
+      b.addEventListener("change",function(){
+        var s=load();
+        if(b.checked)s[b.dataset.q]=1;else delete s[b.dataset.q];
+        save(s);paint();
+      });
+    });
+    function paint(){
+      var el=document.getElementById("wdone");
+      if(el){var n=boxes.filter(function(b){return b.checked}).length;
+        el.textContent=n+" / "+boxes.length;}
+      var hub=document.querySelector("[data-hub]");
+      if(hub){
+        var s=load(),total=0;
+        for(var w=1;w<=12;w++){
+          var n2=0;
+          for(var m=1;m<=4;m++) if(s["w"+w+"m"+m]) n2++;
+          total+=n2;
+          var p=document.querySelector('.p[data-p="'+w+'"]');
+          if(p&&!p.dataset.soon){p.textContent=n2===4?"완료":n2+" / 4";
+            p.className="p"+(n2===4?" done":(n2>0?" ing":""));}
+        }
+        var d=document.getElementById("allDone"),bar=document.getElementById("allBar");
+        if(d)d.textContent=total+" / 12";
+        if(bar)bar.style.width=(total/12*100)+"%";
+      }
+    }
+    paint();
+    var links=[].slice.call(document.querySelectorAll("nav.jump a[href^='#']"));
+    if(links.length){
+      var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1))});
+      var onScroll=function(){
+        var y=window.scrollY+130,idx=0;
+        secs.forEach(function(s,i){if(s&&s.offsetTop<=y)idx=i;});
+        links.forEach(function(a,i){a.classList.toggle("now",i===idx);});
+      };
+      window.addEventListener("scroll",onScroll,{passive:true});onScroll();
+    }
+  })();
+</script>
+</body>
+</html>
