@@ -10,6 +10,7 @@
 | `index.html` | **딸** | 12주 허브. 주차별 문서 목록, 완료 표시, 전체 진행률 |
 | `week01.html` ~ `week12.html` | **딸** | 한 문서 = 일주일치 학습 자료 (12주 전체) |
 | `quiz.html` | **딸** | 과학 문제집 120제 — 12주 × 10문제(객관식 7 · 단답형 3), 누르면 즉시 채점 |
+| `photo.html` | **딸** | **광합성** 집중 문서 — 식물과 에너지 단원을 도식 9장으로 정리 |
 | `heart.html` | **딸** | **심장과 혈액 순환** 집중 문서 — 순환 단원을 도식 10장으로 정리 |
 | `plan.html` | 아빠 | 추진 계획 — 설계 근거, 아빠 역할 설명서, 변수 대응 |
 
@@ -81,7 +82,7 @@ https://saigomad7.github.io/family-location/science_quest/
 
 주소: `https://saigomad7.github.io/family-location/science_quest/quiz.html`
 
-## 단원 집중 문서 (`heart.html`)
+## 단원 집중 문서 (`heart.html` · `photo.html`)
 
 중2 과학 「동물과 에너지」 단원의 **순환** 부분만 따로 떼어 **도식 10장**으로 정리한 문서입니다.
 10주차 문서가 소화·순환·호흡·배설을 한 줄로 꿰는 데 집중하기 때문에,
@@ -94,3 +95,15 @@ https://saigomad7.github.io/family-location/science_quest/
 좌심실이 두꺼운 것도, 모세혈관이 느린 것도, 심장이 네 칸인 것도 전부 이유에서 따라 나오게 썼습니다.
 
 주소: `https://saigomad7.github.io/family-location/science_quest/heart.html`
+
+### 광합성 (`photo.html`)
+
+중2 과학 「식물과 에너지」 단원의 광합성을 **도식 9장**으로 정리했습니다.
+
+구성: 셋이 들어가고 둘이 나온다 → 잎의 단면 → 재료가 오는 길 → 조건 세 가지 그래프 →
+양분의 행방(녹말·설탕) → 기공과 증산 → 광합성 vs 호흡 → **하루 24시간 그래프** →
+자주 틀리는 자리 5개 → 빈칸 채우기 + 확인 문제 6개.
+
+목표는 한 문장에 답하는 것입니다 — **“식물은 밤에만 호흡하나요?”**
+
+주소: `https://saigomad7.github.io/family-location/science_quest/photo.html`
