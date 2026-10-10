@@ -86,6 +86,7 @@ GitHub 저장소 → **Settings → Pages → Branch: main, / (root)** 선택 �
 | `history_quest/` | **역사 항해 12주** 중2 한국사 주차별 학습 문서 — [설명 보기](history_quest/README.md) |
 | `answers.html` | 아빠 | **정답과 해설 480제** — 네 과목 문제집의 답안지 |
 | `math_quest/` | **수학 사다리 12주** 중2 수학 주차별 학습 문서 — [설명 보기](math_quest/README.md) |
+| `korean_quest/` | **국어 집중 문서** 논증 방법(연역·귀납) — [설명 보기](korean_quest/README.md) |
 | `world_quest/` | **세계사 항해 12주** 중2 역사①(세계사) 주차별 학습 문서 — [설명 보기](world_quest/README.md) |
 
 ## 같이 쓰는 앱
@@ -97,6 +98,9 @@ GitHub 저장소 → **Settings → Pages → Branch: main, / (root)** 선택 �
   중2 과학을 하루 20분씩 밟아 가는 주차별 학습 문서입니다. 폰에서 보도록 만들었습니다.
   - 🫀 **심장과 혈액 순환** (단원 집중 문서, 도식 10장): `.../science_quest/heart.html`
   - 🌿 **광합성** (단원 집중 문서, 도식 9장): `.../science_quest/photo.html`
+
+- ✍️ **국어 · 연역과 귀납** (단원 집중 문서, 도식 10장): `https://saigomad7.github.io/family-location/korean_quest/logic.html`
+  논증 방법을 화살표 방향 하나로 가르고, 예제는 모두 중학생 생활에서 가져왔습니다.
 - 🏛️ **역사 항해 12주**: `https://saigomad7.github.io/family-location/history_quest/`
   한국사 전체 흐름을 연표 한 장으로 잇는 주차별 학습 문서입니다. 과학과 같은 리듬으로 진행합니다.
 - 📐 **수학 사다리 12주**: `https://saigomad7.github.io/family-location/math_quest/`

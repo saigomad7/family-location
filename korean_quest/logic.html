@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#DCE2DB">
+<title>연역과 귀납 — 그림으로 끝내기</title>
+<meta name="description" content="중학교 국어 논증 방법(연역·귀납·유추)을 도식 열 장과 생활 예제로 정리한 집중 문서.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#131C18; --ink2:#2C3A33; --muted:#5F6E66; --faint:#8A968F;
+    --mist:#DCE2DB; --surface:#F8FAF6; --surface2:#EFF3EC;
+    --line:#C3CCC1; --hair:#DDE4DB;
+    --kelp:#5B4A8A; --kelp-wash:#E7E2F2; --kelp-line:#B4A9D6;
+    --amber:#8F6209; --amber-wash:#F5EAD0; --amber-line:#DCC79B;
+    --berry:#8C2F3E; --berry-wash:#F3DFE2; --berry-line:#D9A8B0;
+    --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+    --mono:"IBM Plex Mono","SFMono-Regular",Consolas,"D2Coding",monospace;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{margin:0;background:var(--mist);color:var(--ink);font-family:var(--sans);
+    font-size:16px;line-height:1.75;letter-spacing:-0.01em;
+    padding:0 18px calc(70px + env(safe-area-inset-bottom));
+    word-break:keep-all;overflow-wrap:anywhere;}
+  .wrap{max-width:1040px;margin:0 auto;}
+
+  /* ===== 표지 ===== */
+  .cover{padding:44px 0 30px;border-bottom:2px solid var(--ink);}
+  .cover .kicker{font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:0.2em;text-transform:uppercase;color:var(--kelp);margin:0 0 16px;}
+  .cover h1{font-size:clamp(27px,6vw,44px);font-weight:700;line-height:1.24;
+    letter-spacing:-0.035em;margin:0 0 16px;max-width:21ch;}
+  .cover .lede{font-size:clamp(15.5px,2vw,18px);font-weight:300;color:var(--ink2);
+    max-width:62ch;margin:0 0 24px;line-height:1.72;}
+  .cover .lede b{font-weight:600;color:var(--ink);}
+  .metaline{display:flex;flex-wrap:wrap;gap:6px 22px;font-family:var(--mono);
+    font-size:11.5px;color:var(--muted);letter-spacing:0.03em;}
+  .metaline b{color:var(--ink);font-weight:500;}
+
+  .summary{background:var(--ink);border-radius:3px;padding:26px 22px 24px;margin:28px 0 0;}
+  .summary h2{color:#F6FAF5;font-size:18px;font-weight:600;margin:0 0 6px;letter-spacing:-0.02em;}
+  .summary .sd{color:#93A399;font-size:13.5px;font-weight:300;margin:0 0 22px;line-height:1.65;}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:18px;}
+  .kpi .kl{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:#7E8F84;display:block;margin-bottom:5px;}
+  .kpi .kv{font-size:clamp(21px,3.2vw,28px);font-weight:700;color:#C6BAEC;
+    letter-spacing:-0.03em;display:block;line-height:1.1;}
+  .kpi .kn{font-size:12px;color:#B9C6BC;display:block;margin-top:6px;
+    font-weight:300;line-height:1.5;}
+
+  /* ===== 이동 바 ===== */
+  nav.jump{position:sticky;top:0;z-index:40;margin:0 -18px;padding:0 18px;
+    background:rgba(220,226,219,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);}
+  nav.jump .row{display:flex;gap:6px;overflow-x:auto;padding:9px 0;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  nav.jump .row::-webkit-scrollbar{display:none;}
+  nav.jump a{flex:0 0 auto;font-family:var(--mono);font-size:11.5px;letter-spacing:0.04em;
+    color:var(--muted);background:var(--surface);border:1px solid var(--line);
+    padding:6px 11px;border-radius:2px;text-decoration:none;}
+  nav.jump a.now{color:#fff;background:var(--kelp);border-color:var(--kelp);}
+
+  /* ===== 섹션 ===== */
+  .sec{padding:44px 0 12px;border-bottom:1px solid var(--line);scroll-margin-top:56px;}
+  .sec:last-of-type{border-bottom:0;}
+  .step-no{display:flex;align-items:center;gap:11px;margin-bottom:14px;}
+  .step-no .num{font-family:var(--mono);font-size:12px;font-weight:600;color:#fff;
+    background:var(--kelp);width:28px;height:28px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-no .lbl{font-family:var(--mono);font-size:11px;letter-spacing:0.13em;
+    text-transform:uppercase;color:var(--muted);}
+  .step-no .day{margin-left:auto;font-family:var(--mono);font-size:11px;
+    letter-spacing:0.1em;color:var(--kelp);background:var(--kelp-wash);
+    border:1px solid var(--kelp-line);padding:3px 9px;border-radius:2px;}
+  .sec h2{font-size:clamp(22px,3.4vw,29px);font-weight:600;letter-spacing:-0.03em;
+    line-height:1.34;margin:0 0 14px;max-width:30ch;}
+  .sec h3{font-size:17.5px;font-weight:600;letter-spacing:-0.02em;margin:30px 0 10px;}
+  .sec > p{max-width:70ch;color:var(--ink2);margin:0 0 16px;}
+  .sec strong,.sec b{font-weight:600;color:var(--ink);}
+  .sec code{font-family:var(--mono);font-size:0.86em;background:var(--surface2);
+    border:1px solid var(--hair);padding:1px 5px;border-radius:2px;}
+
+  .plain{background:var(--surface2);border-left:3px solid var(--kelp);
+    padding:14px 17px;margin:0 0 20px;border-radius:0 2px 2px 0;max-width:74ch;}
+  .plain p{margin:0;font-size:14.5px;color:var(--ink2);line-height:1.72;}
+  .plain p + p{margin-top:10px;}
+  .plain b{color:var(--kelp);font-weight:600;}
+
+  .fig{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:20px 16px 16px;margin:20px 0 12px;}
+  .fig-t{font-family:var(--mono);font-size:11px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--kelp);margin:0 0 16px;
+    padding-bottom:9px;border-bottom:1px solid var(--hair);}
+  .fig svg{display:block;width:100%;height:auto;}
+  .fig.wide{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .fig.wide svg{min-width:640px;}
+  .fig-c{font-size:13px;color:var(--muted);margin:14px 0 0;font-weight:300;
+    line-height:1.65;padding-top:12px;border-top:1px solid var(--hair);}
+  .fig-c b{color:var(--ink);font-weight:600;}
+
+  .sb{fill:#fff;stroke:#C3CCC1;stroke-width:1.5;}
+  .sb-k{fill:#E7E2F2;stroke:#5B4A8A;stroke-width:2;}
+  .sb-b{fill:#F3DFE2;stroke:#D9A8B0;stroke-width:1.5;}
+  .sb-a{fill:#F5EAD0;stroke:#DCC79B;stroke-width:1.5;}
+  .sb-g{fill:#EFF3EC;stroke:#C3CCC1;stroke-width:1.5;}
+  .sb-d{fill:#fff;stroke:#5B4A8A;stroke-width:1.6;stroke-dasharray:5 4;}
+  .st{font-family:var(--sans);font-size:13.5px;font-weight:600;fill:#131C18;
+    text-anchor:middle;letter-spacing:-0.3px;}
+  .st-s{font-family:var(--sans);font-size:11.5px;font-weight:400;fill:#5F6E66;text-anchor:middle;}
+  .st-k{fill:#5B4A8A;} .st-b{fill:#8C2F3E;} .st-a{fill:#8F6209;}
+  .sm{font-family:var(--mono);font-size:12px;fill:#131C18;text-anchor:middle;font-weight:500;}
+  .sm-s{font-family:var(--mono);font-size:10.5px;fill:#5F6E66;text-anchor:middle;}
+  .st-m{font-family:var(--mono);font-size:11px;fill:#8A968F;text-anchor:middle;letter-spacing:0.5px;}
+  .sl{stroke:#8A968F;stroke-width:1.6;fill:none;}
+  .sl-k{stroke:#5B4A8A;stroke-width:2;fill:none;}
+  .sl-a{stroke:#8F6209;stroke-width:1.8;fill:none;}
+  .sl-d{stroke:#8A968F;stroke-width:1.4;fill:none;stroke-dasharray:4 4;}
+  .sa{fill:#8A968F;} .sa-k{fill:#5B4A8A;} .sa-a{fill:#8F6209;}
+  .dot-k{fill:#5B4A8A;} .dot-a{fill:#8F6209;} .dot-b{fill:#8C2F3E;}
+
+  /* ===== 표 ===== */
+  .tw{overflow-x:auto;margin:20px 0 8px;border:1px solid var(--line);
+    border-radius:3px;background:var(--surface);}
+  table{border-collapse:collapse;width:100%;font-size:13.8px;}
+  .tw.wide table{min-width:560px;}
+  thead th{background:var(--ink);color:#E8EFE7;text-align:left;font-family:var(--mono);
+    font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
+    padding:11px 13px;}
+  tbody td{padding:11px 13px;border-top:1px solid var(--hair);vertical-align:top;
+    color:var(--ink2);line-height:1.62;}
+  tbody tr:nth-child(even) td{background:var(--surface2);}
+  td.hd{font-weight:600;color:var(--ink);}
+  td.mn{font-family:var(--mono);font-size:12.5px;}
+  td.ok{color:var(--kelp);font-weight:600;}
+  td.no{color:var(--berry);font-weight:600;}
+  td.wa{color:var(--amber);font-weight:600;}
+  td.fill{font-family:var(--mono);color:var(--faint);}
+
+  .note{background:var(--amber-wash);border:1px solid var(--amber-line);
+    border-radius:3px;padding:17px 19px;margin:20px 0 8px;}
+  .note p{margin:0;font-size:14px;color:#5C440C;line-height:1.72;}
+  .note p + p{margin-top:9px;}
+  .note b{font-weight:600;}
+  .note .lb{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--amber);margin-bottom:6px;}
+  .alert{background:var(--berry-wash);border:1px solid var(--berry-line);
+    border-radius:3px;padding:17px 19px;margin:20px 0 8px;}
+  .alert p{margin:0;font-size:14px;color:#6B2430;line-height:1.72;}
+  .alert p + p{margin-top:9px;}
+  .alert b{font-weight:600;}
+  .alert .lb{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--berry);margin-bottom:6px;}
+
+  /* ===== 카드 묶음 ===== */
+  .cards{display:grid;gap:12px;margin:18px 0 8px;}
+  @media(min-width:680px){.cards.two{grid-template-columns:repeat(2,1fr);}}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:15px 17px;}
+  .card .ct{font-family:var(--mono);font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;
+    color:var(--kelp);display:block;margin-bottom:7px;}
+  .card h4{margin:0 0 6px;font-size:15.5px;font-weight:600;letter-spacing:-0.02em;}
+  .card p{margin:0;font-size:14px;color:var(--ink2);line-height:1.68;}
+
+  /* ===== 요일 할 일 ===== */
+  .todo{list-style:none;margin:20px 0 8px;padding:0;background:var(--surface);
+    border:1px solid var(--line);border-radius:3px;overflow:hidden;}
+  .todo li + li{border-top:1px solid var(--hair);}
+  .todo label{display:grid;grid-template-columns:22px 1fr;gap:13px;align-items:start;
+    padding:15px 16px;cursor:pointer;font-size:14.5px;line-height:1.65;color:var(--ink2);min-height:54px;}
+  .todo input{appearance:none;-webkit-appearance:none;width:21px;height:21px;margin:1px 0 0;
+    border:1.5px solid var(--line);border-radius:2px;background:#fff;
+    display:grid;place-content:center;cursor:pointer;}
+  .todo input::after{content:"✓";font-size:13px;font-weight:700;color:#fff;transform:scale(0);}
+  .todo input:checked{background:var(--kelp);border-color:var(--kelp);}
+  .todo input:checked::after{transform:scale(1);}
+  .todo input:focus-visible{outline:2px solid var(--kelp);outline-offset:2px;}
+  .todo input:checked ~ .tt{color:var(--faint);text-decoration:line-through;}
+  .todo .tt b{color:var(--ink);font-weight:600;}
+
+  /* ===== 문제 ===== */
+  .q{background:var(--surface);border:1px solid var(--line);border-radius:3px;
+    padding:15px 17px;margin:12px 0;}
+  .q .qn{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--kelp);
+    letter-spacing:0.12em;}
+  .q > p{margin:6px 0 0;font-size:15.5px;color:var(--ink);line-height:1.7;}
+  .q details{margin-top:12px;border-top:1px solid var(--hair);padding-top:10px;}
+  .q summary{cursor:pointer;list-style:none;font-family:var(--mono);font-size:12px;
+    font-weight:600;color:var(--kelp);letter-spacing:0.06em;padding:3px 0;}
+  .q summary::-webkit-details-marker{display:none;}
+  .q summary::before{content:"+ ";}
+  .q details[open] summary::before{content:"− ";}
+  .q .ans{margin-top:9px;background:var(--kelp-wash);border-radius:2px;padding:12px 14px;
+    font-size:14px;color:var(--ink2);line-height:1.7;}
+  .q .ans b{color:var(--kelp);font-weight:600;}
+
+  /* ===== 설명 대본 ===== */
+  .script{background:var(--surface);border:1px solid var(--kelp-line);border-radius:3px;
+    padding:16px 18px;margin:18px 0 8px;}
+  .script .row{display:grid;grid-template-columns:70px 1fr;gap:12px;font-size:14.5px;
+    color:var(--ink2);line-height:1.7;}
+  .script .row + .row{margin-top:11px;padding-top:11px;border-top:1px solid var(--hair);}
+  .script .s{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;color:var(--kelp);
+    font-weight:600;padding-top:4px;}
+
+  .badge{display:inline-block;font-family:var(--mono);font-size:12.5px;font-weight:600;
+    color:var(--amber);background:var(--amber-wash);border:1px solid var(--amber-line);
+    border-radius:2px;padding:7px 14px;margin-top:14px;letter-spacing:0.04em;}
+
+  /* ===== 주차 목록 (허브) ===== */
+  .wlist{display:flex;flex-direction:column;gap:10px;margin:18px 0 8px;}
+  a.wk{display:grid;grid-template-columns:1fr auto;grid-template-areas:"n p" "t p" "d d";
+    gap:2px 14px;background:var(--surface);border:1px solid var(--line);
+    border-left:3px solid var(--kelp);border-radius:3px;padding:15px 17px;
+    text-decoration:none;color:var(--ink);}
+  a.wk .n{grid-area:n;font-family:var(--mono);font-size:11px;font-weight:600;
+    letter-spacing:0.12em;color:var(--kelp);}
+  a.wk .t{grid-area:t;font-size:17px;font-weight:600;letter-spacing:-0.02em;}
+  a.wk .d{grid-area:d;font-size:13.5px;color:var(--muted);margin-top:5px;line-height:1.6;font-weight:300;}
+  a.wk .p{grid-area:p;align-self:center;font-family:var(--mono);font-size:11px;color:var(--muted);
+    background:var(--surface2);border:1px solid var(--hair);border-radius:2px;padding:4px 9px;white-space:nowrap;}
+  a.wk .p.done{color:#fff;background:var(--kelp);border-color:var(--kelp);}
+  a.wk .p.ing{color:var(--amber);background:var(--amber-wash);border-color:var(--amber-line);}
+  .wk.soon{border-left-color:var(--line);opacity:.62;pointer-events:none;}
+  .wk.soon .n,.wk.soon .t{color:var(--muted);}
+
+  /* ===== 진행 막대 ===== */
+  .bar{height:7px;background:var(--hair);border-radius:99px;overflow:hidden;margin-top:12px;
+    border:1px solid var(--line);}
+  .bar i{display:block;height:100%;background:var(--kelp);width:0;transition:width .3s;}
+
+  /* ===== 페이지 이동 ===== */
+  .pager{display:flex;gap:9px;margin:26px 0 0;}
+  .pager a{flex:1;text-align:center;font-size:13.5px;font-weight:600;text-decoration:none;
+    color:var(--ink2);background:var(--surface);border:1px solid var(--line);
+    border-radius:3px;padding:14px 8px;}
+  .pager a.main{background:var(--kelp);border-color:var(--kelp);color:#fff;}
+  footer{padding:26px 0 10px;font-family:var(--mono);font-size:11.5px;color:var(--faint);
+    letter-spacing:0.03em;line-height:1.8;}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;}}
+
+  /* 단원 집중 문서 전용 */
+  .fillin{background:#fff;border:1px dashed var(--line);border-radius:3px;
+    padding:13px 15px;margin:16px 0;font-size:14.5px;color:var(--muted);}
+  .fillin b{color:var(--ink);}
+  .two-col{display:grid;grid-template-columns:1fr;gap:12px;margin:18px 0;}
+  @media(min-width:620px){.two-col{grid-template-columns:1fr 1fr;}}
+  .mini{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--kelp);
+    border-radius:2px;padding:13px 15px;font-size:14.5px;color:var(--ink2);}
+  .mini h4{margin:0 0 6px;font-size:14.5px;font-weight:600;color:var(--ink);}
+  .mini p{margin:0;}
+  .sl-b{stroke:#8C2F3E;stroke-width:2;fill:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="cover">
+  <p class="kicker">중2 국어 · 논증 방법 · 집중 문서</p>
+  <h1>연역과 귀납</h1>
+  <p class="lede">
+    두 단어가 어려운 건 뜻이 복잡해서가 아니라, <b>이름이 한자라서</b>입니다.
+    실제로 둘을 가르는 것은 <b>화살표의 방향 하나</b>뿐입니다.
+    위에서 아래로 가면 연역, 아래에서 위로 가면 귀납. 이 문서는 그 화살표를 그림으로 잡습니다.
+  </p>
+  <div class="metaline">
+    <span>과목 <b>국어 · 논증 방법</b></span>
+    <span>도식 <b>10장</b></span>
+    <span>걸리는 시간 <b>30분</b></span>
+    <span>목표 <b>글 보고 바로 판별하기</b></span>
+  </div>
+
+  <div class="summary">
+    <h2>이 문서가 끝나면 할 수 있는 것</h2>
+    <p class="sd">지문을 읽고 <b>“이건 연역이네”</b>를 3초 안에 말할 수 있으면 끝입니다.</p>
+    <div class="kpis">
+      <div class="kpi"><span class="kl">연역</span><span class="kv">↓</span>
+        <span class="kn">모두가 그렇다 → 그러니 이것도 그렇다</span></div>
+      <div class="kpi"><span class="kl">귀납</span><span class="kv">↑</span>
+        <span class="kn">이것도 저것도 그렇다 → 그러니 모두 그렇다</span></div>
+      <div class="kpi"><span class="kl">유추</span><span class="kv">↔</span>
+        <span class="kn">둘이 닮았으니 이것도 닮았을 것이다</span></div>
+      <div class="kpi"><span class="kl">함정</span><span class="kv">5개</span>
+        <span class="kn">시험에서 꼭 나오는 헷갈리는 자리</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="jump"><div class="row">
+  <a href="#base">1 논증이란</a>
+  <a href="#ded">2 연역</a>
+  <a href="#ind">3 귀납</a>
+  <a href="#arrow">4 화살표</a>
+  <a href="#vs">5 성격 비교</a>
+  <a href="#break">6 무너지는 자리</a>
+  <a href="#ana">7 유추</a>
+  <a href="#find">8 판별하기</a>
+  <a href="#trap">9 함정 5개</a>
+</div></nav>
+
+<section class="sec" id="base">
+  <div class="step-no"><span class="num">1</span><span class="lbl">출발점</span></div>
+  <h2>논증 = 주장 + 근거</h2>
+
+  <p>누군가 <b>“~해야 한다”, “~이다”</b>라고 말할 때, 그 말이 왜 맞는지 받쳐 주는 것이 <b>근거</b>입니다.
+  근거로 주장을 떠받치는 것을 <b>논증</b>이라고 합니다.
+  <b>연역과 귀납은 논증의 두 가지 방식</b>, 즉 <b>근거에서 주장으로 가는 두 가지 길</b>입니다.</p>
+
+  <div class="fig">
+    <p class="fig-t">도식 1 · 논증의 기본 모양</p>
+    <svg viewBox="0 0 420 164" role="img" aria-label="근거가 주장을 떠받치는 논증의 구조">
+      <rect class="sb-k" x="110" y="14" width="200" height="40" rx="3"/>
+      <text class="st st-k" x="210" y="39">주장</text>
+
+      <path class="sl-k" d="M210 100 L210 64"/><polygon class="sa-k" points="204,64 210,54 216,64"/>
+
+      <rect class="sb" x="8" y="104" width="124" height="38" rx="3"/>
+      <text class="st-s" x="70" y="128">근거 ①</text>
+      <rect class="sb" x="148" y="104" width="124" height="38" rx="3"/>
+      <text class="st-s" x="210" y="128">근거 ②</text>
+      <rect class="sb" x="288" y="104" width="124" height="38" rx="3"/>
+      <text class="st-s" x="350" y="128">근거 ③</text>
+
+      <text class="st-m" x="210" y="160">근거에서 주장으로 올라가는 <tspan font-weight="600">길의 모양</tspan>이 논증 방법입니다</text>
+    </svg>
+    <p class="fig-c">시험에서 “이 글의 논증 방법은?”이라고 물으면,
+    <b>근거와 주장이 어떤 관계로 이어져 있는지</b>를 묻는 것입니다.</p>
+  </div>
+</section>
+
+<section class="sec" id="ded">
+  <div class="step-no"><span class="num">2</span><span class="lbl">첫째 길</span></div>
+  <h2>연역 — 큰 원칙에서 하나로 내려옵니다</h2>
+
+  <p><b>이미 모두가 인정하는 큰 원칙</b>에서 출발해, <b>눈앞의 하나</b>에 그 원칙을 적용하는 방법입니다.
+  가장 익숙한 모양이 <b>삼단 논법</b>입니다.</p>
+
+  <div class="fig">
+    <p class="fig-t">도식 2 · 연역 — 넓은 데서 좁은 데로</p>
+    <svg viewBox="0 0 420 216" role="img" aria-label="대전제 소전제 결론으로 내려오는 삼단 논법">
+      <rect class="sb-k" x="8" y="12" width="404" height="46" rx="3"/>
+      <text class="sm-s" x="30" y="30">대전제</text>
+      <text class="st-s st-k" x="210" y="36">모든 사람은 언젠가 죽는다</text>
+      <text class="sm-s" x="210" y="52">누구나 인정하는 큰 원칙</text>
+
+      <path class="sl-k" d="M210 58 L210 70"/><polygon class="sa-k" points="204,70 210,80 216,70"/>
+
+      <rect class="sb" x="8" y="82" width="404" height="46" rx="3"/>
+      <text class="sm-s" x="30" y="100">소전제</text>
+      <text class="st-s" x="210" y="106">소크라테스는 사람이다</text>
+      <text class="sm-s" x="210" y="122">눈앞의 하나가 그 원칙에 들어간다</text>
+
+      <path class="sl-k" d="M210 128 L210 140"/><polygon class="sa-k" points="204,140 210,150 216,140"/>
+
+      <rect class="sb-a" x="8" y="152" width="404" height="46" rx="3"/>
+      <text class="sm-s" x="30" y="170">결론</text>
+      <text class="st-s st-a" x="210" y="176">그러므로 소크라테스는 죽는다</text>
+      <text class="sm-s" x="210" y="192">원칙을 그대로 적용한 결과</text>
+
+      <text class="st-m" x="210" y="212">모두 → 하나 · 아래로 내려오는 화살표</text>
+    </svg>
+    <p class="fig-c">핵심은 <b>결론이 이미 전제 안에 들어 있다</b>는 점입니다.
+    “모든 사람은 죽는다”에 소크라테스도 포함돼 있으니, 결론은 <b>새로 알아낸 것이 아니라 꺼낸 것</b>입니다.</p>
+  </div>
+
+  <div class="two-col">
+    <div class="mini"><h4>생활 예제 ①</h4>
+      <p>모든 아이돌 콘서트는 예매가 어렵다.<br>
+      이번 공연도 아이돌 콘서트다.<br>
+      <b>→ 이번 공연도 예매가 어려울 것이다.</b></p></div>
+    <div class="mini"><h4>생활 예제 ②</h4>
+      <p>물은 100 ℃에서 끓는다.<br>
+      주전자 안의 액체는 물이다.<br>
+      <b>→ 주전자의 물은 100 ℃에서 끓는다.</b></p></div>
+  </div>
+</section>
+
+<section class="sec" id="ind">
+  <div class="step-no"><span class="num">3</span><span class="lbl">둘째 길</span></div>
+  <h2>귀납 — 여러 사례에서 하나로 올라갑니다</h2>
+
+  <p>연역과 <b>정확히 반대 방향</b>입니다. 여러 사례를 모아서 <b>“그러니까 전부 그럴 것이다”</b>라고
+  하나의 일반적인 결론을 끌어올립니다. 과학 실험이 대표적인 귀납입니다.</p>
+
+  <div class="fig">
+    <p class="fig-t">도식 3 · 귀납 — 좁은 데서 넓은 데로</p>
+    <svg viewBox="0 0 420 206" role="img" aria-label="여러 사례에서 하나의 일반 결론으로 올라가는 귀납">
+      <rect class="sb" x="8" y="12" width="128" height="52" rx="3"/>
+      <text class="st-s" x="72" y="34">사례 ①</text>
+      <text class="sm-s" x="72" y="52">참새는 날개가 있다</text>
+
+      <rect class="sb" x="146" y="12" width="128" height="52" rx="3"/>
+      <text class="st-s" x="210" y="34">사례 ②</text>
+      <text class="sm-s" x="210" y="52">비둘기도 날개가 있다</text>
+
+      <rect class="sb" x="284" y="12" width="128" height="52" rx="3"/>
+      <text class="st-s" x="348" y="34">사례 ③</text>
+      <text class="sm-s" x="348" y="52">까치도 날개가 있다</text>
+
+      <path class="sl-k" d="M72 72 L190 108"/>
+      <path class="sl-k" d="M210 72 L210 104"/>
+      <path class="sl-k" d="M348 72 L230 108"/>
+      <polygon class="sa-k" points="204,106 210,96 216,106"/>
+
+      <rect class="sb-a" x="78" y="120" width="264" height="52" rx="3"/>
+      <text class="st-s st-a" x="210" y="142">그러므로 새는 날개가 있다</text>
+      <text class="sm-s" x="210" y="160">사례들을 묶어 끌어올린 일반 결론</text>
+
+      <text class="st-m" x="210" y="196">하나하나 → 모두 · 위로 올라가는 화살표</text>
+    </svg>
+    <p class="fig-c">여기서 결론은 <b>전제에 없던 새 지식</b>입니다. 참새·비둘기·까치만 봤는데
+    <b>세상 모든 새</b>로 범위를 넓혔으니까요. 그래서 귀납은 <b>새롭지만 100% 확실하지는 않습니다.</b></p>
+  </div>
+
+  <div class="two-col">
+    <div class="mini"><h4>생활 예제 ①</h4>
+      <p>1반 수학 평균이 떨어졌다. 2반도, 3반도 떨어졌다.<br>
+      <b>→ 우리 학교 2학년 수학 평균이 떨어졌을 것이다.</b></p></div>
+    <div class="mini"><h4>생활 예제 ②</h4>
+      <p>작년에도 올해도 장마철에 습도가 높았다. 재작년에도 그랬다.<br>
+      <b>→ 장마철에는 습도가 높다.</b></p></div>
+  </div>
+</section>
+
+<section class="sec" id="arrow">
+  <div class="step-no"><span class="num">4</span><span class="lbl">핵심</span></div>
+  <h2>이 그림 한 장이 전부입니다</h2>
+
+  <div class="fig">
+    <p class="fig-t">도식 4 · 화살표 방향으로 가르기</p>
+    <svg viewBox="0 0 420 228" role="img" aria-label="연역은 위에서 아래로 귀납은 아래에서 위로 향하는 화살표">
+      <rect class="sb" x="8" y="10" width="194" height="178" rx="3"/>
+      <text class="st st-k" x="105" y="34">연역</text>
+      <rect class="sb-k" x="26" y="48" width="158" height="32" rx="3"/>
+      <text class="sm-s" x="105" y="68">일반 · 모두</text>
+      <path class="sl-k" d="M105 86 L105 124"/><polygon class="sa-k" points="99,124 105,136 111,124"/>
+      <rect class="sb-a" x="62" y="142" width="86" height="32" rx="3"/>
+      <text class="sm-s" x="105" y="162">개별 · 하나</text>
+
+      <rect class="sb" x="218" y="10" width="194" height="178" rx="3"/>
+      <text class="st st-k" x="315" y="34">귀납</text>
+      <rect class="sb-a" x="272" y="48" width="86" height="32" rx="3"/>
+      <text class="sm-s" x="315" y="68">일반 · 모두</text>
+      <path class="sl-k" d="M315 136 L315 98"/><polygon class="sa-k" points="309,98 315,86 321,98"/>
+      <rect class="sb-k" x="236" y="142" width="158" height="32" rx="3"/>
+      <text class="sm-s" x="315" y="162">개별 · 여럿</text>
+
+      <text class="st-m" x="210" y="210">연역은 <tspan font-weight="600">내려오고</tspan>, 귀납은 <tspan font-weight="600">올라갑니다</tspan></text>
+      <text class="st-m" x="210" y="224">출발점이 위에 있으면 연역 · 아래에 있으면 귀납</text>
+    </svg>
+    <p class="fig-c">이름이 헷갈릴 때 쓰는 방법 — <b>귀납(歸納)의 ‘납’은 거두어들인다는 뜻</b>입니다.
+    여기저기서 사례를 <b>거두어 모으는</b> 쪽이 귀납입니다.</p>
+  </div>
+</section>
+
+<section class="sec" id="vs">
+  <div class="step-no"><span class="num">5</span><span class="lbl">성격</span></div>
+  <h2>하나를 얻으면 하나를 잃습니다</h2>
+
+  <div class="fig">
+    <p class="fig-t">도식 5 · 확실성과 새로움은 맞바꿈 관계</p>
+    <svg viewBox="0 0 420 186" role="img" aria-label="연역은 확실하지만 새롭지 않고 귀납은 새롭지만 확실하지 않다">
+      <rect class="sb-k" x="8" y="12" width="194" height="128" rx="3"/>
+      <text class="st st-k" x="105" y="38">연역</text>
+      <text class="st-s" x="105" y="66">확실함 · 높음</text>
+      <text class="st-s" x="105" y="90">새로움 · 없음</text>
+      <text class="sm-s" x="105" y="116">전제가 참이면</text>
+      <text class="sm-s" x="105" y="132">결론은 반드시 참</text>
+
+      <rect class="sb-a" x="218" y="12" width="194" height="128" rx="3"/>
+      <text class="st st-a" x="315" y="38">귀납</text>
+      <text class="st-s" x="315" y="66">확실함 · 낮음</text>
+      <text class="st-s" x="315" y="90">새로움 · 있음</text>
+      <text class="sm-s" x="315" y="116">사례가 많을수록</text>
+      <text class="sm-s" x="315" y="132">설득력이 커질 뿐</text>
+
+      <text class="st-m" x="210" y="166">연역은 <tspan font-weight="600">안전하지만 제자리</tspan>, 귀납은 <tspan font-weight="600">모험이지만 전진</tspan></text>
+      <text class="st-m" x="210" y="180">그래서 학문은 둘을 번갈아 씁니다</text>
+    </svg>
+    <p class="fig-c">왜 연역에는 새로움이 없을까요? <b>결론이 이미 전제 안에 들어 있기 때문</b>입니다.
+    왜 귀납은 확실하지 않을까요? <b>보지 않은 사례가 아직 남아 있기 때문</b>입니다.
+    두 질문의 답이 서로를 설명합니다.</p>
+  </div>
+</section>
+
+<section class="sec" id="break">
+  <div class="step-no"><span class="num">6</span><span class="lbl">약점</span></div>
+  <h2>각자 무너지는 자리가 다릅니다</h2>
+
+  <div class="fig">
+    <p class="fig-t">도식 6 · 연역이 무너질 때 — 전제가 거짓이면</p>
+    <svg viewBox="0 0 420 180" role="img" aria-label="전제가 거짓이면 연역의 결론도 거짓이 된다">
+      <rect class="sb-b" x="8" y="12" width="404" height="40" rx="3"/>
+      <text class="st-s st-b" x="210" y="30">모든 새는 하늘을 난다 ← 이 전제가 거짓입니다</text>
+      <text class="sm-s" x="210" y="46">펭귄 · 타조는 날지 못합니다</text>
+      <path class="sl-k" d="M210 52 L210 64"/><polygon class="sa-k" points="204,64 210,74 216,64"/>
+      <rect class="sb" x="8" y="76" width="404" height="32" rx="3"/>
+      <text class="st-s" x="210" y="97">펭귄은 새다</text>
+      <path class="sl-k" d="M210 108 L210 120"/><polygon class="sa-k" points="204,120 210,130 216,120"/>
+      <rect class="sb-b" x="8" y="132" width="404" height="40" rx="3"/>
+      <text class="st-s st-b" x="210" y="150">그러므로 펭귄은 하늘을 난다 ← 결론도 거짓</text>
+      <text class="sm-s" x="210" y="166">형식은 완벽한데 전제가 틀려서 결론이 틀립니다</text>
+    </svg>
+    <p class="fig-c">연역에서 의심할 곳은 <b>전제</b>입니다.
+    <b>“정말 모든 ○○가 그런가?”</b> 한 번만 물으면 됩니다.</p>
+  </div>
+
+  <div class="fig">
+    <p class="fig-t">도식 7 · 귀납이 무너질 때 — 성급한 일반화</p>
+    <svg viewBox="0 0 420 190" role="img" aria-label="적은 사례로 전체를 단정하는 성급한 일반화의 오류">
+      <rect class="sb" x="8" y="12" width="128" height="44" rx="3"/>
+      <text class="sm-s" x="72" y="32">우리 반 지윤이</text>
+      <text class="sm-s" x="72" y="48">그 드라마 봄</text>
+      <rect class="sb" x="146" y="12" width="128" height="44" rx="3"/>
+      <text class="sm-s" x="210" y="32">우리 반 서연이</text>
+      <text class="sm-s" x="210" y="48">그 드라마 봄</text>
+      <rect class="sb" x="284" y="12" width="128" height="44" rx="3"/>
+      <text class="sm-s" x="348" y="32">우리 반 하은이</text>
+      <text class="sm-s" x="348" y="48">그 드라마 봄</text>
+
+      <path class="sl-k" d="M72 64 L190 96"/>
+      <path class="sl-k" d="M210 64 L210 92"/>
+      <path class="sl-k" d="M348 64 L230 96"/>
+      <polygon class="sa-k" points="204,94 210,84 216,94"/>
+
+      <rect class="sb-b" x="48" y="108" width="324" height="44" rx="3"/>
+      <text class="st-s st-b" x="210" y="130">요즘 중학생은 다 그 드라마를 본다</text>
+      <text class="sm-s" x="210" y="146">사례 3개로 전국을 단정했습니다</text>
+
+      <text class="st-m" x="210" y="176">사례가 <tspan font-weight="600">적거나 한쪽에 치우치면</tspan> 귀납은 무너집니다</text>
+    </svg>
+    <p class="fig-c">이것을 <b>성급한 일반화의 오류</b>라고 합니다.
+    귀납에서 의심할 곳은 전제가 아니라 <b>사례의 수와 다양성</b>입니다 —
+    <b>“몇 명을 봤지? 한쪽에 몰려 있지 않나?”</b></p>
+  </div>
+</section>
+
+<section class="sec" id="ana">
+  <div class="step-no"><span class="num">7</span><span class="lbl">셋째 길</span></div>
+  <h2>유추 — 닮았으니 이것도 닮았을 것이다</h2>
+
+  <p>교과서에서 연역·귀납과 함께 나오는 세 번째 방법입니다.
+  <b>두 대상이 여러 면에서 닮았다면, 나머지 한 면도 닮았을 것</b>이라고 미루어 짐작하는 방법입니다.</p>
+
+  <div class="fig">
+    <p class="fig-t">도식 8 · 유추의 구조</p>
+    <svg viewBox="0 0 420 196" role="img" aria-label="두 대상의 닮은 점에서 나머지 한 점도 같을 것이라 추론한다">
+      <rect class="sb-k" x="8" y="12" width="186" height="40" rx="3"/>
+      <text class="st-s st-k" x="101" y="38">지구</text>
+      <rect class="sb-k" x="226" y="12" width="186" height="40" rx="3"/>
+      <text class="st-s st-k" x="319" y="38">화성</text>
+      <text class="sm-s" x="210" y="38">↔</text>
+
+      <rect class="sb" x="8" y="62" width="404" height="56" rx="3"/>
+      <text class="sm-s" x="210" y="82">닮은 점 · 태양계 행성이다 · 암석으로 되어 있다</text>
+      <text class="sm-s" x="210" y="100">· 물의 흔적이 있다 · 대기가 있다</text>
+
+      <path class="sl-k" d="M210 118 L210 130"/><polygon class="sa-k" points="204,130 210,140 216,130"/>
+
+      <rect class="sb-a" x="8" y="142" width="404" height="40" rx="3"/>
+      <text class="st-s st-a" x="210" y="160">그러므로 화성에도 생명체가 있을 것이다</text>
+      <text class="sm-s" x="210" y="176">닮은 점이 많을수록 설득력이 커집니다</text>
+    </svg>
+    <p class="fig-c">유추의 약점은 <b>다른 점</b>입니다.
+    지구와 화성은 <b>온도와 대기의 두께가 크게 다릅니다.</b>
+    그 차이가 결론과 관계있는 것이라면 유추는 무너집니다 — <b>“닮지 않은 점은 없나?”</b></p>
+  </div>
+
+  <div class="mini"><h4>생활 예제</h4>
+    <p>토끼와 햄스터는 둘 다 작고, 풀을 먹고, 앞니가 계속 자란다.
+    토끼는 나무를 갉아 이를 간다. <b>→ 햄스터도 무언가를 갉을 것이다.</b>
+    (실제로 맞습니다. 하지만 <b>“닮았으니까”가 근거일 뿐 증명은 아닙니다.</b>)</p></div>
+</section>
+
+<section class="sec" id="find">
+  <div class="step-no"><span class="num">8</span><span class="lbl">실전</span></div>
+  <h2>글을 보고 3초 안에 가르기</h2>
+
+  <div class="fig">
+    <p class="fig-t">도식 9 · 판별 순서도</p>
+    <svg viewBox="0 0 420 236" role="img" aria-label="결론의 범위를 보고 연역 귀납 유추를 판별하는 순서도">
+      <rect class="sb-k" x="40" y="10" width="340" height="38" rx="3"/>
+      <text class="st-s st-k" x="210" y="34">결론이 가리키는 것은 무엇인가?</text>
+      <path class="sl-k" d="M210 48 L210 62"/><polygon class="sa-k" points="204,62 210,72 216,62"/>
+
+      <rect class="sb" x="8" y="74" width="130" height="52" rx="3"/>
+      <text class="sm-s" x="73" y="96">개별 하나</text>
+      <text class="sm-s" x="73" y="114">(그 사람 · 그 물건)</text>
+
+      <rect class="sb" x="146" y="74" width="130" height="52" rx="3"/>
+      <text class="sm-s" x="211" y="96">전체 · 일반</text>
+      <text class="sm-s" x="211" y="114">(모두 · 늘 · ~이다)</text>
+
+      <rect class="sb" x="284" y="74" width="128" height="52" rx="3"/>
+      <text class="sm-s" x="348" y="96">다른 대상</text>
+      <text class="sm-s" x="348" y="114">(A를 보고 B를 짐작)</text>
+
+      <path class="sl-k" d="M73 126 L73 148"/><polygon class="sa-k" points="67,148 73,158 79,148"/>
+      <path class="sl-k" d="M211 126 L211 148"/><polygon class="sa-k" points="205,148 211,158 217,148"/>
+      <path class="sl-k" d="M348 126 L348 148"/><polygon class="sa-k" points="342,148 348,158 354,148"/>
+
+      <rect class="sb-a" x="8" y="160" width="130" height="40" rx="3"/>
+      <text class="st-s st-a" x="73" y="185">연역</text>
+      <rect class="sb-a" x="146" y="160" width="130" height="40" rx="3"/>
+      <text class="st-s st-a" x="211" y="185">귀납</text>
+      <rect class="sb-a" x="284" y="160" width="128" height="40" rx="3"/>
+      <text class="st-s st-a" x="348" y="185">유추</text>
+
+      <text class="st-m" x="210" y="222">앞부분은 보지 말고 <tspan font-weight="600">마지막 문장(결론)</tspan>부터 보세요</text>
+    </svg>
+    <p class="fig-c">요령 하나 — <b>“그러므로” 뒤를 먼저 읽습니다.</b>
+    그 뒤가 <b>‘모두·언제나’</b>면 귀납, <b>특정한 하나</b>면 연역입니다.</p>
+  </div>
+
+  <h3>연습 — 어떤 논증일까요</h3>
+
+  <div class="q"><span class="qn">연습 1</span>
+    <p>“우리 동네 도서관도, 옆 동네 도서관도, 시립 도서관도 월요일에 쉰다.
+    그러므로 도서관은 월요일에 쉰다.”</p>
+    <details><summary>답 보기</summary><div class="ans">
+      <b>귀납</b>입니다. 사례 세 개를 모아 “도서관은”이라는 <b>전체 결론</b>으로 올라갔습니다.
+      결론에 ‘모두에 해당하는 말’이 있으면 귀납입니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">연습 2</span>
+    <p>“모든 포유류는 새끼를 낳는다. 고래는 포유류다. 그러므로 고래는 새끼를 낳는다.”</p>
+    <details><summary>답 보기</summary><div class="ans">
+      <b>연역</b>입니다. “모든 포유류”라는 큰 원칙에서 <b>고래 하나</b>로 내려왔습니다.
+      결론이 <b>특정한 하나</b>를 가리키면 연역입니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">연습 3</span>
+    <p>“사람의 뇌와 컴퓨터는 둘 다 정보를 저장하고 꺼내 쓴다.
+    컴퓨터는 용량이 꽉 차면 느려진다. 그러므로 사람도 너무 많이 외우면 느려질 것이다.”</p>
+    <details><summary>답 보기</summary><div class="ans">
+      <b>유추</b>입니다. 닮은 점을 근거로 <b>다른 대상</b>에 대해 짐작했습니다.
+      덧붙이면 이 유추는 <b>약한 유추</b>입니다. 뇌와 컴퓨터는 저장 방식이 근본적으로 달라,
+      <b>닮지 않은 점이 결론과 직접 관계</b>있기 때문입니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">연습 4</span>
+    <p>“내 친구 둘이 그 학원에 다니는데 성적이 올랐대. 그 학원은 잘 가르치는 곳이야.”</p>
+    <details><summary>답 보기</summary><div class="ans">
+      형태는 <b>귀납</b>이지만 <b>성급한 일반화의 오류</b>입니다.
+      사례가 <b>둘뿐</b>이고, 성적이 오른 이유가 학원 때문인지도 확인되지 않았습니다.
+      귀납을 보면 늘 <b>“몇 개를 봤지?”</b>를 물어야 합니다.
+    </div></details>
+  </div>
+</section>
+
+<section class="sec" id="trap">
+  <div class="step-no"><span class="num">9</span><span class="lbl">함정</span></div>
+  <h2>시험에서 꼭 나오는 자리 다섯</h2>
+
+  <div class="tw wide"><table>
+    <thead><tr><th>흔한 오해</th><th>사실은</th><th>판별 요령</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">예를 들면<br>무조건 귀납이다</td>
+        <td><b>예시는 설명일 수도 있다</b></td>
+        <td>예를 모아 <b>결론을 끌어올렸는지</b> 확인 — 그냥 설명을 돕는 예시는 논증이 아님</td></tr>
+      <tr><td class="hd">연역이 귀납보다<br>더 좋은 방법이다</td>
+        <td><b>용도가 다르다</b></td>
+        <td>연역은 확실하지만 새 지식이 없고, 귀납은 새롭지만 확실하지 않음</td></tr>
+      <tr><td class="hd">귀납은 과학,<br>연역은 수학에만 쓴다</td>
+        <td><b>글 어디에나 쓰인다</b></td>
+        <td>신문 사설, 광고, 친구와의 대화에도 그대로 들어 있음</td></tr>
+      <tr><td class="hd">전제가 참이면<br>논증은 늘 옳다</td>
+        <td><b>연역만 그렇다</b></td>
+        <td>귀납은 전제가 다 참이어도 결론이 틀릴 수 있음(보지 않은 사례)</td></tr>
+      <tr><td class="hd">유추는 증명이다</td>
+        <td><b>짐작이다</b></td>
+        <td>닮은 점이 많아도 <b>다른 점 하나</b>로 무너질 수 있음</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="sec" id="draw">
+  <div class="step-no"><span class="num">10</span><span class="lbl">마무리</span></div>
+  <h2>빈칸 채우기와 확인 문제</h2>
+
+  <div class="fig">
+    <p class="fig-t">도식 10 · 직접 채워 보기</p>
+    <svg viewBox="0 0 420 176" role="img" aria-label="연역과 귀납의 빈칸 채우기">
+      <rect class="sb-d" x="8" y="12" width="194" height="60" rx="3"/>
+      <text class="st-m" x="105" y="36">(　　　)</text>
+      <text class="sm-s" x="105" y="58">모두 → 하나 · 화살표 (　)</text>
+
+      <rect class="sb-d" x="218" y="12" width="194" height="60" rx="3"/>
+      <text class="st-m" x="315" y="36">(　　　)</text>
+      <text class="sm-s" x="315" y="58">하나하나 → 모두 · 화살표 (　)</text>
+
+      <rect class="sb-d" x="8" y="84" width="404" height="34" rx="3"/>
+      <text class="st-m" x="210" y="106">적은 사례로 전체를 단정하는 오류 · (　　　　　　)</text>
+
+      <rect class="sb-d" x="8" y="126" width="404" height="34" rx="3"/>
+      <text class="st-m" x="210" y="148">닮은 점을 근거로 짐작하는 방법 · (　　)</text>
+    </svg>
+    <p class="fig-c">채운 뒤 <b>도식 4</b>와 맞춰 봅니다.</p>
+  </div>
+
+  <div class="q"><span class="qn">Q1</span>
+    <p>연역과 귀납을 가르는 가장 간단한 기준은 무엇인가요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>결론의 범위, 즉 화살표의 방향입니다.</b>
+      일반적인 원칙에서 개별로 내려오면 연역, 개별 사례들에서 일반으로 올라가면 귀납입니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q2</span>
+    <p>“연역은 새로운 지식을 주지 않는다”는 말은 무슨 뜻일까요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>결론이 이미 전제 안에 들어 있기 때문입니다.</b>
+      “모든 사람은 죽는다”에 소크라테스가 이미 포함돼 있으므로,
+      결론은 새로 알아낸 것이 아니라 <b>꺼내 보인 것</b>입니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q3</span>
+    <p>귀납의 결론이 100% 확실하지 않은 까닭은 무엇인가요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>아직 보지 않은 사례가 남아 있기 때문입니다.</b>
+      참새·비둘기·까치를 봤다고 해서 세상 모든 새를 본 것은 아닙니다.
+      그래서 귀납은 <b>사례가 많고 고를수록 설득력이 커질 뿐</b>입니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q4</span>
+    <p>“모든 새는 난다. 펭귄은 새다. 그러므로 펭귄은 난다.” 이 논증은 어디가 잘못됐나요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>형식은 옳지만 전제가 거짓입니다.</b> 펭귄·타조처럼 날지 못하는 새가 있으므로
+      “모든 새는 난다”가 참이 아닙니다. <b>연역에서 의심할 곳은 전제</b>입니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q5</span>
+    <p>성급한 일반화의 오류란 무엇이며, 어떻게 피할 수 있을까요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>너무 적거나 한쪽에 치우친 사례로 전체를 단정하는 잘못입니다.</b>
+      사례의 <b>수를 늘리고</b>, 여러 집단에서 <b>고르게</b> 모으면 피할 수 있습니다.
+    </div></details>
+  </div>
+
+  <div class="q"><span class="qn">Q6</span>
+    <p>유추가 증명이 아니라 짐작인 까닭은 무엇일까요?</p>
+    <details><summary>해설 보기</summary><div class="ans">
+      <b>닮은 점이 아무리 많아도, 결론과 관계있는 ‘다른 점’이 하나라도 있으면 무너지기 때문입니다.</b>
+      그래서 유추를 볼 때는 늘 <b>“닮지 않은 점은 없나?”</b>를 물어야 합니다.
+    </div></details>
+  </div>
+
+  <h3>아빠에게 3분 설명하기</h3>
+  <div class="script">
+    <div class="row"><span class="s">한 줄</span><span>연역은 위에서 아래로, 귀납은 아래에서 위로. 화살표 방향만 보면 돼.</span></div>
+    <div class="row"><span class="s">예</span><span>“모든 사람은 죽는다, 소크라테스는 사람이다, 그러니 죽는다”가 연역. “참새도 비둘기도 까치도 날개가 있으니 새는 날개가 있다”가 귀납.</span></div>
+    <div class="row"><span class="s">차이</span><span>연역은 확실한데 새로운 게 없고, 귀납은 새로운데 확실하지가 않아.</span></div>
+    <div class="row"><span class="s">판별법</span><span>“그러므로” 뒤를 봐. ‘모두’면 귀납, 특정한 하나면 연역이야.</span></div>
+  </div>
+</section>
+
+<footer>연역과 귀납 · 중학교 국어 논증 방법 집중 문서 · 도식 10장</footer>
+</div>
+<script>
+  (function(){
+    var KEY="science_quest_progress";
+    function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){return{}}}
+    function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+    var boxes=[].slice.call(document.querySelectorAll(".todo input[type=checkbox]"));
+    var st=load();
+    boxes.forEach(function(b){
+      if(st[b.dataset.q])b.checked=true;
+      b.addEventListener("change",function(){
+        var s=load();
+        if(b.checked)s[b.dataset.q]=1;else delete s[b.dataset.q];
+        save(s);paint();
+      });
+    });
+    function paint(){
+      var el=document.getElementById("wdone");
+      if(el){var n=boxes.filter(function(b){return b.checked}).length;
+        el.textContent=n+" / "+boxes.length;}
+      var hub=document.querySelector("[data-hub]");
+      if(hub){
+        var s=load(),total=0;
+        for(var w=1;w<=12;w++){
+          var n2=0;
+          for(var m=1;m<=4;m++) if(s["w"+w+"m"+m]) n2++;
+          total+=n2;
+          var p=document.querySelector('.p[data-p="'+w+'"]');
+          if(p&&!p.dataset.soon){p.textContent=n2===4?"완료":n2+" / 4";
+            p.className="p"+(n2===4?" done":(n2>0?" ing":""));}
+        }
+        var d=document.getElementById("allDone"),bar=document.getElementById("allBar");
+        if(d)d.textContent=total+" / 12";
+        if(bar)bar.style.width=(total/12*100)+"%";
+      }
+    }
+    paint();
+    var links=[].slice.call(document.querySelectorAll("nav.jump a[href^='#']"));
+    if(links.length){
+      var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1))});
+      var onScroll=function(){
+        var y=window.scrollY+130,idx=0;
+        secs.forEach(function(s,i){if(s&&s.offsetTop<=y)idx=i;});
+        links.forEach(function(a,i){a.classList.toggle("now",i===idx);});
+      };
+      window.addEventListener("scroll",onScroll,{passive:true});onScroll();
+    }
+  })();
+</script>
+</body>
+</html>
